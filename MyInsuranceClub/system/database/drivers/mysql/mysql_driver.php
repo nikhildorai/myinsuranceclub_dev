@@ -309,8 +309,8 @@ class CI_DB_mysql_driver extends CI_DB {
 
 	   		return $str;
 	   	}
-
-		if (function_exists('mysql_real_escape_string') AND is_resource($this->conn_id))
+	   	$str = is_resource($this->conn_id) ? mysql_real_escape_string($str, $this->conn_id) : addslashes($str);
+		/* if (function_exists('mysql_real_escape_string') AND is_resource($this->conn_id))
 		{
 			$str = mysql_real_escape_string($str, $this->conn_id);
 		}
@@ -322,11 +322,13 @@ class CI_DB_mysql_driver extends CI_DB {
 		{
 			$str = addslashes($str);
 		}
-
+ */
 		// escape LIKE condition wildcards
 		if ($like === TRUE)
 		{
-			$str = str_replace(array('%', '_'), array('\\%', '\\_'), $str);
+			/* $str = str_replace(array('%', '_'), array('\\%', '\\_'), $str); */
+			return str_replace(array($this->_like_escape_chr, '%', '_'),
+			array($this->_like_escape_chr.$this->_like_escape_chr, $this->_like_escape_chr.'%', $this->_like_escape_chr.'_'),$str);
 		}
 
 		return $str;
