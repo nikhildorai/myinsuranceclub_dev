@@ -1123,6 +1123,8 @@ class CI_Form_validation {
 	 * @access	public
 	 * @param	string
 	 * @return	bool
+	 * Date:21/05/2014
+	 * CUSTOM FUNCTION FOR MyInsuranceClub.
 	 */
 	public function alpha_spaces_dots($str)
 	{
@@ -1137,6 +1139,8 @@ class CI_Form_validation {
 	 * @access	public
 	 * @param	string
 	 * @return	bool
+	 * Date:21/05/2014
+	 * CUSTOM FUNCTION FOR MyInsuranceClub.
 	 */
 	public function age_greater_than_18($str)
 	{
@@ -1162,8 +1166,10 @@ class CI_Form_validation {
 	 * @access	public
 	 * @param	string
 	 * @return	bool
+	 * Date:21/05/2014
+	 * CUSTOM FUNCTION FOR MyInsuranceClub. WILL CHANGE DEPENDING ON COUNTRY.
 	 */
-	public function phone_789($str)
+	public function phone_789($str) /* Custom function for MyInsuranceClub. May change if */
 	{
 		if(!(preg_match("/^[7-9]/",$str)))
 		{
