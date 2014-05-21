@@ -191,6 +191,26 @@ if (defined('ENVIRONMENT'))
 		define('APPPATH', BASEPATH.$application_folder.'/');
 	}
 
+	define('ROOTPATH', realpath(dirname(__FILE__)) . '/');
+
+
+
+/*
+ * --------------------------------------------------------------------
+ * DEFINE THE BASE URL DYNAMICALLY
+ * --------------------------------------------------------------------
+ *
+ */
+	if (realpath(dirname(__FILE__)) == $_SERVER['DOCUMENT_ROOT'])
+	{
+	    define('ROOT', '/');
+	}
+	else
+	{
+	    define('ROOT', substr(ROOTPATH, strlen($_SERVER['DOCUMENT_ROOT'])+1));
+	}
+	
+
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE
