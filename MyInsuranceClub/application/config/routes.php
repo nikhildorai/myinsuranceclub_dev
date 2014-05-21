@@ -41,6 +41,18 @@
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
+//	custom routes	//
+$route['admin'] = "admin/admin";
+$route['admin/register'] = "admin/admin/register_account";
+$route['admin/forgotten_password'] = "admin/admin/forgotten_password";
+$route['admin/resend_activation_token'] = "admin/admin/resend_activation_token";
+$route['admin/logout'] = "admin/admin/logout";
+$route['admin/dashboard'] = "admin/auth_admin/dashboard";
+
+
+//$route['admin/(:any)'] = "admin/auth/$1";
+//$route['admin'] = "admin/admin/login";
+//$route['admin/(:any)'] = "admin/admin/$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

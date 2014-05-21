@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '';
+$config['base_url']	= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] .'/'. ROOT;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ $config['base_url']	= '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -357,6 +357,16 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+
+
+/*
+|--------------------------------------------------------------------------
+| Custom global declaration
+|--------------------------------------------------------------------------
+|
+*/
+$config['css_path'] 	= 	$config['base_url'].'application/views/css/';
+$config['js_path'] 		= 	$config['base_url'].'application/views/js/';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
