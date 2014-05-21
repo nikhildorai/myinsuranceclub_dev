@@ -207,7 +207,8 @@ if (defined('ENVIRONMENT'))
 	}
 	else
 	{
-	    define('ROOT', substr(ROOTPATH, strlen($_SERVER['DOCUMENT_ROOT'])+1));
+		$rPath = implode('/', explode('\\', substr(ROOTPATH, strlen($_SERVER['DOCUMENT_ROOT'])+1)));		
+	    define('ROOT', $rPath);
 	}
 	
 

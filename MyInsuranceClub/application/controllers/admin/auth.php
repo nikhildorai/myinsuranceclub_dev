@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Auth extends CI_Controller {
  
     function __construct() 
     {
@@ -136,7 +136,7 @@ class Admin extends CI_Controller {
 		// Get any status message that may have been set.
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];		
 
-		$this->template->write_view('content', 'admin/admin/login_view', $this->data, TRUE);
+		$this->template->write_view('content', 'admin/auth/login_view', $this->data, TRUE);
 		$this->template->render();
 		//$this->load->view('admin/login_view', $this->data);
     }
@@ -185,7 +185,7 @@ class Admin extends CI_Controller {
 		// Get any status message that may have been set.
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];		
 
-		$this->template->write_view('content', 'admin/admin/register_view', $this->data, TRUE);
+		$this->template->write_view('content', 'admin/auth/register_view', $this->data, TRUE);
 		$this->template->render();
 		//$this->load->view('demo/public_examples/register_view', $this->data);
 	}
@@ -231,7 +231,7 @@ class Admin extends CI_Controller {
 		// Get any status message that may have been set.
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];		
 
-		$this->template->write_view('content', 'admin/admin/resend_activation_token_view', $this->data, TRUE);
+		$this->template->write_view('content', 'admin/auth/resend_activation_token_view', $this->data, TRUE);
 		$this->template->render();
 		//$this->load->view('demo/public_examples/resend_activation_token_view', $this->data);		
 	}
@@ -260,7 +260,7 @@ class Admin extends CI_Controller {
 		// Get any status message that may have been set.
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];		
 
-		$this->template->write_view('content', 'admin/admin/forgot_password_view', $this->data, TRUE);
+		$this->template->write_view('content', 'admin/auth/forgot_password_view', $this->data, TRUE);
 		$this->template->render();
 		//$this->load->view('demo/public_examples/forgot_password_view', $this->data);		
 	}
@@ -283,7 +283,7 @@ class Admin extends CI_Controller {
 		// Get any status message that may have been set.
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];		
 
-		$this->template->write_view('content', 'admin/admin/forgot_password_update_view', $this->data, TRUE);
+		$this->template->write_view('content', 'admin/auth/forgot_password_update_view', $this->data, TRUE);
 		$this->template->render();
 		//$this->load->view('demo/public_examples/forgot_password_update_view', $this->data);
 	}
