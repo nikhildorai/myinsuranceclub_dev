@@ -1,0 +1,42 @@
+@CHARSET "ISO-8859-1";
+
+/* START css for jquery accordian on CLIENTS page*/
+
+#wrapper {
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	}
+ 
+.accordionButton {	
+	font-family:"Wellfleet";
+	width: 800px;
+	height:50px;
+	float: left;
+	background: #ADEAEA;
+	border-bottom: 5px solid #FFFFFF;
+	border-radius:10px;
+	cursor: pointer;
+	display:block;
+	}
+ 
+.accordionContent {
+	font-family:"Wellfleet";
+	width: 800px;
+	float: left;
+	background:#fff;
+	/* display: none; */
+	}
+
+.over {
+	background: #CCCCCC;
+	}
+	
+	
+input[type=submit] {padding:5px 15px; background: orange; border:0 none;
+cursor:pointer;
+-webkit-border-radius: 5px;
+border-radius: 5px; }
+
+table tr:nth-child(odd){    background-color: #ebf9f9; }
+/*  END css for jquery accordian*/	
