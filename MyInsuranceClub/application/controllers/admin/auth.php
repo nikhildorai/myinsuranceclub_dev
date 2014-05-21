@@ -169,11 +169,11 @@ class Auth extends CI_Controller {
 	 * Note: This page is only accessible to users who are not currently logged in, else they will be redirected.
 	 */ 
 	function register_account()
-	{
+	{		
 		// Redirect user away from registration page if already logged in.
-		if ($this->flexi_admin->is_logged_in()) 
+		if ($this->flexi_auth->is_logged_in()) 
 		{
-			redirect('admin');
+			redirect('admin/auth');
 		}
 		// If 'Registration' form has been submitted, attempt to register their details as a new account.
 		else if ($this->input->post('register_user'))
@@ -210,7 +210,7 @@ class Auth extends CI_Controller {
 		// Save any public status or error messages (Whilst suppressing any admin messages) to CI's flash session data.
 		$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 
-		redirect('admin');
+		redirect('admin/auth');
 	}
 	
 	/**
@@ -304,7 +304,7 @@ class Auth extends CI_Controller {
 		// Set a message to the CI flashdata so that it is available after the page redirect.
 		$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 		
-		redirect('admin');
+		redirect('admin/auth');
 	}
 		
 	###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++###	
@@ -325,7 +325,7 @@ class Auth extends CI_Controller {
 		// Set a message to the CI flashdata so that it is available after the page redirect.
 		$this->session->set_flashdata('message', $this->flexi_auth->get_messages());		
  
-		redirect('admin');
+		redirect('admin/auth');
     }
 	
 	/**
@@ -341,7 +341,7 @@ class Auth extends CI_Controller {
 		// Set a message to the CI flashdata so that it is available after the page redirect.
 		$this->session->set_flashdata('message', $this->flexi_auth->get_messages());		
         
-		redirect('admin');
+		redirect('admin/auth');
     }	
 }
 

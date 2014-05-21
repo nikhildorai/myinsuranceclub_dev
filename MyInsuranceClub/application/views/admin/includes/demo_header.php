@@ -89,7 +89,7 @@
 				</li>
 				*/ ?>
 				<li>
-					<a href="<?php echo $base_url;?>logout">Logout</a>
+					<a href="<?php echo $base_url;?>admin/logout">Logout</a>
 				</li>
 				
 							

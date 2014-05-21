@@ -44,7 +44,7 @@
 							<li class="info_req">
 								<label for="email_address">Email Address:</label>
 								<input type="text" id="email_address" name="register_email_address" value="<?php echo set_value('register_email_address');?>" class="tooltip_trigger"
-									title="This demo requires that upon registration, you will need to activate your account via clicking a link that is sent to your email address."
+									title="After registration, you will need to activate your account via clicking a link that is sent to your email address."
 								/>
 							</li>
 							<li class="info_req">

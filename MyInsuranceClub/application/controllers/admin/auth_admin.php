@@ -38,7 +38,7 @@ class Auth_admin extends CI_Controller {
 			// Set a custom error message.
 			$this->flexi_auth->set_error_message('You must login as an admin to access this area.', TRUE);
 			$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
-			redirect('auth');
+			redirect('admin/auth');
 		}
 
 		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.

@@ -67,7 +67,7 @@ class Demo_auth_model extends CI_Model {
 			$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 
 			// Reload page, if login was successful, sessions will have been created that will then further redirect verified users.
-			redirect('auth');
+			redirect('admin/auth');
 		}
 		else
 		{	
@@ -170,7 +170,7 @@ class Demo_auth_model extends CI_Model {
 				}
 				
 				// Redirect user to login page
-				redirect('auth');
+				redirect('admin/auth');
 			}
 		}
 
@@ -240,7 +240,7 @@ class Demo_auth_model extends CI_Model {
 			$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 			
 			// Redirect user.
-			redirect('auth');
+			redirect('admin/auth');
 		}
 		else
 		{
@@ -283,7 +283,7 @@ class Demo_auth_model extends CI_Model {
 			// Save any public status or error messages (Whilst suppressing any admin messages) to CI's flash session data.
 			$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 			
-			redirect('auth');
+			redirect('admin/auth');
 		}
 		else
 		{		

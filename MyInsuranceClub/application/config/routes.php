@@ -46,7 +46,7 @@ $route['admin'] = "admin/auth";
 $route['admin/register'] = "admin/auth/register_account";
 $route['admin/forgotten_password'] = "admin/auth/forgotten_password";
 $route['admin/resend_activation_token'] = "admin/auth/resend_activation_token";
-$route['admin/logout'] = "admin/auth/logout";
+$route['admin/logout'] = "admin/auth_public/logout";
 $route['admin/dashboard'] = "admin/auth_admin/dashboard";
 
 
