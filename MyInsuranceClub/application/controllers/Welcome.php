@@ -21,8 +21,6 @@ class Welcome extends CI_Controller {
 	{
 		// Call the Controller constructor
 		parent::__construct();
-		echo "inside welcome";
-		exit;
 		//$this->load->library('email');
 		$this->load->library('session');
 		$this->load->library('table');
