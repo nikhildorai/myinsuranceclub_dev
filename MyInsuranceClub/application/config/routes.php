@@ -39,6 +39,7 @@
 */
 
 $route['default_controller'] = "welcome";
+var_dump($route['default_controller']);
 $route['404_override'] = '';
 
 //	custom routes	//
