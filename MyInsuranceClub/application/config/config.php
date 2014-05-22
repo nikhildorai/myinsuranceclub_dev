@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= var_dump((isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] .'/'. ROOT);
+$config['base_url']	=''; /* var_dump((isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] .'/'. ROOT); */
 
 /*
 |--------------------------------------------------------------------------
