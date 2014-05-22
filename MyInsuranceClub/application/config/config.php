@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= "http://www.myinc.com";
+$config['base_url']	= '';
 
 //var_dump($config['base_url']);
 
@@ -28,7 +28,7 @@ $config['base_url']	= "http://www.myinc.com";
 | variable so that it is blank.
 |
 */
-$config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
