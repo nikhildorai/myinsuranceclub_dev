@@ -117,7 +117,7 @@
   /***********************/
   
  /** Form validations **/
-  $(document).ready(function(){
+/*  $(document).ready(function(){
 	    $("#form_id").validate({
 	        rules: {
 	            cust_name: {
@@ -147,12 +147,12 @@
 	        }
 	        })
 	});//document ready close
-  
+*/  
   
   /***********************/
   
   /** Complete address of visitor **/
-  $(document).ready(function(){
+ /* $(document).ready(function(){
   function displayLocation(latitude,longitude){
 	  var request = new XMLHttpRequest();
 
@@ -200,7 +200,7 @@
 	};
 
 	navigator.geolocation.getCurrentPosition(successCallback,errorCallback,options);
-  });
+  });*/
   /********************************/
   
   
