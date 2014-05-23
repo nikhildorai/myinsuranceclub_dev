@@ -96,7 +96,7 @@ class Util {
 	public function getCompanyTypeDropDownOptions($defaultEmpty = "Please Select", $optionType = null)
 	{
 		$result = $this->getTableData($modelName='Company_type_model', $type="all", $id='', $fields = array());		
-		$options[] = $defaultEmpty;
+		$options[''] = $defaultEmpty;
 		foreach ($result as $k1=>$v1)
 		{
 			if (!empty($optionType))

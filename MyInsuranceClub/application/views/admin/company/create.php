@@ -1,4 +1,3 @@
-<?php $search_query = array();?>
 		<div class="content clearfix">
 			<div class="col100">
 			
@@ -9,24 +8,30 @@
 					<?php echo $message; ?>
 				</div>
 			<?php } ?>		
-				<?php echo form_open('admin/company/create');	?>
+				<?php echo form_open('admin/company/create'); ?>
 					<fieldset>
 						<legend>Company Details</legend>
 						
-						<label for="search">Search Company:</label>
-						<input type="text" id="company" name="company" value="<?php echo array_key_exists( 'company',$search_query) ? $search_query['company'] : '';?>" class="tooltip_trigger" title="Search company by name, shortname, display name." /><br />
+						<label for="search">Company Name:</label>
+						<input type="text" id="company_name" name="companyModel[company_name]" value="<?php echo array_key_exists( 'company_name',$companyModel) ? $companyModel['company_name'] : '';?>" class="tooltip_trigger" title="Unique company name." /><br />
+						
+						<label for="search">Company Shortname:</label>
+						<input type="text" id="company_shortname" name="companyModel[company_shortname]" value="<?php echo array_key_exists( 'company_shortname',$companyModel) ? $companyModel['company_shortname'] : '';?>" class="tooltip_trigger" title="Unique company shortname." /><br />
+						
+						<label for="search">Company Display Name:</label>
+						<input type="text" id="company_display_name" name="companyModel[company_display_name]" value="<?php echo array_key_exists( 'company_display_name',$companyModel) ? $companyModel['company_display_name'] : '';?>" class="tooltip_trigger" title="Unique company display name." /><br />
+						
 						<label for="search">Company Type:</label>
-						<!-- <input type="select" id="company_type" name="company_type" value="<?php // echo ?>" class="tooltip_trigger" title="Search by company type."> -->
 						<?php 
-						$selected = array_key_exists( 'company_type',$search_query) ? $search_query['company_type'] : '';
+						$selected = array_key_exists( 'company_type_id',$companyModel) ?  $companyModel['company_type_id'] : '';
 						$options = $this->util->getCompanyTypeDropDownOptions();
 						//sort($options);
-						echo form_dropdown('company_type', $options, $selected, ' id="company_type" class="tooltip_trigger" title="Search by company type."');
+						echo form_dropdown('companyModel[company_type_id]', $options, $selected, ' id="company_type_id" class="tooltip_trigger" title="Search by company type."');
 						?>
-						<br />
+						<br />			
+						<input type="hidden" id="company_id" name="companyModel[company_id]" value="<?php echo array_key_exists( 'company_id',$companyModel) ? $companyModel['company_id'] : '';?>" />
 						<label for="search"></label>
-						<input type="submit" name="search" value="Search" class="link_button"/>
-						<a href="<?php echo $base_url; ?>admin/company" class="link_button grey">Reset</a>
+						<input type="submit" name="submit" value="Submit" class="link_button"/>
 						
 					</fieldset>
 				<?php echo form_close();?>

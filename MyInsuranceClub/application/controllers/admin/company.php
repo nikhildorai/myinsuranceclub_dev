@@ -41,6 +41,12 @@ class Company extends CI_Controller {
 			}
 		}
 		
+		// Load required CI libraries and helpers.
+		$this->load->database();
+		$this->load->library('session');
+ 		$this->load->helper('url');
+ 		$this->load->helper('form');
+ 		
 		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
 		$this->load->vars('base_url', base_url());
 		$this->load->vars('includes_dir', base_url().'/includes/');
@@ -48,17 +54,18 @@ class Company extends CI_Controller {
 		
 		// Define a global variable to store data that is then used by the end view page.
 		$this->data = null;
-	
-	}
-
-    public function index()
-	{
+    
 		// Check user has privileges to view user accounts, else display a message to notify the user they do not have valid privileges.
 		if (! $this->flexi_auth->is_privileged('View Users'))
 		{
 			$this->session->set_flashdata('message', '<p class="error_msg">You do not have privileges.</p>');
-			redirect('auth_admin');
+			redirect('admin/auth_admin');
 		}
+		
+	}
+
+    public function index()
+	{
 		$this->load->library('table');
 		$this->load->library('pagination');
 		$this->load->model('insurance_company_master_model');
@@ -80,12 +87,15 @@ class Company extends CI_Controller {
 
     public function create()
 	{
-		// Check user has privileges to view user accounts, else display a message to notify the user they do not have valid privileges.
-		if (! $this->flexi_auth->is_privileged('View Users'))
+		$companyModel = array();
+		if ($this->input->post('companyModel'))
 		{
-			$this->session->set_flashdata('message', '<p class="error_msg">You do not have privileges.</p>');
-			redirect('auth_admin');
-		}
+			$this->load->model('insurance_company_master_model');
+			$this->insurance_company_master_model->saveCompanyRecord();
+			$companyModel = $_POST['companyModel'];
+		}		
+		$this->data['companyModel'] = $companyModel;
+//var_dump($this->data);die;		
 		$this->template->write_view('content', 'admin/company/create', $this->data, TRUE);
 		$this->template->render();
 	}
