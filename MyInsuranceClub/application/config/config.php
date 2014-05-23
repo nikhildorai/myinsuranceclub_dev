@@ -369,6 +369,9 @@ $config['proxy_ips'] = '';
 */
 $config['css_path'] 	= 	$config['base_url'].'application/views/css/';
 $config['js_path'] 		= 	$config['base_url'].'application/views/js/';
+$config['per_page'] 	= 	10; 
+$config['num_links'] 	= 	5;
+$config['page_query_string'] = TRUE;
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

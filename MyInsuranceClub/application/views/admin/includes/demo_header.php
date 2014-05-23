@@ -55,6 +55,18 @@
 						</li>
 					</ul>		
 				</li>
+			
+				<li class="css_nav_dropmenu">
+					<a href="<?php echo $base_url;?>admin/company/">Company</a>
+					<ul>
+						<li>
+							<a href="<?php echo $base_url;?>admin/company/">Company Listing</a>
+						</li>
+						<li>
+							<a href="<?php echo $base_url;?>admin/company/create">Create Company</a>
+						</li>
+					</ul>		
+				</li>
 				
 				<?php /*?>
 				<li class="css_nav_dropmenu">

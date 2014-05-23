@@ -41,13 +41,21 @@
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
-//	custom routes	//
-/* $route['admin'] = "admin/auth";
+/*
+ * custom routes
+ */		
+//auth/login
+$route['admin'] = "admin/auth";
 $route['admin/register'] = "admin/auth/register_account";
 $route['admin/forgotten_password'] = "admin/auth/forgotten_password";
 $route['admin/resend_activation_token'] = "admin/auth/resend_activation_token";
 $route['admin/logout'] = "admin/auth_public/logout";
-$route['admin/dashboard'] = "admin/auth_admin/dashboard"; */
+$route['admin/dashboard'] = "admin/auth_admin/dashboard";
+
+//company
+$route['admin/company'] = "admin/company/index";
+$route['admin/company/(:any)'] = "admin/company/$1";
+
 
 
 //$route['admin/(:any)'] = "admin/auth/$1";

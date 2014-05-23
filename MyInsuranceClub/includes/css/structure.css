@@ -73,7 +73,7 @@ body {/*background:url(../images/site_bg.png) repeat #292929; */text-align:cente
 /* Content Wraps --------------------------------------------------------------------------------------------------------------------------------------------- */
 .w100, .w66, .w50, .w33 {float:left; margin:0 10px 0 0; padding:10px 15px;}
 .w100.float_r, .w66.float_r, .w50.float_r, .w33.float_r {float:right;}
-.w100 {width:926px; margin:0 0 10px;}
+.w100 {width:97%; margin:0 0 10px;}
 .w66 {width:598px;}
 .w50 {width:441px;}
 .w33 {width:279px;}
@@ -98,9 +98,9 @@ body {/*background:url(../images/site_bg.png) repeat #292929; */text-align:cente
 .content_wrap.footer_bg {background:url(../images/footer_wrap_bg.png) repeat-x;}
 .content_wrap.no_bg_overlap {background-position:0 -10px;}
 
-.content {position:relative; width:960px; margin:0 auto; padding:10px 0;}
+.content {position:relative; width:98%; margin:0 auto; padding:10px 0;}
 
-fieldset {width:926px; margin:10px 0; padding:10px 15px; background-color:#f0f0f0; border:2px solid #aaa;}
+fieldset {/*width:926px;*/ margin:10px 0; padding:10px 15px; background-color:#f0f0f0; border:2px solid #aaa;}
 fieldset.w50 {margin:5px 10px 5px 0;}
 fieldset.w50.r_margin {margin-right:0;}
 .frame {margin-top:10px; background-color:#f0f0f0; border:2px solid #aaa;}
