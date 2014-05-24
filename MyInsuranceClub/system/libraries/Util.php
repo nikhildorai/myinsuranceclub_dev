@@ -19,7 +19,7 @@ class Util {
 		$config = array();
 		$config['per_page'] 	=	10;
 		$config['num_links'] 	=	5;
-		$config['first_link'] = 'First';
+		$config['first_link'] 	= 	'First';
 		$config['first_tag_open'] = '<div>';
 		$config['first_tag_close'] = '</div>';
 		$config['last_link'] = 'Last';

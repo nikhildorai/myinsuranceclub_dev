@@ -26,27 +26,27 @@ class Insurance_company_master_model EXTENDS CI_Model{
 		return $result;
 	}
 	
-	function saveCompanyRecord()
+	function saveCompanyRecord($modelType = 'update')
 	{
-		$validation_rules = array(
-			array('field' => 'companyModel[company_type_id]', 'label' => 'company type', 'rules' => 'required'),
-			array('field' => 'companyModel[company_shortname]', 'label' => 'company shortname', 'rules' => 'required'),
-			array('field' => 'companyModel[company_display_name]', 'label' => 'company display name', 'rules' => 'required'),
-			array('field' => 'companyModel[company_type_id]', 'label' => 'company type', 'rules' => 'required'),
-		);
-
-		$this->form_validation->set_rules($validation_rules);
-		
-
-		// Run the validation.
-		if ($this->form_validation->run()==FALSE)
-		{
-		}
-
-		// Set validation errors.
-		//$this->data['message'] = validation_errors('<p class="error_msg">', '</p>');
-
-//var_dump($_POST, $this->form_validation->run(),  validation_errors())		;die;	
 		return FALSE;
+	}
+	
+
+	public function getInsuranceCompany($arrParams)
+	{	
+		$sql = 'SELECT * FROM insurance_company_master WHERE status = "active"';
+		if (!empty($arrParams))
+		{
+			if (isset($arrParams['company_name']) && !empty($arrParams['company_name']))
+				$sql .= ' AND company_name LIKE "%'.$arrParams['company_name'].'%" ';
+			if (isset($arrParams['company_shortname']) && !empty($arrParams['company_shortname']))
+				$sql .= ' AND company_shortname LIKE "%'.$arrParams['company_shortname'].'%" ';
+			if (isset($arrParams['company_display_name']) && !empty($arrParams['company_display_name']))
+				$sql .= ' AND company_display_name LIKE "%'.$arrParams['company_display_name'].'%" ';
+			if (isset($arrParams['company_type_id']) && !empty($arrParams['company_type_id']))
+				$sql .= ' AND company_type_id = '.$arrParams['company_type_id'];
+		}
+		$result = $this->db->query($sql);
+		return $result;
 	}
 }
