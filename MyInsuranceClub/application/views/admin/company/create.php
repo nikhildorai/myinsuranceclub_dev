@@ -8,6 +8,10 @@
 					<?php echo $message; ?>
 				</div>
 			<?php } ?>		
+					
+<?php echo form_error('company_name'); ?>
+<?php echo validation_errors(); ?> 
+						<?php echo form_error() ;?>
 				<?php echo form_open('admin/company/create'); ?>
 					<fieldset>
 						<legend>Company Details</legend>

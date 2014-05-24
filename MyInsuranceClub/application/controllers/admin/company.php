@@ -86,21 +86,58 @@ class Company extends CI_Controller {
 		$this->template->render();
 	}
 
-    public function create()
+    public function create($company_id = null)
 	{
 		$companyModel = array();
 		if ($this->input->post('companyModel'))
 		{
 			$arrParams = $this->input->post('companyModel');
 			$companyTypeId = (isset($arrParams['company_type_id']) && !empty($arrParams['company_type_id'])) ? $arrParams['company_type_id'] : '';
+
 			$validation_rules = array(
-				array('field' => 'companyModel[company_name]', 'label' => 'company type', 'rules' => 'required|callback_validateInsuranceCompany[company_name#'.$arrParams["company_name"].',company_type_id#'.$companyTypeId.']'),
+				//array('field' => 'companyModel[company_name]', 'label' => 'company type', 'rules' => 'required'),
+				//array('field' => 'companyModel[company_shortname]', 'label' => 'company shortname', 'rules' => 'required'),
+				//array('field' => 'companyModel[company_display_name]', 'label' => 'company display name', 'rules' => 'required'),
+		
+				array('field' => 'companyModel[company_name]', 'label' => 'company name', 'rules' => 'required|callback_validateInsuranceCompany[company_name#'.$arrParams["company_name"].',company_type_id#'.$companyTypeId.']'),
 				array('field' => 'companyModel[company_shortname]', 'label' => 'company shortname', 'rules' => 'required|callback_validateInsuranceCompany[company_shortname#'.$arrParams["company_shortname"].',company_type_id#'.$companyTypeId.']'),
-		//		array('field' => 'companyModel[company_display_name]', 'label' => 'company display name', 'rules' => 'required'),
+				array('field' => 'companyModel[company_display_name]', 'label' => 'company display name', 'rules' => 'required|callback_validateInsuranceCompany[company_display_name#'.$arrParams["company_display_name"].',company_type_id#'.$companyTypeId.']'),
 				array('field' => 'companyModel[company_type_id]', 'label' => 'company type', 'rules' => 'required'),
 			);
 			$this->form_validation->set_rules($validation_rules);
-	
+			
+			
+		/*	
+			//	validate each value for unique 
+			$arrSkip = array('company_id', 'company_type_id', 'company_display_name');
+			if (!empty($arrParams))
+			{
+				foreach ($arrParams as $k1=>$v1)
+				{
+					if (!in_array($k1, $arrSkip))
+					{
+						$params = array();
+						if (!empty($v1))
+						{
+							$params[$k1] = $v1;
+							$params['company_type_id'] = $companyTypeId;
+							$validEachRow[] = $this->validateInsuranceCompany($params, $modelType = 'create', $fieldName = $k1, $company_id);
+						}
+					}
+				}
+			}
+			$newErrorMsg  = '';
+			if (!empty($validEachRow))
+			{
+				foreach ($validEachRow as $k2=>$v2)
+				{
+					if (!empty($v2['msg']))
+						$newErrorMsg .= $v2['msg'];
+				}				
+			}
+			$this->form_validation->set_message('company_name', 'bsaydasydy');
+	//		$this->form_validation->set_message('required', 'Your custom message here');
+	*/
 			// Run the validation.
 			if ($this->form_validation->run())
 			{
@@ -109,10 +146,10 @@ class Company extends CI_Controller {
 				echo 'inside';
 			}
 	
+	//var_dump($_POST, validation_errors())		;die;	
 			// Set validation errors.
 			//$this->data['message'] = validation_errors('<p class="error_msg">', '</p>');
 	
-	var_dump($_POST, validation_errors())		;die;	
 		
 			//$this->insurance_company_master_model->saveCompanyRecord($modelType = 'create');
 			$companyModel = $_POST['companyModel'];
@@ -130,9 +167,13 @@ class Company extends CI_Controller {
 	 * 			It should be key value pair should be separated by "#".
 	 * 			example: "company_name#Agricultural Insurance Company of India,company_type_id#1"
 	 */
-	public function validateInsuranceCompany($value, $params = null)
+//	public function validateInsuranceCompany($params = array(), $modelType = 'create', $fieldName = '')
+	public function validateInsuranceCompany($value , $params)
 	{
-		$arrParams = array();
+		$arrParams = $return = array();
+		$msg = 'Undefined validation error';
+		$exist = true;		
+		
 		if (is_array($value))
 		{
 			$arrParams = $value;
@@ -159,18 +200,28 @@ class Company extends CI_Controller {
 		{
 			$this->form_validation->set_message('undefined', 'Undefined validation error');
 			return FALSE;
-		}
-		
+		}		
 		$record = $this->insurance_company_master_model->getInsuranceCompany($arrParams);
+//var_dump($params, '---------------->');		
 		if ($record->num_rows > 0)
 		{
-			echo 'exists';
+			$this->form_validation->set_message('validateInsuranceCompany', 'The %s already exists');
+			return FALSE;
+		//$this->form_validation->set_message('error', 'Undefined validation error');
+			/*
+			if (!empty($fieldName))
+				$msg = '<p>'.ucfirst(str_replace('_', ' ', $fieldName)).' already exists.</p> ';
+			else 
+				$msg = '<p>Record already exists</p> ';
+			$exist = 'yes';
+			*/
 		}
 		else 
 		{
-			//$this->form_validation->set_message('undefined', 'Undefined validation error');
-			return true;
+			return TRUE;
+			//$this->form_validation->set_message('error', 'Undefined validation error');
 		}
+		//return array('msg'=>$msg, 'exist'=>$exist);
 	}
 
 }
