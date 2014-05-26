@@ -31,9 +31,10 @@ class Util {
 		if (isset($_SERVER['QUERY_STRING']) &&!empty($_SERVER['QUERY_STRING']))
 		{
 			$qString = explode('&', $_SERVER['QUERY_STRING']);
+//var_dump($qString);			
 			foreach ($qString as $k1=>$v1)
 			{
-				if (reset(explode('=', $v1)) != 'per_page')
+				if (reset(explode('=', $v1)) != 'per_page' && !empty($v1))
 					$pageUrl .= '&'.$v1;
 			}
 		}	
@@ -75,7 +76,7 @@ class Util {
 		{
 			$i = 0;
 			foreach ($result->result_array() as $k1=>$v1)
-			{
+			{			
 				if (!empty($v1))
 				{	
 					if ($type == 'all')
@@ -83,8 +84,12 @@ class Util {
 						$value[$i] = $v1;
 					}
 					else if (in_array($type, array('single')) && !empty($fields) )
-					{				
+					{			
 						$value[$i] = array_intersect_key($v1, array_flip($fields));
+					}
+					else if (in_array($type, array('single')) && empty($fields) )
+					{			
+						$value = $v1;
 					}
 				}
 				$i++;

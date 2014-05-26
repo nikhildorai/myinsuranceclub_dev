@@ -13,7 +13,7 @@ html {overflow-y:scroll; -webkit-font-smoothing:antialiased;}
 /* Font Styling ----------------------------------------------------------------------------- */
 h1,h2,h3,h4,h5,h6 {font-weight:bold; text-rendering:optimizeLegibility;} /* Title kerning */ 
 h1 {font-size:19px; margin:5px 0;}
-h2 {font-size:18px; margin:5px 0;}
+h2 {font-size:18px; margin:5px 0; width:80%;}
 h3 {font-size:17px; margin:3px 0;}
 h4 {font-size:16px; margin:3px 0;}
 h5 {font-size:15px; margin:0 0 3px;}
@@ -234,3 +234,27 @@ hr.clear {clear:both; display:block; border:0 none; height:0;}
 .clearfix, .box, .parallel {display:block;}
 /*.clearfix {display:inline-block;}
 * html .clearfix {height:1%;} /* Hides from IE-mac \*/
+
+
+/* Download Row Starts */
+.download-row{
+	display: inline-block;
+    float: right;
+	text-align:right;
+	margin:0.3em 1.5%;
+	}
+.download-row label{
+	display:inline-block;
+	margin:0 5px 0 0px;
+	}
+.download-row select{
+	width:110px;
+	}
+.download-row a{
+	color:#333;
+	}
+.download-row input{
+	padding:3px 8px 4px;
+	font-size:10px;
+	}
+/* Download Row Ends */

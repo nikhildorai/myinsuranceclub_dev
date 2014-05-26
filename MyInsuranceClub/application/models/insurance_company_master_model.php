@@ -22,13 +22,56 @@ class Insurance_company_master_model EXTENDS CI_Model{
 			if (array_key_exists('company_type', $arrParams) && !empty($arrParams['company_type']))
 				$sql .= ' AND company_type_id = '.$arrParams['company_type'];
 		}
+		$sql .= ' ORDER BY company_name ASC, company_type_id ASC ';
 		$result = $this->db->query($sql);
 		return $result;
 	}
 	
-	function saveCompanyRecord($modelType = 'update')
+	function saveCompanyRecord($arrParams = array(), $modelType = 'update')
 	{
-		return FALSE;
+		if (!empty($arrParams))
+		{
+			$colNames = $colValues = array();
+			if ($modelType == 'create')
+			{
+				foreach ($arrParams as $k1=>$v1)
+				{
+					if (!in_array($k1, array('company_id')))
+					{
+						$colNames[] = trim($k1);
+						if (is_numeric($v1))
+							$colValues[] = trim($v1);
+						else
+							$colValues[] = '"'.trim($v1).'"';
+					}
+				}
+				$colNames = implode(', ', $colNames);
+				$colValues = implode(', ', $colValues);
+				$sql = 'INSERT INTO insurance_company_master ('.$colNames.') VALUES('.$colValues.')';
+			}
+			else
+			{
+				foreach ($arrParams as $k1=>$v1)
+				{
+					if (!in_array($k1, array('company_id')))
+					{
+						if (is_numeric($v1))
+							$colValues[] = trim($k1).'='.trim($v1);
+						else
+							$colValues[] = trim($k1).'='.'"'.trim($v1).'"';
+					}
+				}
+				$colValues = implode(', ', $colValues);
+				$sql = 'UPDATE insurance_company_master SET '.$colValues.' WHERE company_id = '.$arrParams['company_id'];
+//var_dump($arrParams, $colValues, $sql);die;				
+			}		
+			if ($this->db->query($sql))
+				return true;
+			else 
+				return false;
+		}
+		else
+			return FALSE;
 	}
 	
 
@@ -48,5 +91,18 @@ class Insurance_company_master_model EXTENDS CI_Model{
 		}
 		$result = $this->db->query($sql);
 		return $result;
+	}
+	
+	
+	public function getById($id)
+	{
+		$sql = 'SELECT * FROM insurance_company_master WHERE company_id = '.$id;		
+		return $this->db->query($sql);
+	}
+	
+	public function getAll()
+	{
+		$sql = 'SELECT * FROM insurance_company_master';
+		return $this->db->query($sql);
 	}
 }

@@ -3,25 +3,23 @@
 			
 				<h2>Create Company</h2>
 			
-			<?php if (! empty($message)) { ?>
-				<div id="message">
-					<?php echo $message; ?>
-				</div>
-			<?php } ?>		
 					
-<?php echo form_error('company_name'); ?>
-<?php echo validation_errors(); ?> 
-						<?php echo form_error() ;?>
-				<?php echo form_open('admin/company/create'); ?>
+<?php //echo validation_errors('<p class="error_msg">', '</p>'); ?> 
+				<?php echo form_open(); ?>
 					<fieldset>
 						<legend>Company Details</legend>
+							<?php if (! empty($message)) { ?>
+								<div id="message">
+									<?php echo $message; ?>
+								</div>
+							<?php } ?>		
 						<ul>
 							<li class="info_req">
 								<label for="search">Company Name:</label>
 								<input type="text" id="company_name" name="companyModel[company_name]" value="<?php echo array_key_exists( 'company_name',$companyModel) ? $companyModel['company_name'] : '';?>" class="tooltip_trigger" title="Unique company name." /><br />
 							</li>
 							
-							<li>
+							<li class="info_req">
 								<label for="search">Company Display Name:</label>
 								<input type="text" id="company_display_name" name="companyModel[company_display_name]" value="<?php echo array_key_exists( 'company_display_name',$companyModel) ? $companyModel['company_display_name'] : '';?>" class="tooltip_trigger" title="Unique company display name." /><br />
 							</li>
@@ -46,6 +44,7 @@
 								<input type="hidden" id="company_id" name="companyModel[company_id]" value="<?php echo array_key_exists( 'company_id',$companyModel) ? $companyModel['company_id'] : '';?>" />
 								<label for="search"></label>
 								<input type="submit" name="submit" value="Submit" class="link_button"/>
+								<a href="<?php echo $base_url; ?>admin/company" class="link_button grey">Cancel</a>
 							</li>
 						</ul>
 					</fieldset>

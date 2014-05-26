@@ -74,8 +74,10 @@ class Company extends CI_Controller {
 		if (array_key_exists('search', $_GET) && $_GET['search']== "Search")
 			$arrParams = $_GET;
 		$this->data['search_query'] = $arrParams;
-		// Set any returned status/error messages.
-		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];		
+		// Set any returned status/error messages..		
+		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
+		//unset($this->session->set_flashdata('message'));
+		$this->session->set_flashdata('message','');
 		
 		$this->data['records'] 	= $this->insurance_company_master_model->get_all_insurance_company($arrParams);
 		//	pagination
@@ -88,70 +90,67 @@ class Company extends CI_Controller {
 
     public function create($company_id = null)
 	{
+		$modelType = 'create';
+		//	check if company id exists
 		$companyModel = array();
+		if (!empty($company_id))
+		{
+			$exist = $this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $id=$company_id, $fields = array());
+			if (empty($exist))
+			{
+				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
+				redirect('admin/company/index');
+			}
+			else 
+			{
+				$companyModel = $exist;	
+				$modelType = 'update';
+			}
+		}
+		
 		if ($this->input->post('companyModel'))
 		{
+			$_POST['companyModel']['company_display_name'] = (isset($_POST['companyModel']['company_display_name']) && !empty($_POST['companyModel']['company_display_name'])) ? $_POST['companyModel']['company_display_name'] :  $_POST['companyModel']['company_name'];
 			$arrParams = $this->input->post('companyModel');
 			$companyTypeId = (isset($arrParams['company_type_id']) && !empty($arrParams['company_type_id'])) ? $arrParams['company_type_id'] : '';
-
+			$company_id = (isset($arrParams['company_id']) && !empty($arrParams['company_id'])) ? $arrParams['company_id'] : '';
 			$validation_rules = array(
-				//array('field' => 'companyModel[company_name]', 'label' => 'company type', 'rules' => 'required'),
-				//array('field' => 'companyModel[company_shortname]', 'label' => 'company shortname', 'rules' => 'required'),
-				//array('field' => 'companyModel[company_display_name]', 'label' => 'company display name', 'rules' => 'required'),
-		
-				array('field' => 'companyModel[company_name]', 'label' => 'company name', 'rules' => 'required|callback_validateInsuranceCompany[company_name#'.$arrParams["company_name"].',company_type_id#'.$companyTypeId.']'),
-				array('field' => 'companyModel[company_shortname]', 'label' => 'company shortname', 'rules' => 'required|callback_validateInsuranceCompany[company_shortname#'.$arrParams["company_shortname"].',company_type_id#'.$companyTypeId.']'),
-				array('field' => 'companyModel[company_display_name]', 'label' => 'company display name', 'rules' => 'required|callback_validateInsuranceCompany[company_display_name#'.$arrParams["company_display_name"].',company_type_id#'.$companyTypeId.']'),
+				array('field' => 'companyModel[company_name]', 'label' => 'company name', 'rules' => 'required|callback_validateInsuranceCompany[company_name#'.$arrParams["company_name"].',company_type_id#'.$companyTypeId.',modelType#'.$modelType.',company_id#'.$company_id.']'),
+				array('field' => 'companyModel[company_shortname]', 'label' => 'company shortname', 'rules' => 'required|callback_validateInsuranceCompany[company_shortname#'.$arrParams["company_shortname"].',company_type_id#'.$companyTypeId.',modelType#'.$modelType.',company_id#'.$company_id.']'),
+				array('field' => 'companyModel[company_display_name]', 'label' => 'company display name', 'rules' => 'required|callback_validateInsuranceCompany[company_display_name#'.$arrParams["company_display_name"].',company_type_id#'.$companyTypeId.',modelType#'.$modelType.',company_id#'.$company_id.']'),
 				array('field' => 'companyModel[company_type_id]', 'label' => 'company type', 'rules' => 'required'),
 			);
 			$this->form_validation->set_rules($validation_rules);
 			
-			
-		/*	
-			//	validate each value for unique 
-			$arrSkip = array('company_id', 'company_type_id', 'company_display_name');
-			if (!empty($arrParams))
-			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, $arrSkip))
-					{
-						$params = array();
-						if (!empty($v1))
-						{
-							$params[$k1] = $v1;
-							$params['company_type_id'] = $companyTypeId;
-							$validEachRow[] = $this->validateInsuranceCompany($params, $modelType = 'create', $fieldName = $k1, $company_id);
-						}
-					}
-				}
-			}
-			$newErrorMsg  = '';
-			if (!empty($validEachRow))
-			{
-				foreach ($validEachRow as $k2=>$v2)
-				{
-					if (!empty($v2['msg']))
-						$newErrorMsg .= $v2['msg'];
-				}				
-			}
-			$this->form_validation->set_message('company_name', 'bsaydasydy');
-	//		$this->form_validation->set_message('required', 'Your custom message here');
-	*/
 			// Run the validation.
 			if ($this->form_validation->run())
 			{
-				//$validate = $this->getInsuranceCompany($arrParams);
-				//var_dump($validate);			
-				echo 'inside';
+				//	run validation on complete company post data
+				$validate = $this->validateInsuranceCompany($arrParams, 'modelType#'.$modelType.',company_id#'.$company_id);			
+				if ($validate == true)
+				{
+					//	save record
+					if ($this->insurance_company_master_model->saveCompanyRecord($arrParams, $modelType))
+					{
+						$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
+						redirect('admin/company/index');
+					}
+					else
+					{
+						$this->data['message'] = '<p class="error_msg">Record could not be created.</p>';
+					}
+				}
+				else 
+				{
+					$this->data['message'] .= '<p class="error_msg">Record already exists.</p>';
+				}
+			}		
+			else 
+			{
+				// 	Set validation errors.
+				$this->data['message'] = validation_errors('<p class="error_msg">', '</p>'); 
 			}
-	
-	//var_dump($_POST, validation_errors())		;die;	
-			// Set validation errors.
-			//$this->data['message'] = validation_errors('<p class="error_msg">', '</p>');
-	
 		
-			//$this->insurance_company_master_model->saveCompanyRecord($modelType = 'create');
 			$companyModel = $_POST['companyModel'];
 		}		
 		$this->data['companyModel'] = $companyModel;
@@ -168,11 +167,27 @@ class Company extends CI_Controller {
 	 * 			example: "company_name#Agricultural Insurance Company of India,company_type_id#1"
 	 */
 //	public function validateInsuranceCompany($params = array(), $modelType = 'create', $fieldName = '')
-	public function validateInsuranceCompany($value , $params)
+	public function validateInsuranceCompany($value , $params = null)
 	{
-		$arrParams = $return = array();
+		$arrParams = $arrParamsVals = $return = array();
 		$msg = 'Undefined validation error';
 		$exist = true;		
+	
+		if (!empty($params))
+		{
+			$params = explode(',', $params);
+			foreach ($params as $k1=>$v1)
+			{
+				if (!empty($v1))
+				{
+					$a = explode('#', $v1);
+					if (!empty($a))
+					{
+						$arrParamsVals[$a[0]] = $a[1];
+					}
+				}
+			}
+		}
 		
 		if (is_array($value))
 		{
@@ -180,48 +195,53 @@ class Company extends CI_Controller {
 		}
 		else if (is_string($value))
 		{
-			if (!empty($params))
-			{
-				$params = explode(',', $params);
-				foreach ($params as $k1=>$v1)
-				{
-					if (!empty($v1))
-					{
-						$a = explode('#', $v1);
-						if (!empty($a))
-						{
-							$arrParams[$a[0]] = $a[1];
-						}
-					}
-				}
-			}
+			$arrParams = $arrParamsVals;
 		}
 		else 
 		{
-			$this->form_validation->set_message('undefined', 'Undefined validation error');
+			$this->form_validation->set_message('validateInsuranceCompany', 'Undefined validation error');
 			return FALSE;
 		}		
 		$record = $this->insurance_company_master_model->getInsuranceCompany($arrParams);
-//var_dump($params, '---------------->');		
-		if ($record->num_rows > 0)
+		
+		if ($record->num_rows == 0)
+		{
+			return TRUE;
+		}
+		else if ($record->num_rows == 1)
+		{
+			if (isset($arrParamsVals['modelType']) && $arrParamsVals['modelType'] == 'create' )
+			{
+				$this->form_validation->set_message('validateInsuranceCompany', 'The %s already exists');
+				return FALSE;
+			}
+			else if (isset($arrParamsVals['modelType']) && $arrParamsVals['modelType'] == 'update' && !empty($arrParamsVals['modelType']))
+			{
+				//	set validation for update
+				$record = reset($record->result_array());
+				if ($record['company_id'] == $arrParamsVals['company_id'])
+					return true;
+				else 
+				{
+					$this->form_validation->set_message('validateInsuranceCompany', 'The %s already exists');
+					return FALSE;
+				}
+			}
+			else 
+			{
+				$this->form_validation->set_message('validateInsuranceCompany', 'Undefined validation error');
+				return FALSE;
+			}
+		}
+		else if ($record->num_rows > 1)
 		{
 			$this->form_validation->set_message('validateInsuranceCompany', 'The %s already exists');
-			return FALSE;
-		//$this->form_validation->set_message('error', 'Undefined validation error');
-			/*
-			if (!empty($fieldName))
-				$msg = '<p>'.ucfirst(str_replace('_', ' ', $fieldName)).' already exists.</p> ';
-			else 
-				$msg = '<p>Record already exists</p> ';
-			$exist = 'yes';
-			*/
 		}
 		else 
 		{
-			return TRUE;
-			//$this->form_validation->set_message('error', 'Undefined validation error');
+			$this->form_validation->set_message('validateInsuranceCompany', 'Undefined validation error');
+			return FALSE;
 		}
-		//return array('msg'=>$msg, 'exist'=>$exist);
 	}
 
 }

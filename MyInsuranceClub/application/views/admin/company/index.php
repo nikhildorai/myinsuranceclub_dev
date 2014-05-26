@@ -3,12 +3,18 @@
 			<div class="col100">
 			
 				<h2>Manage Company</h2>
-			
+<div class="download-row">
+				<a href="<?php echo $base_url;?>admin/company/create" class="link_button">Create New Company</a>
+</div>
+<br>
+<br>			
 			<?php if (! empty($message)) { ?>
 				<div id="message">
 					<?php echo $message; ?>
 				</div>
-			<?php } ?>		
+			<?php } 
+			$message = null;
+			?>		
 				<?php echo form_open('admin/company/index', array('method'=>'get'));	?>
 					<fieldset>
 						<legend>Search Filter</legend>
@@ -19,9 +25,17 @@
 						<!-- <input type="select" id="company_type" name="company_type" value="<?php // echo ?>" class="tooltip_trigger" title="Search by company type."> -->
 						<?php 
 						$selected = array_key_exists( 'company_type',$search_query) ? $search_query['company_type'] : '';
-						$options = $this->util->getCompanyTypeDropDownOptions();
-						//sort($options);
-						echo form_dropdown('company_type', $options, $selected, ' id="company_type" class="tooltip_trigger" title="Search by company type."');
+						$options = $this->util->getCompanyTypeDropDownOptions($defaultEmpty = 'All');			
+						foreach ($options as $k1=>$v1)
+						{
+							$op = array(
+							    'name'        => 'company_type',
+							    'value'       => $k1,
+							    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+							    'style'       => 'margin:10px',
+							    );
+							echo form_radio($op).$v1;
+						}
 						?>
 						<br />
 						<label for="search"></label>
@@ -57,7 +71,7 @@
 								$rows[] = $row['company_display_name']; 
 								$comp_type = reset($this->util->getTableData($modelName='Company_type_model', $type="single", $id=$row['company_type_id'], $fields = array('company_type_name')));
 								$rows[] = $comp_type['company_type_name']; 
-								$actionBtn = '<a href="'.$base_url.'admin/company/create">Update</a>';
+								$actionBtn = '<a href="'.$base_url.'admin/company/create/'.$row['company_id'].'">Update</a>';
 								$rows[] = $actionBtn; 
 								$this->table->add_row($rows);
 					   		}
