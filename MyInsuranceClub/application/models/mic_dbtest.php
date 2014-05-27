@@ -10,8 +10,17 @@ class mic_dbtest EXTENDS CI_Model{
 		$this->load->library('session');
 	}
 	
+	public function get_coverage_amount()
+	{
+		$get_cvg_amt= "SELECT DISTINCT sum_assured FROM annual_premium_health WHERE sum_assured !=0";
+		$cvg_amt= $this->db->query($get_cvg_amt);
+		return $cvg_amt->result_array();
+	}
+	
 	public function get_user_info($user_info)
 	{	
+			
+			//$user_location=mysql_real_escape_string($user_info['location']);
 			$insert_user_info="INSERT INTO visitor_information(sessions_id,visitor_referrer_site,visitor_device,visitor_os,visitor_browser,visitor_entry_time) VALUES('$user_info[session_id]','$user_info[referrer]','$user_info[device]','$user_info[os]','$user_info[browser]','$user_info[timestamp]')";
 			$this->db->query($insert_user_info);
 	}
@@ -19,17 +28,25 @@ class mic_dbtest EXTENDS CI_Model{
 	
 	public function customer_personal_search_details($user_input)
 	{
+		if($user_input['cust_gender']=='male')
+		{
+			$cust_gend ='2';
+		}
+		else
+		{
+			$cust_gend ='3';
+		}
 		$session_id= $this->session->userdata('session_id');
 		$insert_customer_details=" INSERT INTO customer_details(cust_session_id,cust_firstname,cust_middlename,cust_lastname,
 		cust_email_id,cust_phone,cust_dob,cust_age,cust_gender,cust_city) VALUES('$session_id','$user_input[first_name]','$user_input[middle_name]','$user_input[last_name]',
-		'$user_input[cust_email]','$user_input[cust_mobile]','$user_input[cust_birthdate]','$user_input[cust_age]','$user_input[cust_gender]','$user_input[cust_city]')";
+		'$user_input[cust_email]','$user_input[cust_mobile]','$user_input[cust_birthdate]','$user_input[cust_age]','$cust_gend','$user_input[cust_city]')";
 		
 		$this->db->query($insert_customer_details);
 		
 		$plantype='';
 		if($user_input['plan_type']=='1'){$plantype='Individual';}else{$plantype='Family Floater';}
 		$insert_customer_search_details="INSERT INTO customer_search_details(session_id,product_name,product_type,plan_type,coverage_amount,policy_term)
-		VALUES('$session_id','$user_input[product_name]','$user_input[product_type]','$plantype','$user_input[coverage_amount]','$user_input[policy_term]')";
+		VALUES('$session_id','$user_input[product_name]','$user_input[product_type]','$plantype','$user_input[coverage_amount]',1)";
 		
 		$this->db->query($insert_customer_search_details);
 	}
@@ -39,13 +56,14 @@ class mic_dbtest EXTENDS CI_Model{
 	{	
 		$get_policy="SELECT i.company_shortname,p.policy_name,ap.annual_premium,ap.age,ap.sum_assured,ap.service_tax,ap.final_premium,f.cashless_treatment,f.preexisting_diseases,f.maternity,
 					ap.no_of_members,v.variant_name,f.autorecharge_SI,f.pre_hosp,f.post_hosp,f.day_care,f.check_up,f.ayurvedic,f.co_pay FROM insurance_company_master i,policy_health_master p, annual_premium_health ap,
-					 policy_health_features f,policy_health_variants v WHERE i.company_id=p.company_id AND p.policy_id=v.policy_id AND v.variant_id=f.variant_id";
+					 policy_health_features f,policy_health_variants v WHERE i.company_id=p.company_id AND p.policy_id=v.policy_id AND v.variant_id=f.variant_id
+					AND ap.term = 1";
 	
 		/* Filtering data based on $user_input */
 		
 		if($user_input['plan_type']!='')		/* Filter based on Individual/Family Composition */
 		{
-			if($user_input['plan_type']=='1')
+			if($user_input['plan_type']=='myself')
 			{
 				$get_policy.=" AND ap.no_of_members='1A'";
 			}
@@ -98,13 +116,13 @@ class mic_dbtest EXTENDS CI_Model{
 		
 		if($user_input['coverage_amount']!='') /* Filter based on coverage amount */
 		{
-			$amount_list1=array(1,2,3,4);
-			if(in_array($user_input['coverage_amount'],$amount_list1))
-			{
-				$get_policy.=" AND ap.sum_assured=300000";
-			}
+			//$amount_list1=array(1,2,3,4);
+			/* if($user_input['coverage_amount']=='300000')
+			{ */
+				$get_policy.=" AND ap.sum_assured=".$user_input['coverage_amount'];
+			/* } */
 			
-			elseif($user_input['coverage_amount']=='5')
+			/* elseif($user_input['coverage_amount']=='5')
 			{
 				$get_policy.=" AND ap.sum_assured BETWEEN 300000 AND 500000";
 			}
@@ -128,16 +146,16 @@ class mic_dbtest EXTENDS CI_Model{
 			elseif($user_input['coverage_amount']>='9')
 			{
 				$get_policy.=" AND ap.sum_assured >= 1500000";
-			}
+			} */
 		}
 		
 		/* Filter based on coverage amount */
 		 	
 		/* Filter based on policy_term */
-		if($user_input['policy_term']!='')
+		/* if($user_input['policy_term']!='')
 		{
 			$get_policy.=" AND ap.term =".$user_input['policy_term'];
-		}
+		} */
 		/* Filter based on policy_term ends*/
 	
 		/* Filter based on customer age*/
@@ -148,13 +166,13 @@ class mic_dbtest EXTENDS CI_Model{
 		/* Filter based on customer gender */
 		if($user_input['cust_gender']!='')
 		{
-			if($user_input['cust_gender']== '2')
+			if($user_input['cust_gender']== 'male')
 			{
 				
 				$get_policy.=" AND ap.gender_id !=3";
 				
 			}
-			if($user_input['cust_gender']== '3')
+			if($user_input['cust_gender']== 'female')
 			{
 				$get_policy.=" AND ap.gender_id !=2 ";
 			}

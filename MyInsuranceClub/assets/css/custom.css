@@ -1,0 +1,196 @@
+.pad_l0 .col-xs-1, .pad_l0 .col-sm-1, .pad_l0 .col-md-1, .pad_l0 .col-lg-1, .pad_l0 .col-xs-2, .pad_l0 .col-sm-2, .pad_l0 .col-md-2, .pad_l0 .col-lg-2, .pad_l0 .col-xs-3, .pad_l0 .col-sm-3, .pad_l0 .col-md-3, .pad_l0 .col-lg-3, .pad_l0 .col-xs-4, .pad_l0 .col-sm-4, .pad_l0 .col-md-4, .pad_l0 .col-lg-4, .pad_l0 .col-xs-5, .pad_l0 .col-sm-5, .pad_l0 .col-md-5, .pad_l0 .col-lg-5, .pad_l0 .col-xs-6, .pad_l0 .col-sm-6, .pad_l0 .col-md-6, .pad_l0 .col-lg-6, .pad_l0 .col-xs-7, .pad_l0 .col-sm-7, .pad_l0 .col-md-7, .pad_l0 .col-lg-7, .pad_l0 .col-xs-8, .pad_l0 .col-sm-8, .pad_l0 .col-md-8, .pad_l0 .col-lg-8, .pad_l0 .col-xs-9, .pad_l0 .col-sm-9, .pad_l0 .col-md-9, .pad_l0 .col-lg-9, .pad_l0 .col-xs-10, .pad_l0 .col-sm-10, .pad_l0 .col-md-10, .pad_l0 .col-lg-10, .pad_l0 .col-xs-11, .pad_l0 .col-sm-11, .pad_l0 .col-md-11, .pad_l0 .col-lg-11, .pad_l0 .col-xs-12, .pad_l0 .col-sm-12, .pad_l0 .col-md-12, .pad_l0 .col-lg-12  { padding-left:0px; padding-right:5px;}
+.choice {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 6px;
+    border-top: 4px solid #EAE9E6;
+    bottom: 0px;
+	
+    color: #CCCCCC;
+    height: auto;
+    left: -60px; 
+    margin: 0 auto;
+    max-width: 205px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    width: 100%;
+    z-index: 99999;
+}
+.choice.f {
+    left: 330px; 
+  
+}
+.choice.g {
+    left: -260px; bottom:-10px; 
+}
+.choice.l {
+    left: 270px; bottom:-10px;  height:270px;
+  
+}
+
+
+.choice .choice-leftcol {
+    border-bottom: 4px solid #EAE9E6;
+    border-left: 4px solid #EAE9E6;
+    border-right: 4px solid #EAE9E6;
+    float: left;
+    height: auto;
+    position: relative;
+    width: 100%;
+}
+.choice.l .choice-leftcol {
+    border-bottom: 4px solid #EAE9E6;
+    border-left: 4px solid #EAE9E6;
+    border-right: 4px solid #EAE9E6;
+    float: left;
+    height: 262px;
+    position: relative;
+    width: 100%;
+}
+
+.choice a {
+	color:#dfdfdf;
+	cursor:default
+}
+.choice a:hover {
+	  text-decoration:none;
+}
+.choice.l a,.choice.f a {
+	color:#dfdfdf; font-size:15px;
+	cursor:default
+}
+.choice a.picked {
+	color:#60c6e7
+}
+.choice .active {
+	border-radius:4px 4px 0 0;
+	background:#fff
+}
+.choice .active a {
+	color:#727272;
+	cursor:pointer
+}
+.choice .active a:hover {
+	color:#60c6e7
+}
+.choice .active-picked {
+	border-radius:0;
+	background:#FFFFFF
+}
+.choice .active-picked a {
+	color:#ddd
+}
+.choice .active-picked a.picked {
+	color:#60c6e7
+}
+
+@media screen and (max-width: 585px) and (min-width: 541px) {
+.choice .choice-leftcol {
+width:35% !important
+}
+}
+.choice .years {
+	list-style:none;
+	margin:0;
+	padding:18px 0px 48px 0px;
+	float:left;
+	width:100%;
+	font-size:24px;
+	background:#fff;
+	height:auto;
+	position:relative;
+	-webkit-animation-delay:3s;
+	-moz-animation-delay:3s;
+	-ms-animation-delay:3s;
+	-o-animation-delay:3s;
+	animation-delay:3s;
+	overflow-y:hidden;
+	-webkit-overflow-scrolling:touch
+}
+.choice.l .years {
+	list-style:none;
+	margin:0;
+	padding:0px 10px 48px 10px;
+	float:left;
+	width:100%;
+	font-size:24px;
+	background:#fff;
+	height:215px;
+	position:relative;
+	-webkit-animation-delay:3s;
+	-moz-animation-delay:3s;
+	-ms-animation-delay:3s;
+	-o-animation-delay:3s;
+	animation-delay:3s;
+	overflow-y:scroll;
+	-webkit-overflow-scrolling:touch
+}
+.choice.f .years {
+	list-style:none;
+	margin:0;
+	padding:0px 0px 48px 0px;
+}
+.choice .years.active-picked {
+	height:240px
+}
+.choice .years.active-picked .jspVerticalBar {
+	display:none
+}
+.choice .years li {
+	margin-bottom:0.5px;
+	text-align:center
+}
+
+
+@media screen and (max-width: 585px) and (min-width: 541px) {}
+
+.stepwrap {
+	width:100%;
+	float:right;
+	height:42px
+}
+.stepwrap.years-stepwrap {
+	bottom:-4px;
+	float:left;
+	left:-4px;
+	position:absolute;
+	right:-4px;
+	width:auto
+}
+.step {
+	background:none repeat scroll 0 0 #2daee4;
+	color:#FFFFFF;
+	display:none;
+	font-size:15px;
+	height:42px;
+	line-height:42px;
+	padding:0 5px 0 15px;
+	text-align:left;
+	width:100%;
+	position:relative;
+	-webkit-border-radius:0 0 0px 4px;
+	-moz-border-radius:0 0 0px 4px;
+	-ms-border-radius:0 0 0px 4px;
+	-o-border-radius:0 0 0px 4px;
+	border-radius:0 0 0px 4px
+}
+.step em {
+	font-style:normal;
+	display:inline-block;
+	background:#f26522;
+	border-radius:100px;
+	width:24px;
+	height:24px;
+	margin:0 13px 0 0;
+	line-height:26px;
+	font-size:16px;
+	font-weight:500;
+	text-align:center
+}
+
+
+
+}
+
+

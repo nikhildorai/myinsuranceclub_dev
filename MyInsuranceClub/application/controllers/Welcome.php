@@ -34,7 +34,7 @@ class Welcome extends CI_Controller {
 	}
 	public function index()
 	{
-		$this->load->view('MIC_DEV');
+		$this->load->view('home');//
 		
 		$user_info['session_id'] = $this->session->userdata('session_id');
 		$user_info['timestamp'] = date('H:i:s',$this->session->userdata('last_activity'));
@@ -61,38 +61,43 @@ class Welcome extends CI_Controller {
 		 	
 	}
 	
+	public function health_insurance_form()
+	{	
+		$data=array();
+		$data['cvg_amt']=$this->mic_dbtest->get_coverage_amount();
+		$this->load->view('health_insurance/health',$data);
+	}
+	
 	public function health_policy()
 	{	
 		/* Form Validation Rules */
-		$this->form_validation->set_rules('cust_name', 'Full Name', 'required|alpha_spaces_dots');
-		$this->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|numeric|phone_789|exact_length[10]');
+		/* $this->form_validation->set_rules('cust_name', 'Full Name', 'required|alpha');
+		$this->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|numeric|exact_length[10]');
 		$this->form_validation->set_rules('cust_email', 'Email', 'required|valid_email');
-		$this->form_validation->set_rules('cust_dob', 'Date of Birth', 'required|age_greater_than_18');
-		$this->form_validation->set_rules('cust_city', 'City', 'required');
-		$this->form_validation->set_rules('plan_type', 'Plan', 'required');
-		$this->form_validation->set_error_delimiters('<div class="error" style="color: red;">', '</div>');
+		$this->form_validation->set_rules('cust_dob', 'Date of Birth', 'required');
+		$this->form_validation->set_error_delimiters('<div class="error" style="color: red;">', '</div>'); */
 		/* Form Validation Rules Ends  */
 		
-		if ($this->form_validation->run() == FALSE)
+		/* if ($this->form_validation->run() == FALSE)
 		{
-			$this->index();
+			redirect('Welcome/health_insurance_form');
 		}
-		else{
+		else{ */
 		
-			$user_input=array();/* array passed on to database */
-			$data=array();		/* array passed to the view with result */
+				$user_input=array();/* array passed on to database */
+				$data=array();		/* array passed to the view with result */
 		
-			if ($this->input->post()!='')			/* customer policy details start */
+				if ($this->input->post()!='')			/* customer policy details start */
 			{
 				$plan_type=explode('/',$this->input->post('product_des'));
-				$user_input['product_name']=$plan_type[0];
-				$user_input['product_type']=$plan_type[1];
+				$user_input['product_name']=$this->input->post('product_name');
+				$user_input['product_type']=$this->input->post('product_type');
 						
 			
 				if($this->input->post('plan_type')!='')
 				{
 					$user_input['plan_type']=$this->input->post('plan_type');
-				}
+				} 
 				if($this->input->post('coverage_amount')!='')
 				{
 					$user_input['coverage_amount']=$this->input->post('coverage_amount');
@@ -105,15 +110,14 @@ class Welcome extends CI_Controller {
 				{
 					$user_input['child']=$this->input->post('child');
 				}
-				if($this->input->post('policy_term')!='')
+				/* if($this->input->post('policy_term')!='')
 				{
 					$user_input['policy_term']=$this->input->post('policy_term');
-				}												/* customer policy details ends */
+				} */											/* customer policy details ends */
 			
 				if($this->input->post('cust_name')!='')			/* customer personal details starts */
 				{
 					$custname=explode(' ',$this->input->post('cust_name'));
-					
 					if(count($custname==1))
 					{
 						$user_input['first_name']=$custname[0];
@@ -133,7 +137,6 @@ class Welcome extends CI_Controller {
 						$user_input['last_name']=$custname[2];
 					}
 					
-					
 				}
 				if($this->input->post('cust_dob')!='')
 				{
@@ -144,8 +147,8 @@ class Welcome extends CI_Controller {
 					$birthage=$this->input->post('cust_dob');
 					$birthDate=explode('-',$birthage);
 					$age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
-						? ((date("Y") - $birthDate[0]) - 1)
-						: (date("Y") - $birthDate[0]));
+						? ((date("Y") - $birthDate[2]) - 1)
+						: (date("Y") - $birthDate[2]));
 				
 					$user_input['cust_age']=$age;
 																				/* age ends */
@@ -207,15 +210,15 @@ class Welcome extends CI_Controller {
 					$user_input['cust_city']=$this->input->post('cust_city');
 												/* customer personal details end */
 				}
-			}
+		/* 	} */
 		
 			
 		$this->mic_dbtest->customer_personal_search_details($user_input);
 		$data['customer_details']=$this->mic_dbtest->get_policy_results($user_input);
-		$data['send_email']= $this->mic_dbtest->get_policy_results($user_input);
-		$this->load->view('search_results',$data);
+		$data['send_email']= $this->mic_dbtest->get_policy_results($user_input); 
+		$this->load->view('health_insurance/health_compare',$data);//,$data
 		
-		/*  Email config */
+		/* Email config */
 		/* $message=$this->load->view('email/send_email',$data,TRUE);
 		$config = Array(
 				'protocol' => 'smtp',
@@ -237,12 +240,11 @@ class Welcome extends CI_Controller {
 		$this->email->to('nikhildorai@gmail.com');
 		$this->email->subject('This is an email test');
 		$this->email->message($message);
-		$this->email->send(); */
+		$this->email->send();  */
 		/* Email config Ends */
 		
 		}	
 	}	
-	
 }
 
 /* End of file welcome.php */
