@@ -74,21 +74,23 @@ class Insurance_company_master_model EXTENDS CI_Model{
 			return FALSE;
 	}
 	
-
 	public function getInsuranceCompany($arrParams)
 	{	
 		$sql = 'SELECT * FROM insurance_company_master WHERE status = "active"';
 		if (!empty($arrParams))
 		{
 			if (isset($arrParams['company_name']) && !empty($arrParams['company_name']))
-				$sql .= ' AND company_name LIKE "%'.$arrParams['company_name'].'%" ';
+				$sql .= ' AND company_name = "'.$arrParams['company_name'].'" ';
 			if (isset($arrParams['company_shortname']) && !empty($arrParams['company_shortname']))
-				$sql .= ' AND company_shortname LIKE "%'.$arrParams['company_shortname'].'%" ';
+				$sql .= ' AND company_shortname = "'.$arrParams['company_shortname'].'" ';
 			if (isset($arrParams['company_display_name']) && !empty($arrParams['company_display_name']))
-				$sql .= ' AND company_display_name LIKE "%'.$arrParams['company_display_name'].'%" ';
+				$sql .= ' AND company_display_name = "'.$arrParams['company_display_name'].'" ';
 			if (isset($arrParams['company_type_id']) && !empty($arrParams['company_type_id']))
 				$sql .= ' AND company_type_id = '.$arrParams['company_type_id'];
+			if (isset($arrParams['slug']) && !empty($arrParams['slug']))
+				$sql .= ' AND slug = "'.$arrParams['slug'].'" ';
 		}
+//var_dump($sql);		
 		$result = $this->db->query($sql);
 		return $result;
 	}

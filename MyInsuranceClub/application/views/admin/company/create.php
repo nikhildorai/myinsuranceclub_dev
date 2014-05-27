@@ -38,6 +38,26 @@
 								echo form_dropdown('companyModel[company_type_id]', $options, $selected, ' id="company_type_id" class="tooltip_trigger" title="Search by company type."');
 								?>
 							</li>
+							
+							<li class="info_req">
+								<label for="search">SEO Title:</label>
+								<input type="text" id="seo_title" name="companyModel[seo_title]" value="<?php echo array_key_exists( 'seo_title',$companyModel) ? $companyModel['seo_title'] : '';?>" class="tooltip_trigger" title="Add seo title" /><br />
+							</li>
+							
+							<li class="info_req">
+								<label for="search">SEO Description:</label>
+								<textarea id="seo_description" name="companyModel[seo_description]" class="tooltip_trigger" title=" Add seo description" ><?php echo array_key_exists( 'seo_description',$companyModel) ? $companyModel['seo_description'] : '';?></textarea><br />
+							</li>
+							
+							<li class="info_req">
+								<label for="search">SEO Keywords:</label>
+								<textarea id="seo_keywords" name="companyModel[seo_keywords]" class="tooltip_trigger" title="Add seo keywords"><?php echo array_key_exists( 'seo_keywords',$companyModel) ? $companyModel['seo_keywords'] : '';?></textarea><br />
+							</li>
+							
+							<li class="info_req">
+								<label for="search">URL:</label>
+								<input type="text" id="url" name="companyModel[slug]" value="<?php echo array_key_exists( 'slug',$companyModel) ? $companyModel['slug'] : '';?>" class="tooltip_trigger" title="Add URL" /><br />
+							</li>
 						
 							<li>	
 								<hr/>
