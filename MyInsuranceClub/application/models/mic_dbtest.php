@@ -116,37 +116,54 @@ class mic_dbtest EXTENDS CI_Model{
 		
 		if($user_input['coverage_amount']!='') /* Filter based on coverage amount */
 		{
-			//$amount_list1=array(1,2,3,4);
-			/* if($user_input['coverage_amount']=='300000')
-			{ */
-				$get_policy.=" AND ap.sum_assured=".$user_input['coverage_amount'];
-			/* } */
 			
-			/* elseif($user_input['coverage_amount']=='5')
+			if($user_input['coverage_amount']=='Below 1 Lakh')
 			{
-				$get_policy.=" AND ap.sum_assured BETWEEN 300000 AND 500000";
+				$get_policy.=" AND ap.sum_assured <= 100000";
 			}
 			
-			elseif($user_input['coverage_amount']=='6')
+			 elseif($user_input['coverage_amount']=='1 Lakh')
 			{
-				$get_policy.=" AND ap.sum_assured = 500000";
+				$get_policy.=" AND ap.sum_assured BETWEEN 100000 AND 190000";
 			}
-			elseif($user_input['coverage_amount']=='7')
+			
+			elseif($user_input['coverage_amount']=='2 Lakhs')
 			{
-				$get_policy.=" AND ap.sum_assured BETWEEN 500000 AND 1000000";
+				$get_policy.=" AND ap.sum_assured BETWEEN 200000 AND 290000";
 			}
-			elseif($user_input['coverage_amount']=='8')
+			elseif($user_input['coverage_amount']=='3 Lakhs')
 			{
-				$get_policy.=" AND ap.sum_assured = 1000000";
+				$get_policy.=" AND ap.sum_assured BETWEEN 300000 AND 390000";
 			}
-			elseif($user_input['coverage_amount']=='9')
+			elseif($user_input['coverage_amount']=='4 Lakhs')
 			{
-				$get_policy.=" AND ap.sum_assured = 1500000";
+				$get_policy.=" AND ap.sum_assured BETWEEN 400000 AND 500000";
 			}
-			elseif($user_input['coverage_amount']>='9')
+			elseif($user_input['coverage_amount']=='5 Lakhs')
 			{
-				$get_policy.=" AND ap.sum_assured >= 1500000";
-			} */
+				$get_policy.=" AND ap.sum_assured BETWEEN 500000 AND 590000";
+			}
+			elseif($user_input['coverage_amount']=='7.5 Lakhs')
+			{
+				$get_policy.=" AND ap.sum_assured BETWEEN 700000 AND 790000";
+			} 
+			elseif($user_input['coverage_amount']=='10 Lakhs')
+			{
+				$get_policy.=" AND ap.sum_assured BETWEEN 1000000 AND 1090000";
+			}
+			elseif($user_input['coverage_amount']=='15 Lakhs')
+			{
+				$get_policy.=" AND ap.sum_assured BETWEEN 1500000 AND 1990000";
+			}
+			elseif($user_input['coverage_amount']=='20 Lakhs')
+			{
+				$get_policy.=" AND ap.sum_assured BETWEEN 2000000 AND 4990000";
+			}
+			elseif($user_input['coverage_amount']=='50 Lakhs')
+			{
+				$get_policy.=" AND ap.sum_assured = 5000000";
+			}
+			
 		}
 		
 		/* Filter based on coverage amount */

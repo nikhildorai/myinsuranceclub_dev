@@ -136,13 +136,25 @@
               <!-- Blog post -->
               <div class="media row" style="border:none; padding-bottom:0px;" >
               <div class="col-md-11 media-body">
-               	<?php 				$anuual_premium = array_map(function($details) 
-               										{
-														return $details['annual_premium'];
-													}, $customer_details);
-													$min_annual_premium=min($anuual_premium);
-													$max_annual_premium=max($anuual_premium);?>
-                <h6 class="fh3" style="border:none;">We’ve got <span class="highlight"><?php echo count($customer_details);?></span> plan that meets your search - <span class="highlight">Rs. <?php echo $min_annual_premium; ?></span> to <span class="highlight">Rs. <?php $max_annual_premium; ?></span> </h6>
+               	<?php 			
+               	$min_annual_premium='';
+               	$max_annual_premium='';
+               	if(count($customer_details) > 0)
+               	{
+               		$anuual_premium = array_map(function($details) 
+               		{
+						return $details['annual_premium'];
+					}, $customer_details);
+					$min_annual_premium=min($anuual_premium);
+					$max_annual_premium=max($anuual_premium);
+               	}
+               	elseif(count($customer_details) == 0)
+               	{
+               		$min_annual_premium='0';
+               		$max_annual_premium='0';
+               	}
+               	?>
+                <h6 class="fh3" style="border:none;">We’ve got <span class="highlight"><?php echo count($customer_details);?></span> plan that meets your search - <span class="highlight">Rs. <?php echo $min_annual_premium; ?></span> to <span class="highlight">Rs. <?php echo $max_annual_premium; ?></span> </h6>
               
               
               

@@ -63,8 +63,11 @@ class Welcome extends CI_Controller {
 	
 	public function health_insurance_form()
 	{	
+		$this->load->model('city');
 		$data=array();
-		$data['cvg_amt']=$this->mic_dbtest->get_coverage_amount();
+		$data['cvg_amt']=array('1'=>'Below 1 Lakh','2'=>'1 Lakh','3'=>'2 Lakhs','4'=>'3 Lakhs','5'=>'4 Lakhs','6'=>'5 Lakhs',
+								'7'=>'7.5 Lakhs','8'=>'10 Lakhs','9'=>'15 Lakhs','10'=>'20 Lakhs','11'=>'50 Lakhs');
+		$data['city']=$this->city->get_city();
 		$this->load->view('health_insurance/health',$data);
 	}
 	

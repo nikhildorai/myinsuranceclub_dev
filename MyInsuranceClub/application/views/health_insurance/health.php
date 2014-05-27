@@ -135,13 +135,13 @@
   <p>Choose from 56 plans from 18 companies</p>
   </div>
   
- <div class="col-md-12 center" style=" position:relative;"><h3>I want a <span id="clickk"><span class="dotted rs" id="rs">300000</span>
+ <div class="col-md-12 center" style=" position:relative;"><h3>I want a <span id="clickk"><span class="dotted rs" id="rs">3 Lakhs</span>
  
  <div data-bind="" style="display: none;" class="choice" id="c_ch">
                <div class="choice-leftcol" data-bind="">
                     <ul class="years active" id="c_amt" data-bind="jScrollPane">
-                            <?php foreach($cvg_amt as $amt){?>
-                            <li><a href="javascript:void(0);"><?php echo $amt['sum_assured'];?></a></li>
+                            <?php foreach($cvg_amt as $k=>$v){?>
+                            <li><a href="javascript:void(0);"><?php echo $v;?></a></li>
                             <?php } ?>
                     </ul>
                     <div class="stepwrap years-stepwrap">
@@ -216,211 +216,11 @@
  <div data-bind="" style="display: none;" class="choice l" id="c_ch_l">
                <div class="choice-leftcol" data-bind="">
                     <ul class="years active scroll-pane" id="c_for_l" data-bind="jScrollPane">
-<li><a href="javascript:void(0);">Ahmedabad</a></li> 
-<li><a href="javascript:void(0);">Bengaluru/Bangalore</a></li>
-<li><a href="javascript:void(0);">Chandigarh</a></li>
-<li><a href="javascript:void(0);">Chennai</a></li>
-<li><a href="javascript:void(0);">Delhi</a></li>
-<li><a href="javascript:void(0);">Gurgaon</a></li>
-<li><a href="javascript:void(0);">Hyderabad/Secunderabad</a></li>
-<li><a href="javascript:void(0);">Kolkatta</a></li>
-<li><a href="javascript:void(0);">Mumbai</a></li>
-<li><a href="javascript:void(0);">Noida</a></li>
-<li><a href="javascript:void(0);">Pune</a></li>
-<li><a href="javascript:void(0);">Anantapur</a></li>
-<li><a href="javascript:void(0);">Guntakal</a></li>
-<li><a href="javascript:void(0);">Guntur</a></li>
-<li><a href="javascript:void(0);">Hyderabad/Secunderabad</a></li>
-<li><a href="javascript:void(0);">kakinada</a></li>
-<li><a href="javascript:void(0);">kurnool</a></li>
-<li><a href="javascript:void(0);">Nellore</a></li>
-<li><a href="javascript:void(0);">Nizamabad</a></li>
-<li><a href="javascript:void(0);">Rajahmundry</a></li>
-<li><a href="javascript:void(0);">Tirupati</a></li>
-<li><a href="javascript:void(0);">Vijayawada</a></li>
-<li><a href="javascript:void(0);">Visakhapatnam</a></li>
-<li><a href="javascript:void(0);">Warangal</a></li>
-<li><a href="javascript:void(0);">Andra Pradesh-Other</a></li>
-<li><a href="javascript:void(0);">Itanagar</a></li>
-<li><a href="javascript:void(0);">Arunachal Pradesh-Other</a></li>
-<li><a href="javascript:void(0);">Guwahati</a></li>
-<li><a href="javascript:void(0);">Silchar</a></li>
-<li><a href="javascript:void(0);">Assam-Other</a></li>
-<li><a href="javascript:void(0);">Bhagalpur</a></li>
-<li><a href="javascript:void(0);">Patna</a></li>
-<li><a href="javascript:void(0);">Bihar-Other</a></li>
-<li><a href="javascript:void(0);">Bhillai</a></li>
-<li><a href="javascript:void(0);">Bilaspur</a></li>
-<li><a href="javascript:void(0);">Raipur</a></li>
-<li><a href="javascript:void(0);">Chhattisgarh-Other</a></li>
-<li><a href="javascript:void(0);">Panjim/Panaji</a></li>
-<li><a href="javascript:void(0);">Vasco Da Gama</a></li>
-<li><a href="javascript:void(0);">Goa-Other</a></li>
-<li><a href="javascript:void(0);">Ahmedabad</a></li>
-<li><a href="javascript:void(0);">Anand</a></li>
-<li><a href="javascript:void(0);">Ankleshwar</a></li>
-<li><a href="javascript:void(0);">Bharuch</a></li>
-<li><a href="javascript:void(0);">Bhavnagar</a></li>
-<li><a href="javascript:void(0);">Bhuj</a></li>
-<li><a href="javascript:void(0);">Gandhinagar</a></li>
-<li><a href="javascript:void(0);">Gir</a></li>
-<li><a href="javascript:void(0);">Jamnagar</a></li>
-<li><a href="javascript:void(0);">Kandla</a></li>
-<li><a href="javascript:void(0);">Porbandar</a></li>
-<li><a href="javascript:void(0);">Rajkot</a></li>
-<li><a href="javascript:void(0);">Surat</a></li>
-<li><a href="javascript:void(0);">Vadodara/Baroda</a></li>
-<li><a href="javascript:void(0);">Valsad</a></li>
-<li><a href="javascript:void(0);">Vapi</a></li>
-<li><a href="javascript:void(0);">Gujarat-Other</a></li>
-<li><a href="javascript:void(0);">Ambala</a></li>
-<li><a href="javascript:void(0);">Chandigarh</a></li>
-<li><a href="javascript:void(0);">Faridabad</a></li>
-<li><a href="javascript:void(0);">Gurgaon</a></li>
-<li><a href="javascript:void(0);">Hisar</a></li>
-<li><a href="javascript:void(0);">Karnal</a></li>
-<li><a href="javascript:void(0);">Kurukshetra</a></li>
-<li><a href="javascript:void(0);">Panipat</a></li>
-<li><a href="javascript:void(0);">Rohtak</a></li>
-<li><a href="javascript:void(0);">Haryana-Other</a></li>
-<li><a href="javascript:void(0);">Dalhousie</a></li>
-<li><a href="javascript:void(0);">Dharmasala</a></li>
-<li><a href="javascript:void(0);">Kulu/Manali</a></li>
-<li><a href="javascript:void(0);">Shimla</a></li>
-<li><a href="javascript:void(0);">Himachal Pradesh-Other</a></li>
-<li><a href="javascript:void(0);">Jammu</a></li>
-<li><a href="javascript:void(0);">Srinagar</a></li>
-<li><a href="javascript:void(0);">Jammu and Kashmir-Other</a></li>
-<li><a href="javascript:void(0);">Bokaro</a></li>
-<li><a href="javascript:void(0);">Dhanbad</a></li>
-<li><a href="javascript:void(0);">Jamshedpur</a></li>
-<li><a href="javascript:void(0);">Ranchi</a></li>
-<li><a href="javascript:void(0);">Jharkhand-Other</a></li>
-<li><a href="javascript:void(0);">Bengaluru/Bangalore</a></li>
-<li><a href="javascript:void(0);">Belgaum</a></li>
-<li><a href="javascript:void(0);">Bellary</a></li>
-<li><a href="javascript:void(0);">Bidar</a></li>
-<li><a href="javascript:void(0);">Dharwad</a></li>
-<li><a href="javascript:void(0);">Gulbarga</a></li>
-<li><a href="javascript:void(0);">Hubli</a></li>
-<li><a href="javascript:void(0);">Kolar</a></li>
-<li><a href="javascript:void(0);">Mangalore</a></li>
-<li><a href="javascript:void(0);">Mysoru/Mysore</a></li>
-<li><a href="javascript:void(0);">Karnataka-Other</a></li>
-<li><a href="javascript:void(0);">Calicut</a></li>
-<li><a href="javascript:void(0);">Cochin</a></li>
-<li><a href="javascript:void(0);">Ernakulam</a></li>
-<li><a href="javascript:void(0);">Kannur</a></li>
-<li><a href="javascript:void(0);">Kochi</a></li>
-<li><a href="javascript:void(0);">Kollam</a></li>
-<li><a href="javascript:void(0);">Kottayam</a></li>
-<li><a href="javascript:void(0);">Kozhikode</a></li>
-<li><a href="javascript:void(0);">Palakkad</a></li>
-<li><a href="javascript:void(0);">Palghat</a></li>
-<li><a href="javascript:void(0);">Thrissur</a></li>
-<li><a href="javascript:void(0);">Trivandrum</a></li>
-<li><a href="javascript:void(0);">Kerela-Other</a></li>
-<li><a href="javascript:void(0);">Bhopal</a></li>
-<li><a href="javascript:void(0);">Gwalior</a></li>
-<li><a href="javascript:void(0);">Indore</a></li>
-<li><a href="javascript:void(0);">Jabalpur</a></li>
-<li><a href="javascript:void(0);">Ujjain</a></li>
-<li><a href="javascript:void(0);">Madhya Pradesh-Other</a></li>
-<li><a href="javascript:void(0);">Ahmednagar</a></li>
-<li><a href="javascript:void(0);">Aurangabad</a></li>
-<li><a href="javascript:void(0);">Jalgaon</a></li>
-<li><a href="javascript:void(0);">Kolhapur</a></li>
-<li><a href="javascript:void(0);">Mumbai</a></li>
-<li><a href="javascript:void(0);">Mumbai Suburbs</a></li>
-<li><a href="javascript:void(0);">Nagpur</a></li>
-<li><a href="javascript:void(0);">Nasik</a></li>
-<li><a href="javascript:void(0);">Navi Mumbai</a></li>
-<li><a href="javascript:void(0);">Pune</a></li>
-<li><a href="javascript:void(0);">Solapur</a></li>
-<li><a href="javascript:void(0);">Maharashtra-Other</a></li>
-<li><a href="javascript:void(0);">Imphal</a></li>
-<li><a href="javascript:void(0);">Manipur-Other</a></li>
-<li><a href="javascript:void(0);">Shillong</a></li>
-<li><a href="javascript:void(0);">Meghalaya-Other</a></li>
-<li><a href="javascript:void(0);">Aizawal</a></li>
-<li><a href="javascript:void(0);">Mizoram-Other</a></li>
-<li><a href="javascript:void(0);">Dimapur</a></li>
-<li><a href="javascript:void(0);">Nagaland-Other</a></li>
-<li><a href="javascript:void(0);">Bhubaneshwar</a></li>
-<li><a href="javascript:void(0);">Cuttak</a></li>
-<li><a href="javascript:void(0);">Paradeep</a></li>
-<li><a href="javascript:void(0);">Puri</a></li>
-<li><a href="javascript:void(0);">Rourkela</a></li>
-<li><a href="javascript:void(0);">Orissa-Other</a></li>
-<li><a href="javascript:void(0);">Amritsar</a></li>
-<li><a href="javascript:void(0);">Bathinda</a></li>
-<li><a href="javascript:void(0);">Chandigarh</a></li>
-<li><a href="javascript:void(0);">Jalandhar</a></li>
-<li><a href="javascript:void(0);">Ludhiana</a></li>
-<li><a href="javascript:void(0);">Mohali</a></li>
-<li><a href="javascript:void(0);">Pathankot</a></li>
-<li><a href="javascript:void(0);">Patiala</a></li>
-<li><a href="javascript:void(0);">Punjab-Other</a></li>
-<li><a href="javascript:void(0);">Ajmer</a></li>
-<li><a href="javascript:void(0);">Jaipur</a></li>
-<li><a href="javascript:void(0);">Jaisalmer</a></li>
-<li><a href="javascript:void(0);">Jodhpur</a></li>
-<li><a href="javascript:void(0);">Kota</a></li>
-<li><a href="javascript:void(0);">Udaipur</a></li>
-<li><a href="javascript:void(0);">Rajasthan-Other</a></li>
-<li><a href="javascript:void(0);">Gangtok</a></li>
-<li><a href="javascript:void(0);">Sikkim-Other</a></li>
-<li><a href="javascript:void(0);">Chennai</a></li>
-<li><a href="javascript:void(0);">Coimbatore</a></li>
-<li><a href="javascript:void(0);">Cuddalore</a></li>
-<li><a href="javascript:void(0);">Erode</a></li>
-<li><a href="javascript:void(0);">Hosur</a></li>
-<li><a href="javascript:void(0);">Madurai</a></li>
-<li><a href="javascript:void(0);">Nagerkoil</a></li>
-<li><a href="javascript:void(0);">Ooty</a></li>
-<li><a href="javascript:void(0);">Salem</a></li>
-<li><a href="javascript:void(0);">Thanjavur</a></li>
-<li><a href="javascript:void(0);">Tirunalveli</a></li>
-<li><a href="javascript:void(0);">Trichy</a></li>
-<li><a href="javascript:void(0);">Tuticorin</a></li>
-<li><a href="javascript:void(0);">Vellore</a></li>
-<li><a href="javascript:void(0);">Tamil Nadu-Other</a></li>
-<li><a href="javascript:void(0);">Agartala</a></li>
-<li><a href="javascript:void(0);">Tripura-Other</a></li>
-<li><a href="javascript:void(0);">Chandigarh</a></li>
-<li><a href="javascript:void(0);">Dadra & Nagar Haveli-Silvassa</a></li>
-<li><a href="javascript:void(0);">Daman & Diu</a></li>
-<li><a href="javascript:void(0);">Delhi</a></li>
-<li><a href="javascript:void(0);">Pondichery</a></li>
-<li><a href="javascript:void(0);">Agra</a></li>
-<li><a href="javascript:void(0);">Aligarh</a></li>
-<li><a href="javascript:void(0);">Allahabad</a></li>
-<li><a href="javascript:void(0);">Bareilly</a></li>
-<li><a href="javascript:void(0);">Faizabad</a></li>
-<li><a href="javascript:void(0);">Ghaziabad</a></li>
-<li><a href="javascript:void(0);">Gorakhpur</a></li>
-<li><a href="javascript:void(0);">Kanpur</a></li>
-<li><a href="javascript:void(0);">Lucknow</a></li>
-<li><a href="javascript:void(0);">Mathura</a></li>
-<li><a href="javascript:void(0);">Meerut</a></li>
-<li><a href="javascript:void(0);">Moradabad</a></li>
-<li><a href="javascript:void(0);">Noida</a></li>
-<li><a href="javascript:void(0);">Varanasi/Banaras</a></li>
-<li><a href="javascript:void(0);">Uttar Pradesh-Other</a></li>
-<li><a href="javascript:void(0);">Dehradun</a></li>
-<li><a href="javascript:void(0);">Roorkee</a></li>
-<li><a href="javascript:void(0);">Uttaranchal-Other</a></li>
-<li><a href="javascript:void(0);">Asansol</a></li>
-<li><a href="javascript:void(0);">Durgapur</a></li>
-<li><a href="javascript:void(0);">Haldia</a></li>
-<li><a href="javascript:void(0);">Kharagpur</a></li>
-<li><a href="javascript:void(0);">Kolkatta</a></li>
-<li><a href="javascript:void(0);">Siliguri</a></li>
-<li><a href="javascript:void(0);">West Bengal - Other</a></li>
-<li><a href="javascript:void(0);">Other</a></li>
-
-                            
+					<?php foreach ($city as $c_name){?>
+                    <li><a href="javascript:void(0);"><?php echo $c_name['mic_city_name']; ?></a></li> 
+                    <?php }?>
                     </ul>
+                    
                     <div class="stepwrap years-stepwrap">
                         <span class="step show">
                             <em>5</em>
@@ -450,7 +250,7 @@
                   </div>
                      <div class="form-group col-md-2">
                     <label class="sr-only" for="signup-first-name">Date Of Birth</label>
-                    <input type="text" class="form-control" id="cust_dob" name="cust_dob" value="<?php echo set_value('cust_dob');?>" placeholder="Date Of Birth">
+                    <input type="text" data-provide="datepicker" class="form-control" id="cust_dob" name="cust_dob" value="<?php echo set_value('cust_dob');?>" placeholder="Date Of Birth">
                   </div>
                      <div class="form-group col-md-2">
                     <label class="sr-only" for="signup-first-name">Mobile</label>
@@ -882,6 +682,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
   
 </div>
 
+<?php //echo $this->load->view('partial_view/footer_view');?>
 
 
  
@@ -926,7 +727,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
       </div>
       <div id="bottom_3" class="one_fourth">
         <div class="column-content-wrapper">
-          <!--<div class="bottom-col-content widget_text substitute_widget_class">
+          <-<div class="bottom-col-content widget_text substitute_widget_class">
             <h3 class="bottom-col-title">Address</h3>
             <div class="textwidget">
               <div style="color:#EEEEE; font-style:italic;">305, Gundecha Industrial Complex,
@@ -937,7 +738,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
                 Phone: +91 22 28463454 </div>
               <div style="margin-top:10px; color:#3d6e97; font-style:italic; font-size:13px;"> Email: contact@myinsuranceclub.com</div>
             </div>
-          </div>-->
+          </div>
           <div class="bottom-col-content widget_recent_entries custom-formatting">
             <h3 class="bottom-col-title">Quick Connect</h3>
             <ul>
