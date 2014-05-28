@@ -249,7 +249,7 @@ class Policy extends CI_Controller {
 			$companyModel = $_POST['companyModel'];
 		}		
 		$this->data['companyModel'] = $companyModel;
-		$this->template->write_view('content', 'admin/company/create', $this->data, TRUE);
+		$this->template->write_view('content', 'admin/policy/create', $this->data, TRUE);
 		$this->template->render();
 	}
 	
