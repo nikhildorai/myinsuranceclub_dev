@@ -14,9 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '';
-
-//var_dump($config['base_url']);
+$config['base_url']	= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] .'/'. ROOT;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +26,7 @@ $config['base_url']	= '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -369,9 +367,25 @@ $config['proxy_ips'] = '';
 */
 $config['css_path'] 	= 	$config['base_url'].'application/views/css/';
 $config['js_path'] 		= 	$config['base_url'].'application/views/js/';
-$config['per_page'] 	= 	10; 
-$config['num_links'] 	= 	5;
-$config['page_query_string'] = TRUE;
+
+//	pagination setting
+$config['pagination']['per_page'] 	=	10;
+$config['pagination']['num_links'] 	=	5;
+$config['pagination']['first_link'] 	= 	'First';
+$config['pagination']['first_tag_open'] = '<div>';
+$config['pagination']['first_tag_close'] = '</div>';
+$config['pagination']['last_link'] = 'Last';
+$config['pagination']['last_tag_open'] = '<div>';
+$config['pagination']['last_tag_close'] = '</div>';
+$config['pagination']['display_pages'] = TRUE;
+$config['pagination']['page_query_string'] = TRUE;
+$config['pagination']['base_url'] = $_SERVER['PHP_SELF'];
+
+//	upload url path
+$config['url_path']['company'] = $config['base_url'].'uploads/company/';
+
+//	upload folder paths
+$config['folder_path']['company'] = realpath(APPPATH . '../uploads').'/company/';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

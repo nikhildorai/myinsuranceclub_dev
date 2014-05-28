@@ -12,6 +12,8 @@
 	<?php $this->load->view('admin/includes/head'); ?> 
 </head>
 
+<!-- Scripts -->  
+<?php $this->load->view('admin/includes/scripts'); ?> 
 <body id="login">
 
 <div id="body_wrap">
@@ -31,8 +33,6 @@
 	<?php $this->load->view('admin/includes/footer'); ?> 
 </div>
 
-<!-- Scripts -->  
-<?php $this->load->view('admin/includes/scripts'); ?> 
 
 </body>
 </html>

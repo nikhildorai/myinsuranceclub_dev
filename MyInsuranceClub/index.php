@@ -201,7 +201,7 @@ if (defined('ENVIRONMENT'))
  * --------------------------------------------------------------------
  *
  */
-	/* if (realpath(dirname(__FILE__)) == $_SERVER['DOCUMENT_ROOT'])
+	if (realpath(dirname(__FILE__)) == $_SERVER['DOCUMENT_ROOT'])
 	{
 	    define('ROOT', '/');
 	}
@@ -209,7 +209,7 @@ if (defined('ENVIRONMENT'))
 	{
 		$rPath = implode('/', explode('\\', substr(ROOTPATH, strlen($_SERVER['DOCUMENT_ROOT'])+1)));		
 	    define('ROOT', $rPath);
-	} */
+	}
 	
 	
 

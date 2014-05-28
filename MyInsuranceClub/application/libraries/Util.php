@@ -16,28 +16,19 @@ class Util {
 	
 	function get_pagination_params()
 	{
-		$config = array();
-		$config['per_page'] 	=	10;
-		$config['num_links'] 	=	5;
-		$config['first_link'] 	= 	'First';
-		$config['first_tag_open'] = '<div>';
-		$config['first_tag_close'] = '</div>';
-		$config['last_link'] = 'Last';
-		$config['last_tag_open'] = '<div>';
-		$config['last_tag_close'] = '</div>';
-		$config['display_pages'] = TRUE;
-		$config['page_query_string'] = TRUE;
+		$CI =& get_instance();
+		$config =  $CI->config->config['pagination'];
+		
 		$pageUrl = $this->getUrl().'?';
 		if (isset($_SERVER['QUERY_STRING']) &&!empty($_SERVER['QUERY_STRING']))
 		{
-			$qString = explode('&', $_SERVER['QUERY_STRING']);
-//var_dump($qString);			
+			$qString = explode('&', $_SERVER['QUERY_STRING']);			
 			foreach ($qString as $k1=>$v1)
 			{
 				if (reset(explode('=', $v1)) != 'per_page' && !empty($v1))
 					$pageUrl .= '&'.$v1;
 			}
-		}	
+		}
 		$config['base_url'] 	= $pageUrl;
 		return $config;
 	}

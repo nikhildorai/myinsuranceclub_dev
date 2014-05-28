@@ -44,8 +44,10 @@ class Company extends CI_Controller {
 		// Load required CI libraries and helpers.
 		$this->load->database();
 		$this->load->library('session');
+        $this->load->library('upload');
  		$this->load->helper('url');
  		$this->load->helper('form');
+ 		$this->load->helper('ckeditor');
 		$this->load->model('insurance_company_master_model');
  		
 		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
@@ -92,6 +94,23 @@ class Company extends CI_Controller {
 		$modelType = 'create';
 		//	check if company id exists
 		$companyModel = array();
+		$this->data['message'] = '';
+		$this->data['file_upload'] = array();
+		
+		/*
+		//Ckeditor's configuration
+		$this->data['ckeditor'] = array(
+			//ID of the textarea that will be replaced
+			'id' 	=> 	'content1',
+			'path'	=>	'js/ckeditor',
+			//Optionnal values
+			'config' => array(
+				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
+				'width' 	=> 	"60%",	//Setting a custom width
+				'height' 	=> 	'100px',	//Setting a custom height
+			),
+		);
+		*/
 		if (!empty($company_id))
 		{
 			$exist = $this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $id=$company_id, $fields = array());
@@ -110,12 +129,36 @@ class Company extends CI_Controller {
 		//	check if post data is available
 		if ($this->input->post('companyModel'))
 		{
+			//	check if file is uploaded
+			if (!empty($_FILES))
+			{
+				foreach($_FILES['companyModel']['name'] as $k1=>$v1)
+				{
+					$ext = end(explode('.', $v1));
+					if (empty($ext))
+						$ext = 'jpg';
+					$name = date('YmdHis').'_'.uniqid().'.'.$ext;
+					$arrFileNames[$k1] = $name;
+					if (empty($v1))
+					{
+						$_POST['companyModel'][$k1] = $companyModel[$k1];
+					}
+					else
+						$_POST['companyModel'][$k1] = $name;
+				}
+			}
+			else 
+			{
+				//	set previous file name in post
+				$_POST['companyModel']['image_logo_1'] = $companyModel['image_logo_1'];
+				$_POST['companyModel']['image_logo_2'] = $companyModel['image_logo_2'];
+			}				
 			//	set default values
 			$_POST['companyModel']['company_display_name'] = (isset($_POST['companyModel']['company_display_name']) && !empty($_POST['companyModel']['company_display_name'])) ? $_POST['companyModel']['company_display_name'] :  $_POST['companyModel']['company_name'];
 			$arrParams = $this->input->post('companyModel');
 			$companyTypeId = (isset($arrParams['company_type_id']) && !empty($arrParams['company_type_id'])) ? $arrParams['company_type_id'] : '';
-			$company_id = (isset($arrParams['company_id']) && !empty($arrParams['company_id'])) ? $arrParams['company_id'] : '';
-					
+			$company_id = (isset($arrParams['company_id']) && !empty($arrParams['company_id'])) ? $arrParams['company_id'] : '';	
+		
 			//	set validation rules
 			$validation_rules = array(
 				array('field' => 'companyModel[company_name]', 'label' => 'company name', 'rules' => 'required|callback_validateInsuranceCompany[company_name#'.$arrParams["company_name"].',company_type_id#'.$companyTypeId.',modelType#'.$modelType.',company_id#'.$company_id.']'),
@@ -125,10 +168,12 @@ class Company extends CI_Controller {
 				array('field' => 'companyModel[seo_title]', 'label' => 'seo title', 'rules' => 'required'),
 				array('field' => 'companyModel[seo_description]', 'label' => 'seo description', 'rules' => 'required'),
 				array('field' => 'companyModel[seo_keywords]', 'label' => 'seo keywords', 'rules' => 'required'),
+		//		array('field' => 'companyModel[image_logo_1]', 'label' => 'logo image 1', 'rules' => 'required'),
+		//		array('field' => 'companyModel[image_logo_2]', 'label' => 'logo image 2', 'rules' => 'required'),
 				array('field' => 'companyModel[slug]', 'label' => 'url', 'rules' => 'required|callback_validateInsuranceCompany[slug#'.$arrParams["slug"].',modelType#'.$modelType.',company_id#'.$company_id.']'),
 			);
-			$this->form_validation->set_rules($validation_rules);
 			
+			$this->form_validation->set_rules($validation_rules);
 			// Run the validation.
 			if ($this->form_validation->run())
 			{
@@ -139,8 +184,48 @@ class Company extends CI_Controller {
 					//	save record and redirect to index
 					if ($this->insurance_company_master_model->saveCompanyRecord($arrParams, $modelType))
 					{
-						$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
-						redirect('admin/company/index');
+						$this->data['file_upload_error'] = array();
+						if (!empty($_FILES))
+						{
+					        $config['upload_path'] = $this->config->config['folder_path']['company'];
+					        $config['file_name'] = $arrFileNames;
+					        $config['allowed_types'] = 'gif|jpg|png';
+					        $config['max_size'] = '200';
+					        $config['max_width']  = '400';
+					        $config['max_height']  = '250';
+							$this->load->library('upload', $config);
+							$this->upload->initialize($config); 	
+							if($this->upload->do_multi_upload("companyModel"))
+							{
+				              	$this->data['file_upload'] = $this->upload->get_multi_upload_data();
+							}
+							else 
+							{
+				                $this->data['file_upload_error'][] = $this->upload->display_errors();
+							}
+				             $this->data['file_upload'] = $this->upload->get_multi_upload_data();
+						}			
+						
+					//	$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
+					//	redirect('admin/company/index');
+						
+			            if (empty($this->data['file_upload_error']))
+			            {
+							$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
+							redirect('admin/company/index');
+			            }
+			            else 
+			            {
+			            	if (empty($this->data['file_upload']) && !empty($this->data['file_upload_error']))
+			            	{      	
+				            	foreach ($this->data['file_upload_error'] as $k1=>$v1)
+				            	{
+				            		$msg = str_replace('<p>', '', $v1);
+				            		$msg = str_replace('</p>', '', $msg);
+									$this->data['message'] .= '<p class="error_msg">'.$msg.'</p>';
+				            	}
+			            	}
+			            }
 					}
 					else
 					{
@@ -252,6 +337,31 @@ class Company extends CI_Controller {
 		}
 	}
 
+	function handle_upload()
+	{
+		if (isset($_FILES['image']) && !empty($_FILES['image']['name']))
+		{
+			if ($this->upload->do_upload('image'))
+			{
+				// set a $_POST value for 'image' that we can use later
+				$upload_data    = $this->upload->data();
+				$_POST['image'] = $upload_data['file_name'];
+				return true;
+			}
+			else
+			{
+				// possibly do some clean up ... then throw an error
+				$this->form_validation->set_message('handle_upload', $this->upload->display_errors());
+				return false;
+			}
+		}
+		else
+		{
+			// throw an error because nothing was uploaded
+			$this->form_validation->set_message('handle_upload', "You must upload an image!");
+			return false;
+		}
+	}
 }
 
 /* End of file auth_lite.php */

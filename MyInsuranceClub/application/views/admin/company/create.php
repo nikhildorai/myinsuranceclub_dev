@@ -2,10 +2,29 @@
 			<div class="col100">
 			
 				<h2>Create Company</h2>
+				
+<script src="<?php echo base_url()?>JS/tinymce/tinymce.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	/*
+	tinymce.init({
+	    selector: "textarea",
+	    plugins: [
+	        "advlist autolink lists link image charmap print preview anchor",
+	        "searchreplace visualblocks code fullscreen",
+	        "insertdatetime media table contextmenu paste"
+	    ],
+	    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+	});
+	*/
+});
+</script>
+
 			
 					
 <?php //echo validation_errors('<p class="error_msg">', '</p>'); ?> 
-				<?php echo form_open(); ?>
+				<?php echo form_open_multipart(); ?>
 					<fieldset>
 						<legend>Company Details</legend>
 							<?php if (! empty($message)) { ?>
@@ -58,7 +77,54 @@
 								<label for="search">URL:</label>
 								<input type="text" id="url" name="companyModel[slug]" value="<?php echo array_key_exists( 'slug',$companyModel) ? $companyModel['slug'] : '';?>" class="tooltip_trigger" title="Add URL" /><br />
 							</li>
-						
+							
+							<li class="info_req1">
+								<label for="search">Logo Image 1:</label>
+								<input type="file" id="logo1" name="companyModel[logo_image_1]" /><span>Image size: 400px X 250px</span> <br />
+<?php 
+$folderUrl = $this->config->config['folder_path']['company'];
+$fileUrl = $this->config->config['url_path']['company'];
+if (isset($companyModel['logo_image_1']) && !empty($companyModel['logo_image_1']))
+{
+	if (file_exists($folderUrl.$companyModel['logo_image_1']))
+		echo '<img src="'.$fileUrl.$companyModel['logo_image_1'].'"><br>';
+}
+?>								
+							</li>
+<?php ?>							
+							<li class="info_req1">
+								<label for="search">Logo Image 2:</label>
+								<input type="file" id="logo2" name="companyModel[logo_image_2]" /><span>Image size: 400px X 250px</span> <br />
+<?php 
+if (isset($companyModel['logo_image_1']) && !empty($companyModel['logo_image_2']))
+{
+	if (file_exists($folderUrl.$companyModel['logo_image_2']))
+		echo '<img src="'.$fileUrl.$companyModel['logo_image_2'].'"><br>';
+}
+?>									
+							</li>
+<?php ?>						
+<?php /*?>							
+							<li class="info_req">
+								<label for="search">description:</label>
+								<textarea name="content1" id="content1" >Example data</textarea>
+								<?php echo display_ckeditor($ckeditor); ?>
+							</li>
+							
+							<li class="info_req">
+								<label for="search">Add heading:</label>
+								<input type="text" name="feature[heading][]" value="" class="tooltip_trigger" title="Add Description" /><br />
+							</li>
+							
+							<li class="info_req">
+								<label for="search">Description:</label>
+								<textarea name="feature[content][]" style="width:60%">Add description here</textarea>
+							</li>
+							
+
+*/ ?>						
+							
+						<?php //widget::run('features'); ?>
 							<li>	
 								<hr/>
 								<input type="hidden" id="company_id" name="companyModel[company_id]" value="<?php echo array_key_exists( 'company_id',$companyModel) ? $companyModel['company_id'] : '';?>" />

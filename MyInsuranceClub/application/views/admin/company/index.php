@@ -53,7 +53,7 @@
 					if ($records->num_rows() > 0)
 					{
 						$i = 1;
-						$min = 0; $max = $this->config->item('per_page');
+						$min = 0; $max = $this->config->config['pagination']['per_page'];
 				   		if (array_key_exists('per_page', $_GET))
 				   		{
 				   			$page = str_replace('/','',$_GET['per_page']);

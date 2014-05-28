@@ -47,20 +47,20 @@
 
 $active_group = 'default';/* database settings can be created for production,development and testing environment.*/
 $active_record = TRUE;
-
+/*
 //localhost
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = '';
+$db['default']['password'] = 'root';
+$db['default']['database'] = 'mic_testdb';
+*/
+
+// internal server
+$db['default']['hostname'] = '192.168.2.105';
+$db['default']['username'] = 'krishna';
+$db['default']['password'] = 'krishna';
 $db['default']['database'] = 'mic_testdb';
 
-/*
-// internal server
-$db['default']['hostname'] = '192.168.2.201';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'root';
-$db['default']['database'] = 'mic_testdb1';
-*/
 
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';

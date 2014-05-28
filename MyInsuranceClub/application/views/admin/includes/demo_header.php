@@ -38,7 +38,8 @@
 			?>
 			
 				<li class="css_nav_dropmenu">
-					<a href="<?php echo $base_url;?>admin/auth_public/">Dashboard</a>
+					<a href="<?php echo $base_url;?>admin/auth_public/">Home</a>
+					<?php /*?>
 					<ul>
 						<li>
 							<a href="<?php echo $base_url;?>admin/auth_public/">Dashboard</a>
@@ -53,21 +54,139 @@
 						<li>
 							<a href="<?php echo $base_url;?>admin/auth_public/change_password">Update Password</a>
 						</li>
-					</ul>		
+					</ul>	
+					*/ ?>	
 				</li>
 			
 				<li class="css_nav_dropmenu">
-					<a href="<?php echo $base_url;?>admin/company/">Company</a>
+					<a href="javascript:void(0);">Master DB</a>
 					<ul>
 						<li>
-							<a href="<?php echo $base_url;?>admin/company/">Company Listing</a>
+							<a href="<?php echo $base_url;?>admin/company/">Company</a>
 						</li>
 						<li>
-							<a href="<?php echo $base_url;?>admin/company/create">Create Company</a>
+							<a href="<?php echo $base_url;?>admin/policy/">Policy</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">City</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Users</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Products</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Upload Files</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Ad Banners</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Testimonials</a>
 						</li>
 					</ul>		
 				</li>
 				
+			
+				<li class="css_nav_dropmenu">
+					<a href="javascript:void(0);">Content</a>
+					<ul>
+						<li>
+							<a href="javascript:void(0);">Articles</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Guides</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">News</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Ask an Expert</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Company Page</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Policy Reviews</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Buzz of the Month</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Views from MyInsuranceClub</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Author Profiles</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Categories</a>
+						</li>
+					</ul>		
+				</li>
+				
+			
+				<li class="css_nav_dropmenu">
+					<a href="javascript:void(0);">Touchpoints</a>
+					<ul>
+						<li>
+							<a href="javascript:void(0);">Contact Us</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Comments</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Feedback</a>
+						</li>
+					</ul>		
+				</li>
+				
+			
+				<li class="css_nav_dropmenu">
+					<a href="javascript:void(0);">Products</a>
+					<ul>
+						<li>
+							<a href="javascript:void(0);">Life</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Health</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Car</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">2W</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Travel</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">PA</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">CI</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Home</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Corporate</a>
+						</li>
+					</ul>		
+				</li>
+				
+			
+				<li class="css_nav_dropmenu">
+					<a href="javascript:void(0);">Reports</a>
+					<ul>
+						<li>
+							<a href="javascript:void(0);">Daily Sales</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">Social Login Data</a>
+						</li>
+					</ul>		
+				</li>
 				<?php /*?>
 				<li class="css_nav_dropmenu">
 					<a href="<?php echo $base_url;?>admin/auth_admin/">Manage Users</a>
