@@ -1,28 +1,28 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Insurance_company_master_model EXTENDS CI_Model{
+class Policy_health_master_model EXTENDS CI_Model{
 
 	function __construct()
 	{
 		// Call the Model constructor
 		parent::__construct();
 		$this->load->library('session');
-		$this->load->library('form_validation');
-        $this->load->helper('form');
 	}
 	
-	public function get_all_insurance_company($arrParams = array())
+	public function get_all_policy($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM insurance_company_master WHERE status != "deleted" AND company_shortname != "mic" ';
+		$sql = 'SELECT * FROM policy_health_master WHERE status="active" ';
 		if (!empty($arrParams))
 		{
-			if (array_key_exists('company', $arrParams) && !empty($arrParams['company']))
-				$sql .= ' AND (company_name LIKE "%'.$arrParams['company'].'%" OR company_shortname LIKE "%'.$arrParams['company'].'%" OR company_display_name LIKE "%'.$arrParams['company'].'%") ';
-			if (array_key_exists('company_type', $arrParams) && !empty($arrParams['company_type']))
-				$sql .= ' AND company_type_id = '.$arrParams['company_type'];
+			if (isset($arrParams['policy_name']) && !empty($arrParams['policy_name']))
+				$sql .= ' AND policy_name LIKE "%'.$arrParams['policy_name'].'%" ';
+			if (isset($arrParams['company_id']) && !empty($arrParams['company_id']))
+				$sql .= ' AND company_id = '.$arrParams['company_id'];
+			if (isset($arrParams['type_health_plan']) && !empty($arrParams['type_health_plan']))
+				$sql .= ' AND type_health_plan = '.$arrParams['type_health_plan'];
 		}
-		$sql .= ' ORDER BY company_name ASC, company_type_id ASC ';
+		$sql .= ' ORDER BY policy_name ASC, type_health_plan ASC ';	
 		$result = $this->db->query($sql);
 		return $result;
 	}
@@ -47,7 +47,7 @@ class Insurance_company_master_model EXTENDS CI_Model{
 				}
 				$colNames = implode(', ', $colNames);
 				$colValues = implode(', ', $colValues);
-				$sql = 'INSERT INTO insurance_company_master ('.$colNames.') VALUES('.$colValues.')';
+				$sql = 'INSERT INTO policy_health_master ('.$colNames.') VALUES('.$colValues.')';
 			}
 			else
 			{
@@ -62,7 +62,7 @@ class Insurance_company_master_model EXTENDS CI_Model{
 					}
 				}
 				$colValues = implode(', ', $colValues);
-				$sql = 'UPDATE insurance_company_master SET '.$colValues.' WHERE company_id = '.$arrParams['company_id'];
+				$sql = 'UPDATE policy_health_master SET '.$colValues.' WHERE company_id = '.$arrParams['company_id'];
 //var_dump($arrParams, $colValues, $sql);die;				
 			}		
 			if ($this->db->query($sql))
@@ -76,7 +76,7 @@ class Insurance_company_master_model EXTENDS CI_Model{
 	
 	public function getInsuranceCompany($arrParams)
 	{	
-		$sql = 'SELECT * FROM insurance_company_master WHERE status != "deleted"';
+		$sql = 'SELECT * FROM policy_health_master WHERE status = "active"';
 		if (!empty($arrParams))
 		{
 			if (isset($arrParams['company_name']) && !empty($arrParams['company_name']))
@@ -89,7 +89,8 @@ class Insurance_company_master_model EXTENDS CI_Model{
 				$sql .= ' AND company_type_id = '.$arrParams['company_type_id'];
 			if (isset($arrParams['slug']) && !empty($arrParams['slug']))
 				$sql .= ' AND slug = "'.$arrParams['slug'].'" ';
-		}	
+		}
+//var_dump($sql);		
 		$result = $this->db->query($sql);
 		return $result;
 	}
@@ -97,13 +98,13 @@ class Insurance_company_master_model EXTENDS CI_Model{
 	
 	public function getById($id)
 	{
-		$sql = 'SELECT * FROM insurance_company_master WHERE company_id = '.$id;		
+		$sql = 'SELECT * FROM policy_health_master WHERE policy_id = '.$id;		
 		return $this->db->query($sql);
 	}
 	
 	public function getAll()
 	{
-		$sql = 'SELECT * FROM insurance_company_master';
+		$sql = 'SELECT * FROM policy_health_master';
 		return $this->db->query($sql);
 	}
 }

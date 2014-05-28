@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Insurance_company_master_model EXTENDS CI_Model{
+class Policy_health_features_model EXTENDS CI_Model{
 
 	function __construct()
 	{
@@ -14,7 +14,7 @@ class Insurance_company_master_model EXTENDS CI_Model{
 	
 	public function get_all_insurance_company($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM insurance_company_master WHERE status != "deleted" AND company_shortname != "mic" ';
+		$sql = 'SELECT * FROM insurance_company_master WHERE company_shortname != "mic" ';
 		if (!empty($arrParams))
 		{
 			if (array_key_exists('company', $arrParams) && !empty($arrParams['company']))
@@ -76,7 +76,7 @@ class Insurance_company_master_model EXTENDS CI_Model{
 	
 	public function getInsuranceCompany($arrParams)
 	{	
-		$sql = 'SELECT * FROM insurance_company_master WHERE status != "deleted"';
+		$sql = 'SELECT * FROM insurance_company_master WHERE status = "active"';
 		if (!empty($arrParams))
 		{
 			if (isset($arrParams['company_name']) && !empty($arrParams['company_name']))
@@ -89,7 +89,8 @@ class Insurance_company_master_model EXTENDS CI_Model{
 				$sql .= ' AND company_type_id = '.$arrParams['company_type_id'];
 			if (isset($arrParams['slug']) && !empty($arrParams['slug']))
 				$sql .= ' AND slug = "'.$arrParams['slug'].'" ';
-		}	
+		}
+//var_dump($sql);		
 		$result = $this->db->query($sql);
 		return $result;
 	}

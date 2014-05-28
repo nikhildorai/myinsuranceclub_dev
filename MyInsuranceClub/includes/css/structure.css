@@ -4,7 +4,7 @@ body {/*background:url(../images/site_bg.png) repeat #292929; */text-align:cente
 
 /* Header ---------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* #header_wrap {background:url(../images/header_bg.png) repeat-x #2a2a2a;}	*/
-#header {position:relative; width:940px; height:70px; margin:0 auto; padding:10px; /*background:url(../images/header_bg.png) repeat-x; */ } 
+#header {position:relative; width:98%; height:70px; margin:0 auto; padding:10px; /*background:url(../images/header_bg.png) repeat-x; */ } 
 #header a:link, #header a:active, #header a:hover, #header a:visited {color:#777;}
 
 #logo {position:absolute; left:10px; top:15px;}

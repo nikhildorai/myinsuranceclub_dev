@@ -3,10 +3,10 @@
 			
 				<h2>Create Company</h2>
 		<div class="download-row">
-			<a href="<?php echo $base_url;?>admin/company" class="link_button">Back</a>
+			<a href="<?php echo $base_url;?>admin/policy" class="link_button">Back</a>
 		</div>
 		<br>
-<br>			
+<br>		
 				
 <script src="<?php echo base_url()?>JS/tinymce/tinymce.min.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -57,7 +57,7 @@ $(document).ready(function(){
 								<label for="search">Company Type:</label>
 								<?php 
 								$selected = array_key_exists( 'company_type_id',$companyModel) ?  $companyModel['company_type_id'] : '';
-								$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Company_type_model', $optionKey = 'company_type_id', $optionValue = 'company_type_name', $defaultEmpty = "Please Select");
+								$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Insurance_company_master_model', $optionKey = 'company_id', $optionValue = 'company_name', $defaultEmpty = "All");
 								//sort($options);
 								echo form_dropdown('companyModel[company_type_id]', $options, $selected, ' id="company_type_id" class="tooltip_trigger" title="Search by company type."');
 								?>

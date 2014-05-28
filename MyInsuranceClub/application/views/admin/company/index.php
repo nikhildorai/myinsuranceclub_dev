@@ -25,7 +25,7 @@
 						<!-- <input type="select" id="company_type" name="company_type" value="<?php // echo ?>" class="tooltip_trigger" title="Search by company type."> -->
 						<?php 
 						$selected = array_key_exists( 'company_type',$search_query) ? $search_query['company_type'] : '';
-						$options = $this->util->getCompanyTypeDropDownOptions($defaultEmpty = 'All');			
+						$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Company_type_model', $optionKey = 'company_type_id', $optionValue = 'company_type_name', $defaultEmpty = "All");			
 						foreach ($options as $k1=>$v1)
 						{
 							$op = array(
