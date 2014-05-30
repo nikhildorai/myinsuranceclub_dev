@@ -67,6 +67,8 @@ class Welcome extends CI_Controller {
 		$data=array();
 		$data['cvg_amt']=array('1'=>'Below 1 Lakh','2'=>'1 Lakh','3'=>'2 Lakhs','4'=>'3 Lakhs','5'=>'4 Lakhs','6'=>'5 Lakhs',
 								'7'=>'7.5 Lakhs','8'=>'10 Lakhs','9'=>'15 Lakhs','10'=>'20 Lakhs','11'=>'50 Lakhs');
+		$data['family_composition']=array('1A'=>'myself','2A'=>'Self + Spouse','1A1C'=>'Self + 1 Child','1A2C'=>'Self + 2 Children','1A3C'=>'Self + 3 Children','1A4C'=>'Self + 4 Children','2A1C'=>'Self + Spouse + 1 Child','2A2C'=>'Self + Spouse + 2 Children',
+									'2A3C'=>'Self + Spouse + 3 Children','2A4C'=>'Self + Spouse + 4 Children');
 		$data['city']=$this->city->get_city();
 		$this->load->view('health_insurance/health',$data);
 	}

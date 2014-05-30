@@ -54,64 +54,64 @@ class mic_dbtest EXTENDS CI_Model{
 	
 	public function get_policy_results($user_input)
 	{	
-		$get_policy="SELECT i.company_shortname,p.policy_name,ap.annual_premium,ap.age,ap.sum_assured,ap.service_tax,ap.final_premium,f.cashless_treatment,f.preexisting_diseases,f.maternity,
+		/* $get_policy="SELECT i.company_shortname,p.policy_name,ap.annual_premium,ap.age,ap.sum_assured,ap.service_tax,ap.final_premium,f.cashless_treatment,f.preexisting_diseases,f.maternity,
 					ap.no_of_members,v.variant_name,f.autorecharge_SI,f.pre_hosp,f.post_hosp,f.day_care,f.check_up,f.ayurvedic,f.co_pay FROM insurance_company_master i,policy_health_master p, annual_premium_health ap,
 					 policy_health_features f,policy_health_variants v WHERE i.company_id=p.company_id AND p.policy_id=v.policy_id AND v.variant_id=f.variant_id
-					AND ap.term = 1";
-	
-		/* Filtering data based on $user_input */
+					AND ap.term = 1"; */
+			$get_policy="SELECT i.company_shortname,p.policy_name,ap.annual_premium,ap.age,ap.sum_assured,ap.service_tax,ap.final_premium,f.cashless_treatment,
+					f.preexisting_diseases,f.maternity,ap.no_of_members,v.variant_name,f.autorecharge_SI,f.pre_hosp,f.post_hosp,f.day_care,f.check_up,f.ayurvedic,
+					f.co_pay 
+					         FROM 
+					               insurance_company_master i,policy_health_master p, annual_premium_health ap, policy_health_features f,policy_health_variants v,zone z,company_city_zone ccz 
+							WHERE 
+					               i.company_id=p.company_id AND p.policy_id=v.policy_id AND v.variant_id=f.variant_id AND v.variant_id=ap.variant_id AND ap.zone=z.zone_id AND z.zone_id=ccz.zone_id AND ap.term=1";
+		/* FILTER DATA USING USER INPUT */
 		
 		if($user_input['plan_type']!='')		/* Filter based on Individual/Family Composition */
 		{
-			if($user_input['plan_type']=='myself')
+			if($user_input['plan_type']=='1A')
 			{
-				$get_policy.=" AND ap.no_of_members='1A'";
+				$get_policy.=" AND ap.no_of_members='1A'";		//indivudual
 			}
-			elseif($user_input['plan_type']=='2')
+			elseif($user_input['plan_type']=='2A')				
 			{
-				 
-				if((!isset($user_input['child'])) && $user_input['adult']=='2')
-				{
-					$get_policy.=" AND ap.no_of_members='2A'";
-				}
-				elseif(isset($user_input['child']))
-				{
-					if($user_input['adult']=='1' && $user_input['child']=='1')
-				 	{
-				 		$get_policy.=" AND ap.no_of_members='1A1C'";
-				    }
-				 	elseif($user_input['adult']=='1' && $user_input['child']=='2')
-				 	{
-				 		$get_policy.=" AND ap.no_of_members='1A2C'";
-					}
-					elseif($user_input['adult']=='1' && $user_input['child']=='3')
-					{
-				 		$get_policy.=" AND ap.no_of_members='1A3C'";
-				    }
-				 	elseif($user_input['adult']=='1' && $user_input['child']=='4')
-				 	{
-				 		$get_policy.=" AND ap.no_of_members='1A4C'";
-					}
-					elseif($user_input['adult']=='2' && $user_input['child']=='1')
-					{
-				 		$get_policy.=" AND ap.no_of_members='2A1C'";
-					}	
-					elseif($user_input['adult']=='2' && $user_input['child']=='2')
-					{
-					 	$get_policy.=" AND ap.no_of_members='2A2C'";
-				    }
-				 	elseif($user_input['adult']=='2' && $user_input['child']=='3')
-				 	{
-				 		$get_policy.=" AND ap.no_of_members='2A3C'";
-				 	}
-				 	elseif($user_input['adult']=='2' && $user_input['child']=='4')
-				 	{
-				 		$get_policy.=" AND ap.no_of_members='2A4C'";
-				 	}												
-				}	
-				 	
-				 	
-			}		/* Filter based on individual/family composition ends*/
+				$get_policy.=" AND ap.no_of_members='2A'";		//couple
+			}
+			elseif($user_input['plan_type']=='1A1C')
+			{
+				$get_policy.=" AND ap.no_of_members='1A1C'";	//self+1child
+			}
+			elseif($user_input['plan_type']=='1A2C')
+			{
+				$get_policy.=" AND ap.no_of_members='1A2C'";	//self+2children		
+			}
+			elseif($user_input['plan_type']=='1A3C')
+			{
+				$get_policy.=" AND ap.no_of_members='1A3C'";	//self+3children
+			}
+			elseif($user_input['plan_type']=='1A4C')		
+			{
+				$get_policy.=" AND ap.no_of_members='1A4C'";	//self+4children
+			}
+			
+			
+			elseif($user_input['plan_type']=='2A1C')
+			{
+				$get_policy.=" AND ap.no_of_members='2A1C'";	//self+spouse+1child
+			}
+			elseif($user_input['plan_type']=='2A2C')
+			{
+				$get_policy.=" AND ap.no_of_members='2A2C'";	//self+spouse+2children
+			}
+			elseif($user_input['plan_type']=='2A3C')
+			{
+				$get_policy.=" AND ap.no_of_members='2A3C'";	//self+spouse+3children
+			}
+			elseif($user_input['plan_type']=='2A4C')
+			{
+				$get_policy.=" AND ap.no_of_members='2A4C'";	//self+spouse+4children
+			}	 	
+			/* Filter ends */
 		}										
 		
 		if($user_input['coverage_amount']!='') /* Filter based on coverage amount */
@@ -162,11 +162,11 @@ class mic_dbtest EXTENDS CI_Model{
 			elseif($user_input['coverage_amount']=='50 Lakhs')
 			{
 				$get_policy.=" AND ap.sum_assured = 5000000";
-			}
+			}								
 			
-		}
+		}/* Filter ends */
 		
-		/* Filter based on coverage amount */
+		
 		 	
 		/* Filter based on policy_term */
 		/* if($user_input['policy_term']!='')
@@ -175,13 +175,14 @@ class mic_dbtest EXTENDS CI_Model{
 		} */
 		/* Filter based on policy_term ends*/
 	
-		/* Filter based on customer age*/
-		if(isset($user_input['cust_age']))
+		
+		if(isset($user_input['cust_age']))	/* Filter based on customer age*/
 		{
 			$get_policy.=" AND ap.age =".$user_input['cust_age'];
-		}
-		/* Filter based on customer gender */
-		if($user_input['cust_gender']!='')
+		}	/* Filter ends */
+		
+		
+		if($user_input['cust_gender']!='') /* Filter based on policyholder gender*/
 		{
 			if($user_input['cust_gender']== 'male')
 			{
@@ -192,7 +193,11 @@ class mic_dbtest EXTENDS CI_Model{
 			if($user_input['cust_gender']== 'female')
 			{
 				$get_policy.=" AND ap.gender_id !=2 ";
-			}
+			}/* Filter ends */
+		}
+		if($user_input['cust_city']!='')
+		{
+			$get_policy.=" AND ccz.city_id = ".$user_input['cust_city'];
 		}
 		$get_data=$this->db->query($get_policy);
 		return $get_data->result_array();

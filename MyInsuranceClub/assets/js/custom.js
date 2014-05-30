@@ -77,6 +77,7 @@ $('#clickk_f').mouseenter(function(){
   });
 $("#c_for_f li").click(function() {
    var am_v = $(this).text(); 
+   var am_vid = $(this).data('compo-id');
 	$("#c_for").text(am_v);
 	if(am_v == 'myself'){
 		//alert
@@ -105,7 +106,7 @@ $("#c_for_f li").click(function() {
 		$("#adlt_spc,#one_c,#two_c,#three_c,#four_c").fadeIn();
 	}
 	
-	$("#plan_type").val(am_v);
+	$("#plan_type").val(am_vid);
 	 $("#c_ch_f").fadeOut();
 });
 

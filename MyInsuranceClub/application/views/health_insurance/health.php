@@ -176,14 +176,9 @@
  <div data-bind="" style="display: none;" class="choice f" id="c_ch_f">
                <div class="choice-leftcol" data-bind="">
                     <ul class="years active" id="c_for_f" data-bind="jScrollPane">
-                            <li><a href="javascript:void(0);">myself</a></li>
- <li><a href="javascript:void(0);">Self + Spouse</a></li>
- <li><a href="javascript:void(0);">Self + Spouse + 1 Child</a></li>
- <li><a href="javascript:void(0);">Self + Spouse + 2 Children</a></li>
- <li><a href="javascript:void(0);">Self + Spouse + 3 Children</a></li>
- <li><a href="javascript:void(0);">Self + Spouse + 4 Children</a></li>
-
-                            
+                           <?php foreach($family_composition as $k=>$v){?> 
+                           <li data-compo-id="<?php echo $k; ?>"><a href="javascript:void(0);"><?php echo $v; ?></a></li>
+                           <?php } ?>
                     </ul>
                     <div class="stepwrap years-stepwrap">
                         <span class="step show">

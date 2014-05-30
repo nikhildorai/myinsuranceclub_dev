@@ -180,14 +180,15 @@
                 
                 
                 <div class="cmp_tbl">
+                <?php foreach($customer_details as $detail){?>
                 <div style="min-height:74px;height:auto; margin-top:10px; background:#effdfe; border:2px  solid #dadada;">
+                
                 <div class="col-md-5">
                 <label for="1_1_refundable" style="margin-top:-5px; margin-bottom:0px; padding:25px 0px 20px 0px;" >
-                 <?php foreach($customer_details as $detail){
-                 				$room_rent=round(0.01*$detail['sum_assured']);	
-								$icu_rent=round(0.02*$detail['sum_assured']);
-								
-				?>
+                 
+                 <?php 		$room_rent=round(0.01*$detail['sum_assured']);	
+							$icu_rent=round(0.02*$detail['sum_assured']);
+					?>
 						<input type="checkbox" name="refundable" id="1_1_refundable" class="refundable"/>
 						<span class="title_c"><?php echo $detail['company_shortname'];?></span><span class="sub_tit">(<?php echo $detail['policy_name'];?>)</span>
 					</label>
@@ -215,7 +216,7 @@
                  </div>
                  
                 </div>
-                </div>
+                <!-- /div> -->
                 
                 <div class="accordion_a">
                  <div class="col-md-12">
@@ -325,6 +326,7 @@ Rs.<?php echo $room_rent;?>/day</li>
                 </div>
                 
                 </div>
+                 </div>
                 <?php }?>
                </div> 
                 
