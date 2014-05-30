@@ -99,7 +99,7 @@ class Policy extends CI_Controller {
 		$this->data['message'] = '';
 		$company_id = '';
 		if ((isset($_GET['policy_id']) && !empty($_GET['policy_id'])) || !empty($policy_id))
-		{			
+		{	
 			if (isset($_GET['policy_id']))
 				$policy_id = $_GET['policy_id'];
 			$where = array();
@@ -119,6 +119,32 @@ class Policy extends CI_Controller {
 				$modelType = 'update';
 			}
 		}
+	
+		//	get all the health type as per company type
+		$allCompanyType = $this->util->getTableData($modelName='Company_type_model', $type="all", $where = array(), $fields = array());
+		if (!empty($allCompanyType))
+		{
+			foreach ($allCompanyType as $k1=>$v1)
+			{
+				$where = array();
+				$where[0]['field'] = 'company_type_id';
+				$where[0]['value'] = (int)$v1['company_type_id'];
+				$where[0]['compare'] = 'equal';
+				$a = array();
+				$op = '';
+				$policyHealth = $this->util->getTableData($modelName='Policy_health_type_model', $type="all", $where, $fields = array());
+				if (!empty($policyHealth))
+				{
+					foreach ($policyHealth as $k2=>$v2)
+					{
+						$a[$v2['type_id']] = $v2['type_name']; 
+						$op .= '<option value="'.$v2['type_id'].'">'.$v2['type_name'].'</option>';
+					}
+				}
+				$this->data['allPolicyHealthType']['data'][(int)$v1['company_type_id']] = $a;
+				$this->data['allPolicyHealthType']['options'][(int)$v1['company_type_id']] = $op;
+			}
+		}
 		
 		//	check if post data is available
 		if ($this->input->post('policyModel'))
@@ -132,14 +158,20 @@ class Policy extends CI_Controller {
 			$validation_rules = array(
 				array('field' => 'policyModel[policy_name]', 'label' => 'policy name', 'rules' => 'required|callback_validatePost[policy_name]'),
 				array('field' => 'policyModel[company_id]', 'label' => 'company name', 'rules' => 'required'),
-				array('field' => 'policyModel[type_health_plan]', 'label' => 'health plan type', 'rules' => 'required'),
-				array('field' => 'policyModel[varient]', 'label' => 'varient', 'rules' => 'required'),
+				array('field' => 'policyModel[type_health_plan]', 'label' => 'health plan type', 'rules' => 'callback_validatePost[type_health_plan]'),
+			//	array('field' => 'policyModel[variant]', 'label' => 'varient', 'rules' => 'required'),
+				array('field' => 'policyModel[seo_title]', 'label' => 'seo title', 'rules' => 'required'),
+				array('field' => 'policyModel[seo_description]', 'label' => 'seo description', 'rules' => 'required'),
+				array('field' => 'policyModel[seo_keywords]', 'label' => 'seo keywords', 'rules' => 'required'),
+				array('field' => 'policyModel[slug]', 'label' => 'url', 'rules' => 'required|callback_validatePost[slug]'),
 				);
 			
 			$this->form_validation->set_rules($validation_rules);
 			// Run the validation.
 			if ($this->form_validation->run())
 			{
+				//	set new default values
+				$arrParams = $this->input->post('policyModel');
 				//	run validation on complete company post data
 				$validate = $this->validatePost($arrParams);	
 				if ($validate == true)
@@ -154,10 +186,11 @@ class Policy extends CI_Controller {
 					else 
 						$saveData[] = false;
 					
+						
 					// save records for varients
 					if (!empty($policy_id))
 					{
-						$saveVarient = $this->saveVarientData($policy_id, $isVarient=$_POST['policyModel']['varient'],$varientPost);
+						$saveVarient = $this->saveVarientData($policy_id, $isVarient=$_POST['policyModel']['variant'],$varientPost);
 						if ($saveVarient['result'] == true)
 							$saveData[] = true;
 						else 
@@ -185,18 +218,20 @@ class Policy extends CI_Controller {
 			{
 				// 	Set validation errors.
 				$this->data['message'] = validation_errors('<p class="error_msg">', '</p>'); 
-			}
+			}			
 			$policyModel = $_POST['policyModel'];
 		}
+		
 		$this->data['policyModel'] = $policyModel;
+		$this->data['modelType'] = $modelType;
 		$this->template->write_view('content', 'admin/policy/create', $this->data, TRUE);
 		$this->template->render();
 	}
 	
 	public function saveVarientData($policy_id, $isVarient = 'no', $varientPost = array())
 	{
-		
-var_dump($_POST, $policy_id, $isVarient, $varientPost );die;		
+var_dump($_POST, $policy_id, $isVarient, $varientPost );die;	
+		return array('result'=>true);	
 	}
 	
 	
@@ -221,6 +256,49 @@ var_dump($_POST, $policy_id, $isVarient, $varientPost );die;
 			if ($validationFor == 'policy_name')
 			{
 				$arrSkip = array('type_health_plan');
+			}
+			else if ($validationFor == 'type_health_plan')
+			{			
+				if (!empty($policyModel['company_id']))
+				{
+					$where = array();
+					$where[0]['field'] = 'company_id';
+					$where[0]['value'] = (int)$policyModel['company_id'];
+					$where[0]['compare'] = 'equal';
+					$compType = reset($this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $where, $fields = array('company_type_id')));
+					$where = array();
+					$where[0]['field'] = 'company_type_id';
+					$where[0]['value'] = (int)$compType['company_type_id'];
+					$where[0]['compare'] = 'equal';
+					$policyHealth = $this->util->getTableData($modelName='Policy_health_type_model', $type="all", $where, $fields = array());
+
+					if (!empty($policyHealth))
+					{
+						if (isset($policyModel['type_health_plan']) && !empty($policyModel['type_health_plan']))
+						{
+							return true;
+							/*foreach ($policyHealth as $k2=>$v2)
+							{
+								$a[$v2['type_id']] = $v2['type_name']; 
+								$op .= '<option value="'.$v2['type_id'].'">'.$v2['type_name'].'</option>';
+							}*/
+						}
+						else 
+						{
+							$_POST['policyModel']['type_health_plan'] = null;
+							$this->form_validation->set_message('validatePost', 'The %s is required');
+							return FALSE;
+						}
+					}
+					else 
+					{
+						$_POST['policyModel']['type_health_plan'] = null;
+					}		
+				}
+				else 
+				{
+					return true;
+				}
 			}
 			else 
 			{

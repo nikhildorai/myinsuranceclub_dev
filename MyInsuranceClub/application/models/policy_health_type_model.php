@@ -90,7 +90,6 @@ class Policy_health_type_model EXTENDS CI_Model{
 			if (isset($arrParams['slug']) && !empty($arrParams['slug']))
 				$sql .= ' AND slug = "'.$arrParams['slug'].'" ';
 		}
-//var_dump($sql);		
 		$result = $this->db->query($sql);
 		return $result;
 	}

@@ -35,10 +35,10 @@ class Policy_health_master_model EXTENDS CI_Model{
 			$colNames = $colValues = $values = array();
 			foreach ($arrParams as $k1=>$v1)
 			{
-				if (!in_array($k1, array('policy_id')))
+				if (!in_array($k1, array('policy_id', 'variant')))
 				{
 					if (is_numeric($v1))
-						$values[$k1] = trim($v1);
+						$values[$k1] = (int)trim($v1);
 					else
 						$values[$k1] = trim($v1);
 				}
@@ -54,8 +54,7 @@ class Policy_health_master_model EXTENDS CI_Model{
 				if ($this->db->update('policy_health_master', $values, $where))
 					$saveRecord = true;
 			}
-		}
-		
+		}	
 		if ($saveRecord == true)
 		{
 			if ($modelType == 'create')
