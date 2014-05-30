@@ -56,7 +56,7 @@ $db['default']['database'] = 'mic_testdb';
 */
 
 // internal server
-$db['default']['hostname'] = '192.168.2.105';
+$db['default']['hostname'] = '192.168.2.103';
 $db['default']['username'] = 'krishna';
 $db['default']['password'] = 'krishna';
 $db['default']['database'] = 'mic_testdb';

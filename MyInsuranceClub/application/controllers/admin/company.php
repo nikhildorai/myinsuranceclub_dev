@@ -47,7 +47,7 @@ class Company extends CI_Controller {
         $this->load->library('upload');
  		$this->load->helper('url');
  		$this->load->helper('form');
- 		$this->load->helper('ckeditor');
+		$this->load->library('form_validation');
 		$this->load->model('insurance_company_master_model');
  		
 		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
@@ -92,28 +92,19 @@ class Company extends CI_Controller {
     public function create($company_id = null)
 	{
 		$modelType = 'create';
-		//	check if company id exists
 		$companyModel = array();
 		$this->data['message'] = '';
 		$this->data['file_upload'] = array();
 		
-		/*
-		//Ckeditor's configuration
-		$this->data['ckeditor'] = array(
-			//ID of the textarea that will be replaced
-			'id' 	=> 	'content1',
-			'path'	=>	'js/ckeditor',
-			//Optionnal values
-			'config' => array(
-				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
-				'width' 	=> 	"60%",	//Setting a custom width
-				'height' 	=> 	'100px',	//Setting a custom height
-			),
-		);
-		*/
+		//	check if company id exists
 		if (!empty($company_id))
 		{
-			$exist = $this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $id=$company_id, $fields = array());
+			$where = array();
+			$where[0]['field'] = 'company_id';
+			$where[0]['value'] = (int)$company_id;
+			$where[0]['compare'] = 'equal';
+			$exist = $this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $where, $fields = array());
+			//$this =& get_instance();
 			if (empty($exist))
 			{
 				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
@@ -214,17 +205,19 @@ class Company extends CI_Controller {
 							$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
 							redirect('admin/company/index');
 			            }
+			            else if (!empty($this->data['file_upload_error']))
+			            {
+			            	foreach ($this->data['file_upload_error'] as $k1=>$v1)
+			            	{
+			            		$msg = str_replace('<p>', '', $v1);
+			            		$msg = str_replace('</p>', '', $msg);
+								$this->data['message'] .= '<p class="error_msg">'.$msg.'</p>';
+			            	}
+			            }
 			            else 
 			            {
-			            	if (empty($this->data['file_upload']) && !empty($this->data['file_upload_error']))
-			            	{      	
-				            	foreach ($this->data['file_upload_error'] as $k1=>$v1)
-				            	{
-				            		$msg = str_replace('<p>', '', $v1);
-				            		$msg = str_replace('</p>', '', $msg);
-									$this->data['message'] .= '<p class="error_msg">'.$msg.'</p>';
-				            	}
-			            	}
+							$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
+							redirect('admin/company/index');
 			            }
 					}
 					else
@@ -337,30 +330,36 @@ class Company extends CI_Controller {
 		}
 	}
 
-	function handle_upload()
+	function changeStatus($company_id = null, $status = 'inactive')
 	{
-		if (isset($_FILES['image']) && !empty($_FILES['image']['name']))
+		if (!empty($company_id))
 		{
-			if ($this->upload->do_upload('image'))
+			//	check if company id exists
+			$where[0]['field'] = 'company_id';
+			$where[0]['value'] = (int)$company_id;
+			$where[0]['compare'] = 'equal';
+			$exist = $this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $where, $fields = array());
+	
+			if (empty($exist))
 			{
-				// set a $_POST value for 'image' that we can use later
-				$upload_data    = $this->upload->data();
-				$_POST['image'] = $upload_data['file_name'];
-				return true;
+				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
 			}
-			else
+			else 
 			{
-				// possibly do some clean up ... then throw an error
-				$this->form_validation->set_message('handle_upload', $this->upload->display_errors());
-				return false;
+				$companyModel = $exist;	
+				$modelType = 'update';
+				$arrParams['status'] = $status;
+				$arrParams['company_id'] = $company_id;
+				if ($this->insurance_company_master_model->saveCompanyRecord($arrParams, $modelType))
+					$this->session->set_flashdata('message', '<p class="status_msg">Record updated successfully.</p>');
+				else 
+					$this->session->set_flashdata('message', '<p class="error_msg">Record could not be updated.</p>');
 			}
 		}
 		else
-		{
-			// throw an error because nothing was uploaded
-			$this->form_validation->set_message('handle_upload', "You must upload an image!");
-			return false;
-		}
+			$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
+			
+		redirect('admin/company/index');
 	}
 }
 

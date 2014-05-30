@@ -96,7 +96,7 @@ class Policy_health_features_model EXTENDS CI_Model{
 	}
 	
 	
-	public function getById($id)
+	public function getByWhere($id)
 	{
 		$sql = 'SELECT * FROM insurance_company_master WHERE company_id = '.$id;		
 		return $this->db->query($sql);
@@ -105,6 +105,16 @@ class Policy_health_features_model EXTENDS CI_Model{
 	public function getAll()
 	{
 		$sql = 'SELECT * FROM insurance_company_master';
+		return $this->db->query($sql);
+	}
+	
+	public function getTableName()
+	{
+		return 'insurance_company_master';
+	}
+	
+	public function excuteQuery($sql)
+	{
 		return $this->db->query($sql);
 	}
 }

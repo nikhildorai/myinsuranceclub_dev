@@ -142,7 +142,7 @@ input[type=checkbox] {vertical-align:-2px; margin-right:5px;}
 
 select optgroup {color:#777;}
 select optgroup option{color:#333;}
-input[type=text], input[type=password],textarea {width: 270px;}
+input[type=text], input[type=password],textarea, select{width: 270px;}
 input[type=text], input[type=password], input[type=button], input[type=submit], textarea, select, button {padding:3px; margin-bottom:5px; border:1px solid #AAA;}
 textarea {overflow-y:auto; resize:vertical;}
 

@@ -75,14 +75,14 @@ class Policy extends CI_Controller {
 		$this->load->library('table');
 		$this->load->library('pagination');
 		$arrParams 	= array();
-		if (array_key_exists('search', $_GET) && $_GET['search']== "Search")
+		if (isset($_GET))
 			$arrParams = $_GET;
 		$this->data['search_query'] = $arrParams;
 		// Set any returned status/error messages..		
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
 		$this->session->set_flashdata('message','');		
 		$this->data['records'] 	= $this->policy_health_master_model->get_all_policy($arrParams);
-//var_dump($this->data['records']);die;		
+
 		//	pagination
 		$config = $this->util->get_pagination_params();
 		$config['total_rows'] 	= $this->data['records']->num_rows();
@@ -91,31 +91,22 @@ class Policy extends CI_Controller {
 		$this->template->render();
 	}
 
-    public function create($company_id = null)
-	{
+    public function create($policy_id = null)
+	{	
 		$modelType = 'create';
-		//	check if company id exists
-		$companyModel = array();
+		//	check if policy id exists
+		$policyModel = $varientPost = array();
 		$this->data['message'] = '';
-		$this->data['file_upload'] = array();
-		
-		/*
-		//Ckeditor's configuration
-		$this->data['ckeditor'] = array(
-			//ID of the textarea that will be replaced
-			'id' 	=> 	'content1',
-			'path'	=>	'js/ckeditor',
-			//Optionnal values
-			'config' => array(
-				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
-				'width' 	=> 	"60%",	//Setting a custom width
-				'height' 	=> 	'100px',	//Setting a custom height
-			),
-		);
-		*/
-		if (!empty($company_id))
-		{
-			$exist = $this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $id=$company_id, $fields = array());
+		$company_id = '';
+		if ((isset($_GET['policy_id']) && !empty($_GET['policy_id'])) || !empty($policy_id))
+		{			
+			if (isset($_GET['policy_id']))
+				$policy_id = $_GET['policy_id'];
+			$where = array();
+			$where[0]['field'] = 'policy_id';
+			$where[0]['value'] = (int)$policy_id;
+			$where[0]['compare'] = 'equal';
+			$exist = $this->util->getTableData($modelName='Policy_health_master_model', $type="single", $where, $fields = array());
 			if (empty($exist))
 			{
 				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
@@ -123,116 +114,65 @@ class Policy extends CI_Controller {
 			}
 			else 
 			{
-				$companyModel = $exist;	
+				$policyModel = $exist;
+				$company_id = $policyModel['company_id'];
 				$modelType = 'update';
 			}
 		}
 		
 		//	check if post data is available
-		if ($this->input->post('companyModel'))
+		if ($this->input->post('policyModel'))
 		{
-			//	check if file is uploaded
-			if (!empty($_FILES))
-			{
-				foreach($_FILES['companyModel']['name'] as $k1=>$v1)
-				{
-					$ext = end(explode('.', $v1));
-					if (empty($ext))
-						$ext = 'jpg';
-					$name = date('YmdHis').'_'.uniqid().'.'.$ext;
-					$arrFileNames[$k1] = $name;
-					if (empty($v1))
-					{
-						$_POST['companyModel'][$k1] = $companyModel[$k1];
-					}
-					else
-						$_POST['companyModel'][$k1] = $name;
-				}
-			}
-			else 
-			{
-				//	set previous file name in post
-				$_POST['companyModel']['image_logo_1'] = $companyModel['image_logo_1'];
-				$_POST['companyModel']['image_logo_2'] = $companyModel['image_logo_2'];
-			}				
 			//	set default values
-			$_POST['companyModel']['company_display_name'] = (isset($_POST['companyModel']['company_display_name']) && !empty($_POST['companyModel']['company_display_name'])) ? $_POST['companyModel']['company_display_name'] :  $_POST['companyModel']['company_name'];
-			$arrParams = $this->input->post('companyModel');
-			$companyTypeId = (isset($arrParams['company_type_id']) && !empty($arrParams['company_type_id'])) ? $arrParams['company_type_id'] : '';
+			$arrParams = $this->input->post('policyModel');
+			$policy_id = (isset($arrParams['policy_id']) && !empty($arrParams['policy_id'])) ? $arrParams['policy_id'] : '';
 			$company_id = (isset($arrParams['company_id']) && !empty($arrParams['company_id'])) ? $arrParams['company_id'] : '';	
-		
+			$_POST['modelType'] = $modelType;
 			//	set validation rules
 			$validation_rules = array(
-				array('field' => 'companyModel[company_name]', 'label' => 'company name', 'rules' => 'required|callback_validateInsuranceCompany[company_name#'.$arrParams["company_name"].',company_type_id#'.$companyTypeId.',modelType#'.$modelType.',company_id#'.$company_id.']'),
-				array('field' => 'companyModel[company_shortname]', 'label' => 'company shortname', 'rules' => 'required|callback_validateInsuranceCompany[company_shortname#'.$arrParams["company_shortname"].',company_type_id#'.$companyTypeId.',modelType#'.$modelType.',company_id#'.$company_id.']'),
-				array('field' => 'companyModel[company_display_name]', 'label' => 'company display name', 'rules' => 'required|callback_validateInsuranceCompany[company_display_name#'.$arrParams["company_display_name"].',company_type_id#'.$companyTypeId.',modelType#'.$modelType.',company_id#'.$company_id.']'),
-				array('field' => 'companyModel[company_type_id]', 'label' => 'company type', 'rules' => 'required'),
-				array('field' => 'companyModel[seo_title]', 'label' => 'seo title', 'rules' => 'required'),
-				array('field' => 'companyModel[seo_description]', 'label' => 'seo description', 'rules' => 'required'),
-				array('field' => 'companyModel[seo_keywords]', 'label' => 'seo keywords', 'rules' => 'required'),
-		//		array('field' => 'companyModel[image_logo_1]', 'label' => 'logo image 1', 'rules' => 'required'),
-		//		array('field' => 'companyModel[image_logo_2]', 'label' => 'logo image 2', 'rules' => 'required'),
-				array('field' => 'companyModel[slug]', 'label' => 'url', 'rules' => 'required|callback_validateInsuranceCompany[slug#'.$arrParams["slug"].',modelType#'.$modelType.',company_id#'.$company_id.']'),
-			);
+				array('field' => 'policyModel[policy_name]', 'label' => 'policy name', 'rules' => 'required|callback_validatePost[policy_name]'),
+				array('field' => 'policyModel[company_id]', 'label' => 'company name', 'rules' => 'required'),
+				array('field' => 'policyModel[type_health_plan]', 'label' => 'health plan type', 'rules' => 'required'),
+				array('field' => 'policyModel[varient]', 'label' => 'varient', 'rules' => 'required'),
+				);
 			
 			$this->form_validation->set_rules($validation_rules);
 			// Run the validation.
 			if ($this->form_validation->run())
 			{
 				//	run validation on complete company post data
-				$validate = $this->validateInsuranceCompany($arrParams, 'modelType#'.$modelType.',company_id#'.$company_id);	
+				$validate = $this->validatePost($arrParams);	
 				if ($validate == true)
 				{
-					//	save record and redirect to index
-					if ($this->insurance_company_master_model->saveCompanyRecord($arrParams, $modelType))
+					//	save record for policy 
+					$recordId = $this->policy_health_master_model->saveRecord($arrParams, $modelType);	
+					if ($recordId != false)
 					{
-						$this->data['file_upload_error'] = array();
-						if (!empty($_FILES))
-						{
-					        $config['upload_path'] = $this->config->config['folder_path']['company'];
-					        $config['file_name'] = $arrFileNames;
-					        $config['allowed_types'] = 'gif|jpg|png';
-					        $config['max_size'] = '200';
-					        $config['max_width']  = '400';
-					        $config['max_height']  = '250';
-							$this->load->library('upload', $config);
-							$this->upload->initialize($config); 	
-							if($this->upload->do_multi_upload("companyModel"))
-							{
-				              	$this->data['file_upload'] = $this->upload->get_multi_upload_data();
-							}
-							else 
-							{
-				                $this->data['file_upload_error'][] = $this->upload->display_errors();
-							}
-				             $this->data['file_upload'] = $this->upload->get_multi_upload_data();
-						}			
-						
-					//	$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
-					//	redirect('admin/company/index');
-						
-			            if (empty($this->data['file_upload_error']))
-			            {
-							$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
-							redirect('admin/company/index');
-			            }
-			            else 
-			            {
-			            	if (empty($this->data['file_upload']) && !empty($this->data['file_upload_error']))
-			            	{      	
-				            	foreach ($this->data['file_upload_error'] as $k1=>$v1)
-				            	{
-				            		$msg = str_replace('<p>', '', $v1);
-				            		$msg = str_replace('</p>', '', $msg);
-									$this->data['message'] .= '<p class="error_msg">'.$msg.'</p>';
-				            	}
-			            	}
-			            }
+						$saveData[] = true;
+						$policy_id = $recordId;	
 					}
-					else
+					else 
+						$saveData[] = false;
+					
+					// save records for varients
+					if (!empty($policy_id))
 					{
-						// show error if record is not created
-						$this->data['message'] = '<p class="error_msg">Record could not be created.</p>';
+						$saveVarient = $this->saveVarientData($policy_id, $isVarient=$_POST['policyModel']['varient'],$varientPost);
+						if ($saveVarient['result'] == true)
+							$saveData[] = true;
+						else 
+							$saveData[] = false;
+					}
+					
+					//	if policy and varients records are stored then on show success and redirect to index 
+					if(!in_array(false, $saveData))
+					{
+						$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
+						redirect('admin/policy/index');
+					}
+					else 
+					{
+						echo 'define error';die;
 					}
 				}
 				else 
@@ -246,123 +186,134 @@ class Policy extends CI_Controller {
 				// 	Set validation errors.
 				$this->data['message'] = validation_errors('<p class="error_msg">', '</p>'); 
 			}
-			$companyModel = $_POST['companyModel'];
-		}		
-		$this->data['companyModel'] = $companyModel;
+			$policyModel = $_POST['policyModel'];
+		}
+		$this->data['policyModel'] = $policyModel;
 		$this->template->write_view('content', 'admin/policy/create', $this->data, TRUE);
 		$this->template->render();
 	}
 	
+	public function saveVarientData($policy_id, $isVarient = 'no', $varientPost = array())
+	{
+		
+var_dump($_POST, $policy_id, $isVarient, $varientPost );die;		
+	}
 	
 	
 	/* 
 	 * $value	: it will have current validations post value
-	 * $params	:should be string with multiple key value joined using ",". 
-	 * 			It should be key value pair should be separated by "#".
-	 * 			example: "company_name#Agricultural Insurance Company of India,company_type_id#1"
+	 * $validationFor	:defines type of validation on field
 	 */
-	public function validateInsuranceCompany($value , $params = null)
+	public function validatePost($post , $validationFor = null)
 	{
-		$arrParams = $arrParamsVals = $return = array();
-	
-		//	separate parametes from string
-		if (!empty($params))
+		if (!empty($_POST) || !empty($post))
 		{
-			$params = explode(',', $params);
-			foreach ($params as $k1=>$v1)
+			$modelType = 'create';
+			$policyModel = $_POST['policyModel'];
+			
+			if (isset($_POST['modelType']) && !empty($_POST['modelType']))
+				$modelType = $_POST['modelType'];
+				
+			$policy_id = (isset($policyModel['policy_id']) && !empty($policyModel['policy_id'])) ? $policyModel['policy_id'] : '';
+			$company_id = (isset($policyModel['company_id']) && !empty($policyModel['company_id'])) ? $policyModel['company_id'] : '';	
+			
+			$arrSkip = $arrParams = array();
+			if ($validationFor == 'policy_name')
 			{
-				if (!empty($v1))
-				{
-					$a = explode('#', $v1);
-					if (!empty($a))
-					{
-						$arrParamsVals[$a[0]] = $a[1];
-					}
-				}
-			}
-		}
-		
-		//	set where parametes accordingly
-		if (is_array($value))
-		{
-			$arrParams = $value;
-		}
-		else if (is_string($value))
-		{
-			$arrParams = $arrParamsVals;
-		}
-		else 
-		{
-			$this->form_validation->set_message('validateInsuranceCompany', 'Undefined validation error');
-			return FALSE;
-		}
-		//	search for existing records
-		$record = $this->insurance_company_master_model->getInsuranceCompany($arrParams);
-
-		if ($record->num_rows == 0)
-		{
-			return TRUE;
-		}
-		else if ($record->num_rows == 1)
-		{
-			if (isset($arrParamsVals['modelType']) && $arrParamsVals['modelType'] == 'create' )
-			{
-				$this->form_validation->set_message('validateInsuranceCompany', 'The %s already exists');
-				return FALSE;
-			}
-			else if (isset($arrParamsVals['modelType']) && $arrParamsVals['modelType'] == 'update' && !empty($arrParamsVals['modelType']))
-			{
-				//	if company id matches with post company id, then true else record exists 
-				$record = reset($record->result_array());
-				if ($record['company_id'] == $arrParamsVals['company_id'])
-					return true;
-				else 
-				{
-					$this->form_validation->set_message('validateInsuranceCompany', 'The %s already exists');
-					return FALSE;
-				}
+				$arrSkip = array('type_health_plan');
 			}
 			else 
 			{
-				$this->form_validation->set_message('validateInsuranceCompany', 'Undefined validation error');
+				$arrParams = $policyModel;
+			}
+			
+			foreach ($policyModel as $k1=>$v1)
+			{
+				if (!in_array($k1, $arrSkip))
+					$arrParams[$k1] = $v1;
+			}	
+	
+			//	search for existing records
+			$record = $this->policy_health_master_model->getPolicy($arrParams);
+
+			if ($record->num_rows == 0)
+			{
+				return TRUE;
+			}
+			else if ($record->num_rows == 1)
+			{
+				if ($modelType == 'create' )
+				{
+					$this->form_validation->set_message('validatePost', 'The %s already exists');
+					return FALSE;
+				}
+				else if ($modelType == 'update')
+				{
+					//	if company id matches with post company id, then true else record exists 
+					$record = reset($record->result_array());
+					if ($record['policy_id'] == $arrParams['policy_id'])
+					{
+						return true;
+					}
+					else 
+					{
+						$this->form_validation->set_message('validatePost', 'The %s already exists');
+						return FALSE;
+					}
+				}
+				else 
+				{
+					$this->form_validation->set_message('validatePost', 'Undefined validation error');
+					return FALSE;
+				}
+			}
+			else if ($record->num_rows > 1)
+			{
+				$this->form_validation->set_message('validatePost', 'The %s already exists');
+			}
+			else 
+			{
+				$this->form_validation->set_message('validatePost', 'Undefined validation error');
 				return FALSE;
 			}
 		}
-		else if ($record->num_rows > 1)
-		{
-			$this->form_validation->set_message('validateInsuranceCompany', 'The %s already exists');
-		}
 		else 
 		{
-			$this->form_validation->set_message('validateInsuranceCompany', 'Undefined validation error');
+			$this->form_validation->set_message('validatePost', 'Undefined validation error');
 			return FALSE;
 		}
 	}
 
-	function handle_upload()
+	function changeStatus($policy_id = null, $status = 'inactive')
 	{
-		if (isset($_FILES['image']) && !empty($_FILES['image']['name']))
+		if (!empty($policy_id))
 		{
-			if ($this->upload->do_upload('image'))
+			//	check if policy id exists
+			$where = array();
+			$where[0]['field'] = 'policy_id';
+			$where[0]['value'] = (int)$policy_id;
+			$where[0]['compare'] = 'equal';
+			$exist = $this->util->getTableData($modelName='Policy_health_master_model', $type="single", $where, $fields = array());
+			if (empty($exist))
 			{
-				// set a $_POST value for 'image' that we can use later
-				$upload_data    = $this->upload->data();
-				$_POST['image'] = $upload_data['file_name'];
-				return true;
+				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
 			}
-			else
+			else 
 			{
-				// possibly do some clean up ... then throw an error
-				$this->form_validation->set_message('handle_upload', $this->upload->display_errors());
-				return false;
+				$companyModel = $exist;	
+				$modelType = 'update';
+				$arrParams['status'] = $status;
+				$arrParams['policy_id'] = $policy_id;
+				if ($this->policy_health_master_model->saveRecord($arrParams, $modelType))
+					$this->session->set_flashdata('message', '<p class="status_msg">Record updated successfully.</p>');
+				else 
+					$this->session->set_flashdata('message', '<p class="error_msg">Record could not be updated.</p>');
 			}
 		}
 		else
-		{
-			// throw an error because nothing was uploaded
-			$this->form_validation->set_message('handle_upload', "You must upload an image!");
-			return false;
-		}
+			$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
+			
+		redirect('admin/policy/index');
 	}
 }
 

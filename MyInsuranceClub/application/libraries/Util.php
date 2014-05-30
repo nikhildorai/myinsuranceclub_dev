@@ -50,58 +50,80 @@ class Util {
 		return $value;
 	}
 	
-	function getTableData($modelName = '', $type="all", $id = null, $fields = array('id'))
+	function getTableData($modelName = '', $type="all", $where = array(), $fields = array('id'))
 	{
-		$result = $value = null;
+		$result = $value = array();
 		$model = &get_instance();
 		$model->load->model($modelName);
-		if ($type == 'single' && !empty($id))
+		$condition = '';
+		$tableName = $model->$modelName->getTableName();
+		if (!empty($where))
 		{
-			$result = $model->$modelName->getById($id);
-		}
-		else if ($type == 'all')
-		{
-			$result = $model->$modelName->getAll($id);
-		}	
-		if ($result->num_rows > 0)
-		{
-			$i = 0;
-			foreach ($result->result_array() as $k1=>$v1)
-			{			
-				if (!empty($v1))
-				{	
-					if ($type == 'all')
-					{
-						$value[$i] = $v1;
-					}
-					else if (in_array($type, array('single')) && !empty($fields) )
-					{			
-						$value[$i] = array_intersect_key($v1, array_flip($fields));
-					}
-					else if (in_array($type, array('single')) && empty($fields) )
-					{			
-						$value = $v1;
-					}
+			foreach ($where as $k2=>$v2)
+			{
+				if (is_string($v2['value']))
+					$v2['value'] = '"'.$v2['value'].'"';
+				if ($v2['compare'] == 'equal')
+				{
+					$condition .= empty($condition) ? $v2['field'].' = '.$v2['value'] : ' AND '.$v2['field'].' = '.$v2['value'];
 				}
-				$i++;
+			}	
+		}
+		
+		$sql = 'SELECT * FROM '.$tableName;
+		if (!empty($condition))
+		{
+			 $sql .= ' WHERE '.$condition;	
+		}
+		$result = $model->$modelName->excuteQuery($sql);
+
+		if (!empty($result))
+		{
+			if ($result->num_rows > 0)
+			{
+				$i = 0;
+				foreach ($result->result_array() as $k1=>$v1)
+				{			
+					if (!empty($v1))
+					{	
+						if ($type == 'all')
+						{
+							$value[$i] = $v1;
+						}
+						else if (in_array($type, array('single')) && !empty($fields) )
+						{			
+							$value[$i] = array_intersect_key($v1, array_flip($fields));
+						}
+						else if (in_array($type, array('single')) && empty($fields) )
+						{			
+							$value = $v1;
+						}
+					}
+					$i++;
+				}
 			}
 		}
 		return $value;
 	}
 	
-	public function getCompanyTypeDropDownOptions($modelName ='Company_type_model', $optionKey = 'company_type_id', $optionValue = 'company_type_name', $defaultEmpty = "Please Select")
+	public function getCompanyTypeDropDownOptions($modelName ='Company_type_model', $optionKey = 'id', $optionValue = 'id', $defaultEmpty = "Please Select", $extraKeys = false)
 	{
-		$result = $this->getTableData($modelName, $type="all", $id='', $fields = array());		
+		$result = $this->getTableData($modelName, $type="all", $where = array(), $fields = array());		
 		$options[''] = $defaultEmpty;
+		$optionsExtra = array();
 		foreach ($result as $k1=>$v1)
 		{
 			$options[$v1[$optionKey]] = $v1[$optionValue];
-		}		
-		return $options;
+			$optionsExtra[$v1[$optionKey]] = $v1;			
+		}
+		if ($extraKeys == false)
+			return $options;
+		else 
+			return $optionsExtra;
 	}
 }
 
 // END Util class
 
-/* End of file Calendar.php */
-/* Location: ./system/libraries/Util.php */
+/* End of file Util.php */
+/* Location: ./application/libraries/Util.php */

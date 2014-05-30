@@ -96,7 +96,7 @@ class Policy_health_type_model EXTENDS CI_Model{
 	}
 	
 	
-	public function getById($id)
+	public function getByWhere($id)
 	{
 		$sql = 'SELECT * FROM policy_health_type WHERE type_id = '.$id;		
 		return $this->db->query($sql);
@@ -105,6 +105,16 @@ class Policy_health_type_model EXTENDS CI_Model{
 	public function getAll()
 	{
 		$sql = 'SELECT * FROM policy_health_type';
+		return $this->db->query($sql);
+	}
+	
+	public function getTableName()
+	{
+		return 'policy_health_type';
+	}
+	
+	public function excuteQuery($sql)
+	{		
 		return $this->db->query($sql);
 	}
 }

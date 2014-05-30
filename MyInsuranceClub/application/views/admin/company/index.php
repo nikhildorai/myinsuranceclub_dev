@@ -69,9 +69,23 @@
 								$rows[] = $row['company_name']; 
 								$rows[] = $row['company_shortname']; 
 								$rows[] = $row['company_display_name']; 
-								$comp_type = reset($this->util->getTableData($modelName='Company_type_model', $type="single", $id=$row['company_type_id'], $fields = array('company_type_name')));
+								$where = array();
+								$where[0]['field'] = 'company_type_id';
+								$where[0]['value'] = (int)$row['company_type_id'];
+								$where[0]['compare'] = 'equal';
+								
+								$comp_type = reset($this->util->getTableData($modelName='Company_type_model', $type="single", $where, $fields = array('company_type_name')));
 								$rows[] = $comp_type['company_type_name']; 
-								$actionBtn = '<a href="'.$base_url.'admin/company/create/'.$row['company_id'].'">Update</a>';
+								if ($row['status'] == 'active')
+								{
+									$actionBtn = '<a href="'.$base_url.'admin/company/create/'.$row['company_id'].'">Update</a>';
+									$actionBtn .= ' | <a href="'.$base_url.'admin/company/changeStatus/'.$row['company_id'].'/inactive">Inactive</a>';	
+									$actionBtn .= ' | <a href="'.$base_url.'admin/policy/index?company_id='.$row['company_id'].'">View Policy</a>';
+								}
+								else if ($row['status'] == 'inactive')
+								{
+									$actionBtn = '<a href="'.$base_url.'admin/company/changeStatus/'.$row['company_id'].'/active">Activate</a>';
+								}
 								$rows[] = $actionBtn; 
 								$this->table->add_row($rows);
 					   		}

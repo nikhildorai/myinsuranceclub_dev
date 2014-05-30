@@ -10,7 +10,7 @@ class Company_type_model EXTENDS CI_Model{
 		$this->load->library('session');
 	}
 	
-	public function getById($id)
+	public function getByWhere($id)
 	{
 		$sql = 'SELECT * FROM company_type WHERE company_type_id = '.$id;
 		return $this->db->query($sql);
@@ -19,6 +19,16 @@ class Company_type_model EXTENDS CI_Model{
 	public function getAll()
 	{
 		$sql = 'SELECT * FROM company_type';
+		return $this->db->query($sql);
+	}
+	
+	public function getTableName()
+	{
+		return 'company_type';
+	}
+	
+	public function excuteQuery($sql)
+	{
 		return $this->db->query($sql);
 	}
 	

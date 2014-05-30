@@ -8,8 +8,6 @@ class Insurance_company_master_model EXTENDS CI_Model{
 		// Call the Model constructor
 		parent::__construct();
 		$this->load->library('session');
-		$this->load->library('form_validation');
-        $this->load->helper('form');
 	}
 	
 	public function get_all_insurance_company($arrParams = array())
@@ -62,8 +60,7 @@ class Insurance_company_master_model EXTENDS CI_Model{
 					}
 				}
 				$colValues = implode(', ', $colValues);
-				$sql = 'UPDATE insurance_company_master SET '.$colValues.' WHERE company_id = '.$arrParams['company_id'];
-//var_dump($arrParams, $colValues, $sql);die;				
+				$sql = 'UPDATE insurance_company_master SET '.$colValues.' WHERE company_id = '.$arrParams['company_id'];	
 			}		
 			if ($this->db->query($sql))
 				return true;
@@ -95,15 +92,25 @@ class Insurance_company_master_model EXTENDS CI_Model{
 	}
 	
 	
-	public function getById($id)
+	public function getByWhere($condition)
 	{
-		$sql = 'SELECT * FROM insurance_company_master WHERE company_id = '.$id;		
+		$sql = 'SELECT * FROM insurance_company_master WHERE '.$condition;		
 		return $this->db->query($sql);
 	}
 	
 	public function getAll()
 	{
 		$sql = 'SELECT * FROM insurance_company_master';
+		return $this->db->query($sql);
+	}
+	
+	public function getTableName()
+	{
+		return 'insurance_company_master';
+	}
+	
+	public function excuteQuery($sql)
+	{
 		return $this->db->query($sql);
 	}
 }
