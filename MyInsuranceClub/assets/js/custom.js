@@ -133,8 +133,9 @@ $('#clickk_l').mouseenter(function(){
   });
 $("#c_for_l li").click(function() {
    var am_v = $(this).text(); 
-	$("#loc").text(am_v);
-	$("#cust_city").val(am_v);
+	var am_vid=$(this).data('city-id');
+   $("#loc").text(am_v);
+	$("#cust_city").val(am_vid);
 	 $("#c_ch_l").fadeOut();
 });
 

@@ -217,7 +217,7 @@
                <div class="choice-leftcol" data-bind="">
                     <ul class="years active scroll-pane" id="c_for_l" data-bind="jScrollPane">
 					<?php foreach ($city as $c_name){?>
-                    <li><a href="javascript:void(0);"><?php echo $c_name['mic_city_name']; ?></a></li> 
+                    <li data-city-id="<?php echo $c_name['city_id'];?>"><a href="javascript:void(0);"><?php echo $c_name['mic_city_name']; ?></a></li> 
                     <?php }?>
                     </ul>
                     
