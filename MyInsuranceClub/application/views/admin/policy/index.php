@@ -42,7 +42,95 @@
 			</fieldset>
 		<?php echo form_close();?>
 	
-		<div class="w100 frame">	
+		<div class="w100 frame">
+<?php /*?>
+			<table cellspacing="0" cellpadding="4" border="0">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Policy Name</th>
+						<th>Company Name</th>
+						<th>Health Plan Type</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php 
+				if (!empty($records))
+		{
+			if ($records->num_rows() > 0)
+			{
+				$i = 1;
+				$min = 0; $max = $this->config->config['pagination']['per_page'];
+		   		if (array_key_exists('per_page', $_GET))
+		   		{
+		   			$page = str_replace('/','',$_GET['per_page']);
+		   			$min = $page;
+		   			$max += $page;
+		   		}   		
+			   	foreach ($records->result_array() as $row)
+			   	{
+			   		if ($i > $min && $i <= $max)
+			   		{
+				   		$rows = array();
+						$rows[] = $row['policy_id'];
+						$rows[] = $row['policy_name']; 
+						$where = array();
+						$where[0]['field'] = 'company_id';
+						$where[0]['value'] = (int)$row['company_id'];
+						$where[0]['compare'] = 'equal';
+						$comp_name = reset($this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $where, $fields = array('company_name')));
+						$rows[] = '<a href="'.$base_url.'admin/company/create/'.$row['company_id'].'">'.$comp_name['company_name'].'</a>'; 
+						$where = array();
+						$where[0]['field'] = 'type_id';
+						$where[0]['value'] = (int)$row['type_health_plan'];
+						$where[0]['compare'] = 'equal';				
+						$comp_type = reset($this->util->getTableData($modelName='Policy_health_type_model', $type="single", $where, $fields = array('type_name')));
+						$rows[] = $comp_type['type_name']; 
+						//$rows[] = ucfirst($row['varient']);
+						if ($row['status'] == 'active')
+						{
+							$actionBtn = '<a href="'.$base_url.'admin/policy/create/'.$row['policy_id'].'">Update</a>';
+							$actionBtn .= ' | <a href="'.$base_url.'admin/policy/changeStatus/'.$row['policy_id'].'/inactive">Inactive</a>';
+						}
+						else if ($row['status'] == 'inactive')
+						{
+							$actionBtn = '<a href="'.$base_url.'admin/policy/changeStatus/'.$row['policy_id'].'/active">Activate</a>';
+						}
+						$rows[] = $actionBtn; 
+						$this->table->add_row($rows);	?>
+<?php 			   	}
+					$i++;
+				}
+			}
+			else 
+			{
+				$cell = array('data' => 'No record found.','colspan' => 6);
+				$this->table->add_row($cell);
+			}
+		}
+		else 
+		{
+			echo '<tr colspan="5"><td>No record found</td></tr>';
+		}
+				?>
+					<tr>
+						<td>2</td>
+						<td>Easy Health Individual</td>
+						<td><a
+							href="http://127.0.0.1/myinsuranceclub_dev/MyInsuranceClub/admin/company/create/2">Apollo
+								Munich Health Insurance Company</a></td>
+						<td>Mediclaim</td>
+						<td><a
+							href="http://127.0.0.1/myinsuranceclub_dev/MyInsuranceClub/admin/policy/create/2">Update</a>
+							| <a
+							href="http://127.0.0.1/myinsuranceclub_dev/MyInsuranceClub/admin/policy/changeStatus/2/inactive">Inactive</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+*/?>
 		<?php 
 		$this->table->set_heading('Id', 'Policy Name', 'Company Name', 'Health Plan Type', 'Action');
 		if (!empty($records))
@@ -87,8 +175,8 @@
 							$actionBtn = '<a href="'.$base_url.'admin/policy/changeStatus/'.$row['policy_id'].'/active">Activate</a>';
 						}
 						$rows[] = $actionBtn; 
-						$this->table->add_row($rows);
-			   		}
+						$this->table->add_row($rows);	?>
+<?php 			   	}
 					$i++;
 				}
 			}

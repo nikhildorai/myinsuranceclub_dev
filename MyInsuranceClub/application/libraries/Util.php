@@ -74,7 +74,7 @@ class Util {
 		if (!empty($condition))
 		{
 			 $sql .= ' WHERE '.$condition;	
-		}
+		}	
 		$result = $model->$modelName->excuteQuery($sql);
 
 		if (!empty($result))

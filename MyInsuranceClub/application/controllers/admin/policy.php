@@ -95,7 +95,7 @@ class Policy extends CI_Controller {
 	{	
 		$modelType = 'create';
 		//	check if policy id exists
-		$policyModel = $varientPost = array();
+		$policyModel = $variantModel = array();
 		$this->data['message'] = '';
 		$company_id = '';
 		if ((isset($_GET['policy_id']) && !empty($_GET['policy_id'])) || !empty($policy_id))
@@ -122,6 +122,15 @@ class Policy extends CI_Controller {
 	
 		//	get all the health type as per company type
 		$allCompanyType = $this->util->getTableData($modelName='Company_type_model', $type="all", $where = array(), $fields = array());
+		
+		//	get all existing variants
+		$where[0]['field'] = 'policy_id';
+		$where[0]['value'] = (int)$policy_id;
+		$where[0]['compare'] = 'equal';
+		$where[1]['field'] = 'status';
+		$where[1]['value'] = 'active';
+		$where[1]['compare'] = 'equal';
+		$variantModel = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());		
 		if (!empty($allCompanyType))
 		{
 			foreach ($allCompanyType as $k1=>$v1)
@@ -148,8 +157,8 @@ class Policy extends CI_Controller {
 		
 		//	check if post data is available
 		if ($this->input->post('policyModel'))
-		{
-			//	set default values
+		{	
+			//	set default values for policy
 			$arrParams = $this->input->post('policyModel');
 			$policy_id = (isset($arrParams['policy_id']) && !empty($arrParams['policy_id'])) ? $arrParams['policy_id'] : '';
 			$company_id = (isset($arrParams['company_id']) && !empty($arrParams['company_id'])) ? $arrParams['company_id'] : '';	
@@ -167,6 +176,12 @@ class Policy extends CI_Controller {
 				);
 			
 			$this->form_validation->set_rules($validation_rules);
+			
+			
+			//	set default values for variant
+			$variantPost = $this->input->post('variantModel');
+		
+			
 			// Run the validation.
 			if ($this->form_validation->run())
 			{
@@ -190,13 +205,16 @@ class Policy extends CI_Controller {
 					// save records for varients
 					if (!empty($policy_id))
 					{
-						$saveVarient = $this->saveVarientData($policy_id, $isVarient=$_POST['policyModel']['variant'],$varientPost);
+						$saveVarient = $this->saveVarientData($policy_id, $variantPost);
 						if ($saveVarient['result'] == true)
 							$saveData[] = true;
 						else 
+						{
 							$saveData[] = false;
-					}
-					
+							$this->data['message'] .= $saveVarient['msg'];
+						}
+						$variantModel = $saveVarient['varientModel'];				
+					}			
 					//	if policy and varients records are stored then on show success and redirect to index 
 					if(!in_array(false, $saveData))
 					{
@@ -205,7 +223,7 @@ class Policy extends CI_Controller {
 					}
 					else 
 					{
-						echo 'define error';die;
+						//$this->data['message'] .= '<p class="error_msg">Validation Error.</p>';
 					}
 				}
 				else 
@@ -218,21 +236,175 @@ class Policy extends CI_Controller {
 			{
 				// 	Set validation errors.
 				$this->data['message'] = validation_errors('<p class="error_msg">', '</p>'); 
-			}			
+			}
 			$policyModel = $_POST['policyModel'];
 		}
-		
 		$this->data['policyModel'] = $policyModel;
 		$this->data['modelType'] = $modelType;
+		$this->data['variantModel'] = $variantModel;
 		$this->template->write_view('content', 'admin/policy/create', $this->data, TRUE);
 		$this->template->render();
 	}
 	
-	public function saveVarientData($policy_id, $isVarient = 'no', $varientPost = array())
+	public function saveVarientData($policy_id, $variantPost = array())
 	{
-var_dump($_POST, $policy_id, $isVarient, $varientPost );die;	
-		return array('result'=>true);	
+		$return = $variantModel = array();
+		$result = false;
+		
+		$msg = '<p class="error_msg">Undefined error in variant.</p>';
+		if (!empty($variantPost))
+		{
+			foreach ($variantPost as $k1=>$v1)
+			{
+				foreach ($variantPost[$k1] as $k2=>$v2)
+				{
+					$variantModel[$k2][$k1] = $v2;
+					$variantModel[$k2]['policy_id'] = $policy_id;
+				}
+			}
+					
+			if (!empty($variantModel))
+			{
+				$variantErrors = array();
+				$arrSkip = array('variant_id', 'comments');
+				foreach ($variantModel as $k3=>$v3)
+				{
+					if (!empty($v3))
+					{
+						$chkEmpty = true;
+						foreach ($v3 as $k5=>$v5)
+						{
+							if (empty($v5) && !in_array($k5, $arrSkip))
+								$chkEmpty = false;
+						}
+					}
+					if ($chkEmpty == true)
+					{
+				  		$variantSave[] = true;
+					}
+					else 
+					{
+						$variantSave[] = false;
+						$variantErrors[] = 'Some fields are empty for variant.';
+					}
+				}
+			}
+			if (!in_array(false, $variantSave))
+			{
+				$where = $existingVarientsIds = array();
+				$where[0]['field'] = 'policy_id';
+				$where[0]['value'] = (int)$policy_id;
+				$where[0]['compare'] = 'equal';
+	
+				//	Add/update variants
+				if (!empty($variantModel))
+				{
+					foreach ($variantModel as $k6=>$v6)
+					{
+						//	un comment to update existing records with previous status
+					//	$v6['status'] = 'active';
+						$savedVarients[] = $selectedVariantsIds[] = $this->addUpdateVariants($model = $v6, $policy_id);
+					}
+				}
+			
+				$existingVarients = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());
+				if (!empty($existingVarients))
+				{
+					foreach ($existingVarients as $k1=>$v1)
+					{
+						$existingVarientsIds[] = $v1['variant_id'];
+					}
+				}	
+				$deleteVarients = array_diff($existingVarientsIds, $selectedVariantsIds);	
+				//	save or update record
+				if (!empty($deleteVarients))
+				{
+					foreach ($deleteVarients as $k4=>$v4)
+					{
+						$model = array();
+						$model['variant_id'] = $v4;
+						$model['status'] = 'deleted';
+						$savedVarients[] = $this->addUpdateVariants($model, $policy_id);
+					}
+				}
+			
+				if (!empty($savedVarients))
+				{
+					$result = true;
+					$msg = 'Variant updated successfully';
+				}
+			}
+	  		else if (in_array(false, $variantSave))
+	  		{
+	  			$msg = '';
+	  			$variantErrors = array_unique($variantErrors);
+	  			//	not update some fields are empty
+	  			foreach ($variantErrors as $k1=>$v1)
+	  			{
+	  				$msg .= '<p class="error_msg">'.$v1.'</p>';
+	  			}
+	  			$result = false;
+	  		}	
+		}
+		else 
+		{
+			$result = false;
+			$msg = '<p class="error_msg">Varient cannot be blank.</p>';
+		}
+		$return = array('result'=>$result, 'msg'=>$msg, 'varientModel'=>$variantModel);
+		return $return;	
 	}
+	
+	public function addUpdateVariants($model, $policy_id)
+	{	
+		$save  = false;
+		if (!empty($model))
+		{	
+			//	check if record exists
+			$where = array();
+			$arrSkip = array('variant_id', 'status', 'comments');
+			if (isset($model['variant_id']) && !empty($model['variant_id']))
+			{
+				$where[0]['field'] = 'variant_id';
+				$where[0]['value'] = $model['variant_id'];
+				$where[0]['compare'] = 'equal';
+			}
+			else 
+			{
+				$i = 0;
+				foreach ($model as $k1=>$v1)
+				{
+					if (!in_array($k1, $arrSkip))
+					{
+						$where[$i]['field'] = $k1;
+						$where[$i]['value'] = $v1;
+						$where[$i]['compare'] = 'equal';
+						$i++;
+					}
+				}
+			}
+			
+			$isExist = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());
+			
+			if (!empty($isExist))
+			{
+				foreach ($isExist as $k1=>$v1)
+				{
+					$model['variant_id'] = (int)$v1['variant_id'];
+					$save = $this->policy_health_variants_model->saveRecord($arrParams = $model, $modelType = 'update');
+					break;	
+				}
+			}
+			else 
+			{
+				$save = $this->policy_health_variants_model->saveRecord($arrParams = $model, $modelType = 'create');
+			}
+			
+		}
+		return $save;
+	}
+	
+	
 	
 	
 	/* 

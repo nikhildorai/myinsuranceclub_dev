@@ -133,6 +133,106 @@
 		<fieldset>
 			<legend>Variant Details</legend>
 			
+		<?php 
+		$showBtn = true;
+		$i = 1;
+		$count = count($variantModel);
+		?>
+		<input type="hidden" id="tablerowcount" value="<?php echo $count;?>" />
+			<div style="display: inline-block;width: 100%">
+				<table class="dynatable tablesorter" style="border: 1px solid #aaa;">
+                	<thead>
+			            <tr style="background:none">
+			            
+			            	<td class="button-column" style="border-bottom:0; text-align: left;" colspan="3">
+			            		<a href="javascript:void(0);" class="add">Add More</a>
+			            	</td>
+			            
+			            </tr>
+                		<tr>
+		                    <th>#</th>
+		                    <th>Variant Names</th>
+		                    <th>Comments</th>
+		                    <th>Remove</th>
+						</tr>
+                	</thead> 
+                	<tbody>
+                	
+					<?php 
+						$i = 1;	
+						if (!empty($variantModel))
+						{
+							foreach ($variantModel as $k1=>$v1)
+							{	
+								if (!empty($v1))
+								{				
+									if ($i == 1)
+									{	?>
+										<tr id="tr<?php echo $i;?>" class="prototype"> 
+					                    	<td>
+					                    		<span id="spanId" class="incVal id add increment" ><?php echo $i;?><font color="red">*</font></span>
+					                    		<input type="hidden" name="variantModel[variant_id][]" value="<?php echo $v1['variant_id'];?>">
+					                    	</td>
+					<?php 			}	
+				                    else
+					                {	?>
+					                    <tr id="tr<?php echo $i;?>" class="<?php echo $i;?> item">
+					                    	<td>
+					                    		<span id="spanId" class="incVal" ><?php echo $i;?></span>
+					                    		<input type="hidden" name="variantModel[variant_id][]" value="<?php echo $v1['variant_id'];?>">
+					                    	</td>
+				     <?php          }		 ?>
+				     
+					                    	<td>
+					                    		<input type="text" name="variantModel[variant_name][]"  value="<?php echo $v1['variant_name'];?>">
+					                    	</td>
+					                    	<td>
+					                    		<input type="text" name="variantModel[comments][]" value="<?php echo $v1['comments'];?>">
+					                    	</td>
+			                     <?php 	
+									if ($i != 1)
+									{
+											echo '<td class="button-column"><a href="javascript:void(0);" class="remove">Remove</a></td>';
+									}	?>
+								</tr>
+				<?php 					
+									$i++;
+								}
+							}
+						}
+						else
+						{
+							if ($i == 1)
+							{	?>
+								<tr id="tr<?php echo $i;?>'" class="prototype"> 
+			                    	<td>
+			                    		<span id="spanId" class="incVal id add increment" ><?php echo $i;?><font color="red">*</font></span>
+			                    		<input type="hidden" name="variantModel[variant_id][]">
+			                    	</td>
+			          		     	<td>
+			                    		<input type="text" name="variantModel[variant_name][]" value="" >
+			                    	</td>
+			<?php 			}
+		                    else
+		                    {	?>
+		                    	<tr id="tr<?php echo $i;?>" class="<?php echo $i;?> item">
+			                    	<td>
+			                    		<span id="spanId" class="incVal" ><?php echo $i;?></span>
+			                    		<input type="hidden" name="variantModel[variant_id][]">
+			                    	</td>
+			          		     	<td>
+			                    		<input type="text" name="variantModel[variant_name][]" >
+			                    	</td>
+		        <?php       }	?>
+			                    	<td>
+			                    		<input type="text" name="variantModel[comments][]">
+			                    	</td>
+		                		</tr>
+		        <?php 	}	?>
+					</tbody>
+				</table>
+			</div>
+				
 		</fieldset>
 		
 		<fieldset>
