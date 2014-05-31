@@ -234,11 +234,11 @@
    <div class="form-group col-md-3" style="padding-left:5px;">
                     <label class="sr-only" for="signup-first-name">Full Name</label>
                     <input type="text" class="form-control" id="cust_name" name="cust_name" value="<?php echo set_value('cust_name');?>" placeholder="Full name">
-                    <input type="hidden" id="cust_gender" name="cust_gender" value="">
+                    <input type="hidden" id="cust_gender" name="cust_gender" value="male">
                     <input type="hidden" id="policy_term" name="policy_term" value="">
-                     <input type="hidden" id="cust_city" name="cust_city" value="">
-                     <input type="hidden" id="coverage_amount" name="coverage_amount" value="">
-                     <input type="hidden" id="plan_type" name="plan_type" value="">
+                     <input type="hidden" id="cust_city" name="cust_city" value="599">
+                     <input type="hidden" id="coverage_amount" name="coverage_amount" value="3 Lakhs">
+                     <input type="hidden" id="plan_type" name="plan_type" value="1A">
                      <input type="hidden" id="product_name" name="product_name" value="Health Insurance">
                      <input type="hidden" id="product_type" name="product_type" value="Mediclaim">
 
