@@ -121,6 +121,26 @@ class Util {
 		else 
 			return $optionsExtra;
 	}
+	
+
+	public function getSlug($title) {
+	   	$title = strip_tags($title);
+	   	
+	    $search_arr 	= array('%', ',', '?', '.', '!',
+	    						'"', '\'', '/', '\\', '#',
+	    						'©', 'Ã', '¨', 'â', 'ƒ', 'â'
+	    						,'+','^','$','%','&','(',')','=',
+	    						' ', ';','//', '`', '*', '');
+	    $replace_arr 	= '-';
+	    $title = str_replace($search_arr, $replace_arr, $title);
+	    $title = preg_replace('/\s+/', '-', $title);
+	    $title = preg_replace('/&.+?;/', '', $title); // kill entities
+	    
+	    $title = preg_replace('|-+|', '-', $title);
+	    $title = trim($title, '-');
+	    $title = strtolower($title);
+	    return $title;
+    }
 }
 
 // END Util class

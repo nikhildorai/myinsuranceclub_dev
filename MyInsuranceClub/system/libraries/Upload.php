@@ -399,6 +399,11 @@ class CI_Upload {
 		{
 			return $filename;
 		}
+		else 
+		{
+			@unlink($path.$filename);
+			return $filename;
+		}
 
 		$filename = str_replace($this->file_ext, '', $filename);
 
