@@ -1,7 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-class Policy extends CI_Controller {
- 
+class Variants extends CI_Controller {
     function __construct() 
     {
         parent::__construct();
@@ -92,7 +90,7 @@ class Policy extends CI_Controller {
 	}
 
     public function create($policy_id = null)
-	{	
+	{
 		$modelType = 'create';
 		//	check if policy id exists
 		$policyModel = $variantModel = array();
@@ -535,16 +533,16 @@ class Policy extends CI_Controller {
 		}
 	}
 
-	function changeStatus($policy_id = null, $status = 'inactive')
+	function changeStatus($variant_id = null, $status = 'inactive')
 	{
-		if (!empty($policy_id))
+		if (!empty($variant_id))
 		{
 			//	check if policy id exists
 			$where = array();
-			$where[0]['field'] = 'policy_id';
-			$where[0]['value'] = (int)$policy_id;
+			$where[0]['field'] = 'variant_id';
+			$where[0]['value'] = (int)$variant_id;
 			$where[0]['compare'] = 'equal';
-			$exist = $this->util->getTableData($modelName='Policy_health_master_model', $type="single", $where, $fields = array());
+			$exist = $this->util->getTableData($modelName='Policy_health_variants_model', $type="single", $where, $fields = array());
 			if (empty($exist))
 			{
 				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
@@ -554,8 +552,8 @@ class Policy extends CI_Controller {
 				$companyModel = $exist;	
 				$modelType = 'update';
 				$arrParams['status'] = $status;
-				$arrParams['policy_id'] = $policy_id;
-				if ($this->policy_health_master_model->saveRecord($arrParams, $modelType))
+				$arrParams['variant_id'] = $variant_id;				
+				if ($this->policy_health_variants_model->saveRecord($arrParams, $modelType))
 					$this->session->set_flashdata('message', '<p class="status_msg">Record updated successfully.</p>');
 				else 
 					$this->session->set_flashdata('message', '<p class="error_msg">Record could not be updated.</p>');
@@ -563,10 +561,8 @@ class Policy extends CI_Controller {
 		}
 		else
 			$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
-			
 		redirect('admin/policy/index');
 	}
 }
-
 /* End of file auth_lite.php */
 /* Location: ./application/controllers/auth_lite.php */

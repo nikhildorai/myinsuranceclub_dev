@@ -85,7 +85,7 @@
 								if ($row['status'] == 'active')
 								{
 									$actionBtn = '<a href="'.$base_url.'admin/policy/create/'.$row['policy_id'].'">Update</a>';
-									$actionBtn .= ' | <a href="javascript:void(0);" class="showVariants" data-clicktype="show">Show Variants</a>';
+									$actionBtn .= ' | <a href="javascript:void(0);" class="showVariants" >Show Variants</a>';
 									$actionBtn .= ' | <a href="'.$base_url.'admin/policy/changeStatus/'.$row['policy_id'].'/inactive">Inactive</a>';
 								}
 								else if ($row['status'] == 'inactive')
@@ -131,13 +131,13 @@
 														echo '<td>'.ucfirst($v1['status']).'</td>';
 														if (in_array($v1['status'], array('inactive', 'deleted')))
 														{
-															$action = '<a href="'.$base_url.'admin/variants/changeStatus/'.$v1['variant_id'].'/active">Activate</a>';
+															$action = '<a href="'.$base_url.'admin/variant/changeStatus/'.$v1['variant_id'].'/active">Activate</a>';
 														}
 														else 
 														{
-															$action = '<a href="'.$base_url.'admin/variants/create/'.$v1['variant_id'].'">Update</a>';
-															$action .= ' | <a href="'.$base_url.'admin/variants/changeStatus/'.$v1['variant_id'].'/inactive">Inactive</a>';
-															$action .= ' | <a href="'.$base_url.'admin/variants/changeStatus/'.$v1['variant_id'].'/deleted">Delete</a>';
+															$action = '<a href="'.$base_url.'admin/variant/create/'.$v1['variant_id'].'">Update</a>';
+															$action .= ' | <a href="'.$base_url.'admin/variant/changeStatus/'.$v1['variant_id'].'/inactive">Inactive</a>';
+															$action .= ' | <a href="'.$base_url.'admin/variant/changeStatus/'.$v1['variant_id'].'/deleted">Delete</a>';
 														}
 														echo '<td>'.$action.'</td>';
 													echo '</tr>';
@@ -253,33 +253,10 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-
-	var currentOpen = '';
-	
 	$('.showVariants').click(function(){
-		var clickType= $(this).data('clicktype');
-		if(clickType=="show")
-		{
-			$(this).data('clicktype','hide').text('Hide Variants');
-			$('.even').hide();
-			$(this).parent().parent().next().slideDown(1000);
-			var currentId = $(this).parent().parent().attr('id'); 
-			if(currentOpen != '' && currentOpen != 'undefined')
-			{
-				$('#'+currentOpen).find('.showVariants').data('clicktype', 'show').text('Show Variants');
-			}
-			currentOpen = currentId;
-		}
-		else if(clickType=="hide")
-		{
-			$(this).data('clicktype','show').text('Show Variants');
-			$(this).parent().parent().next().hide();
-			currentOpen = '';
-		}
-		else
-		{
-			$('.even').hide();
-		}
+		$('.even').hide();
+		$(this).parent().parent().next().slideToggle(1000);
+		//console.log(id);
 	});
 	
 });

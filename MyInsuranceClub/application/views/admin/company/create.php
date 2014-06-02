@@ -84,7 +84,7 @@ $(document).ready(function(){
 							</li>
 							
 							<li class="info_req1">
-								<label for="search">Logo Image 1:</label>
+								<label for="search">Logo for Company Page:</label>
 								<input type="file" id="logo1" name="companyModel[logo_image_1]" /><span>Image size: 400px X 250px</span> <br />
 								<?php 
 								$folderUrl = $this->config->config['folder_path']['company'];
@@ -98,7 +98,7 @@ $(document).ready(function(){
 							</li>
 
 							<li class="info_req1">
-								<label for="search">Logo Image 2:</label>
+								<label for="search">Logo for Search Results:</label>
 								<input type="file" id="logo2" name="companyModel[logo_image_2]" /><span>Image size: 400px X 250px</span> <br />
 								<?php 
 								if (isset($companyModel['logo_image_1']) && !empty($companyModel['logo_image_2']))
