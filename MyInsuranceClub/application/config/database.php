@@ -55,26 +55,17 @@ $db['default']['password'] = 'root';
 $db['default']['database'] = 'mic_testdb';
 */
 
-// internal server
-$db['default']['hostname'] = '192.168.2.106';
-$db['default']['username'] = 'krishna';
-$db['default']['password'] = 'krishna';
-$db['default']['database'] = 'mic_testdb';
-
-/*
-//server
-//$db['default']['hostname'] = '192.168.2.201';
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'root';
+//	internal server
+$db['default']['hostname'] = '192.168.2.201';
+$db['default']['username'] = 'developer';
+$db['default']['password'] = 'developer';
 $db['default']['database'] = 'myinsuranceclubDB';
-//$db['default']['database'] = 'mic_testdb';
-*/
+
 
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
-$db['default']['db_debug'] = FALSE;
+$db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;
 $db['default']['cachedir'] = '';
 $db['default']['char_set'] = 'utf8';

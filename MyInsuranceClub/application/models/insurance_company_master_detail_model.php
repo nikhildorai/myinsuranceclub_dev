@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Insurance_company_master_model EXTENDS CI_Model{
+class Insurance_company_master_detail_model EXTENDS CI_Model{
 
 	function __construct()
 	{
@@ -12,7 +12,7 @@ class Insurance_company_master_model EXTENDS CI_Model{
 	
 	public function get_all_insurance_company($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM insurance_company_master WHERE status != "deleted" AND company_shortname != "mic" ';
+		$sql = 'SELECT * FROM insurance_company_master_detail WHERE status != "deleted" AND company_shortname != "mic" ';
 		if (!empty($arrParams))
 		{
 			if (array_key_exists('company', $arrParams) && !empty($arrParams['company']))
@@ -25,60 +25,15 @@ class Insurance_company_master_model EXTENDS CI_Model{
 		return $result;
 	}
 	
-	function saveCompanyRecord($arrParams = array(), $modelType = 'update')
+	function saveCompanyRecord($arrParams = array(), $dmodelType = 'update')
 	{
-		/*
-		if (!empty($arrParams))
-		{
-			$colNames = $colValues = array();
-			if ($modelType == 'create')
-			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, array('company_id')))
-					{
-						$colNames[] = trim($k1);
-						if (is_numeric($v1))
-							$colValues[] = trim($v1);
-						else
-							$colValues[] = '"'.trim($v1).'"';
-					}
-				}
-				$colNames = implode(', ', $colNames);
-				$colValues = implode(', ', $colValues);
-				$sql = 'INSERT INTO insurance_company_master ('.$colNames.') VALUES('.$colValues.')';
-			}
-			else
-			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, array('company_id')))
-					{
-						if (is_numeric($v1))
-							$colValues[] = trim($k1).'='.trim($v1);
-						else
-							$colValues[] = trim($k1).'='.'"'.trim($v1).'"';
-					}
-				}
-				$colValues = implode(', ', $colValues);
-				$sql = 'UPDATE insurance_company_master SET '.$colValues.' WHERE company_id = '.$arrParams['company_id'];	
-			}		
-			if ($this->db->query($sql))
-				return $this->db->insert_id();
-			else 
-				return $this->db->insert_id();
-		}
-		else
-			return FALSE;
-			*/
-		
 		$saveRecord = false;
 		if (!empty($arrParams))
 		{
 			$colNames = $colValues = $values = array();
 			foreach ($arrParams as $k1=>$v1)
 			{
-				if (!in_array($k1, array('company_id')))
+				if (!in_array($k1, array('company_detail_id')))
 				{
 					if (is_numeric($v1))
 						$values[$k1] = (int)trim($v1);
@@ -86,24 +41,24 @@ class Insurance_company_master_model EXTENDS CI_Model{
 						$values[$k1] = trim($v1);
 				}
 			}
-			if ($modelType == 'create')
+			if ($dmodelType == 'create')
 			{
-				if ($this->db->insert('insurance_company_master', $values))
+				if ($this->db->insert('insurance_company_master_detail', $values))
 					$saveRecord = true;
 			}
 			else
 			{
-				$where = array('company_id'=> $arrParams['company_id']);
-				if ($this->db->update('insurance_company_master', $values, $where))
+				$where = array('company_detail_id'=> $arrParams['company_detail_id']);
+				if ($this->db->update('insurance_company_master_detail', $values, $where))
 					$saveRecord = true;
 			}
 		}
 		if ($saveRecord == true)
 		{
-			if ($modelType == 'create')
+			if ($dmodelType == 'create')
 				return $this->db->insert_id();
 			else 
-				return $arrParams['company_id'];
+				return $arrParams['company_detail_id'];
 		}
 		else
 			return false;				
@@ -111,7 +66,7 @@ class Insurance_company_master_model EXTENDS CI_Model{
 	
 	public function getInsuranceCompany($arrParams)
 	{	
-		$sql = 'SELECT * FROM insurance_company_master WHERE status != "deleted"';
+		$sql = 'SELECT * FROM insurance_company_master_detail WHERE status != "deleted"';
 		if (!empty($arrParams))
 		{
 			if (isset($arrParams['company_name']) && !empty($arrParams['company_name']))
@@ -132,19 +87,19 @@ class Insurance_company_master_model EXTENDS CI_Model{
 	
 	public function getByWhere($condition)
 	{
-		$sql = 'SELECT * FROM insurance_company_master WHERE '.$condition;		
+		$sql = 'SELECT * FROM insurance_company_master_detail WHERE '.$condition;		
 		return $this->db->query($sql);
 	}
 	
 	public function getAll()
 	{
-		$sql = 'SELECT * FROM insurance_company_master';
+		$sql = 'SELECT * FROM insurance_company_master_detail';
 		return $this->db->query($sql);
 	}
 	
 	public function getTableName()
 	{
-		return 'insurance_company_master';
+		return 'insurance_company_master_detail';
 	}
 	
 	public function excuteQuery($sql)

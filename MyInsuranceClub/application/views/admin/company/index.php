@@ -94,13 +94,13 @@
 										$rows[] = ucfirst($row['status']);
 										if ($row['status'] == 'active')
 										{
-											$actionBtn = '<a href="'.$base_url.'admin/company/create/'.$row['company_id'].'">Update</a>';
-											$actionBtn .= ' | <a href="'.$base_url.'admin/company/changeStatus/'.$row['company_id'].'/inactive">De-activate</a>';	
-											$actionBtn .= ' <br><a href="'.$base_url.'admin/policy/index?company_id='.$row['company_id'].'">View Policies</a>';
+											$actionBtn = '<a href="'.$base_url.'admin/company/create/'.$row['company_id'].'" style="line-height: 2;" >Update</a>';
+											$actionBtn .= ' | <a href="'.$base_url.'admin/company/changeStatus/'.$row['company_id'].'/inactive" style="line-height: 2;">De-activate</a>';	
+											$actionBtn .= ' <br><a href="'.$base_url.'admin/policy/index?company_id='.$row['company_id'].'" style="line-height: 2;">View Policies</a>';
 										}
 										else if ($row['status'] == 'inactive')
 										{
-											$actionBtn = '<a href="'.$base_url.'admin/company/changeStatus/'.$row['company_id'].'/active">Activate</a>';
+											$actionBtn = '<a href="'.$base_url.'admin/company/changeStatus/'.$row['company_id'].'/active" style="line-height: 2;">Activate</a>';
 										}
 										$rows[] = $actionBtn; 
 										?>

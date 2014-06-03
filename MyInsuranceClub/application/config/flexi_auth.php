@@ -257,7 +257,7 @@
 	 * 
 	 * Note: Ensure you consistently use the same data type in all defined flexi auth tables for date and time data.
 	*/ 
-	$config['database']['settings']['date_time'] = date('Y-m-d H:i:s'); 
+	$config['database']['settings']['date_time'] = date('Y-m-d H:i:s');//date_default_timezone_set('Asia/Calcutta');//date('Y-m-d H:i:s'); 
 	
 	
 	###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++###	

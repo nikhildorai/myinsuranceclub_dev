@@ -4,7 +4,7 @@ article, aside, figure, footer, header, hgroup, nav, section {display:block;}
 /* END RESET CSS -------------------------------------------------------------------------------- */
 
 /* Global Styles -------------------------------------------------------------------------------- */
-body {font:14px sans-serif; *font-size:small; *font:x-small; color:#333; line-height:1.3;}
+body {font:12px sans-serif; *font-size:small; *font:x-small; color:#333; line-height:1.3;}
 html {overflow-y:scroll; -webkit-font-smoothing:antialiased;}
 
 .ie7 img {-ms-interpolation-mode:bicubic;} /* IE7 Bicubic Resizing for Non-Native Sized img */
@@ -143,7 +143,7 @@ input[type=checkbox] {vertical-align:-2px; margin-right:5px;}
 select optgroup {color:#777;}
 select optgroup option{color:#333;}
 input[type=text], input[type=password],textarea, select{width: 270px;}
-input[type=text], input[type=password], input[type=button], input[type=submit], textarea, select, button {padding:3px; margin-bottom:5px; border:1px solid #AAA;}
+input[type=text], input[type=password], input[type=button], input[type=submit], textarea, select, button {padding:3px; margin-bottom:5px; margin-top: 5px; border:1px solid #AAA;}
 textarea {overflow-y:auto; resize:vertical;}
 
 input, textarea, select, button {
@@ -171,7 +171,7 @@ input:focus, textarea:focus, select:focus, button:focus {
     -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
 input:disabled, textarea:disabled, select:disabled  {font-style:italic; color:#999; background-color:#ddd;}
-
+select {width: 278px;}
 label {display:inline-block; width:200px;}
 input.width_50, select.width_50, textarea.width_50 {width:50px;}
 input.width_75, select.width_75, textarea.width_75 {width:75px;}
