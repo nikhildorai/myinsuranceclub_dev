@@ -56,11 +56,20 @@ $db['default']['database'] = 'mic_testdb';
 */
 
 // internal server
-$db['default']['hostname'] = '192.168.2.103';
+$db['default']['hostname'] = '192.168.2.106';
 $db['default']['username'] = 'krishna';
 $db['default']['password'] = 'krishna';
 $db['default']['database'] = 'mic_testdb';
 
+/*
+//server
+//$db['default']['hostname'] = '192.168.2.201';
+$db['default']['hostname'] = 'localhost';
+$db['default']['username'] = 'root';
+$db['default']['password'] = 'root';
+$db['default']['database'] = 'myinsuranceclubDB';
+//$db['default']['database'] = 'mic_testdb';
+*/
 
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';

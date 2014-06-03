@@ -123,12 +123,16 @@ class Company extends CI_Controller {
 			//	check if file is uploaded
 			if (!empty($_FILES))
 			{
+				$i = 1;
 				foreach($_FILES['companyModel']['name'] as $k1=>$v1)
 				{
 					$ext = end(explode('.', $v1));
 					if (empty($ext))
 						$ext = 'jpg';
-					$name = date('YmdHis').'_'.uniqid().'.'.$ext;
+					$name = $this->util->getSlug($_POST['companyModel']['company_display_name']);
+					if ($i == 2)
+						$name .= '-small';
+					$name .= '.'.$ext;
 					$arrFileNames[$k1] = $name;
 					if (empty($v1))
 					{
@@ -136,6 +140,7 @@ class Company extends CI_Controller {
 					}
 					else
 						$_POST['companyModel'][$k1] = $name;
+					$i++;
 				}
 			}
 			else 
@@ -143,7 +148,8 @@ class Company extends CI_Controller {
 				//	set previous file name in post
 				$_POST['companyModel']['image_logo_1'] = $companyModel['image_logo_1'];
 				$_POST['companyModel']['image_logo_2'] = $companyModel['image_logo_2'];
-			}				
+			}
+//var_dump($arrFileNames);die;			
 			//	set default values
 			$_POST['companyModel']['company_display_name'] = (isset($_POST['companyModel']['company_display_name']) && !empty($_POST['companyModel']['company_display_name'])) ? $_POST['companyModel']['company_display_name'] :  $_POST['companyModel']['company_name'];
 			$arrParams = $this->input->post('companyModel');

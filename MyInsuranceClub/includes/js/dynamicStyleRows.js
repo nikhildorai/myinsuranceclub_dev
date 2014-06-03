@@ -13,13 +13,9 @@
           prot.attr("class", id + " item").attr('id', 'tr'+id);
           prot.find(".id").text(id);
           prot.find('input[type=text]').attr({value:""});
-          prot.find('.eventDate').attr({id:"eventDate_"+id}).val("");
-          prot.find('.eventFrom').attr({id:"eventFrom_"+id}).val("").css('display','none');
-        //  prot.find('.eventFrom').attr({id:"eventFrom_"+id}).val("").addClass('datetime24');
-          prot.find('.combodate').remove();
+          prot.find('input[type=hidden]').attr({value:""});
           master.find("tbody").append(prot);
           prot.append('<td class="button-column"><a href="javascript:void(0)" class="remove">Remove</a></td>');
-          delegateDatepicker();
           
       });
       
@@ -35,32 +31,5 @@ function recalcId(){
 $.each($("table tr.item"),function (i,el){
   $(this).find("td:first span").text(i + 2); // Simply couse the first "prototype" is not counted in the list
 })
-}
-
-
-function delegateDatepicker(){
-
-
-	$('.datetime24').combodate({
-		firstItem: 'name',
-		minuteStep: 1,
-	}); 
-	
-    var minEDate = $('#GurudwaraEvents_date_from').val();
-    var maxEDate = $('#GurudwaraEvents_date_to').val();
-	jQuery('.datepicker').removeClass('hasDatepicker').datepicker({
-	    dateFormat: 'dd-mm-yy',
-	    minDate: minEDate,
-	    maxDate: maxEDate,
-	    });
-	
-	$('.datepicker').live('click', function(){
-		 $('.datepicker').datepicker({
-			    dateFormat: 'dd-mm-yy',
-			    minDate: minEDate,
-			    maxDate: maxEDate,
-		 });
-		 
-		});
 }
 
