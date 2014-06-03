@@ -92,7 +92,7 @@
             <ul class="nav navbar-nav" id="menu">
               <li><a href="#" class=" menu-item" >Car Insurance </a></li>
               <li><a href="#" class=" menu-item" >Two Wheeler Insurance </a></li>
-              <li><a href="#" class=" menu-item" >Health Insurance </a></li>
+              <li><a href="<?php echo base_url();?>/Welcome/health_insurance_form" class=" menu-item" >Health Insurance </a></li>
               <li><a href="#" class="dropdown-toggle menu-item" id="features-drop" data-toggle="dropdown" data-hover="dropdown">Life Insurance</a> 
                 <!-- Dropdown Menu - Mega Menu -->
                 <ul class="dropdown-menu mega-menu" role="menu" aria-labelledby="features-drop">
@@ -154,7 +154,7 @@
                		$max_annual_premium='0';
                	}
                	?>
-                <h6 class="fh3" style="border:none;">We’ve got <span class="highlight"><?php echo count($customer_details);?></span> plan that meets your search - <span class="highlight">Rs. <?php echo $min_annual_premium; ?></span> to <span class="highlight">Rs. <?php echo $max_annual_premium; ?></span> </h6>
+                <h6 class="fh3" style="border:none;">We’ve got <span class="highlight"><?php echo count($customer_details);?></span> plan that meets your search - <span class="highlight">Rs. <?php echo number_format($min_annual_premium); ?></span> to <span class="highlight">Rs. <?php echo number_format($max_annual_premium); ?></span> </h6>
               
               
               
@@ -188,9 +188,17 @@
                  
                  <?php 		$room_rent=round(0.01*$detail['sum_assured']);	
 							$icu_rent=round(0.02*$detail['sum_assured']);
+							$variant='';
+							if($detail['variant_name']!='Base')
+							{
+								$variant=' '.$detail['variant_name'];
+							}
+							else{
+								$variant='';
+							}
 					?>
-						<input type="checkbox" name="refundable" id="1_1_refundable" class="refundable"/>
-						<span class="title_c"><?php echo $detail['company_shortname'];?></span><span class="sub_tit">(<?php echo $detail['policy_name'];?>)</span>
+						<input type="checkbox" name="refundable" id="1_1_refundable" class="refundable" value=""/>
+						<span class="title_c"><?php echo $detail['company_shortname'];?></span><span class="sub_tit">(<?php echo $detail['policy_name'].$variant;?>)</span>
 					</label>
                 </div>
                 
@@ -198,7 +206,7 @@
                  <div class="col-md-7">
                 
                 <div class="col-md-6 no_pad_l">
-                 <h3 class="anc">Rs. <?php echo $detail['annual_premium'];?></h3>
+                 <h3 class="anc">Rs. <?php echo number_format($detail['annual_premium']);?>.00</h3>
                  <p class="anc_f">for cover of Rs. <?php echo $detail['sum_assured'];?></p>
                  </div>
                  
@@ -326,8 +334,9 @@ Rs.<?php echo $room_rent;?>/day</li>
                 </div>
                 
                 </div>
+                
                  </div>
-                <?php }?>
+                 <?php }?>
                </div> 
                 
                 
@@ -675,8 +684,8 @@ age of 80 years</td></tr>
 							
 			
 			<p class="displayStaticRange clearFix" style="padding-bottom:0px; margin-bottom:0px;">
-				<span class="fLeft"><span data-pr="6437" class="INR">&#8377;</span>6,437</span>
-				<span class="fRight"><span data-pr="42306" class="INR">&#8377;</span>42,306</span>
+				<span class="fLeft"><span data-pr="6437" class="INR">&#8377;</span><?php echo number_format($min_annual_premium); ?></span>
+				<span class="fRight"><span data-pr="42306" class="INR">&#8377;</span><?php echo number_format($max_annual_premium); ?></span>
 			</p>
 	
 			<input type="hidden" name="price" value="6437-32293">
@@ -1063,11 +1072,11 @@ age of 80 years</td></tr>
         		// just some values for the sliders
         		$scope.demo2 = {
 					range: {
-						min: 0,
-						max: 10050
+						min:<?php echo $min_annual_premium;?>,
+						max: <?php echo $max_annual_premium;?>
 					},
-					minPrice: 1000,
-					maxPrice: 4000
+					minPrice: <?php echo $min_annual_premium;?>,
+					maxPrice: <?php echo $max_annual_premium;?>
 				};
 
         	}

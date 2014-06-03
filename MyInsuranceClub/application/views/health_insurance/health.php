@@ -92,7 +92,7 @@
             <ul class="nav navbar-nav" id="menu">
               <li><a href="#" class=" menu-item" >Car Insurance </a></li>
               <li><a href="#" class=" menu-item" >Two Wheeler Insurance </a></li>
-              <li><a href="#" class=" menu-item" >Health Insurance </a></li>
+              <li><a href="<?php echo current_url(); ?>" class=" menu-item" >Health Insurance </a></li>
               <li><a href="#" class="dropdown-toggle menu-item" id="features-drop" data-toggle="dropdown" data-hover="dropdown">Life Insurance</a> 
                 <!-- Dropdown Menu - Mega Menu -->
                 <ul class="dropdown-menu mega-menu" role="menu" aria-labelledby="features-drop">
