@@ -54,7 +54,7 @@ class Policy_health_master_model EXTENDS CI_Model{
 				if ($this->db->update('policy_health_master', $values, $where))
 					$saveRecord = true;
 			}
-		}	
+		}
 		if ($saveRecord == true)
 		{
 			if ($modelType == 'create')

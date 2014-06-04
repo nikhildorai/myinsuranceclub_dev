@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Company extends CI_Controller {
+class CompanyClaimRatio extends CI_Controller {
  
     function __construct() 
     {
@@ -48,9 +48,7 @@ class Company extends CI_Controller {
  		$this->load->helper('url');
  		$this->load->helper('form');
 		$this->load->library('form_validation');
-        $this->load->helper('ckeditor');
-		$this->load->model('insurance_company_master_model');
-		$this->load->model('insurance_company_master_detail_model');
+		$this->load->model('company_claim_ratio_model');
  		
 		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
 		$this->load->vars('base_url', base_url());
@@ -69,28 +67,152 @@ class Company extends CI_Controller {
 		
 	}
 
-    public function index()
+    public function index($company_id)
 	{
-		$this->load->library('table');
-		$this->load->library('pagination');
-		$this->load->model('insurance_company_master_model');
-		$arrParams 	= array();
-		if (array_key_exists('search', $_GET) && $_GET['search']== "Search")
-			$arrParams = $_GET;
-		$this->data['search_query'] = $arrParams;
-		// Set any returned status/error messages..		
-		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
-		$this->session->set_flashdata('message','');
-		
-		$this->data['records'] 	= $this->insurance_company_master_model->get_all_insurance_company($arrParams);
-		//	pagination
-		$config = $this->util->get_pagination_params();
-		$config['total_rows'] 	= $this->data['records']->num_rows();
-		$this->pagination->initialize($config); 		
-		$this->template->write_view('content', 'admin/company/index', $this->data, TRUE);
-		$this->template->render();
+		//	check if policy id exists
+		if ((isset($_GET['company_id']) && !empty($_GET['company_id'])) || !empty($company_id))
+		{
+			if (isset($_GET['policy_id']))
+				$policy_id = $_GET['policy_id'];
+			$where = array();
+			$where[0]['field'] = 'company_id';
+			$where[0]['value'] = (int)$company_id;
+			$where[0]['compare'] = 'equal';
+			$exist = $this->util->getTableData($modelName='company_claim_ratio_model', $type="all", $where, $fields = array());
+			if (empty($exist))
+			{
+				$modelType = 'create';
+				$ratioModel = array();
+			}
+			else 
+			{
+				foreach ($exist as $k4=>$v4)
+				{
+					$ratioModel[$v4['year_to']] = $v4;
+				}
+				$modelType = 'update';				
+			}
+			$this->data['message'] = '';
+			if (!empty($_POST))
+			{				
+				$claimRatioPost = $_POST;			
+				$saveClaim = $savedRecords = $errorClaim = array();
+				if (!empty($claimRatioPost))
+				{
+					$variantErrors = array();
+					$arrSkip = array('claim_ratio_id');
+					foreach ($claimRatioPost as $k1=>$v1)
+					{
+						if (!empty($v1['claim_ratio']) && $v1['claim_ratio'] <= 100)
+						{	
+							foreach ($v1 as $k2=>$v2)
+							{
+								$saveClaim[$k1][$k2] = $v2;
+							}
+							$saveClaim[$k1]['year_from'] = $k1-1;
+							$saveClaim[$k1]['year_to'] = $k1;
+							$saveClaim[$k1]['company_id'] = $company_id;
+						}
+						else if (!empty($v1['claim_ratio']))
+						{
+							$errorClaim[] = false;
+						}
+					}
+				}						
+				if (!empty($saveClaim))
+				{
+					foreach ($saveClaim as $k3=>$v3)
+					{
+						$savedRecords[] = $this->addUpdateClaimRatio($model = $v3, $company_id);
+					}
+				}
+				
+				if (!empty($savedRecords) && !empty($errorClaim))
+				{
+					$this->data['message'] = '<p class="status_msg">Records added successfully.</p>';
+					$this->data['message'] .= '<p class="error_msg">Records with claim ratio cannot be greater than 100 could not be saved.</p>';
+				}
+				else if (!empty($savedRecords) && empty($errorClaim))
+				{
+					$this->data['message'] = '<p class="status_msg">Records added successfully.</p>';
+				}
+				
+				else if (!empty($errorClaim))
+				{
+					//	show error if validation fails
+					$this->data['message'] = '<p class="error_msg">Claim ratio cannot be greater than 100.</p>';
+				}
+		  		else
+		  		{
+					//	show error if no record saved
+					$this->data['message'] = '<p class="error_msg">Minimum 1 record is required.</p>';
+		  		}
+		  		$ratioModel = $saveClaim;
+			}		
+			
+			$this->data['modelType'] = $modelType;
+			$this->data['ratioModel'] = $ratioModel;
+			$this->data['company_id'] = $company_id;
+			$this->template->write_view('content', 'admin/companyClaimRatio/index', $this->data, TRUE);
+			$this->template->render();
+		}
+		else 
+		{
+			$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
+			redirect('admin/company/index');
+		}
 	}
 
+	
+	public function addUpdateClaimRatio($model, $company_id)
+	{	
+		$save  = false;
+		if (!empty($model))
+		{	
+			//	check if record exists
+			$where = array();
+			$arrSkip = array('claim_ratio_id');
+			if (isset($model['claim_ratio_id']) && !empty($model['claim_ratio_id']))
+			{
+				$where[0]['field'] = 'claim_ratio_id';
+				$where[0]['value'] = $model['claim_ratio_id'];
+				$where[0]['compare'] = 'equal';
+			}
+			else 
+			{
+				$i = 0;
+				foreach ($model as $k1=>$v1)
+				{
+					if (!in_array($k1, $arrSkip))
+					{
+						$where[$i]['field'] = $k1;
+						$where[$i]['value'] = $v1;
+						$where[$i]['compare'] = 'equal';
+						$i++;
+					}
+				}
+			}
+			
+			$isExist = $this->util->getTableData($modelName='company_claim_ratio_model', $type="all", $where, $fields = array());			
+			if (!empty($isExist))
+			{
+				foreach ($isExist as $k1=>$v1)
+				{
+					$model['claim_ratio_id'] = (int)$v1['claim_ratio_id'];
+					$save = $this->company_claim_ratio_model->saveRecord($arrParams = $model, $modelType = 'update');
+					break;	
+				}
+			}
+			else 
+			{
+				$save = $this->company_claim_ratio_model->saveRecord($arrParams = $model, $modelType = 'create');
+			}
+			
+		}
+		return $save;
+	}
+	
+	
     public function create($company_id = null)
 	{
 		$modelType = 'create';
@@ -317,6 +439,76 @@ class Company extends CI_Controller {
 						// show error if record is not created
 						$this->data['message'] .= '<p class="error_msg">Record could not be created.</p>';
 					}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					/*
+					
+					//	save record and redirect to index
+					if ($this->insurance_company_master_model->saveCompanyRecord($arrParams, $modelType))
+					{
+						$this->data['file_upload_error'] = array();
+						if (!empty($_FILES))
+						{
+					        $config['upload_path'] = $this->config->config['folder_path']['company'];
+					        $config['file_name'] = $arrFileNames;
+					        $config['allowed_types'] = 'gif|jpg|png';
+					        $config['max_size'] = '200';
+					        $config['max_width']  = '400';
+					        $config['max_height']  = '250';
+							$this->load->library('upload', $config);
+							$this->upload->initialize($config); 	
+							if($this->upload->do_multi_upload("companyModel"))
+							{
+				              	$this->data['file_upload'] = $this->upload->get_multi_upload_data();
+							}
+							else 
+							{
+				                $this->data['file_upload_error'][] = $this->upload->display_errors();
+							}
+				             $this->data['file_upload'] = $this->upload->get_multi_upload_data();
+						}			
+												
+			            if (empty($this->data['file_upload_error']))
+			            {
+							$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
+							redirect('admin/company/index');
+			            }
+			            else if (!empty($this->data['file_upload_error']))
+			            {
+			            	foreach ($this->data['file_upload_error'] as $k1=>$v1)
+			            	{
+			            		$msg = str_replace('<p>', '', $v1);
+			            		$msg = str_replace('</p>', '', $msg);
+								$this->data['message'] .= '<p class="error_msg">'.$msg.'</p>';
+			            	}
+			            }
+			            else 
+			            {
+							$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
+							redirect('admin/company/index');
+			            }
+					}
+					else
+					{
+						// show error if record is not created
+						$this->data['message'] = '<p class="error_msg">Record could not be created.</p>';
+					}
+					*/
 				}
 				else 
 				{

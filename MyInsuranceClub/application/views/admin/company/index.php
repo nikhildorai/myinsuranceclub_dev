@@ -56,7 +56,7 @@
 								<th>Display Name</th>
 								<th>Type</th>
 								<th>Status</th>
-								<th style="width: 12%;">Action</th>
+								<th style="width: 13%;">Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -97,6 +97,7 @@
 											$actionBtn = '<a href="'.$base_url.'admin/company/create/'.$row['company_id'].'" style="line-height: 2;" >Update</a>';
 											$actionBtn .= ' | <a href="'.$base_url.'admin/company/changeStatus/'.$row['company_id'].'/inactive" style="line-height: 2;">De-activate</a>';	
 											$actionBtn .= ' <br><a href="'.$base_url.'admin/policy/index?company_id='.$row['company_id'].'" style="line-height: 2;">View Policies</a>';
+											$actionBtn .= '  | <a href="'.$base_url.'admin/companyClaimRatio/index/'.$row['company_id'].'" style="line-height: 2;">Claim Ratio</a>';
 										}
 										else if ($row['status'] == 'inactive')
 										{

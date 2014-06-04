@@ -92,7 +92,7 @@ class Policy extends CI_Controller {
 	}
 
     public function create($policy_id = null)
-	{	
+	{
 		$modelType = 'create';
 		//	check if policy id exists
 		$policyModel = $variantModel = array();
@@ -110,7 +110,7 @@ class Policy extends CI_Controller {
 			if (empty($exist))
 			{
 				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
-				redirect('admin/company/index');
+				redirect('admin/policy/index');
 			}
 			else 
 			{
