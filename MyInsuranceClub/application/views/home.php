@@ -116,7 +116,7 @@
             <ul class="nav navbar-nav" id="menu">
               <li><a href="#" class=" menu-item" >Car Insurance </a></li>
               <li><a href="#" class=" menu-item" >Two Wheeler Insurance </a></li>
-              <li><a href="<?php echo site_url();?>Welcome/health_insurance_form" class=" menu-item" >Health Insurance </a></li>
+              <li><a href="<?php echo base_url();?>Welcome/health_insurance_form" class=" menu-item" >Health Insurance </a></li>
               <li><a href="#" class="dropdown-toggle menu-item" id="features-drop" data-toggle="dropdown" data-hover="dropdown">Life Insurance</a> 
                 <!-- Dropdown Menu - Mega Menu -->
                 <ul class="dropdown-menu mega-menu" role="menu" aria-labelledby="features-drop">
@@ -172,7 +172,7 @@
           <h3 class="ser_h">Two Wheeler<br/>
             Insurance</h3>
         </li>
-        </a> <a href="<?php echo site_url();//javascript:void(0)?>Welcome/health_insurance_form">
+        </a> <a href="<?php echo base_url();//javascript:void(0)?>Welcome/health_insurance_form">
         <li class="service box animated flipInY visible" data-animation="flipInY" data-animation-delay="400"><strong class="service-logo"><img src="<?php echo base_url();?>assets/images/icons/health.png" border="0" class="img_cen2"></strong>
           <h3 class="ser_h">Health<br/>
             Insurance</h3>
