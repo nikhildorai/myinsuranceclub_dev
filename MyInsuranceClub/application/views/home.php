@@ -23,11 +23,11 @@
 <link href="<?php echo base_url();?>assets/css/theme-style.min.css" rel="stylesheet">
 
 <!-- custom override -->
-<link href="assets/css/custom-style.css" rel="stylesheet">
-<link href="assets/css/clingify.css" rel="stylesheet">
-<link href="assets/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="assets/css/slick.css"/>
-    <link rel="stylesheet" href="assets/css/slicknav.css">
+<link href="<?php echo base_url();?>assets/css/custom-style.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/clingify.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/slick.css"/>
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/slicknav.css">
 
 
 <!-- HTML5 shiv & respond.js for IE6-8 support of HTML5 elements & media queries -->
