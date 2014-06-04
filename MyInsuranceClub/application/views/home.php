@@ -60,8 +60,8 @@
         <div class="row">
           <div class="col-md-12"> 
             <!--branding/logo--> 
-            <a class="navbar-brand" href="index.htm" title="Home">
-            <h1><img src="assets/images/logo.gif" /> </h1>
+            <a class="navbar-brand" href="<?php echo site_url();?>" title="Home">
+            <h1><img src="<?php echo base_url();?>assets/images/logo.gif" /> </h1>
             </a>
             <div class="slogan col-md-8">India's 1st IRDA Approved Comparison Site</div>
           </div>
