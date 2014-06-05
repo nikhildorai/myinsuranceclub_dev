@@ -54,11 +54,7 @@ class mic_dbtest EXTENDS CI_Model{
 	
 	public function get_policy_results($user_input)
 	{	
-		/* $get_policy="SELECT i.company_shortname,p.policy_name,ap.annual_premium,ap.age,ap.sum_assured,ap.service_tax,ap.final_premium,f.cashless_treatment,f.preexisting_diseases,f.maternity,
-					ap.no_of_members,v.variant_name,f.autorecharge_SI,f.pre_hosp,f.post_hosp,f.day_care,f.check_up,f.ayurvedic,f.co_pay FROM insurance_company_master i,policy_health_master p, annual_premium_health ap,
-					 policy_health_features f,policy_health_variants v WHERE i.company_id=p.company_id AND p.policy_id=v.policy_id AND v.variant_id=f.variant_id
-					AND ap.term = 1"; */
-			$get_policy="SELECT i.company_shortname,p.policy_name,ap.annual_premium,ap.age,ap.sum_assured,ap.service_tax,ap.final_premium,f.cashless_treatment,
+		$get_policy="SELECT ap.variant_id,ap.ap_id,i.company_id,ap.age,i.company_shortname,p.policy_name,ap.annual_premium,ap.age,ap.sum_assured,ap.service_tax,ap.final_premium,f.cashless_treatment,
 					f.preexisting_diseases,f.maternity,ap.no_of_members,v.variant_name,f.autorecharge_SI,f.pre_hosp,f.post_hosp,f.day_care,f.check_up,f.ayurvedic,
 					f.co_pay 
 					         FROM 
@@ -137,7 +133,7 @@ class mic_dbtest EXTENDS CI_Model{
 			}
 			elseif($user_input['coverage_amount']=='4 Lakhs')
 			{
-				$get_policy.=" AND ap.sum_assured BETWEEN 400000 AND 500000";
+				$get_policy.=" AND ap.sum_assured BETWEEN 400000 AND 490000";
 			}
 			elseif($user_input['coverage_amount']=='5 Lakhs')
 			{
