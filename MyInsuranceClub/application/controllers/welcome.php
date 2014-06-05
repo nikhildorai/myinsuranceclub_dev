@@ -30,6 +30,7 @@ class Welcome extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->helper('url');
 		$this->load->library('form_validation');
+		$this->load->helper('html');
 		date_default_timezone_set('Asia/Kolkata');
 	}
 	public function index()
@@ -217,7 +218,7 @@ class Welcome extends CI_Controller {
 				}
 		/* 	} */
 		
-			
+		$this->session->set_userdata($user_input);
 		$this->mic_dbtest->customer_personal_search_details($user_input);
 		$data['customer_details']=$this->mic_dbtest->get_policy_results($user_input);
 		$data['send_email']= $this->mic_dbtest->get_policy_results($user_input); 
@@ -249,6 +250,49 @@ class Welcome extends CI_Controller {
 		/* Email config Ends */
 		
 		}	
+	}
+	public function compare_policies()
+	{
+		$data=array();
+		$this->load->model('compare_health_policies');
+		$variant=array();
+		$annual_premium=array();
+		$age=array();
+		if($this->input->post()!='')
+		{
+			
+			foreach($this->input->post('compare') as $k=>$v)
+			{
+				$compare=explode('-',$v);
+				//var_dump($compare);
+				$variant[]=$compare[0];
+				$annual_premium[]=$compare[1];
+				$age=$compare[2];
+			}
+			
+		}
+		$data['comparison_results']=$this->compare_health_policies->get_comparison($variant,$annual_premium,$age);
+		
+		foreach ($data['comparison_results'] as $k1=>$v1)
+		{
+			
+			foreach ($v1 as $k2=>$v2)
+			{
+				if ($k2 == 'company_shortname')
+				{
+					$key = 'Company';
+				}
+				
+				else 
+				{
+					$key = ucfirst(str_replace(array('_','-',' '), ' ', $k2));
+				}
+				
+				$result[$key][] = $v2;	
+			}
+		}
+		$data['result']=$result;
+		$this->load->view('health_insurance/health_comparison_results',$data);
 	}	
 }
 

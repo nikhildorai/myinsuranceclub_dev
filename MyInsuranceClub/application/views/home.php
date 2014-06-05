@@ -159,7 +159,7 @@
       <h2 class="normal fh1">Compare Premiums & Features in seconds</h2>
       <h3 class="mar-30 fh1">Start comparing. Start saving.</h3>
     </div>
-    <div class="col-md-3"> <img src="assets/images/lady.jpg" border="0"> </div>
+    <div class="col-md-3"> <img src="<?php echo base_url(); ?>assets/images/lady.jpg" border="0"> </div>
     <div class="col-md-12 pad-30">
       <ul class="icon">
         <a href="javascript:void(0)">

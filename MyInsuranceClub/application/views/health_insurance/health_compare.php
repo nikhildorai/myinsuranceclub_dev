@@ -137,6 +137,8 @@
               <div class="media row" style="border:none; padding-bottom:0px;" >
               <div class="col-md-11 media-body">
                	<?php 			
+               	$json=json_encode($customer_details);
+               	//print_r($json);
                	$min_annual_premium='';
                	$max_annual_premium='';
                	if(count($customer_details) > 0)
@@ -154,7 +156,8 @@
                		$max_annual_premium='0';
                	}
                	?>
-                <h6 class="fh3" style="border:none;">We’ve got <span class="highlight"><?php echo count($customer_details);?></span> plan that meets your search - <span class="highlight">Rs. <?php echo number_format($min_annual_premium); ?></span> to <span class="highlight">Rs. <?php echo number_format($max_annual_premium); ?></span> </h6>
+               	<?php echo form_open('welcome/compare_policies');?>
+                <h6 class="fh3" style="border:none;">We’ve got <span class="highlight"><?php echo count($customer_details);?></span> plan that meets your search - <span class="highlight">Rs. <?php echo number_format($min_annual_premium); ?></span> to <span class="highlight">Rs. <?php echo number_format($max_annual_premium); ?></span> <?php echo nbs(25);?><span><a href="javascript:void(0);" id="comparePolicy" >Compare Selected Policies</a></span></h6>
               
               
               
@@ -196,8 +199,10 @@
 							else{
 								$variant='';
 							}
-					?>
-						<input type="checkbox" name="refundable" id="1_1_refundable" class="refundable" value=""/>
+							$compare_data=$detail['variant_id'].'-'.$detail['annual_premium'].'-'.$detail['age'];
+					?>							
+						<input type="checkbox" name="compare[]" class="refundable" value="<?php echo $compare_data; ?>"/>
+						
 						<span class="title_c"><?php echo $detail['company_shortname'];?></span><span class="sub_tit">(<?php echo $detail['policy_name'].$variant;?>)</span>
 					</label>
                 </div>
@@ -336,7 +341,9 @@ Rs.<?php echo $room_rent;?>/day</li>
                 </div>
                 
                  </div>
+                 
                  <?php }?>
+                 <?php echo form_close();?>
                </div> 
                 
                 
@@ -699,10 +706,10 @@ age of 80 years</td></tr>
                 <h6 class="fh3">Sub limits</h6>
                 <p class="addOnFilter" >
                  
-					<label for="1_1_refundable">
+					<!--label for="1_1_refundable">
 						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable">
 						Show plans without room rent caps
-					</label>
+					</label> -->
                     <label for="1_1_refundable">
 						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable">
 						Show plans with room rent caps
@@ -719,10 +726,10 @@ age of 80 years</td></tr>
 						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable">
 						Show plans with maternity benefits
 					</label>
-                    <label for="1_1_refundable">
+                    <!--label for="1_1_refundable">
 						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable">
 						Show plans without maternity benefits
-					</label>
+					</label> -->
 				</p>
                 
                 
@@ -790,7 +797,7 @@ age of 80 years</td></tr>
 					</label>
                     <label for="1_1_refundable">
 						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable">
-						Not Online
+						Offline
 					</label>
                     
 				</p>
@@ -828,16 +835,16 @@ age of 80 years</td></tr>
                  
 					<label for="1_1_refundable" style="width:100%;">
 						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable">
-						Plans from Private Sector companies
+						Private Sector Companies
 					</label>
                     <label for="1_1_refundable">
 						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable">
-						Plans from Public Sector companies
+						Public Sector Companies
 					</label>
                     
                     <label for="1_1_refundable">
 						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable">
-						Plans from Health Insurance companies
+						Health Insurance Companies
 					</label>
                     
 				</p>
@@ -850,26 +857,11 @@ age of 80 years</td></tr>
                  <p class="addOnFilter" >
                  
                     <label for="1_1_refundable" style="width:100%;">
-                   
-						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable"> Relaince Life <span style="float:right;"> Rs. 12,340</span></label>
-<label for="1_1_refundable" style="width:100%;">
-						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable"> Max Life <span style="float:right;"> Rs. 13,340</span></label>
-<label for="1_1_refundable" style="width:100%;">
-						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable"> Aviva <span style="float:right;"> Rs. 13,340</span></label>
-<label for="1_1_refundable" style="width:100%;">
-						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable"> HDFC Life <span style="float:right;"> Rs. 13,340</span></label>
-<label for="1_1_refundable" style="width:100%;">
-						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable"> Max Life <span style="float:right;"> Rs. 13,340</span></label>
-<label for="1_1_refundable" style="width:100%;">
-						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable"> Canara HSBC OBC <span style="float:right;"> Rs. 13,340</span></label>
-<label for="1_1_refundable" style="width:100%;">
-						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable"> LIC <span style="float:right;"> Rs. 13,340</span></label>
-<label for="1_1_refundable" style="width:100%;">
-						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable"> Star Union Daiichi <span style="float:right;"> Rs. 13,340</span></label>
-                   
-                    
+                   	<?php foreach ($customer_details as $company){?>
+						<input type="checkbox" class="refundable" id="1_1_refundable" name="refundable" value="<?php echo $company['company_id']?>"> <?php echo $company['company_shortname']?> <span style="float:right;"><?php //echo $company['annual_premium'];?></span></label><?php }?>
+
 				</p>
-                
+                <br/>
                 </div>
                 
               </div>
@@ -1106,7 +1098,7 @@ $(document).ready(function(){
 			
 		//	$('.down_cnt').closest('.accordion_a').slideToggle();
 		//$('.accordion_a').slideToggle();
-$(this).parent().parent().parent().parent().find('.accordion_a').slideToggle();
+$(this).parent().parent().parent().find('.accordion_a').slideToggle();
 		
 	});	
 	
@@ -1114,6 +1106,10 @@ $(this).parent().parent().parent().parent().find('.accordion_a').slideToggle();
 
 (function($) {
 	$(document).ready(function() {
+
+		$('#comparePolicy').click(function(){
+			$('form').submit();
+		});
 		$('.accordion').accordion({
 			collapsible: true,
 			heightStyle : 'content'
