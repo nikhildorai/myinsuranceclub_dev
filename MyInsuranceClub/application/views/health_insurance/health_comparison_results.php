@@ -3,7 +3,6 @@
 <head>
 </head>
 <body>
-<a href="<?php echo site_url();?>/Welcome/health_policy">Back to Search Results</a>
 <table border='1'>
 <?php 
 	if (!empty($result))

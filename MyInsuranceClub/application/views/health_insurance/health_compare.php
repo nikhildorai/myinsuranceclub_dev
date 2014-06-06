@@ -666,7 +666,7 @@ age of 80 years</td></tr>
                 
                 
                 <div class="block">
-                 <h6 class="fh3 c"><a href="<?php echo site_url();?>/Welcome/health_insurance_form">&lt; Modify your search</a></h6>
+                 <h6 class="fh3 c"><a href="<?php echo site_url();?>welcome/health_insurance_form">&lt; Modify your search</a></h6>
                 </div>
                 
                 
@@ -1108,7 +1108,15 @@ $(this).parent().parent().parent().find('.accordion_a').slideToggle();
 	$(document).ready(function() {
 
 		$('#comparePolicy').click(function(){
-			$('form').submit();
+			if(!($('.refundable:checked').length>1))
+			{
+				alert('Please Select At Least 2 Plans To Compare.');
+				return false;
+			}
+			else
+			{
+				$('form').submit();
+			}
 		});
 		$('.accordion').accordion({
 			collapsible: true,
