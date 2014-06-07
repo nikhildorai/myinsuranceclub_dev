@@ -648,7 +648,7 @@
 	 * Directory where email templates are stored.
 	 * Default: 'includes/email/'
 	*/
-	$config['email']['email_template_directory'] = 'includes/email/';
+	$config['email']['email_template_directory'] = 'admin/includes/email/';
 	
 	/**
 	 * 'Activate Account' email template.

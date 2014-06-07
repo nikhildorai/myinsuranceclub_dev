@@ -1,4 +1,118 @@
+<div class="page-signin">
 
+    <div class="signin-header">
+        <div class="container text-center">
+            <section class="logo">
+				<a href="<?php echo base_url().'admin'?>" title="My Insurance Club">
+					<img src="<?php echo $includes_dir;?>images/logo.gif" alt="myinsuranceclub.com" />
+				</a>
+            </section>
+        </div>
+    </div>
+
+    <div class="signin-body">
+        <div class="container">
+            <div class="form-container"   data-ng-controller="signupCtrl">
+<!-- 
+                <section class="row signin-social text-center">
+                    <a href="javascript:;" class="btn-twitter-round"><i class="fa fa-twitter"></i></a>
+                    <div class="space"></div>
+                    <a href="javascript:;" class="btn-facebook-round"><i class="fa fa-facebook"></i></a>
+                    <div class="space"></div>
+                    <a href="javascript:;" class="btn-google-plus-round"><i class="fa fa-google-plus"></i></a>
+                </section>
+
+                <span class="line-thru">OR</span>
+-->
+<?php 
+//
+?>
+				<?php 
+				$attributes = array('class'=>"form-horizontal form-validation", );
+				echo form_open(current_url(), $attributes);?>  
+                    <fieldset>
+						
+				<?php 	if (! empty($message))
+						{
+							if (isset($msgType) && !empty($msgType))
+							{
+								if ($msgType=='error') 
+									echo '<div class="callout callout-danger">';
+								else if ($msgType=='success') 
+									echo '<div class="callout callout-success">';
+								else
+									echo '<div class="callout callout-info">';
+							}
+							else
+								echo '<div class="callout callout-info">';
+											echo $message;
+									echo '</div>';
+						} ?>
+						
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-envelope"></span>
+                                </span>
+                                <input type="email"
+                                       class="form-control"
+                                       placeholder="Email"
+                                       id="identity" 
+                                       name="login_identity"
+                                       required
+                                       data-ng-model="user.email"
+                                       value="<?php //echo set_value('login_identity', 'admin@admin.com');?>" 
+                                       >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                </span>
+                                <input type="password"
+                                       class="form-control"
+                                       placeholder="password"
+                                       id="password" 
+                                       name="login_password" 
+                                       required
+                                       data-ng-model="user.password"
+                                       data-ng-minlength="6"
+                                       value="<?php //echo set_value('login_password', 'password123');?>"
+                                       >
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+			                <!-- <section>
+			                    <p class="text-center text-muted text-small">Note: 3 failed login attempts will raise security on the account, activating a 10 second time limit ban per login attempt (20 secs after 9+ attempts), and activation of a captcha that must be completed to login.</p>
+			                </section>-->
+                        </div>
+                        
+                        
+                        <div class="form-group">
+						<input
+							type="submit" 
+							name="login_user" 
+							id="submit" 
+							value="Log in"
+							class="btn btn-primary btn-lg btn-block " />
+					</div>
+                    </fieldset>
+				<?php echo form_close();?>
+
+                <section>
+                    <p class="text-center"><a href="<?php echo $base_url;?>admin/forgotten_password">Forgot your password?</a></p>
+                    <!-- <p class="text-center text-muted text-small">Don't have an account yet? <a href="#/pages/signup">Sign up</a></p>-->
+                </section>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<?php /*?>
 		<div class="content clearfix">
 			<div class="col100">
 				<h2>User Login</h2>
@@ -47,7 +161,7 @@
 										</tbody>
 									</table>
 								</span>
-							*/ ?>	
+							*/ /*?>	
 							</li>
 							<li>
 								<label for="password">Password:</label>
@@ -80,7 +194,7 @@
 								echo $captcha.' = <input type="text" id="captcha" name="login_captcha" class="width_50"/>'."\n";
 								echo "</li>\n";
 							}
-							#*/
+							#*//*
 						?>
 							<li>
 								<label for="remember_me">Remember Me:</label>
@@ -118,3 +232,4 @@
 				<?php echo form_close();?>
 			</div>
 		</div>
+*/ ?>

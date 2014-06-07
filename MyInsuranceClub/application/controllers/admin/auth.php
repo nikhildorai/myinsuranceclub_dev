@@ -135,7 +135,10 @@ class Auth extends CI_Controller {
 				
 		// Get any status message that may have been set.
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];		
-
+		if ($this->data['message'] == '<p class="status_msg">You have been successfully logged out.</p>')
+			$this->data['msgType'] = 'info';
+		else
+			$this->data['msgType'] = 'error';
 		$this->template->write_view('content', 'admin/auth/login_view', $this->data, TRUE);
 		$this->template->render();
 		//$this->load->view('admin/login_view', $this->data);
@@ -318,7 +321,6 @@ class Auth extends CI_Controller {
 	 */
 	function logout() 
 	{
-		echo 'safd';die;
 		// By setting the logout functions argument as 'TRUE', all browser sessions are logged out.
 		$this->flexi_auth->logout(TRUE);
 		
@@ -343,7 +345,8 @@ class Auth extends CI_Controller {
         
 		redirect('admin/auth');
     }	
+    
 }
 
 /* End of file auth.php */
-/* Location: ./application/controllers/auth.php */
+/* Location: ./application/controller/auth.php */
