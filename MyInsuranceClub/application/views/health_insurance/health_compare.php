@@ -190,7 +190,7 @@
                		$max_annual_premium='0';
                	}
                	?>
-               	<?php echo form_open('welcome/compare_policies',array('id'=>'compare'));?>
+               	
                 <h6 class="fh3" style="border: none;">
 								We’ve got <span class="highlight"><?php echo count($customer_details);?></span>
 								plan that meets your search - <span class="highlight">Rs. <?php echo number_format($min_annual_premium); ?></span>
@@ -209,7 +209,7 @@
 					</div>
 
 					<div class="col-md-12" style="padding: 0px;">
-
+					<?php echo form_open('Welcome/compare_policies',array('id'=>'compare'));?>
 						<div
 							style="height: auto; padding: 10px 0px 30px 0px; background: #ededec;">
 							<div class="col-md-5">Insurer</div>
