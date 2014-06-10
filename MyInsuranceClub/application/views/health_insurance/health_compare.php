@@ -209,7 +209,7 @@
 					</div>
 
 					<div class="col-md-12" style="padding: 0px;">
-					<?php echo form_open('Welcome/compare_policies',array('id'=>'compare'));?>
+					<?php echo form_open('welcome/compare_policies',array('id'=>'compare'));?>
 						<div
 							style="height: auto; padding: 10px 0px 30px 0px; background: #ededec;">
 							<div class="col-md-5">Insurer</div>
