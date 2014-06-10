@@ -130,7 +130,7 @@
 <div id="highlighted" style=" background:#f9f9f9; padding-bottom:50px; margin-bottom:0px;" >
   <div class="container">
     <!-- form name="" action="#" id="" enctype="multipart/form-data"  -->
-	<?php echo form_open('welcome/health_policy');?>
+	<?php echo form_open('welcome/health_policy',array('name'=>'health_form'));?>
   <div class="col-md-12 center mar-20"><h1>Compare & Buy Health Insurance Plans</h1>
   <p>Choose from 56 plans from 18 companies</p>
   </div>
@@ -387,7 +387,7 @@
                   
                    <div class="form-group col-md-3"> 
                   
-                  <input type="submit"  class="btn btn-primary my" value="Show My Options >"/>
+                  <input type="submit"  name='submit' class="btn btn-primary my" value="Show My Options >"/>
                   
                   </div>
                   </div>

@@ -3,6 +3,8 @@
 <head>
 </head>
 <body>
+<?php echo anchor('welcome/health_policy','Go Back To Search Results');?>
+
 <table border='1'>
 <?php 
 	if (!empty($result))

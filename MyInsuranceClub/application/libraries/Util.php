@@ -42,8 +42,6 @@ class Util {
 			$value = reset(explode('?', $url));
 		else if ($type == 'currentPageUrl')
 			$value = $url;
-		else if ($type == 'serverName')
-			$value = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'].'/';
 	//	$router =& load_class('Router', 'core');
 	//	$uri = & load_class('URI','core');
 	//	$router->fetch_class();
@@ -125,8 +123,7 @@ class Util {
 	}
 	
 
-	public function getSlug($title) 
-	{
+	public function getSlug($title) {
 	   	$title = strip_tags($title);
 	   	
 	    $search_arr 	= array('%', ',', '?', '.', '!',
@@ -145,29 +142,210 @@ class Util {
 	    return $title;
     }
     
-    public function getLoggedInUserDetails()
+    public function getUserSearchFiltersHtml($customer_details = array(), $type="health")
     {
-    	$userDetails = array();
-		$model = &get_instance();
-    	$userIdentifier =  $model->session->all_userdata(); //$this->CI->auth->session_name['user_identifier'];
-    	if (isset($userIdentifier['flexi_auth']['user_identifier']) && !empty($userIdentifier['flexi_auth']['user_identifier']))
-    	{
-    		$userDetails = $userIdentifier['flexi_auth'];
-    		$userId = $userIdentifier['flexi_auth']['user_id'];
-			$where = array();
-			$where[0]['field'] = 'upro_uacc_fk';
-			$where[0]['value'] = (int)$userId;
-			$where[0]['compare'] = 'equal';
-			$exist = $this->getTableData($modelName='Demo_user_profiles_model', $type="single", $where, $fields = array());
-			if (!empty($exist))
-			{
-				$userDetails['firstName'] = $exist['upro_first_name'];
-				$userDetails['lastName'] = $exist['upro_last_name'];
-				$userDetails['name'] = $exist['upro_first_name'].' '.$exist['upro_last_name'];
-				$userDetails['phone'] = $exist['upro_phone'];
-			}		
-    	}
-    	return $userDetails;
+    	$return = '';
+		if(empty($customer_details))
+		{
+			$return.='<div>There are no plans that match your selection criteria.</div>';
+		}
+		
+		elseif (!empty($customer_details)) 
+		{
+        	foreach($customer_details as $detail)
+        	{
+        		$preexist_diseases='';
+				$return	.=	'<div style="min-height: 74px; height: auto; margin-top: 10px; background: #effdfe; border: 2px solid #dadada;" class="main_acc">
+								<div class="col-md-5">
+									<label for="1_1_refundable" style="margin-top: -5px; margin-bottom: 0px; padding: 25px 0px 20px 0px;">';
+                 					if($detail['room_rent']!='Fully Covered')
+                 					{
+										$room_rent='Rs.'.round(0.01*$detail['sum_assured']).'/day';	
+                 					}else 
+                 					{
+                 						$room_rent=$detail['room_rent'];
+                 					}
+                 					if($detail['icu_rent']!='Fully Covered')
+                 					{
+										$icu_rent='Rs.'.round(0.02*$detail['sum_assured']).'/day';
+                 					}
+                 					else
+                 					{
+                 						$icu_rent=$detail['icu_rent'];
+                 					}
+                 					if($detail['doctor_fee']!='Fully Covered')
+                 					{
+                 						$doctor_fee='As per actuals';
+                 					}
+                 					else 
+                 					{
+                 						$doctor_fee=$detail['doctor_fee'];
+                 					}
+                 					if($detail['preexisting_diseases']!='Not Covered')
+                 					{
+                 						$preexist_diseases='Waiting period of '.$detail['preexisting_diseases'].' years';
+                 					}
+                 					else
+                 					{
+                 						$preexist_diseases=$detail['preexisting_diseases'];
+                 					}
+									$variant='';
+									if($detail['variant_name']!='Base')
+									{
+										$variant=' '.$detail['variant_name'];
+									}
+									else{
+										$variant='';
+									}
+									$compare_data=$detail['variant_id'].'-'.$detail['annual_premium'].'-'.$detail['age'];
+						$return	.=	'<input type="checkbox" name="compare[]" class="refundable" value="'.$compare_data.'" /> 
+									<span class="title_c">'.$detail['company_shortname'].'</span>
+									<span class="sub_tit">('.$detail['policy_name'].$variant.')</span>
+									</label>
+								</div>';
+
+
+					$return	.=	'<div class="col-md-7">
+									<div class="col-md-6 no_pad_l">
+										<h3 class="anc">Rs. '.number_format($detail['annual_premium']).'</h3>
+										<p class="anc_f">for cover of Rs. '.number_format($detail['sum_assured']).'</p>
+									</div>
+
+									<div class="col-md-2">
+										<div class="down_cnt">
+											<img src="'.base_url().'assets/images/down_ar.jpg" border="0">
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<button type="submit" class="btn btn-primary my" style="margin-top: 18px;">Buy Now &gt;</button>
+									</div>
+								</div>';
+
+					$return	.=	'<div class="accordion_a">
+									<div class="col-md-12">
+										<div class="col-md-8">
+											<h4 class="h_d">Plan Details</h4>
+											<div class="custom-table-1">
+												<table width="100%">
+													<tbody>
+														<tr class="odd">
+															<td>Cashless treatment</td>
+															<td>'.$detail['cashless_treatment'].'</td>
+														</tr>
+														<tr>
+															<td>Pre-existing diseases</td>
+															<td>'.$preexist_diseases.'</td>
+														</tr>
+
+														<tr class="odd">
+															<td>Auto recharge of Sum Insured</td>
+															<td>'.$detail['autorecharge_SI'].'</td>
+														</tr>
+														<tr>
+															<td>Hospitalisation expenses
+																<ul>
+																	<li>Room Rent</li>
+																	<li>ICU Rent</li>
+																	<li>Fees of Surgeon, Anesthetist, Medicines, Nurses, etc</li>
+																</ul>
+															</td>
+															<td>
+																<ul class="no">
+																	<li>'.$room_rent.'</li>
+																	<li>'.$icu_rent.'</li>
+																	<li>'.$doctor_fee.'</li>
+																</ul>
+															</td>
+														</tr>
+														<tr class="odd">
+															<td>Pre-hospitalisation</td>
+															<td>'.$detail['pre_hosp'].'</td>
+														</tr>
+														<tr>
+															<td>Post-hospitalisation</td>
+															<td>'.$detail['post_hosp'].'</td>
+														</tr>
+
+														<tr class="odd">
+															<td>Day care expenses</td>
+															<td>'.$detail['day_care'].'</td>
+														</tr>
+
+														<tr>
+															<td>Maternity Benefits</td>
+															<td>'.$detail['maternity'].'</td>
+														</tr>
+														<tr class="odd">
+															<td>Auto Recharge of Sum Insured</td>
+															<td>Yes – only if hospitalisation due to Accident</td>
+														</tr>
+														<tr>
+															<td>Health Check up</td>
+															<td>'.$detail['check_up'].'</td>
+														</tr>
+
+														<tr class="odd">
+															<td>Ayurvedic Treatment</td>
+															<td>'.$detail['ayurvedic'].'</td>
+														</tr>
+														<tr>
+															<td>Co-payment</td>
+															<td>'.$detail['co_pay'].'</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>';
+					
+							$return	.=	'<div class="col-md-4 no_pad_lr">
+											<h4 class="h_d mar-40">Product Brouchure <img src="'.base_url().'assets/images/pdf.png" border="0"></h4>
+
+											<div class="cus_d" style="padding: 5px;">
+												<h4 class="h_d3">List of Cashless Hospitalization facility</h4>
+												<div style="float: left; width: 100%;">
+													<div style="float: left;">
+														<h4 class="h_d" style="margin-top: 7px">Enter Pincode</h4>
+													</div>
+													<div style="float: right; width: 150px;">
+														<div class="form-group col-md-12">
+															<label class="sr-only" for="">Enter Pincode</label> <input
+																type="text" class="form-control brdr" id="pin"
+																name="pin" placeholder="Enter Pincode">
+														</div>
+													</div>
+												</div>
+
+
+												<div class="loc_d">
+
+													<div class="col-md-12">
+														<label for="1_1_refundable22"> <input type="radio"
+															name="loc_current1" value="Mumbai" class="loc_fnt">
+															Mumbai
+														</label> <label for="1_1_refundable2"> <input type="radio"
+															name="loc_current1" value="Anywhere in India"
+															class="loc_fnt"> Anywhere in India
+														</label>
+													</div>
+
+													<div class=" col-md-12">
+														<label class="sr-only" for="">Enter Pincode</label> <input
+															type="text" class="form-control brdr" id="pin"
+															name="pin1" placeholder="Search by name of hospital">
+													</div>
+
+
+												</div>';
+
+								$return	.=	'</div>
+										</div>
+									</div>
+								</div>
+							</div>';
+        	}
+		}
+		return $return;
     }
     
 
