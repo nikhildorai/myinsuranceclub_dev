@@ -52,11 +52,11 @@ class mic_dbtest EXTENDS CI_Model{
 	}
 	
 	
-	public function get_policy_results($user_input)
+	public function get_policy_results($user_input,$search_filter)
 	{	
-		$get_policy="SELECT ap.variant_id,ap.ap_id,i.company_id,ap.age,i.company_shortname,p.policy_name,ap.annual_premium,ap.age,ap.sum_assured,ap.service_tax,ap.final_premium,f.cashless_treatment,
+		$get_policy="SELECT ap.variant_id,ap.ap_id,i.company_id,i.public_private_health,ap.age,i.company_shortname,p.policy_name,ap.annual_premium,ap.age,ap.sum_assured,ap.service_tax,ap.final_premium,f.cashless_treatment,
 					f.preexisting_diseases,f.maternity,ap.no_of_members,v.variant_name,f.autorecharge_SI,f.pre_hosp,f.post_hosp,f.day_care,f.check_up,f.ayurvedic,
-					f.co_pay 
+					f.co_pay,f.room_rent,f.icu_rent,f.doctor_fee 
 					         FROM 
 					               insurance_company_master i,policy_health_master p, annual_premium_health ap, policy_health_features f,policy_health_variants v,zone z,company_city_zone ccz 
 							WHERE 
@@ -194,6 +194,37 @@ class mic_dbtest EXTENDS CI_Model{
 		if($user_input['cust_city']!='')
 		{
 			$get_policy.=" AND ccz.city_id = ".$user_input['cust_city'];
+		}
+		/* Search Filters obtained from  Users */
+		
+		if($this->input->is_ajax_request())
+		{
+		if(count($search_filter)>0)
+		{
+			if(isset($search_filter['room_rent']))
+			{
+				$get_policy.=" AND f.room_rent='Fully Covered' AND f.icu_rent='Fully Covered' AND doctor_fee='Fully Covered'";
+			}
+			if(isset($search_filter['maternity']))
+			{
+				$get_policy.=" AND f.maternity!='Not Covered'";
+			}
+			if(isset($search_filter['precover']))
+			{
+				$preexisting_diseases =implode(',',$search_filter['precover']);
+				$get_policy .=" AND f.preexisting_diseases IN ($preexisting_diseases)";
+			}
+			if(isset($search_filter['sector']))
+			{
+				$sector=implode(',',$search_filter['sector']);
+				$get_policy .=" AND i.public_private_health IN($sector)";
+			}
+			if(isset($search_filter['company_name']))
+			{
+				$company = implode(',',$search_filter['company_name']);
+				$get_policy .=" AND i.company_id IN ($company)";
+			}
+		}
 		}
 		$get_data=$this->db->query($get_policy);
 		return $get_data->result_array();

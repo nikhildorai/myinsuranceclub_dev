@@ -30,6 +30,7 @@ class Welcome extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->helper('url');
 		$this->load->library('form_validation');
+		$this->load->library('util');
 		$this->load->helper('html');
 		date_default_timezone_set('Asia/Kolkata');
 	}
@@ -89,12 +90,13 @@ class Welcome extends CI_Controller {
 			redirect('Welcome/health_insurance_form');
 		}
 		else{ */
-		
+				$search_filter=array();
 				$user_input=array();/* array passed on to database */
 				$data=array();		/* array passed to the view with result */
-		
-				if ($this->input->post()!='')			/* customer policy details start */
+				
+				if ($this->input->post('submit'))			/* customer policy details start */
 			{
+				
 				$plan_type=explode('/',$this->input->post('product_des'));
 				$user_input['product_name']=$this->input->post('product_name');
 				$user_input['product_type']=$this->input->post('product_type');
@@ -124,19 +126,19 @@ class Welcome extends CI_Controller {
 				if($this->input->post('cust_name')!='')			/* customer personal details starts */
 				{
 					$custname=explode(' ',$this->input->post('cust_name'));
-					if(count($custname==1))
+					if(sizeof($custname)==1)
 					{
 						$user_input['first_name']=$custname[0];
 						$user_input['middle_name']="";
 						$user_input['last_name']="";
 					}
-					elseif(count($custname==2))
+					elseif(sizeof($custname)==2)
 					{
 						$user_input['first_name']=$custname[0];
 						$user_input['middle_name']="";
 						$user_input['last_name']=$custname[1];
 					}
-					elseif(count($custname)==3)
+					elseif(sizeof($custname)==3)
 					{
 						$user_input['first_name']=$custname[0];
 						$user_input['middle_name']=$custname[1];
@@ -213,17 +215,37 @@ class Welcome extends CI_Controller {
 				}
 				if($this->input->post('cust_city')!='')
 				{
+					
 					$user_input['cust_city']=$this->input->post('cust_city');
 												/* customer personal details end */
 				}
-		/* 	} */
+				
+				$this->session->set_userdata('user_input',$user_input);
+				
+			} elseif($this->input->is_ajax_request())
+			{
+				
+				$search_filter=$_POST;		//getting all ajax post value
+				$this->session->set_userdata('search_filter',$search_filter);
+				
+			}			
+			
+			$user_input=$this->session->userdata('user_input',$user_input);
+			$search_filter=$this->session->userdata('search_filter',$search_filter);
+			
+			$this->mic_dbtest->customer_personal_search_details($user_input);
+			$data['customer_details']=$this->mic_dbtest->get_policy_results($user_input,$search_filter);
+			$data['send_email']= $this->mic_dbtest->get_policy_results($user_input,$search_filter); 
 		
-		$this->session->set_userdata($user_input);
-		$this->mic_dbtest->customer_personal_search_details($user_input);
-		$data['customer_details']=$this->mic_dbtest->get_policy_results($user_input);
-		$data['send_email']= $this->mic_dbtest->get_policy_results($user_input); 
-		$this->load->view('health_insurance/health_compare',$data);//,$data
-		
+			if($this->input->is_ajax_request())
+			{
+				
+				echo $this->util->getUserSearchFiltersHtml($data['customer_details'], $type="health");
+				
+			}
+			else{
+			$this->load->view('health_insurance/health_compare',$data);//,$data
+			}
 		/* Email config */
 		/* $message=$this->load->view('email/send_email',$data,TRUE);
 		$config = Array(
@@ -249,7 +271,7 @@ class Welcome extends CI_Controller {
 		$this->email->send();  */
 		/* Email config Ends */
 		
-		}	
+		/*}*/	
 	}
 	public function compare_policies()
 	{
@@ -258,13 +280,12 @@ class Welcome extends CI_Controller {
 		$variant=array();
 		$annual_premium=array();
 		$age=array();
-		if($this->input->post()!='')
+		if($this->input->post('compare')!=null)
 		{
 			
 			foreach($this->input->post('compare') as $k=>$v)
 			{
 				$compare=explode('-',$v);
-				//var_dump($compare);
 				$variant[]=$compare[0];
 				$annual_premium[]=$compare[1];
 				$age=$compare[2];
@@ -294,6 +315,7 @@ class Welcome extends CI_Controller {
 		$data['result']=$result;
 		$this->load->view('health_insurance/health_comparison_results',$data);
 	}	
+	
 }
 
 /* End of file welcome.php */
