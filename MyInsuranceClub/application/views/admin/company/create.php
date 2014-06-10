@@ -1,3 +1,300 @@
+<div class="page" data-ng-controller="signupCtrl">
+<?php 	$attributes = array('class'=>"form-horizontal form-validation");
+		echo form_open_multipart(current_url(), $attributes);	?>
+	<div class="panel panel-primary">
+    	<div class="panel-heading">
+        	<h3 class="panel-title"><?php echo (isset($companyModel['company_id']) && !empty($companyModel['company_id'])) ? 'Update Company' : 'Create Company';?></h3>
+        		
+        </div>
+		<?php 	if (! empty($message))
+				{
+					if (isset($msgType) && !empty($msgType))
+					{
+						if ($msgType=='error') 
+							echo '<div class="callout callout-danger">';
+						else if ($msgType=='success') 
+							echo '<div class="callout callout-success">';
+						else
+							echo '<div class="callout callout-info">';
+					}
+					else
+						echo '<div class="callout callout-success">';
+									echo $message;
+							echo '</div>';
+				} ?>
+				
+        <div class="panel-body">
+        	<div class="row">
+        	
+		        <div class="col-md-6">
+		            <section class="panel panel-default">
+		                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Company Details</strong></div>
+		                <div class="panel-body">
+			                <div class="form-group">
+			                    <label for="Company Type" class="col-sm-3">Company Type</label>
+			                    <div class="col-sm-9">
+									<span class="ui-select "> 
+									<?php 
+										$selected = array_key_exists( 'company_type_id',$companyModel) ?  $companyModel['company_type_id'] : '';
+										$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Company_type_model', $optionKey = 'company_type_id', $optionValue = 'company_type_name', $defaultEmpty = "Please Select");
+										echo form_dropdown('companyModel[company_type_id]', $options, $selected, ' id="company_type_id" class="tooltip_trigger" required title="Search by company type." style="width: 357px;"');
+									?>		
+									</span> 
+			                    </div>
+			                </div>
+			                
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">Company Name</label>
+			                    <div class="col-sm-9">
+			                        <input type="text" class="form-control" required placeholder="Company Name" id="company_name" name="companyModel[company_name]" value="<?php echo array_key_exists( 'company_name',$companyModel) ? $companyModel['company_name'] : '';?>" >
+			                    </div>
+			                </div>
+			                
+			                
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">Company Display Name</label>
+			                    <div class="col-sm-9">
+			                        <input type="text" class="form-control" required  placeholder="Company Display Name" id="company_display_name" name="companyModel[company_display_name]" value="<?php echo array_key_exists( 'company_display_name',$companyModel) ? $companyModel['company_display_name'] : '';?>">
+			                    </div>
+			                </div>
+			                
+			                
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">Company Short Name</label>
+			                    <div class="col-sm-9">
+			                        <input type="text" class="form-control" required  placeholder="Company Short Name" id="company_shortname" name="companyModel[company_shortname]" value="<?php echo array_key_exists( 'company_shortname',$companyModel) ? $companyModel['company_shortname'] : '';?>" >
+			                    </div>
+			                </div>
+			                
+			                
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">SEO Title</label>
+			                    <div class="col-sm-9">
+			                        <input type="text" class="form-control" required  placeholder="SEO Title" maxlength="90" id="seo_title" name="companyModel[seo_title]" maxlength="90" value="<?php echo array_key_exists( 'seo_title',$companyModel) ? $companyModel['seo_title'] : '';?>" >
+			                        <span class="help-block">Max length 90 characters.</span>
+			                    </div>
+			                </div>
+			                
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">SEO Description</label>
+			                    <div class="col-sm-9">
+			                        <textarea class="form-control" rows="5"  required maxlength="175" id="seo_description" name="companyModel[seo_description]"><?php echo array_key_exists( 'seo_description',$companyModel) ? $companyModel['seo_description'] : '';?></textarea>
+			                        <span class="help-block">Max length 175 characters.</span>
+			                    </div>
+			                </div>
+			                
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">SEO Keywords</label>
+			                    <div class="col-sm-9">
+			                        <textarea class="form-control" rows="4" required  maxlength="175" id="seo_keywords" name="companyModel[seo_keywords]"><?php echo array_key_exists( 'seo_keywords',$companyModel) ? $companyModel['seo_keywords'] : '';?></textarea>
+			                    </div>
+			                </div>
+			                
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">URL</label>
+			                    <div class="col-sm-9">
+			                        <input type="text" class="form-control"  required placeholder="URL"  name="companyModel[slug]" value="<?php echo array_key_exists( 'slug',$companyModel) ? $companyModel['slug'] : '';?>" >
+			                    </div>
+			                </div>
+			                
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">Logo for Company Page:</label>
+			                    <div class="col-sm-9">
+			                        <input type="file" id="logo1" name="companyModel[logo_image_1]"  title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'logo_image_1',$companyModel) ? $companyModel['logo_image_1'] : '';?>">
+			                        <span class="help-block">Image size: 400px X 250px</span>
+			                    
+			                    <?php 
+											$folderUrl = $this->config->config['folder_path']['company'];
+											$fileUrl = $this->config->config['url_path']['company'];
+											
+											if (isset($companyModel['logo_image_1']) && !empty($companyModel['logo_image_1']))
+											{
+												if (file_exists($folderUrl.$companyModel['logo_image_1']))
+												{
+													echo 	'<div class="divider"></div>
+				                    						<img src="'.$fileUrl.$companyModel['logo_image_1'].'">';
+												}
+											}
+											?>
+								</div>
+			                </div>
+			                
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">Logo for Search Results:</label>
+			                    <div class="col-sm-9">
+			                        <input type="file" id="logo1" name="companyModel[logo_image_2]"  title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'logo_image_1',$companyModel) ? $companyModel['logo_image_1'] : '';?>">
+			                        <span class="help-block">Image size: 400px X 250px</span>
+			                    <?php 
+											if (isset($companyModel['logo_image_2']) && !empty($companyModel['logo_image_2']))
+											{
+												if (file_exists($folderUrl.$companyModel['logo_image_2']))
+												{
+													echo 	'<div class="divider"></div>
+				                    						<img src="'.$fileUrl.$companyModel['logo_image_2'].'">';
+												}
+											}
+								?>		   
+								</div>
+			                 							
+			                </div>
+		           	  
+		                </div>
+		            </section>
+		        </div>
+		        
+        	
+        	
+        	
+        	
+		        <div class="col-md-6">
+		            <section class="panel panel-default">
+		                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Contact Details</strong></div>
+		                <div class="panel-body">
+		                
+		                <div class="form-group">
+		                    <label for="" class="col-sm-3">Corporate Office</label>
+		                    <div class="col-sm-9">
+		                    	<textarea class="form-control"  required rows="4" maxlength="175" id="address" name="companyDetailModel[address]" ><?php echo array_key_exists( 'address',$companyDetailModel) ? $companyDetailModel['address'] : '';?></textarea>
+		                   </div>
+		                </div>
+		                
+		                
+		                <div class="form-group">
+		                    <label for="" class="col-sm-3">Website</label>
+		                    <div class="col-sm-9">
+		                        <input type="text" class="form-control" required  placeholder="Website"name="companyDetailModel[website]" value="<?php echo array_key_exists( 'website',$companyDetailModel) ? $companyDetailModel['website'] : '';?>" >
+		                    </div>
+		                </div>
+		                
+		                
+		                <div class="form-group">
+		                    <label for="" class="col-sm-3">Twitter Handle</label>
+		                    <div class="col-sm-9">
+		                        <input type="text" class="form-control" placeholder="Twitter Handle"  name="companyDetailModel[twitter]" value="<?php echo array_key_exists( 'twitter',$companyDetailModel) ? $companyDetailModel['twitter'] : '';?>"  >
+		                    </div>
+		                </div>
+		                
+		                
+		                <div class="form-group">
+		                    <label for="" class="col-sm-3">Facebook Page</label>
+		                    <div class="col-sm-9">
+		                        <input type="text" class="form-control" placeholder="Facebook Page" name="companyDetailModel[facebook]" value="<?php echo array_key_exists( 'facebook',$companyDetailModel) ? $companyDetailModel['facebook'] : '';?>" >
+		                    </div>
+		                </div>
+		                
+		                <div class="form-group">
+		                    <label for="" class="col-sm-3">Google Profile</label>
+		                    <div class="col-sm-9">
+		                        <input type="text" class="form-control" placeholder="Google Profile" name="companyDetailModel[google_plus]" value="<?php echo array_key_exists( 'google_plus',$companyDetailModel) ? $companyDetailModel['google_plus'] : '';?>" >
+		                    </div>
+		                </div>
+		                
+		                <div class="form-group">
+		                    <label for="" class="col-sm-3">Phone</label>
+		                    <div class="col-sm-9">
+		                        <input type="text" class="form-control input-lg" required  placeholder="Add phone number" name="companyDetailModel[phone]" value="<?php echo array_key_exists( 'phone',$companyDetailModel) ? $companyDetailModel['phone'] : '';?>" >
+		                        <div class="divider"></div>
+		                        <input type="text" class="form-control input-lg" placeholder="Add phone number" name="companyDetailModel[phone2]" value="<?php echo array_key_exists( 'phone2',$companyDetailModel) ? $companyDetailModel['phone2'] : '';?>" >
+		                        <div class="divider"></div>
+		                        <input type="text" class="form-control input-lg" placeholder="Add phone number" name="companyDetailModel[phone3]" value="<?php echo array_key_exists( 'phone3',$companyDetailModel) ? $companyDetailModel['phone2'] : '';?>" >
+		                        <span class="help-block">Add comma seperate multiple values</span>
+		                    </div>
+		                </div>
+		                
+		                <div class="form-group">
+		                    <label for="" class="col-sm-3">Email</label>
+		                    <div class="col-sm-9">
+		                    	<input type="text" class="form-control" required  placeholder="Add coporate email"  name="companyDetailModel[email]" value="<?php echo array_key_exists( 'email',$companyDetailModel) ? $companyDetailModel['email'] : '';?>" >
+		                   	</div>
+		                </div>
+		                
+		                <div class="form-group">
+		                    <label for="" class="col-sm-3">SMS</label>
+		                    <div class="col-sm-9">
+		                        <input type="text" class="form-control" placeholder="" name="companyDetailModel[sms]" value="<?php echo array_key_exists( 'sms',$companyDetailModel) ? $companyDetailModel['sms'] : '';?>">
+		                    </div>
+		                </div>
+		                
+		           	  
+		                </div>
+		            </section>
+		        </div>
+		        
+		    </div>
+		    
+	        <div class="row">
+		        <div class="col-md-12">
+				    <section class="panel panel-default">
+				        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Description Details</strong></div>
+				        <div class="panel-body">
+				        
+		                
+			                <div class="form-group">
+			                    <label for="" class="col-sm-2">Heading 1</label>
+			                    <div class="col-sm-10">
+			                        <input type="text" class="form-control" placeholder="" name="companyDetailModel[heading_1]" value="<?php echo array_key_exists( 'heading_1',$companyDetailModel) ? $companyDetailModel['heading_1'] : '';?>" >
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label for="" class="col-sm-2">Description 1</label>
+			                    <div class="col-sm-10">
+			                        <textarea class="form-control" name="companyDetailModel[description_1]" id="description_1" ><?php echo array_key_exists( 'description_1',$companyDetailModel) ? $companyDetailModel['description_1'] : '';?></textarea>
+			                        <?php echo display_ckeditor($ckeditor1); ?>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label for="" class="col-sm-2">Heading 2</label>
+			                    <div class="col-sm-10">
+			                        <input type="text" class="form-control" placeholder="" name="companyDetailModel[heading_2]" value="<?php echo array_key_exists( 'heading_2',$companyDetailModel) ? $companyDetailModel['heading_2'] : '';?>" >
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label for="" class="col-sm-2">Description 2</label>
+			                    <div class="col-sm-10">
+			                        <textarea class="form-control" name="companyDetailModel[description_2]" id="description_2" ><?php echo array_key_exists( 'description_2',$companyDetailModel) ? $companyDetailModel['description_2'] : '';?></textarea>
+			                        <?php echo display_ckeditor($ckeditor2); ?>
+			                    </div>
+			                </div>
+				        </div>
+				    </section> 
+		        </div>
+	        </div>   
+	        
+	        
+	        <div class="row">
+		        <div class="col-md-12">
+				    <section class="panel panel-default">
+				        <div class="panel-body">
+				        
+			                <div class="form-group">
+			                
+			                    <label for="" class="col-sm-4"></label>
+			                    <div class="col-sm-4">
+			                    <input type="hidden" id="company_id" name="companyModel[company_id]" value="<?php echo array_key_exists( 'company_id',$companyModel) ? $companyModel['company_id'] : '';?>" />
+								<input type="hidden" id="company_detail_id" name="companyDetailModel[company_detail_id]" value="<?php echo array_key_exists( 'company_detail_id',$companyDetailModel) ? $companyDetailModel['company_detail_id'] : '';?>" />
+							
+			                        <input type="submit" name="submit" value="Submit" class="btn btn-success btn-lg btn-block " />
+			                     </div>
+			                    
+			               	</div>
+
+				        </div>
+				    </section> 
+		        </div>
+	        </div>   
+	        
+	          
+       	</div>
+	</div>
+   
+
+	<?php echo form_close();?>
+</div>
+
+
+
+<?php /*?>			
+					
 		<div class="content clearfix">
 			<div class="col100">
 			
@@ -9,8 +306,6 @@
 <br>			
 		
 
-			
-					
 <?php //echo validation_errors('<p class="error_msg">', '</p>'); ?> 
 				<?php echo form_open_multipart(); ?>
 					<fieldset>
@@ -94,34 +389,6 @@
 ?>									
 							</li>
 						</ul>
-							
-							
-							
-							
-							
-							
-							
-							
-							
-<?php /*?>							
-							<li class="info_req">
-								<label for="search">description:</label>
-								<textarea name="content1" id="content1" >Example data</textarea>
-								<?php echo display_ckeditor($ckeditor); ?>
-							</li>
-							
-							<li class="info_req">
-								<label for="search">Add heading:</label>
-								<input type="text" name="feature[heading][]" value="" class="tooltip_trigger" title="Add Description" /><br />
-							</li>
-							
-							<li class="info_req">
-								<label for="search">Description:</label>
-								<textarea name="feature[content][]" style="width:60%">Add description here</textarea>
-							</li>
-							
-
-*/ ?>						
 							
 					</fieldset>
 					
@@ -225,3 +492,5 @@
 			</div>
 		</div>
 	
+*/?>					
+					

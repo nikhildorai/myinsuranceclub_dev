@@ -38,13 +38,15 @@ class Auth extends CI_Controller {
 			if ($this->session->flashdata('message')) { $this->session->keep_flashdata('message'); }
 			
 			// Redirect logged in admins (For security, admin users should always sign in via Password rather than 'Remember me'.
+		
+			// Redirect logged in admins (For security, admin users should always sign in via Password rather than 'Remember me'.
 			if ($this->flexi_auth->is_admin()) 
 			{
-				redirect('admin/auth_admin/dashboard');
+			//	redirect('admin/auth_public/dashboard');
 			}
 			else
 			{
-				redirect('admin/auth_public/dashboard');
+		//		redirect('admin/auth_public/dashboard');
 			}
 		}
 		
@@ -93,7 +95,7 @@ class Auth extends CI_Controller {
 	 * Note: This page is only accessible to users who are not currently logged in, else they will be redirected.
 	 */ 
     function login()
-    {	
+    {
 		// If 'Login' form has been submited, attempt to log the user in.
 		if ($this->input->post('login_user'))
 		{
@@ -134,11 +136,15 @@ class Auth extends CI_Controller {
 		}
 				
 		// Get any status message that may have been set.
-		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];		
-		if ($this->data['message'] == '<p class="status_msg">You have been successfully logged out.</p>')
-			$this->data['msgType'] = 'info';
-		else
-			$this->data['msgType'] = 'error';
+		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];	
+		
+	    if (strpos($this->data['message'],'status_msg') !== false) 
+	    	$this->data['msgType'] = 'success';
+	    else if (strpos($this->data['message'],'error_msg') !== false) 
+	    	$this->data['msgType'] = 'error';
+	    else 
+	    	$this->data['msgType'] = 'infor';
+		
 		$this->template->write_view('content', 'admin/auth/login_view', $this->data, TRUE);
 		$this->template->render();
 		//$this->load->view('admin/login_view', $this->data);
@@ -172,9 +178,9 @@ class Auth extends CI_Controller {
 	 * Note: This page is only accessible to users who are not currently logged in, else they will be redirected.
 	 */ 
 	function register_account()
-	{		
+	{
 		// Redirect user away from registration page if already logged in.
-		if ($this->flexi_auth->is_logged_in()) 
+		if (!$this->flexi_auth->is_logged_in()) 
 		{
 			redirect('admin/auth');
 		}

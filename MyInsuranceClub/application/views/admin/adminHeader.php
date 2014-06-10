@@ -2,13 +2,11 @@
     <a href="#/" data-toggle-min-nav
                  class="toggle-min"
                  ><i class="fa fa-bars"></i></a>
-<?php 
-$user = $this->util->getLoggedInUserDetails();
-?>
+<?php $user = $this->util->getLoggedInUserDetails();?>
     <!-- Logo -->
     <div class="logo">    
-		<a href="<?php echo base_url().'admin'?>" title="My Insurance Club">
-            <span>My Insurance Club</span>
+		<a href="<?php echo base_url().'admin'?>" title="MyInsuranceClub" style="font-size: 16px;">
+            <span>MyInsuranceClub</span>
         </a>
     </div>
 
@@ -199,7 +197,7 @@ $user = $this->util->getLoggedInUserDetails();
             </li> -->
             <li class="dropdown text-normal nav-profile">
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                    <!-- <img src="images/g1.jpg" alt="" class="img-circle img30_30"> -->
+                    <img src="<?php echo base_url();?>dist/images/user.png" alt="" class="img-circle img30_30">
                     <span class="hidden-xs">
                         <span data-i18n="<?php echo $user['name'];?>"><?php echo $user['name'];?></span>
                     </span>

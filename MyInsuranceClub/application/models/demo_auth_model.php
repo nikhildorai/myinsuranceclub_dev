@@ -204,7 +204,7 @@ class Demo_auth_model extends CI_Model {
 			$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 
 			// Redirect user.
-			($response) ? redirect('auth') : redirect('auth/resend_activation_token');
+			($response) ? redirect('admin/auth') : redirect('admin/auth/resend_activation_token');
 		}
 		else
 		{	
@@ -466,7 +466,7 @@ class Demo_auth_model extends CI_Model {
 		}
 		else
 		{
-			redirect('admin/admin/login');
+			redirect('admin/auth');
 		}
 	}
 	
@@ -496,7 +496,8 @@ class Demo_auth_model extends CI_Model {
 		$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 		
 		// Redirect user.
-		redirect('admin/auth_public/manage_address_book');
+		redirect('admin/auth');
+		//redirect('admin/auth_public/manage_address_book');
 	}
 	
 	/**
@@ -551,7 +552,8 @@ class Demo_auth_model extends CI_Model {
 			$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 			
 			// Redirect user.
-			($response) ? redirect('admin/auth_public/manage_address_book') : redirect('admin/auth_public/insert_address');
+			($response) ? redirect('admin/auth') : redirect('admin/auth');
+			//($response) ? redirect('admin/auth_public/manage_address_book') : redirect('admin/auth_public/insert_address');
 		}
 		else
 		{		
@@ -627,7 +629,8 @@ class Demo_auth_model extends CI_Model {
 			$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 			
 			// Redirect user.
-			($response) ? redirect('admin/auth_public/manage_address_book') : redirect('admin/auth_public/update_address');
+			($response) ? redirect('admin/auth') : redirect('admin/auth');
+			//($response) ? redirect('admin/auth_public/manage_address_book') : redirect('admin/auth_public/update_address');
 		}
 		else
 		{		

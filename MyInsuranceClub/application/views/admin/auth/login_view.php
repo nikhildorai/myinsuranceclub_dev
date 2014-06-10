@@ -72,12 +72,12 @@
                                 </span>
                                 <input type="password"
                                        class="form-control"
-                                       placeholder="password"
+                                       placeholder="Password"
                                        id="password" 
                                        name="login_password" 
                                        required
                                        data-ng-model="user.password"
-                                       data-ng-minlength="6"
+                                       data-ng-minlength="8"
                                        value="<?php //echo set_value('login_password', 'password123');?>"
                                        >
                             </div>

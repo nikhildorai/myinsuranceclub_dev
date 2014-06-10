@@ -27,15 +27,15 @@ class Variants extends CI_Controller {
 		{
 			// Preserve any flashdata messages so they are passed to the redirect page.
 			if ($this->session->flashdata('message')) { $this->session->keep_flashdata('message'); }
-			
+		
 			// Redirect logged in admins (For security, admin users should always sign in via Password rather than 'Remember me'.
 			if ($this->flexi_auth->is_admin()) 
 			{
-				//redirect('admin/auth_admin/dashboard');
+			//	redirect('admin/auth_public/dashboard');
 			}
 			else
 			{
-				//redirect('admin/auth_public/dashboard');
+		//		redirect('admin/auth_public/dashboard');
 			}
 		}
 		

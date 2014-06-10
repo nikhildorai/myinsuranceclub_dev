@@ -29,15 +29,15 @@ class Company extends CI_Controller {
 		{
 			// Preserve any flashdata messages so they are passed to the redirect page.
 			if ($this->session->flashdata('message')) { $this->session->keep_flashdata('message'); }
-			
+		
 			// Redirect logged in admins (For security, admin users should always sign in via Password rather than 'Remember me'.
 			if ($this->flexi_auth->is_admin()) 
 			{
-				//redirect('admin/auth_admin/dashboard');
+			//	redirect('admin/auth_public/dashboard');
 			}
 			else
 			{
-				//redirect('admin/auth_public/dashboard');
+		//		redirect('admin/auth_public/dashboard');
 			}
 		}
 		
@@ -82,10 +82,53 @@ class Company extends CI_Controller {
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
 		$this->session->set_flashdata('message','');
 		
-		$this->data['records'] 	= $this->insurance_company_master_model->get_all_insurance_company($arrParams);
+		$this->data['records'] 	= $records = $this->insurance_company_master_model->get_all_insurance_company($arrParams);
 		//	pagination
 		$config = $this->util->get_pagination_params();
 		$config['total_rows'] 	= $this->data['records']->num_rows();
+		$base_url = base_url();
+		$rows = array();
+		if (!empty($records))
+		{
+			if ($records->num_rows() > 0)
+			{
+				$i = 0;
+				$rows = array();
+			   	foreach ($records->result_array() as $row)
+			   	{
+						$rows[$i]['company_id'] = $row['company_id'];
+						$rows[$i]['company_name'] = $row['company_name']; 
+						$rows[$i]['company_shortname'] = $row['company_shortname']; 
+						$rows[$i]['company_display_name'] = $row['company_display_name']; 
+						$rows[$i]['status'] = ucfirst($row['status']); 
+						$where = array();
+						$where[0]['field'] = 'company_type_id';
+						$where[0]['value'] = (int)$row['company_type_id'];
+						$where[0]['compare'] = 'equal';
+						
+						$comp_type = reset($this->util->getTableData($modelName='Company_type_model', $type="single", $where, $fields = array('company_type_name')));
+						$rows[$i]['company_type_name'] = $comp_type['company_type_name']; 
+						if ($row['status'] == 'active')
+						{
+							$actionBtn = '<a href="'.$base_url.'admin/company/create/'.$row['company_id'].'" style="line-height: 2;" >Update</a>';
+							$actionBtn .= ' | <a href="'.$base_url.'admin/company/changeStatus/'.$row['company_id'].'/inactive" style="line-height: 2;">De-activate</a>';	
+							$actionBtn .= ' <br><a href="'.$base_url.'admin/policy/index?company_id='.$row['company_id'].'" style="line-height: 2;">View Policies</a>';
+							$actionBtn .= '  | <a href="'.$base_url.'admin/companyClaimRatio/index/'.$row['company_id'].'" style="line-height: 2;">Claim Ratio</a>';
+						}
+						else if ($row['status'] == 'inactive')
+						{
+							$actionBtn = '<a href="'.$base_url.'admin/company/changeStatus/'.$row['company_id'].'/active" style="line-height: 2;">Activate</a>';
+						}
+						$rows[$i]['action'] = $actionBtn;
+					$i++;
+				}
+			}
+			else 
+			{
+				echo '<tr data-ng-repeat="store in currentPageStores"><td colspan="7">No record found</td></tr>';
+			}
+		}
+		$this->data['jsonRows'] = json_encode($rows);
 		$this->pagination->initialize($config); 		
 		$this->template->write_view('content', 'admin/company/index', $this->data, TRUE);
 		$this->template->render();
@@ -107,7 +150,7 @@ class Company extends CI_Controller {
 			//Optionnal values
 			'config' => array(
 				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
-				'width' 	=> 	"80%",	//Setting a custom width
+				'width' 	=> 	"100%",	//Setting a custom width
 				'height' 	=> 	'100px',	//Setting a custom height
 			),
 		);
@@ -118,7 +161,7 @@ class Company extends CI_Controller {
 			//Optionnal values
 			'config' => array(
 				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
-				'width' 	=> 	"80%",	//Setting a custom width
+				'width' 	=> 	"100%",	//Setting a custom width
 				'height' 	=> 	'100px',	//Setting a custom height
 			),
 		);
@@ -316,12 +359,14 @@ class Company extends CI_Controller {
 					{
 						// show error if record is not created
 						$this->data['message'] .= '<p class="error_msg">Record could not be created.</p>';
+						$this->data['msgType'] = 'error';
 					}
 				}
 				else 
 				{
 					//	show error if record exist
 					$this->data['message'] .= '<p class="error_msg">Record already exists.</p>';
+					$this->data['msgType'] = 'error';
 				}
 			}		
 			else 
