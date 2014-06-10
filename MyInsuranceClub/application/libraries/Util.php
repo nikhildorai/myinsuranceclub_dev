@@ -42,6 +42,8 @@ class Util {
 			$value = reset(explode('?', $url));
 		else if ($type == 'currentPageUrl')
 			$value = $url;
+		else if ($type == 'serverName')
+			$value = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'].'/';
 	//	$router =& load_class('Router', 'core');
 	//	$uri = & load_class('URI','core');
 	//	$router->fetch_class();
@@ -140,6 +142,31 @@ class Util {
 	    $title = trim($title, '-');
 	    $title = strtolower($title);
 	    return $title;
+    }
+    
+    public function getLoggedInUserDetails()
+    {
+    	$userDetails = array();
+		$model = &get_instance();
+    	$userIdentifier =  $model->session->all_userdata(); //$this->CI->auth->session_name['user_identifier'];
+    	if (isset($userIdentifier['flexi_auth']['user_identifier']) && !empty($userIdentifier['flexi_auth']['user_identifier']))
+    	{
+    		$userDetails = $userIdentifier['flexi_auth'];
+    		$userId = $userIdentifier['flexi_auth']['user_id'];
+			$where = array();
+			$where[0]['field'] = 'upro_uacc_fk';
+			$where[0]['value'] = (int)$userId;
+			$where[0]['compare'] = 'equal';
+			$exist = $this->getTableData($modelName='Demo_user_profiles_model', $type="single", $where, $fields = array());
+			if (!empty($exist))
+			{
+				$userDetails['firstName'] = $exist['upro_first_name'];
+				$userDetails['lastName'] = $exist['upro_last_name'];
+				$userDetails['name'] = $exist['upro_first_name'].' '.$exist['upro_last_name'];
+				$userDetails['phone'] = $exist['upro_phone'];
+			}		
+    	}
+    	return $userDetails;
     }
     
     public function getUserSearchFiltersHtml($customer_details = array(), $type="health")
