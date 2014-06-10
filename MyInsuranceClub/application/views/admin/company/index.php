@@ -1,5 +1,5 @@
 <div class="page">
-
+<?php var_dump($this->util->getLoggedInUserDetails());?>
 <?php 	if (! empty($message))
 		{
 			if (isset($msgType) && !empty($msgType))
@@ -115,7 +115,7 @@
 
 
 
-<?php ?>
+<?php /*?>
 <div class="page page-table" data-ng-controller="tableCtrl" >
 		<?php 	if (! empty($message))
 				{

@@ -25,15 +25,18 @@
                 <span class="line-thru">OR</span>
 -->
 <?php 
-//
+// 
 ?>
 				<?php 
 				$attributes = array('class'=>"form-horizontal form-validation", );
 				echo form_open(current_url(), $attributes);?>  
                     <fieldset>
 						
-				<?php 	if (! empty($message))
+                        
+				<?php 	
+						if (! empty($message))
 						{
+							echo '<div class="form-group">';
 							if (isset($msgType) && !empty($msgType))
 							{
 								if ($msgType=='error') 
@@ -47,6 +50,7 @@
 								echo '<div class="callout callout-info">';
 											echo $message;
 									echo '</div>';
+							echo '</div>';
 						} ?>
 						
                         <div class="form-group">
@@ -82,7 +86,20 @@
                                        >
                             </div>
                         </div>
-                        
+                        <?php 
+							if (isset($captcha))
+							{	?>
+				                <div class="form-group">
+				                    <label for="" class="col-sm-4">Captcha Question</label>
+				                    <div class="col-sm-8">
+				                        <label><?php echo $captcha;?></label>
+				                        <div class="divider"></div>
+				                        <input type="number" class="form-control input-lg" placeholder="Enter Captcha"
+		                                       id="captcha" name="login_captcha" required  >
+				                    </div>
+				                </div>
+			<?php 			}
+                        ?>
                         <div class="form-group">
 			                <!-- <section>
 			                    <p class="text-center text-muted text-small">Note: 3 failed login attempts will raise security on the account, activating a 10 second time limit ban per login attempt (20 secs after 9+ attempts), and activation of a captcha that must be completed to login.</p>

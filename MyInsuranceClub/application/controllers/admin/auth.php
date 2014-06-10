@@ -102,7 +102,7 @@ class Auth extends CI_Controller {
 			$this->load->model('demo_auth_model');
 			$this->demo_auth_model->login();
 		}
-			
+			//echo 1;die;
 		// CAPTCHA Example
 		// Check whether there are any existing failed login attempts from the users ip address and whether those attempts have exceeded the defined threshold limit.
 		// If the user has exceeded the limit, generate a 'CAPTCHA' that the user must additionally complete when next attempting to login.
@@ -121,7 +121,7 @@ class Auth extends CI_Controller {
 			 * 
 			 * Note: To use this example, you will also need to enable the recaptcha examples in 'models/demo_auth_model.php', and 'views/demo/login_view.php'.
 			*/
-			$this->data['captcha'] = $this->flexi_auth->recaptcha(FALSE);
+			//$this->data['captcha'] = $this->flexi_auth->recaptcha(FALSE);
 						
 			/**
 			 * flexi auths math CAPTCHA
@@ -132,7 +132,7 @@ class Auth extends CI_Controller {
 			 *
 			 * Note: To use this example, you will also need to enable the math_captcha examples in 'models/demo_auth_model.php', and 'views/demo/login_view.php'.
 			*/
-			# $this->data['captcha'] = $this->flexi_auth->math_captcha(FALSE);
+			$this->data['captcha'] = $this->flexi_auth->math_captcha(FALSE);
 		}
 				
 		// Get any status message that may have been set.
@@ -143,7 +143,7 @@ class Auth extends CI_Controller {
 	    else if (strpos($this->data['message'],'error_msg') !== false) 
 	    	$this->data['msgType'] = 'error';
 	    else 
-	    	$this->data['msgType'] = 'infor';
+	    	$this->data['msgType'] = 'info';
 		
 		$this->template->write_view('content', 'admin/auth/login_view', $this->data, TRUE);
 		$this->template->render();
@@ -158,6 +158,7 @@ class Auth extends CI_Controller {
 	 */ 
     function login_via_ajax()
     {
+		redirect('admin/auth');
 		if ($this->input->is_ajax_request())
 		{
 			$this->load->model('demo_auth_model');

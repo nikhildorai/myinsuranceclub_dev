@@ -169,6 +169,57 @@ class Util {
     	}
     	return $userDetails;
     }
+    
+
+	public function addUpdateClaimRatio($model, $company_id)
+	{	
+		$save  = false;
+		if (!empty($model))
+		{	
+			//	check if record exists
+			$where = array();
+			$arrSkip = array('claim_ratio_id');
+			if (isset($model['claim_ratio_id']) && !empty($model['claim_ratio_id']))
+			{
+				$where[0]['field'] = 'claim_ratio_id';
+				$where[0]['value'] = $model['claim_ratio_id'];
+				$where[0]['compare'] = 'equal';
+			}
+			else 
+			{
+				$i = 0;
+				foreach ($model as $k1=>$v1)
+				{
+					if (!in_array($k1, $arrSkip))
+					{
+						$where[$i]['field'] = $k1;
+						$where[$i]['value'] = $v1;
+						$where[$i]['compare'] = 'equal';
+						$i++;
+					}
+				}
+			}
+			
+			$isExist = $this->getTableData($modelName='company_claim_ratio_model', $type="all", $where, $fields = array());
+			$model1 = &get_instance();	
+			$model1->load->model('company_claim_ratio_model');		
+			if (!empty($isExist))
+			{
+				foreach ($isExist as $k1=>$v1)
+				{
+					$model['claim_ratio_id'] = (int)$v1['claim_ratio_id'];
+					$save = $model1->company_claim_ratio_model->saveRecord($arrParams = $model, $modelType = 'update');
+					break;	
+				}
+			}
+			else 
+			{
+				$save = $model1->company_claim_ratio_model->saveRecord($arrParams = $model, $modelType = 'create');
+			}
+			
+		}
+		return $save;
+	}
 }
 
 // END Util class

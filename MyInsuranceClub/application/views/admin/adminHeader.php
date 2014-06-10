@@ -197,7 +197,7 @@
             </li> -->
             <li class="dropdown text-normal nav-profile">
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="<?php echo base_url();?>dist/images/user.png" alt="" class="img-circle img30_30">
+                    <img src="<?php echo base_url();?>dist/images/user2.png" alt="" class="img-circle img30_30">
                     <span class="hidden-xs">
                         <span data-i18n="<?php echo $user['name'];?>"><?php echo $user['name'];?></span>
                     </span>

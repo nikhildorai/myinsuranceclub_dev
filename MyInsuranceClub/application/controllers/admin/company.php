@@ -51,6 +51,7 @@ class Company extends CI_Controller {
         $this->load->helper('ckeditor');
 		$this->load->model('insurance_company_master_model');
 		$this->load->model('insurance_company_master_detail_model');
+		$this->load->model('company_claim_ratio_model');
  		
 		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
 		$this->load->vars('base_url', base_url());
@@ -111,9 +112,9 @@ class Company extends CI_Controller {
 						if ($row['status'] == 'active')
 						{
 							$actionBtn = '<a href="'.$base_url.'admin/company/create/'.$row['company_id'].'" style="line-height: 2;" >Update</a>';
-							$actionBtn .= ' | <a href="'.$base_url.'admin/company/changeStatus/'.$row['company_id'].'/inactive" style="line-height: 2;">De-activate</a>';	
-							$actionBtn .= ' <br><a href="'.$base_url.'admin/policy/index?company_id='.$row['company_id'].'" style="line-height: 2;">View Policies</a>';
-							$actionBtn .= '  | <a href="'.$base_url.'admin/companyClaimRatio/index/'.$row['company_id'].'" style="line-height: 2;">Claim Ratio</a>';
+					//		$actionBtn .= ' | <a href="'.$base_url.'admin/company/changeStatus/'.$row['company_id'].'/inactive" style="line-height: 2;">De-activate</a>';	
+							$actionBtn .= ' | <a href="'.$base_url.'admin/policy/index?company_id='.$row['company_id'].'" style="line-height: 2;">View Policies</a>';
+					//		$actionBtn .= '  | <a href="'.$base_url.'admin/companyClaimRatio/index/'.$row['company_id'].'" style="line-height: 2;">Claim Ratio</a>';
 						}
 						else if ($row['status'] == 'inactive')
 						{
@@ -187,10 +188,6 @@ class Company extends CI_Controller {
 				$modelType = 'update';
 				
 				//	check if details exist
-				$where = array();
-				$where[0]['field'] = 'company_id';
-				$where[0]['value'] = (int)$company_id;
-				$where[0]['compare'] = 'equal';
 				$detailExists = $this->util->getTableData($modelName='Insurance_company_master_detail_model', $type="single", $where, $fields = array());
 				
 				if (empty($detailExists))
@@ -201,8 +198,23 @@ class Company extends CI_Controller {
 				{
 					$companyDetailModel = $detailExists;
 					$dmodelType = 'update';
-				}			
-				
+				}	
+
+				//	check if claim ratio exists or not
+				$claimExist = $this->util->getTableData($modelName='company_claim_ratio_model', $type="all", $where, $fields = array());				
+				if (empty($claimExist))
+				{
+					$cmodelType = 'create';
+					$ratioModel = array();
+				}
+				else 
+				{
+					foreach ($claimExist as $k4=>$v4)
+					{
+						$ratioModel[$v4['year_to']] = $v4;
+					}
+					$cmodelType = 'update';				
+				}
 			}
 		}
 		
@@ -251,6 +263,7 @@ class Company extends CI_Controller {
 				array('field' => 'companyModel[company_shortname]', 'label' => 'company shortname', 'rules' => 'required|callback_validateInsuranceCompany[company_shortname#'.$arrParams["company_shortname"].',company_type_id#'.$companyTypeId.',modelType#'.$modelType.',company_id#'.$company_id.']'),
 				array('field' => 'companyModel[company_display_name]', 'label' => 'company display name', 'rules' => 'required|callback_validateInsuranceCompany[company_display_name#'.$arrParams["company_display_name"].',company_type_id#'.$companyTypeId.',modelType#'.$modelType.',company_id#'.$company_id.']'),
 				array('field' => 'companyModel[company_type_id]', 'label' => 'company type', 'rules' => 'required'),
+				array('field' => 'companyModel[public_private_health]', 'label' => 'company sector type', 'rules' => 'required'),
 				array('field' => 'companyModel[seo_title]', 'label' => 'seo title', 'rules' => 'required'),
 				array('field' => 'companyModel[seo_description]', 'label' => 'seo description', 'rules' => 'required'),
 				array('field' => 'companyModel[seo_keywords]', 'label' => 'seo keywords', 'rules' => 'required'),
@@ -271,6 +284,7 @@ class Company extends CI_Controller {
 				
 			);
 			$companyDetailModel = $_POST['companyDetailModel'];
+			$claimRatioPost = $_POST['claimRatio'];	
 			$this->form_validation->set_rules($validation_rules);
 			// Run the validation.
 			if ($this->form_validation->run())
@@ -342,12 +356,64 @@ class Company extends CI_Controller {
 							if ($recordId != false)
 							{
 								$saveData[] = true;
-								$company_id = $recordId;	
 							}
 							else 
 								$saveData[] = false;	
 						}
 						
+						//	save post for claim ratio
+						$saveClaim = $savedRecords = $errorClaim = array();
+						if (!empty($claimRatioPost))
+						{
+							$variantErrors = array();
+							$arrSkip = array('claim_ratio_id');
+							foreach ($claimRatioPost as $k1=>$v1)
+							{
+								if (!empty($v1['claim_ratio']) && $v1['claim_ratio'] <= 100 && $v1['claim_ratio'] >= 0)
+								{	
+									foreach ($v1 as $k2=>$v2)
+									{
+										$saveClaim[$k1][$k2] = $v2;
+									}
+									$saveClaim[$k1]['year_from'] = $k1-1;
+									$saveClaim[$k1]['year_to'] = $k1;
+									$saveClaim[$k1]['company_id'] = $company_id;
+								}
+								else if (!empty($v1['claim_ratio']) && $v1['claim_ratio'] < 0)
+								{
+									$errorClaim[] = false;
+								}
+							}
+			
+							if (!empty($saveClaim))
+							{
+								foreach ($saveClaim as $k3=>$v3)
+								{
+									$savedRecords[] = $this->util->addUpdateClaimRatio($model = $v3, $company_id);
+								}
+							}
+							if (!empty($savedRecords) && !empty($errorClaim))
+							{
+								$this->data['message'] = '<p class="status_msg">Records added successfully.</p>';
+								$this->data['message'] .= '<p class="error_msg">Records with claim ratio cannot be greater than 100 could not be saved.</p>';
+							}
+							else if (!empty($savedRecords) && empty($errorClaim))
+							{
+								$this->data['message'] = '<p class="status_msg">Records added successfully.</p>';
+							}
+							
+							else if (!empty($errorClaim))
+							{
+								//	show error if validation fails
+								$this->data['message'] = '<p class="error_msg">Claim ratio cannot be greater than 100.</p>';
+							}
+					  		else
+					  		{
+								//	show error if no record saved
+								$this->data['message'] = '<p class="error_msg">Minimum 1 record is required.</p>';
+					  		}
+					  		$ratioModel = $saveClaim;
+						}
 					}			
 					//	if policy and varients records are stored then on show success and redirect to index 
 					if(!in_array(false, $saveData))
@@ -379,6 +445,7 @@ class Company extends CI_Controller {
 		}		
 		$this->data['companyModel'] = $companyModel;
 		$this->data['companyDetailModel'] = $companyDetailModel;
+		$this->data['ratioModel'] = $ratioModel;
 		$this->template->write_view('content', 'admin/company/create', $this->data, TRUE);
 		$this->template->render();
 	}

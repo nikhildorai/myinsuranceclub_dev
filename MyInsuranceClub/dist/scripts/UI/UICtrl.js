@@ -137,6 +137,7 @@ angular.module('app.ui.ctrls', []).controller('NotifyCtrl', [
     };
     $scope.ok = function() {
       $modalInstance.close($scope.selected.item);
+      alert($scope.selected.item+123);
     };
     $scope.cancel = function() {
       $modalInstance.dismiss("cancel");

@@ -39,7 +39,7 @@ class Demo_auth_model extends CI_Model {
 			 * 
 			 * Note: To use this example, you will also need to enable the recaptcha examples in 'controllers/auth.php', and 'views/demo/login_view.php'.
 			*/
-			$this->form_validation->set_rules('recaptcha_response_field', 'Captcha Answer', 'required|validate_recaptcha');				
+			//$this->form_validation->set_rules('recaptcha_response_field', 'Captcha Answer', 'required|validate_recaptcha');				
 			
 			/**
 			 * flexi auths math CAPTCHA
@@ -51,9 +51,8 @@ class Demo_auth_model extends CI_Model {
 			 * 
 			 * Note: To use this example, you will also need to enable the math_captcha examples in 'controllers/auth.php', and 'views/demo/login_view.php'.
 			*/
-			# $this->form_validation->set_rules('login_captcha', 'Captcha Answer', 'required|validate_math_captcha['.$this->input->post('login_captcha').']');				
-		}
-		
+			$this->form_validation->set_rules('login_captcha', 'Captcha Answer', 'required|validate_math_captcha['.$this->input->post('login_captcha').']');				
+		}	
 		// Run the validation.
 		if ($this->form_validation->run())
 		{
@@ -61,13 +60,16 @@ class Demo_auth_model extends CI_Model {
 			$remember_user = ($this->input->post('remember_me') == 1);
 	
 			// Verify login data.
-			$this->flexi_auth->login($this->input->post('login_identity'), $this->input->post('login_password'), $remember_user);
-
+			$valid = $this->flexi_auth->login($this->input->post('login_identity'), $this->input->post('login_password'), $remember_user);
+			
 			// Save any public status or error messages (Whilst suppressing any admin messages) to CI's flash session data.
 			$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
-
+//var_dump(validation_errors(), $this->flexi_auth->login($this->input->post('login_identity'), $this->input->post('login_password'), $remember_user),$this->session->set_flashdata('message', $this->flexi_auth->get_messages()) );die;
 			// Reload page, if login was successful, sessions will have been created that will then further redirect verified users.
-			redirect('admin/auth');
+			if ($valid)
+				redirect('admin/auth_public/dashboard');
+			else
+				redirect('admin');
 		}
 		else
 		{	
@@ -466,7 +468,7 @@ class Demo_auth_model extends CI_Model {
 		}
 		else
 		{
-			redirect('admin/auth');
+			redirect('admin/admin/login');
 		}
 	}
 	
