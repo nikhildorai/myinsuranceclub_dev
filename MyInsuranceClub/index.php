@@ -211,8 +211,9 @@ if (defined('ENVIRONMENT'))
 	    define('ROOT', $rPath);
 	}
 	
-	
-
+if ( function_exists( 'date_default_timezone_set' ) )
+date_default_timezone_set('Asia/Calcutta');	
+ini_set('date.timezone', 'America/New_York');
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE
