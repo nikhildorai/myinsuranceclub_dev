@@ -1,3 +1,13 @@
+<script type="text/javascript">
+<!--
+$(document).ready(function(){
+<?php if (isset($companyModel['status']) && !empty($companyModel['status']) && in_array($companyModel['status'], array( 'inactive', 'delete'))) {?>
+$(".form-horizontal :input").prop("disabled", true);
+<?php }?>	
+});
+//-->
+</script>
+
 <div class="page" data-ng-controller="signupCtrl">
 <?php 	$attributes = array('class'=>"form-horizontal form-validation");
 		echo form_open_multipart(current_url(), $attributes);	?>
@@ -37,33 +47,33 @@
 		                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Company Details</strong></div>
 		                <div class="panel-body">
 			                <div class="form-group">
-			                    <label for="Company Type" class="col-sm-3">Company Type</label>
+			                    <label for="Company Type" class="col-sm-3">Vertical</label>
 			                    <div class="col-sm-9">
 									<span class="ui-select "> 
 									<?php 
 										$selected = array_key_exists( 'company_type_id',$companyModel) ?  $companyModel['company_type_id'] : '';
 										$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Company_type_model', $optionKey = 'company_type_id', $optionValue = 'company_type_name', $defaultEmpty = "Please Select");
-										echo form_dropdown('companyModel[company_type_id]', $options, $selected, ' id="company_type_id" class="tooltip_trigger" required title="Search by company type." style="width: 357px;margin-top: 0px;"');
+										echo form_dropdown('companyModel[company_type_id]', $options, $selected, ' id="company_type_id" class="tooltip_trigger" required title="Search by company type." style="width: 345px;margin-top: 0px;"');
 									?>		
 									</span> 
 			                    </div>
 			                </div>
 			                
 			                <div class="form-group">
-			                    <label for="Company Type" class="col-sm-3">Company Sector Type</label>
+			                    <label for="Company Type" class="col-sm-3">Type</label>
 			                    <div class="col-sm-9">
 									<span class="ui-select "> 
 									<?php 
 										$selected = array_key_exists( 'public_private_health',$companyModel) ?  $companyModel['public_private_health'] : '';
 										$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Company_private_public_health_model', $optionKey = 'pph_id', $optionValue = 'company_type', $defaultEmpty = "Please Select");
-										echo form_dropdown('companyModel[public_private_health]', $options, $selected, ' id="public_private_health" class="tooltip_trigger" required title="Search by company type." style="width: 357px;margin-top: 0px;"');
+										echo form_dropdown('companyModel[public_private_health]', $options, $selected, ' id="public_private_health" class="tooltip_trigger" required title="Search by company type." style="width: 345px;margin-top: 0px;"');
 									?>		
 									</span> 
 			                    </div>
 			                </div>
 			                
 			                <div class="form-group">
-			                    <label for="" class="col-sm-3">Company Name</label>
+			                    <label for="" class="col-sm-3">Name</label>
 			                    <div class="col-sm-9">
 			                        <input type="text" class="form-control" required placeholder="Company Name" id="company_name" name="companyModel[company_name]" value="<?php echo array_key_exists( 'company_name',$companyModel) ? $companyModel['company_name'] : '';?>" >
 			                    </div>
@@ -71,7 +81,7 @@
 			                
 			                
 			                <div class="form-group">
-			                    <label for="" class="col-sm-3">Company Display Name</label>
+			                    <label for="" class="col-sm-3">Display Name</label>
 			                    <div class="col-sm-9">
 			                        <input type="text" class="form-control" required  placeholder="Company Display Name" id="company_display_name" name="companyModel[company_display_name]" value="<?php echo array_key_exists( 'company_display_name',$companyModel) ? $companyModel['company_display_name'] : '';?>">
 			                    </div>
@@ -79,7 +89,7 @@
 			                
 			                
 			                <div class="form-group">
-			                    <label for="" class="col-sm-3">Company Short Name</label>
+			                    <label for="" class="col-sm-3">Short Name</label>
 			                    <div class="col-sm-9">
 			                        <input type="text" class="form-control" required  placeholder="Company Short Name" id="company_shortname" name="companyModel[company_shortname]" value="<?php echo array_key_exists( 'company_shortname',$companyModel) ? $companyModel['company_shortname'] : '';?>" >
 			                    </div>
@@ -261,6 +271,12 @@
 			                        <?php echo display_ckeditor($ckeditor1); ?>
 			                    </div>
 			                </div>
+			                
+			                <div class="form-group">
+			                </div>
+			                <div class="form-group">
+			                </div>
+			                
 			                <div class="form-group">
 			                    <label for="" class="col-sm-2">Heading 2</label>
 			                    <div class="col-sm-10">
@@ -276,9 +292,15 @@
 			                </div>
 			                
 			                <div class="form-group">
-			                    <label for="" class="col-sm-2">Claim Ratio</label>
+			                </div>
+			                <div class="form-group">
+			                </div>
+			                
+			                
+			                <div class="form-group">
+			                    <label for="" class="col-sm-2">Claims Ratio</label>
 			                    <div class="col-sm-10">
-			                        <label for="">Claim Ratio</label>
+			                        <label for="">Claims Ratio</label>
 			                        <div class="divider"></div>
 			                        
 										<table class="table table-bordered table-striped cf">
@@ -286,7 +308,7 @@
 						                		<tr>
 								                    <th>#</th>
 								                    <th>Financial Year</th>
-								                    <th class="numeric">Claim Ratio</th>
+								                    <th class="numeric">Claims Ratio</th>
 												</tr>
 						                	</thead> 
 						                	<tbody>
@@ -308,7 +330,7 @@
 															<input type="hidden" name="claimRatio[<?php echo $cur;?>][financial_year]" value="<?php echo $prev.'-'.$cur; ?>">
 														</td>
 														<td>
-															<input type="number" name="claimRatio[<?php echo $cur;?>][claim_ratio]" value="<?php echo isset($ratioModel[$cur]) ? $ratioModel[$cur]['claim_ratio'] : '';?>"/>%
+															<input type="number" name="claimRatio[<?php echo $cur;?>][claim_ratio]" value="<?php echo isset($ratioModel[$cur]) ? $ratioModel[$cur]['claim_ratio'] : '';?>"/>&nbsp;&nbsp;%
 														</td>
 													</tr>
 								<?php 				$i++;
@@ -339,12 +361,21 @@
                             			<h3>Confirmation</h3>
                         			</div>
                         			<div class="modal-body">
-                            			Are you sure, you want to deactivate "<?php echo $companyModel['company_name'];?>" <span class="glyphicon glyphicon-question-sign"></span>
+										Are you sure, you want to 
+								<?php 	if (isset($companyModel['status']) && !empty($companyModel['status'])) 
+					          			{
+					          				if (in_array($companyModel['status'], array( 'inactive', 'delete'))) {	?>
+					          					Activate
+					          	<?php 		}
+					          				else if (in_array($companyModel['status'], array( 'active'))) {?>
+					                 			De-activate
+					           <?php 		}
+					          			}  ?>
+                            			  "<?php echo $companyModel['company_name'];?>" ?
                         			</div>
                         			<div class="modal-footer">
-                            			<button class="btn btn-danger" onClick="deactiveCompany()">Yes</button>
+                            			<button class="btn btn-danger" onClick="deactiveCompany()">Yes</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             			<button class="btn btn-primary" ng-click="cancel()">No</button>
-                            			<button class="btn btn-info" ng-click="cancel()">Cancel</button>
                         			</div>
                     			</script>
 
@@ -353,11 +384,13 @@
 
 								<input type="hidden" id="company_id" name="companyModel[company_id]" value="<?php echo array_key_exists( 'company_id',$companyModel) ? $companyModel['company_id'] : '';?>" />
 									<input type="hidden" id="company_detail_id" name="companyDetailModel[company_detail_id]" value="<?php echo array_key_exists( 'company_detail_id',$companyDetailModel) ? $companyDetailModel['company_detail_id'] : '';?>" />
-							
+							<?php 
+							if (!in_array($companyModel['status'], array( 'inactive', 'delete'))) {?>
 			                        <input type="submit" name="submit" value="Submit" class="btn btn-success btn-lg  " />
-			                        
+			                <?php }	?>        
 					           <?php 	
-					                 if (isset($companyModel['company_id']) && !empty($companyModel['company_id'])){?>
+					                 if (isset($companyModel['company_id']) && !empty($companyModel['company_id']))
+					                 {	?>
 					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
 					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
 					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
@@ -369,10 +402,16 @@
 					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
 					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
 					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-					                 	<div class="space"></div><div class="space"></div><div class="space"></div>
-					                 	<a href="javascript:void(0);" ng-click="open()" id="deactiveCompany" data-hrefval="<?php echo $base_url;?>admin/company/changeStatus/<?php echo $companyModel['company_id'];?>/inactive" class="btn btn-danger btn-lg" >De-activate</a>
-					           <?php } ?>
+					          	<?php 	if (isset($companyModel['status']) && !empty($companyModel['status'])) 
+					          			{
+					          				if (in_array($companyModel['status'], array( 'inactive', 'delete'))) {	?>
+					          					<a href="javascript:void(0);" ng-click="open()" id="deactiveCompany" data-hrefval="<?php echo $base_url;?>admin/company/changeStatus/<?php echo $companyModel['company_id'];?>/active" class="btn btn-danger btn-lg" >Activate Company</a>
+					          	<?php 		}
+					          				else if (in_array($companyModel['status'], array( 'active'))) {?>
+					                 			<a href="javascript:void(0);" ng-click="open()" id="deactiveCompany" data-hrefval="<?php echo $base_url;?>admin/company/changeStatus/<?php echo $companyModel['company_id'];?>/inactive" class="btn btn-danger btn-lg" >De-activate Company</a>
+					           <?php 		}
+					          			} 
+					          		}	?>
 			                     </div>
 			                    
 			               	</div>

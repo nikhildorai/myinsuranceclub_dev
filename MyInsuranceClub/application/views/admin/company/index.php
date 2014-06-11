@@ -79,7 +79,7 @@
                             <th class="numeric">Company Name</th>
                             <th class="numeric">Short Name</th>
                             <th class="numeric">Display Name</th>
-                            <th class="numeric">Type</th>
+                            <th class="numeric">Vertical</th>
                             <th class="numeric">Status</th>
                             <th class="numeric">Action</th>
                         </tr>

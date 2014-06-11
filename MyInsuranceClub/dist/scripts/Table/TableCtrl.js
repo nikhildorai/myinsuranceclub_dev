@@ -130,7 +130,6 @@ angular.module('app.tables', []).controller('tableCtrl', [
         rating: 4.4
       }
     ];
-console.log('js',$scope.stores);    
     $scope.searchKeywords = '';
     $scope.filteredStores = [];
     $scope.row = '';

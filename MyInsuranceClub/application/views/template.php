@@ -14,6 +14,7 @@ $server = base_url();//$this->util->getUrl('currentPageUrl');
         <!-- needs images, font... therefore can not be part of ui.css -->
         <link rel="stylesheet" href="<?php echo $server;?>dist/bower_components/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="<?php echo $server;?>dist/bower_components/weather-icons/css/weather-icons.min.css">
+        <script src="<?php echo $server;?>dist/bower_components/jquery/dist/jquery.min.js"></script>
         <!-- end needs images -->
 
             <!-- build:css styles/ui.css -->
@@ -56,7 +57,6 @@ $server = base_url();//$this->util->getUrl('currentPageUrl');
 
 
         <!-- build:js scripts/vendor.js -->
-        <script src="<?php echo $server;?>dist/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="<?php echo $server;?>dist/bower_components/angular/angular.min.js"></script>
         <script src="<?php echo $server;?>dist/bower_components/angular-route/angular-route.min.js"></script>
         <script src="<?php echo $server;?>dist/bower_components/angular-animate/angular-animate.min.js"></script>

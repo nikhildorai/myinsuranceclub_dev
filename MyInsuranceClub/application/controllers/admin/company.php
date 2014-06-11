@@ -118,7 +118,8 @@ class Company extends CI_Controller {
 						}
 						else if ($row['status'] == 'inactive')
 						{
-							$actionBtn = '<a href="'.$base_url.'admin/company/changeStatus/'.$row['company_id'].'/active" style="line-height: 2;">Activate</a>';
+							$actionBtn = '<a href="'.$base_url.'admin/company/create/'.$row['company_id'].'" style="line-height: 2;" >View</a>';
+							//$actionBtn = '<a href="'.$base_url.'admin/company/changeStatus/'.$row['company_id'].'/active" style="line-height: 2;">Activate</a>';
 						}
 						$rows[$i]['action'] = $actionBtn;
 					$i++;
@@ -152,7 +153,7 @@ class Company extends CI_Controller {
 			'config' => array(
 				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
 				'width' 	=> 	"100%",	//Setting a custom width
-				'height' 	=> 	'100px',	//Setting a custom height
+				'height' 	=> 	'300px',	//Setting a custom height
 			),
 		);
 		$this->data['ckeditor2'] = array(
@@ -184,6 +185,11 @@ class Company extends CI_Controller {
 			}
 			else 
 			{
+				if ($exist['status'] == 'delete')
+				{
+					$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
+					redirect('admin/company/index');
+				}
 				$companyModel = $exist;	
 				$modelType = 'update';
 				
