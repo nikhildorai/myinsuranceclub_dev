@@ -74,6 +74,7 @@ class Policy extends CI_Controller {
 	{
 		$this->load->library('table');
 		$this->load->library('pagination');
+        $this->load->library('paginationlib');
 		$arrParams 	= array();
 		if (isset($_GET))
 			$arrParams = $_GET;
@@ -87,6 +88,7 @@ class Policy extends CI_Controller {
 		$config = $this->util->get_pagination_params();
 		$config['total_rows'] 	= $this->data['records']->num_rows();
 		$this->pagination->initialize($config); 		
+        
 		$this->template->write_view('content', 'admin/policy/index', $this->data, TRUE);
 		$this->template->render();
 	}

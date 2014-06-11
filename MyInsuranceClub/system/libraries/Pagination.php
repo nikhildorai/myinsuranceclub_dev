@@ -47,8 +47,8 @@ class CI_Pagination {
 	var $last_tag_open		= '&nbsp;';
 	var $last_tag_close		= '';
 	var $first_url			= ''; // Alternative URL for the First Page.
-	var $cur_tag_open		= '&nbsp;<strong>';
-	var $cur_tag_close		= '</strong>';
+	var $cur_tag_open		= '';
+	var $cur_tag_close		= '';
 	var $next_tag_open		= '&nbsp;';
 	var $next_tag_close		= '&nbsp;';
 	var $prev_tag_open		= '&nbsp;';
@@ -59,7 +59,7 @@ class CI_Pagination {
 	var $query_string_segment = 'per_page';
 	var $display_pages		= TRUE;
 	var $anchor_class		= '';
-
+	var $show_goto			= FALSE;
 	/**
 	 * Constructor
 	 *
@@ -223,12 +223,13 @@ class CI_Pagination {
 
 		// And here we go...
 		$output = '';
+		$goto = '';
 
 		// Render the "First" link
 		if  ($this->first_link !== FALSE AND $this->cur_page > ($this->num_links + 1))
 		{
 			$first_url = ($this->first_url == '') ? $this->base_url : $this->first_url;
-			$output .= $this->first_tag_open.'<a '.$this->anchor_class.'href="'.$first_url.'">'.$this->first_link.'</a>'.$this->first_tag_close;
+			$output .= $this->first_tag_open.'<a class="btn btn-info" '.$this->anchor_class.'href="'.$first_url.'">'.$this->first_link.'</a>'.$this->first_tag_close;
 		}
 
 		// Render the "previous" link
@@ -245,12 +246,12 @@ class CI_Pagination {
 
 			if ($i == 0 && $this->first_url != '')
 			{
-				$output .= $this->prev_tag_open.'<a '.$this->anchor_class.'href="'.$this->first_url.'">'.$this->prev_link.'</a>'.$this->prev_tag_close;
+				$output .= $this->prev_tag_open.'<a class="btn btn-info" '.$this->anchor_class.'href="'.$this->first_url.'">'.$this->prev_link.'</a>'.$this->prev_tag_close;
 			}
 			else
 			{
 				$i = ($i == 0) ? '' : $this->prefix.$i.$this->suffix;
-				$output .= $this->prev_tag_open.'<a '.$this->anchor_class.'href="'.$this->base_url.$i.'">'.$this->prev_link.'</a>'.$this->prev_tag_close;
+				$output .= $this->prev_tag_open.'<a class="btn btn-info" '.$this->anchor_class.'href="'.$this->base_url.$i.'">'.$this->prev_link.'</a>'.$this->prev_tag_close;
 			}
 
 		}
@@ -282,13 +283,13 @@ class CI_Pagination {
 
 						if ($n == '' && $this->first_url != '')
 						{
-							$output .= $this->num_tag_open.'<a '.$this->anchor_class.'href="'.$this->first_url.'">'.$loop.'</a>'.$this->num_tag_close;
+							$output .= $this->num_tag_open.'<a  class="btn btn-info" '.$this->anchor_class.'href="'.$this->first_url.'">'.$loop.'</a>'.$this->num_tag_close;
 						}
 						else
 						{
 							$n = ($n == '') ? '' : $this->prefix.$n.$this->suffix;
 
-							$output .= $this->num_tag_open.'<a '.$this->anchor_class.'href="'.$this->base_url.$n.'">'.$loop.'</a>'.$this->num_tag_close;
+							$output .= $this->num_tag_open.'<a  class="btn btn-info" '.$this->anchor_class.'href="'.$this->base_url.$n.'">'.$loop.'</a>'.$this->num_tag_close;
 						}
 					}
 				}
@@ -307,7 +308,7 @@ class CI_Pagination {
 				$i = ($this->cur_page * $this->per_page);
 			}
 
-			$output .= $this->next_tag_open.'<a '.$this->anchor_class.'href="'.$this->base_url.$this->prefix.$i.$this->suffix.'">'.$this->next_link.'</a>'.$this->next_tag_close;
+			$output .= $this->next_tag_open.'<a class="btn btn-info" '.$this->anchor_class.'href="'.$this->base_url.$this->prefix.$i.$this->suffix.'">'.$this->next_link.'</a>'.$this->next_tag_close;
 		}
 
 		// Render the "Last" link
@@ -321,7 +322,7 @@ class CI_Pagination {
 			{
 				$i = (($num_pages * $this->per_page) - $this->per_page);
 			}
-			$output .= $this->last_tag_open.'<a '.$this->anchor_class.'href="'.$this->base_url.$this->prefix.$i.$this->suffix.'">'.$this->last_link.'</a>'.$this->last_tag_close;
+			$output .= $this->last_tag_open.'<a class="btn btn-info" '.$this->anchor_class.'href="'.$this->base_url.$this->prefix.$i.$this->suffix.'">'.$this->last_link.'</a>'.$this->last_tag_close;
 		}
 
 		// Kill double slashes.  Note: Sometimes we can end up with a double slash
@@ -331,6 +332,25 @@ class CI_Pagination {
 		// Add the wrapper HTML if exists
 		$output = $this->full_tag_open.$output.$this->full_tag_close;
 
+		if ($this->show_goto == TRUE)
+		{
+			for ($i = 1; $i <= $num_pages; $i++)
+			{
+				$pageUrl = $this->base_url.($i*$this->per_page - $this->per_page);
+				if ($this->cur_page == $i)
+					$goto .= '<option value="'.$i.'" data-href="'.$pageUrl.'" selected>'.$i.'</option>';
+				else
+					$goto .= '<option value="'.$i.'" data-href="'.$pageUrl.'" >'.$i.'</option>';
+			}
+			$output .= '<div class="input-group" style="width: 109px;">
+                        	<span class="ui-select">
+                				<select id="goto_page_dd" style="width: 60px; margin-top: 0px; margin-bottom: 0px; padding-top: 7px; padding-bottom: 8px; right: 1px;">'.$goto.'</select>
+			            	</span>
+                            <span class="input-group-btn">
+                            	<button id="goto_page_btn" class="btn btn-info" type="button">Go!</button>
+                            </span>
+                        </div>'; 
+		}
 		return $output;
 	}
 }

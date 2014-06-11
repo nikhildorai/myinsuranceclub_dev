@@ -13,8 +13,27 @@ $(".form-horizontal :input").prop("disabled", true);
 		echo form_open_multipart(current_url(), $attributes);	?>
 	<div class="panel panel-primary">
     	<div class="panel-heading">
-        	<h3 class="panel-title"><?php echo (isset($companyModel['company_id']) && !empty($companyModel['company_id'])) ? 'Update Company' : 'Create Company';?></h3>
-        		
+        	<strong>
+        		<span class="glyphicon glyphicon-th-list"></span> <?php echo (isset($companyModel['company_id']) && !empty($companyModel['company_id'])) ? 'Update Company' : 'Create Company';?> 
+        	</strong>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>&nbsp;
+        	<a href="<?php echo $base_url;?>admin/company/" class="btn btn-w-md btn-gap-v btn-default">Back</a>
+        	
         </div>
 		<?php 	if (! empty($message))
 				{
@@ -46,6 +65,7 @@ $(".form-horizontal :input").prop("disabled", true);
 		            <section class="panel panel-default">
 		                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Company Details</strong></div>
 		                <div class="panel-body">
+		                
 			                <div class="form-group">
 			                    <label for="Company Type" class="col-sm-3">Vertical</label>
 			                    <div class="col-sm-9">
@@ -123,6 +143,13 @@ $(".form-horizontal :input").prop("disabled", true);
 			                    <label for="" class="col-sm-3">URL</label>
 			                    <div class="col-sm-9">
 			                        <input type="text" class="form-control"  required placeholder="URL"  name="companyModel[slug]" value="<?php echo array_key_exists( 'slug',$companyModel) ? $companyModel['slug'] : '';?>" >
+			                    </div>
+			                </div>
+			                
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">Tag</label>
+			                    <div class="col-sm-9">
+			                        <input type="text" class="form-control"  required placeholder="Tag"  name="companyModel[tag]" value="<?php echo array_key_exists( 'tag',$companyModel) ? $companyModel['tag'] : '';?>" >
 			                    </div>
 			                </div>
 			                
@@ -296,7 +323,6 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <div class="form-group">
 			                </div>
 			                
-			                
 			                <div class="form-group">
 			                    <label for="" class="col-sm-2">Claims Ratio</label>
 			                    <div class="col-sm-10">
@@ -313,7 +339,12 @@ $(".form-horizontal :input").prop("disabled", true);
 						                	</thead> 
 						                	<tbody>
 												<?php 
-												$curYear = (int)date('Y')-1;
+												$curMonth = (int)date('m');
+												if ($curMonth > 3)
+													$curYear = (int)date('Y')-1;
+												else
+													$curYear = (int)date('Y')-2;
+													
 												$i = 1;
 												for ($year = 2000; $year <= $curYear; $year++)
 												{	
@@ -340,6 +371,7 @@ $(".form-horizontal :input").prop("disabled", true);
 					
 			                    </div>
 			                </div>
+			                
 				        </div>
 				    </section> 
 		        </div>
@@ -385,30 +417,23 @@ $(".form-horizontal :input").prop("disabled", true);
 								<input type="hidden" id="company_id" name="companyModel[company_id]" value="<?php echo array_key_exists( 'company_id',$companyModel) ? $companyModel['company_id'] : '';?>" />
 									<input type="hidden" id="company_detail_id" name="companyDetailModel[company_detail_id]" value="<?php echo array_key_exists( 'company_detail_id',$companyDetailModel) ? $companyDetailModel['company_detail_id'] : '';?>" />
 							<?php 
-							if (!in_array($companyModel['status'], array( 'inactive', 'delete'))) {?>
-			                        <input type="submit" name="submit" value="Submit" class="btn btn-success btn-lg  " />
-			                <?php }	?>        
+							if (isset($companyModel['status']) && !in_array($companyModel['status'], array( 'inactive', 'delete'))) {?>
+			                        <div class="space"><div class="space"><input type="submit" name="submit" value="Submit" class="btn btn-success btn-lg  " />
+			                <?php }else {	?>
+			                		<div class="space"><div class="space"><input type="submit" name="submit" value="Submit" class="btn btn-success btn-lg  " />
+			                <?php }	?>   
+			                	<a href = "<?php echo $base_url; ?>admin/company"  class="btn btn-lg btn-default">Cancel</a>     
 					           <?php 	
 					                 if (isset($companyModel['company_id']) && !empty($companyModel['company_id']))
 					                 {	?>
-					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-					                 	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+					         
 					          	<?php 	if (isset($companyModel['status']) && !empty($companyModel['status'])) 
 					          			{
 					          				if (in_array($companyModel['status'], array( 'inactive', 'delete'))) {	?>
-					          					<a href="javascript:void(0);" ng-click="open()" id="deactiveCompany" data-hrefval="<?php echo $base_url;?>admin/company/changeStatus/<?php echo $companyModel['company_id'];?>/active" class="btn btn-danger btn-lg" >Activate Company</a>
+					          					<a style="float: right;" href="javascript:void(0);" ng-click="open()" id="deactiveCompany" data-hrefval="<?php echo $base_url;?>admin/company/changeStatus/<?php echo $companyModel['company_id'];?>/active" class="btn btn-danger btn-lg" >Activate Company</a>
 					          	<?php 		}
 					          				else if (in_array($companyModel['status'], array( 'active'))) {?>
-					                 			<a href="javascript:void(0);" ng-click="open()" id="deactiveCompany" data-hrefval="<?php echo $base_url;?>admin/company/changeStatus/<?php echo $companyModel['company_id'];?>/inactive" class="btn btn-danger btn-lg" >De-activate Company</a>
+					                 			<a style="float: right;" href="javascript:void(0);" ng-click="open()" id="deactiveCompany" data-hrefval="<?php echo $base_url;?>admin/company/changeStatus/<?php echo $companyModel['company_id'];?>/inactive" class="btn btn-danger btn-lg" >De-activate Company</a>
 					           <?php 		}
 					          			} 
 					          		}	?>

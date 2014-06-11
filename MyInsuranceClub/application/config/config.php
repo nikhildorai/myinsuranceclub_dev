@@ -369,17 +369,26 @@ $config['css_path'] 	= 	$config['base_url'].'application/views/css/';
 $config['js_path'] 		= 	$config['base_url'].'application/views/js/';
 
 //	pagination setting
-$config['pagination']['per_page'] 	=	10;
-$config['pagination']['num_links'] 	=	5;
-$config['pagination']['first_link'] 	= 	'First';
-$config['pagination']['first_tag_open'] = '<div>';
-$config['pagination']['first_tag_close'] = '</div>';
-$config['pagination']['last_link'] = 'Last';
-$config['pagination']['last_tag_open'] = '<div>';
-$config['pagination']['last_tag_close'] = '</div>';
-$config['pagination']['display_pages'] = TRUE;
-$config['pagination']['page_query_string'] = TRUE;
-$config['pagination']['base_url'] = $_SERVER['PHP_SELF'];
+$config['pagination']['per_page'] 			=	10;
+$config['pagination']['num_links'] 			=	1;
+$config['pagination']['first_link'] 		= 	'First';
+$config['pagination']['last_link'] 			= 	'Last';
+$config['pagination']['display_pages'] 		= 	TRUE;
+$config['pagination']['page_query_string'] 	= 	TRUE;
+$config['pagination']['base_url'] 			= 	$_SERVER['PHP_SELF'];
+$config['pagination']['cur_tag_open'] 		= 	'<a href="javascript:void(0);" class="btn btn-primary">';
+$config['pagination']['cur_tag_close'] 		= 	'</a>';
+$config['pagination']['show_goto']			=	TRUE;
+$config['pagination']['full_tag_open'] 		=	'<div class="btn-group">';
+$config['pagination']['full_tag_close'] 		=	'</div>'; 
+//$config['pagination']['cur_tag_open'] 		= 	'<a href="javascript:void(0);" class="badge badge-primary">';
+//$config['pagination']['anchor_class']		=	'btn btn-info';
+//$config['pagination']['uri_segment']       	= 	3;
+//$config['pagination']['use_page_numbers']  	= 	TRUE;
+//$config['pagination']['first_tag_open'] = $config['pagination']['last_tag_open']= $config['pagination']['next_tag_open']= $config['pagination']['prev_tag_open'] = $config['pagination']['num_tag_open'] = '<li>';
+//$config['pagination']['first_tag_close'] = $config['pagination']['last_tag_close']= $config['pagination']['next_tag_close']= $config['pagination']['prev_tag_close'] = $config['pagination']['num_tag_close'] = '</li>';
+
+
 
 //	upload url path
 $config['url_path']['company'] = $config['base_url'].'uploads/company/';

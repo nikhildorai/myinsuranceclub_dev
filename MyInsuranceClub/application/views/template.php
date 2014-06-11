@@ -43,7 +43,7 @@ $server = base_url();//$this->util->getUrl('currentPageUrl');
                     <?php $this->load->view('admin/adminHeader'); ?> 
                 </section>
 
-                <aside data-ng-include1=" '<?php echo $server;?>dist/views/nav.html' " id="nav-container">
+                <aside data-ng-include1=" '<?php echo $server;?>dist/views/nav.html' " id="nav-container" class="ng-scope" >
                     <?php $this->load->view('admin/adminNav'); ?> 
                 </aside>
             </div>
@@ -54,7 +54,22 @@ $server = base_url();//$this->util->getUrl('currentPageUrl');
                 </section>
             </div>
         </div>
+<script type="text/javascript">
+$(document).ready(function(){
 
+	$('#goto_page_btn').click(function(){
+		var hrefVal = $('#goto_page_dd').find(':selected').data('href');
+		window.location.href = hrefVal;
+	});
+	
+	/*
+	$('#goto_page_dd').change(function(){
+		var hrefVal = $('#goto_page_dd').find(':selected').data('href');
+		window.location.href = hrefVal;
+	});
+	*/
+});
+</script>
 
         <!-- build:js scripts/vendor.js -->
         <script src="<?php echo $server;?>dist/bower_components/angular/angular.min.js"></script>

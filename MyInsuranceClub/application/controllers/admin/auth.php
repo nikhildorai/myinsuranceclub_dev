@@ -48,8 +48,7 @@ class Auth extends CI_Controller {
 			{
 		//		redirect('admin/auth_public/dashboard');
 			}
-		}
-		
+		}	
 		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
 		$this->load->vars('base_url', base_url());
 		$this->load->vars('includes_dir', base_url().'/includes/');
@@ -84,7 +83,15 @@ class Auth extends CI_Controller {
 	 */ 
 	function index()
     {
-		$this->login();
+		$isUser = $this->util->getLoggedInUserDetails();
+    	if (!empty($isUser)) 
+		{
+			redirect('admin/auth_public/dashboard');
+		}
+		else
+		{
+			$this->login();
+		}
 	}
  
 	/**

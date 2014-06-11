@@ -74,10 +74,10 @@
 					
 				?>			
 				<li class="info_req" id="type_health_plan_li" style="display:<?php echo $pfTypeDisplay;?>;">
-					<label for="search">Policy Health Type:</label>
+					<label for="search">Product:</label>
 					<?php 
 					//
-					echo form_dropdown('policyModel[type_health_plan]', $healthOptions, $selected, ' id="type_health_plan" class="tooltip_trigger" title="Search by health type."');
+					echo form_dropdown('policyModel[type_health_plan]', $healthOptions, $selected, 'multiple id="type_health_plan" class="tooltip_trigger" title="Search by health type."');
 					?>
 				</li>
 <?php /*?>				

@@ -139,7 +139,7 @@ class Company extends CI_Controller {
     public function create($company_id = null)
 	{
 		$modelType = 'create';
-		$companyModel = $companyDetailModel = $saveData = array();
+		$companyModel = $companyDetailModel = $saveData = $ratioModel = array();
 		$this->data['message'] = '';
 		$this->data['file_upload'] = array();
 		
@@ -211,7 +211,6 @@ class Company extends CI_Controller {
 				if (empty($claimExist))
 				{
 					$cmodelType = 'create';
-					$ratioModel = array();
 				}
 				else 
 				{
@@ -273,6 +272,7 @@ class Company extends CI_Controller {
 				array('field' => 'companyModel[seo_title]', 'label' => 'seo title', 'rules' => 'required'),
 				array('field' => 'companyModel[seo_description]', 'label' => 'seo description', 'rules' => 'required'),
 				array('field' => 'companyModel[seo_keywords]', 'label' => 'seo keywords', 'rules' => 'required'),
+				array('field' => 'companyModel[tag]', 'label' => 'tag', 'rules' => 'required'),
 		//		array('field' => 'companyModel[image_logo_1]', 'label' => 'logo image 1', 'rules' => 'required'),
 		//		array('field' => 'companyModel[image_logo_2]', 'label' => 'logo image 2', 'rules' => 'required'),
 				array('field' => 'companyModel[slug]', 'label' => 'url', 'rules' => 'required|callback_validateInsuranceCompany[slug#'.$arrParams["slug"].',modelType#'.$modelType.',company_id#'.$company_id.',company_type_id#'.$companyTypeId.']'),

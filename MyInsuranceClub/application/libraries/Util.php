@@ -36,6 +36,8 @@ class Util {
 	function getUrl($type = 'currentUrl')
 	{
 		$value = base_url();
+		$router =& load_class('Router', 'core');
+		$uri = & load_class('URI','core');
 		$url = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] .$_SERVER['REQUEST_URI'];
 		
 		if ($type == 'currentUrl' )
@@ -44,11 +46,12 @@ class Util {
 			$value = $url;
 		else if ($type == 'serverName')
 			$value = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'].'/';
-	//	$router =& load_class('Router', 'core');
-	//	$uri = & load_class('URI','core');
-	//	$router->fetch_class();
-	//	$router->fetch_method();
-	//	$router->fetch_module();
+		else if ($type == 'module')
+			$value = $uri->segment(1);
+		else if($type == 'controller')
+			$value = $uri->segment(2);
+		else if ($type == 'action')
+			$value = $uri->segment(3);
 		return $value;
 	}
 	
@@ -424,6 +427,22 @@ class Util {
 			
 		}
 		return $save;
+	}
+	
+	public function getStatusIcon($status)
+	{
+		$status = strtolower($status);
+		$value = '<span class="btn-icon-round btn-icon-round-sm bg-info"></span>';
+		if ($status == 'active') {
+			$value = '<span class="btn-icon-round btn-icon-round-sm bg-success"></span>';
+		}
+		else if ($status == 'inactive') {
+			$value = '<span class="btn-icon-round btn-icon-round-sm bg-warning"></span>';
+		}
+		else if ($status == 'deleted') {
+			$value = '<span class="btn-icon-round btn-icon-round-sm bg-danger"></span>';
+		}
+		return $value;
 	}
 }
 

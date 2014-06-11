@@ -5,7 +5,10 @@
         data-slim-scroll
         data-highlight-active>
         
-        
+        <?php
+        $controller = $this->util->getUrl('controller');
+       // var_dump($controller);
+          ?>
         
         <li>
         	<a href="<?php echo $base_url;?>admin/auth_public/"> 
@@ -16,21 +19,22 @@
         	</a>
         </li>
         
-        <li>
+        <li class="<?php echo in_array($controller, array('company', 'policy')) ? 'open active' : '';?>">
             <a href="javascript:void(0);">
             	<i class="fa fa-magic">
             		<span class="icon-bg bg-orange"></span>
             	</i>
             	<span data-i18n="Master DB"></span>
             </a>
-            <ul>
-                <li>
+            <ul style="display: <?php echo in_array($controller, array('company', 'policy')) ? 'block' : 'none';?>;">
+            
+                <li class="<?php echo in_array($controller, array('company')) ? 'active' : 'inactive';?>">
                 	<a href="<?php echo $base_url;?>admin/company/">
                 		<i class="fa fa-caret-right"></i>
                 		<span data-i18n="Company"></span>
                 	</a>
                	</li>
-                <li>
+                <li class="<?php echo in_array($controller, array('policy')) ? 'active' : 'inactive';?>">
                 	<a href="<?php echo $base_url;?>admin/policy/">
                 		<i class="fa fa-caret-right"></i>
                 		<span data-i18n="Policy"></span>

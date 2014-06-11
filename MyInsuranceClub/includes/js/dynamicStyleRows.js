@@ -20,7 +20,7 @@
       });
       
       // Remove button functionality
-      $("table.dynatable a.remove").live("click", function() {
+      $("table.dynatable a.remove").on("click", function() {
           $(this).parents("tr").remove();
           recalcId();
           id--;

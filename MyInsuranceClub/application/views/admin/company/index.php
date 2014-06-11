@@ -18,7 +18,27 @@
 		} ?>
 
     <section class="panel panel-primary">
-        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Manage Company</strong></div>
+        <div class="panel-heading">
+        	<strong>
+        		<span class="glyphicon glyphicon-th"></span> Manage Company 
+        	</strong>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
+        	<div class="space"></div><div class="space"></div>
+        	<a href="<?php echo $base_url;?>admin/company/create" class="btn btn-w-md btn-gap-v btn-warning">Create New Company</a>
+        </div>
         <div class="panel-body">
 	        <section class="panel panel-default">
 			    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Search</strong></div>
@@ -91,14 +111,18 @@
                     	$rows = json_decode($jsonRows);
                     	foreach ($rows as $k1=>$v1)
                     	{
-                    		$v1 = (array)$v1;	?>
+                    		$v1 = (array)$v1;	
+                    		if (strtolower($v1['status']) != 'active'){?>
+                    		<tr  class="danger">
+                    		<?php }else{	?>
                     		<tr>
+                    <?php 	}?>
 								<td><?php echo $v1['company_id'];?></td>
 								<td><?php echo $v1['company_name'];?></td>
 								<td><?php echo $v1['company_shortname'];?></td>
 								<td><?php echo $v1['company_display_name'];?></td>
 								<td><?php echo $v1['company_type_name'];?></td>
-								<td><?php echo $v1['status'];?></td>
+								<td><?php echo $this->util->getStatusIcon($v1['status']);?></td>
 								<td style="width:18%;"><?php echo $v1['action'];?></td>
 							</tr>
         <?php          	}
