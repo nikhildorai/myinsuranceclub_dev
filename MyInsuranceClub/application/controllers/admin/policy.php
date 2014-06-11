@@ -74,7 +74,6 @@ class Policy extends CI_Controller {
 	{
 		$this->load->library('table');
 		$this->load->library('pagination');
-        $this->load->library('paginationlib');
 		$arrParams 	= array();
 		if (isset($_GET))
 			$arrParams = $_GET;
