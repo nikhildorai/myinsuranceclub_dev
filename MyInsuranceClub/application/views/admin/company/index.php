@@ -1,5 +1,5 @@
 <div class="page">
-<?php var_dump($this->util->getLoggedInUserDetails());?>
+<?php //var_dump($this->util->getLoggedInUserDetails());?>
 <?php 	if (! empty($message))
 		{
 			if (isset($msgType) && !empty($msgType))
