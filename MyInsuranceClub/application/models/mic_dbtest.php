@@ -60,7 +60,7 @@ class mic_dbtest EXTENDS CI_Model{
 					         FROM 
 					               insurance_company_master i,policy_health_master p, annual_premium_health ap, policy_health_features f,policy_health_variants v,zone z,company_city_zone ccz 
 							WHERE 
-					               i.company_id=p.company_id AND p.policy_id=v.policy_id AND v.variant_id=f.variant_id AND v.variant_id=ap.variant_id AND ap.zone=z.zone_id AND z.zone_id=ccz.zone_id AND ap.term=1";
+					               i.company_id=p.company_id AND p.policy_id=v.policy_id AND v.variant_id=f.variant_id AND v.variant_id=ap.variant_id AND ap.zone=z.zone_id AND ap.variant_id=ccz.variant_id AND z.zone_id=ccz.zone_id AND ap.term=1";
 		/* FILTER DATA USING USER INPUT */
 		
 		if($user_input['plan_type']!='')		/* Filter based on Individual/Family Composition */
@@ -226,6 +226,8 @@ class mic_dbtest EXTENDS CI_Model{
 			}
 		}
 		}
+		$get_policy.=" ORDER BY ap.annual_premium ASC";
+		//echo $get_policy;
 		$get_data=$this->db->query($get_policy);
 		return $get_data->result_array();
 	}

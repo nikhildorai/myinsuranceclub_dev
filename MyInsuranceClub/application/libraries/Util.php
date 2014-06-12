@@ -188,7 +188,7 @@ class Util {
 				$return	.=	'<div style="min-height: 74px; height: auto; margin-top: 10px; background: #effdfe; border: 2px solid #dadada;" class="main_acc">
 								<div class="col-md-5">
 									<label for="1_1_refundable" style="margin-top: -5px; margin-bottom: 0px; padding: 25px 0px 20px 0px;">';
-                 					if($detail['room_rent']!='Fully Covered')
+                 					/* if($detail['room_rent']!='Fully Covered')
                  					{
 										$room_rent='Rs.'.round(0.01*$detail['sum_assured']).'/day';	
                  					}else 
@@ -210,7 +210,7 @@ class Util {
                  					else 
                  					{
                  						$doctor_fee=$detail['doctor_fee'];
-                 					}
+                 					} */
                  					if($detail['preexisting_diseases']!='Not Covered')
                  					{
                  						$preexist_diseases='Waiting period of '.$detail['preexisting_diseases'].' years';
@@ -282,9 +282,9 @@ class Util {
 															</td>
 															<td>
 																<ul class="no">
-																	<li>'.$room_rent.'</li>
-																	<li>'.$icu_rent.'</li>
-																	<li>'.$doctor_fee.'</li>
+																	<li>'.$detail['room_rent'].'</li>
+																	<li>'.$detail['icu_rent'].'</li>
+																	<li>'.$detail['doctor_fee'].'</li>
 																</ul>
 															</td>
 														</tr>
