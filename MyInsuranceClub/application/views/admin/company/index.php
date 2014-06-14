@@ -22,28 +22,17 @@
         	<strong>
         		<span class="glyphicon glyphicon-th"></span> Manage Company 
         	</strong>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div>
-        	<a href="<?php echo $base_url;?>admin/company/create" class="btn btn-w-md btn-gap-v btn-warning">Create New Company</a>
+        	<a href="<?php echo $base_url;?>admin/company/create" class="btn btn-w-md btn-gap-v btn-success btn-sm" style="float: right; margin-top: -5px;">Create New Company</a>
         </div>
         <div class="panel-body">
-	        <section class="panel panel-default">
-			    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Search</strong></div>
-				<div class="panel-body">
-				
+        
+        
+        
+    <!-- Accordion -->
+        <section class="panel" data-ng-controller="AccordionDemoCtrl"  style="border-bottom-width: 0px;">
+            <accordion close-others="oneAtATime" class="ui-accordion">
+                <accordion-group heading="Search Filter" is-open="false">
+					
 				<?php echo form_open('admin/company/index', array('method'=>'get'));	?>
 			        <div class="form-group">
 	                    <label for="" class="col-sm-2">Search Company</label>
@@ -86,8 +75,10 @@
                     	</div>
 	                </div>
 				<?php echo form_close();?>
-		        </div>
-		    </section>
+                </accordion-group>
+            </accordion>
+
+        </section>
         
         
         

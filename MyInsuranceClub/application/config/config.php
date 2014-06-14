@@ -392,9 +392,12 @@ $config['pagination']['full_tag_close'] 		=	'</div>';
 
 //	upload url path
 $config['url_path']['company'] = $config['base_url'].'uploads/company/';
+$config['url_path']['policy'] = $config['base_url'].'uploads/policy/';
 
 //	upload folder paths
 $config['folder_path']['company'] = realpath(APPPATH . '../uploads').'/company/';
+$config['folder_path']['policy'] = realpath(APPPATH . '../uploads').'/policy/';
 
+$config['policy']['descriptionCount'] = 10;
 /* End of file config.php */
 /* Location: ./application/config/config.php */

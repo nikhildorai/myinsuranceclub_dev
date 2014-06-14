@@ -47,11 +47,15 @@ class Policy extends CI_Controller {
         $this->load->library('upload');
  		$this->load->helper('url');
  		$this->load->helper('form');
+        $this->load->helper('ckeditor');
 		$this->load->library('form_validation');
 		$this->load->model('policy_health_features_model');
-		$this->load->model('policy_health_type_model');
 		$this->load->model('policy_health_variants_model');
 		$this->load->model('policy_health_master_model');
+		$this->load->model('policy_features_model');
+		$this->load->model('product_model');
+		$this->load->model('sub_product_model');
+		$this->load->model('user_accounts_model');
  		
 		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
 		$this->load->vars('base_url', base_url());
@@ -96,11 +100,15 @@ class Policy extends CI_Controller {
 	{
 		$modelType = 'create';
 		//	check if policy id exists
-		$policyModel = $variantModel = array();
+		$policyModel = $variantModel = $policyFeaturesModel = array();
 		$this->data['message'] = '';
 		$company_id = '';
+		$sessionMsg = $this->session->flashdata('message');
+		$this->data['message'] = ( !empty($sessionMsg)) ? $sessionMsg : '';
+		$this->session->set_flashdata('message','');	
+		$isActive = true;
 		if ((isset($_GET['policy_id']) && !empty($_GET['policy_id'])) || !empty($policy_id))
-		{	
+		{
 			if (isset($_GET['policy_id']))
 				$policy_id = $_GET['policy_id'];
 			$where = array();
@@ -115,14 +123,21 @@ class Policy extends CI_Controller {
 			}
 			else 
 			{
+				if ($exist['status'] != 'active')
+					$isActive = false;
 				$policyModel = $exist;
 				$company_id = $policyModel['company_id'];
 				$modelType = 'update';
+				
+				
+				$where = array();
+				$where[0]['field'] = 'policy_id';
+				$where[0]['value'] = (int)$policy_id;
+				$where[0]['compare'] = 'equal';
+	
+				$policyFeaturesModel = $this->util->getTableData($modelName='Policy_features_model', $type="single", $where, $fields = array());	
 			}
 		}
-	
-		//	get all the health type as per company type
-		$allCompanyType = $this->util->getTableData($modelName='Company_type_model', $type="all", $where = array(), $fields = array());
 		
 		//	get all existing variants
 		$where = array();
@@ -132,34 +147,74 @@ class Policy extends CI_Controller {
 		$where[1]['field'] = 'status';
 		$where[1]['value'] = 'active';
 		$where[1]['compare'] = 'equal';
-		$variantModel = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());		
-		if (!empty($allCompanyType))
-		{
-			foreach ($allCompanyType as $k1=>$v1)
-			{
-				$where = array();
-				$where[0]['field'] = 'company_type_id';
-				$where[0]['value'] = (int)$v1['company_type_id'];
-				$where[0]['compare'] = 'equal';
-				$a = array();
-				$op = '';
-				$policyHealth = $this->util->getTableData($modelName='Policy_health_type_model', $type="all", $where, $fields = array());
-				if (!empty($policyHealth))
-				{
-					foreach ($policyHealth as $k2=>$v2)
-					{
-						$a[$v2['type_id']] = $v2['type_name']; 
-						$op .= '<option value="'.$v2['type_id'].'">'.$v2['type_name'].'</option>';
-					}
-				}
-				$this->data['allPolicyHealthType']['data'][(int)$v1['company_type_id']] = $a;
-				$this->data['allPolicyHealthType']['options'][(int)$v1['company_type_id']] = $op;
-			}
-		}
+		$variantModel = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());
 		
+		//	initailze all policy feature ckeditor
+		
+		$descCount = $this->config->config['policy']['descriptionCount'];
+		for($i = 1; $i<=$descCount; $i++)
+		{
+			$ck = 'ckeditor'.$i;
+			$des = 'description'.$i;
+			$this->data[$ck] = array(
+			//ID of the textarea that will be replaced
+			'id' 	=> 	$des,
+			'path'	=>	'js/ckeditor',
+			//Optionnal values
+			'config' => array(
+				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
+				'width' 	=> 	"100%",	//Setting a custom width
+				'height' 	=> 	'300px',	//Setting a custom height
+				),
+			);
+		}	
+				
 		//	check if post data is available
-		if ($this->input->post('policyModel'))
-		{	
+		if ($this->input->post('policyModel') && $isActive == true)
+		{
+			//	check if file is uploaded
+			if (!empty($_FILES))
+			{
+				$i = 1;
+				foreach($_FILES['policyModel']['name'] as $k1=>$v1)
+				{					
+					$ext = end(explode('.', $v1));
+					if (empty($ext))
+						$ext = 'doc';
+					$name = $this->util->getSlug($_POST['policyModel']['policy_name']);
+					if ($k1 == 'brochure')
+						$name .= '-brochure';
+					else if ($k1 == 'policy_wordings')
+						$name .= '-policy-wordings';
+					else 
+						$name .= '-doc-'.date('dmy').time();
+					$name .= '.'.$ext;
+					$arrFileNames[$k1] = $name;
+					if (empty($v1))
+					{
+						$_POST['policyModel'][$k1] = $policyModel[$k1];
+					}
+					else
+						$_POST['policyModel'][$k1] = $name;
+					$i++;
+				}
+			}
+			else 
+			{
+				//	set previous file name in post
+				$_POST['policyModel']['brochure'] = $policyModel['brochure'];
+				$_POST['policyModel']['policy_wordings'] = $policyModel['policy_wordings'];
+			}	
+			
+			if (isset($_POST['policyModel']['product_id']) && !empty($_POST['policyModel']['product_id']))
+				$_POST['policyModel']['product_id'] = implode(',', $_POST['policyModel']['product_id']);
+				
+			if (isset($_POST['policyModel']['sub_product_id']) && !empty($_POST['policyModel']['sub_product_id']))
+				$_POST['policyModel']['sub_product_id'] = implode(',', $_POST['policyModel']['sub_product_id']);
+				
+			if (isset($_POST['policyModel']['key_features']) && !empty($_POST['policyModel']['key_features']))
+				$_POST['policyModel']['key_features'] = serialize($_POST['policyModel']['key_features']);
+
 			//	set default values for policy
 			$arrParams = $this->input->post('policyModel');
 			$policy_id = (isset($arrParams['policy_id']) && !empty($arrParams['policy_id'])) ? $arrParams['policy_id'] : '';
@@ -169,20 +224,22 @@ class Policy extends CI_Controller {
 			$validation_rules = array(
 				array('field' => 'policyModel[policy_name]', 'label' => 'policy name', 'rules' => 'required|callback_validatePost[policy_name]'),
 				array('field' => 'policyModel[company_id]', 'label' => 'company name', 'rules' => 'required'),
-				array('field' => 'policyModel[type_health_plan]', 'label' => 'health plan type', 'rules' => 'callback_validatePost[type_health_plan]'),
-			//	array('field' => 'policyModel[variant]', 'label' => 'varient', 'rules' => 'required'),
+				array('field' => 'policyModel[product_id]', 'label' => 'health plan type', 'rules' => 'callback_validatePost[product_id]'),
 				array('field' => 'policyModel[seo_title]', 'label' => 'seo title', 'rules' => 'required'),
 				array('field' => 'policyModel[seo_description]', 'label' => 'seo description', 'rules' => 'required'),
 				array('field' => 'policyModel[seo_keywords]', 'label' => 'seo keywords', 'rules' => 'required'),
+				array('field' => 'policyModel[key_features]', 'label' => 'key features', 'rules' => 'required'),
+				array('field' => 'policyModel[created_by_user_id]', 'label' => 'created by', 'rules' => 'required'),
 				array('field' => 'policyModel[slug]', 'label' => 'url', 'rules' => 'required|callback_validatePost[slug]'),
-				);
-			
+				);	
 			$this->form_validation->set_rules($validation_rules);
 			
 			
 			//	set default values for variant
-			$variantPost = $this->input->post('variantModel');
-		
+			$variantPost = $this->input->post('variantModel');	
+			
+			//	set default values for policy features
+			$policyFeaturesPost = $this->input->post('policyFeaturesModel');	
 			
 			// Run the validation.
 			if ($this->form_validation->run())
@@ -203,10 +260,52 @@ class Policy extends CI_Controller {
 					else 
 						$saveData[] = false;
 					
-						
-					// save records for varients
+					
+					// save records for policy is stored then add/update varient and policy features
 					if (!empty($policy_id))
 					{
+						// 	save records for files
+						if (!empty($_FILES))
+						{
+							$this->data['file_upload_error'] = array();
+					        $config['upload_path'] = $this->config->config['folder_path']['policy'];
+					        $config['file_name'] = $arrFileNames;
+					        $config['allowed_types'] = '*';
+					        $config['max_size'] = '5120';
+							$this->load->library('upload', $config);
+							$this->upload->initialize($config); 	
+							if($this->upload->do_multi_upload("policyModel"))
+							{
+				              	$this->data['file_upload'] = $this->upload->get_multi_upload_data();
+							}
+							else 
+							{
+				                $this->data['file_upload_error'][] = $this->upload->display_errors();
+							}
+				            $this->data['file_upload'] = $this->upload->get_multi_upload_data();
+				             
+				            if (empty($this->data['file_upload_error']))
+				            {
+								$saveData[] = true;
+				            }
+				            else if (!empty($this->data['file_upload_error']))
+				            {
+				            	foreach ($this->data['file_upload_error'] as $k1=>$v1)
+				            	{
+				            		$msg = str_replace('<p>', '', $v1);
+				            		$msg = str_replace('</p>', '', $msg);
+									$this->data['message'] .= '<p class="error_msg">'.$msg.'</p>';
+									$this->data['msgType'] = 'error';
+				            	}
+								$saveData[] = false;
+				            }
+				            else 
+				            {
+								$saveData[] = true;
+				            }
+						}	
+						
+					// save records for varients
 						$saveVarient = $this->saveVarientData($policy_id, $variantPost);
 						if ($saveVarient['result'] == true)
 							$saveData[] = true;
@@ -214,36 +313,56 @@ class Policy extends CI_Controller {
 						{
 							$saveData[] = false;
 							$this->data['message'] .= $saveVarient['msg'];
+							$this->data['msgType'] = 'error';
 						}
-						$variantModel = $saveVarient['varientModel'];				
+						$variantModel = $saveVarient['varientModel'];	
+
+						
+						//	save policy features
+						$savePolicyFeatures = $this->savePolicyFeatures($policy_id, $policyFeaturesPost);
+						if ($savePolicyFeatures['result'] == true)
+							$saveData[] = true;
+						else 
+						{
+							$saveData[] = false;
+							$this->data['message'] .= $savePolicyFeatures['msg'];
+							$this->data['msgType'] = 'error';
+						}
+						$policyFeaturesPost = $savePolicyFeatures['policyFeaturesPost'];	
+						
 					}			
 					//	if policy and varients records are stored then on show success and redirect to index 
 					if(!in_array(false, $saveData))
 					{
 						$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
+						$this->data['msgType'] = 'success';
 						redirect('admin/policy/index');
 					}
 					else 
 					{
 						//$this->data['message'] .= '<p class="error_msg">Validation Error.</p>';
+						//$this->data['msgType'] = 'error';
 					}
 				}
 				else 
 				{
 					//	show error if record exist
 					$this->data['message'] .= '<p class="error_msg">Record already exists.</p>';
+					$this->data['msgType'] = 'error';
 				}
 			}		
 			else 
 			{
 				// 	Set validation errors.
 				$this->data['message'] = validation_errors('<p class="error_msg">', '</p>'); 
+				$this->data['msgType'] = 'error';
 			}
 			$policyModel = $_POST['policyModel'];
-		}
+		}		
 		$this->data['policyModel'] = $policyModel;
 		$this->data['modelType'] = $modelType;
 		$this->data['variantModel'] = $variantModel;
+		$this->data['policyFeaturesModel'] = $policyFeaturesModel;
 		$this->template->write_view('content', 'admin/policy/create', $this->data, TRUE);
 		$this->template->render();
 	}
@@ -358,12 +477,12 @@ class Policy extends CI_Controller {
 	}
 	
 	public function addUpdateVariants($model, $policy_id)
-	{	
+	{
 		$save  = false;
 		if (!empty($model))
 		{	
 			//	check if record exists
-			$where = array();
+			$where = $isExist = array();
 			$arrSkip = array('variant_id', 'status', 'comments');
 			if (isset($model['variant_id']) && !empty($model['variant_id']))
 			{
@@ -371,7 +490,8 @@ class Policy extends CI_Controller {
 				$where[0]['value'] = $model['variant_id'];
 				$where[0]['compare'] = 'equal';
 			}
-			else 
+			//	for unique varients within a policy
+		/*	else 
 			{
 				$i = 0;
 				foreach ($model as $k1=>$v1)
@@ -385,8 +505,9 @@ class Policy extends CI_Controller {
 					}
 				}
 			}
-			
-			$isExist = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());
+			*/
+			if (!empty($where))
+				$isExist = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());
 			
 			if (!empty($isExist))
 			{
@@ -409,6 +530,58 @@ class Policy extends CI_Controller {
 	
 	
 	
+	public function savePolicyFeatures($policy_id, $policyFeaturesPost = array())
+	{
+		$return = $policyFeaturesModel = array();
+		$result = false;
+		
+		$msg = '<p class="error_msg">Undefined error in variant.</p>';
+		if (!empty($policyFeaturesPost))
+		{
+			$policyFeaturesModel = $policyFeaturesPost;
+			$policyFeaturesModel['policy_id'] = $policy_id;
+			
+			$where = array();
+			$where[0]['field'] = 'policy_id';
+			$where[0]['value'] = (int)$policy_id;
+			$where[0]['compare'] = 'equal';
+
+			$isExist = $this->util->getTableData($modelName='Policy_features_model', $type="all", $where, $fields = array());
+			if (!empty($isExist))
+			{
+				foreach ($isExist as $k1=>$v1)
+				{
+					$save = $this->policy_features_model->saveRecord($arrParams = $policyFeaturesModel, $modelType = 'update');
+					break;	
+				}
+			}
+			else 
+			{
+				$save = $this->policy_features_model->saveRecord($arrParams = $policyFeaturesModel, $modelType = 'create');
+			}
+			
+	  		if ($save)
+	  		{
+				$result = true;
+				$msg = 'Policy features updated successfully';
+	  		}
+	  		else 
+	  		{
+	  			$result = false;
+	  			$msg = '<p class="error_msg">Policy features cannot be updated.</p>';
+	  		}
+		}
+		else 
+		{
+			$result = false;
+			$msg = '<p class="error_msg">Policy features cannot be blank.</p>';
+		}
+		$return = array('result'=>$result, 'msg'=>$msg, 'policyFeaturesModel'=>$policyFeaturesModel);
+		return $return;	
+	}
+	
+	
+	
 	/* 
 	 * $value	: it will have current validations post value
 	 * $validationFor	:defines type of validation on field
@@ -426,13 +599,14 @@ class Policy extends CI_Controller {
 			$policy_id = (isset($policyModel['policy_id']) && !empty($policyModel['policy_id'])) ? $policyModel['policy_id'] : '';
 			$company_id = (isset($policyModel['company_id']) && !empty($policyModel['company_id'])) ? $policyModel['company_id'] : '';	
 			
-			$arrSkip = $arrParams = array();
+			$arrSkip = $arrParams = $arrQuery = array();
 			if ($validationFor == 'policy_name')
 			{
-				$arrSkip = array('type_health_plan');
+				$arrQuery = array('company_id', 'policy_name');
+				$arrSkip = array('product_id', 'product_id');
 			}
-			else if ($validationFor == 'type_health_plan')
-			{			
+			else if ($validationFor == 'product_id')
+			{
 				if (!empty($policyModel['company_id']))
 				{
 					$where = array();
@@ -444,29 +618,38 @@ class Policy extends CI_Controller {
 					$where[0]['field'] = 'company_type_id';
 					$where[0]['value'] = (int)$compType['company_type_id'];
 					$where[0]['compare'] = 'equal';
-					$policyHealth = $this->util->getTableData($modelName='Policy_health_type_model', $type="all", $where, $fields = array());
+					$policyHealth = $this->util->getTableData($modelName='Product_model', $type="all", $where, $fields = array());
 
 					if (!empty($policyHealth))
 					{
-						if (isset($policyModel['type_health_plan']) && !empty($policyModel['type_health_plan']))
+						if (isset($policyModel['product_id']) && !empty($policyModel['product_id']))
 						{
-							return true;
-							/*foreach ($policyHealth as $k2=>$v2)
+							$product_id = explode(',', $policyModel['product_id']);
+							$exist = false;
+							foreach ($policyHealth as $k2=>$v2)
 							{
-								$a[$v2['type_id']] = $v2['type_name']; 
-								$op .= '<option value="'.$v2['type_id'].'">'.$v2['type_name'].'</option>';
-							}*/
+								if (in_array($v2['product_id'], $product_id))
+									$exist = true;
+							}
+							if ($exist)
+								return TRUE;
+							else
+							{
+								$_POST['policyModel']['product_id'] = null;
+								$this->form_validation->set_message('validatePost', 'The %s is required');
+								return FALSE;
+							}
 						}
 						else 
 						{
-							$_POST['policyModel']['type_health_plan'] = null;
+							$_POST['policyModel']['product_id'] = null;
 							$this->form_validation->set_message('validatePost', 'The %s is required');
 							return FALSE;
 						}
 					}
 					else 
 					{
-						$_POST['policyModel']['type_health_plan'] = null;
+						$_POST['policyModel']['product_id'] = null;
 					}		
 				}
 				else 
@@ -481,10 +664,9 @@ class Policy extends CI_Controller {
 			
 			foreach ($policyModel as $k1=>$v1)
 			{
-				if (!in_array($k1, $arrSkip))
+				if (in_array($k1, $arrQuery))
 					$arrParams[$k1] = $v1;
 			}	
-	
 			//	search for existing records
 			$record = $this->policy_health_master_model->getPolicy($arrParams);
 
@@ -503,7 +685,7 @@ class Policy extends CI_Controller {
 				{
 					//	if company id matches with post company id, then true else record exists 
 					$record = reset($record->result_array());
-					if ($record['policy_id'] == $arrParams['policy_id'])
+					if ($record['policy_id'] == $policyModel['policy_id'])
 					{
 						return true;
 					}
@@ -566,6 +748,154 @@ class Policy extends CI_Controller {
 			$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
 			
 		redirect('admin/policy/index');
+	}
+	
+	public function getProductSubProductDropDown()
+	{
+		$result = '';
+		if (isset($_POST['companyTypeId']) && !empty($_POST['companyTypeId']))
+		{	
+			$compType = $_POST['companyTypeId'];
+			$where = array();
+			$changeType = $_POST['changeType'];
+			if (!empty($_POST['companyTypeId']) &&($changeType == 'product_id'))
+			{
+				$where[0]['field'] = 'company_type_id';
+				$where[0]['value'] = (int)$compType;
+				$where[0]['compare'] = 'equal';
+			}
+			if (!empty($_POST['productId']))
+			{
+				$where[1]['field'] = 'product_id';
+				$where[1]['value'] = implode(',', $_POST['productId']);
+				$where[1]['compare'] = 'findInSet';
+			}
+			if ($changeType == 'product_id')
+			{
+				$selected = isset($_POST['productId']) ? $_POST['productId'] : array();
+				$modelName = 'product_model';
+				$optionKey = 'product_id';
+				$optionValue = 'product_name';
+				$sqlFilter['orderBy'] = 'product_name';
+			}
+			else if ($changeType == 'sub_product_id')
+			{
+				$selected = isset($_POST['subProductId']) ? $_POST['subProductId'] : array();
+				$modelName = 'Sub_product_model';
+				$optionKey = 'sub_product_id';
+				$optionValue = 'sub_product_name';
+				$sqlFilter['orderBy'] = 'sub_product_name';
+			}
+			$healthOptions = $this->util->getCompanyTypeDropDownOptions($modelName, $optionKey, $optionValue, $defaultEmpty = "Please Select", $extraKeys = false, $where, $sqlFilter); 
+			if (!empty($healthOptions))
+			{
+				foreach ($healthOptions as $k1=>$v1)
+				{
+					if (in_array($k1, $selected))
+						$result .= '<option value="'.$k1.'" selected>'.$v1.'</option>';
+					else
+						$result .= '<option value="'.$k1.'">'.$v1.'</option>';
+				}
+			}
+		}		
+		echo $result;
+	}
+	
+	public function download($policy_id = null, $field = null)
+	{
+		if (!empty($policy_id))
+		{
+			//	check if policy id exists
+			$where = array();
+			$where[0]['field'] = 'policy_id';
+			$where[0]['value'] = (int)$policy_id;
+			$where[0]['compare'] = 'equal';
+			$exist = $this->util->getTableData($modelName='Policy_health_master_model', $type="single", $where, $fields = array());
+			if (empty($exist))
+			{
+				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
+				$this->data['msgType'] = 'error';
+				redirect('admin/policy/index');
+			}
+			else 
+			{
+				$policyModel = $exist;
+				if (empty($field))
+					$field = 'brochure';
+				$this->load->helper('download');
+				$folderUrl = $this->config->config['folder_path']['policy'];
+				$fileUrl = $this->config->config['url_path']['policy'];
+				$data = file_get_contents($fileUrl.$policyModel[$field]);
+				force_download($policyModel[$field], $data);
+				//if ($pol)
+			}
+		}
+		else
+		{
+			$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
+			$this->data['msgType'] = 'error';
+			redirect('admin/policy/index');
+		}	
+	}
+
+	
+	public function deleteFile($policy_id = null, $field = null)
+	{
+		if (!empty($policy_id))
+		{
+			//	check if policy id exists
+			$where = array();
+			$where[0]['field'] = 'policy_id';
+			$where[0]['value'] = (int)$policy_id;
+			$where[0]['compare'] = 'equal';
+			$exist = $this->util->getTableData($modelName='Policy_health_master_model', $type="single", $where, $fields = array());
+			if (empty($exist))
+			{
+				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
+				$this->data['msgType'] = 'error';
+				redirect('admin/policy/index');
+			}
+			else 
+			{
+				$policyModel = $exist;
+				if ($exist['status'] == 'active')
+				{
+					if (empty($field))
+						$field = 'brochure';
+					$this->load->helper('download');
+					$folderUrl = $this->config->config['folder_path']['policy'];
+					$fileUrl = $this->config->config['url_path']['policy'];
+			//		if (file_exists($folderUrl.$policyModel[$field]))
+			//			@unlink($folderUrl.$policyModel[$field]);
+					$arrParams[$field] = null;
+					$modelType = 'update';
+					$arrParams['policy_id'] = $policy_id;
+					
+					if ($this->policy_health_master_model->saveRecord($arrParams, $modelType))
+					{
+						$this->session->set_flashdata('message', '<p class="status_msg">File deleted successfully.</p>');
+						$this->data['msgType'] = 'success';
+					}
+					else 
+					{
+						$this->session->set_flashdata('message', '<p class="error_msg">File could not be deleted.</p>');
+						$this->data['msgType'] = 'error';
+					}
+				}
+				else 
+				{
+					$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
+					$this->data['msgType'] = 'error';
+					redirect('admin/policy/index');
+				}
+			}
+		}
+		else
+		{
+			$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
+			$this->data['msgType'] = 'error';
+		}
+		redirect('admin/policy/create/'.$policy_id);
 	}
 }
 

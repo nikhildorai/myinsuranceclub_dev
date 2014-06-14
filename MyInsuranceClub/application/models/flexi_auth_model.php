@@ -1826,10 +1826,35 @@ class Flexi_auth_model extends Flexi_auth_lite_model
 		// Set user privileges to session.
 		$this->auth->session_data[$this->auth->session_name['privileges']] = $privileges;
 		
+		
+		//	add user details
+		
+	
+    	$userDetails = array();
+    	$userIdentifier =  $this->session->all_userdata(); //$this->CI->auth->session_name['user_identifier'];
+    	if (isset($this->auth->session_data['user_identifier']) && !empty($this->auth->session_data['user_identifier']))
+    	{
+    		$userId = $this->auth->session_data['user_id'];
+			$where = array();
+			$where[0]['field'] = 'upro_uacc_fk';
+			$where[0]['value'] = (int)$userId;
+			$where[0]['compare'] = 'equal';
+			$exist = $this->util->getTableData($modelName='Demo_user_profiles_model', $type="single", $where, $fields = array());
+			if (!empty($exist))
+			{
+				$userDetails['firstName'] = $exist['upro_first_name'];
+				$userDetails['lastName'] = $exist['upro_last_name'];
+				$userDetails['name'] = $exist['upro_first_name'].' '.$exist['upro_last_name'];
+				$userDetails['phone'] = $exist['upro_phone'];
+				$userDetails['email'] = $this->auth->session_data['user_identifier'];
+				$userDetails['userId'] = $userId;
+			}	
+    	}
+		$this->auth->session_data['user_details'] = $userDetails;
+    	
 		###+++++++++++++++++++++++++++++++++###
 				
 		$this->session->set_userdata(array($this->auth->session_name['name'] => $this->auth->session_data));
-
 		return TRUE;
 	}	
 	
@@ -1884,11 +1909,11 @@ class Flexi_auth_model extends Flexi_auth_lite_model
 		$this->db->insert($this->auth->tbl_user_session, $sql_insert);
 		
 	    if ($this->db->affected_rows() > 0)
-	    {
+	    {    	
 			// Create session.
 			$this->auth->session_data[$this->auth->session_name['login_session_token']] = $session_token;
 			$this->session->set_userdata(array($this->auth->session_name['name'] => $this->auth->session_data));
-
+	 
 			// Hash database session token as it will be visible via cookie.
 			$hash_session_token = $this->hash_cookie_token($session_token);
 							

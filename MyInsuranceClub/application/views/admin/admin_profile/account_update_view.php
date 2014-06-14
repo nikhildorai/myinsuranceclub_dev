@@ -158,7 +158,7 @@
                                 <li>
                                     <span class="icon glyphicon glyphicon-envelope"></span>
                                     <label>Email</label>
-                                    <?php echo $user['user_identifier'];?>
+                                    <?php echo $user['email'];?>
                                 </li>
                                 <li>
                                     <span class="icon glyphicon glyphicon-earphone"></span>

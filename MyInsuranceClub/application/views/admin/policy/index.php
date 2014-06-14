@@ -18,11 +18,11 @@
 		} ?>
 
     <section class="panel panel-primary">
-        <div class="panel-heading" style="height: 55px;">
+        <div class="panel-heading">
         	<strong>
         		<span class="glyphicon glyphicon-th"></span> Manage Policy 
         	</strong>
-        	<a href="<?php echo $base_url;?>admin/policy/create" class="btn btn-w-md btn-gap-v btn-warning"  style="float: right;">Create New Policy</a>
+        	<a href="<?php echo $base_url;?>admin/policy/create" class="btn btn-w-md btn-gap-v btn-success btn-sm" style="float: right; margin-top: -5px;">Create New Policy</a>
         </div>
         <div class="panel-body">
         
@@ -60,9 +60,9 @@
 		                    <div class="col-sm-10">
 								<span class="ui-select "> 
 				<?php 
-						$selected = array_key_exists( 'type_health_plan',$search_query) ? $search_query['type_health_plan'] : '';
-						$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Policy_health_type_model', $optionKey = 'type_id', $optionValue = 'type_name', $defaultEmpty = "All");
-						echo form_dropdown('type_health_plan', $options, $selected, ' id="type_health_plan" class="tooltip_trigger" title="Search by health type." style="width: 345px;margin-top: 0px;"');
+						$selected = array_key_exists( 'product_id',$search_query) ? $search_query['product_id'] : '';
+						$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Product_model', $optionKey = 'product_id', $optionValue = 'product_name', $defaultEmpty = "All");						
+						echo form_dropdown('product_id', $options, $selected, ' id="product_id" class="tooltip_trigger" title="Search by health type." style="width: 345px;margin-top: 0px;"');
 				?>
 								</span>
 		                	</div>
@@ -78,7 +78,7 @@
 								id="submit" 
 								value="Search"
 								class="btn btn-w-md btn-gap-v btn-primary" />
-								<a href="<?php echo $base_url; ?>admin/company"  class="btn btn-w-md btn-gap-v btn-default">Reset</a>
+								<a href="<?php echo $base_url; ?>admin/policy"  class="btn btn-w-md btn-gap-v btn-default">Reset</a>
 	                    	</div>
 		                </div>
 					<?php echo form_close();?>
@@ -98,7 +98,7 @@
 							<th>Company Name</th>
 							<th>Product</th>
 							<th>Status</th>
-							<th>Action</th>
+							<th style="width: 16%;">Action</th>
                         </tr>
                     </thead>
 					<tbody>
@@ -125,10 +125,13 @@
 									$where[0]['compare'] = 'equal';
 									$comp_name = reset($this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $where, $fields = array('company_name')));
 									$where = array();
-									$where[0]['field'] = 'type_id';
-									$where[0]['value'] = (int)$row['type_health_plan'];
-									$where[0]['compare'] = 'equal';				
-									$comp_type = reset($this->util->getTableData($modelName='Policy_health_type_model', $type="single", $where, $fields = array('type_name')));
+									$where[0]['field'] = 'product_id';
+									$where[0]['value'] = $row['product_id'];
+									$where[0]['compare'] = 'findInSet';				
+									$prod_type = $this->util->getTableData($modelName='Product_model', $type="single", $where, $fields = array('product_name'));
+									$productId = array();
+									foreach ($prod_type as $k1=>$v1)
+										$productId[] = $v1['product_name'];
 									$actionBtn = '';
 									if ($row['status'] == 'active')
 									{
@@ -140,17 +143,20 @@
 									{
 										$actionBtn .= '<a href="'.$base_url.'admin/policy/create/'.$row['policy_id'].'">View</a>';
 									}
-									?>
-									<tr class="odd" id="<?php echo $i;?>">
+			                    		if (strtolower($row['status']) != 'active'){?>
+			                    	<tr  class="danger odd" id="<?php echo $i;?>">
+			                    		<?php }else{	?>
+			                    	<tr class="odd" id="<?php echo $i;?>">
+			                    <?php 	}?>
 										<td><?php echo $row['policy_id'];?></td>
 										<td><?php echo $row['policy_name'];?></td>
 										<td><a href="<?php echo $base_url.'admin/company/create/'.$row['company_id']; ?>"><?php echo $comp_name['company_name']; ?></a></td>
-										<td><?php echo $comp_type['type_name'];?></td>
+										<td><?php echo implode('<br>', $productId);?></td>
 										<td><?php echo $this->util->getStatusIcon($row['status']);?></td>
 										<td><?php echo $actionBtn;?></td>
 									</tr>
 									<tr class="even" style="display:none;">
-										<td colspan="5">
+										<td colspan="6">
 											<?php 
 											//	get all existing variants
 											$where = array();
@@ -262,9 +268,9 @@
 				<br />
 				<label for="search">Health Type:</label>
 				<?php 
-					$selected = array_key_exists( 'type_health_plan',$search_query) ? $search_query['type_health_plan'] : '';
-					$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Policy_health_type_model', $optionKey = 'type_id', $optionValue = 'type_name', $defaultEmpty = "All");
-					echo form_dropdown('type_health_plan', $options, $selected, ' id="type_health_plan" class="tooltip_trigger" title="Search by health type."');
+					$selected = array_key_exists( 'product_id',$search_query) ? $search_query['product_id'] : '';
+					$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Product_model', $optionKey = 'type_id', $optionValue = 'type_name', $defaultEmpty = "All");
+					echo form_dropdown('product_id', $options, $selected, ' id="product_id" class="tooltip_trigger" title="Search by health type."');
 				?>
 				<br />
 				
@@ -312,9 +318,9 @@
 								$comp_name = reset($this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $where, $fields = array('company_name')));
 								$where = array();
 								$where[0]['field'] = 'type_id';
-								$where[0]['value'] = (int)$row['type_health_plan'];
+								$where[0]['value'] = (int)$row['product_id'];
 								$where[0]['compare'] = 'equal';				
-								$comp_type = reset($this->util->getTableData($modelName='Policy_health_type_model', $type="single", $where, $fields = array('type_name')));
+								$comp_type = reset($this->util->getTableData($modelName='Product_model', $type="single", $where, $fields = array('type_name')));
 								if ($row['status'] == 'active')
 								{
 									$actionBtn = '<a href="'.$base_url.'admin/policy/create/'.$row['policy_id'].'">Update</a>';
@@ -433,9 +439,9 @@
 						$rows[] = '<a href="'.$base_url.'admin/company/create/'.$row['company_id'].'">'.$comp_name['company_name'].'</a>'; 
 						$where = array();
 						$where[0]['field'] = 'type_id';
-						$where[0]['value'] = (int)$row['type_health_plan'];
+						$where[0]['value'] = (int)$row['product_id'];
 						$where[0]['compare'] = 'equal';				
-						$comp_type = reset($this->util->getTableData($modelName='Policy_health_type_model', $type="single", $where, $fields = array('type_name')));
+						$comp_type = reset($this->util->getTableData($modelName='Product_model', $type="single", $where, $fields = array('type_name')));
 						$rows[] = $comp_type['type_name']; 
 						//$rows[] = ucfirst($row['varient']);
 						if ($row['status'] == 'active')

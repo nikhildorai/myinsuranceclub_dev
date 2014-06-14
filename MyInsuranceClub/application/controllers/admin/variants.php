@@ -47,7 +47,7 @@ class Variants extends CI_Controller {
  		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->model('policy_health_features_model');
-		$this->load->model('policy_health_type_model');
+		$this->load->model('policy_product_type_model');
 		$this->load->model('policy_health_variants_model');
 		$this->load->model('policy_health_master_model');
  		

@@ -18,7 +18,7 @@
     </div>
 
     <div class="top-nav">
-<!--  
+<?php /*?>  
         <ul class="nav-left list-unstyled">
             <li class="dropdown">
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
@@ -157,9 +157,9 @@
                 </div>
             </li>
         </ul>
--->
+ */ ?>
         <ul class="nav-right pull-right list-unstyled">
-<!--        
+<?php /*?>       
             <li class="dropdown langs text-normal" data-ng-controller="LangCtrl">
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                     {{lang}}
@@ -195,6 +195,7 @@
                     <li><a href="javascript:;" class="color-option color-some_color" data-style="some_color"></a></li>
                 </ul>
             </li> -->
+*/ ?>                  
             <li class="dropdown text-normal nav-profile">
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                     <img src="<?php echo base_url();?>dist/images/user2.png" alt="" class="img-circle img30_30">
@@ -209,7 +210,7 @@
                             <span data-i18n="My Profile"></span>
                         </a>
                     </li>
-                    <!-- 
+<?php /*?>
                     <li>
                         <a href="#/tasks">
                             <i class="fa fa-check"></i>
@@ -223,6 +224,7 @@
                         </a>
                     </li>
                     -->
+*/ ?>                    
                     <li>
                         <a href="<?php echo $base_url;?>admin/logout">
                             <i class="fa fa-sign-out"></i>

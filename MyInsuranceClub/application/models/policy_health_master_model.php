@@ -19,10 +19,10 @@ class Policy_health_master_model EXTENDS CI_Model{
 				$sql .= ' AND policy_name LIKE "%'.$arrParams['policy_name'].'%" ';
 			if (isset($arrParams['company_id']) && !empty($arrParams['company_id']))
 				$sql .= ' AND company_id = '.$arrParams['company_id'];
-			if (isset($arrParams['type_health_plan']) && !empty($arrParams['type_health_plan']))
-				$sql .= ' AND type_health_plan = '.$arrParams['type_health_plan'];
+			if (isset($arrParams['product_id']) && !empty($arrParams['product_id']))
+				$sql .= ' AND product_id = '.$arrParams['product_id'];
 		}
-		$sql .= ' ORDER BY policy_name ASC, type_health_plan ASC ';	
+		$sql .= ' ORDER BY policy_name ASC, product_id ASC ';	
 		$result = $this->db->query($sql);
 		return $result;
 	}
@@ -54,7 +54,7 @@ class Policy_health_master_model EXTENDS CI_Model{
 				if ($this->db->update('policy_health_master', $values, $where))
 					$saveRecord = true;
 			}
-		}
+		}		
 		if ($saveRecord == true)
 		{
 			if ($modelType == 'create')
@@ -75,8 +75,8 @@ class Policy_health_master_model EXTENDS CI_Model{
 				$sql .= ' AND policy_name = "'.$arrParams['policy_name'].'" ';
 			if (isset($arrParams['company_id']) && !empty($arrParams['company_id']))
 				$sql .= ' AND company_id = '.$arrParams['company_id'];
-			if (isset($arrParams['type_health_plan']) && !empty($arrParams['type_health_plan']))
-				$sql .= ' AND type_health_plan = "'.$arrParams['type_health_plan'].'" ';
+			if (isset($arrParams['product_id']) && !empty($arrParams['product_id']))
+				$sql .= ' AND product_id = "'.$arrParams['product_id'].'" ';
 		}
 		$result = $this->db->query($sql);
 		return $result;

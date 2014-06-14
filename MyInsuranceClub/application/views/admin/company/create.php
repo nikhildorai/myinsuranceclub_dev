@@ -37,6 +37,8 @@ $(".form-horizontal :input").prop("disabled", true);
         </div>
 		<?php 	if (! empty($message))
 				{
+					echo '<div class="col-md-12">
+					            <section class="panel-default">';
 					if (isset($msgType) && !empty($msgType))
 					{
 						if ($msgType=='error') 
@@ -50,6 +52,8 @@ $(".form-horizontal :input").prop("disabled", true);
 						echo '<div class="callout callout-success">';
 									echo $message;
 							echo '</div>';
+					echo '		</section>
+					      </div>';
 				} ?>
 				
         <div class="panel-body">
@@ -178,7 +182,7 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <div class="form-group">
 			                    <label for="" class="col-sm-3">Logo for Search Results:</label>
 			                    <div class="col-sm-9">
-			                        <input type="file" id="logo1" name="companyModel[logo_image_2]"  title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'logo_image_1',$companyModel) ? $companyModel['logo_image_1'] : '';?>">
+			                        <input type="file" id="logo1" name="companyModel[logo_image_2]"  title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'logo_image_2',$companyModel) ? $companyModel['logo_image_2'] : '';?>">
 			                        <span class="help-block">Image size: 400px X 250px</span>
 			                    <?php 
 											if (isset($companyModel['logo_image_2']) && !empty($companyModel['logo_image_2']))
