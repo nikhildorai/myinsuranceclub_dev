@@ -219,7 +219,7 @@
 						</div>
 
 
-						<div class="cmp_tbl" id="cmp_tbl">
+						<div id="cmp_tbl">
                 			<?php echo $this->util->getUserSearchFiltersHtml($customer_details, $type='health');?>
                 		</div>
                  <?php echo form_close();?>

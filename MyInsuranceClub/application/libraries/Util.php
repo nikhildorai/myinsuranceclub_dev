@@ -55,7 +55,7 @@ class Util {
 		return $value;
 	}
 	
-	function getTableData($modelName = '', $type="all", $where = array(), $fields = array('id'), $sqlFilter = array())
+	function getTableData($modelName = '', $type="all", $where = array(), $fields = array('id'))
 	{
 		$result = $value = array();
 		$model = &get_instance();
@@ -72,18 +72,6 @@ class Util {
 				{
 					$condition .= empty($condition) ? $v2['field'].' = '.$v2['value'] : ' AND '.$v2['field'].' = '.$v2['value'];
 				}
-				else if($v2['compare'] == 'empty')
-				{
-					$condition .= empty($condition) ? $v2['field'].' IS NULL ' : ' AND '.$v2['field'].' IS NULL ';
-				}
-				else if($v2['compare'] == 'notEmpty')
-				{
-					$condition .= empty($condition) ? $v2['field'].' IS NOT NULL ' : ' AND '.$v2['field'].' IS NOT NULL ';
-				}
-				else if($v2['compare'] == 'findInSet')
-				{
-					$condition .= empty($condition) ? ' FIND_IN_SET('.$v2['field'].', '.$v2['value'].')' : ' AND FIND_IN_SET('.$v2['field'].', '.$v2['value'].')';
-				}
 			}	
 		}
 		
@@ -92,13 +80,6 @@ class Util {
 		{
 			 $sql .= ' WHERE '.$condition;	
 		}	
-		if (!empty($sqlFilter))
-		{
-			$sort = (isset($sqlFilter['sortOrder'])) ? $sqlFilter['sortOrder'] : 'ASC';
-			if (isset($sqlFilter['orderBy']))
-				$sql .= ' ORDER BY '.$sqlFilter['orderBy'].' '.$sort;
-		}
-//var_dump($sql);		
 		$result = $model->$modelName->excuteQuery($sql);
 
 		if (!empty($result))
@@ -130,9 +111,9 @@ class Util {
 		return $value;
 	}
 	
-	public function getCompanyTypeDropDownOptions($modelName ='Company_type_model', $optionKey = 'id', $optionValue = 'id', $defaultEmpty = "Please Select", $extraKeys = false, $where = array(), $sqlFilter = array())
+	public function getCompanyTypeDropDownOptions($modelName ='Company_type_model', $optionKey = 'id', $optionValue = 'id', $defaultEmpty = "Please Select", $extraKeys = false)
 	{
-		$result = $this->getTableData($modelName, $type="all", $where, $fields = array(), $sqlFilter);		
+		$result = $this->getTableData($modelName, $type="all", $where = array(), $fields = array());		
 		$options[''] = $defaultEmpty;
 		$optionsExtra = array();
 		foreach ($result as $k1=>$v1)
@@ -171,12 +152,23 @@ class Util {
     	$userDetails = array();
 		$model = &get_instance();
     	$userIdentifier =  $model->session->all_userdata(); //$this->CI->auth->session_name['user_identifier'];
-//var_dump($userIdentifier, $userDetails);die;   
-    	if (isset($userIdentifier['flexi_auth']['user_details']) && !empty($userIdentifier['flexi_auth']['user_details']))
+    	if (isset($userIdentifier['flexi_auth']['user_identifier']) && !empty($userIdentifier['flexi_auth']['user_identifier']))
     	{
-    		$userDetails = $userIdentifier['flexi_auth']['user_details'];
-    		$userDetails['group'] = $userIdentifier['flexi_auth']['group'];
-    	} 	    	
+    		$userDetails = $userIdentifier['flexi_auth'];
+    		$userId = $userIdentifier['flexi_auth']['user_id'];
+			$where = array();
+			$where[0]['field'] = 'upro_uacc_fk';
+			$where[0]['value'] = (int)$userId;
+			$where[0]['compare'] = 'equal';
+			$exist = $this->getTableData($modelName='Demo_user_profiles_model', $type="single", $where, $fields = array());
+			if (!empty($exist))
+			{
+				$userDetails['firstName'] = $exist['upro_first_name'];
+				$userDetails['lastName'] = $exist['upro_last_name'];
+				$userDetails['name'] = $exist['upro_first_name'].' '.$exist['upro_last_name'];
+				$userDetails['phone'] = $exist['upro_phone'];
+			}		
+    	}
     	return $userDetails;
     }
     
@@ -193,7 +185,7 @@ class Util {
         	foreach($customer_details as $detail)
         	{
         		$preexist_diseases='';
-				$return	.=	'<div style="min-height: 74px; height: auto; margin-top: 10px; background: #effdfe; border: 2px solid #dadada;" class="main_acc">
+				$return	.=	'<div class="cmp_tbl"><div style="min-height: 74px; height: auto; margin-top: 10px; background: #effdfe; border: 2px solid #dadada;" class="main_acc">
 								<div class="col-md-5">
 									<label for="1_1_refundable" style="margin-top: -5px; margin-bottom: 0px; padding: 25px 0px 20px 0px;">';
                  					/* if($detail['room_rent']!='Fully Covered')
@@ -380,7 +372,7 @@ class Util {
 										</div>
 									</div>
 								</div>
-							</div>';
+							</div></div>';
         	}
 		}
 		return $return;
@@ -445,7 +437,7 @@ class Util {
 			$value = '<span class="btn-icon-round btn-icon-round-sm bg-success"></span>';
 		}
 		else if ($status == 'inactive') {
-			$value = '<span class="btn-icon-round btn-icon-round-sm bg-danger"></span>';
+			$value = '<span class="btn-icon-round btn-icon-round-sm bg-warning"></span>';
 		}
 		else if ($status == 'deleted') {
 			$value = '<span class="btn-icon-round btn-icon-round-sm bg-danger"></span>';
