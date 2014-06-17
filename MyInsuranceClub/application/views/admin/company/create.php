@@ -1,9 +1,17 @@
 <script type="text/javascript">
 <!--
 $(document).ready(function(){
+	
 <?php if (isset($companyModel['status']) && !empty($companyModel['status']) && in_array($companyModel['status'], array( 'inactive', 'delete'))) {?>
 $(".form-horizontal :input").prop("disabled", true);
 <?php }?>	
+
+var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
+
+$('#singleFieldTags2').tagit({
+    availableTags: sampleTags
+});
+
 });
 //-->
 </script>
@@ -16,25 +24,8 @@ $(".form-horizontal :input").prop("disabled", true);
         	<strong>
         		<span class="glyphicon glyphicon-th-list"></span> <?php echo (isset($companyModel['company_id']) && !empty($companyModel['company_id'])) ? 'Update Company' : 'Create Company';?> 
         	</strong>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>
-        	<div class="space"></div><div class="space"></div><div class="space"></div><div class="space"></div>&nbsp;
-        	<a href="<?php echo $base_url;?>admin/company/" class="btn btn-w-md btn-gap-v btn-default">Back</a>
-        	
-        </div>
+        	<a href="<?php echo $base_url;?>admin/company/" class="btn btn-w-md btn-gap-v btn-default btn-sm" style="float: right; margin-top: -5px;">Back</a>
+       </div>
 		<?php 	if (! empty($message))
 				{
 					echo '<div class="col-md-12">
@@ -153,7 +144,8 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <div class="form-group">
 			                    <label for="" class="col-sm-3">Tag</label>
 			                    <div class="col-sm-9">
-			                        <input type="text" class="form-control"  required placeholder="Tag"  name="companyModel[tag]" value="<?php echo array_key_exists( 'tag',$companyModel) ? $companyModel['tag'] : '';?>" >
+			                        <input type="text" class="form-control" id="singleFieldTags2"  required placeholder="Tag"  name="companyModel[tag]" value="Apple, Orange" >
+			                   <!-- <input type="text" class="form-control" id="singleFieldTags2"  required placeholder="Tag"  name="companyModel[tag]" value="<?php echo array_key_exists( 'tag',$companyModel) ? $companyModel['tag'] : '';?>" > -->
 			                    </div>
 			                </div>
 			                

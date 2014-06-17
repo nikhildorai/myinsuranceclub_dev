@@ -72,6 +72,21 @@ class Util {
 				{
 					$condition .= empty($condition) ? $v2['field'].' = '.$v2['value'] : ' AND '.$v2['field'].' = '.$v2['value'];
 				}
+				else if($v2['compare'] == 'empty')
+				{
+					$condition .= empty($condition) ? $v2['field'].' IS NULL ' : ' AND '.$v2['field'].' IS NULL ';
+				}
+				else if($v2['compare'] == 'notEmpty')
+				{
+					$condition .= empty($condition) ? $v2['field'].' IS NOT NULL ' : ' AND '.$v2['field'].' IS NOT NULL ';
+				}
+				else if($v2['compare'] == 'findInSet')
+				{
+					if (count(explode(',', $v2['value'])) > 1)			
+						$condition .= empty($condition) ? ' FIND_IN_SET('.$v2['field'].', '.$v2['value'].')' : ' AND FIND_IN_SET('.$v2['field'].', '.$v2['value'].')';
+					else
+						$condition .= empty($condition) ? ' FIND_IN_SET('.$v2['value'].', '.$v2['field'].')' : ' AND FIND_IN_SET('.$v2['value'].', '.$v2['field'].')';
+				}
 			}	
 		}
 		
@@ -80,6 +95,12 @@ class Util {
 		{
 			 $sql .= ' WHERE '.$condition;	
 		}	
+		if (!empty($sqlFilter))
+		{
+			$sort = (isset($sqlFilter['sortOrder'])) ? $sqlFilter['sortOrder'] : 'ASC';
+			if (isset($sqlFilter['orderBy']))
+				$sql .= ' ORDER BY '.$sqlFilter['orderBy'].' '.$sort;
+		}
 		$result = $model->$modelName->excuteQuery($sql);
 
 		if (!empty($result))
@@ -111,9 +132,9 @@ class Util {
 		return $value;
 	}
 	
-	public function getCompanyTypeDropDownOptions($modelName ='Company_type_model', $optionKey = 'id', $optionValue = 'id', $defaultEmpty = "Please Select", $extraKeys = false)
+	public function getCompanyTypeDropDownOptions($modelName ='Company_type_model', $optionKey = 'id', $optionValue = 'id', $defaultEmpty = "Please Select", $extraKeys = false, $where = array(), $sqlFilter = array())
 	{
-		$result = $this->getTableData($modelName, $type="all", $where = array(), $fields = array());		
+		$result = $this->getTableData($modelName, $type="all", $where, $fields = array(), $sqlFilter);	
 		$options[''] = $defaultEmpty;
 		$optionsExtra = array();
 		foreach ($result as $k1=>$v1)
@@ -152,22 +173,10 @@ class Util {
     	$userDetails = array();
 		$model = &get_instance();
     	$userIdentifier =  $model->session->all_userdata(); //$this->CI->auth->session_name['user_identifier'];
-    	if (isset($userIdentifier['flexi_auth']['user_identifier']) && !empty($userIdentifier['flexi_auth']['user_identifier']))
+    	if (isset($userIdentifier['flexi_auth']['user_details']) && !empty($userIdentifier['flexi_auth']['user_details']))
     	{
-    		$userDetails = $userIdentifier['flexi_auth'];
-    		$userId = $userIdentifier['flexi_auth']['user_id'];
-			$where = array();
-			$where[0]['field'] = 'upro_uacc_fk';
-			$where[0]['value'] = (int)$userId;
-			$where[0]['compare'] = 'equal';
-			$exist = $this->getTableData($modelName='Demo_user_profiles_model', $type="single", $where, $fields = array());
-			if (!empty($exist))
-			{
-				$userDetails['firstName'] = $exist['upro_first_name'];
-				$userDetails['lastName'] = $exist['upro_last_name'];
-				$userDetails['name'] = $exist['upro_first_name'].' '.$exist['upro_last_name'];
-				$userDetails['phone'] = $exist['upro_phone'];
-			}		
+    		$userDetails = $userIdentifier['flexi_auth']['user_details'];
+    		$userDetails['group'] = $userIdentifier['flexi_auth']['group'];	
     	}
     	return $userDetails;
     }
@@ -437,12 +446,23 @@ class Util {
 			$value = '<span class="btn-icon-round btn-icon-round-sm bg-success"></span>';
 		}
 		else if ($status == 'inactive') {
-			$value = '<span class="btn-icon-round btn-icon-round-sm bg-warning"></span>';
+			$value = '<span class="btn-icon-round btn-icon-round-sm bg-danger"></span>';
 		}
 		else if ($status == 'deleted') {
 			$value = '<span class="btn-icon-round btn-icon-round-sm bg-danger"></span>';
 		}
 		return $value;
+	}
+	
+	public function getActiveUserLIst()
+	{
+		$db = &get_instance();	
+		$sql = 	'SELECT us.uacc_id, dp.upro_first_name,dp.upro_last_name,us.uacc_username 
+				FROM user_accounts us, demo_user_profiles dp 
+				WHERE us.uacc_active = 1 AND
+				us.uacc_id = dp.upro_uacc_fk 
+				AND FIND_IN_SET(uacc_group_fk, "2,3")';
+		return $db->db->query($sql);
 	}
 }
 

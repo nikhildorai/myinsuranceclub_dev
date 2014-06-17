@@ -56,9 +56,9 @@ $db['default']['database'] = 'mic_testdb';
 */
 
 //	internal server
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'root';
+$db['default']['hostname'] = '192.168.2.201';
+$db['default']['username'] = 'developer';
+$db['default']['password'] = 'developer';
 $db['default']['database'] = 'myinsuranceclubDB';
 
 

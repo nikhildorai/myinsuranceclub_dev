@@ -399,5 +399,6 @@ $config['folder_path']['company'] = realpath(APPPATH . '../uploads').'/company/'
 $config['folder_path']['policy'] = realpath(APPPATH . '../uploads').'/policy/';
 
 $config['policy']['descriptionCount'] = 10;
+$config['policy']['keyFeatures'] = 4;
 /* End of file config.php */
 /* Location: ./application/config/config.php */

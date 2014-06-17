@@ -81,16 +81,22 @@
         
         
         
-        <li>
+        <li class="<?php echo in_array($controller, array('articles')) ? 'open active' : '';?>">
             <a href="javascript:void(0);">
             	<i class="fa fa-table">
             		<span class="icon-bg bg-violet"></span>
             	</i>
             	<span data-i18n="Content"></span>
             </a>
-            <ul>
+            <ul style="display: <?php echo in_array($controller, array('articles')) ? 'block' : 'none';?>;">
                 <li>
-                	<a href="javascript:void(0);">
+                	<a href="<?php echo $base_url;?>admin/master_tags/">
+                		<i class="fa fa-caret-right"></i>
+                		<span data-i18n="Tags"></span>
+                	</a>
+               	</li>
+                <li>
+                	<a href="<?php echo $base_url;?>admin/articles/">
                 		<i class="fa fa-caret-right"></i>
                 		<span data-i18n="Articles"></span>
                 	</a>

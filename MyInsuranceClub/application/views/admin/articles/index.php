@@ -20,9 +20,9 @@
     <section class="panel panel-primary">
         <div class="panel-heading">
         	<strong>
-        		<span class="glyphicon glyphicon-th"></span> Manage Policy 
+        		<span class="glyphicon glyphicon-th"></span> Manage Articles 
         	</strong>
-        	<a href="<?php echo $base_url;?>admin/policy/create" class="btn btn-w-md btn-gap-v btn-success btn-sm" style="float: right; margin-top: -5px;">Create New Policy</a>
+        	<a href="<?php echo $base_url;?>admin/articles/create" class="btn btn-w-md btn-gap-v btn-success btn-sm" style="float: right; margin-top: -5px;">Create New Article</a>
         </div>
         <div class="panel-body">
         
@@ -37,43 +37,16 @@
             	$open = true;
             ?>
                 <accordion-group heading="Search Filter" is-open="<?php echo $open;?>">
-					<?php echo form_open('admin/policy/index', array('method'=>'get'));	?>
+					<?php echo form_open('admin/articles/index', array('method'=>'get'));	?>
 				        <div class="form-group">
-		                    <label for="" class="col-sm-2">Search Policy</label>
+		                    <label for="" class="col-sm-2">Title</label>
 		                    <div class="col-sm-10">
-		                        <input type="text" class="form-control" placeholder="Search by policy name"  id="policy_name" name="policy_name" value="<?php echo array_key_exists( 'policy_name',$search_query) ? $search_query['policy_name'] : '';?>" >
+		                        <input type="text" class="form-control" placeholder="Search by policy name"  id="title" name="title" value="<?php echo array_key_exists( 'title',$search_query) ? $search_query['title'] : '';?>" >
 	                    	</div>
 		                </div>
 		                
 		                <div class="space"></div>
-				        <div class="form-group">
-		                    <label for="" class="col-sm-2">Company Name</label>
-		                    <div class="col-sm-10">
-								<span class="ui-select "> 
-				<?php 
-						$selected = array_key_exists( 'company_id',$search_query) ? $search_query['company_id'] : '';
-						$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Insurance_company_master_model', $optionKey = 'company_id', $optionValue = 'company_name', $defaultEmpty = "All");
-						echo form_dropdown('company_id', $options, $selected, ' id="company_id" class="tooltip_trigger" title="Search by company name." style="width: 345px;margin-top: 0px;"');			
-				?>
-								</span>
-		                	</div>
-		                </div>
-	
-		                
-				        <div class="form-group">
-		                    <label for="" class="col-sm-2">Product Type</label>
-		                    <div class="col-sm-10">
-								<span class="ui-select "> 
-				<?php 
-						$selected = array_key_exists( 'product_id',$search_query) ? $search_query['product_id'] : '';
-						$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Product_model', $optionKey = 'product_id', $optionValue = 'product_name', $defaultEmpty = "All");						
-						echo form_dropdown('product_id', $options, $selected, ' id="product_id" class="tooltip_trigger" title="Search by health type." style="width: 345px;margin-top: 0px;"');
-				?>
-								</span>
-		                	</div>
-		                </div>
-	
-						                
+    
 				        <div class="form-group">
 		                    <label for="" class="col-sm-2"></label>
 		                    <div class="col-sm-10">
@@ -83,7 +56,7 @@
 								id="submit" 
 								value="Search"
 								class="btn btn-w-md btn-gap-v btn-primary" />
-								<a href="<?php echo $base_url; ?>admin/policy"  class="btn btn-w-md btn-gap-v btn-default">Reset</a>
+								<a href="<?php echo $base_url; ?>admin/articles"  class="btn btn-w-md btn-gap-v btn-default">Reset</a>
 	                    	</div>
 		                </div>
 					<?php echo form_close();?>
@@ -99,9 +72,9 @@
                     <thead class="cf">
                         <tr>
 							<th>Id</th>
-							<th>Policy Name</th>
-							<th>Company Name</th>
-							<th>Product</th>
+							<th>Title</th>
+							<th>Description</th>
+							<th>Publish Date</th>
 							<th>Status</th>
 							<th style="width: 16%;">Action</th>
                         </tr>
@@ -124,19 +97,6 @@
 						   	{
 						   		if ($i > $min && $i <= $max)
 						   		{
-									$where = array();
-									$where[0]['field'] = 'company_id';
-									$where[0]['value'] = (int)$row['company_id'];
-									$where[0]['compare'] = 'equal';
-									$comp_name = reset($this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $where, $fields = array('company_name')));
-									$where = array();
-									$where[0]['field'] = 'product_id';
-									$where[0]['value'] = $row['product_id'];
-									$where[0]['compare'] = 'findInSet';				
-									$prod_type = $this->util->getTableData($modelName='Product_model', $type="single", $where, $fields = array('product_name'));
-									$productId = array();
-									foreach ($prod_type as $k1=>$v1)
-										$productId[] = $v1['product_name'];
 									$actionBtn = '';
 									if ($row['status'] == 'active')
 									{
@@ -149,85 +109,29 @@
 										$actionBtn .= '<a href="'.$base_url.'admin/policy/create/'.$row['policy_id'].'">View</a>';
 									}
 			                    	if (strtolower($row['status']) != 'active'){?>
-			                    	<tr  class="danger odd" id="<?php echo $i;?>">
+			                    	<tr  class="danger" id="<?php echo $i;?>">
 			                  <?php }	else	{	?>
-			                    	<tr class="odd" id="<?php echo $i;?>">
+			                    	<tr id="<?php echo $i;?>">
 			                 <?php 	}?>
-										<td><?php echo $row['policy_id'];?></td>
-										<td><?php echo $row['policy_name'];?></td>
-										<td><a href="<?php echo $base_url.'admin/company/create/'.$row['company_id']; ?>"><?php echo $comp_name['company_name']; ?></a></td>
-										<td><?php echo implode('<br>', $productId);?></td>
+										<td><?php echo $row['article_id'];?></td>
+										<td><?php echo $row['title'];?></td>
+										<td><?php echo $row['description'];?></td>
+										<td><?php echo $row['publish_date']?></td>
 										<td><?php echo $this->util->getStatusIcon($row['status']);?></td>
 										<td><?php echo $actionBtn;?></td>
-									</tr>
-									<tr class="even" style="display:none;">
-										<td colspan="6">
-											<?php 
-											//	get all existing variants
-											$where = array();
-											$where[0]['field'] = 'policy_id';
-											$where[0]['value'] = (int)$row['policy_id'];
-											$where[0]['compare'] = 'equal';
-											$variantModel = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());	
-											if (!empty($variantModel))
-											{	?>
-												<table class="table">
-													<thead>
-														<tr>
-															<th>Variant Id</th>
-															<th>Variant Name</th>
-															<th>Comments</th>
-															<th>Status</th>
-															<th>Action</th>
-														</tr>
-													</thead>
-													<tbody>
-											<?php 	
-													//	get action depending upon product
-													$row['product_id'];											
-													foreach ($variantModel as $k1 => $v1)
-													{
-														echo '<tr>';
-															echo '<td>'.$v1['variant_id'].'</td>';
-															echo '<td>'.$v1['variant_name'].'</td>';
-															echo '<td>'.$v1['comments'].'</td>';
-															echo '<td>'.$this->util->getStatusIcon($v1['status']).'</td>';
-															$action = '';
-															if (in_array($v1['status'], array('inactive', 'deleted')))
-															{
-													//			$action .= '<a href="'.$base_url.'admin/variants/changeStatus/'.$v1['variant_id'].'/active">Activate</a>';
-															}
-															else 
-															{
-													//			$action .= '<a href="'.$base_url.'admin/variants/create/'.$v1['variant_id'].'">Update</a>';
-													//			$action .= ' | <a href="'.$base_url.'admin/variants/changeStatus/'.$v1['variant_id'].'/inactive">Inactive</a>';
-													//			$action .= ' | <a href="'.$base_url.'admin/variants/changeStatus/'.$v1['variant_id'].'/deleted">Delete</a>';
-															}
-															echo '<td>'.$action.'</td>';
-														echo '</tr>';
-													}	?>		
-													</tbody>
-												</table>
-									<?php 	}
-											else 
-											{
-												echo 'No variants found.';
-											}
-												?>
-										</td>
-									</tr>							
+									</tr>						
 			<?php 			   	}
 								$i++;
 							}
 						}
 						else 
 						{
-							echo '<tr><td colspan="5">No record found</td></tr>';
+							echo '<tr><td colspan="6">No record found</td></tr>';
 						}
 					}
 					else 
 					{
-						echo '<tr><td colspan="5">No record found</td></tr>';
+						echo '<tr><td colspan="6">No record found</td></tr>';
 					}
 					?>
 					</tbody>

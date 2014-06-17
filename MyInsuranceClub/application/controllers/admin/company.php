@@ -226,6 +226,7 @@ class Company extends CI_Controller {
 		//	check if post data is available
 		if ($this->input->post('companyModel'))
 		{
+var_dump($_POST);die;			
 			//	check if file is uploaded
 			if (!empty($_FILES))
 			{

@@ -58,26 +58,26 @@ $('.remove').prop('disabled', true);
 		    	}
 		});	
 	});
-
+var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionCount'];?>;
 	$(document).delegate('.showMoreLess','click',function(e){
 		showMoreLessNum = parseInt($('#showMoreLessNum').val());
 		var btnname = $(this).data('btnname');	
 		if(btnname == 'more')
 		{
-			if(showMoreLessNum<10)
+			if(showMoreLessNum < maxPolicyFeatures)
 			{
 				$('#featureDiv'+(parseInt(showMoreLessNum+1))).show();
 				$('#featureDiv'+(parseInt(showMoreLessNum+2))).show();
 				$('#showMoreLessNum').val(parseInt(showMoreLessNum+2));
 				showMoreLessNum = parseInt($('#showMoreLessNum').val());
-				if(showMoreLessNum == 10)
+				if(showMoreLessNum == maxPolicyFeatures)
 					$('#showMore').hide();
 				$('#showLess').show();
 			}
 		}
 		else if(btnname == 'less')
 		{
-			if(showMoreLessNum>2)
+			if(showMoreLessNum > 2)
 			{
 				$('#featureDiv'+(parseInt(showMoreLessNum))).hide();
 				$('#featureDiv'+(parseInt(showMoreLessNum-1))).hide();
@@ -143,17 +143,7 @@ $('.remove').prop('disabled', true);
 						                    <div class="col-sm-9">
 												<span class="ui-select "> 
 													<?php 					
-													$compType = '';
 													$selected = array_key_exists( 'company_id',$policyModel) ? $policyModel['company_id'] : '';
-													$where = array();
-													if (!empty($selected))
-													{
-														$where[0]['field'] = 'company_id';
-														$where[0]['value'] = (int)$policyModel['company_id'];
-														$where[0]['compare'] = 'equal';
-														$compType = reset($this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $where, $fields = array('company_type_id')));
-													}
-
 													$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Insurance_company_master_model', $optionKey = 'company_id', $optionValue = 'company_name', $defaultEmpty = "Please Select", $extraKeys = true);
 													$optionsText = '<option value="" data-company_type_id="">Please Select</option>';
 													foreach ($options as $k1=>$v1)
@@ -173,12 +163,21 @@ $('.remove').prop('disabled', true);
 						                </div>
 
 										<?php
+										$compType = '';
+										$where = array();
+										if (!empty($selected))
+										{
+											$where[0]['field'] = 'company_id';
+											$where[0]['value'] = (int)$policyModel['company_id'];
+											$where[0]['compare'] = 'equal';
+											$compType = reset($this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $where, $fields = array('company_type_id')));
+										}
 										$where = array();
 										if (!empty($compType))
 										{
 											$where[0]['field'] = 'company_type_id';
-											$where[0]['value'] = (int)$compType['company_type_id'];
-											$where[0]['compare'] = 'equal';
+											$where[0]['value'] = $compType['company_type_id'];
+											$where[0]['compare'] = 'findInSet';
 										}
 										$selected = array_key_exists( 'product_id',$policyModel) ? explode(',',$policyModel['product_id']) : '';
 										$sqlFilter['orderBy'] = 'product_name';
@@ -344,14 +343,12 @@ $('.remove').prop('disabled', true);
 			                    {
 			                    	$keyFeatures = unserialize( $policyModel['key_features']);			                    	
 			                    }
+			                    for ($i = 0; $i < $this->config->config['policy']['keyFeatures']; $i++)
+			                    {
 			                    ?>
-			                        <input type="text" class="form-control"  required placeholder="Key feature 1"  id="url" name="policyModel[key_features][]" value="<?php echo array_key_exists( '0',$keyFeatures) ? $keyFeatures['0'] : '';?>"  >
+			                        <input type="text" class="form-control"  required placeholder="Key feature <?php echo $i+1;?>"  id="url" name="policyModel[key_features][]" value="<?php echo array_key_exists( $i,$keyFeatures) ? $keyFeatures[$i] : '';?>"  >
 			                        <div class="divider"></div>
-			                        <input type="text" class="form-control"   placeholder="Key feature 2"  id="url" name="policyModel[key_features][]" value="<?php echo array_key_exists( '1',$keyFeatures) ? $keyFeatures['1'] : '';?>"  >
-			                        <div class="divider"></div>
-			                        <input type="text" class="form-control"   placeholder="Key feature 3"  id="url" name="policyModel[key_features][]" value="<?php echo array_key_exists( '2',$keyFeatures) ? $keyFeatures['2'] : '';?>"  >
-			                        <div class="divider"></div>
-			                        <input type="text" class="form-control"  placeholder="Key feature 4"  id="url" name="policyModel[key_features][]" value="<?php echo array_key_exists( '3',$keyFeatures) ? $keyFeatures['3'] : '';?>"  >
+			               <?php }	?>
 			                    </div>
 			                </div>
 			                
@@ -359,34 +356,15 @@ $('.remove').prop('disabled', true);
 			                    <label for="Company Type" class="col-sm-3">Created By</label>
 			                    <div class="col-sm-9">
 									<span class="ui-select "> 
-										<?php 					
-										$compType = '';
+										<?php 			
 										$selected = array_key_exists( 'created_by_user_id',$policyModel) ? $policyModel['created_by_user_id'] : '';
-										$where = array();
-										$where[0]['field'] = 'uacc_active';
-										$where[0]['value'] = 1;
-										$where[0]['compare'] = 'equal';
-										$where[0]['field'] = 'uacc_group_fk';
-										$where[0]['value'] = "2,3";
-										$where[0]['compare'] = 'findInSet';
-										
-										$userTypes = $this->util->getTableData($modelName='User_accounts_model', $type="single", $where, $fields = array('uacc_id'));
-										foreach ($userTypes as $k2=>$v2)
-										{
-											$where = array();
-											$where[0]['field'] = 'upro_uacc_fk';
-											$where[0]['value'] = $v2['uacc_id'];
-											$where[0]['compare'] = 'equal';
-											$users[] = $this->util->getTableData($modelName='Demo_user_profiles_model', $type="single", $where, $fields = array());
-										}			
-
 										$optionsText = '<option value="" data-company_type_id="">Please Select</option>';
 										foreach ($users as $k1=>$v1)
 										{
-											if ($selected == $v1['upro_uacc_fk'])
-												$optionsText .= '<option value="'.$v1['upro_uacc_fk'].'"  selected>'.$v1['upro_first_name'].' '.$v1['upro_last_name'].'</option>';
+											if ($selected == $v1['uacc_id'])
+												$optionsText .= '<option value="'.$v1['uacc_id'].'"  selected>'.$v1['upro_first_name'].' '.$v1['upro_last_name'].'</option>';
 											else
-												$optionsText .= '<option value="'.$v1['upro_uacc_fk'].'">'.$v1['upro_first_name'].' '.$v1['upro_last_name'].'</option>';
+												$optionsText .= '<option value="'.$v1['uacc_id'].'">'.$v1['upro_first_name'].' '.$v1['upro_last_name'].'</option>';
 										}
 										?>
 										<select id="created_by_user_id" name="policyModel[created_by_user_id]" required style="margin-top: 0px;">

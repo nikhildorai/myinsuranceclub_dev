@@ -47,7 +47,6 @@ class Variants extends CI_Controller {
  		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->model('policy_health_features_model');
-		$this->load->model('policy_product_type_model');
 		$this->load->model('policy_health_variants_model');
 		$this->load->model('policy_health_master_model');
  		
@@ -89,15 +88,15 @@ class Variants extends CI_Controller {
 		$this->template->render();
 	}
 
-    public function create($policy_id = null)
+    public function health($variant_id = null)
 	{
 		$modelType = 'create';
 		//	check if policy id exists
-		$policyModel = $variantModel = array();
+		$variantModel = array();
 		$this->data['message'] = '';
 		$company_id = '';
 		if ((isset($_GET['policy_id']) && !empty($_GET['policy_id'])) || !empty($policy_id))
-		{	
+		{
 			if (isset($_GET['policy_id']))
 				$policy_id = $_GET['policy_id'];
 			$where = array();
@@ -118,130 +117,14 @@ class Variants extends CI_Controller {
 			}
 		}
 	
-		//	get all the health type as per company type
-		$allCompanyType = $this->util->getTableData($modelName='Company_type_model', $type="all", $where = array(), $fields = array());
-		
-		//	get all existing variants
-		$where = array();
-		$where[0]['field'] = 'policy_id';
-		$where[0]['value'] = (int)$policy_id;
-		$where[0]['compare'] = 'equal';
-		$where[1]['field'] = 'status';
-		$where[1]['value'] = 'active';
-		$where[1]['compare'] = 'equal';
-		$variantModel = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());		
-		if (!empty($allCompanyType))
-		{
-			foreach ($allCompanyType as $k1=>$v1)
-			{
-				$where = array();
-				$where[0]['field'] = 'company_type_id';
-				$where[0]['value'] = (int)$v1['company_type_id'];
-				$where[0]['compare'] = 'equal';
-				$a = array();
-				$op = '';
-				$policyHealth = $this->util->getTableData($modelName='Policy_health_type_model', $type="all", $where, $fields = array());
-				if (!empty($policyHealth))
-				{
-					foreach ($policyHealth as $k2=>$v2)
-					{
-						$a[$v2['type_id']] = $v2['type_name']; 
-						$op .= '<option value="'.$v2['type_id'].'">'.$v2['type_name'].'</option>';
-					}
-				}
-				$this->data['allPolicyHealthType']['data'][(int)$v1['company_type_id']] = $a;
-				$this->data['allPolicyHealthType']['options'][(int)$v1['company_type_id']] = $op;
-			}
-		}
-		
 		//	check if post data is available
 		if ($this->input->post('policyModel'))
-		{	
-			//	set default values for policy
-			$arrParams = $this->input->post('policyModel');
-			$policy_id = (isset($arrParams['policy_id']) && !empty($arrParams['policy_id'])) ? $arrParams['policy_id'] : '';
-			$company_id = (isset($arrParams['company_id']) && !empty($arrParams['company_id'])) ? $arrParams['company_id'] : '';	
-			$_POST['modelType'] = $modelType;
-			//	set validation rules
-			$validation_rules = array(
-				array('field' => 'policyModel[policy_name]', 'label' => 'policy name', 'rules' => 'required|callback_validatePost[policy_name]'),
-				array('field' => 'policyModel[company_id]', 'label' => 'company name', 'rules' => 'required'),
-				array('field' => 'policyModel[type_health_plan]', 'label' => 'health plan type', 'rules' => 'callback_validatePost[type_health_plan]'),
-			//	array('field' => 'policyModel[variant]', 'label' => 'varient', 'rules' => 'required'),
-				array('field' => 'policyModel[seo_title]', 'label' => 'seo title', 'rules' => 'required'),
-				array('field' => 'policyModel[seo_description]', 'label' => 'seo description', 'rules' => 'required'),
-				array('field' => 'policyModel[seo_keywords]', 'label' => 'seo keywords', 'rules' => 'required'),
-				array('field' => 'policyModel[slug]', 'label' => 'url', 'rules' => 'required|callback_validatePost[slug]'),
-				);
-			
-			$this->form_validation->set_rules($validation_rules);
-			
-			
-			//	set default values for variant
-			$variantPost = $this->input->post('variantModel');
+		{
 		
-			
-			// Run the validation.
-			if ($this->form_validation->run())
-			{
-				//	set new default values
-				$arrParams = $this->input->post('policyModel');
-				//	run validation on complete company post data
-				$validate = $this->validatePost($arrParams);	
-				if ($validate == true)
-				{
-					//	save record for policy 
-					$recordId = $this->policy_health_master_model->saveRecord($arrParams, $modelType);	
-					if ($recordId != false)
-					{
-						$saveData[] = true;
-						$policy_id = $recordId;	
-					}
-					else 
-						$saveData[] = false;
-					
-						
-					// save records for varients
-					if (!empty($policy_id))
-					{
-						$saveVarient = $this->saveVarientData($policy_id, $variantPost);
-						if ($saveVarient['result'] == true)
-							$saveData[] = true;
-						else 
-						{
-							$saveData[] = false;
-							$this->data['message'] .= $saveVarient['msg'];
-						}
-						$variantModel = $saveVarient['varientModel'];				
-					}			
-					//	if policy and varients records are stored then on show success and redirect to index 
-					if(!in_array(false, $saveData))
-					{
-						$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
-						redirect('admin/policy/index');
-					}
-					else 
-					{
-						//$this->data['message'] .= '<p class="error_msg">Validation Error.</p>';
-					}
-				}
-				else 
-				{
-					//	show error if record exist
-					$this->data['message'] .= '<p class="error_msg">Record already exists.</p>';
-				}
-			}		
-			else 
-			{
-				// 	Set validation errors.
-				$this->data['message'] = validation_errors('<p class="error_msg">', '</p>'); 
-			}
-			$policyModel = $_POST['policyModel'];
 		}
-		$this->data['policyModel'] = $policyModel;
 		$this->data['modelType'] = $modelType;
 		$this->data['variantModel'] = $variantModel;
-		$this->template->write_view('content', 'admin/policy/create', $this->data, TRUE);
+		$this->template->write_view('content', 'admin/variant/health', $this->data, TRUE);
 		$this->template->render();
 	}
 	

@@ -224,7 +224,7 @@ class Policy extends CI_Controller {
 			$validation_rules = array(
 				array('field' => 'policyModel[policy_name]', 'label' => 'policy name', 'rules' => 'required|callback_validatePost[policy_name]'),
 				array('field' => 'policyModel[company_id]', 'label' => 'company name', 'rules' => 'required'),
-				array('field' => 'policyModel[product_id]', 'label' => 'health plan type', 'rules' => 'callback_validatePost[product_id]'),
+				array('field' => 'policyModel[product_id]', 'label' => 'health plan type', 'rules' => 'required'),
 				array('field' => 'policyModel[seo_title]', 'label' => 'seo title', 'rules' => 'required'),
 				array('field' => 'policyModel[seo_description]', 'label' => 'seo description', 'rules' => 'required'),
 				array('field' => 'policyModel[seo_keywords]', 'label' => 'seo keywords', 'rules' => 'required'),
@@ -240,12 +240,13 @@ class Policy extends CI_Controller {
 			
 			//	set default values for policy features
 			$policyFeaturesPost = $this->input->post('policyFeaturesModel');	
-			
+						
 			// Run the validation.
 			if ($this->form_validation->run())
 			{
 				//	set new default values
 				$arrParams = $this->input->post('policyModel');
+//var_dump($_POST, $arrParams);die;
 				//	run validation on complete company post data
 				$validate = $this->validatePost($arrParams);	
 				if ($validate == true)
@@ -363,6 +364,17 @@ class Policy extends CI_Controller {
 		$this->data['modelType'] = $modelType;
 		$this->data['variantModel'] = $variantModel;
 		$this->data['policyFeaturesModel'] = $policyFeaturesModel;
+		
+		
+		//	get all active authorized(admin n moderator) users
+		$sql = 	'SELECT us.uacc_id, dp.upro_first_name,dp.upro_last_name,us.uacc_username 
+				FROM user_accounts us, demo_user_profiles dp 
+				WHERE us.uacc_active = 1 AND
+				us.uacc_id = dp.upro_uacc_fk 
+				AND FIND_IN_SET(uacc_group_fk, "2,3")';
+		$users = $this->db->query($sql);
+		
+		$this->data['users'] = $users->result_array();
 		$this->template->write_view('content', 'admin/policy/create', $this->data, TRUE);
 		$this->template->render();
 	}
@@ -751,41 +763,38 @@ class Policy extends CI_Controller {
 	}
 	
 	public function getProductSubProductDropDown()
-	{
+	{		
 		$result = '';
 		if (isset($_POST['companyTypeId']) && !empty($_POST['companyTypeId']))
 		{	
 			$compType = $_POST['companyTypeId'];
-			$where = array();
 			$changeType = $_POST['changeType'];
+			$isProductId = isset($_POST['productId']) ? reset($_POST['productId']) : '';
 			if (!empty($_POST['companyTypeId']) &&($changeType == 'product_id'))
 			{
+				$where = array();
 				$where[0]['field'] = 'company_type_id';
-				$where[0]['value'] = (int)$compType;
-				$where[0]['compare'] = 'equal';
-			}
-			if (!empty($_POST['productId']))
-			{
-				$where[1]['field'] = 'product_id';
-				$where[1]['value'] = implode(',', $_POST['productId']);
-				$where[1]['compare'] = 'findInSet';
-			}
-			if ($changeType == 'product_id')
-			{
+				$where[0]['value'] = $compType;
+				$where[0]['compare'] = 'findInSet';
 				$selected = isset($_POST['productId']) ? $_POST['productId'] : array();
-				$modelName = 'product_model';
+				$modelName = 'Product_model';
 				$optionKey = 'product_id';
 				$optionValue = 'product_name';
 				$sqlFilter['orderBy'] = 'product_name';
 			}
-			else if ($changeType == 'sub_product_id')
+			if (!empty($isProductId) && $changeType == 'sub_product_id')
 			{
+				$where = array();
+				$where[1]['field'] = 'product_id';
+				$where[1]['value'] = implode(',', $_POST['productId']);
+				$where[1]['compare'] = 'findInSet';
 				$selected = isset($_POST['subProductId']) ? $_POST['subProductId'] : array();
 				$modelName = 'Sub_product_model';
 				$optionKey = 'sub_product_id';
 				$optionValue = 'sub_product_name';
 				$sqlFilter['orderBy'] = 'sub_product_name';
 			}
+		
 			$healthOptions = $this->util->getCompanyTypeDropDownOptions($modelName, $optionKey, $optionValue, $defaultEmpty = "Please Select", $extraKeys = false, $where, $sqlFilter); 
 			if (!empty($healthOptions))
 			{
