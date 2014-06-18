@@ -131,7 +131,7 @@
   <div class="container">
     <!-- form name="" action="#" id="" enctype="multipart/form-data"  -->
     <?php echo validation_errors();?>
-	<?php echo form_open('Welcome/health_policy',array('name'=>'health_form'));?>
+	<?php echo form_open('welcome/health_policy',array('name'=>'health_form'));?>
   <div class="col-md-12 center mar-20"><h1>Compare & Buy Health Insurance Plans</h1>
   <p>Choose from 56 plans from 18 companies</p>
   </div>
