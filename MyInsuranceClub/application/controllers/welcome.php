@@ -110,7 +110,7 @@ class Welcome extends CI_Controller {
 		/* Form Validation Rules */
 		$post='';
 		
-		if(empty($this->input->post()))
+		if($this->input->post()='')
 		{
 			$post = $this->session->userdata('user_input');
 		}
