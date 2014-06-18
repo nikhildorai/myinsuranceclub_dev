@@ -108,6 +108,12 @@ class Welcome extends CI_Controller {
 	public function health_policy()
 	{	
 		/* Form Validation Rules */
+		$post='';
+		
+		if(empty($this->input->post()))
+		{
+			$post = $this->session->userdata('user_input');
+		}
 		
 		$this->form_validation->set_rules('cust_name', 'Full Name', 'required|alpha');
 		
@@ -123,7 +129,7 @@ class Welcome extends CI_Controller {
 		
 		/* Form Validation Rules Ends  */
 		
-		if (!($this->input->is_ajax_request()) && $this->form_validation->run() == FALSE)
+		if (!($this->input->is_ajax_request()) && empty($post) && $this->form_validation->run() == FALSE)
 		{
 			$this->load->view('health_insurance/health');
 		}
