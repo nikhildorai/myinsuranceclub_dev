@@ -115,7 +115,7 @@
 								<li><a href="#" class=" menu-item">Car Insurance </a></li>
 								<li><a href="#" class=" menu-item">Two Wheeler Insurance </a></li>
 								<li><a
-									href="<?php echo base_url();?>/Welcome/health_insurance_form"
+									href="<?php echo base_url();?>/welcome/health_insurance_form"
 									class=" menu-item">Health Insurance </a></li>
 								<li><a href="#" class="dropdown-toggle menu-item"
 									id="features-drop" data-toggle="dropdown" data-hover="dropdown">Life
@@ -219,7 +219,7 @@
 						</div>
 
 
-						<div id="cmp_tbl">
+						<div  id="cmp_tbl">
                 			<?php echo $this->util->getUserSearchFiltersHtml($customer_details, $type='health');?>
                 		</div>
                  <?php echo form_close();?>
@@ -431,13 +431,23 @@
 								<h6 class="fh3">Company</h6>
 								<p class="addOnFilter">
 
-                   		<?php 	foreach ($customer_details as $company)
+                   		<?php 	
+                   				$newVal = array();
+                   				foreach($customer_details as $k=>$v)
+                   				{
+                   					if(!in_array($v['company_id'], $newVal))
+                   					{
+                   						$aNew [] = $v;
+                   					}
+                   					$newVal [] = $v['company_id'];
+                   				}
+                   				
+                   				foreach ($aNew as $company)
                    				{	?>
 										<input type="checkbox" class="search_filter"
 											name="company_name[]"
-											value="<?php echo $company['company_id']?>" /> 
-										<?php echo $company['company_shortname']?><br/>
-										<!-- span style="float: right;"><?php //echo $company['annual_premium'];?></span> -->
+											value="<?php echo $company['company_id'];?>" /> 
+										<?php echo $company['company_shortname'];?><br/>
 						<?php 	}?>
 
 				</p>
