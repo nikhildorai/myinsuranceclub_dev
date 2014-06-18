@@ -12,8 +12,7 @@ class City EXTENDS CI_Model{
 
 	public function get_city()
 	{
-		$city="SELECT DISTINCT c.city_id,c.mic_city_name from city c ORDER BY FIELD(mic_city_name,'Chennai','Kolkata','Hyderabad','Bangalore','Delhi','Mumbai')DESC,mic_city_name";
-		$city_query= $this->db->query($city);
+		$city_query= $this->db->query("CALL sp_getCityList()");
 		return $city_query->result_array();
 	}
 }

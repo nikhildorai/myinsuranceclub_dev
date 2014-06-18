@@ -130,7 +130,8 @@
 <div id="highlighted" style=" background:#f9f9f9; padding-bottom:50px; margin-bottom:0px;" >
   <div class="container">
     <!-- form name="" action="#" id="" enctype="multipart/form-data"  -->
-	<?php echo form_open('welcome/health_policy',array('name'=>'health_form'));?>
+    <?php echo validation_errors();?>
+	<?php echo form_open('Welcome/health_policy',array('name'=>'health_form'));?>
   <div class="col-md-12 center mar-20"><h1>Compare & Buy Health Insurance Plans</h1>
   <p>Choose from 56 plans from 18 companies</p>
   </div>
@@ -298,14 +299,14 @@
   <div style="padding-left:0px;" class="col-md-12"><p>Child 1:</p></div>
                      <div class="form-group col-md-6">
                     <label for="signup-first-name" class="sr-only">Date Of Birth</label>
-                    <input type="text" placeholder="Date Of Birth" name="spouce_dob" id="spouce_dob" class="form-control">
+                    <input type="text" placeholder="Date Of Birth" name="child1_dob" id="spouce_dob" class="form-control">
                   </div>
                   
                   
                   
                    <div class="form-group col-md-6">
                     <label for="signup-first-name" class="sr-only">Gender</label>
-<select id="spouce_gender" name="spouce_gender" class="form-control">
+<select id="spouce_gender" name="child1_gender" class="form-control">
 <option value="Male">Male</option>
 <option value="Male">Female</option>
 
@@ -315,14 +316,14 @@
   <div style="padding-left:0px;" class="col-md-12"><p>Child 2:</p></div>
                      <div class="form-group col-md-6">
                     <label for="signup-first-name" class="sr-only">Date Of Birth</label>
-                    <input type="text" placeholder="Date Of Birth" name="spouce_dob" id="spouce_dob" class="form-control">
+                    <input type="text" placeholder="Date Of Birth" name="child2_dob" id="spouce_dob" class="form-control">
                   </div>
                   
                   
                   
                    <div class="form-group col-md-6">
                     <label for="signup-first-name" class="sr-only">Gender</label>
-<select id="spouce_gender" name="spouce_gender" class="form-control">
+<select id="spouce_gender" name="child2_gender" class="form-control">
 <option value="Male">Male</option>
 <option value="Male">Female</option>
 
@@ -332,14 +333,14 @@
   <div style="padding-left:0px;" class="col-md-12"><p>Child 3:</p></div>
                      <div class="form-group col-md-6">
                     <label for="signup-first-name" class="sr-only">Date Of Birth</label>
-                    <input type="text" placeholder="Date Of Birth" name="spouce_dob" id="spouce_dob" class="form-control">
+                    <input type="text" placeholder="Date Of Birth" name="child3_dob" id="spouce_dob" class="form-control">
                   </div>
                   
                   
                   
                    <div class="form-group col-md-6">
                     <label for="signup-first-name" class="sr-only">Gender</label>
-<select id="spouce_gender" name="spouce_gender" class="form-control">
+<select id="spouce_gender" name="child3_gender" class="form-control">
 <option value="Male">Male</option>
 <option value="Male">Female</option>
 
@@ -349,14 +350,14 @@
   <div style="padding-left:0px;" class="col-md-12"><p>Child 4:</p></div>
                      <div class="form-group col-md-6">
                     <label for="signup-first-name" class="sr-only">Date Of Birth</label>
-                    <input type="text" placeholder="Date Of Birth" name="spouce_dob" id="spouce_dob" class="form-control">
+                    <input type="text" placeholder="Date Of Birth" name="child4_dob" id="spouce_dob" class="form-control">
                   </div>
                   
                   
                   
                    <div class="form-group col-md-6">
                     <label for="signup-first-name" class="sr-only">Gender</label>
-<select id="spouce_gender" name="spouce_gender" class="form-control">
+<select id="spouce_gender" name="child4_gender" class="form-control">
 <option value="Male">Male</option>
 <option value="Male">Female</option>
 
@@ -380,7 +381,7 @@
    
     <div class="checkbox">
                     <label>
-                      <input type="checkbox" value="term">
+                      <input type="checkbox" name="MIC_terms" value="1">
                      I authorize MyInsuranceClub & its partners to Call/SMS for my application & agree to the <a href="" class="link">Terms of Use</a>.
                     </label>
                   </div>
@@ -419,7 +420,7 @@
   
   
 <?php echo form_close(); ?>
-</form>
+
 </div>
 </div>
 
