@@ -27,11 +27,6 @@
  */
 class Widget
 {
-	public function __construct()
-    {
-        require_once APPPATH.'plugins/widget_pi.php';
-    }
-    
     function Widget() {
         $this->_assign_libraries();
     }
@@ -42,7 +37,7 @@ class Widget
         require_once APPPATH.'widgets/'.$name.EXT;
         $name = ucfirst($name);
         
-        $widget =& new $name();
+        $widget = new $name();
         return call_user_func_array(array(&$widget, 'run'), array_slice($args, 1));    
     }
     

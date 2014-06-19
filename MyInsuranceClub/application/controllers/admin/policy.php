@@ -48,10 +48,11 @@ class Policy extends CI_Controller {
  		$this->load->helper('url');
  		$this->load->helper('form');
         $this->load->helper('ckeditor');
+        $this->load->plugin('widget_pi');
 		$this->load->library('form_validation');
 		$this->load->model('policy_health_features_model');
-		$this->load->model('policy_health_variants_model');
-		$this->load->model('policy_health_master_model');
+		$this->load->model('policy_variants_master_model');
+		$this->load->model('policy_master_model');
 		$this->load->model('policy_features_model');
 		$this->load->model('product_model');
 		$this->load->model('sub_product_model');
@@ -85,7 +86,7 @@ class Policy extends CI_Controller {
 		// Set any returned status/error messages..		
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
 		$this->session->set_flashdata('message','');		
-		$this->data['records'] 	= $this->policy_health_master_model->get_all_policy($arrParams);
+		$this->data['records'] 	= $this->policy_master_model->get_all_policy($arrParams);
 
 		//	pagination
 		$config = $this->util->get_pagination_params();
@@ -115,7 +116,7 @@ class Policy extends CI_Controller {
 			$where[0]['field'] = 'policy_id';
 			$where[0]['value'] = (int)$policy_id;
 			$where[0]['compare'] = 'equal';
-			$exist = $this->util->getTableData($modelName='Policy_health_master_model', $type="single", $where, $fields = array());
+			$exist = $this->util->getTableData($modelName='Policy_master_model', $type="single", $where, $fields = array());
 			if (empty($exist))
 			{
 				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
@@ -147,7 +148,7 @@ class Policy extends CI_Controller {
 		$where[1]['field'] = 'status';
 		$where[1]['value'] = 'active';
 		$where[1]['compare'] = 'equal';
-		$variantModel = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());
+		$variantModel = $this->util->getTableData($modelName='Policy_variants_master_model', $type="all", $where, $fields = array());
 		
 		//	initailze all policy feature ckeditor
 		
@@ -172,6 +173,13 @@ class Policy extends CI_Controller {
 		//	check if post data is available
 		if ($this->input->post('policyModel') && $isActive == true)
 		{
+			//	save tags
+			if (isset($_POST['tag']) && !empty($_POST['tag']))
+			{
+				$tag = $this->util->addUpdateTags($_POST['tag']);
+				$_POST['policyModel']['tag'] = $tag;
+			}		
+			
 			//	check if file is uploaded
 			if (!empty($_FILES))
 			{
@@ -252,7 +260,7 @@ class Policy extends CI_Controller {
 				if ($validate == true)
 				{
 					//	save record for policy 
-					$recordId = $this->policy_health_master_model->saveRecord($arrParams, $modelType);	
+					$recordId = $this->policy_master_model->saveRecord($arrParams, $modelType);	
 					if ($recordId != false)
 					{
 						$saveData[] = true;
@@ -366,15 +374,7 @@ class Policy extends CI_Controller {
 		$this->data['policyFeaturesModel'] = $policyFeaturesModel;
 		
 		
-		//	get all active authorized(admin n moderator) users
-		$sql = 	'SELECT us.uacc_id, dp.upro_first_name,dp.upro_last_name,us.uacc_username 
-				FROM user_accounts us, demo_user_profiles dp 
-				WHERE us.uacc_active = 1 AND
-				us.uacc_id = dp.upro_uacc_fk 
-				AND FIND_IN_SET(uacc_group_fk, "2,3")';
-		$users = $this->db->query($sql);
-		
-		$this->data['users'] = $users->result_array();
+		$this->data['selectedTags'] = isset($policyModel['tag']) ? $policyModel['tag'] : '';
 		$this->template->write_view('content', 'admin/policy/create', $this->data, TRUE);
 		$this->template->render();
 	}
@@ -440,7 +440,7 @@ class Policy extends CI_Controller {
 					}
 				}
 			
-				$existingVarients = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());
+				$existingVarients = $this->util->getTableData($modelName='Policy_variants_master_model', $type="all", $where, $fields = array());
 				if (!empty($existingVarients))
 				{
 					foreach ($existingVarients as $k1=>$v1)
@@ -519,20 +519,20 @@ class Policy extends CI_Controller {
 			}
 			*/
 			if (!empty($where))
-				$isExist = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());
+				$isExist = $this->util->getTableData($modelName='Policy_variants_master_model', $type="all", $where, $fields = array());
 			
 			if (!empty($isExist))
 			{
 				foreach ($isExist as $k1=>$v1)
 				{
 					$model['variant_id'] = (int)$v1['variant_id'];
-					$save = $this->policy_health_variants_model->saveRecord($arrParams = $model, $modelType = 'update');
+					$save = $this->policy_variants_master_model->saveRecord($arrParams = $model, $modelType = 'update');
 					break;	
 				}
 			}
 			else 
 			{
-				$save = $this->policy_health_variants_model->saveRecord($arrParams = $model, $modelType = 'create');
+				$save = $this->policy_variants_master_model->saveRecord($arrParams = $model, $modelType = 'create');
 			}
 			
 		}
@@ -680,7 +680,7 @@ class Policy extends CI_Controller {
 					$arrParams[$k1] = $v1;
 			}	
 			//	search for existing records
-			$record = $this->policy_health_master_model->getPolicy($arrParams);
+			$record = $this->policy_master_model->getPolicy($arrParams);
 
 			if ($record->num_rows == 0)
 			{
@@ -739,7 +739,7 @@ class Policy extends CI_Controller {
 			$where[0]['field'] = 'policy_id';
 			$where[0]['value'] = (int)$policy_id;
 			$where[0]['compare'] = 'equal';
-			$exist = $this->util->getTableData($modelName='Policy_health_master_model', $type="single", $where, $fields = array());
+			$exist = $this->util->getTableData($modelName='Policy_master_model', $type="single", $where, $fields = array());
 			if (empty($exist))
 			{
 				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
@@ -750,7 +750,7 @@ class Policy extends CI_Controller {
 				$modelType = 'update';
 				$arrParams['status'] = $status;
 				$arrParams['policy_id'] = $policy_id;
-				if ($this->policy_health_master_model->saveRecord($arrParams, $modelType))
+				if ($this->policy_master_model->saveRecord($arrParams, $modelType))
 					$this->session->set_flashdata('message', '<p class="status_msg">Record updated successfully.</p>');
 				else 
 					$this->session->set_flashdata('message', '<p class="error_msg">Record could not be updated.</p>');
@@ -819,7 +819,7 @@ class Policy extends CI_Controller {
 			$where[0]['field'] = 'policy_id';
 			$where[0]['value'] = (int)$policy_id;
 			$where[0]['compare'] = 'equal';
-			$exist = $this->util->getTableData($modelName='Policy_health_master_model', $type="single", $where, $fields = array());
+			$exist = $this->util->getTableData($modelName='Policy_master_model', $type="single", $where, $fields = array());
 			if (empty($exist))
 			{
 				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
@@ -857,7 +857,7 @@ class Policy extends CI_Controller {
 			$where[0]['field'] = 'policy_id';
 			$where[0]['value'] = (int)$policy_id;
 			$where[0]['compare'] = 'equal';
-			$exist = $this->util->getTableData($modelName='Policy_health_master_model', $type="single", $where, $fields = array());
+			$exist = $this->util->getTableData($modelName='Policy_master_model', $type="single", $where, $fields = array());
 			if (empty($exist))
 			{
 				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
@@ -880,7 +880,7 @@ class Policy extends CI_Controller {
 					$modelType = 'update';
 					$arrParams['policy_id'] = $policy_id;
 					
-					if ($this->policy_health_master_model->saveRecord($arrParams, $modelType))
+					if ($this->policy_master_model->saveRecord($arrParams, $modelType))
 					{
 						$this->session->set_flashdata('message', '<p class="status_msg">File deleted successfully.</p>');
 						$this->data['msgType'] = 'success';

@@ -49,10 +49,10 @@ $active_group = 'default';/* database settings can be created for production,dev
 $active_record = TRUE;
 /*
 //localhost
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'root';
-$db['default']['database'] = 'mic_testdb';
+$db['default']['hostname'] = '192.168.2.201';
+$db['default']['username'] = 'developer';
+$db['default']['password'] = 'developer';
+$db['default']['database'] = 'myinsuranceclubDB';
 */
 
 //	internal server

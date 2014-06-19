@@ -19,14 +19,14 @@
         	</a>
         </li>
         
-        <li class="<?php echo in_array($controller, array('company', 'policy')) ? 'open active' : '';?>">
+        <li class="<?php echo in_array($controller, array('company', 'policy', 'product')) ? 'open active' : '';?>">
             <a href="javascript:void(0);">
             	<i class="fa fa-magic">
             		<span class="icon-bg bg-orange"></span>
             	</i>
             	<span data-i18n="Master DB"></span>
             </a>
-            <ul style="display: <?php echo in_array($controller, array('company', 'policy')) ? 'block' : 'none';?>;">
+            <ul style="display: <?php echo in_array($controller, array('company', 'policy', 'product')) ? 'block' : 'none';?>;">
             
                 <li class="<?php echo in_array($controller, array('company')) ? 'active' : 'inactive';?>">
                 	<a href="<?php echo $base_url;?>admin/company/">
@@ -52,8 +52,8 @@
                 		<span data-i18n="Users"></span>
                 	</a>
                	</li>
-                <li>
-                	<a href="javascript:void(0);">
+                <li class="<?php echo in_array($controller, array('product')) ? 'active' : 'inactive';?>">
+                	<a href="<?php echo $base_url;?>admin/product/">
                 		<i class="fa fa-caret-right"></i>
                 		<span data-i18n="Products"></span>
                 	</a>

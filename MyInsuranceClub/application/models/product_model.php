@@ -8,55 +8,60 @@ class Product_model EXTENDS CI_Model{
 		// Call the Model constructor
 		parent::__construct();
 		$this->load->library('session');
-		$this->load->library('form_validation');
-        $this->load->helper('form');
 	}
+
 	
-	function saveCompanyRecord($arrParams = array(), $modelType = 'update')
+	public static function saveRecord($arrParams = array(), $modelType = 'update')
 	{
+		$saveRecord = false;
+		$db = &get_instance();
 		if (!empty($arrParams))
 		{
-			$colNames = $colValues = array();
+			$colNames = $colValues = $values = array();
+			foreach ($arrParams as $k1=>$v1)
+			{
+				if (!in_array($k1, array('product_id')))
+				{
+					if (is_numeric($v1))
+						$values[$k1] = (int)trim($v1);
+					else
+						$values[$k1] = trim($v1);
+				}
+			}		
 			if ($modelType == 'create')
 			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, array('product_id')))
-					{
-						$colNames[] = trim($k1);
-						if (is_numeric($v1))
-							$colValues[] = trim($v1);
-						else
-							$colValues[] = '"'.trim($v1).'"';
-					}
-				}
-				$colNames = implode(', ', $colNames);
-				$colValues = implode(', ', $colValues);
-				$sql = 'INSERT INTO product ('.$colNames.') VALUES('.$colValues.')';
+				if ($db->db->insert('product', $values))
+					$saveRecord = true;
 			}
 			else
 			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, array('product_id')))
-					{
-						if (is_numeric($v1))
-							$colValues[] = trim($k1).'='.trim($v1);
-						else
-							$colValues[] = trim($k1).'='.'"'.trim($v1).'"';
-					}
-				}
-				$colValues = implode(', ', $colValues);
-				$sql = 'UPDATE product SET '.$colValues.' WHERE product_id = '.$arrParams['product_id'];
-//var_dump($arrParams, $colValues, $sql);die;				
-			}		
-			if ($this->db->query($sql))
-				return true;
+				$where = array('product_id'=> $arrParams['product_id']);
+				if ($db->db->update('product', $values, $where))
+					$saveRecord = true;
+			}
+		}	
+		if ($saveRecord == true)
+		{
+			if ($modelType == 'create')
+				return $db->db->insert_id();
 			else 
-				return false;
+				return $arrParams['product_id'];
 		}
 		else
-			return FALSE;
+			return false;
+	}
+
+	public function getAll($arrParams = array())
+	{	
+		$sql = 'SELECT * FROM product WHERE status !="deleted" ';
+		if (!empty($arrParams))
+		{
+			if (isset($arrParams['product_name']) && !empty($arrParams['product_name']))
+				$sql .= ' AND product_name LIKE "%'.$arrParams['product_name'].'%" ';
+		}
+		$sql .= ' ORDER BY product_name ASC, product_id ASC ';	
+		$result = $this->db->query($sql);
+		return $result;
 	}
 	
 	public function getTableName()

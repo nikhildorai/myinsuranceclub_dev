@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Policy_health_variants_model EXTENDS CI_Model{
+class Policy_variants_master_model EXTENDS CI_Model{
 
 	function __construct()
 	{
@@ -14,7 +14,7 @@ class Policy_health_variants_model EXTENDS CI_Model{
 	
 	public function get_all_insurance_company($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM policy_health_variants WHERE company_shortname != "mic" ';
+		$sql = 'SELECT * FROM policy_variants_master WHERE company_shortname != "mic" ';
 		if (!empty($arrParams))
 		{
 			if (array_key_exists('company', $arrParams) && !empty($arrParams['company']))
@@ -46,13 +46,13 @@ class Policy_health_variants_model EXTENDS CI_Model{
 			}		
 			if ($modelType == 'create')
 			{
-				if ($this->db->insert('policy_health_variants', $values))
+				if ($this->db->insert('policy_variants_master', $values))
 					$saveRecord = true;
 			}
 			else
 			{
 				$where = array('variant_id'=> $arrParams['variant_id']);
-				if ($this->db->update('policy_health_variants', $values, $where))
+				if ($this->db->update('policy_variants_master', $values, $where))
 					$saveRecord = true;
 			}
 		}	
@@ -70,7 +70,7 @@ class Policy_health_variants_model EXTENDS CI_Model{
 	
 	public function getInsuranceCompany($arrParams)
 	{	
-		$sql = 'SELECT * FROM policy_health_variants WHERE status = "active"';
+		$sql = 'SELECT * FROM policy_variants_master WHERE status = "active"';
 		if (!empty($arrParams))
 		{
 			if (isset($arrParams['company_name']) && !empty($arrParams['company_name']))
@@ -92,19 +92,19 @@ class Policy_health_variants_model EXTENDS CI_Model{
 	
 	public function getByWhere($id)
 	{
-		$sql = 'SELECT * FROM policy_health_variants WHERE company_id = '.$id;		
+		$sql = 'SELECT * FROM policy_variants_master WHERE company_id = '.$id;		
 		return $this->db->query($sql);
 	}
 	
 	public function getAll()
 	{
-		$sql = 'SELECT * FROM policy_health_variants';
+		$sql = 'SELECT * FROM policy_variants_master';
 		return $this->db->query($sql);
 	}
 	
 	public function getTableName()
 	{
-		return 'policy_health_variants';
+		return 'policy_variants_master';
 	}
 	
 	public function excuteQuery($sql)

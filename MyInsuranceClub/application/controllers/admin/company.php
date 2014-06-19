@@ -49,6 +49,7 @@ class Company extends CI_Controller {
  		$this->load->helper('form');
 		$this->load->library('form_validation');
         $this->load->helper('ckeditor');
+        $this->load->plugin('widget_pi');
 		$this->load->model('insurance_company_master_model');
 		$this->load->model('insurance_company_master_detail_model');
 		$this->load->model('company_claim_ratio_model');
@@ -142,7 +143,7 @@ class Company extends CI_Controller {
 		$companyModel = $companyDetailModel = $saveData = $ratioModel = array();
 		$this->data['message'] = '';
 		$this->data['file_upload'] = array();
-		
+		$this->data['allTags'] = $this->util->getAllTags();
 		
 		//Ckeditor's configuration
 		$this->data['ckeditor1'] = array(
@@ -176,6 +177,7 @@ class Company extends CI_Controller {
 			$where[0]['field'] = 'company_id';
 			$where[0]['value'] = (int)$company_id;
 			$where[0]['compare'] = 'equal';
+			$isActive = true;
 			$exist = $this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $where, $fields = array());
 			//$this =& get_instance();
 			if (empty($exist))
@@ -190,6 +192,8 @@ class Company extends CI_Controller {
 					$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
 					redirect('admin/company/index');
 				}
+				if ($exist['status'] != 'active')
+					$isActive = false;
 				$companyModel = $exist;	
 				$modelType = 'update';
 				
@@ -224,9 +228,14 @@ class Company extends CI_Controller {
 		}
 		
 		//	check if post data is available
-		if ($this->input->post('companyModel'))
+		if ($this->input->post('companyModel') && $isActive == true)
 		{
-var_dump($_POST);die;			
+			//	save tags
+			if (isset($_POST['tag']) && !empty($_POST['tag']))
+			{
+				$tag = $this->util->addUpdateTags($_POST['tag']);
+				$_POST['companyModel']['tag'] = $tag;
+			}
 			//	check if file is uploaded
 			if (!empty($_FILES))
 			{
@@ -261,6 +270,8 @@ var_dump($_POST);die;
 			$arrParams = $this->input->post('companyModel');
 			$companyTypeId = (isset($arrParams['company_type_id']) && !empty($arrParams['company_type_id'])) ? $arrParams['company_type_id'] : '';
 			$company_id = (isset($arrParams['company_id']) && !empty($arrParams['company_id'])) ? $arrParams['company_id'] : '';	
+			$_POST['companyModel']['slug'] = (isset($_POST['companyModel']['slug']) && !empty($_POST['companyModel']['slug'])) ? $this->util->getSlug($_POST['companyModel']['slug']) :  '';
+			
 			
 			//	set validation rules
 			$validation_rules = array(
@@ -407,17 +418,20 @@ var_dump($_POST);die;
 							else if (!empty($savedRecords) && empty($errorClaim))
 							{
 								$this->data['message'] = '<p class="status_msg">Records added successfully.</p>';
+								$this->data['msgType'] = 'success';
 							}
 							
 							else if (!empty($errorClaim))
 							{
 								//	show error if validation fails
 								$this->data['message'] = '<p class="error_msg">Claim ratio cannot be greater than 100.</p>';
+								$this->data['msgType'] = 'error';
 							}
 					  		else
 					  		{
 								//	show error if no record saved
 								$this->data['message'] = '<p class="error_msg">Minimum 1 record is required.</p>';
+								$this->data['msgType'] = 'error';
 					  		}
 					  		$ratioModel = $saveClaim;
 						}
@@ -446,6 +460,7 @@ var_dump($_POST);die;
 			{
 				// 	Set validation errors.
 				$this->data['message'] = validation_errors('<p class="error_msg">', '</p>'); 
+				$this->data['msgType'] = 'error';
 			}
 			$companyModel = $_POST['companyModel'];
 			$companyDetailModel = $_POST['companyDetailModel'];
@@ -453,6 +468,12 @@ var_dump($_POST);die;
 		$this->data['companyModel'] = $companyModel;
 		$this->data['companyDetailModel'] = $companyDetailModel;
 		$this->data['ratioModel'] = $ratioModel;
+		//	tag related data
+		$this->data['selectedTags'] = isset($companyModel['tag']) ? $companyModel['tag'] : '';
+		$this->data['tag_for'] = 'company';
+		$this->data['tagLimit'] = 1;
+		$this->data['status'] = isset($companyModel['status']) ? $companyModel['status'] : '';
+		
 		$this->template->write_view('content', 'admin/company/create', $this->data, TRUE);
 		$this->template->render();
 	}
@@ -621,7 +642,7 @@ var_dump($_POST);die;
 			}	
 	
 			//	search for existing records
-			$record = $this->policy_health_master_model->getPolicy($arrParams);
+			$record = $this->policy_master_model->getPolicy($arrParams);
 
 			if ($record->num_rows == 0)
 			{

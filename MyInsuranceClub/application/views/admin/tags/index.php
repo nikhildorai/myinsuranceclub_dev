@@ -73,6 +73,7 @@
                         <tr>
 							<th>Id</th>
 							<th>Name</th>
+							<th>Tags For</th>
 							<th>Comments</th>
 							<th>Status</th>
 							<th style="width: 16%;">Action</th>
@@ -114,6 +115,7 @@
 			                 <?php 	}?>
 										<td><?php echo $row['tag_id'];?></td>
 										<td><?php echo $row['name'];?></td>
+										<td><?php echo ucfirst($row['tag_for']);?></td>
 										<td><?php echo $row['comments'];?></td>
 										<td><?php echo $this->util->getStatusIcon($row['status']);?></td>
 										<td><?php echo $actionBtn;?></td>
@@ -124,12 +126,12 @@
 						}
 						else 
 						{
-							echo '<tr><td colspan="5">No record found</td></tr>';
+							echo '<tr><td colspan="6">No record found</td></tr>';
 						}
 					}
 					else 
 					{
-						echo '<tr><td colspan="5">No record found</td></tr>';
+						echo '<tr><td colspan="6">No record found</td></tr>';
 					}
 					?>
 					</tbody>

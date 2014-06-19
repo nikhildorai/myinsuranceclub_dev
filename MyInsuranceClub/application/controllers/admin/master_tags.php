@@ -126,13 +126,19 @@ class Master_tags extends CI_Controller {
 				
 		//	check if post data is available
 		if ($this->input->post('model') && $isActive == true)
-		{
+		{		
+			if (isset($_POST['model']['tag_for']) && $_POST['model']['tag_for'] == 'others')
+			{
+				$_POST['model']['tag_for'] = $_POST['tag_for_other'];
+			}
 			//	set default values for policy
 			$arrParams = $this->input->post('model');
 			$_POST['modelType'] = $modelType;
 			//	set validation rules
 			$validation_rules = array(
+				//array('field' => 'tag_for_other', 'label' => 'tag for others', 'rules' => 'required|callback_validatePost[tag_for_other]'),
 				array('field' => 'model[name]', 'label' => 'name', 'rules' => 'required|callback_validatePost[name]'),
+				array('field' => 'model[tag_for]', 'label' => 'tag for', 'rules' => 'required'),
 				);	
 			$this->form_validation->set_rules($validation_rules);
 								
@@ -175,6 +181,7 @@ class Master_tags extends CI_Controller {
 		}		
 		$this->data['model'] = $model;
 		$this->data['modelType'] = $modelType;
+		$this->data['tag_for_other'] = '';
 		$this->template->write_view('content', 'admin/tags/create', $this->data, TRUE);
 		$this->template->render();
 	}
@@ -186,6 +193,7 @@ class Master_tags extends CI_Controller {
 	 */
 	public function validatePost($post , $validationFor = null)
 	{
+		var_dump($post);
 		if (!empty($_POST) || !empty($post))
 		{
 			$modelType = 'create';
@@ -202,6 +210,10 @@ class Master_tags extends CI_Controller {
 				$arrQuery = array('name', 'status');
 				$arrSkip = array('product_id', 'comments');
 			}
+			else if ($validationFor == 'tag_for_other')
+			{
+				return true;
+			}
 			else 
 			{
 				$arrParams = $model;
@@ -213,7 +225,6 @@ class Master_tags extends CI_Controller {
 					$arrParams[$k1] = $v1;
 			}			
 			//	search for existing records
-			$record = $this->master_tags_model->getAll($arrParams);
 			$where = array();
 			$where[0]['field'] = 'name';
 			$where[0]['value'] = $model['name'];

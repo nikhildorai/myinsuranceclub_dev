@@ -110,7 +110,7 @@ $autoload['language'] = array();
 */
 
 $autoload['model'] = array();
-//$autoload['plugin'] = array('widget');
+$autoload['plugin'] = array('widget_pi');
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */

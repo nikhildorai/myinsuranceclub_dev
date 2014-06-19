@@ -47,8 +47,8 @@ class Variants extends CI_Controller {
  		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->model('policy_health_features_model');
-		$this->load->model('policy_health_variants_model');
-		$this->load->model('policy_health_master_model');
+		$this->load->model('policy_variants_master_model');
+		$this->load->model('policy_master_model');
  		
 		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
 		$this->load->vars('base_url', base_url());
@@ -78,7 +78,7 @@ class Variants extends CI_Controller {
 		// Set any returned status/error messages..		
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
 		$this->session->set_flashdata('message','');		
-		$this->data['records'] 	= $this->policy_health_master_model->get_all_policy($arrParams);
+		$this->data['records'] 	= $this->policy_master_model->get_all_policy($arrParams);
 
 		//	pagination
 		$config = $this->util->get_pagination_params();
@@ -103,7 +103,7 @@ class Variants extends CI_Controller {
 			$where[0]['field'] = 'policy_id';
 			$where[0]['value'] = (int)$policy_id;
 			$where[0]['compare'] = 'equal';
-			$exist = $this->util->getTableData($modelName='Policy_health_master_model', $type="single", $where, $fields = array());
+			$exist = $this->util->getTableData($modelName='Policy_master_model', $type="single", $where, $fields = array());
 			if (empty($exist))
 			{
 				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
@@ -189,7 +189,7 @@ class Variants extends CI_Controller {
 					}
 				}
 			
-				$existingVarients = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());
+				$existingVarients = $this->util->getTableData($modelName='Policy_variants_master_model', $type="all", $where, $fields = array());
 				if (!empty($existingVarients))
 				{
 					foreach ($existingVarients as $k1=>$v1)
@@ -266,20 +266,20 @@ class Variants extends CI_Controller {
 				}
 			}
 			
-			$isExist = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());
+			$isExist = $this->util->getTableData($modelName='Policy_variants_master_model', $type="all", $where, $fields = array());
 			
 			if (!empty($isExist))
 			{
 				foreach ($isExist as $k1=>$v1)
 				{
 					$model['variant_id'] = (int)$v1['variant_id'];
-					$save = $this->policy_health_variants_model->saveRecord($arrParams = $model, $modelType = 'update');
+					$save = $this->policy_variants_master_model->saveRecord($arrParams = $model, $modelType = 'update');
 					break;	
 				}
 			}
 			else 
 			{
-				$save = $this->policy_health_variants_model->saveRecord($arrParams = $model, $modelType = 'create');
+				$save = $this->policy_variants_master_model->saveRecord($arrParams = $model, $modelType = 'create');
 			}
 			
 		}
@@ -366,7 +366,7 @@ class Variants extends CI_Controller {
 			}	
 	
 			//	search for existing records
-			$record = $this->policy_health_master_model->getPolicy($arrParams);
+			$record = $this->policy_master_model->getPolicy($arrParams);
 
 			if ($record->num_rows == 0)
 			{
@@ -425,7 +425,7 @@ class Variants extends CI_Controller {
 			$where[0]['field'] = 'variant_id';
 			$where[0]['value'] = (int)$variant_id;
 			$where[0]['compare'] = 'equal';
-			$exist = $this->util->getTableData($modelName='Policy_health_variants_model', $type="single", $where, $fields = array());
+			$exist = $this->util->getTableData($modelName='Policy_variants_master_model', $type="single", $where, $fields = array());
 			if (empty($exist))
 			{
 				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
@@ -436,7 +436,7 @@ class Variants extends CI_Controller {
 				$modelType = 'update';
 				$arrParams['status'] = $status;
 				$arrParams['variant_id'] = $variant_id;				
-				if ($this->policy_health_variants_model->saveRecord($arrParams, $modelType))
+				if ($this->policy_variants_master_model->saveRecord($arrParams, $modelType))
 					$this->session->set_flashdata('message', '<p class="status_msg">Record updated successfully.</p>');
 				else 
 					$this->session->set_flashdata('message', '<p class="error_msg">Record could not be updated.</p>');

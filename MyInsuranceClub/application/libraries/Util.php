@@ -464,6 +464,132 @@ class Util {
 				AND FIND_IN_SET(uacc_group_fk, "2,3")';
 		return $db->db->query($sql);
 	}
+	
+	public function getUserDropdownList($selected = null)
+	{
+		$records = $this->getActiveUserLIst();
+		$value = '<option value="" data-company_type_id="">Please Select</option>';
+		if ($records->num_rows > 0)
+		{
+			foreach ($records->result_array() as $k1=>$v1)
+			{
+				if ($selected == $v1['uacc_id'])
+					$value .= '<option value="'.$v1['uacc_id'].'"  selected>'.$v1['upro_first_name'].' '.$v1['upro_last_name'].'</option>';
+				else
+					$value .= '<option value="'.$v1['uacc_id'].'">'.$v1['upro_first_name'].' '.$v1['upro_last_name'].'</option>';			
+			}
+		}
+		return $value;
+	}
+	
+	public function addUpdateTags($post = null)
+	{
+		$tagIds = null;
+		if (!empty($post['name']))
+		{
+			$tags = explode(',', $post['name']);
+			foreach ($tags as $k1=>$v1)
+			{
+				//	check if tag already exists
+				$arrParams = array();
+				$arrParams['name'] = $v1;
+			
+				$where = array();
+				$where[0]['field'] = 'name';
+				$where[0]['value'] = $v1;
+				$where[0]['compare'] = 'equal';
+				
+				$record = $this->getTableData($modelName='Master_tags_model', $type="all", $where, $fields = array());
+				if (!empty($record))
+				{
+					foreach ($record as $k2=>$v2)
+					{
+						$tagIds[] = $v2['tag_id'];
+					}
+				}
+				else 
+				{
+					$arrParams['slug'] = $this->getSlug($v1);
+					$arrParams['tag_for'] = $post['tag_for'];
+					$recordId = Master_tags_model::saveRecord($arrParams, $modelType='create');					
+					if ($recordId != false)
+						$tagIds[] = $recordId;
+				}		
+			}
+			$tagIds = implode(',', $tagIds);
+		}
+		return $tagIds;
+	}
+	
+	public function getAllTags()
+	{
+		$value = array();
+		$tags = $this->getTableData($modelName='Master_tags_model', $type="all", $where = array(), $fields = array());
+		if (!empty($tags))
+		{
+			$i = 0;
+			foreach ($tags as $k1=>$v1)
+			{
+				$value[$i]['name'] = $v1['name'];
+				$value[$i]['tag_for'] = $v1['tag_for'];
+				$i++;
+			}
+		}
+		return $value;	
+	}
+	
+	
+	public static function getDate($value,$format=null)
+	{
+		$value = strtotime($value);
+		
+		if(empty($value) && $format !=3)
+			return null;
+		else 
+		{
+			switch ($format)
+			{
+				case 1 	:	$format 	= 'm/d/Y'; 				break;
+				case 2 	:	$format 	= 'Y-m-d'; 				break;
+				case 3 	:	$format 	= 'Y-m-d H:i:s'; 		break;
+				case 4 	: 	$format 	= 'm/d/Y \a\t h:i A'; 	break;
+				case 5 	: 	$format 	= 'm/d/Y h:i A'; 		break;
+				case 6	: 	$format 	= 'l, M-d-Y, h:i:s A';	break;
+				case 7	: 	$format 	= '\G\M\T P';			break;
+				case 8 : 	$format 	= 'd/m/Y';				break;
+				default : 	$format 	= 'd-m-Y';				break;
+			}
+			$return = date($format, $value);
+			return $return;
+		}
+	}
+	
+	public static function getDescription($desc)
+	{
+		$value = '';
+		if (!empty($desc))
+		{
+			$value = substr(strip_tags($desc), 0, 100);
+		}	
+		return $value;
+	}
+	
+	public static function getUniqueTagFor()
+	{
+		$db = &get_instance();
+		$sql = 'SELECT DISTINCT tag_for FROM master_tags';
+		$result = $db->db->query($sql);
+		$value = array();
+		if ($result->num_rows > 0)
+		{
+			foreach ($result->result_array() as $k1=>$v1)
+			{		
+				$value[$v1['tag_for']] = ucfirst($v1['tag_for']);
+			}
+		}
+		$value['others'] = 'Others';
+		return $value;		
+	}
 }
 
 // END Util class

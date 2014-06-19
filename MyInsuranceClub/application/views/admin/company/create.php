@@ -5,17 +5,9 @@ $(document).ready(function(){
 <?php if (isset($companyModel['status']) && !empty($companyModel['status']) && in_array($companyModel['status'], array( 'inactive', 'delete'))) {?>
 $(".form-horizontal :input").prop("disabled", true);
 <?php }?>	
-
-var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
-
-$('#singleFieldTags2').tagit({
-    availableTags: sampleTags
-});
-
 });
 //-->
 </script>
-
 <div class="page" data-ng-controller="signupCtrl">
 <?php 	$attributes = array('class'=>"form-horizontal form-validation");
 		echo form_open_multipart(current_url(), $attributes);	?>
@@ -141,14 +133,10 @@ $('#singleFieldTags2').tagit({
 			                    </div>
 			                </div>
 			                
-			                <div class="form-group">
-			                    <label for="" class="col-sm-3">Tag</label>
-			                    <div class="col-sm-9">
-			                        <input type="text" class="form-control" id="singleFieldTags2"  required placeholder="Tag"  name="companyModel[tag]" value="Apple, Orange" >
-			                   <!-- <input type="text" class="form-control" id="singleFieldTags2"  required placeholder="Tag"  name="companyModel[tag]" value="<?php echo array_key_exists( 'tag',$companyModel) ? $companyModel['tag'] : '';?>" > -->
-			                    </div>
-			                </div>
-			                
+							<?php 
+							//	tagit widget
+							echo widget::run('tagit'); ?>
+							
 			                <div class="form-group">
 			                    <label for="" class="col-sm-3">Logo for Company Page:</label>
 			                    <div class="col-sm-9">

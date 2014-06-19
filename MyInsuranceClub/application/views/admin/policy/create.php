@@ -258,6 +258,10 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 						                    </div>
 						                </div>
 						                
+										<?php 
+										//	tagit widget
+										echo widget::run('tagit'); ?>
+										
 						                <div class="form-group">
 						                    <label for="" class="col-sm-3">URL</label>
 						                    <div class="col-sm-9">
@@ -357,18 +361,9 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 			                    <div class="col-sm-9">
 									<span class="ui-select "> 
 										<?php 			
-										$selected = array_key_exists( 'created_by_user_id',$policyModel) ? $policyModel['created_by_user_id'] : '';
-										$optionsText = '<option value="" data-company_type_id="">Please Select</option>';
-										foreach ($users as $k1=>$v1)
-										{
-											if ($selected == $v1['uacc_id'])
-												$optionsText .= '<option value="'.$v1['uacc_id'].'"  selected>'.$v1['upro_first_name'].' '.$v1['upro_last_name'].'</option>';
-											else
-												$optionsText .= '<option value="'.$v1['uacc_id'].'">'.$v1['upro_first_name'].' '.$v1['upro_last_name'].'</option>';
-										}
-										?>
+										$selected = array_key_exists( 'created_by_user_id',$policyModel) ? $policyModel['created_by_user_id'] : '';?>
 										<select id="created_by_user_id" name="policyModel[created_by_user_id]" required style="margin-top: 0px;">
-											<?php echo $optionsText;?>
+											<?php echo $this->util->getUserDropdownList($selected);?>
 										</select>	
 									</span> 
 			                    </div>

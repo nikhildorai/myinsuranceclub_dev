@@ -12,8 +12,8 @@ class Articles_model EXTENDS CI_Model{
         $this->load->helper('form');
 	}
 	
-	function saveCompanyRecord($arrParams = array(), $modelType = 'update')
-	{
+	function saveRecord($arrParams = array(), $modelType = 'update')
+	{		
 		if (!empty($arrParams))
 		{
 			$colNames = $colValues = array();
@@ -47,8 +47,7 @@ class Articles_model EXTENDS CI_Model{
 					}
 				}
 				$colValues = implode(', ', $colValues);
-				$sql = 'UPDATE articles SET '.$colValues.' WHERE article_id = '.$arrParams['article_id'];
-//var_dump($arrParams, $colValues, $sql);die;				
+				$sql = 'UPDATE articles SET '.$colValues.' WHERE article_id = '.$arrParams['article_id'];		
 			}		
 			if ($this->db->query($sql))
 				return true;

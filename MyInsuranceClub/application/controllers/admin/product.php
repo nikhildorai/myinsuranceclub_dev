@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Articles extends CI_Controller {
+class Product extends CI_Controller {
  
     function __construct() 
     {
@@ -47,10 +47,9 @@ class Articles extends CI_Controller {
         $this->load->library('upload');
  		$this->load->helper('url');
  		$this->load->helper('form');
-        $this->load->helper('ckeditor');
         $this->load->plugin('widget_pi');
 		$this->load->library('form_validation');
-		$this->load->model('articles_model');
+		$this->load->model('product_model');
  		
 		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
 		$this->load->vars('base_url', base_url());
@@ -74,23 +73,22 @@ class Articles extends CI_Controller {
 		$this->load->library('pagination');
 		$arrParams 	= array();
 		if (isset($_GET))
-			$arrParams = $_GET;
+			$arrParams = $_GET;			
 		$this->data['search_query'] = $arrParams;
 		// Set any returned status/error messages..		
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
 		$this->session->set_flashdata('message','');		
-		$this->data['records'] 	= $this->articles_model->getAll($arrParams);
-
+		$this->data['records'] 	= $this->product_model->getAll($arrParams);
 		//	pagination
 		$config = $this->util->get_pagination_params();
 		$config['total_rows'] 	= $this->data['records']->num_rows();
 		$this->pagination->initialize($config); 		
         
-		$this->template->write_view('content', 'admin/articles/index', $this->data, TRUE);
+		$this->template->write_view('content', 'admin/product/index', $this->data, TRUE);
 		$this->template->render();
 	}
 
-    public function create($article_id = null)
+    public function create($product_id = null)
 	{
 		$modelType = 'create';
 		//	check if policy id exists
@@ -101,19 +99,19 @@ class Articles extends CI_Controller {
 		$this->data['message'] = ( !empty($sessionMsg)) ? $sessionMsg : '';
 		$this->session->set_flashdata('message','');	
 		$isActive = true;
-		if ((isset($_GET['article_id']) && !empty($_GET['article_id'])) || !empty($article_id))
+		if ((isset($_GET['product_id']) && !empty($_GET['product_id'])) || !empty($product_id))
 		{
-			if (isset($_GET['article_id']))
-				$article_id = $_GET['article_id'];
+			if (isset($_GET['product_id']))
+				$product_id = $_GET['product_id'];
 			$where = array();
-			$where[0]['field'] = 'article_id';
-			$where[0]['value'] = (int)$article_id;
+			$where[0]['field'] = 'product_id';
+			$where[0]['value'] = (int)$product_id;
 			$where[0]['compare'] = 'equal';
-			$exist = $this->util->getTableData($modelName='Articles_model', $type="single", $where, $fields = array());
+			$exist = $this->util->getTableData($modelName='product_model', $type="single", $where, $fields = array());
 			if (empty($exist))
 			{
 				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
-				redirect('admin/articles/index');
+				redirect('admin/product/index');
 			}
 			else 
 			{
@@ -124,20 +122,6 @@ class Articles extends CI_Controller {
 			}
 		}
 		
-		//	initailze ckeditor
-		$this->data['ckeditor'] = array(
-			//ID of the textarea that will be replaced
-			'id' 	=> 	'description',
-			'path'	=>	'js/ckeditor',
-			//Optionnal values
-			'config' => array(
-				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
-				'width' 	=> 	"100%",	//Setting a custom width
-				'height' 	=> 	'300px',	//Setting a custom height
-				),
-			);
-		
-				
 		//	check if post data is available
 		if ($this->input->post('model') && $isActive == true)
 		{		
@@ -150,40 +134,35 @@ class Articles extends CI_Controller {
 			if (isset($_POST['model']['slug']) && !empty($_POST['model']['slug']))
 			{
 				$_POST['model']['slug'] = $this->util->getSlug($_POST['model']['slug']);
-			}		
-			if (isset($_POST['model']['publish_date']) && !empty($_POST['model']['publish_date']))
+			}
+			if (isset($_POST['model']['company_type_id']) && !empty($_POST['model']['company_type_id']))
 			{
-				$_POST['model']['publish_date'] = $this->util->getDate($_POST['model']['publish_date'], 3);
-			}	
+				$_POST['model']['company_type_id'] = implode(',', ($_POST['model']['company_type_id']));
+			}
 			//	set default values for policy
 			$arrParams = $this->input->post('model');
 			$_POST['modelType'] = $modelType;
 			//	set validation rules
 			$validation_rules = array(
-				array('field' => 'model[title]', 'label' => 'title', 'rules' => 'required'),
-				array('field' => 'model[description]', 'label' => 'description', 'rules' => 'required'),
-				array('field' => 'model[publish_date]', 'label' => 'publish date', 'rules' => 'required'),
-				array('field' => 'model[author]', 'label' => 'author', 'rules' => 'required'),
-				array('field' => 'model[seo_description]', 'label' => 'seo description', 'rules' => 'required'),
-				array('field' => 'model[seo_keywords]', 'label' => 'seo keywords', 'rules' => 'required'),
-				array('field' => 'model[seo_title]', 'label' => 'key features', 'rules' => 'required'),
+				array('field' => 'model[product_name]', 'label' => 'title', 'rules' => 'required|callback_validatePost[product_name]'),
+				array('field' => 'model[company_type_id]', 'label' => 'company type id', 'rules' => 'required'),
 				array('field' => 'model[slug]', 'label' => 'url', 'rules' => 'required|callback_validatePost[slug]'),
 				array('field' => 'model[tag]', 'label' => 'tag', 'rules' => 'required'),
 				);	
 			$this->form_validation->set_rules($validation_rules);
-			
+		
 			// Run the validation.
 			if ($this->form_validation->run())
 			{
 				//	set new default values
 				$arrParams = $this->input->post('model');
 				//	run validation on complete company post data
-				//	save record for policy 
-				$recordId = $this->articles_model->saveRecord($arrParams, $modelType);	
+				//	save record for policy 	
+				$recordId = $this->product_model->saveRecord($arrParams, $modelType);	
 				if ($recordId != false)
 				{
 					$saveData[] = true;
-					$article_id = $recordId;	
+					$product_id = $recordId;	
 				}
 				else 
 					$saveData[] = false;
@@ -193,7 +172,7 @@ class Articles extends CI_Controller {
 				{
 					$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
 					$this->data['msgType'] = 'success';
-					redirect('admin/articles/index');
+					redirect('admin/product/index');
 				}
 				else 
 				{
@@ -212,7 +191,10 @@ class Articles extends CI_Controller {
 		$this->data['model'] = $model;
 		$this->data['modelType'] = $modelType;
 		$this->data['selectedTags'] = isset($model['tag']) ? $model['tag'] : '';
-		$this->template->write_view('content', 'admin/articles/create', $this->data, TRUE);
+		$this->data['tag_for'] = 'product';
+		$this->data['tagLimit'] = 1;
+		$this->data['status'] = isset($model['status']) ? $model['status'] : '';
+		$this->template->write_view('content', 'admin/product/create', $this->data, TRUE);
 		$this->template->render();
 	}
 	
@@ -231,12 +213,16 @@ class Articles extends CI_Controller {
 			if (isset($_POST['modelType']) && !empty($_POST['modelType']))
 				$modelType = $_POST['modelType'];
 				
-			$article_id = (isset($model['article_id']) && !empty($model['article_id'])) ? $model['article_id'] : '';
+			$product_id = (isset($model['product_id']) && !empty($model['product_id'])) ? $model['product_id'] : '';
 			
 			$arrSkip = $arrParams = $arrQuery = array();
 			if ($validationFor == 'slug')
 			{
 				$arrQuery = array('slug');
+			}
+			if ($validationFor == 'product_name')
+			{
+				$arrQuery = array('product_name');
 			}
 			else 
 			{
@@ -249,7 +235,7 @@ class Articles extends CI_Controller {
 					$arrParams[$k1] = $v1;
 			}	
 			//	search for existing records
-			$record = $this->articles_model->getAll($arrParams);
+			$record = $this->product_model->getAll($arrParams);
 			if ($record->num_rows == 0)
 			{
 				return TRUE;
@@ -265,7 +251,7 @@ class Articles extends CI_Controller {
 				{
 					//	if company id matches with post company id, then true else record exists 
 					$record = reset($record->result_array());
-					if ($record['article_id'] == $model['article_id'])
+					if ($record['product_id'] == $model['product_id'])
 					{
 						return true;
 					}
@@ -298,16 +284,16 @@ class Articles extends CI_Controller {
 		}
 	}
 
-	function changeStatus($article_id = null, $status = 'inactive')
+	function changeStatus($product_id = null, $status = 'inactive')
 	{
-		if (!empty($article_id))
+		if (!empty($product_id))
 		{
 			//	check if policy id exists
 			$where = array();
-			$where[0]['field'] = 'article_id';
-			$where[0]['value'] = (int)$article_id;
+			$where[0]['field'] = 'product_id';
+			$where[0]['value'] = (int)$product_id;
 			$where[0]['compare'] = 'equal';
-			$exist = $this->util->getTableData($modelName='Articles_model', $type="single", $where, $fields = array());
+			$exist = $this->util->getTableData($modelName='product_model', $type="single", $where, $fields = array());
 			if (empty($exist))
 			{
 				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
@@ -317,8 +303,8 @@ class Articles extends CI_Controller {
 				$companyModel = $exist;	
 				$modelType = 'update';
 				$arrParams['status'] = $status;
-				$arrParams['article_id'] = $article_id;
-				if ($this->articles_model->saveRecord($arrParams, $modelType))
+				$arrParams['product_id'] = $product_id;
+				if ($this->product_model->saveRecord($arrParams, $modelType))
 					$this->session->set_flashdata('message', '<p class="status_msg">Record updated successfully.</p>');
 				else 
 					$this->session->set_flashdata('message', '<p class="error_msg">Record could not be updated.</p>');
@@ -327,9 +313,8 @@ class Articles extends CI_Controller {
 		else
 			$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
 			
-		redirect('admin/articles/index');
+		redirect('admin/product/index');
 	}
-	
 }
 
 /* End of file auth_lite.php */

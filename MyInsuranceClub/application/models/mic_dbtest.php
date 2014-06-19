@@ -74,8 +74,7 @@ class mic_dbtest EXTENDS CI_Model{
 	
 	public function get_policy_results($user_input)
 	{	
-		$health_result_query = "CALL sp_getHealthSearchResults(?,?,?,?,?)";
-		
+		$health_result_query = "CALL sp_getMediclaimSearchResults(?,?,?,?,?)";
 		$user_chosen_filter=array(	$user_input['coverage_amount'],
 									$user_input['plan_type'],
 									$user_input['cust_age'],

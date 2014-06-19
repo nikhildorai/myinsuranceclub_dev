@@ -108,7 +108,7 @@
 										$where[0]['field'] = 'policy_id';
 										$where[0]['value'] = (int)$row['policy_id'];
 										$where[0]['compare'] = 'equal';
-										$variantModel = $this->util->getTableData($modelName='Policy_health_variants_model', $type="all", $where, $fields = array());	
+										$variantModel = $this->util->getTableData($modelName='Policy_variants_master_model', $type="all", $where, $fields = array());	
 										if (!empty($variantModel))
 										{	?>
 											<table cellspacing="0" cellpadding="4" border="0">
