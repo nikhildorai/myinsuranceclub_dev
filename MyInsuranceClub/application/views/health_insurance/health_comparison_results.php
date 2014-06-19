@@ -3,7 +3,7 @@
 <head>
 </head>
 <body>
-<?php echo anchor('welcome/health_policy','Go Back To Search Results');?>
+<?php echo anchor('health_insurance/basicMediclaim/health_policy','Go Back To Search Results');?>
 
 <table border='1'>
 <?php 

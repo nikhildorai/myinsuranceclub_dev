@@ -11,7 +11,7 @@ class mic_dbtest EXTENDS CI_Model{
 	}
 	
 	
-	public function get_user_info($user_info)
+	/* public function get_user_info($user_info)
 	{	
 			$user_data="CALL sp_inputUserInfo(?,?,?,?,?,?)";
 			
@@ -23,7 +23,7 @@ class mic_dbtest EXTENDS CI_Model{
 												$user_info['timestamp']
 												)
 							);
-	}
+	} */
 	
 	
 	public function customer_personal_search_details($user_input)

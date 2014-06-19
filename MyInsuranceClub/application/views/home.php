@@ -23,11 +23,11 @@
 <link href="<?php echo base_url();?>assets/css/theme-style.min.css" rel="stylesheet">
 
 <!-- custom override -->
-<link href="<?php echo base_url();?>assets/css/custom-style.css" rel="stylesheet">
-<link href="<?php echo base_url();?>assets/css/clingify.css" rel="stylesheet">
-<link href="<?php echo base_url();?>assets/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/slick.css"/>
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/slicknav.css">
+<link href="assets/css/custom-style.css" rel="stylesheet">
+<link href="assets/css/clingify.css" rel="stylesheet">
+<link href="assets/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/slick.css"/>
+    <link rel="stylesheet" href="assets/css/slicknav.css">
 
 
 <!-- HTML5 shiv & respond.js for IE6-8 support of HTML5 elements & media queries -->
@@ -61,7 +61,7 @@
           <div class="col-md-12"> 
             <!--branding/logo--> 
             <a class="navbar-brand" href="<?php echo site_url();?>" title="Home">
-            <h1><img src="<?php echo base_url();?>assets/images/logo.gif" /> </h1>
+            <h1><img src="assets/images/logo.gif" /> </h1>
             </a>
             <div class="slogan col-md-8">India's 1st IRDA Approved Comparison Site</div>
           </div>
@@ -116,7 +116,7 @@
             <ul class="nav navbar-nav" id="menu">
               <li><a href="#" class=" menu-item" >Car Insurance </a></li>
               <li><a href="#" class=" menu-item" >Two Wheeler Insurance </a></li>
-              <li><a href="<?php echo site_url('welcome/health_insurance_form') ?>" class=" menu-item" >Health Insurance </a></li>
+              <li><a href="<?php echo site_url('health_insurance/basicMediclaim') ?>" class=" menu-item" >Health Insurance </a></li>
               <li><a href="#" class="dropdown-toggle menu-item" id="features-drop" data-toggle="dropdown" data-hover="dropdown">Life Insurance</a> 
                 <!-- Dropdown Menu - Mega Menu -->
                 <ul class="dropdown-menu mega-menu" role="menu" aria-labelledby="features-drop">
@@ -140,6 +140,8 @@
                       <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Money Back Plans</strong></a> </li>
                       <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Pension Plans</strong></a> </li>
                       <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Endowment Plans</strong></a> </li>
+                      <li class="col-md-4" > <a role="menuitem" href="<?php echo site_url(); ?>/health_insurance/criticalIllness" tabindex="-1" class="menu-item"><strong>Critical Illness</strong></a> </li>
+                      <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Personal Accident</strong></a> </li>
                    
                 </ul>
               </li>
@@ -159,7 +161,7 @@
       <h2 class="normal fh1">Compare Premiums & Features in seconds</h2>
       <h3 class="mar-30 fh1">Start comparing. Start saving.</h3>
     </div>
-    <div class="col-md-3"> <img src="<?php echo base_url(); ?>assets/images/lady.jpg" border="0"> </div>
+    <div class="col-md-3"> <img src="assets/images/lady.jpg" border="0"> </div>
     <div class="col-md-12 pad-30">
       <ul class="icon">
         <a href="javascript:void(0)">
@@ -172,7 +174,7 @@
           <h3 class="ser_h">Two Wheeler<br/>
             Insurance</h3>
         </li>
-        </a> <a href="<?php echo site_url('welcome/health_insurance_form') ?>">
+        </a> <a href="<?php echo site_url();?>/health_insurance/basicMediclaim">
         <li class="service box animated flipInY visible" data-animation="flipInY" data-animation-delay="400"><strong class="service-logo"><img src="<?php echo base_url();?>assets/images/icons/health.png" border="0" class="img_cen2"></strong>
           <h3 class="ser_h">Health<br/>
             Insurance</h3>

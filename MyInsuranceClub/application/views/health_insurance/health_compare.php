@@ -115,7 +115,7 @@
 								<li><a href="#" class=" menu-item">Car Insurance </a></li>
 								<li><a href="#" class=" menu-item">Two Wheeler Insurance </a></li>
 								<li><a
-									href="<?php echo base_url();?>/welcome/health_insurance_form"
+									href="<?php echo base_url();?>/health_insurance/basicMediclaim"
 									class=" menu-item">Health Insurance </a></li>
 								<li><a href="#" class="dropdown-toggle menu-item"
 									id="features-drop" data-toggle="dropdown" data-hover="dropdown">Life
@@ -209,7 +209,7 @@
 					</div>
 
 					<div class="col-md-12" style="padding: 0px;">
-					<?php echo form_open('welcome/compare_policies',array('id'=>'compare'));?>
+					<?php echo form_open('health_insurance/basicMediclaim/compare_policies',array('id'=>'compare'));?>
 						<div
 							style="height: auto; padding: 10px 0px 30px 0px; background: #ededec;">
 							<div class="col-md-5">Insurer</div>
@@ -234,7 +234,7 @@
 
 						<div class="block">
 							<h6 class="fh3 c">
-								<a href="<?php echo site_url();?>/welcome/health_insurance_form">&lt;
+								<a href="<?php echo site_url();?>/health_insurance/basicMediclaim">&lt;
 									Modify your search</a>
 							</h6>
 						</div>
@@ -251,7 +251,7 @@
 							<div class="filterContent ">
 
 
-								<?php echo form_open('welcome/health_policy',array('id'=>'search'));?>
+								<?php echo form_open('health_insurance/basicMediclaim/health_policy',array('id'=>'search'));?>
 								<div class="" ng-controller="DemoController"
 									style="margin-top: 30px;">
 									<div range-slider min="demo2.range.min" max="demo2.range.max"
@@ -747,7 +747,7 @@ $(this).parent().parent().parent().find('.accordion_a').slideToggle();
 
 		 $.ajax({
 			type:"post", 
-			url:"<?php echo base_url().'index.php/welcome/health_policy'?>",
+			url:"<?php echo base_url().'index.php/health_insurance/basicMediclaim/health_policy'?>",
 			data:data,
 			 success:function(data)
 			{ $('#cmp_tbl').html(data);

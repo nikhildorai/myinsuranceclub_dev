@@ -130,9 +130,9 @@
 <div id="highlighted" style=" background:#f9f9f9; padding-bottom:50px; margin-bottom:0px;" >
   <div class="container">
     <!-- form name="" action="#" id="" enctype="multipart/form-data"  -->
-    <?php echo validation_errors();?>
-	<?php echo form_open('health_insurance/basicMediclaim/health_policy',array('name'=>'health_form'));?>
-  <div class="col-md-12 center mar-20"><h1>Compare & Buy Health Insurance Plans</h1>
+    <?php //echo validation_errors();?>
+	<?php //echo form_open('Welcome/health_policy',array('name'=>'health_form'));?>
+  <div class="col-md-12 center mar-20"><h1>Compare & Buy Critical Illness Insurance Plans</h1>
   <p>Choose from 56 plans from 18 companies</p>
   </div>
   
@@ -152,25 +152,6 @@
                         </span>
                     </div>
                 </div>
-             <!-- test policy term start  
-            </div></span> cover for <span id="clickk_p"><span class="dotted rs" id="yr"> 2 years</span>
-            
-            <div data-bind="" style="display: none;" class="choice" id="c_yr">
-               <div class="choice-leftcol" data-bind="">
-                    <ul class="years active" id="c_term" data-bind="jScrollPane">
-                            <li><a href="javascript:void(0);">1 year</a></li>
-                            <li><a href="javascript:void(0);">2 years</a></li>
-                            <li><a href="javascript:void(0);">3 years</a></li>
-                    </ul>
-                    <div class="stepwrap years-stepwrap">
-                        <span class="step show">
-                            <em>2</em>
-                            <span class="label-mid">Policy Term</span>
-            
-            
-            </span></div></div></div></span> for 
-            
-             test policy term end -->
            
             </div> cover for <span id="clickk_f"><span class="dotted c_for" id="c_for">myself</span>
  
@@ -190,19 +171,19 @@
                 </div>
                 
             </div></span>.</h3></div>
- <div class="col-md-12 center no-margin"><h3>I am <span id="clickk_g"><span class="dotted ge" id="ge">male</span>
+ <div class="col-md-12 center no-margin"><h3>My date of birth is <span id="clickk_g"><span class="dotted ge" id="ge">dd/mm/yyyy</span>
  
  <div data-bind="" style="display: none;" class="choice g" id="c_ch_g">
                <div class="choice-leftcol" data-bind="">
                     <ul class="years active" id="c_for_g" data-bind="jScrollPane">
-                            <li><a href="javascript:void(0);">male</a></li>
-                            <li><a href="javascript:void(0);">female</a></li>
+                            <li><a href="javascript:void(0);">15/05/1977</a></li>
+                            <li><a href="javascript:void(0);">21/06/1981</a></li>
                             
                     </ul>
                     <div class="stepwrap years-stepwrap">
                         <span class="step show">
                             <em>4</em>
-                            <span class="label-mid">Gender</span>
+                            <span class="label-mid">DOB</span>
                         </span>
                     </div>
                 </div>
@@ -234,29 +215,29 @@
    <div class="col-md-12 center left80">
    <div class="form-group col-md-3" style="padding-left:5px;">
                     <label class="sr-only" for="signup-first-name">Full Name</label>
-                    <input type="text" class="form-control" id="cust_name" name="cust_name" value="<?php echo set_value('cust_name');?>" placeholder="Full name">
+                    <input type="text" class="form-control" id="cust_name" name="cust_name" value="<?php //echo set_value('cust_name');?>" placeholder="Full name">
                     <input type="hidden" id="cust_gender" name="cust_gender" value="male">
                     <input type="hidden" id="policy_term" name="policy_term" value="">
                      <input type="hidden" id="cust_city" name="cust_city" value="599">
                      <input type="hidden" id="coverage_amount" name="coverage_amount" value="3 Lakhs">
                      <input type="hidden" id="plan_type" name="plan_type" value="1A">
                      <input type="hidden" id="product_name" name="product_name" value="Health Insurance">
-                     <input type="hidden" id="product_type" name="product_type" value="Mediclaim">
+                     <input type="hidden" id="product_type" name="product_type" value="Critical Illness">
 
                   </div>
                      <div class="form-group col-md-2">
                     <label class="sr-only" for="signup-first-name">Date Of Birth</label>
-                    <input type="text" data-provide="datepicker" class="form-control" id="cust_dob" name="cust_dob" value="<?php echo set_value('cust_dob');?>" placeholder="Date Of Birth">
+                    <input type="text" data-provide="datepicker" class="form-control" id="cust_dob" name="cust_dob" value="<?php //echo set_value('cust_dob');?>" placeholder="Date Of Birth">
                   </div>
                      <div class="form-group col-md-2">
                     <label class="sr-only" for="signup-first-name">Mobile</label>
-                    <input type="text" class="form-control" id="cust_mobile" name="cust_mobile" value="<?php echo set_value('cust_mobile');?>" placeholder="Mobile">
+                    <input type="text" class="form-control" id="cust_mobile" name="cust_mobile" value="<?php //echo set_value('cust_mobile');?>" placeholder="Mobile">
                   </div>
                   
                   
                    <div class="form-group col-md-2">
                     <label class="sr-only" for="signup-first-name">Email</label>
-                    <input type="text" class="form-control" id="cust_email" name="cust_email" value="<?php echo set_value('cust_email');?>" placeholder="Email">
+                    <input type="text" class="form-control" id="cust_email" name="cust_email" value="<?php //echo set_value('cust_email');?>" placeholder="Email">
                   </div>
                  
                  
@@ -419,7 +400,7 @@
                   </div>
   
   
-<?php echo form_close(); ?>
+<?php //echo form_close(); ?>
 
 </div>
 </div>
