@@ -23,17 +23,17 @@
 <link href="<?php echo base_url();?>assets/css/theme-style.min.css" rel="stylesheet">
 
 <!-- custom override -->
-<link href="assets/css/custom-style.css" rel="stylesheet">
-<link href="assets/css/clingify.css" rel="stylesheet">
-<link href="assets/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="assets/css/slick.css"/>
-    <link rel="stylesheet" href="assets/css/slicknav.css">
+<link href="<?php echo base_url();?>assets/css/custom-style.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/clingify.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/slick.css"/>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/slicknav.css">
 
 
 <!-- HTML5 shiv & respond.js for IE6-8 support of HTML5 elements & media queries -->
 <!--[if lt IE 9]>
-    <script src="plugins/html5shiv/dist/html5shiv.js"></script>
-    <![endif]-->
+<script src="plugins/html5shiv/dist/html5shiv.js"></script>
+<![endif]-->
 
 <!-- Le fav and touch icons - @todo: fill with your icons or remove -->
 <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/icons/favicon.png">
@@ -45,114 +45,9 @@
 
 <!-- ======== @Region: body ======== -->
 <body class="page page-index">
-<div id="navigation" class="wrapper">
-  <div class="navbar-static-top"> 
-    
-    <!--Hidden Header Region--> 
-    
-    <!--Header & Branding region-->
-    
-   
-	
 
-    <div class="header" >
-      <div class="header-inner container">
-        <div class="row">
-          <div class="col-md-12"> 
-            <!--branding/logo--> 
-            <a class="navbar-brand" href="<?php echo site_url();?>" title="Home">
-            <h1><img src="assets/images/logo.gif" /> </h1>
-            </a>
-            <div class="slogan col-md-8">India's 1st IRDA Approved Comparison Site</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="full-width">
-      <div class="container" data-toggle="clingify">
-        <div class="navbar"> 
-          <!-- mobile collapse menu button - data-toggle="toggle" = default menu - data-toggle="jpanel-menu" = jPanel Menu --> 
-       <!--   <header class="main">
-		<h1 class="logo"><a href="../../index.html" class="ss-list">jPanelMenu</a></h1>
-		<a href="#menu" class="menu-trigger ss-icon">&#xED50;</a>
-		<nav>
-			<ul>
-				<li><a href="../../index.html">Documentation</a></li>
-				<li><a href="#">Overview</a></li>
-				<li><a href="#setup">Setting It Up</a></li>
-				<li><a href="#functionality">Adding Functionality</a></li>
-				<li><a href="#about">About</a></li>
-			</ul>
-		</nav>
-	</header>
--->
-<!--<ul id="menu">
-    <li>Parent 1
-        <ul>
-            <li><a href="#">item 3</a></li>
-            <li>Parent 3
-                <ul>
-                    <li><a href="#">item 8</a></li>
-                    <li><a href="#">item 9</a></li>
-                    <li><a href="#">item 10</a></li>
-                </ul>
-            </li>
-            <li><a href="#">item 4</a></li>
-        </ul>
-    </li>
-    <li><a href="#">item 1</a></li>
-    <li>non-link item</li>
-    <li>Parent 2
-        <ul>
-            <li><a href="#">item 5</a></li>
-            <li><a href="#">item 6</a></li>
-            <li><a href="#">item 7</a></li>
-        </ul>
-    </li>
-</ul>-->
-          <div class="navbar-collapse collapse"> 
-            <!--main navigation-->
-            
-            <ul class="nav navbar-nav" id="menu">
-              <li><a href="#" class=" menu-item" >Car Insurance </a></li>
-              <li><a href="#" class=" menu-item" >Two Wheeler Insurance </a></li>
-              <li><a href="<?php echo site_url('health_insurance/basicMediclaim') ?>" class=" menu-item" >Health Insurance </a></li>
-              <li><a href="#" class="dropdown-toggle menu-item" id="features-drop" data-toggle="dropdown" data-hover="dropdown">Life Insurance</a> 
-                <!-- Dropdown Menu - Mega Menu -->
-                <ul class="dropdown-menu mega-menu" role="menu" aria-labelledby="features-drop">
-                 
-                 
-               
-                      <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Term Plans</strong></a> </li>
-                      <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Endowment Plans</strong></a> </li>
-                      <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Child Plans</strong></a> </li>
-                      <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>ULIP</strong></a> </li>
-                      <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Money Back Plans</strong></a> </li>
-                      <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Pension Plans</strong></a> </li>
-                  
-                  </li>
-                </ul>
-              </li>
-              <li><a href="#" class=" menu-item" >Travel Insurance</a></li>
-              <li><a href="#" class="dropdown-toggl last"  data-toggle="dropdown" data-hover="dropdown">Others</a>
-                <ul class="dropdown-menu mega-menu other" role="menu" aria-labelledby="features-drop">
-                 
-                      <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Money Back Plans</strong></a> </li>
-                      <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Pension Plans</strong></a> </li>
-                      <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Endowment Plans</strong></a> </li>
-                      <li class="col-md-4" > <a role="menuitem" href="<?php echo site_url(); ?>/health_insurance/criticalIllness" tabindex="-1" class="menu-item"><strong>Critical Illness</strong></a> </li>
-                      <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Personal Accident</strong></a> </li>
-                   
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <!--/.navbar-collapse --> 
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<?php $this->load->view('partial_view/header_view');?>
+
 <div id="highlighted" >
   <div class="container mar-20">
     <div class="col-md-9 pad-30">
@@ -174,7 +69,7 @@
           <h3 class="ser_h">Two Wheeler<br/>
             Insurance</h3>
         </li>
-        </a> <a href="<?php echo site_url();?>/health_insurance/basicMediclaim">
+        </a> <a href="<?php echo site_url('health_insurance/basicMediclaim');?>">
         <li class="service box animated flipInY visible" data-animation="flipInY" data-animation-delay="400"><strong class="service-logo"><img src="<?php echo base_url();?>assets/images/icons/health.png" border="0" class="img_cen2"></strong>
           <h3 class="ser_h">Health<br/>
             Insurance</h3>
@@ -251,7 +146,7 @@
     <div class="tab-content">
       <div class="tab-pane fade in active" id="htmlcss">
         <article class="row">
-          <div class="col-md-5 col-sm-5 fadeInLeft visible" > <img class="img-responsive" src="assets/images/why.jpg" alt="starbuck"> </div>
+          <div class="col-md-5 col-sm-5 fadeInLeft visible" > <img class="img-responsive" src="<?php echo base_url();?>assets/images/why.jpg" alt="starbuck"> </div>
           <div class="col-md-6 col-sm-6 text-left fadeInRight visible" >
             <h6>Why Compare Insurance with Us?</h6>
             <p>We insure for peace of mind. Whether it is life insurance, health insurance, motor insurance, home insurance or any other insurance policy, we need to ensure that our assests are secure. While insurance is important, we realise that <span class="highlight">affordable insuranc</span>e is equally important.</p>
@@ -271,7 +166,7 @@
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="assets/images/left_t.png" border="0" class="top_i"> Thank you once again for your free and very valuable information on 
+                  <p><strong><img src="<?php echo base_url();?>assets/images/left_t.png" border="0" class="top_i"> Thank you once again for your free and very valuable information on 
                     insurance. Best wishes to your team and keep up the good work!</strong></p>
                   <p class="col-md-10 aln_right">- Pravin Bhandare, Bangalore</p>
                 </div>
@@ -282,7 +177,7 @@
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="assets/images/left_t.png" border="0" class="top_i">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat!</strong></p>
+                  <p><strong><img src="<?php echo base_url();?>assets/images/left_t.png" border="0" class="top_i">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat!</strong></p>
                   <p class="col-md-10 aln_right">- Anita Viswas, Mumbai</p>
                 </div>
               </div>
@@ -303,7 +198,7 @@
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url();?>assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
         </p> 
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
@@ -313,7 +208,7 @@
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url();?>assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
         </p> 
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
@@ -323,7 +218,7 @@
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url();?>assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
         </p> 
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
@@ -367,7 +262,7 @@
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="assets/images/news1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url();?>assets/images/news1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
         </p> 
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
@@ -377,7 +272,7 @@
      <div class="art_cnt widget ">
       <h4 class="sub_h">Which is the best child plan?</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="assets/images/news2.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url();?>assets/images/news2.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
         </p> 
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
@@ -387,7 +282,7 @@
      <div class="art_cnt widget ">
       <h4 class="sub_h">Benefits of investing early</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="assets/images/news3.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url();?>assets/images/news3.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
         </p> 
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
@@ -453,110 +348,8 @@
 						</ul></div></div></div>
 </div>
 
-<div id="bottom-bg">
-  <div id="bottom" class="container">
-    <div class="bottom-content-padding">
-      <div id="bottom_2" class="one_fourth">
-        <div class="column-content-wrapper">
-          <div class="bottom-col-content widget_recent_entries custom-formatting">
-            <h3 class="bottom-col-title">Company Information</h3>
-            <ul>
-              <li><a href="">About Us</a></li>
-              <li><a href="">Team</a></li>
-            </ul>
-          </div>
-          <div class="bottom-col-content widget_recent_entries custom-formatting">
-            <h3 class="bottom-col-title" style="margin-bottom:11px;">Connect with Us</h3>
-            <ul>
-              <li><a href="">Contact Us</a></li>
-              <li><a href="">Feedback</a></li>
-              <li><a href="">Testimonials</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div id="bottom_2" class="one_fourth">
-        <div class="column-content-wrapper">
-          <div class="bottom-col-content widget_recent_entries custom-formatting">
-            <h3 class="bottom-col-title">Other Links</h3>
-            <ul>
-              <li><a href="">Ask an Expert</a></li>
-              <li><a href="">Insurance Articles</a></li>
-              <li><a href="">Insurance Guides</a></li>
-              <li><a href="">Insurance News</a></li>
-              <li><a href="">Life Insurance Companies in India</a></li>
-              <li><a href="">General Insurance Companies in India</a></li>
-              <li><a href="">Terms of Use</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div id="bottom_3" class="one_fourth">
-        <div class="column-content-wrapper">
-          <!--<div class="bottom-col-content widget_text substitute_widget_class">
-            <h3 class="bottom-col-title">Address</h3>
-            <div class="textwidget">
-              <div style="color:#EEEEE; font-style:italic;">305, Gundecha Industrial Complex,
-                Akurli Road,
-                Kandivali (East),
-                Mumbai - 400101,
-                Maharashtra. India<br>
-                Phone: +91 22 28463454 </div>
-              <div style="margin-top:10px; color:#3d6e97; font-style:italic; font-size:13px;"> Email: contact@myinsuranceclub.com</div>
-            </div>
-          </div>-->
-          <div class="bottom-col-content widget_recent_entries custom-formatting">
-            <h3 class="bottom-col-title">Quick Connect</h3>
-            <ul>
-              <li><a href="javascript:void(0);">Phone: +91 22 28463454</a></li>
-              <li><a href="mailto:contact@myinsuranceclub.com">Email: contact@myinsuranceclub.com</a></li>
-              
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div id="bottom_4" class="one_fourth last_column">
-        <div class="column-content-wrapper">
-          <div class="bottom-col-content widget_text substitute_widget_class">
-            <h3 class="bottom-col-title" style="background:none; margin-top:10px;"></h3>
-            <p class="border-box-f"><img src="assets/images/irda_logo.jpg" border="0"></p>
-            <div class="textwidget small"><strong>Important</strong>: Insurance is the subject matter of solicitation</div>
-            <p class="small">© 2009-14 MyInsuranceClub.com</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<?php $this->load->view('partial_view/footer_view');?>
 
-<footer id="footer">
-        <div class="container">
-          
-          
-          <div class="row">
-            
-            <!--@todo: replace with company copyright details-->
-            <div class="subfooter">
-              <div class="col-md-8">
-                <ul class="list-inline footer-menu">
-                <li><h3>Stay Connected</h3></li>
-                 <li><a href="#">Latest Product Launches </a></li>| 
-                 <li><a href="#">Resolve Insurance Queries </a></li>| 
-                 <li><a href="#">Industry News </a></li>| 
-                 <li><a href="#">Contests & Prizes</a></li></ul>
-              </div>
-              <div class="col-md-4">
-              <ul class="list-inline footer-menu">
-               
-  <li><a href="https://twitter.com/share" class="twitter-share-button" data-url="https://twitter.com/MyInsuranceClub" data-via="MyInsuranceClub" data-lang="en">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
-
-  </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
 
 <!-- ======== @Region: #navigation ======== --> 
 
@@ -571,31 +364,31 @@
 <!--JS plugins--> 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
 
-<script src="assets/js/jquery.min.js"></script> 
+<script src="<?php echo base_url();?>assets/js/jquery.min.js"></script> 
 
 
 <!--Legacy jQuery support for quicksand plugin--> 
-<script src="assets/js/jquery-migrate-1.2.1.min.js"></script> 
+<script src="<?php echo base_url();?>assets/js/jquery-migrate-1.2.1.min.js"></script> 
 
 <!-- Bootstrap JS --> 
-<script src="assets/js/bootstrap.min.js"></script> 
+<script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script> 
 
 <!--Bootstrap third-party plugins--> 
-<script src="assets/js/bootstrap-hover-dropdown.min.js"></script> 
-<script src="assets/js/bootstrap-switch.min.js"></script> 
+<script src="<?php echo base_url();?>assets/js/bootstrap-hover-dropdown.min.js"></script> 
+<script src="<?php echo base_url();?>assets/js/bootstrap-switch.min.js"></script> 
 
 <!--JS plugins--> 
-<script src="assets/js/jquery.clingify.min.js"></script> 
-<script src="assets/js/jquery.jpanelmenu.min.js"></script> 
-<script src="assets/js/jRespond.js"></script> 
+<script src="<?php echo base_url();?>assets/js/jquery.clingify.min.js"></script> 
+<script src="<?php echo base_url();?>assets/js/jquery.jpanelmenu.min.js"></script> 
+<script src="<?php echo base_url();?>assets/js/jRespond.js"></script> 
 
 
 <!--Custom scripts mainly used to trigger libraries --> 
-<script src="assets/js/script.min.js"></script> 
-<script src="assets/js/jquery.bxslider.min.js" type="text/javascript"></script> 
-<script type='text/javascript' src='assets/js/jquery.carouFredSel.js'></script>
-<script type='text/javascript' src='assets/js/clients.js'></script>
-<script src="assets/js/jquery.slicknav.js"></script>
+<script src="<?php echo base_url();?>assets/js/script.min.js"></script> 
+<script src="<?php echo base_url();?>assets/js/jquery.bxslider.min.js" type="text/javascript"></script> 
+<script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.carouFredSel.js'></script>
+<script type='text/javascript' src='<?php echo base_url();?>assets/js/clients.js'></script>
+<script src="<?php echo base_url();?>assets/js/jquery.slicknav.js"></script>
 
 
 <script type="text/javascript">
