@@ -191,7 +191,7 @@
                      <input type="hidden" id="cust_city_name" name="cust_city_name" value="">
                      <input type="hidden" id="coverage_amount" name="coverage_amount" value="3 Lakhs">
                      <input type="hidden" id="plan_type" name="plan_type" value="1A">
-                     <input type="hidden" id="plan_type_name" name="plan_type_name" value="1A">
+                     <input type="hidden" id="plan_type_name" name="plan_type_name" value="">
                      <input type="hidden" id="product_name" name="product_name" value="Health Insurance">
                      <input type="hidden" id="product_type" name="product_type" value="Mediclaim">
 
