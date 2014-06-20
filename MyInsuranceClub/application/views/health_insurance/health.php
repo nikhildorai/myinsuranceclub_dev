@@ -185,12 +185,37 @@
                     																					{			 
                     																						echo set_value('cust_name');
                     																					}?>" placeholder="Full name">
-                    <input type="hidden" id="cust_gender" name="cust_gender" value="male">
+                    																					
+                    <input type="hidden" id="cust_gender" name="cust_gender" value="<?php if(isset($this->session->userdata['user_input']['cust_gender']))
+                    																					{
+                    																						echo $this->session->userdata['user_input']['cust_gender'];
+                    																					}else 
+                    																					{?>		 
+                    																						male
+                    																					<?php }?>">
                     <input type="hidden" id="policy_term" name="policy_term" value="">
-                     <input type="hidden" id="cust_city" name="cust_city" value="599">
+                     <input type="hidden" id="cust_city" name="cust_city" value="<?php if(isset($this->session->userdata['user_input']['cust_city']))
+                    																					{
+                    																						echo $this->session->userdata['user_input']['cust_city'];
+                    																					}else 
+                    																					{?>		 
+                    																						599
+                    																					<?php }?>">
                      <input type="hidden" id="cust_city_name" name="cust_city_name" value="">
-                     <input type="hidden" id="coverage_amount" name="coverage_amount" value="3 Lakhs">
-                     <input type="hidden" id="plan_type" name="plan_type" value="1A">
+                     <input type="hidden" id="coverage_amount" name="coverage_amount" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount']))
+                     																				{
+ 																										echo $this->session->userdata['user_input']['coverage_amount'];
+                     																				}else
+																										{?>
+																											3 Lakhs
+																									<?php }?>">
+                     <input type="hidden" id="plan_type" name="plan_type" value="<?php if(isset($this->session->userdata['user_input']['plan_type']))
+                    																					{
+                    																						echo $this->session->userdata['user_input']['plan_type'];
+                    																					}else 
+                    																					{?>		 
+                    																						1A
+                    																				<?php }?>">
                      <input type="hidden" id="plan_type_name" name="plan_type_name" value="">
                      <input type="hidden" id="product_name" name="product_name" value="Health Insurance">
                      <input type="hidden" id="product_type" name="product_type" value="Mediclaim">
