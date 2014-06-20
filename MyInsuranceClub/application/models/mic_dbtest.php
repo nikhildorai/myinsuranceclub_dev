@@ -10,22 +10,6 @@ class mic_dbtest EXTENDS CI_Model{
 		$this->load->library('session');
 	}
 	
-	
-	/* public function get_user_info($user_info)
-	{	
-			$user_data="CALL sp_inputUserInfo(?,?,?,?,?,?)";
-			
-			$this->db->query($user_data,array(	$user_info['session_id'],
-												$user_info['referrer'],
-												$user_info['device'],
-												$user_info['os'],
-												$user_info['browser'],
-												$user_info['timestamp']
-												)
-							);
-	} */
-	
-	
 	public function customer_personal_search_details($user_input)
 	{
 		$plantype='';

@@ -114,11 +114,11 @@ class basicMediclaim extends CI_Controller {
 	
 		$this->form_validation->set_rules('cust_name', 'Full Name', 'required|alpha');
 	
-		$this->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|numeric|exact_length[10]');
+		$this->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|numeric|phone_789|exact_length[10]');
 	
 		$this->form_validation->set_rules('cust_email', 'Email', 'required|valid_email');
 	
-		$this->form_validation->set_rules('cust_dob', 'Date of Birth', 'required');
+		$this->form_validation->set_rules('cust_dob', 'Date of Birth', 'required|age_greater_than_18');
 	
 		$this->form_validation->set_rules('MIC_terms', 'checkbox', 'required');
 	
