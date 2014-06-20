@@ -114,7 +114,7 @@ class basicMediclaim extends CI_Controller {
 	
 		$this->form_validation->set_rules('cust_name', 'Full Name', 'required|alpha');
 	
-		$this->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|numeric|phone_789|exact_length[10]');
+		$this->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|phone_789|exact_length[10]');
 	
 		$this->form_validation->set_rules('cust_email', 'Email', 'required|valid_email');
 	
@@ -150,6 +150,10 @@ class basicMediclaim extends CI_Controller {
 				{
 					$user_input['plan_type']=$this->input->post('plan_type');
 				}
+				if($this->input->post('plan_type_name')!='')
+				{
+					$user_input['plan_type_name']=$this->input->post('plan_type_name');
+				}
 				if($this->input->post('coverage_amount')!='')
 				{
 					$user_input['coverage_amount']=$this->input->post('coverage_amount');
@@ -166,7 +170,10 @@ class basicMediclaim extends CI_Controller {
 					
 				if($this->input->post('cust_name')!='')		/* customer personal details starts */
 				{
+					$user_input['full_name'] = $this->input->post('cust_name');
+					
 					$custname=explode(' ',$this->input->post('cust_name'));
+					
 					if(sizeof($custname)==1)
 					{
 						$user_input['first_name']=$custname[0];
@@ -266,12 +273,16 @@ class basicMediclaim extends CI_Controller {
 				{
 					$user_input['cust_city']=$this->input->post('cust_city');
 				}										/* customer personal details end */
-	
+				
+				if($this->input->post('cust_city_name')!='')
+				{
+					$user_input['cust_city_name']=$this->input->post('cust_city_name');
+				}
 				$this->session->set_userdata('user_input',$user_input);
 			}
 				
 			$user_input=$this->session->userdata('user_input',$user_input);
-	
+			$data['user_input'] = $user_input;
 			$this->mic_dbtest->customer_personal_search_details($user_input);
 	
 			$data['customer_details']=$this->mic_dbtest->get_policy_results($user_input);
@@ -410,3 +421,4 @@ class basicMediclaim extends CI_Controller {
 	}
 	
 }
+/* End of basicMediclaim controller. */

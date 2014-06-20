@@ -76,13 +76,15 @@
   <p>Choose from 56 plans from 18 companies</p>
   </div>
   
- <div class="col-md-12 center" style=" position:relative;"><h3>I want a <span id="clickk"><span class="dotted rs" id="rs">3 Lakhs</span>
+ <div class="col-md-12 center" style=" position:relative;"><h3>I want a <span id="clickk"><span class="dotted rs" id="rs"> <?php if(isset($this->session->userdata['user_input']['coverage_amount'])){
+ 																																	echo $this->session->userdata['user_input']['coverage_amount'];}else{?>3 Lakhs<?php }?></span>
  
  <div data-bind="" style="display: none;" class="choice" id="c_ch">
                <div class="choice-leftcol" data-bind="">
                     <ul class="years active" id="c_amt" data-bind="jScrollPane">
-                            <?php foreach($cvg_amt as $k=>$v){?>
-                            <li><a href="javascript:void(0);"><?php echo $v;?></a></li>
+                            <?php 
+                            		foreach($cvg_amt as $k=>$v){?>
+                            <li><a href="javascript:void(0);"><?php  {echo $v;} ?></a></li>
                             <?php } ?>
                     </ul>
                     <div class="stepwrap years-stepwrap">
@@ -112,7 +114,9 @@
             
              test policy term end -->
            
-            </div> cover for <span id="clickk_f"><span class="dotted c_for" id="c_for">myself</span>
+            </div> cover for <span id="clickk_f"><span class="dotted c_for" id="c_for">
+            
+            <?php if(isset($this->session->userdata['user_input']['plan_type_name'])){ echo $this->session->userdata['user_input']['plan_type_name'];}else{?>myself<?php }?></span>
  
  <div data-bind="" style="display: none;" class="choice f" id="c_ch_f">
                <div class="choice-leftcol" data-bind="">
@@ -130,7 +134,7 @@
                 </div>
                 
             </div></span>.</h3></div>
- <div class="col-md-12 center no-margin"><h3>I am <span id="clickk_g"><span class="dotted ge" id="ge">male</span>
+ <div class="col-md-12 center no-margin"><h3>I am <span id="clickk_g"><span class="dotted ge" id="ge"><?php if(isset($this->session->userdata['user_input']['cust_gender'])){ echo $this->session->userdata['user_input']['cust_gender'];}else{?>male<?php }?></span>
  
  <div data-bind="" style="display: none;" class="choice g" id="c_ch_g">
                <div class="choice-leftcol" data-bind="">
@@ -147,7 +151,7 @@
                     </div>
                 </div>
                 
-            </div></span> &amp; I stay in <span id="clickk_l"><span class="dotted loc" id="loc">Mumbai</span>
+            </div></span> &amp; I stay in <span id="clickk_l"><span class="dotted loc" id="loc"><?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?></span>
  
  <div data-bind="" style="display: none;" class="choice l" id="c_ch_l">
                <div class="choice-leftcol" data-bind="">
@@ -174,29 +178,55 @@
    <div class="col-md-12 center left80">
    <div class="form-group col-md-3" style="padding-left:5px;">
                     <label class="sr-only" for="signup-first-name">Full Name</label>
-                    <input type="text" class="form-control" id="cust_name" name="cust_name" value="<?php echo set_value('cust_name');?>" placeholder="Full name">
+                    <input type="text" class="form-control" id="cust_name" name="cust_name" value="<?php if(isset($this->session->userdata['user_input']['full_name']))
+                    																					{
+                    																						echo $this->session->userdata['user_input']['full_name'];
+                    																					}else 
+                    																					{			 
+                    																						echo set_value('cust_name');
+                    																					}?>" placeholder="Full name">
                     <input type="hidden" id="cust_gender" name="cust_gender" value="male">
                     <input type="hidden" id="policy_term" name="policy_term" value="">
                      <input type="hidden" id="cust_city" name="cust_city" value="599">
+                     <input type="hidden" id="cust_city_name" name="cust_city_name" value="">
                      <input type="hidden" id="coverage_amount" name="coverage_amount" value="3 Lakhs">
                      <input type="hidden" id="plan_type" name="plan_type" value="1A">
+                     <input type="hidden" id="plan_type_name" name="plan_type_name" value="1A">
                      <input type="hidden" id="product_name" name="product_name" value="Health Insurance">
                      <input type="hidden" id="product_type" name="product_type" value="Mediclaim">
 
                   </div>
                      <div class="form-group col-md-2">
                     <label class="sr-only" for="signup-first-name">Date Of Birth</label>
-                    <input type="text" data-provide="datepicker" class="form-control" id="cust_dob" name="cust_dob" value="<?php echo set_value('cust_dob');?>" placeholder="Date Of Birth">
+                    <input type="text" data-provide="datepicker" class="form-control" id="cust_dob" name="cust_dob" value="<?php if(isset($this->session->userdata['user_input']['cust_birthdate']))
+                    																											{
+                    																												echo $this->session->userdata['user_input']['cust_birthdate'];
+                    																											}else 
+                    																											{			 
+                    																												echo set_value('cust_dob');
+                    																											}?>" placeholder="Date Of Birth">
                   </div>
                      <div class="form-group col-md-2">
                     <label class="sr-only" for="signup-first-name">Mobile</label>
-                    <input type="text" class="form-control" id="cust_mobile" name="cust_mobile" value="<?php echo set_value('cust_mobile');?>" placeholder="Mobile">
+                    <input type="text" class="form-control" id="cust_mobile" name="cust_mobile" value="<?php if(isset($this->session->userdata['user_input']['cust_mobile']))
+                    																						{
+                    																							echo $this->session->userdata['user_input']['cust_mobile'];
+                    																						}else 
+                    																						{			 
+                    																							echo set_value('cust_mobile');
+                    																						}?>" placeholder="Mobile">
                   </div>
                   
                   
                    <div class="form-group col-md-2">
                     <label class="sr-only" for="signup-first-name">Email</label>
-                    <input type="text" class="form-control" id="cust_email" name="cust_email" value="<?php echo set_value('cust_email');?>" placeholder="Email">
+                    <input type="text" class="form-control" id="cust_email" name="cust_email" value="<?php if(isset($this->session->userdata['user_input']['cust_email']))
+                    																						{
+                    																							echo $this->session->userdata['user_input']['cust_email'];
+                    																						}else 
+                    																						{			 
+                    																							echo set_value('cust_email');
+                    																						}?>" placeholder="Email">
                   </div>
                  
                  

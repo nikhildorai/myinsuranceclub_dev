@@ -107,6 +107,7 @@ $("#c_for_f li").click(function() {
 	}
 	
 	$("#plan_type").val(am_vid);
+	$("#plan_type_name").val(am_v);
 	 $("#c_ch_f").fadeOut();
 });
 
@@ -137,6 +138,7 @@ $("#c_for_l li").click(function() {
 	var am_vid=$(this).data('city-id');
    $("#loc").text(am_v);
 	$("#cust_city").val(am_vid);
+	$("#cust_city_name").val(am_v);
 	 $("#c_ch_l").fadeOut();
 });
 
