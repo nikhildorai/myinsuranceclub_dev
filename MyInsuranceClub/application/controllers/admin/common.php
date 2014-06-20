@@ -74,8 +74,11 @@ class Common extends CI_Controller {
 			{
 				foreach ($records->result_array() as $k=>$v)
 				{
-					$response[$k]['label'] = !empty($v['tag_for']) ? $v['tag_for'].' - '.$v['name'] : $v['name'];
-					$response[$k]['value'] = $v['name'];
+					if ($v['status'] == 'active')
+					{
+						$response[$k]['label'] = !empty($v['tag_for']) ? $v['tag_for'].' - '.$v['name'] : $v['name'];
+						$response[$k]['value'] = $v['name'];
+					}
 				}
 				echo json_encode($response);
 			}

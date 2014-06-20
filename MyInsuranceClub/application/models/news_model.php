@@ -1,15 +1,13 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Articles_model EXTENDS CI_Model{
+class News_model EXTENDS CI_Model{
 
 	function __construct()
 	{
 		// Call the Model constructor
 		parent::__construct();
 		$this->load->library('session');
-		$this->load->library('form_validation');
-        $this->load->helper('form');
 	}
 	
 	function saveRecord($arrParams = array(), $modelType = 'update')
@@ -21,7 +19,7 @@ class Articles_model EXTENDS CI_Model{
 			{
 				foreach ($arrParams as $k1=>$v1)
 				{
-					if (!in_array($k1, array('article_id')))
+					if (!in_array($k1, array('news_id')))
 					{
 						$colNames[] = trim($k1);
 						if (is_numeric($v1))
@@ -32,13 +30,13 @@ class Articles_model EXTENDS CI_Model{
 				}
 				$colNames = implode(', ', $colNames);
 				$colValues = implode(', ', $colValues);
-				$sql = 'INSERT INTO articles ('.$colNames.') VALUES('.$colValues.')';
+				$sql = 'INSERT INTO news ('.$colNames.') VALUES('.$colValues.')';
 			}
 			else
 			{
 				foreach ($arrParams as $k1=>$v1)
 				{
-					if (!in_array($k1, array('article_id')))
+					if (!in_array($k1, array('news_id')))
 					{
 						if (is_numeric($v1))
 							$colValues[] = trim($k1).'='.trim($v1);
@@ -47,7 +45,7 @@ class Articles_model EXTENDS CI_Model{
 					}
 				}
 				$colValues = implode(', ', $colValues);
-				$sql = 'UPDATE articles SET '.$colValues.' WHERE article_id = '.$arrParams['article_id'];		
+				$sql = 'UPDATE news SET '.$colValues.' WHERE news_id = '.$arrParams['news_id'];		
 			}		
 			if ($this->db->query($sql))
 				return true;
@@ -61,7 +59,7 @@ class Articles_model EXTENDS CI_Model{
 	
 	public function getAll($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM articles WHERE status !="deleted" ';
+		$sql = 'SELECT * FROM news WHERE status !="deleted" ';
 		if (!empty($arrParams))
 		{
 			if (isset($arrParams['title']) && !empty($arrParams['title']))
@@ -69,14 +67,14 @@ class Articles_model EXTENDS CI_Model{
 			if (isset($arrParams['slug']) && !empty($arrParams['slug']))
 				$sql .= ' AND slug = "'.$arrParams['slug'].'"';
 		}
-		$sql .= ' ORDER BY title ASC, article_id ASC ';	
+		$sql .= ' ORDER BY title ASC, news_id ASC ';		
 		$result = $this->db->query($sql);
 		return $result;
 	}
 	
 	public function getTableName()
 	{
-		return 'articles';
+		return 'news';
 	}
 	
 	public function excuteQuery($sql)

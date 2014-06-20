@@ -81,14 +81,14 @@
         
         
         
-        <li class="<?php echo in_array($controller, array('articles')) ? 'open active' : '';?>">
+        <li class="<?php echo in_array($controller, array('articles','master_tags', 'news', 'guides')) ? 'open active' : '';?>">
             <a href="javascript:void(0);">
             	<i class="fa fa-table">
             		<span class="icon-bg bg-violet"></span>
             	</i>
             	<span data-i18n="Content"></span>
             </a>
-            <ul style="display: <?php echo in_array($controller, array('articles')) ? 'block' : 'none';?>;">
+            <ul style="display: <?php echo in_array($controller, array('articles', 'master_tags', 'news', 'guides')) ? 'block' : 'none';?>;">
                 <li>
                 	<a href="<?php echo $base_url;?>admin/master_tags/">
                 		<i class="fa fa-caret-right"></i>
@@ -102,13 +102,13 @@
                 	</a>
                	</li>
                 <li>
-                	<a href="javascript:void(0);">
+                	<a href="<?php echo $base_url;?>admin/guides/">
                 		<i class="fa fa-caret-right"></i>
                 		<span data-i18n="Guides"></span>
                 	</a>
                	</li>
                 <li>
-                	<a href="javascript:void(0);">
+                	<a href="<?php echo $base_url;?>admin/news/">
                 		<i class="fa fa-caret-right"></i>
                 		<span data-i18n="News"></span>
                 	</a>

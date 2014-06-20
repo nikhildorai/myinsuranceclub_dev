@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Articles extends CI_Controller {
+class News extends CI_Controller {
  
     function __construct() 
     {
@@ -50,7 +50,7 @@ class Articles extends CI_Controller {
         $this->load->helper('ckeditor');
         $this->load->plugin('widget_pi');
 		$this->load->library('form_validation');
-		$this->load->model('articles_model');
+		$this->load->model('news_model');
  		
 		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
 		$this->load->vars('base_url', base_url());
@@ -79,18 +79,18 @@ class Articles extends CI_Controller {
 		// Set any returned status/error messages..		
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
 		$this->session->set_flashdata('message','');		
-		$this->data['records'] 	= $this->articles_model->getAll($arrParams);
+		$this->data['records'] 	= $this->news_model->getAll($arrParams);
 
 		//	pagination
 		$config = $this->util->get_pagination_params();
 		$config['total_rows'] 	= $this->data['records']->num_rows();
 		$this->pagination->initialize($config); 		
         
-		$this->template->write_view('content', 'admin/articles/index', $this->data, TRUE);
+		$this->template->write_view('content', 'admin/news/index', $this->data, TRUE);
 		$this->template->render();
 	}
 
-    public function create($article_id = null)
+    public function create($news_id = null)
 	{
 		$modelType = 'create';
 		//	check if policy id exists
@@ -101,19 +101,19 @@ class Articles extends CI_Controller {
 		$this->data['message'] = ( !empty($sessionMsg)) ? $sessionMsg : '';
 		$this->session->set_flashdata('message','');	
 		$isActive = true;
-		if ((isset($_GET['article_id']) && !empty($_GET['article_id'])) || !empty($article_id))
+		if ((isset($_GET['news_id']) && !empty($_GET['news_id'])) || !empty($news_id))
 		{
-			if (isset($_GET['article_id']))
-				$article_id = $_GET['article_id'];
+			if (isset($_GET['news_id']))
+				$news_id = $_GET['news_id'];
 			$where = array();
-			$where[0]['field'] = 'article_id';
-			$where[0]['value'] = (int)$article_id;
+			$where[0]['field'] = 'news_id';
+			$where[0]['value'] = (int)$news_id;
 			$where[0]['compare'] = 'equal';
-			$exist = $this->util->getTableData($modelName='Articles_model', $type="single", $where, $fields = array());
+			$exist = $this->util->getTableData($modelName='News_model', $type="single", $where, $fields = array());
 			if (empty($exist))
 			{
 				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
-				redirect('admin/articles/index');
+				redirect('admin/news/index');
 			}
 			else 
 			{
@@ -179,11 +179,11 @@ class Articles extends CI_Controller {
 				$arrParams = $this->input->post('model');
 				//	run validation on complete company post data
 				//	save record for policy 
-				$recordId = $this->articles_model->saveRecord($arrParams, $modelType);	
+				$recordId = $this->news_model->saveRecord($arrParams, $modelType);	
 				if ($recordId != false)
 				{
 					$saveData[] = true;
-					$article_id = $recordId;	
+					$news_id = $recordId;	
 				}
 				else 
 					$saveData[] = false;
@@ -193,7 +193,7 @@ class Articles extends CI_Controller {
 				{
 					$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
 					$this->data['msgType'] = 'success';
-					redirect('admin/articles/index');
+					redirect('admin/news/index');
 				}
 				else 
 				{
@@ -212,11 +212,11 @@ class Articles extends CI_Controller {
 		$this->data['model'] = $model;
 		$this->data['modelType'] = $modelType;
 		$this->data['selectedTags'] = isset($model['tag']) ? $model['tag'] : '';
-		$this->data['tag_for'] = 'articles';
+		$this->data['tag_for'] = 'news';
 //		$this->data['tagLimit'] = 1;
 		$this->data['status'] = isset($model['status']) ? $model['status'] : '';
 		
-		$this->template->write_view('content', 'admin/articles/create', $this->data, TRUE);
+		$this->template->write_view('content', 'admin/news/create', $this->data, TRUE);
 		$this->template->render();
 	}
 	
@@ -235,7 +235,7 @@ class Articles extends CI_Controller {
 			if (isset($_POST['modelType']) && !empty($_POST['modelType']))
 				$modelType = $_POST['modelType'];
 				
-			$article_id = (isset($model['article_id']) && !empty($model['article_id'])) ? $model['article_id'] : '';
+			$news_id = (isset($model['news_id']) && !empty($model['news_id'])) ? $model['news_id'] : '';
 			
 			$arrSkip = $arrParams = $arrQuery = array();
 			if ($validationFor == 'slug')
@@ -253,7 +253,8 @@ class Articles extends CI_Controller {
 					$arrParams[$k1] = $v1;
 			}	
 			//	search for existing records
-			$record = $this->articles_model->getAll($arrParams);
+			$record = $this->news_model->getAll($arrParams);
+		
 			if ($record->num_rows == 0)
 			{
 				return TRUE;
@@ -269,7 +270,7 @@ class Articles extends CI_Controller {
 				{
 					//	if company id matches with post company id, then true else record exists 
 					$record = reset($record->result_array());
-					if ($record['article_id'] == $model['article_id'])
+					if ($record['news_id'] == $model['news_id'])
 					{
 						return true;
 					}
@@ -302,16 +303,16 @@ class Articles extends CI_Controller {
 		}
 	}
 
-	function changeStatus($article_id = null, $status = 'inactive')
+	function changeStatus($news_id = null, $status = 'inactive')
 	{
-		if (!empty($article_id))
+		if (!empty($news_id))
 		{
 			//	check if policy id exists
 			$where = array();
-			$where[0]['field'] = 'article_id';
-			$where[0]['value'] = (int)$article_id;
+			$where[0]['field'] = 'news_id';
+			$where[0]['value'] = (int)$news_id;
 			$where[0]['compare'] = 'equal';
-			$exist = $this->util->getTableData($modelName='Articles_model', $type="single", $where, $fields = array());
+			$exist = $this->util->getTableData($modelName='News_model', $type="single", $where, $fields = array());
 			if (empty($exist))
 			{
 				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
@@ -321,8 +322,8 @@ class Articles extends CI_Controller {
 				$companyModel = $exist;	
 				$modelType = 'update';
 				$arrParams['status'] = $status;
-				$arrParams['article_id'] = $article_id;
-				if ($this->articles_model->saveRecord($arrParams, $modelType))
+				$arrParams['news_id'] = $news_id;
+				if ($this->news_model->saveRecord($arrParams, $modelType))
 					$this->session->set_flashdata('message', '<p class="status_msg">Record updated successfully.</p>');
 				else 
 					$this->session->set_flashdata('message', '<p class="error_msg">Record could not be updated.</p>');
@@ -331,7 +332,7 @@ class Articles extends CI_Controller {
 		else
 			$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
 			
-		redirect('admin/articles/index');
+		redirect('admin/news/index');
 	}
 	
 }

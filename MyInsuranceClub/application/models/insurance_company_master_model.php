@@ -16,7 +16,7 @@ class Insurance_company_master_model EXTENDS CI_Model{
 		if (!empty($arrParams))
 		{
 			if (array_key_exists('company', $arrParams) && !empty($arrParams['company']))
-				$sql .= ' AND (company_name LIKE "%'.$arrParams['company'].'%" OR company_shortname LIKE "%'.$arrParams['company'].'%" OR company_display_name LIKE "%'.$arrParams['company'].'%") ';
+				$sql .= ' AND (company_name LIKE "'.$arrParams['company'].'%" OR company_shortname LIKE "'.$arrParams['company'].'%" OR company_display_name LIKE "'.$arrParams['company'].'%") ';
 			if (array_key_exists('company_type', $arrParams) && !empty($arrParams['company_type']))
 				$sql .= ' AND company_type_id = '.$arrParams['company_type'];
 		}
@@ -27,51 +27,6 @@ class Insurance_company_master_model EXTENDS CI_Model{
 	
 	function saveCompanyRecord($arrParams = array(), $modelType = 'update')
 	{
-		/*
-		if (!empty($arrParams))
-		{
-			$colNames = $colValues = array();
-			if ($modelType == 'create')
-			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, array('company_id')))
-					{
-						$colNames[] = trim($k1);
-						if (is_numeric($v1))
-							$colValues[] = trim($v1);
-						else
-							$colValues[] = '"'.trim($v1).'"';
-					}
-				}
-				$colNames = implode(', ', $colNames);
-				$colValues = implode(', ', $colValues);
-				$sql = 'INSERT INTO insurance_company_master ('.$colNames.') VALUES('.$colValues.')';
-			}
-			else
-			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, array('company_id')))
-					{
-						if (is_numeric($v1))
-							$colValues[] = trim($k1).'='.trim($v1);
-						else
-							$colValues[] = trim($k1).'='.'"'.trim($v1).'"';
-					}
-				}
-				$colValues = implode(', ', $colValues);
-				$sql = 'UPDATE insurance_company_master SET '.$colValues.' WHERE company_id = '.$arrParams['company_id'];	
-			}		
-			if ($this->db->query($sql))
-				return $this->db->insert_id();
-			else 
-				return $this->db->insert_id();
-		}
-		else
-			return FALSE;
-			*/
-		
 		$saveRecord = false;
 		if (!empty($arrParams))
 		{

@@ -61,7 +61,7 @@ $(".form-horizontal :input").prop("disabled", true);
 				                    <div class="col-sm-10">
 										<span class="ui-select "> 
 										<?php 
-											$selected = array_key_exists( 'tag_for',$model) ?  $companyModel['tag_for'] : '';
+											$selected = array_key_exists( 'tag_for',$model) ?  $model['tag_for'] : '';
 											$options = Util::getUniqueTagFor();
 											echo form_dropdown('model[tag_for]', $options, $selected, ' id="tag_for" required style="width: 345px;margin-top: 0px;"');
 										?>
