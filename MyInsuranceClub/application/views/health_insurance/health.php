@@ -196,7 +196,7 @@
                     																					{
                     																						echo $this->session->userdata['user_input']['cust_city'];
                     																					}else 
-                    																					{?>599<?php }?>">
+                    																					{?>590<?php }?>">
                      <input type="hidden" id="cust_city_name" name="cust_city_name" value="">
                      <input type="hidden" id="coverage_amount" name="coverage_amount" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount']))
                      																				{
