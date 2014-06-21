@@ -6,7 +6,7 @@ $(document).ready(function() {
          $('#soi').addClass('active');   
 	  if ( $("#tes" ).hasClass( "tes" ) ) {
 		  
-		   $("#target").load("http://localhost/MyInsuranceClub/include/social.html"); 
+		   $("#target").load(" /include/social.html"); 
 		  
 		  } 
 		        });
