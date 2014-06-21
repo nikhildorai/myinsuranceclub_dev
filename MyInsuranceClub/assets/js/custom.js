@@ -6,7 +6,7 @@ $(document).ready(function() {
          $('#soi').addClass('active');   
 	  if ( $("#tes" ).hasClass( "tes" ) ) {
 		  
-		   $("#target").load(" /include/social.html"); 
+		   $("#target").load("http://192.168.2.201//include/social.html"); 
 		  
 		  } 
 		        });
