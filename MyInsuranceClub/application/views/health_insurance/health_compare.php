@@ -14,39 +14,39 @@
 
 <!-- Bootstrap CSS -->
 <link
-	href="<?php echo base_url();?>assets/css/bootstrap/bootstrap.min.css"
+	href="<?php echo base_url();?>/assets/css/bootstrap/bootstrap.min.css"
 	rel="stylesheet">
 
 <!-- Bootstrap third-party plugins css -->
 <link
-	href="<?php echo base_url();?>assets/css/bootstrap/bootstrap-switch.min.css"
+	href="<?php echo base_url();?>/assets/css/bootstrap/bootstrap-switch.min.css"
 	media="screen" rel="stylesheet" />
 <!-- Font Awesome -->
-<link href="<?php echo base_url();?>assets/css/font-awesome.min.css"
+<link href="<?php echo base_url();?>/assets/css/font-awesome.min.css"
 	rel="stylesheet">
 
 <!-- Plugins -->
 
 <!-- style -->
-<link href="<?php echo base_url();?>assets/css/theme-style.min.css"
+<link href="<?php echo base_url();?>/assets/css/theme-style.min.css"
 	rel="stylesheet">
 
 <!-- custom override -->
-<link href="<?php echo base_url();?>assets/css/custom-style.css"
+<link href="<?php echo base_url();?>/assets/css/custom-style.css"
 	rel="stylesheet">
-<link href="<?php echo base_url();?>assets/css/clingify.css"
+<link href="<?php echo base_url();?>/assets/css/clingify.css"
 	rel="stylesheet">
-<link href="<?php echo base_url();?>assets/css/jquery.bxslider.css"
+<link href="<?php echo base_url();?>/assets/css/jquery.bxslider.css"
 	rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css"
-	href="<?php echo base_url();?>assets/css/slick.css" />
+	href="<?php echo base_url();?>/assets/css/slick.css" />
 <link rel="stylesheet"
-	href="<?php echo base_url();?>assets/css/slicknav.css">
+	href="<?php echo base_url();?>/assets/css/slicknav.css">
 
 <link rel="stylesheet"
-	href="<?php echo base_url();?>assets/css/custom.css">
+	href="<?php echo base_url();?>/assets/css/custom.css">
 
-<link href="<?php echo base_url();?>assets/css/angular.rangeSlider.css"
+<link href="<?php echo base_url();?>/assets/css/angular.rangeSlider.css"
 	rel="stylesheet">
 
 <style type="text/css" id="page-css">
@@ -65,14 +65,14 @@
 
 <!-- Le fav and touch icons - @todo: fill with your icons or remove -->
 <link rel="shortcut icon"
-	href="<?php echo base_url();?>assets/img/icons/favicon.png">
+	href="<?php echo base_url();?>/assets/img/icons/favicon.png">
 <link
 	href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300'
 	rel='stylesheet' type='text/css'>
 
 <!--Retina.js plugin - @see: http://retinajs.com/-->
 <script
-	src="<?php echo base_url();?>assets/plugins/js/retina-1.1.0.min.js"></script>
+	src="<?php echo base_url();?>/assets/plugins/js/retina-1.1.0.min.js"></script>
 </head>
 
 <!-- ======== @Region: body ======== -->
@@ -401,54 +401,54 @@
 	<script
 		src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
 
-	<script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/jquery.min.js"></script>
 
 
 	<!--Legacy jQuery support for quicksand plugin-->
 	<script
-		src="<?php echo base_url();?>assets/js/jquery-migrate-1.2.1.min.js"></script>
+		src="<?php echo base_url();?>/assets/js/jquery-migrate-1.2.1.min.js"></script>
 
 	<!-- Bootstrap JS -->
-	<script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/bootstrap.min.js"></script>
 
 	<!--Bootstrap third-party plugins-->
 	<script
-		src="<?php echo base_url();?>assets/js/bootstrap-hover-dropdown.min.js"></script>
-	<script src="<?php echo base_url();?>assets/js/bootstrap-switch.min.js"></script>
+		src="<?php echo base_url();?>/assets/js/bootstrap-hover-dropdown.min.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/bootstrap-switch.min.js"></script>
 
 	<!--JS plugins-->
-	<script src="<?php echo base_url();?>assets/js/jquery.clingify.min.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/jquery.clingify.min.js"></script>
 	<script
-		src="<?php echo base_url();?>assets/js/jquery.jpanelmenu.min.js"></script>
-	<script src="<?php echo base_url();?>assets/js/jRespond.js"></script>
+		src="<?php echo base_url();?>/assets/js/jquery.jpanelmenu.min.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/jRespond.js"></script>
 
 
 	<!--Custom scripts mainly used to trigger libraries -->
-	<script src="<?php echo base_url();?>assets/js/script.min.js"></script>
-	<script src="<?php echo base_url();?>assets/js/jquery.bxslider.min.js"
+	<script src="<?php echo base_url();?>/assets/js/script.min.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/jquery.bxslider.min.js"
 		type="text/javascript"></script>
-	<script type='text/javascript' src='assets/js/jquery.carouFredSel.js'></script>
+	<script type='text/javascript' src='<?php echo base_url();?>/assets/js/jquery.carouFredSel.js'></script>
 	<script
-		src="<?php echo base_url();?>assets/js/jquery.ui.accordion.min.js"></script>
+		src="<?php echo base_url();?>/assets/js/jquery.ui.accordion.min.js"></script>
 
-	<script src="<?php echo base_url();?>assets/js/jquery.slicknav.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/jquery.slicknav.js"></script>
 
 
-	<script src="<?php echo base_url();?>assets/js/jquery.cluetip.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/jquery.cluetip.js"></script>
 	<!-- <script src="../lib/jquery.cluetip.compat.js"></script> -->
-	<script src="<?php echo base_url();?>assets/js/demo.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/demo.js"></script>
 
 	<script type="text/javascript"
-		src="<?php echo base_url();?>assets/js/jquery.mousewheel.js"></script>
+		src="<?php echo base_url();?>/assets/js/jquery.mousewheel.js"></script>
 	<!-- the jScrollPane script -->
 	<script type="text/javascript"
-		src="<?php echo base_url();?>assets/js/jquery.jscrollpane.min.js"></script>
-	<script src="<?php echo base_url();?>assets/js/scrolltopcontrol.js"></script>
-	<script src="<?php echo base_url();?>assets/js/angular.min.js"></script>
+		src="<?php echo base_url();?>/assets/js/jquery.jscrollpane.min.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/scrolltopcontrol.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/angular.min.js"></script>
 	<!-- and out directive code -->
-	<script src="<?php echo base_url();?>assets/js/angular.rangeSlider.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/angular.rangeSlider.js"></script>
 
-	<script src="<?php echo base_url();?>assets/js/custom.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/custom.js"></script>
 	<script>
 		// basic angular app setup
 		var app = angular.module('myApp', ['ui-rangeSlider']);
