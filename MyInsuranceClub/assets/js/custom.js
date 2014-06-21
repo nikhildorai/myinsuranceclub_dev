@@ -2,8 +2,25 @@
 
 $(document).ready(function() {
 
+	 $('#soi').mouseover(function(){
+         $('#soi').addClass('active');   
+	  if ( $("#tes" ).hasClass( "tes" ) ) {
+		  
+		   $("#target").load("http://localhost/MyInsuranceClub/include/social.html"); 
+		  
+		  } 
+		        });
+				
+				
+					$('#footer').mouseleave(function(){
+				 
+				 $('#soi').removeClass('active');  
+	     $("#tes").remove();
+        });
 
-   $('#clickk').mouseenter(function(){
+  
+	
+	$('#clickk').mouseenter(function(){
    var s = $("#o_touch");
 
     var pos = s.position();                    

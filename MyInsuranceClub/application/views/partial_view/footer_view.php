@@ -64,9 +64,9 @@
         <div class="column-content-wrapper">
           <div class="bottom-col-content widget_text substitute_widget_class">
             <h3 class="bottom-col-title" style="background:none; margin-top:10px;"></h3>
-            <p class="border-box-f"><img src="<?php echo base_url();?>assets/images/irda_logo.jpg" border="0"></p>
+            <p class="border-box-f"><img src="<?php echo base_url();?>/assets/images/irda_logo.jpg" border="0"></p>
             <div class="textwidget small"><strong>Important</strong>: Insurance is the subject matter of solicitation</div>
-            <p class="small">Â© 2009-14 MyInsuranceClub.com</p>
+            <p class="small">© 2009-14 MyInsuranceClub.com</p>
           </div>
         </div>
       </div>
@@ -82,23 +82,43 @@
             
             <!--@todo: replace with company copyright details-->
             <div class="subfooter">
-              <div class="col-md-8">
+              <div class="col-md-13">
                 <ul class="list-inline footer-menu">
-                <li><h3>Stay Connected</h3></li>
+                <li><h3>Stay Connected!</h3></li>
                  <li><a href="#">Latest Product Launches </a></li>| 
                  <li><a href="#">Resolve Insurance Queries </a></li>| 
                  <li><a href="#">Industry News </a></li>| 
                  <li><a href="#">Contests & Prizes</a></li></ul>
-              </div>
-              <div class="col-md-4">
-              <ul class="list-inline footer-menu">
+                 
+                       <ul class="list-inline footer-menu main-menu" >
                
-  <li><a href="https://twitter.com/share" class="twitter-share-button" data-url="https://twitter.com/MyInsuranceClub" data-via="MyInsuranceClub" data-lang="en">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
-
+  <!--<li class="social_icon sc fb"></li>
+ <li class="social_icon sc tw"></li>
+  <li class="social_icon sc gp"></li>-->
+ 
+  <li class='follow submenu pull-right' id="soi"><span class='social_icon sc fb'></span> <span class='social_icon sc tw'></span> <span class='social_icon sc gp'></span>
+              <div class='submenu-content'>
+                <div class='container'>
+                  <div class='col-md-7 follow ' id="target"> 
+ 
+                 <div id="tes" class="tes"></div>
+ 
+                  </div>
+                </div>
+              </div>
+            </li>
   </ul>
               </div>
+            
+        
+         
             </div>
           </div>
+          
+          
+          
+      
+                      
+                      
         </div>
-</footer>
+      </footer>

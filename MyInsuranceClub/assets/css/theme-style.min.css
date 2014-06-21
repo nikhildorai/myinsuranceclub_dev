@@ -862,25 +862,22 @@ border-right:none
 border-radius:0;
 -webkit-box-shadow:none;
 box-shadow:none;
--webkit-transition:all .3s ease-out;
-transition:all .3s ease-out;
+/*-webkit-transition:all .3s ease-out;
+transition:all .3s ease-out;*/
 padding:0px 20px;
+
 margin:0;
-font-size:18px; line-height:40px;
+font-size:16px; line-height:33px;
 font-weight:normal;
 text-transform:none;
-color:#fff;
-border-top:0px solid transparent; border-right:1px solid;
+color:#fff; margin-left:-1px;
+border-top:0px solid transparent; border-right:0px solid;  background: url("../images/line.jpg") no-repeat scroll right 9px rgba(0, 0, 0, 0);
 }
 
-.navbar-nav li a.last { border-right:0px solid; }
-@media (max-width:1200px) {
-	.navbar-nav>li>a, #main-menu>li>a {
-	font-size:15px;
-	}
-}
+.navbar-nav li a.last { border-right:0px solid;  background: none; }
+
 .navbar-nav>li>a:hover, #main-menu>li>a:hover, .navbar-nav>li.active>a, #main-menu>li.active>a {
-color:#000;
+color:#000; margin-left:-1px;
 background-color:#fff;
 border-color:transparent
 }
@@ -1062,6 +1059,25 @@ transition:all .2s ease;
 .dropdown-menu-danger a:hover:before {
 	color:#d9534f !important
 }
+.arrow-down {
+width: 0;
+height: 0;
+border-left: 6px solid transparent;
+border-right: 6px solid transparent;
+border-top: 6px solid #fff;
+font-size: 1px;
+margin-left: 5px;
+position: absolute;
+right: 0;
+top: 14px;
+padding-right: 0px;
+margin-right: 10px;
+}
+.navbar-nav li a.home_fix{ padding-right:20px; background:#1c82c3; border:none; font-size:18px;}
+.dropdown-menu.other {
+left:-399px;
+margin-left:-1px;
+}
 @media (min-width:992px) {
 .dropdown-menu {
 margin-top:3px;
@@ -1069,7 +1085,7 @@ padding:8px;
 -webkit-border-radius:0;
 -moz-border-radius:0;
 border-radius:0;
-left:-390px;
+left:-405px;
 margin-left:-1px;
 border:none;
 border-bottom:2px solid #ff6835;
@@ -1079,10 +1095,7 @@ color:rgba(27, 27, 27, 0.8);
 background:#fff;
 position:absolute
 }
-.dropdown-menu.other {
-left:-452px;
-margin-left:-1px;
-}
+
 .dropdown-menu:before, .dropdown-menu:after {
 display:none
 }
@@ -1634,7 +1647,17 @@ transition:all .4s ease-out;
 	display:block
 }
 
-
+@media (max-width:1200px) {
+	.navbar-nav>li>a, #main-menu>li>a {
+	font-size:15px;
+	}
+	.dropdown-menu.other {
+    left: -427px;
+    margin-left: -1px;
+}
+.dropdown-menu {
+left: -415px;
+}
 
 @media (min-width:1200px) {}
 

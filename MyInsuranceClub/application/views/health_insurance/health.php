@@ -368,7 +368,7 @@
    
     <div class="checkbox">
                     <label>
-                      <input type="checkbox" name="MIC_terms" value="1">
+                      <input type="checkbox" name="MIC_terms" value="1" checked="checked">
                      I authorize MyInsuranceClub & its partners to Call/SMS for my application & agree to the <a href="" class="link">Terms of Use</a>.
                     </label>
                   </div>
