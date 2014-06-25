@@ -509,11 +509,12 @@ class Util {
 											<td>'.$detail['ppl'].'</td>
 									</tr>';
     					}
+    					if($detail['cad'] != 'No'){
     					$return .='	 <tr>
 											<td>Coronary Artery Disease</td>
 											<td>'.$detail['cad'].'</td>
 									</tr>';
-    
+    					}
     					if($detail['opr'] != 'No'){
     
     						$return .='	<tr class="odd">

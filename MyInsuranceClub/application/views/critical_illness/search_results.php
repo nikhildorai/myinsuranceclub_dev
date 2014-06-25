@@ -209,7 +209,7 @@
                    							{
                    								$sum_ass [] = $v;
                    							}
-                   							$discard_duplicate [] = $v['company_id'];
+                   							$discard_duplicate [] = $v['sum_assured'];
                    						}
                    				?>
 								<h6 class="fh3">Sum assured</h6>
