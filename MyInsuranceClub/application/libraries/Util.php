@@ -52,10 +52,12 @@ class Util {
 			$value = $uri->segment(2);
 		else if ($type == 'action')
 			$value = $uri->segment(3);
+		else if($type== 'base_url')
+			$value = base_url();
 		return $value;
 	}
 	
-	function getTableData($modelName = '', $type="all", $where = array(), $fields = array('id'))
+	function getTableData($modelName = '', $type="all", $where = array(), $fields = array('id'), $sqlFilter = array())
 	{
 		$result = $value = array();
 		$model = &get_instance();
@@ -101,6 +103,7 @@ class Util {
 			if (isset($sqlFilter['orderBy']))
 				$sql .= ' ORDER BY '.$sqlFilter['orderBy'].' '.$sort;
 		}
+
 		$result = $model->$modelName->excuteQuery($sql);
 
 		if (!empty($result))
@@ -924,6 +927,47 @@ class Util {
 		}
 		$value['others'] = 'Others';
 		return $value;		
+	}
+	
+	public static function getParentChildRelationComment($commentModel)
+	{
+		//	identify parent child comments
+		foreach ($commentModel as $k2=>$v2)
+		{
+			if (empty($v2['parent_comment_id']))
+			{
+				if (!in_array($v2['comment_id'], $commentModel))
+				{
+					$commentModel[$v2['comment_id']]['parent'] = $v2;
+				}
+				$parentComments[$v2['comment_id']] = $v2['comment_id'];
+			}
+			else if (!empty($v2['parent_comment_id']))
+			{
+				if (in_array($v2['parent_comment_id'], $parentComments))
+				{
+					$commentModel[$v2['parent_comment_id']]['child'][$v2['comment_id']] = $v2;
+				}
+				else 
+				{
+					Util::getParentChildRelationComment($v2);
+				}
+			}
+		}
+			/*
+		if (is_array($comments)) {
+			foreach($comments as $k1 => $v1) {
+				$comments[$k1] = Util::getParentChildRelationComment($v1);
+			}
+		} else {
+echo '----------------->';			
+var_dump($comments);			
+			// Now you do anything you want...
+			$comments = stripslashes($comments);
+echo '=================>';
+		}
+		*/
+		return $comments;
 	}
 }
 

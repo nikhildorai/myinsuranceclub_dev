@@ -140,9 +140,8 @@
             <?php echo $this->pagination->create_links();?>
     </div>
             </section>
-            
-            
-        </div>
+		
+	</div>
     </section>
 
 </div>

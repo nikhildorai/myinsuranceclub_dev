@@ -160,15 +160,15 @@
         
         
         
-        
-        <li>
+
+        <li class="<?php echo in_array($controller, array('comments')) ? 'open active' : '';?>">
             <a href="javascript:void(0);">
             	<i class="fa fa-pencil">
             		<span class="icon-bg bg-primary"></span>
             	</i>
             	<span data-i18n="Touch Points"></span>
             </a>
-            <ul>
+            <ul style="display: <?php echo in_array($controller, array('comments')) ? 'block' : 'none';?>;">
                 <li>
                 	<a href="javascript:void(0);">
                 		<i class="fa fa-caret-right"></i>
@@ -176,7 +176,7 @@
                 	</a>
                	</li>
                 <li>
-                	<a href="javascript:void(0);">
+                	<a href="<?php echo $base_url;?>admin/comments/">
                 		<i class="fa fa-caret-right"></i>
                 		<span data-i18n="Comments"></span>
                 	</a>

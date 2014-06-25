@@ -45,6 +45,7 @@ class guides extends CI_Controller {
 		$this->load->database();
 		$this->load->library('session');
         $this->load->library('upload');
+        $this->load->library('curl');
  		$this->load->helper('url');
  		$this->load->helper('form');
         $this->load->helper('ckeditor');
@@ -221,6 +222,14 @@ class guides extends CI_Controller {
 	}
 	
 	
+	public function getComments($guide_id = null)
+	{
+		echo 'comments';
+		DisqusLib::listcomments();
+		
+		die;
+	}
+	
 	/* 
 	 * $value	: it will have current validations post value
 	 * $validationFor	:defines type of validation on field
@@ -333,6 +342,25 @@ class guides extends CI_Controller {
 			$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
 			
 		redirect('admin/guides/index');
+	}
+	
+	
+	public function getList()
+	{
+		$params['forum_api_key'] = 'sNBISJjGv2Z89HegloEf53Hxm36B7hVcPYGD3rud4KQfKb8wp2Oz7cpdpVwHD8cq';
+		$params['url'] = 'http://127.0.0.1/myinsuranceclub_dev/MyInsuranceClub/admin/guides/create/1';
+				
+		$this->CI =& get_instance();
+				$param_string = '/?';
+
+				foreach ($params as $key => $value)
+				{
+					$param_string .= $key.'='.$value.'&';
+				}
+
+				$result = $this->CI->curl->simple_get('http://disqus.com/api/get_thread_by_url'.$param_string);
+var_dump($result);				
+		die;
 	}
 	
 }

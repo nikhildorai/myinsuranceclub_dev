@@ -129,6 +129,7 @@ $(document).ready(function(){
         <script src="<?php echo $server;?>dist/scripts/Chart/ChartDirective.js"></script>
         <!-- endbuild -->
     </body>
+     
 <script type="text/javascript">
 <?php if (! $this->flexi_auth->is_logged_in()) { ?>
 $('body').addClass('body-special');

@@ -163,11 +163,9 @@ $( "#publish_date" ).datepicker({
 			                <div class="panel-body">
 				                <div class="form-group">
 									<?php 							
-									$arrParams['disqus_identifier'] = base_url().'admin/guides/create/'.$model['guide_id'];  
-									$arrParams['disqus_url'] = base_url().'admin/guides/create/'.$model['guide_id'];
-									$arrParams['disqus_title'] = $model['title'];
-									$arrParams['disqus_category_id'] = '3125046';
-										echo DisqusLib::displayDisqus($arrParams);
+										//echo $this->disqus->get_html();
+										echo DisqusLib::displayDisqus();
+										//echo DisqusLib::listcomments();
 									?>
 				               	</div>
 						              

@@ -217,10 +217,25 @@ $( "#publish_date" ).datepicker({
 			</div>  
 			                		
 					
+			
+	        <div class="row">
+		        <div class="col-md-12">
+		        	<div class="panel-body">    
+			            <section class="panel panel-default">
+			                <div class="panel-body">
+				                <div class="form-group">
+									<?php echo $this->disqus->get_html();?>
+				               	</div>
+						              
+			                </div>
+			            </section>
+					</div>
+			    </div>
+			</div>  
+			        
 	        </div>
 		<?php echo form_close();?>
 	</div>
-	
 <script type="text/javascript">
 <!--
 	function deactiveCompany()

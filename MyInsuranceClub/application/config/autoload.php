@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database', 'session', 'Template', 'Util');
+$autoload['libraries'] = array('database', 'session', 'Template', 'Util', 'DisqusLib', 'curl');
 
 
 /*
@@ -80,7 +80,7 @@ $autoload['helper'] = array('url', 'form', 'url_helper', 'util');
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('disqus');
 
 
 /*

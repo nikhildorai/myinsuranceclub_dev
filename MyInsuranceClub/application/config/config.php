@@ -400,5 +400,22 @@ $config['folder_path']['policy'] = realpath(APPPATH . '../uploads').'/policy/';
 
 $config['policy']['descriptionCount'] = 10;
 $config['policy']['keyFeatures'] = 4;
+
+
+//	disqus comments parameters
+$config['disqus']['disqus_shortname'] 		= 	'mictest';
+$config['disqus']['disqus_developer'] 		= 	1;
+$config['disqus']['disqus_identifier'] 		= 	'';
+$config['disqus']['disqus_title'] 			= 	'';
+$config['disqus']['disqus_url'] 			= 	'';
+$config['disqus']['disqus_category_id'] 	= 	'';
+$config['disqus']['disqus_disable_mobile'] 	= 	"true";
+$config['disqus']['forum_id'] 				= 	'mictest';
+$config['disqus']['forum_api_key'] 			= 	'sNBISJjGv2Z89HegloEf53Hxm36B7hVcPYGD3rud4KQfKb8wp2Oz7cpdpVwHD8cq';
+$config['disqus']['forum_secret_key'] 		= 	'eUzcQTdvcBeWUD493CEZkPu3HkGzJUK88FigYG0H11GHOUsr1SpIUHJI05rN6ooG';
+$config['disqus']['user_api_key'] 			= 	'aa8d1d13e8a043579a08373ad004e825';
+$config['disqus']['access_token'] 			= 	'aa8d1d13e8a043579a08373ad004e825';
+
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */
