@@ -181,213 +181,548 @@ class Util {
     	return $userDetails;
     }
     
-    public function getUserSearchFiltersHtml($customer_details = array(), $type="health")
+    public function getUserSearchFiltersHtml($customer_details = array(), $type = "health")
     {
     	$return = '';
-		if(empty($customer_details))
-		{
-			$return.='<div>There are no plans that match your selection criteria.</div>';
-		}
-		
-		elseif (!empty($customer_details)) 
-		{
-        	foreach($customer_details as $detail)
-        	{
-        		$preexist_diseases='';
-				$return	.=	'<div class="cmp_tbl"><div style="min-height: 74px; height: auto; margin-top: 10px; background: #effdfe; border: 2px solid #dadada;" class="main_acc">
-								<div class="col-md-5">
-									<label for="1_1_refundable" style="margin-top: -5px; margin-bottom: 0px; padding: 25px 0px 20px 0px;">';
-                 					/* if($detail['room_rent']!='Fully Covered')
-                 					{
-										$room_rent='Rs.'.round(0.01*$detail['sum_assured']).'/day';	
-                 					}else 
-                 					{
-                 						$room_rent=$detail['room_rent'];
-                 					}
-                 					if($detail['icu_rent']!='Fully Covered')
-                 					{
-										$icu_rent='Rs.'.round(0.02*$detail['sum_assured']).'/day';
-                 					}
-                 					else
-                 					{
-                 						$icu_rent=$detail['icu_rent'];
-                 					}
-                 					if($detail['doctor_fee']!='Fully Covered')
-                 					{
-                 						$doctor_fee='As per actuals';
-                 					}
-                 					else 
-                 					{
-                 						$doctor_fee=$detail['doctor_fee'];
-                 					} */
-                 					if($detail['preexisting_diseases']!='Not Covered')
-                 					{
-                 						$preexist_diseases='Waiting period of '.$detail['preexisting_diseases'].' years';
-                 					}
-                 					else
-                 					{
-                 						$preexist_diseases=$detail['preexisting_diseases'];
-                 					}
-									$variant='';
-									if($detail['variant_name']!='Base')
-									{
-										$variant=' '.$detail['variant_name'];
-									}
-									else{
-										$variant='';
-									}
-									$compare_data=$detail['variant_id'].'-'.$detail['annual_premium'].'-'.$detail['age'];
-						$return	.=	'<input type="checkbox" name="compare[]" class="refundable" value="'.$compare_data.'" /> 
-									<span class="title_c">'.$detail['company_shortname'].'</span>
-									<span class="sub_tit">('.$detail['policy_name'].$variant.')</span>
-									</label>
-								</div>';
-
-
-					$return	.=	'<div class="col-md-7">
-									<div class="col-md-6 no_pad_l">
-										<h3 class="anc">Rs. '.number_format($detail['annual_premium']).'</h3>
-										<p class="anc_f">for cover of Rs. '.number_format($detail['sum_assured']).'</p>
-									</div>
-
-									<div class="col-md-2">
-										<div class="down_cnt">
-											<img src="'.base_url().'assets/images/down_ar.jpg" border="0">
+    	 
+    	if($type == "health")
+    	{
+    		if(empty($customer_details))
+    		{
+    			$return.='<div>There are no plans that match your selection criteria.</div>';
+    		}
+    
+    		elseif (!empty($customer_details))
+    		{
+    			foreach($customer_details as $detail)
+    			{
+    				$return	.=	'<div class="cmp_tbl"><div style="min-height: 74px; height: auto; margin-top: 10px; background: #effdfe; border: 2px solid #dadada;" class="main_acc">
+									<div class="col-md-5">
+										<label for="1_1_refundable" style="margin-top: -5px; margin-bottom: 0px; padding: 25px 0px 20px 0px;">';
+    
+    				if($detail['preexisting_diseases']!='Not Covered')
+    				{
+    					$preexist_diseases='Waiting period of '.$detail['preexisting_diseases'].' years';
+    				}
+    				else
+    				{
+    					$preexist_diseases=$detail['preexisting_diseases'];
+    				}
+    				$variant='';
+    				if($detail['variant_name']!='Base')
+    				{
+    					$variant=' '.$detail['variant_name'];
+    				}
+    				else{
+    					$variant='';
+    				}
+    				$compare_data=$detail['variant_id'].'-'.$detail['annual_premium'].'-'.$detail['age'];
+    				$return	.=	'<input type="checkbox" name="compare[]" class="refundable" value="'.$compare_data.'" />
+										<span class="title_c">'.$detail['company_shortname'].'</span>
+										<span class="sub_tit">('.$detail['policy_name'].$variant.')</span>
+										</label>
+									</div>';
+    
+    
+    				$return	.=	'<div class="col-md-7">
+										<div class="col-md-6 no_pad_l">
+											<h3 class="anc">Rs. '.number_format($detail['annual_premium']).'</h3>
+											<p class="anc_f">for cover of Rs. '.number_format($detail['sum_assured']).'</p>
+										</div>
+    
+										<div class="col-md-2">
+											<div class="down_cnt">
+												<img src="'.base_url().'assets/images/down_ar.jpg" border="0">
+											</div>
+										</div>
+    
+										<div class="col-md-3">
+											<button type="submit" class="btn btn-primary my" style="margin-top: 18px;">Buy Now &gt;</button>
 										</div>
 									</div>
-
-									<div class="col-md-3">
-										<button type="submit" class="btn btn-primary my" style="margin-top: 18px;">Buy Now &gt;</button>
-									</div>
-								</div>';
-
-					$return	.=	'<div class="accordion_a">
-									<div class="col-md-12">
-										<div class="col-md-8">
-											<h4 class="h_d">Plan Details</h4>
-											<div class="custom-table-1">
-												<table width="100%">
-													<tbody>
-														<tr class="odd">
-															<td>Cashless treatment</td>
-															<td>'.$detail['cashless_treatment'].'</td>
-														</tr>
-														<tr>
-															<td>Pre-existing diseases</td>
-															<td>'.$preexist_diseases.'</td>
-														</tr>
-
-														<tr class="odd">
-															<td>Auto recharge of Sum Insured</td>
-															<td>'.$detail['autorecharge_SI'].'</td>
-														</tr>
-														<tr>
-															<td>Hospitalisation expenses
-																<ul>
-																	<li>Room Rent</li>
-																	<li>ICU Rent</li>
-																	<li>Fees of Surgeon, Anesthetist, Medicines, Nurses, etc</li>
-																</ul>
-															</td>
-															<td>
-																<ul class="no">
-																	<li>'.$detail['room_rent'].'</li>
-																	<li>'.$detail['icu_rent'].'</li>
-																	<li>'.$detail['doctor_fee'].'</li>
-																</ul>
-															</td>
-														</tr>
-														<tr class="odd">
-															<td>Pre-hospitalisation</td>
-															<td>'.$detail['pre_hosp'].'</td>
-														</tr>
-														<tr>
-															<td>Post-hospitalisation</td>
-															<td>'.$detail['post_hosp'].'</td>
-														</tr>
-
-														<tr class="odd">
-															<td>Day care expenses</td>
-															<td>'.$detail['day_care'].'</td>
-														</tr>
-
-														<tr>
-															<td>Maternity Benefits</td>
-															<td>'.$detail['maternity'].'</td>
-														</tr>
-														<tr class="odd">
-															<td>Auto Recharge of Sum Insured</td>
-															<td>Yes – only if hospitalisation due to Accident</td>
-														</tr>
-														<tr>
-															<td>Health Check up</td>
-															<td>'.$detail['check_up'].'</td>
-														</tr>
-
-														<tr class="odd">
-															<td>Ayurvedic Treatment</td>
-															<td>'.$detail['ayurvedic'].'</td>
-														</tr>
-														<tr>
-															<td>Co-payment</td>
-															<td>'.$detail['co_pay'].'</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>';
-					
-							$return	.=	'<div class="col-md-4 no_pad_lr">
-											<h4 class="h_d mar-40">Product Brouchure <img src="'.base_url().'assets/images/pdf.png" border="0"></h4>
-
-											<div class="cus_d" style="padding: 5px;">
-												<h4 class="h_d3">List of Cashless Hospitalization facility</h4>
-												<div style="float: left; width: 100%;">
-													<div style="float: left;">
-														<h4 class="h_d" style="margin-top: 7px">Enter Pincode</h4>
-													</div>
-													<div style="float: right; width: 150px;">
-														<div class="form-group col-md-12">
-															<label class="sr-only" for="">Enter Pincode</label> <input
-																type="text" class="form-control brdr" id="pin"
-																name="pin" placeholder="Enter Pincode">
+									';
+    
+    				$return	.=	'<div class="accordion_a">
+										<div class="col-md-12">
+											<div class="col-md-8">
+												<h4 class="h_d">Plan Details</h4>
+												<div class="custom-table-1">
+													<table width="100%">
+														<tbody>
+															<tr class="odd">
+																<td>Cashless treatment</td>
+																<td>'.$detail['cashless_treatment'].'</td>
+															</tr>
+															<tr>
+																<td>Pre-existing diseases</td>
+																<td>'.$preexist_diseases.'</td>
+															</tr>
+    
+															<tr class="odd">
+																<td>Auto recharge of Sum Insured</td>
+																<td>'.$detail['autorecharge_SI'].'</td>
+															</tr>
+															<tr>
+																<td>Hospitalisation expenses
+																	<ul>
+																		<li>Room Rent</li>
+																		<li>ICU Rent</li>
+																		<li>Fees of Surgeon, Anesthetist, Medicines, Nurses, etc</li>
+																	</ul>
+																</td>
+																<td>
+																	<ul class="no">
+																		<li>'.$detail['room_rent'].'</li>
+																		<li>'.$detail['icu_rent'].'</li>
+																		<li>'.$detail['doctor_fee'].'</li>
+																	</ul>
+																</td>
+															</tr>
+															<tr class="odd">
+																<td>Pre-hospitalisation</td>
+																<td>'.$detail['pre_hosp'].'</td>
+															</tr>
+															<tr>
+																<td>Post-hospitalisation</td>
+																<td>'.$detail['post_hosp'].'</td>
+															</tr>
+    
+															<tr class="odd">
+																<td>Day care expenses</td>
+																<td>'.$detail['day_care'].'</td>
+															</tr>
+    
+															<tr>
+																<td>Maternity Benefits</td>
+																<td>'.$detail['maternity'].'</td>
+															</tr>
+															<tr class="odd">
+																<td>Auto Recharge of Sum Insured</td>
+																<td>Yes – only if hospitalisation due to Accident</td>
+															</tr>
+															<tr>
+																<td>Health Check up</td>
+																<td>'.$detail['check_up'].'</td>
+															</tr>
+    
+															<tr class="odd">
+																<td>Ayurvedic Treatment</td>
+																<td>'.$detail['ayurvedic'].'</td>
+															</tr>
+															<tr>
+																<td>Co-payment</td>
+																<td>'.$detail['co_pay'].'</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>';
+    					
+    				$return	.=	'<div class="col-md-4 no_pad_lr">
+												<h4 class="h_d mar-40">Product Brouchure <img src="'.base_url().'assets/images/pdf.png" border="0"></h4>
+    
+												<div class="cus_d" style="padding: 5px;">
+													<h4 class="h_d3">List of Cashless Hospitalization facility</h4>
+													<div style="float: left; width: 100%;">
+														<div style="float: left;">
+															<h4 class="h_d" style="margin-top: 7px">Enter Pincode</h4>
+														</div>
+														<div style="float: right; width: 150px;">
+															<div class="form-group col-md-12">
+																<label class="sr-only" for="">Enter Pincode</label> <input
+																	type="text" class="form-control brdr" id="pin"
+																	name="pin" placeholder="Enter Pincode">
+															</div>
 														</div>
 													</div>
-												</div>
-
-
-												<div class="loc_d">
-
-													<div class="col-md-12">
-														<label for="1_1_refundable22"> <input type="radio"
-															name="loc_current1" value="Mumbai" class="loc_fnt">
-															Mumbai
-														</label> <label for="1_1_refundable2"> <input type="radio"
-															name="loc_current1" value="Anywhere in India"
-															class="loc_fnt"> Anywhere in India
-														</label>
-													</div>
-
-													<div class=" col-md-12">
-														<label class="sr-only" for="">Enter Pincode</label> <input
-															type="text" class="form-control brdr" id="pin"
-															name="pin1" placeholder="Search by name of hospital">
-													</div>
-
-
-												</div>';
-
-								$return	.=	'</div>
+    
+    
+													<div class="loc_d">
+    
+														<div class="col-md-12">
+															<label for="1_1_refundable22"> <input type="radio"
+																name="loc_current1" value="Mumbai" class="loc_fnt">
+																Mumbai
+															</label> <label for="1_1_refundable2"> <input type="radio"
+																name="loc_current1" value="Anywhere in India"
+																class="loc_fnt"> Anywhere in India
+															</label>
+														</div>
+    
+														<div class=" col-md-12">
+															<label class="sr-only" for="">Enter Pincode</label> <input
+																type="text" class="form-control brdr" id="pin"
+																name="pin1" placeholder="Search by name of hospital">
+																<div><ul style="list-style-type: none;"><li></li></ul></div>
+														</div>
+    
+    
+													</div>';
+    
+    				$return	.=	'</div>
+											</div>
 										</div>
 									</div>
-								</div>
-							</div></div>';
-        	}
-		}
-		return $return;
+								</div></div>';
+    			}
+    		}
+    		//return $return;
+    	}
+    	elseif($type == "criticalillness")
+    	{
+    		if(empty($customer_details))
+    		{
+    			$return.='<div>There are no plans that match your selection criteria.</div>';
+    		}
+    		elseif(!empty($customer_details))
+    		{
+    			foreach($customer_details as $detail)
+    			{
+    				$return	.=	'<div class="cmp_tbl"><div style="min-height: 74px; height: auto; margin-top: 10px; background: #effdfe; border: 2px solid #dadada;" class="main_acc">
+									<div class="col-md-5">
+										<label for="1_1_refundable" style="margin-top: -5px; margin-bottom: 0px; padding: 25px 0px 20px 0px;">';
+    
+    				if($detail['preexisting_age']!='Not Covered')
+    				{
+    					$preexist_diseases='Waiting period of '.$detail['preexisting_age'].' years';
+    				}
+    				else
+    				{
+    					$preexist_diseases=$detail['preexisting_age'];
+    				}
+    				$variant='';
+    				if($detail['variant_name']!='Base')
+    				{
+    					$variant=' '.$detail['variant_name'];
+    				}
+    				else{
+    					$variant='';
+    				}
+    				$compare_data=$detail['variant_id'].'-'.$detail['annual_premium'].'-'.$detail['age'];
+    				$return	.=	'<input type="checkbox" name="compare[]" class="refundable" value="'.$compare_data.'" />
+										<span class="title_c">'.$detail['company_shortname'].'</span>
+										<span class="sub_tit">('.$detail['policy_name'].$variant.')</span>
+										</label>
+									</div>';
+    
+    
+    				$return	.=	'<div class="col-md-7">
+										<div class="col-md-6 no_pad_l">
+											<h3 class="anc">Rs. '.number_format($detail['annual_premium']).'</h3>
+											<p class="anc_f">for cover of Rs. '.number_format($detail['sum_assured']).'</p>
+										</div>
+    
+										<div class="col-md-2">
+											<div class="down_cnt">
+												<img src="'.base_url().'assets/images/down_ar.jpg" border="0">
+											</div>
+										</div>
+    
+										<div class="col-md-3">
+											<button type="submit" class="btn btn-primary my" style="margin-top: 18px;">Buy Now &gt;</button>
+										</div>
+									</div>
+									';
+    
+    				$return	.=	'<div class="accordion_a">
+										<div class="col-md-12">
+											<div class="col-md-8">
+												<h4 class="h_d">Plan Details</h4>
+												<div class="custom-table-1">
+													<table width="100%">
+														<tbody>
+															<tr class="odd">
+																<td>Pre-existing diseases</td>
+																<td>'.$preexist_diseases.'</td>
+															</tr>
+															<tr><td><h4 class="h_d">Diseases Covered</h4></td></tr>';
+    
+    				if($detail['gender_id'] != '2'){
+    
+    					if($detail['cancer'] != 'No'){
+    						$return .=	'<tr class="odd">
+											<td>Cancer</td>
+											<td>'.$detail['cancer'].'</td>
+									</tr>';
+    					}
+    					if($detail['myocardial_infraction'] != 'No'){
+    						$return .=	'<tr>
+											<td>Myocardial Infraction</td>
+											<td>'.$detail['myocardial_infraction'].'</td>
+									</tr>';
+    					}
+    					if($detail['kidney_faliure'] != 'No'){
+    						$return .=	'<tr class="odd">
+											<td>Kidney Faliure</td>
+											<td>'.$detail['kidney_faliure'].'</td>
+									</tr>';
+    					}
+    					if($detail['stroke'] != 'No'){
+    						$return .=	'<tr >
+											<td>Stroke</td>
+											<td>'.$detail['stroke'].'</td>
+									</tr>';
+    					}
+    					if($detail['obt'] != 'No'){
+    						$return .=	'<tr class="odd">
+											<td>Organ/Bone Marrow Transplant</td>
+											<td>'.$detail['obt'].'</td>
+									</tr>';
+    					}
+    					if($detail['cabg'] != 'No'){
+    						$return .=	'<tr>
+											<td>Coronary Artery Bypass Surgery</td>
+											<td>'.$detail['cabg'].'</td>
+									</tr>';
+    					}
+    					if($detail['ppah'] != 'No'){
+    						$return .=	'<tr class="odd">
+											<td>Primary Pulmonary Arterial Hypertension</td>
+											<td>'.$detail['ppah'].'</td>
+									</tr>';
+    					}
+    					if($detail['ms'] != 'No'){
+    						$return .=	'<tr>
+											<td>Multiple Sclerosis</td>
+											<td>'.$detail['ms'].'</td>
+									</tr>';
+    					}
+    					if($detail['coma'] != 'No'){
+    						$return .=	'<tr class="odd">
+											<td>Coma</td>
+											<td>'.$detail['coma'].'</td>
+									</tr>';
+    					}
+    					if($detail['ags'] != 'No'){
+    						$return .=	'<tr>
+											<td>Aorta Graft Surgery</td>
+											<td>'.$detail['ags'].'</td>
+									</tr>';
+    					}
+    					if($detail['ppl'] != 'No'){
+    							
+    						$return .='	<tr class="odd">
+											<td>Permenant Paralysis Of Limbs</td>
+											<td>'.$detail['ppl'].'</td>
+									</tr>';
+    					}
+    					$return .='	 <tr>
+											<td>Coronary Artery Disease</td>
+											<td>'.$detail['cad'].'</td>
+									</tr>';
+    
+    					if($detail['opr'] != 'No'){
+    
+    						$return .='	<tr class="odd">
+											<td>Open Heart Replacement</td>
+											<td>'.$detail['opr'].'</td>
+									</tr>';
+    					}
+    					if($detail['aplastic_anemia'] != 'No'){
+    						$return .='	<tr>
+											<td>Aplastic Anemia</td>
+											<td>'.$detail['aplastic_anemia'].'</td>
+									</tr>';
+    					}
+    					if($detail['e_lu_d'] != 'No'){
+    						$return .='	<tr class="odd">
+											<td>End Stage Lung Disease</td>
+											<td>'.$detail['e_lu_d'].'</td>
+									</tr>';
+    					}
+    					if($detail['e_li_d'] != 'No'){
+    						$return .='	<tr>
+											<td>End Stage Liver Disease</td>
+											<td>'.$detail['e_li_d'].'</td>
+									</tr>';
+    					}
+    					if($detail['major_burns'] != 'No'){
+    						$return .='	<tr class="odd">
+											<td>Major Burns</td>
+											<td>'.$detail['major_burns'].'</td>
+									</tr>';
+    					}
+    					if($detail['mnd'] != 'No'){
+    						$return .='	<tr>
+											<td>Motor Neuron Disease</td>
+											<td>'.$detail['mnd'].'</td>
+									</tr>';
+    					}
+    					if($detail['ti'] != 'No'){
+    						$return .='	<tr class="odd">
+											<td>Terminal Illness</td>
+											<td>'.$detail['ti'].'</td>
+									</tr>';
+    					}
+    					if($detail['bm'] != 'No'){
+    						$return .='	<tr>
+											<td>Bacterial Meningitis</td>
+											<td>'.$detail['bm'].'</td>
+									</tr>';
+    					}
+    					if($detail['parkinsons'] != 'No'){
+    							
+    						$return .='	<tr class="odd">
+											<td>Parkinsons</td>
+											<td>'.$detail['parkinsons'].'</td>
+									</tr>';
+    					}
+    					if($detail['blindness'] != 'No'){
+    						$return .='	<tr>
+											<td>Blindness</td>
+											<td>'.$detail['blindness'].'</td>
+									</tr>';
+    					}
+    
+    					if($detail['speech_loss'] != 'No'){
+    						$return .='	<tr class="odd">
+											<td>Speech Loss</td>
+											<td>'.$detail['speech_loss'].'</td>
+									</tr>';
+    					}
+    					if($detail['deafness'] != 'No'){
+    						$return .='	<tr>
+										<td>Deafness</td>
+										<td>'.$detail['deafness'].'</td>
+									</tr>';
+    					}
+    					if($detail['md'] != 'No'){
+    						$return .='	<tr class="odd">
+											<td>Muscular Dystrophy</td>
+											<td>'.$detail['md'].'</td>
+									</tr>';
+    					}
+    					if($detail['paraplegia'] != 'No'){
+    						$return .='	<tr>
+											<td>Paraplegia</td>
+											<td>'.$detail['paraplegia'].'</td>
+									</tr>';
+    					}
+    					if($detail['hepatoma'] != 'No'){
+    						$return .='	<tr class="odd">
+											<td>Hepatoma</td>
+											<td>'.$detail['hepatoma'].'</td>
+									</tr>';
+    					}
+    					if($detail['hvs'] != 'No'){
+    						$return .='	<tr>
+											<td>Heart Valve Surgery</td>
+											<td>'.$detail['hvs'].'</td>
+									</tr>';
+    					}
+    					if($detail['quad'] != 'No'){
+    						$return .='	<tr class="odd">
+											<td>Quadriplegia</td>
+											<td>'.$detail['quad'].'</td>
+									</tr>';
+    					}
+    
+    				}
+    				elseif($detail['gender_id'] == '2')
+    				{
+    					if($detail['ovarian_c'] != 'No'){
+    						$return .= '<tr class="odd">
+																<td>Ovarian Cancer</td>
+																<td>'.$detail['ovarian_c'].'</td>
+															</tr>';
+    					}
+    					if($detail['vaginal_c'] != 'No'){
+    						$return .= '<tr>
+																<td>Vaginal Cancer</td>
+																<td>'.$detail['vaginal_c'].'</td>
+															</tr>';
+    					}
+    					if($detail['breast_c'] != 'No'){
+    						$return .= '<tr class="odd">
+																<td>Breast Cancer</td>
+																<td>'.$detail['breast_c'].'</td>
+															</tr>';
+    					}
+    					if($detail['cervical'] != 'No'){
+    						$return .= '<tr>
+																<td>Cervical Cancer</td>
+																<td>'.$detail['cervical'].'</td>
+															</tr>';
+    					}
+    					if($detail['endometrial_c'] != 'No'){
+    						$return .= '<tr class="odd">
+																<td>Uterine/Endometrial Cancer</td>
+																<td>'.$detail['endometrial_c'].'</td>
+															</tr>';
+    					}
+    					if($detail['fallopian_tube_c'] != 'No'){
+    						$return .= '<tr>
+																<td>Fallopian Tube Cancer</td>
+																<td>'.$detail['fallopian_tube_c'].'</td>
+															</tr>';
+    					}
+    					if($detail['burns'] != 'No'){
+    						$return .= '<tr class="odd">
+																<td>Burns</td>
+																<td>'.$detail['burns'].'</td>
+															</tr>';
+    					}
+    					if($detail['paralysis_multitrauma'] != 'No'){
+    						$return .= '<tr>
+																<td>Paralysis/Multitrauma</td>
+																<td>'.$detail['paralysis_multitrauma'].'</td>
+															</tr>';
+    					}
+    					if($detail['cdb'] != 'No'){
+    						$return .= '<tr class="odd">
+																<td>Congenital Disability Benefit</td>
+																<td>'.$detail['cdb'].'</td>
+															</tr>';
+    					}
+    				}
+    				$return .=				'<tr>
+															<td></td>
+															<td>'."".'</td>
+													</tr>
+													</tbody>
+													</table>
+												</div>
+											</div>';
+    					
+    				$return	.=	'<div class="col-md-4 no_pad_lr">
+												<h4 class="h_d mar-40">Product Brouchure <img src="'.base_url().'assets/images/pdf.png" border="0"></h4>
+    
+												<div style="padding: 5px;">
+							
+													<div style="float: left; width: 100%;">
+    
+														<div style="float: right; width: 150px;">
+								
+														</div>
+													</div>
+    
+    
+													<div>
+    
+														<div class="col-md-12">
+								
+														</div>
+    
+														<div class=" col-md-12">
+								
+														</div>
+    
+    
+													</div>';
+    
+    				$return	.=	'</div>
+											</div>
+										</div>
+									</div>
+								</div></div>';
+    			}
+    		}
+    
+    	}
+    	return $return;
     }
     
-
+    
 	public function addUpdateClaimRatio($model, $company_id)
 	{	
 		$save  = false;

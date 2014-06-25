@@ -10,28 +10,28 @@
 <meta name="Keywords" content="compare insurance, best life insurance, best health insurance, cheap car insurance, auto insurance quote, cheap travel insurance, affordable insurance, best insurance policy, insurance companies in India" />
 
 <!-- Bootstrap CSS -->
-<link href="<?php echo base_url();?>/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 
 <!-- Bootstrap third-party plugins css -->
-<link href="<?php echo base_url();?>/assets/css/bootstrap/bootstrap-switch.min.css" media="screen" rel="stylesheet" />
+<link href="<?php echo base_url();?>assets/css/bootstrap/bootstrap-switch.min.css" media="screen" rel="stylesheet" />
 <!-- Font Awesome -->
-<link href="<?php echo base_url();?>/assets/css/font-awesome.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/font-awesome.min.css" rel="stylesheet">
 
 <!-- Plugins -->
 
 <!-- style -->
-<link href="<?php echo base_url();?>/assets/css/theme-style.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/theme-style.min.css" rel="stylesheet">
 
 <!-- custom override -->
-<link href="<?php echo base_url();?>/assets/css/custom-style.css" rel="stylesheet">
-<link href="<?php echo base_url();?>/assets/css/clingify.css" rel="stylesheet">
-<link href="<?php echo base_url();?>/assets/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/assets/css/slick.css"/>
-<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/slicknav.css">
+<link href="<?php echo base_url();?>assets/css/custom-style.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/clingify.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/slick.css"/>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/slicknav.css">
 
-<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/custom.css">
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/custom.css">
 
-<link type="text/css" href="<?php echo base_url();?>/assets/css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+<link type="text/css" href="<?php echo base_url();?>assets/css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
 
 		<style type="text/css" id="page-css">
 			/* Styles specific to this particular page */
@@ -50,11 +50,11 @@
     <![endif]-->
 
 <!-- Le fav and touch icons - @todo: fill with your icons or remove -->
-<link rel="shortcut icon" href="<?php echo base_url();?>/assets/img/icons/favicon.png">
+<link rel="shortcut icon" href="assets/img/icons/favicon.png">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
 
 <!--Retina.js plugin - @see: http://retinajs.com/-->
-<script src="<?php echo base_url();?>/assets/plugins/js/retina-1.1.0.min.js"></script>
+<script src="<?php echo base_url();?>assets/plugins/js/retina-1.1.0.min.js"></script>
 </head>
 
 <!-- ======== @Region: body ======== -->
@@ -68,29 +68,13 @@
   <div class="container">
     <!-- form name="" action="#" id="" enctype="multipart/form-data"  -->
     <?php //echo validation_errors();?>
-	<?php //echo form_open('Welcome/health_policy',array('name'=>'health_form'));?>
+	<?php echo form_open('health_insurance/criticalIllness/get_critical_illness_results');?>
   <div class="col-md-12 center mar-20"><h1>Compare & Buy Critical Illness Insurance Plans</h1>
   <p>Choose from 56 plans from 18 companies</p>
   </div>
   
- <div class="col-md-12 center" style=" position:relative;"><h3>I want a <span id="clickk"><span class="dotted rs" id="rs">3 Lakhs</span>
- 
- <div data-bind="" style="display: none;" class="choice" id="c_ch">
-               <div class="choice-leftcol" data-bind="">
-                    <ul class="years active" id="c_amt" data-bind="jScrollPane">
-                            <?php foreach($cvg_amt as $k=>$v){?>
-                            <li><a href="javascript:void(0);"><?php echo $v;?></a></li>
-                            <?php } ?>
-                    </ul>
-                    <div class="stepwrap years-stepwrap">
-                        <span class="step show">
-                            <em>1</em>
-                            <span class="label-mid">Select Coverage Amount</span>
-                        </span>
-                    </div>
-                </div>
-           
-            </div> cover for <span id="clickk_f"><span class="dotted c_for" id="c_for">myself</span>
+ <div class="col-md-12 center" style=" position:relative;"><h3>I want a critical illness cover for 
+ <span id="clickk_f"><span class="dotted c_for" id="c_for">myself</span>
  
  <div data-bind="" style="display: none;" class="choice f" id="c_ch_f">
                <div class="choice-leftcol" data-bind="">
@@ -101,7 +85,7 @@
                     </ul>
                     <div class="stepwrap years-stepwrap">
                         <span class="step show">
-                            <em>3</em>
+                            <em>1</em>
                             <span class="label-mid">Select Members</span>
                         </span>
                     </div>
@@ -113,32 +97,14 @@
  <div data-bind="" style="display: none;" class="choice g" id="c_ch_g">
                <div class="choice-leftcol" data-bind="">
                     <ul class="years active" id="c_for_g" data-bind="jScrollPane">
-                            <li><a href="javascript:void(0);">15/05/1977</a></li>
-                            <li><a href="javascript:void(0);">21/06/1981</a></li>
+                            <li><a href="javascript:void(0);">05-16-1977</a></li>
+                            <li><a href="javascript:void(0);">07-04-1981</a></li>
                             
                     </ul>
                     <div class="stepwrap years-stepwrap">
                         <span class="step show">
-                            <em>4</em>
+                            <em>2</em>
                             <span class="label-mid">DOB</span>
-                        </span>
-                    </div>
-                </div>
-                
-            </div></span> &amp; I stay in <span id="clickk_l"><span class="dotted loc" id="loc">Mumbai</span>
- 
- <div data-bind="" style="display: none;" class="choice l" id="c_ch_l">
-               <div class="choice-leftcol" data-bind="">
-                    <ul class="years active scroll-pane" id="c_for_l" data-bind="jScrollPane">
-					<?php foreach ($city as $c_name){?>
-                    <li data-city-id="<?php echo $c_name['city_id'];?>"><a href="javascript:void(0);"><?php echo $c_name['mic_city_name']; ?></a></li> 
-                    <?php }?>
-                    </ul>
-                    
-                    <div class="stepwrap years-stepwrap">
-                        <span class="step show">
-                            <em>5</em>
-                            <span class="label-mid">Location</span>
                         </span>
                     </div>
                 </div>
@@ -146,23 +112,25 @@
             </div></span>.</h3>
   </div>
   
-  <div class="col-md-12 mar-20 left80 ">
+  <!-- div class="col-md-12 mar-20 left80 "> 
   <p>About Policy holder:</p>
-  </div>
+  </div>-->
    <div class="col-md-12 center left80">
    <div class="form-group col-md-3" style="padding-left:5px;">
-                    <label class="sr-only" for="signup-first-name">Full Name</label>
+                    <!-- label class="sr-only" for="signup-first-name">Full Name</label>
                     <input type="text" class="form-control" id="cust_name" name="cust_name" value="<?php //echo set_value('cust_name');?>" placeholder="Full name">
                     <input type="hidden" id="cust_gender" name="cust_gender" value="male">
                     <input type="hidden" id="policy_term" name="policy_term" value="">
                      <input type="hidden" id="cust_city" name="cust_city" value="599">
-                     <input type="hidden" id="coverage_amount" name="coverage_amount" value="3 Lakhs">
+                     <input type="hidden" id="coverage_amount" name="coverage_amount" value="3 Lakhs"> -->
+                     <input type="hidden" id="cust_dob" name="cust_dob" value="05-16-1977">
+                     <input type="hidden" id="cust_gender" name="cust_gender" value="male">
                      <input type="hidden" id="plan_type" name="plan_type" value="1A">
                      <input type="hidden" id="product_name" name="product_name" value="Health Insurance">
                      <input type="hidden" id="product_type" name="product_type" value="Critical Illness">
 
                   </div>
-                     <div class="form-group col-md-2">
+                     <!-- div class="form-group col-md-2">
                     <label class="sr-only" for="signup-first-name">Date Of Birth</label>
                     <input type="text" data-provide="datepicker" class="form-control" id="cust_dob" name="cust_dob" value="<?php //echo set_value('cust_dob');?>" placeholder="Date Of Birth">
                   </div>
@@ -175,7 +143,7 @@
                    <div class="form-group col-md-2">
                     <label class="sr-only" for="signup-first-name">Email</label>
                     <input type="text" class="form-control" id="cust_email" name="cust_email" value="<?php //echo set_value('cust_email');?>" placeholder="Email">
-                  </div>
+                  </div> -->
                  
                  
                   
@@ -185,7 +153,7 @@
    
  
    
-   
+   	
      <div class="col-md-12  left80 pad_l0 " style="padding-left:15px; display:none;" id="adlt_spc">
   
   <div class="col-md-3  ">
@@ -277,7 +245,7 @@
                     <label for="signup-first-name" class="sr-only">Gender</label>
 <select id="spouce_gender" name="child4_gender" class="form-control">
 <option value="Male">Male</option>
-<option value="Male">Female</option>
+<option value="Female">Female</option>
 
 </select>                  </div>
    </div>
@@ -296,10 +264,10 @@
    
    
     <div class="col-md-12  left80">
-   
+   <br />
     <div class="checkbox">
                     <label>
-                      <input type="checkbox" name="MIC_terms" value="1">
+                      <input type="checkbox" name="MIC_terms" checked="checked" value="1">
                      I authorize MyInsuranceClub & its partners to Call/SMS for my application & agree to the <a href="" class="link">Terms of Use</a>.
                     </label>
                   </div>
@@ -310,7 +278,7 @@
                   
                   </div>
                   </div>
-                 
+                 <?php echo form_close(); ?>
                   <div class="col-md-9  cen"  style="margin-top:20px;">
                   <div style="" class="pos">
                   <div class="col-md-3" >
@@ -337,7 +305,7 @@
                   </div>
   
   
-<?php //echo form_close(); ?>
+
 
 </div>
 </div>
@@ -379,7 +347,7 @@
     <div class="tab-content">
       <div class="tab-pane fade in active" id="htmlcss">
         <article class="row">
-          <div class="col-md-5 col-sm-5 fadeInLeft visible" > <img class="img-responsive" src="<?php echo base_url(); ?>/assets/images/why1.jpg" alt="starbuck"> </div>
+          <div class="col-md-5 col-sm-5 fadeInLeft visible" > <img class="img-responsive" src="<?php echo base_url(); ?>assets/images/why1.jpg" alt="starbuck"> </div>
           <div class="col-md-7 col-sm-6 text-left fadeInRight visible" >
             <h6>Benefits of Comparing Health Insurance with us?</h6>
             <p>Health expenses are increasing considerably each day and so are the health risks. With a wide array of health insurance policies, the task of choosing the best health insurance policy for your needs can be quite tough and confusing.
@@ -406,7 +374,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="<?php echo base_url(); ?>/assets/images/left_t.png" border="0" class="top_i"> Thank you once again for your free and very valuable information on 
+                  <p><strong><img src="<?php echo base_url(); ?>assets/images/left_t.jpg" border="0" class="top_i"> Thank you once again for your free and very valuable information on 
                     insurance. Best wishes to your team and keep up the good work!</strong></p>
                   <p class="col-md-10 aln_right">- Pravin Bhandare, Bangalore</p>
                 </div>
@@ -417,7 +385,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="<?php echo base_url(); ?>/assets/images/left_t.png" border="0" class="top_i">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat!</strong></p>
+                  <p><strong><img src="<?php echo base_url(); ?>assets/images/left_t.jpg" border="0" class="top_i">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat!</strong></p>
                   <p class="col-md-10 aln_right">- Anita Viswas, Mumbai</p>
                 </div>
               </div>
