@@ -440,7 +440,7 @@ class Util {
 															</tr>
 															<tr><td><h4 class="h_d">Diseases Covered</h4></td></tr>';
     
-    				if($detail['gender_id'] != '2'){
+    				//if($detail['gender_id'] != '2'){
     
     					if($detail['cancer'] != 'No'){
     						$return .=	'<tr class="odd">
@@ -621,9 +621,9 @@ class Util {
 									</tr>';
     					}
     
-    				}
-    				elseif($detail['gender_id'] == '2')
-    				{
+    				//}
+    				//elseif($detail['gender_id'] == '2')
+    				//{
     					if($detail['ovarian_c'] != 'No'){
     						$return .= '<tr class="odd">
 																<td>Ovarian Cancer</td>
@@ -678,7 +678,7 @@ class Util {
 																<td>'.$detail['cdb'].'</td>
 															</tr>';
     					}
-    				}
+    				//}
     				$return .=				'<tr>
 															<td></td>
 															<td>'."".'</td>

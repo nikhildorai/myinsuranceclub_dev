@@ -11,9 +11,9 @@ class Get_results_critical_illness EXTENDS CI_Model{
 	
 	public function get_results($user_input)
 	{	
-		$health_result_query = "CALL sp_getCriticalIllnessSearchResults(?,?,?)";
+		$health_result_query = "CALL sp_getCriticalIllnessSearchResults(?,?)";
 		
-		$user_chosen_filter=array($user_input['plan_type'],$user_input['cust_age'],$user_input['cust_gender']);
+		$user_chosen_filter=array($user_input['plan_type'],$user_input['cust_age']);
 		
 		$health_result_data = $this->db->query($health_result_query,$user_chosen_filter);
 		
