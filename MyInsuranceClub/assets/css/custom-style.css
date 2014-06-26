@@ -1683,7 +1683,7 @@ i.searchSprite, .searchSprite, .withNotch .tracker, .rangeHandle, .withArrows li
 .mar-40{ margin-top:40px;}
 .addOnFilter{ margin:0px; padding:0px;}
 .title_c{ font-size:20px; color:#000; font-weight:normal;}
-.sub_tit{ font-size:13px; color:#939393; font-weight:normal; left: 10px;
+.sub_tit{ font-size:12px; color:#939393; font-weight:normal; left: 10px;
     position: relative;
     top: -2px;}
 	.anc{   font-size: 20px;
