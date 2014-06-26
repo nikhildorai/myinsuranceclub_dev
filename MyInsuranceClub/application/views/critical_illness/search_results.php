@@ -522,6 +522,11 @@ $(this).parent().parent().parent().find('.accordion_a').slideToggle();
 				alert('Please Select At Least 2 Plans To Compare.');
 				return false;
 			}
+			else if ($('.refundable:checked').length>3)
+			{
+				alert('You can select maximum of 3 policies to compare.');
+				return false;
+			}
 			else
 			{
 				$('#compare').submit();

@@ -28,6 +28,7 @@ class CriticalIllness extends CI_Controller {
 		$this->load->database();
 		$this->load->model('mic_dbtest');
 		$this->load->model('get_results_critical_illness');
+		$this->load->model('compare_critical_illness_policies');
 		$this->load->model('city');
 		$this->load->helper('form');
 		$this->load->helper('url');
@@ -246,6 +247,53 @@ class CriticalIllness extends CI_Controller {
 	
 	public function compare_policies()
 	{
-			$this->load->view('critical_illness/compare_results');
+		$this->load->model('compare_health_policies');
+	
+		$data=array();
+	
+		$variant=array();
+	
+		$annual_premium=array();
+	
+		$age=array();
+	
+		if($this->input->post('compare')!=null)
+		{
+				
+			foreach($this->input->post('compare') as $k=>$v)
+			{
+				$compare=explode('-',$v);
+	
+				$variant[]=$compare[0];
+	
+				$annual_premium[]=$compare[1];
+	
+				$age=$compare[2];
+			}
+				
+		}
+		$data['comparison_results']=$this->compare_critical_illness_policies->get_comparison($variant,$annual_premium,$age);
+	
+		foreach ($data['comparison_results'] as $k1=>$v1)
+		{
+				
+			foreach ($v1 as $k2=>$v2)
+			{
+				if ($k2 == 'company_shortname')
+				{
+					$key = 'Company';
+				}
+	
+				else
+				{
+					$key = ucfirst(str_replace(array('_','-',' '), ' ', $k2));
+				}
+	
+				$result[$key][] = $v2;
+			}
+		}
+		$data['result']=$result;
+	
+		$this->load->view('critical_illness/compare_results',$data);
 	}
 }
