@@ -19,13 +19,16 @@ class mic_dbtest EXTENDS CI_Model{
 		
 		$plantype='';
 		
-		if(trim($user_input['plan_type']) == '1A')
+		if (array_key_exists('plan_type', $user_input))
 		{
-			$plantype='Individual';
-		}
-		else
-		{
-			$plantype='Family Floater';
+			if(trim($user_input['plan_type']) == '1A')
+			{
+				$plantype='Individual';
+			}
+			else
+			{
+				$plantype='Family Floater';
+			}
 		}
 		
 		$session_id= $this->session->userdata('session_id');
@@ -40,6 +43,7 @@ class mic_dbtest EXTENDS CI_Model{
 											$user_input['last_name'],
 											$user_input['cust_email'],
 											$user_input['cust_mobile'],
+											'',
 											$birthdate_format,
 											$user_input['cust_age'],
 											$user_input['cust_gender'],
@@ -59,6 +63,7 @@ class mic_dbtest EXTENDS CI_Model{
 		elseif(trim($user_input['product_type']) == 'Critical Illness')
 		{
 			$customer_info_array = array(	$session_id,
+											'',
 											'',
 											'',
 											'',
@@ -88,6 +93,7 @@ class mic_dbtest EXTENDS CI_Model{
 											'',
 											'',
 											'',
+											'',
 											$birthdate_format,
 											$user_input['cust_age'],
 											$user_input['cust_gender'],
@@ -103,7 +109,31 @@ class mic_dbtest EXTENDS CI_Model{
 													1
 												);
 		}
-		$cust_personal_data="CALL sp_insertCustomerPersonalDetails(?,?,?,?,?,?,?,?,?,?);";
+		elseif(trim($user_input['product_type']) == 'Term Plan')
+		{
+			$customer_info_array = array(	$session_id,
+											$user_input['first_name'],
+											$user_input['middle_name'],
+											$user_input['last_name'],
+											$user_input['cust_email'],
+											$user_input['cust_mobile'],
+											$user_input['smoker'],
+											$birthdate_format,
+											$user_input['cust_age'],
+											$user_input['cust_gender'],
+											$user_input['cust_city_name']
+											);
+		
+			$customer_search_info_array = array(	$session_id,
+													$user_input['cust_email'],
+													$user_input['product_name'],
+													$user_input['product_type'],
+													'',
+													$user_input['coverage_amount'],
+													$user_input['policy_term']
+													);
+		}
+		$cust_personal_data="CALL sp_insertCustomerPersonalDetails(?,?,?,?,?,?,?,?,?,?,?);";
 		
 		$this->db->query($cust_personal_data,$customer_info_array);
 		
