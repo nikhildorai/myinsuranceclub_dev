@@ -96,13 +96,15 @@ class Personal_accident extends CI_Controller {
 			$this->session->set_userdata('user_input',$user_input);
 		}	
 		$user_input=$this->session->userdata('user_input',$user_input);
-//var_dump($user_input);die;		
+var_dump($user_input,$_POST);die;
+		
 		$data['user_input'] = $user_input;
 		
 		$this->mic_dbtest->customer_personal_search_details($user_input);
 		
 		$data['customer_details'] = $this->annual_premium_personal_accident_model->get_results($user_input);
-			
+		var_dump($data);
+		die;
 		/* Filter Data Received From Ajax Post */
 		
 		if($this->input->is_ajax_request())
