@@ -56,7 +56,7 @@
 <div id="highlighted" style=" background:#fff; padding-bottom:50px; margin-bottom:0px;" >
   <div class="container">
   <?php echo validation_errors();?>
-	<?php echo form_open('health_insurance/basicMediclaim/health_policy',array('name'=>'health_form','id'=>'health_form'));?>
+	<?php echo form_open('health_insurance/basicMediclaim/health_policy',array('name'=>'health_form','id'=>'health_form','class'=>'health-form'));?>
       <div class="col-md-12 center ">
         <div class="col-md-1"></div>
         <h1 class="col-md-11" style="text-align:left;">Compare & Buy Health Insurance Plans</h1>
@@ -118,7 +118,7 @@
           <div data-bind="" style="display: none; left:0px;  max-width: 350px; width: 400px;" class="choice l cit" id="c_ch_l">
             <div class="choice-leftcol" data-bind="">
               <select  name="cust_city" id="combobox" style="height:auto;" placeholder="Type or select from list">
-                <option value="" ></option>
+                <option value="" >  </option>
                <?php foreach ($city as $c_name){
                			if($c_name['city_id']==$this->session->userdata['user_input']['cust_city']){?>
                <option value="<?php echo $c_name['city_id']; ?>" selected="selected"><?php echo $c_name['mic_city_name']; ?></option>
