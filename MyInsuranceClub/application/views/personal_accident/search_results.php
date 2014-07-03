@@ -211,17 +211,23 @@
                    							}
                    							$discard_duplicate [] = $v['sum_assured'];
                    						}				
-                   						sort($sum_ass);
+                   						//sort($sum_ass);
                    				?>
 								<h6 class="fh3">Sum assured</h6>
 								<p class="addOnFilter">
 									<label for="1_1_refundable"> 
-										<?php foreach ($sum_ass as $s)
-										{
+									
+										<?php 	if(!empty($sum_ass))
+												{
+													sort($sum_ass); 
+													foreach ($sum_ass as $s)
+													{
 											?>
-										<input type="checkbox" class="search_filter" id="sum_assured" name="sum_assured[]" value="<?php echo $s;?>"> <?php echo number_format($s,0);?>
-										<br/><?php }?>
-									</label>
+														<input type="checkbox" class="search_filter" id="sum_assured" name="sum_assured[]" value="<?php echo $s;?>"> <?php echo number_format($s,0);?>
+														<br/><?php }
+													}?>
+														
+														</label>
 								</p>
 								
 								

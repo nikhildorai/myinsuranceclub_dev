@@ -218,8 +218,9 @@
 									<label for="1_1_refundable"> 
 										
 										<?php 
-										if(!empty(sort($sum_ass)))
+										if(!empty($sum_ass))
 										{
+											sort($sum_ass);
 											foreach ($sum_ass as $s){?>
 											<input type="checkbox"
 											class="search_filter" id="sum_assured" name="sum_assured[]"
