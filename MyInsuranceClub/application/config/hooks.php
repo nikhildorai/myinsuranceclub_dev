@@ -10,6 +10,13 @@
 |
 */
 
+$hook['pre_controller'] = array(
+		'class'    => 'User_info',
+		'function' => 'index',
+		'filename' => 'user_info.php',
+		'filepath' => 'controllers',
+		'params'   => ''
+);
 
 
 /* End of file hooks.php */
