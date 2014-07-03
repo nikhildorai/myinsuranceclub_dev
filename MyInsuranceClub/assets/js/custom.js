@@ -251,7 +251,7 @@ $("#c_for_g li").click(function() {
 $("#c_for_occupation li").click(function() {
 	   var am_v = $(this).text(); 
 		$("#oc").text(am_v);
-		$("#cust_occupation").val(am_v);
+		$("#cust_occupation").val($(this).data('occupation-id'));
 		  mouseOverActiveElement2 = false; 
 		   $("#c_ch_g").fadeOut();
 	});
