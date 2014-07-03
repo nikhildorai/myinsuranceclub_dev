@@ -389,13 +389,15 @@
                    					$newVal [] = $v['company_id'];
                    				}
                    				
+                   				if(!empty($aNew))
+                   				{
                    				foreach ($aNew as $company)
                    				{	?>
 										<input type="checkbox" class="search_filter"
 											name="company_name[]"
 											value="<?php echo $company['company_id'];?>" /> 
 										<?php echo $company['company_shortname'];?><br/>
-						<?php 	}?>
+						<?php 	}}?>
 
 				</p>
 								<br />
