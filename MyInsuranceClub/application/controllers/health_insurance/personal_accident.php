@@ -149,30 +149,20 @@ class Personal_accident extends CI_Controller {
 	
 	public function compare_policies()
 	{
-		$data=array();
-	
-		$variant=array();
-	
-		$annual_premium=array();
-	
-		$age=array();
-var_dump($_POST);die;	
+		$data=$variant=$annual_premium=$age=array();
 		if($this->input->post('compare')!=null)
-		{
-				
+		{	
 			foreach($this->input->post('compare') as $k=>$v)
 			{
 				$compare=explode('-',$v);
-	
 				$variant[]=$compare[0];
-	
 				$annual_premium[]=$compare[1];
-	
-				$age=$compare[2];
+			//	$age=$compare[2];
 			}
-				
+			$variant = implode(',', $variant);
+			$annual_premium = implode(',', $annual_premium);
 		}
-		$data['comparison_results']=$this->compare_health_policies->get_comparison($variant,$annual_premium,$age);
+		$data['comparison_results']=$this->annual_premium_personal_accident_model->get_comparison($variant,$annual_premium,$age);
 	
 		foreach ($data['comparison_results'] as $k1=>$v1)
 		{
@@ -183,17 +173,14 @@ var_dump($_POST);die;
 				{
 					$key = 'Company';
 				}
-	
 				else
 				{
 					$key = ucfirst(str_replace(array('_','-',' '), ' ', $k2));
 				}
-	
 				$result[$key][] = $v2;
 			}
 		}
 		$data['result']=$result;
-	
-		$this->load->view('personal_accident/compare_results');
+		$this->load->view('personal_accident/compare_results', $data);
 	}
 }

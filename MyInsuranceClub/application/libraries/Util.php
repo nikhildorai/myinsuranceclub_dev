@@ -755,7 +755,7 @@ class Util {
     				else{
     					$variant='';
     				}
-    				$compare_data=$detail['variant_id'];//.'-'.$detail['annual_premium'].'-'.$detail['age'];
+    				$compare_data=$detail['variant_id'].'-'.$detail['annual_premium'];//.'-'.$detail['age'];
     				$return	.=	'<input type="checkbox" name="compare[]" class="refundable" value="'.$compare_data.'" />
 										<span class="title_c">'.$detail['company_shortname'].'</span>
 										<span class="sub_tit">('.$detail['policy_name'].$variant.')</span>
