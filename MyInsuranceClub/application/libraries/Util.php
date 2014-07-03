@@ -858,6 +858,146 @@ class Util {
     		}
     
     	}
+    	elseif($type == "termplan")
+    	{
+    		if(empty($customer_details))
+    		{
+    			$return.='<div>There are no plans that match your selection criteria.</div>';
+    		}
+    		elseif(!empty($customer_details))
+    		{
+    			foreach ($customer_details as $detail)
+    			{
+    	
+    				$calpremium = '';
+    					
+    				$CI =& get_instance();
+    					
+    				$sum_assured_session = $CI->session->userdata['user_input']['coverage_amount_literal'];
+    					
+    				$calpremium = round($sum_assured_session/1000);
+    					
+    				if(!($detail['rate_per_1000_SA']=='0' || $detail['rate_per_1000_SA']=='0.0' || $detail['rate_per_1000_SA']=='0.00'))
+    				{
+    					$annual_premium = $calpremium * $detail['rate_per_1000_SA'];
+    				}
+    				else
+    				{
+    					$annual_premium = $calpremium;
+    				}
+    					
+    				$service_tax = round($annual_premium * 0.1236);
+    					
+    					
+    				$return	.=	'<div class="cmp_tbl"><div style="min-height: 74px; height: auto; margin-top: 10px; background: #effdfe; border: 2px solid #dadada;" class="main_acc">
+									<div class="col-md-5">
+										<label for="1_1_refundable" style="margin-top: -5px; margin-bottom: 0px; padding: 25px 0px 20px 0px;">';
+    					
+    				$variant='';
+    				if($detail['variant_name']!='Base')
+    				{
+    					$variant=' '.$detail['variant_name'];
+    				}
+    				else
+    				{
+    					$variant='';
+    				}
+    					
+    				$compare_data=$detail['variant_id'].'-'.$annual_premium .'-'.$detail['age'];
+    					
+    				$return	.=	'<input type="checkbox" name="compare[]" class="term_check" value="'.$compare_data.'" />
+										<span class="title_c">'.$detail['company_shortname'].'</span>
+										<span class="sub_tit">('.$detail['policy_name'].$variant.')</span>
+										</label>
+									</div>';
+    					
+    					
+    				$return	.=	'<div class="col-md-7">
+										<div class="col-md-6 no_pad_l">
+											<h3 class="anc">Rs. '.number_format($annual_premium).'</h3>
+											<p class="anc_f">for cover of Rs. '.number_format($sum_assured_session).'</p>
+										</div>
+    	
+										<div class="col-md-2">
+											<div class="down_cnt">
+												<img src="'.base_url().'assets/images/down_ar.jpg" border="0">
+											</div>
+										</div>
+    	
+										<div class="col-md-3">
+											<button type="submit" class="btn btn-primary my buy_now" style="margin-top: 18px;">Buy Now &gt;</button>
+										</div>
+									</div>
+									';
+    					
+    				$return	.=	'<div class="accordion_a">
+										<div class="col-md-12">
+											<div class="col-md-8">
+												<h4 class="h_d">Plan Details</h4>
+												<div class="custom-table-1">
+													<table width="100%">
+														<tbody>
+															<tr class="odd">
+																<td>Duration</td>
+																<td>'.$detail['term'].' years</td>
+															</tr>
+															<tr>
+																<td>Claims Ratio</td>
+																<td>'.$detail['financial_year'].' : <span style="color:green;">'.$detail['claim_ratio'].'%</span></td>
+															</tr>
+    	
+															<tr class="odd">
+																<td>Service Tax</td>
+																<td>Rs.'.$service_tax.'</td>
+															</tr>
+															<tr>
+																<td></td>
+																<td>'."".'</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>';
+    	
+    				$return	.=	'<div class="col-md-4 no_pad_lr">
+												<h4 class="h_d mar-40">Product Brouchure <img src="'.base_url().'assets/images/pdf.png" border="0"></h4>
+    	
+												<div style="padding: 5px;">
+							
+													<div style="float: left; width: 100%;">
+														<div style="float: left;">
+								
+														</div>
+														<div style="float: right; width: 150px;">
+															<div class="form-group col-md-12">
+    	
+															</div>
+														</div>
+													</div>
+    	
+    	
+													<div>
+    	
+														<div class="col-md-12">
+								
+														</div>
+    	
+														<div class=" col-md-12">
+			
+														</div>
+    	
+    	
+													</div>';
+    					
+    				$return	.=	'</div>
+											</div>
+										</div>
+									</div>
+								</div></div>';
+    	
+    			}
+    		}
+    	}
     	return $return;
     }
     

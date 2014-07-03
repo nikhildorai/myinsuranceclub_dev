@@ -35,7 +35,7 @@
                  
                  
                
-                      <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Term Plans</strong></a> </li>
+                      <li class="col-md-4" > <a role="menuitem" href="<?php echo site_url('life_insurance/termPlan');?>" tabindex="-1" class="menu-item"><strong>Term Plans</strong></a> </li>
                       <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Endowment Plans</strong></a> </li>
                       <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Child Plans</strong></a> </li>
                       <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>ULIP</strong></a> </li>
@@ -56,8 +56,8 @@
                       <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Money Back Plans</strong></a> </li>
                       <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Pension Plans</strong></a> </li>
                       <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Endowment Plans</strong></a> </li>
-                   	  <li class="col-md-4" > <a role="menuitem" href="<?php echo site_url('health_insurance/criticalIllness');?>" tabindex="-1" class="menu-item"><strong>Critical Illness</strong></a> </li>
-                      <li class="col-md-4" > <a role="menuitem" href="<?php echo site_url('health_insurance/personal_accident');?>" tabindex="-1" class="menu-item"><strong>Personal Accident</strong></a> </li>
+                   	   <li class="col-md-4" > <a role="menuitem" href="<?php echo site_url('health_insurance/criticalIllness');?>" tabindex="-1" class="menu-item"><strong>Critical Illness</strong></a> </li>
+                        <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Personal Accident</strong></a> </li>
                 </ul>
               </li>
          

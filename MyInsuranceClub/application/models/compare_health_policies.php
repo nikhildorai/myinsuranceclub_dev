@@ -17,7 +17,7 @@ class compare_health_policies EXTENDS CI_Model{
 					f.preexisting_diseases,f.autorecharge_SI,f.maternity,f.pre_hosp as 'Pre-Hospitalisation',f.post_hosp as 'Post-Hospitalisation',f.day_care,f.check_up,f.ayurvedic,f.co_pay FROM insurance_company_master i, policy_master p,
 		policy_variants_master v,annual_premium_health ap,policy_features_mediclaim f WHERE i.company_id=p.company_id AND p.policy_id=v.policy_id AND v.variant_id=ap.variant_id
 		AND f.variant_id = ap.variant_id
-		AND v.variant_id IN ($var) AND ap.annual_premium IN ($ap) AND ap.age=$age";
+		AND v.variant_id IN ($var) AND ap.annual_premium IN ($ap) AND ap.age=$age ORDER BY ap.annual_premium ASC";
 		$comparison_query=$this->db->query($comparison);
 		return $comparison_query->result_array();
 	}

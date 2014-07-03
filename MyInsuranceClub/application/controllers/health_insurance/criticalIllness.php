@@ -245,7 +245,7 @@ class CriticalIllness extends CI_Controller {
 		
 	}
 	
-	public function compare_policies()
+public function compare_policies()
 	{
 		$this->load->model('compare_health_policies');
 	

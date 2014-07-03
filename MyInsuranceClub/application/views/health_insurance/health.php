@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,28 +10,28 @@
 <meta name="Keywords" content="compare insurance, best life insurance, best health insurance, cheap car insurance, auto insurance quote, cheap travel insurance, affordable insurance, best insurance policy, insurance companies in India" />
 
 <!-- Bootstrap CSS -->
-<link href="<?php echo base_url();?>/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 
 <!-- Bootstrap third-party plugins css -->
-<link href="<?php echo base_url();?>/assets/css/bootstrap/bootstrap-switch.min.css" media="screen" rel="stylesheet" />
+<link href="<?php echo base_url();?>assets/css/bootstrap/bootstrap-switch.min.css" media="screen" rel="stylesheet" />
 <!-- Font Awesome -->
-<link href="<?php echo base_url();?>/assets/css/font-awesome.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/font-awesome.min.css" rel="stylesheet">
 
 <!-- Plugins -->
 
 <!-- style -->
-<link href="<?php echo base_url();?>/assets/css/theme-style.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/theme-style.min.css" rel="stylesheet">
 
 <!-- custom override -->
-<link href="<?php echo base_url();?>/assets/css/custom-style.css" rel="stylesheet">
-<link href="<?php echo base_url();?>/assets/css/clingify.css" rel="stylesheet">
-<link href="<?php echo base_url();?>/assets/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/assets/css/slick.css"/>
-<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/slicknav.css">
+<link href="<?php echo base_url();?>assets/css/custom-style.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/clingify.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/slick.css"/>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/slicknav.css">
 
-<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/custom.css">
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/custom.css">
 
-<link type="text/css" href="<?php echo base_url();?>/assets/css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+<link type="text/css" href="<?php echo base_url();?>assets/css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
 
 		<style type="text/css" id="page-css">
 			/* Styles specific to this particular page */
@@ -52,11 +50,11 @@
     <![endif]-->
 
 <!-- Le fav and touch icons - @todo: fill with your icons or remove -->
-<link rel="shortcut icon" href="<?php echo base_url();?>/assets/img/icons/favicon.png">
+<link rel="shortcut icon" href="assets/img/icons/favicon.png">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
 
 <!--Retina.js plugin - @see: http://retinajs.com/-->
-<script src="<?php echo base_url();?>/assets/plugins/js/retina-1.1.0.min.js"></script>
+<script src="<?php echo base_url();?>assets/plugins/js/retina-1.1.0.min.js"></script>
 </head>
 
 <!-- ======== @Region: body ======== -->
@@ -71,7 +69,7 @@
   <div class="container">
     <!-- form name="" action="#" id="" enctype="multipart/form-data"  -->
     <?php echo validation_errors();?>
-	<?php echo form_open('health_insurance/basicMediclaim/health_policy',array('name'=>'health_form'));?>
+	<?php echo form_open('health_insurance/basicMediclaim/health_policy',array('name'=>'health_form', 'onsubmit'=>'addLoader();'));?>
   <div class="col-md-12 center mar-20"><h1>Compare & Buy Health Insurance Plans</h1>
   <p>Choose from 56 plans from 18 companies</p>
   </div>
@@ -185,7 +183,6 @@
                     																					{			 
                     																						echo set_value('cust_name');
                     																					}?>" placeholder="Full name">
-                    																					
                     <input type="hidden" id="cust_gender" name="cust_gender" value="<?php if(isset($this->session->userdata['user_input']['cust_gender']))
                     																					{
                     																						echo $this->session->userdata['user_input']['cust_gender'];
@@ -376,30 +373,30 @@
                    <div class="form-group col-md-3"> 
                   
                   <input type="submit"  name='submit' class="btn btn-primary my" value="Show My Options >"/>
-                  
+                  <div id="loader" style="display: none;"><img src="<?php echo base_url().'images/loading.gif'?>" ></div> 
                   </div>
                   </div>
                  
                   <div class="col-md-9  cen"  style="margin-top:20px;">
                   <div style="" class="pos">
                   <div class="col-md-3" >
-                <p ><img src="<?php echo base_url(); ?>/assets/images/star.png" border="0" class="mar-r8">Cashless claims  </p>
+                <p ><img src="<?php echo base_url(); ?>assets/images/star.png" border="0" class="mar-r8">Cashless claims  </p>
 
                   </div>
                   
                   <div class="col-md-3">
-                <p><img src="<?php echo base_url(); ?>/assets/images/star.png" border="0" class="mar-r8">Lifetime renewal</p>
+                <p><img src="<?php echo base_url(); ?>assets/images/star.png" border="0" class="mar-r8">Lifetime renewal</p>
 
                   </div>
                   
                   <div class="col-md-3">
-                <p><img src="<?php echo base_url(); ?>/assets/images/star.png" border="0" class="mar-r8">Tax benefits</p>
+                <p><img src="<?php echo base_url(); ?>assets/images/star.png" border="0" class="mar-r8">Tax benefits</p>
 
                   </div>
                   
                     
                   <div class="col-md-3">
-                <p><img src="<?php echo base_url(); ?>/assets/images/star.png" border="0" class="mar-r8">Free health checkups</p>
+                <p><img src="<?php echo base_url(); ?>assets/images/star.png" border="0" class="mar-r8">Free health checkups</p>
 
                   </div>
                   </div>
@@ -448,7 +445,7 @@
     <div class="tab-content">
       <div class="tab-pane fade in active" id="htmlcss">
         <article class="row">
-          <div class="col-md-5 col-sm-5 fadeInLeft visible" > <img class="img-responsive" src="<?php echo base_url(); ?>/assets/images/why1.jpg" alt="starbuck"> </div>
+          <div class="col-md-5 col-sm-5 fadeInLeft visible" > <img class="img-responsive" src="<?php echo base_url(); ?>assets/images/why1.jpg" alt="starbuck"> </div>
           <div class="col-md-7 col-sm-6 text-left fadeInRight visible" >
             <h6>Benefits of Comparing Health Insurance with us?</h6>
             <p>Health expenses are increasing considerably each day and so are the health risks. With a wide array of health insurance policies, the task of choosing the best health insurance policy for your needs can be quite tough and confusing.
@@ -475,7 +472,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="<?php echo base_url(); ?>/assets/images/left_t.png" border="0" class="top_i"> Thank you once again for your free and very valuable information on 
+                  <p><strong><img src="<?php echo base_url(); ?>assets/images/left_t.jpg" border="0" class="top_i"> Thank you once again for your free and very valuable information on 
                     insurance. Best wishes to your team and keep up the good work!</strong></p>
                   <p class="col-md-10 aln_right">- Pravin Bhandare, Bangalore</p>
                 </div>
@@ -486,7 +483,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="<?php echo base_url(); ?>/assets/images/left_t.png" border="0" class="top_i">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat!</strong></p>
+                  <p><strong><img src="<?php echo base_url(); ?>assets/images/left_t.jpg" border="0" class="top_i">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat!</strong></p>
                   <p class="col-md-10 aln_right">- Anita Viswas, Mumbai</p>
                 </div>
               </div>
@@ -592,7 +589,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>/assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
         </p> 
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
@@ -602,7 +599,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>/assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
         </p> 
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
@@ -612,7 +609,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>/assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
         </p> 
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
@@ -632,7 +629,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>/assets/images/news1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>assets/images/news1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
         </p> 
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
@@ -642,7 +639,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
      <div class="art_cnt widget ">
       <h4 class="sub_h">Which is the best child plan?</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>/assets/images/news2.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>assets/images/news2.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
         </p> 
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
@@ -652,7 +649,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
      <div class="art_cnt widget ">
       <h4 class="sub_h">Benefits of investing early</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>/assets/images/news3.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>assets/images/news3.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
         </p> 
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
@@ -746,6 +743,11 @@ $(document).ready(function(){
 			 
 				          
          });
+
+         function addLoader()
+         {
+             $('#loader').show();
+         }
     </script>
  
 </body>

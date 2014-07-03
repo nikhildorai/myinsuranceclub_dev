@@ -21,7 +21,7 @@
 
 <!-- style -->
 <link href="<?php echo base_url();?>/assets/css/theme-style.min.css" rel="stylesheet">
-
+<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/responsive.css">	
 <!-- custom override -->
 <link href="<?php echo base_url();?>/assets/css/custom-style.css" rel="stylesheet">
 <link href="<?php echo base_url();?>/assets/css/clingify.css" rel="stylesheet">
@@ -60,7 +60,7 @@
 <!-- ======== @Region: body ======== -->
 <body class="page page-index">
 
-<?php $this->load->view('partial_view/header_view');?>
+<?php $this->load->view('partial_view/header_new');?>
 
 <span id="o_touch"></span>
 
@@ -564,7 +564,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
   
 </div>
 
-<?php echo $this->load->view('partial_view/footer_view');?>
+<?php echo $this->load->view('partial_view/footer_new');?>
 
 <!-- ======== @Region: #navigation ======== --> 
 

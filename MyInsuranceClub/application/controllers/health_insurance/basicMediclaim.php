@@ -40,33 +40,6 @@ class basicMediclaim extends CI_Controller {
 	public function index()
 	{
 		
-		/* 
-		
-		$user_info['session_id'] = $this->session->userdata('session_id');
-		
-		$user_info['timestamp'] = date('H:i:s',$this->session->userdata('last_activity'));
-		
-		 if($this->agent->is_browser())
-		 {
-		 	$user_info['browser']=$this->agent->browser();
-		 	
-		 	$user_info['os']=$this->agent->platform();
-		 }
-		 if($this->agent->is_mobile())
-		 {
-		 	$user_info['device']=$this->agent->mobile();
-		 }
-		 if ($this->agent->is_referral())
-		 {
-		 	$user_info['referrer']=$this->agent->referrer();
-		 	
-		 }
-		 else {
-		 	$user_info['referrer']='';
-		 }
-		 
-		 	$this->visitor_information->get_user_info($user_info);
-		 	 */
 		$this->load->model('city');
 		
 		$data=array();
@@ -98,7 +71,7 @@ class basicMediclaim extends CI_Controller {
 		
 		$data['city']=$this->city->get_city();
 		
-		$this->load->view('health_insurance/health',$data);
+		$this->load->view('health_insurance/health_new',$data);
 	
 	}
 	
@@ -118,9 +91,9 @@ class basicMediclaim extends CI_Controller {
 	
 		$this->form_validation->set_rules('cust_email', 'Email', 'required|valid_email');
 	
-		$this->form_validation->set_rules('cust_dob', 'Date of Birth', 'required|age_greater_than_18');
+		//$this->form_validation->set_rules('cust_dob', 'Date of Birth', 'required|age_greater_than_18');
 	
-		$this->form_validation->set_rules('MIC_terms', 'checkbox', 'required');
+		//$this->form_validation->set_rules('MIC_terms', 'checkbox', 'required');
 	
 		$this->form_validation->set_error_delimiters('<div class="error" style="color: red;">', '</div>');
 	
@@ -140,10 +113,9 @@ class basicMediclaim extends CI_Controller {
 			if ($this->input->post('submit'))			/* customer policy details start */
 			{
 	
-				$plan_type=explode('/',$this->input->post('product_des'));
 					
 				$user_input['product_name']=$this->input->post('product_name');
-					
+				
 				$user_input['product_type']=$this->input->post('product_type');
 	
 				if($this->input->post('plan_type')!='')
@@ -157,6 +129,7 @@ class basicMediclaim extends CI_Controller {
 				if($this->input->post('coverage_amount')!='')
 				{
 					$user_input['coverage_amount']=$this->input->post('coverage_amount');
+					
 				}
 				if($this->input->post('adult')!='')
 				{
@@ -200,14 +173,26 @@ class basicMediclaim extends CI_Controller {
 					}
 						
 				}
-				if($this->input->post('cust_dob')!='')
+				if($this->input->post('desktop_cust_dob')!='')
 				{
 					/* birthdate */
-					$user_input['cust_birthdate']=$this->input->post('cust_dob');
+					
+					$user_input['cust_birthdate']=$this->input->post('desktop_cust_dob');
+					
+					$birthage=$this->input->post('desktop_cust_dob');
+					
+				}
+				elseif($this->input->post('mobile_cust_dob')!='')
+				{
+					$user_input['cust_birthdate']=$this->input->post('mobile_cust_dob');
+					
+					$birthage=$this->input->post('mobile_cust_dob');
+				}
 					/* birthdate ends */
+					
+					
 					/* age */
-					$birthage=$this->input->post('cust_dob');
-	
+					
 					$birthDate=explode('-',$birthage);
 	
 					$age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
@@ -215,8 +200,9 @@ class basicMediclaim extends CI_Controller {
 							: (date("Y") - $birthDate[2]));
 	
 					$user_input['cust_age']=$age;
+					
 					/* age ends */
-				}
+				
 				if($this->input->post('cust_gender')!='')
 				{
 					$user_input['cust_gender']=$this->input->post('cust_gender');
@@ -277,14 +263,18 @@ class basicMediclaim extends CI_Controller {
 				if($this->input->post('cust_city_name')!='')
 				{
 					$user_input['cust_city_name']=$this->input->post('cust_city_name');
+					echo "test"/* $user_input['cust_city_name'] */;
 				}
+				
 				$this->session->set_userdata('user_input',$user_input);
 			}
-				
+			
 			$user_input=$this->session->userdata('user_input',$user_input);
+			
 			$data['user_input'] = $user_input;
+			
 			$this->mic_dbtest->customer_personal_search_details($user_input);
-	
+			
 			$data['customer_details']=$this->mic_dbtest->get_policy_results($user_input);
 	
 			/* Filter Data Received From Ajax Post */
@@ -332,7 +322,7 @@ class basicMediclaim extends CI_Controller {
 					}
 				}
 					
-				echo $this->util->getUserSearchFiltersHtml($data['customer_details'], $type="health");
+				echo $this->util->getUserSearchFiltersHtml($data['customer_details'], $type = "health");
 					
 			}
 			else

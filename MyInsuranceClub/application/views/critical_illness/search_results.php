@@ -78,7 +78,7 @@
 <!-- ======== @Region: body ======== -->
 <body class="page page-index">
 
-<?php $this->load->view('partial_view/header_view');?>
+<?php $this->load->view('partial_view/header_resultpage');?>
 
 	<span id="o_touch"></span>
 
@@ -207,18 +207,21 @@
                    						{
                    							if(!in_array($v['sum_assured'], $discard_duplicate))
                    							{
-                   								$sum_ass [] = $v;
+                   								$sum_ass [] = $v['sum_assured'];
                    							}
                    							$discard_duplicate [] = $v['sum_assured'];
                    						}
-                   				?>
+                   						sort($sum_ass);
+                   						?>
 								<h6 class="fh3">Sum assured</h6>
 								<p class="addOnFilter">
 									<label for="1_1_refundable"> 
-										<?php foreach ($sum_ass as $s){?>
+										
+										<?php 
+										foreach ($sum_ass as $s){?>
 										<input type="checkbox"
 										class="search_filter" id="sum_assured" name="sum_assured[]"
-										value="<?php echo $s['sum_assured'];?>"> <?php echo $s['sum_assured'];?>
+										value="<?php echo $s;?>"> <?php echo number_format($s);?>
 										<br/><?php }?>
 									</label>
 								</p>
@@ -397,7 +400,7 @@
 </div>
 	</div>
 
-<?php echo $this->load->view('partial_view/footer_view');?>
+<?php echo $this->load->view('partial_view/footer_resultpage');?>
 
 
 	<!-- ======== @Region: #navigation ======== -->
@@ -532,7 +535,7 @@ $(this).parent().parent().parent().find('.accordion_a').slideToggle();
 				$('#compare').submit();
 			}
 		});
-
+				
 		$('.accordion').accordion({
 			collapsible: true,
 			heightStyle : 'content'

@@ -28,7 +28,7 @@
 <link href="<?php echo base_url();?>/assets/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/assets/css/slick.css"/>
     <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/slicknav.css">
-
+	<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/responsive.css">
 
 <!-- HTML5 shiv & respond.js for IE6-8 support of HTML5 elements & media queries -->
 <!--[if lt IE 9]>
@@ -42,10 +42,9 @@
 </head>
 
 <!-- ======== @Region: body ======== -->
+
 <body class="page page-index">
-
-<?php echo $this->load->view('partial_view/header_view');?>
-
+<?php echo $this->load->view('partial_view/header_new');?>
 <div id="highlighted" >
   <div class="container mar-20 ce">
     <div class="col-md-9 pad-30_a no_pad_l">
@@ -382,7 +381,7 @@
 			</li>
 						</ul></div></div></div>
 </div>
-<?php echo $this->load->view('partial_view/footer_view');?>
+<?php echo $this->load->view('partial_view/footer_new');?>
 
       <!--<div class="container" style="width:100%; padding:0px;">
       
