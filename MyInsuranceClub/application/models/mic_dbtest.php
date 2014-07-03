@@ -94,9 +94,9 @@ class mic_dbtest EXTENDS CI_Model{
 											'',
 											'',
 											'',
-											$birthdate_format,
-											$user_input['cust_age'],
-											$user_input['cust_gender'],
+											'',
+											'',
+											'',
 											''
 										);
 		
@@ -158,4 +158,7 @@ class mic_dbtest EXTENDS CI_Model{
 		
 		return $health_result_data->result_array();
 	}
+	
+	
+	
 }
