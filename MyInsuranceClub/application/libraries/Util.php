@@ -723,6 +723,141 @@ class Util {
     		}
     
     	}
+    	elseif($type == "personalAccident")
+    	{
+    		if(empty($customer_details))
+    		{
+    			$return.='<div>There are no plans that match your selection criteria.</div>';
+    		}
+    		elseif(!empty($customer_details))
+    		{
+    			foreach($customer_details as $detail)
+    			{
+    				$return	.=	'<div class="cmp_tbl"><div style="min-height: 74px; height: auto; margin-top: 10px; background: #effdfe; border: 2px solid #dadada;" class="main_acc">
+									<div class="col-md-5">
+										<label for="1_1_refundable" style="margin-top: -5px; margin-bottom: 0px; padding: 25px 0px 20px 0px;">';
+    
+    			/*	if($detail['preexisting_age']!='Not Covered')
+    				{
+    					$preexist_diseases='Waiting period of '.$detail['preexisting_age'].' years';
+    				}
+    				else
+    				{
+    					$preexist_diseases=$detail['preexisting_age'];
+    				}
+    				*/
+    				$preexist_diseases = '';
+    				$variant='';
+    				if($detail['variant_name']!='Base')
+    				{
+    					$variant=' '.$detail['variant_name'];
+    				}
+    				else{
+    					$variant='';
+    				}
+    				$compare_data=$detail['variant_id'];//.'-'.$detail['annual_premium'].'-'.$detail['age'];
+    				$return	.=	'<input type="checkbox" name="compare[]" class="refundable" value="'.$compare_data.'" />
+										<span class="title_c">'.$detail['company_shortname'].'</span>
+										<span class="sub_tit">('.$detail['policy_name'].$variant.')</span>
+										</label>
+									</div>';
+    
+    
+    				$return	.=	'<div class="col-md-7">
+										<div class="col-md-6 no_pad_l">
+											<h3 class="anc">Rs. '.number_format($detail['annual_premium']).'</h3>
+											<p class="anc_f">for cover of Rs. '.number_format($detail['sum_assured']).'</p>
+										</div>
+    
+										<div class="col-md-2">
+											<div class="down_cnt">
+												<img src="'.base_url().'assets/images/down_ar.jpg" border="0">
+											</div>
+										</div>
+    
+										<div class="col-md-3">
+											<button type="submit" class="btn btn-primary my" style="margin-top: 18px;">Buy Now &gt;</button>
+										</div>
+									</div>
+									';
+    
+    				$return	.=	'<div class="accordion_a">
+										<div class="col-md-12">
+											<div class="col-md-8">
+												<h4 class="h_d">Plan Details</h4>
+												<div class="custom-table-1">
+													<table width="100%">
+														<tbody>';
+    												$featureList = Util::featureList($type);
+    												$featureKeys = array_keys($featureList);
+    												$i = 1;
+    												foreach ($detail as $k1=>$v1)
+    												{	
+    													if (in_array($k1, $featureKeys) && !empty($v1))
+    													{
+    														if ($i == 1)
+								    							$return .=	'<tr class="odd">';
+								    						else 
+								    							$return .=	'<tr>';
+																$return .=		'<td>'.$featureList[$k1].'</td>
+																				<td>';
+									    						if ($k1 == 'major_exclusions')
+									    						{
+									    							$return .= 			implode('<br>', unserialize($v1));
+									    						}
+									    						else 
+									    							$return .=			$v1;
+																$return .=		'</td>
+																			</tr>';
+						    								$i++;
+						    								if ($i == 3)
+						    									$i = 1;
+    													}
+    												}
+    							$return .=					'<tr>
+																<td></td>
+																<td>'."".'</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>';
+    					
+    				$return	.=	'<div class="col-md-4 no_pad_lr">
+												<h4 class="h_d mar-40">Product Brouchure <img src="'.base_url().'assets/images/pdf.png" border="0"></h4>
+    
+												<div style="padding: 5px;">
+							
+													<div style="float: left; width: 100%;">
+    
+														<div style="float: right; width: 150px;">
+								
+														</div>
+													</div>
+    
+    
+													<div>
+    
+														<div class="col-md-12">
+								
+														</div>
+    
+														<div class=" col-md-12">
+								
+														</div>
+    
+    
+													</div>';
+    
+    				$return	.=	'</div>
+											</div>
+										</div>
+									</div>
+								</div></div>';
+    			}
+    		}
+    
+    	}
     	return $return;
     }
     
@@ -969,6 +1104,62 @@ echo '=================>';
 		}
 		*/
 		return $comments;
+	}
+	
+	public static function featureList($featureType = '')
+	{
+		$value = array();
+		if ($featureType == 'personalAccident')
+		{
+			$value = array(
+				'minimum_coverage_amount'=>'Minimum Coverage amount',
+				'maximum_coverage_amount'=>'Maximum Coverage amount',
+				'coverage_years'=>'Coverage Years',
+				'maximum_renewal_age'=>'Maximum Renewal Age',
+				'minimum_entry_age'=>'Minimum Entry Age',
+				'maximum_entry_age'=>'Maximum Entry Age',
+				'annual_income_eligibility'=>'Annual Income Eligibility',
+				'no_medical_test_age'=>'No Medical Test Age',
+				'no_medical_sum_assured_limit'=>'No Medical Sum Assured Limit',
+				'pre_existing_diseases'=>'Pre Existing Diseases',
+				'co_payment'=>'Co Payment',
+				'buying_mode'=>'Buying Mode',
+				'online'=>'Online',
+				'offline'=>'Offline',
+				'list_of_hospitals'=>'List of Hospitals',
+				'tax_benefits'=>'Tax Benefits',
+				'waiting_period'=>'Waiting Period',
+				'free_look_period'=>'Free Look Period',
+				'grace_period'=>'Grace Period',
+				'world_wide_coverage'=>'World Wide Coverage',
+				'cumulative_bonus'=>'Cumulative Bonus',
+				'accidental_death'=>'Accidental Death',
+				'permanent_total_disablement'=>'Permanent Total Disablement',
+				'permanent_partial_disablement'=>'Permanent Partial Disablement',
+				'hospital_daily_cash'=>'Hospital Daily Cash',
+				'double_indemnity'=>'Double Indemnity',
+				'accident_medical_expenses'=>'Accident Medical Expenses',
+				'accidental_hospitalisation_expenses_reimbursement'=>'Accidental Hospitalisation Expenses Reimbursement',
+				'accidental_out_patient_expenses_reimbursement'=>'Accidental Out Patient Expenses Reimbursement',
+				'weekly_indemnity'=>'Weekly Indemnity',
+				'broken_bone'=>'Broken Bone',
+				'modification_of_residence_vehicle'=>'Modification of Residence Vehicle',
+				'cost_of_transporting_mortal_remains'=>'Cost of Transporting Mortal Remains',
+				'cost_of_performane_of_death_ceremonies'=>'Cost of Performane of Death Ceremonies',
+				'ambulance_hiring_charges'=>'Ambulance Hiring Charges',
+				'family_transportation_benefit'=>'Family Transportation Benefit',
+				'burns'=>'Burns',
+				'major_exclusions'=>'Major Exclusions',
+				'accident_death_spouse'=>'Accident Death Spouse',
+				'permanent_total_disablity_spouse'=>'Permanent Total Disablity Spouse',
+				'permanent_partial_disablity_spouse'=>'Permanent Partial Disablity Spouse',
+				'accident_death_per_child'=>'Accident Death Per Child',
+				'permanent_total_disablity_per_child'=>'Permanent Total Disablity Per Child',
+				'permanent_partial_disablity_per_child'=>'Permanent Partial Disablity Per Child',
+				'tution_fees_per_child'=>'Tution Fees Per Child',
+			);
+		}
+		return $value;
 	}
 }
 

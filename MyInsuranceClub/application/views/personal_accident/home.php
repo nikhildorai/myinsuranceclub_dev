@@ -68,202 +68,80 @@
   <div class="container">
     <!-- form name="" action="#" id="" enctype="multipart/form-data"  -->
     <?php //echo validation_errors();?>
-	<?php echo form_open('health_insurance/personalAccident/get_critical_illness_results');?>
+	<?php echo form_open('health_insurance/personal_accident/get_personal_accident_results');?>
   <div class="col-md-12 center mar-20"><h1>Compare & Buy Personal Accident Insurance Plans</h1>
   <p>Choose from 56 plans from 18 companies</p>
   </div>
-  
- <div class="col-md-12 center" style=" position:relative;"><h3>I want a personal accident cover for 
- <span id="clickk_f"><span class="dotted c_for" id="c_for">myself</span>
- 
- <div data-bind="" style="display: none;" class="choice f" id="c_ch_f">
-               <div class="choice-leftcol" data-bind="">
-                    <ul class="years active" id="c_for_f" data-bind="jScrollPane">
-                           <?php foreach($family_composition as $k=>$v){?> 
-                           <li data-compo-id="<?php echo $k; ?>"><a href="javascript:void(0);"><?php echo $v; ?></a></li>
-                           <?php } ?>
-                    </ul>
-                    <div class="stepwrap years-stepwrap">
-                        <span class="step show">
-                            <em>1</em>
-                            <span class="label-mid">Select Members</span>
-                        </span>
-                    </div>
-                </div>
-                
-            </div></span>.</h3></div>
- <div class="col-md-12 center no-margin"><h3>I work as <span id="clickk_g"><span class="dotted ge" id="ge">occupation</span>
- 
- <div data-bind="" style="display: none;" class="choice g" id="c_ch_g">
-               <div class="choice-leftcol" data-bind="">
-                    <ul class="years active" id="c_for_g" data-bind="jScrollPane">
-                            <li><a href="javascript:void(0);">05-16-1977</a></li>
-                            <li><a href="javascript:void(0);">07-04-1981</a></li>
-                            
-                    </ul>
-                    <div class="stepwrap years-stepwrap">
-                        <span class="step show">
-                            <em>2</em>
-                            <span class="label-mid">DOB</span>
-                        </span>
-                    </div>
-                </div>
-                
-            </div></span>.</h3>
-  </div>
-  
-  <!-- div class="col-md-12 mar-20 left80 "> 
+			<div class="col-md-12 center" style="position: relative;">
+				<h3>
+					I want a personal accident cover for
+					<span id="clickk_f">
+						<span class="dotted c_for" id="c_for">myself</span>
+
+						<div data-bind="" style="display: none;" class="choice f" id="c_ch_f">
+							<div class="choice-leftcol" data-bind="">
+								<ul class="years active" id="c_for_f" data-bind="jScrollPane">
+									<?php foreach($family_composition as $k=>$v)
+									{	?>
+										<li data-compo-id="<?php echo $k; ?>">
+											<a href="javascript:void(0);"><?php echo $v; ?> </a>
+										</li>
+							<?php 	} ?>
+								</ul>
+								<div class="stepwrap years-stepwrap">
+									<span class="step show"> <em>1</em> <span class="label-mid">Select
+											Members</span> </span>
+								</div>
+							</div>
+
+						</div> 
+					</span>.
+				</h3>
+			</div>
+			<div class="col-md-12 center no-margin">
+				<h3>
+					I work as 
+					<span id="clickk_g">
+						<span class="dotted ge" id="oc">occupation</span>
+						<div data-bind="" style="display: none;" class="choice g" id="c_ch_g">
+							<div class="choice-leftcol" data-bind="">
+								<ul class="years active" id="c_for_occupation" data-bind="jScrollPane">
+						<?php 				
+								if (!empty($occupation))
+								{
+									foreach ($occupation as $k1=>$v1)
+									{	?>
+										<li data-occupation-id="<?php echo $v1['occupation_id']; ?>">
+											<a href="javascript:void(0);"><?php echo ucwords($v1['occupation_name']); ?> </a>
+										</li>
+					<?php 			}
+								}?>
+								</ul>
+								<div class="stepwrap years-stepwrap">
+									<span class="step show"> <em>2</em> <span class="label-mid">DOB</span>
+									</span>
+								</div>
+							</div>
+
+						</div> 
+					</span>.
+				</h3>
+			</div>
+
+	<!-- div class="col-md-12 mar-20 left80 "> 
   <p>About Policy holder:</p>
   </div>-->
-   <div class="col-md-12 center left80">
-   <div class="form-group col-md-3" style="padding-left:5px;">
-                    <!-- label class="sr-only" for="signup-first-name">Full Name</label>
-                    <input type="text" class="form-control" id="cust_name" name="cust_name" value="<?php //echo set_value('cust_name');?>" placeholder="Full name">
-                    <input type="hidden" id="cust_gender" name="cust_gender" value="male">
-                    <input type="hidden" id="policy_term" name="policy_term" value="">
-                     <input type="hidden" id="cust_city" name="cust_city" value="599">
-                     <input type="hidden" id="coverage_amount" name="coverage_amount" value="3 Lakhs"> -->
-                     <input type="hidden" id="cust_dob" name="cust_dob" value="05-16-1977">
-                     <input type="hidden" id="cust_gender" name="cust_gender" value="male">
-                     <input type="hidden" id="plan_type" name="plan_type" value="1A">
-                     <input type="hidden" id="product_name" name="product_name" value="Health Insurance">
-                     <input type="hidden" id="product_type" name="product_type" value="Critical Illness">
+			<div class="col-md-12 center left80">
+				<div class="form-group col-md-3" style="padding-left: 5px;">
+					<input type="hidden" id="cust_occupation" name="cust_occupation" value="1"> 
+					<input type="hidden" id="plan_type" name="plan_type" value="1A"> 
+					<input type="hidden" id="plan_type_name" name="plan_type_name" value="Myself"> 
+					<input type="hidden" id="product_name" name="product_name" value="Health Insurance"> 
+					<input type="hidden" id="product_type" name="product_type" value="Personal Accident">
+				</div>
+			</div>
 
-                  </div>
-                     <!-- div class="form-group col-md-2">
-                    <label class="sr-only" for="signup-first-name">Date Of Birth</label>
-                    <input type="text" data-provide="datepicker" class="form-control" id="cust_dob" name="cust_dob" value="<?php //echo set_value('cust_dob');?>" placeholder="Date Of Birth">
-                  </div>
-                     <div class="form-group col-md-2">
-                    <label class="sr-only" for="signup-first-name">Mobile</label>
-                    <input type="text" class="form-control" id="cust_mobile" name="cust_mobile" value="<?php //echo set_value('cust_mobile');?>" placeholder="Mobile">
-                  </div>
-                  
-                  
-                   <div class="form-group col-md-2">
-                    <label class="sr-only" for="signup-first-name">Email</label>
-                    <input type="text" class="form-control" id="cust_email" name="cust_email" value="<?php //echo set_value('cust_email');?>" placeholder="Email">
-                  </div> -->
-                 
-                 
-                  
-   </div>
-   
-   
-   
- 
-   
-   	
-     <div class="col-md-12  left80 pad_l0 " style="padding-left:15px; display:none;" id="adlt_spc">
-  
-  <div class="col-md-3  ">
-  <div style="padding-left:0px;" class="col-md-12"><p>Adult 2 (Spouse):</p></div>
-                     <div class="form-group col-md-6">
-                    <label for="signup-first-name" class="sr-only">Date Of Birth</label>
-                    <input type="text" class="form-control" id="spouce_dob" name="spouce_dob" placeholder="Date Of Birth">
-                  </div>
-                  
-                  
-                  
-                   <div class="form-group col-md-6">
-                   <label class="sr-only" for="signup-first-name">Gender</label>
-<select class="form-control" name="spouce_gender" id="spouce_gender">
-<option value="Male">Male</option>
-<option value="Male">Female</option>
-
-</select>                </div>
-   </div>
-   </div>
-   
-   
-   
-   
-   
-    <div class="col-md-12  left80 pad_l0 " style="padding-left:15px;">
-  
-  <div class="col-md-3  " id="one_c" style="display:none;">
-  <div style="padding-left:0px;" class="col-md-12"><p>Child 1:</p></div>
-                     <div class="form-group col-md-6">
-                    <label for="signup-first-name" class="sr-only">Date Of Birth</label>
-                    <input type="text" placeholder="Date Of Birth" name="child1_dob" id="spouce_dob" class="form-control">
-                  </div>
-                  
-                  
-                  
-                   <div class="form-group col-md-6">
-                    <label for="signup-first-name" class="sr-only">Gender</label>
-<select id="spouce_gender" name="child1_gender" class="form-control">
-<option value="Male">Male</option>
-<option value="Male">Female</option>
-
-</select>                  </div>
-   </div>
-   <div class="col-md-3  " id="two_c" style="display:none;">
-  <div style="padding-left:0px;" class="col-md-12"><p>Child 2:</p></div>
-                     <div class="form-group col-md-6">
-                    <label for="signup-first-name" class="sr-only">Date Of Birth</label>
-                    <input type="text" placeholder="Date Of Birth" name="child2_dob" id="spouce_dob" class="form-control">
-                  </div>
-                  
-                  
-                  
-                   <div class="form-group col-md-6">
-                    <label for="signup-first-name" class="sr-only">Gender</label>
-<select id="spouce_gender" name="child2_gender" class="form-control">
-<option value="Male">Male</option>
-<option value="Male">Female</option>
-
-</select>                  </div>
-   </div>
-   <div class="col-md-3  " id="three_c" style="display:none;">
-  <div style="padding-left:0px;" class="col-md-12"><p>Child 3:</p></div>
-                     <div class="form-group col-md-6">
-                    <label for="signup-first-name" class="sr-only">Date Of Birth</label>
-                    <input type="text" placeholder="Date Of Birth" name="child3_dob" id="spouce_dob" class="form-control">
-                  </div>
-                  
-                  
-                  
-                   <div class="form-group col-md-6">
-                    <label for="signup-first-name" class="sr-only">Gender</label>
-<select id="spouce_gender" name="child3_gender" class="form-control">
-<option value="Male">Male</option>
-<option value="Male">Female</option>
-
-</select>                  </div>
-   </div>
-   <div class="col-md-3  " id="four_c" style="display:none;">
-  <div style="padding-left:0px;" class="col-md-12"><p>Child 4:</p></div>
-                     <div class="form-group col-md-6">
-                    <label for="signup-first-name" class="sr-only">Date Of Birth</label>
-                    <input type="text" placeholder="Date Of Birth" name="child4_dob" id="spouce_dob" class="form-control">
-                  </div>
-                  
-                  
-                  
-                   <div class="form-group col-md-6">
-                    <label for="signup-first-name" class="sr-only">Gender</label>
-<select id="spouce_gender" name="child4_gender" class="form-control">
-<option value="Male">Male</option>
-<option value="Female">Female</option>
-
-</select>                  </div>
-   </div>
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   </div>
-   
-   
-    <div class="col-md-12  left80">
+			<div class="col-md-12  left80">
    <br />
     <div class="checkbox">
                     <label>

@@ -399,7 +399,7 @@ $config['folder_path']['company'] = realpath(APPPATH . '../uploads').'/company/'
 $config['folder_path']['policy'] = realpath(APPPATH . '../uploads').'/policy/';
 
 $config['policy']['descriptionCount'] = 10;
-$config['policy']['keyFeatures'] = 4;
+$config['policy']['keyFeatures'] = 15;
 
 
 //	disqus comments parameters

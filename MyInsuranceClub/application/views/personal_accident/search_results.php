@@ -130,7 +130,7 @@
 					</div>
 
 					<div class="col-md-12" style="padding: 0px;">
-					<?php echo form_open('health_insurance/criticalIllness/compare_policies',array('id'=>'compare'));?>
+					<?php echo form_open('health_insurance/personal_accident/compare_policies',array('id'=>'compare'));?>
 						<div
 							style="height: auto; padding: 10px 0px 30px 0px; background: #ededec;">
 							<div class="col-md-5">Insurer</div>
@@ -141,7 +141,7 @@
 
 
 						<div  id="cmp_tbl">
-						<?php echo $this->util->getUserSearchFiltersHtml($customer_details, $type = "criticalillness");?>
+						<?php echo $this->util->getUserSearchFiltersHtml($customer_details, $type = "personalAccident");?>
                 		
 						</div>
 				<?php echo form_close();?>
@@ -155,7 +155,7 @@
 
 						<div class="block">
 							<h6 class="fh3 c">
-								<a href="<?php echo site_url('health_insurance/criticalIllness');?>">&lt;
+								<a href="<?php echo site_url('health_insurance/personal_accident');?>">&lt;
 									Modify your search</a>
 							</h6>
 						</div>
@@ -172,7 +172,7 @@
 							<div class="filterContent ">
 
 
-								<?php echo form_open('health_insurance/criticalillness',array('id'=>'search'));?>
+								<?php echo form_open('health_insurance/personal_accident/get_personal_accident_results',array('id'=>'search'));?>
 								<div class="" ng-controller="DemoController"
 									style="margin-top: 30px;">
 									<div range-slider min="demo2.range.min" max="demo2.range.max"
@@ -207,21 +207,28 @@
                    						{
                    							if(!in_array($v['sum_assured'], $discard_duplicate))
                    							{
-                   								$sum_ass [] = $v;
+                   								$sum_ass [] = $v['sum_assured'];
                    							}
-                   							$discard_duplicate [] = $v['company_id'];
-                   						}
+                   							$discard_duplicate [] = $v['sum_assured'];
+                   						}				
+                   						sort($sum_ass);
                    				?>
 								<h6 class="fh3">Sum assured</h6>
 								<p class="addOnFilter">
 									<label for="1_1_refundable"> 
-										<?php foreach ($sum_ass as $s){?>
-										<input type="checkbox"
-										class="search_filter" id="sum_assured" name="sum_assured[]"
-										value="<?php echo $s['sum_assured'];?>"> <?php echo $s['sum_assured'];?>
+										<?php foreach ($sum_ass as $s)
+										{
+											?>
+										<input type="checkbox" class="search_filter" id="sum_assured" name="sum_assured[]" value="<?php echo $s;?>"> <?php echo number_format($s,0);?>
 										<br/><?php }?>
 									</label>
 								</p>
+								
+								
+<?php /*?>								
+								
+								
+								
 								<p class="addOnFilter" style="margin: 0px; padding: 0px;">
 								
 								
@@ -354,7 +361,7 @@
 									<label for="1_1_refundable"> <input type="checkbox" class="search_filter" name="sector[]" value="3"> Health Insurance Companies </label>
 
 								</p>
-
+ */ ?>
 								<p class="addOnFilter" style="margin: 0px; padding: 0px;">
 								
 								
@@ -541,7 +548,7 @@ $(this).parent().parent().parent().find('.accordion_a').slideToggle();
 
 		 $.ajax({
 			type:"post", 
-			url:"<?php echo base_url().'index.php/health_insurance/criticalIllness/get_critical_illness_results'?>",
+			url:"<?php echo base_url().'health_insurance/personal_accident/get_personal_accident_results'?>",
 			data:data,
 			 success:function(data)
 			{ $('#cmp_tbl').html(data);

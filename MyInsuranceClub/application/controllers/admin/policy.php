@@ -172,7 +172,7 @@ class Policy extends CI_Controller {
 				
 		//	check if post data is available
 		if ($this->input->post('policyModel') && $isActive == true)
-		{
+		{		
 			//	save tags
 			if (isset($_POST['tag']) && !empty($_POST['tag']))
 			{
@@ -200,7 +200,7 @@ class Policy extends CI_Controller {
 					$arrFileNames[$k1] = $name;
 					if (empty($v1))
 					{
-						$_POST['policyModel'][$k1] = $policyModel[$k1];
+						$_POST['policyModel'][$k1] = isset($policyModel[$k1]) ? $policyModel[$k1] : '';
 					}
 					else
 						$_POST['policyModel'][$k1] = $name;
@@ -227,10 +227,11 @@ class Policy extends CI_Controller {
 			$arrParams = $this->input->post('policyModel');
 			$policy_id = (isset($arrParams['policy_id']) && !empty($arrParams['policy_id'])) ? $arrParams['policy_id'] : '';
 			$company_id = (isset($arrParams['company_id']) && !empty($arrParams['company_id'])) ? $arrParams['company_id'] : '';	
+			$_POST['policyModel']['slug'] = (isset($_POST['policyModel']['slug']) && !empty($_POST['policyModel']['slug'])) ? $this->util->getSlug($_POST['policyModel']['slug']) :  '';
 			$_POST['modelType'] = $modelType;
 			//	set validation rules
 			$validation_rules = array(
-				array('field' => 'policyModel[policy_name]', 'label' => 'policy name', 'rules' => 'required|callback_validatePost[policy_name]'),
+				array('field' => 'policyModel[policy_name]', 'label' => 'policy name', 'rules' => 'required'),
 				array('field' => 'policyModel[company_id]', 'label' => 'company name', 'rules' => 'required'),
 				array('field' => 'policyModel[product_id]', 'label' => 'health plan type', 'rules' => 'required'),
 				array('field' => 'policyModel[seo_title]', 'label' => 'seo title', 'rules' => 'required'),
@@ -256,7 +257,7 @@ class Policy extends CI_Controller {
 				$arrParams = $this->input->post('policyModel');
 //var_dump($_POST, $arrParams);die;
 				//	run validation on complete company post data
-				$validate = $this->validatePost($arrParams);	
+				$validate = true;//$this->validatePost($arrParams);	
 				if ($validate == true)
 				{
 					//	save record for policy 
@@ -375,6 +376,9 @@ class Policy extends CI_Controller {
 		
 		
 		$this->data['selectedTags'] = isset($policyModel['tag']) ? $policyModel['tag'] : '';
+		$this->data['tag_for'] = 'policy';
+		$this->data['status'] = isset($policyModel['status']) ? $policyModel['status'] : '';
+		
 		$this->template->write_view('content', 'admin/policy/create', $this->data, TRUE);
 		$this->template->render();
 	}
@@ -616,6 +620,10 @@ class Policy extends CI_Controller {
 			{
 				$arrQuery = array('company_id', 'policy_name');
 				$arrSkip = array('product_id', 'product_id');
+			}
+			else if ($validationFor == 'slug')
+			{
+				$arrQuery = array('slug');
 			}
 			else if ($validationFor == 'product_id')
 			{

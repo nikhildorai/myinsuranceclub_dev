@@ -33,7 +33,7 @@ class mic_dbtest EXTENDS CI_Model{
 		
 		$session_id= $this->session->userdata('session_id');
 		
-		$birthdate_format = date("Y-m-d", strtotime(str_replace('-','/',$user_input['cust_birthdate'])));
+		$birthdate_format = isset($user_input['cust_birthdate']) ? date("Y-m-d", strtotime(str_replace('-','/',$user_input['cust_birthdate']))) : '';
 		
 		if(trim($user_input['product_type']) == 'Mediclaim')
 		{
@@ -94,9 +94,9 @@ class mic_dbtest EXTENDS CI_Model{
 											'',
 											'',
 											'',
-											$birthdate_format,
-											$user_input['cust_age'],
-											$user_input['cust_gender'],
+											'',
+											'',
+											'',
 											''
 										);
 		

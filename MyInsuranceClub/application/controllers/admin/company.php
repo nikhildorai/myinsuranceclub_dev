@@ -420,7 +420,6 @@ class Company extends CI_Controller {
 								$this->data['message'] = '<p class="status_msg">Records added successfully.</p>';
 								$this->data['msgType'] = 'success';
 							}
-							
 							else if (!empty($errorClaim))
 							{
 								//	show error if validation fails

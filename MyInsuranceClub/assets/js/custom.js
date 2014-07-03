@@ -135,12 +135,19 @@ $('#clickk_g').mouseenter(function(){
   $('#c_ch_g').mouseleave(function(){
 	   $("#c_ch_g").slideUp("slow");
   });
-$("#c_for_g li").click(function() {
-   var am_v = $(this).text(); 
-	$("#ge").text(am_v);
-	$("#cust_gender").val(am_v);
-	 $("#c_ch_g").fadeOut();
-});
+  $("#c_for_g li").click(function() {
+	   var am_v = $(this).text(); 
+		$("#ge").text(am_v);
+		$("#cust_gender").val(am_v);
+		 $("#c_ch_g").fadeOut();
+	});
+  
+  $("#c_for_occupation li").click(function() {
+	   var am_v = $(this).text(); 
+		$("#oc").text(am_v);
+		$("#cust_occupation").val($(this).data('occupation-id'));
+		$("#c_for_occupation").fadeOut();
+	});
 
 $('#clickk_l').mouseenter(function(){
 	// $('#c_for_l').load('city/city.txt');

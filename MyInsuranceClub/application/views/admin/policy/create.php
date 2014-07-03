@@ -350,9 +350,9 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 			                    for ($i = 0; $i < $this->config->config['policy']['keyFeatures']; $i++)
 			                    {
 			                    ?>
-			                        <input type="text" class="form-control"  required placeholder="Key feature <?php echo $i+1;?>"  id="url" name="policyModel[key_features][]" value="<?php echo array_key_exists( $i,$keyFeatures) ? $keyFeatures[$i] : '';?>"  >
+			                        <input type="text" class="form-control"  <?php echo ($i==0) ? "required" : '';?> placeholder="Key feature <?php echo $i+1;?>"  id="url" name="policyModel[key_features][]" value="<?php echo array_key_exists( $i,$keyFeatures) ? $keyFeatures[$i] : '';?>"  >
 			                        <div class="divider"></div>
-			               <?php }	?>
+			             <?php 	}?>
 			                    </div>
 			                </div>
 			                
