@@ -102,7 +102,7 @@
 				<h3>
 					I work as 
 					<span id="clickk_g">
-						<span class="dotted ge" id="oc">occupation</span>
+						<span class="dotted ge" id="oc">Accountant</span>
 						<div data-bind="" style="display: none;" class="choice g" id="c_ch_g">
 							<div class="choice-leftcol" data-bind="">
 								<ul class="years active" id="c_for_occupation" data-bind="jScrollPane">

@@ -248,7 +248,13 @@ $("#c_for_g li").click(function() {
 
 
 //FOUR
-
+$("#c_for_occupation li").click(function() {
+	   var am_v = $(this).text(); 
+		$("#oc").text(am_v);
+		$("#cust_occupation").val(am_v);
+		  mouseOverActiveElement2 = false; 
+		   $("#c_ch_g").fadeOut();
+	});
 
 
 $('#clickk_l').click(function(){
