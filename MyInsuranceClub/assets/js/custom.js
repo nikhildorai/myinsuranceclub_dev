@@ -156,7 +156,7 @@ $("#c_for_f li").click(function() {
    var am_v = $(this).text(); 
    var am_vid = $(this).data('compo-id');
 	$("#c_for").text(am_v);
-	if(am_v == 'Myself'){
+	if(am_v == 'myself'){
 		//alert
 		//$("#adlt_spc").fadeIn();
 		$("#adlt_spc,#one_c,#two_c,#three_c,#four_c").fadeOut();
@@ -312,7 +312,7 @@ $(".ui-autocomplete li").click(function() {
 
 /* js for policy term list */
  
- /* $('#clickk_p').mouseenter(function(){
+  $('#clickk_p').mouseenter(function(){
 	  $("#c_yr").stop().slideDown();
 	  }); 
 	  $('#c_yr').mouseleave(function(){
@@ -325,7 +325,7 @@ $(".ui-autocomplete li").click(function() {
 		$("#yr").text(am_v);
 		$("#policy_term").val(am_v);
 		 $("#c_yr").fadeOut();
-	});*/
+	});
  /* js for policy term ends */
   
 /*$("#clickk").hover(function () {
