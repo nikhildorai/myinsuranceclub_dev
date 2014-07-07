@@ -78,7 +78,7 @@
 <!-- ======== @Region: body ======== -->
 <body class="page page-index">
 
-<?php $this->load->view('partial_view/header_view');?>
+<?php $this->load->view('partial_view/header_resultpage');?>
 
 	<span id="o_touch"></span>
 
@@ -361,7 +361,7 @@
 </div>
 	</div>
 
-<?php echo $this->load->view('partial_view/footer_view');?>
+<?php echo $this->load->view('partial_view/footer_resultpage');?>
 
 
 	<!-- ======== @Region: #navigation ======== -->

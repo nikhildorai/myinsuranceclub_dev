@@ -82,7 +82,7 @@
               </div>
             </div>
           </div>
-          </span> cover for <span id="clickk_f" style="position:relative;"><span class="dotted c_for" id="c_for"><?php if(isset($this->session->userdata['user_input']['plan_type_name'])){ echo $this->session->userdata['user_input']['plan_type_name'];}else{?>Myself<?php }?></span>
+          </span> cover for <span id="clickk_f" style="position:relative;"><span class="dotted c_for" id="c_for"><?php if(isset($this->session->userdata['user_input']['plan_type_name'])){ echo $this->session->userdata['user_input']['plan_type_name'];}else{?>myself<?php }?></span>
           <div data-bind="" style="display: none;" class="choice l self" id="c_ch_f">
             <div class="choice-leftcol" data-bind="">
               <ul class="years active scroll-pane" id="c_for_f" data-bind="jScrollPane">
@@ -104,8 +104,8 @@
           <div data-bind="" style="display: none;" class="choice  g" id="c_ch_g">
             <div class="choice-leftcol" data-bind="">
               <ul class="years active" id="c_for_g"  style="padding:0px 0 30px;">
-                <li><a href="javascript:void(0);">Male</a></li>
-                <li><a href="javascript:void(0);">Female</a></li>
+                <li><a href="javascript:void(0);">male</a></li>
+                <li><a href="javascript:void(0);">female</a></li>
               </ul>
               <div class="stepwrap years-stepwrap">
                 <div class="step show"> <em>3</em>
@@ -169,8 +169,8 @@
                     																						echo $this->session->userdata['user_input']['plan_type'];
                     																					}else 
                     																					{?>1A<?php }?>">
-              <input type="hidden" id="cust_city_name" name="cust_city_name" value="">
-              <input type="hidden" id="plan_type_name" name="plan_type_name" value="">
+              <input type="hidden" id="cust_city_name" name="cust_city_name" value="<?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?>">
+              <input type="hidden" id="plan_type_name" name="plan_type_name" value="<?php if(isset($this->session->userdata['user_input']['plan_type_name'])){ echo $this->session->userdata['user_input']['plan_type_name'];}else{?>myself<?php }?>">
               <input type="hidden" id="product_name" name="product_name" value="Health Insurance">
               <input type="hidden" id="product_type" name="product_type" value="Mediclaim">
               </label>
