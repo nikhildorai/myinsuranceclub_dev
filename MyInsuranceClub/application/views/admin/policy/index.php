@@ -129,14 +129,17 @@
 									$where[0]['value'] = (int)$row['company_id'];
 									$where[0]['compare'] = 'equal';
 									$comp_name = reset($this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $where, $fields = array('company_name')));
-									$where = array();
-									$where[0]['field'] = 'product_id';
-									$where[0]['value'] = $row['product_id'];
-									$where[0]['compare'] = 'findInSet';				
-									$prod_type = $this->util->getTableData($modelName='Product_model', $type="single", $where, $fields = array('product_name'));
-									$productId = array();
-									foreach ($prod_type as $k1=>$v1)
-										$productId[] = $v1['product_name'];
+									$where = $productId = array();
+									if (!empty($row['product_id']))
+									{
+										$where[0]['field'] = 'product_id';
+										$where[0]['value'] = $row['product_id'];
+										$where[0]['compare'] = 'findInSet';				
+										$prod_type = $this->util->getTableData($modelName='Product_model', $type="single", $where, $fields = array('product_name'));
+										$productId = array();
+										foreach ($prod_type as $k1=>$v1)
+											$productId[] = $v1['product_name'];
+									}
 									$actionBtn = '';
 									if ($row['status'] == 'active')
 									{

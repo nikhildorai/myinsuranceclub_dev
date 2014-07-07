@@ -20,9 +20,9 @@ class Annual_premium_personal_accident_model EXTENDS CI_Model{
 	
 	public function get_results($user_input)
 	{	
-		$health_result_query = "CALL sp_getPersonalAccidentSearchResults(?,?)";
+		$health_result_query = "CALL sp_getPersonalAccidentSearchResults(?,?,?)";
 		
-		$user_chosen_filter=array($user_input['plan_type'],$user_input['cust_occupation']);
+		$user_chosen_filter=array($user_input['plan_type'],$user_input['cust_occupation'],"");
 		
 		$health_result_data = $this->db->query($health_result_query,$user_chosen_filter);
 		
