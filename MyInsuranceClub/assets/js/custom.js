@@ -323,7 +323,8 @@ $(".ui-autocomplete li").click(function() {
 
 	   var am_v = $(this).text(); 
 		$("#yr").text(am_v);
-		$("#policy_term").val(am_v);
+		var am_vid = $(this).data('term-id');
+		$("#policy_term").val(am_vid);
 		 $("#c_yr").fadeOut();
 	});
  /* js for policy term ends */

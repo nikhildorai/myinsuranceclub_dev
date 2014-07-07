@@ -87,7 +87,7 @@
             <div class="choice-leftcol" data-bind="">
               <ul class="years active scroll-pane" id="c_for_f" data-bind="jScrollPane">
                 <?php foreach($family_composition as $k=>$v){?>
-                <li data-compo-id="<?php echo $k; ?>"><a href="javascript:void(0);"><?php echo $v; ?></a></li>
+                <li data-compo-id="<?php echo $k; ?>"><a href="javascript:void(0);"><?php echo trim($v); ?></a></li>
                 <?php }?>
               </ul>
               <div class="stepwrap years-stepwrap">
