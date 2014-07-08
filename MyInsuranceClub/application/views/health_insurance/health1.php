@@ -119,7 +119,7 @@
           </span><span style=""> & I stay in</span> <span id="clickk_l" style="position:relative; "><span class="dotted loc" id="loc"><?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?></span>
           <div data-bind="" style="display: none; left:0px;  max-width: 350px; width: 400px;" class="choice l cit" id="c_ch_l">
             <div class="choice-leftcol" data-bind="">
-              <select id="combobox" style="height:auto;" placeholder="Type or select from list">
+              <select name="cust_city" id="combobox" style="height:auto;" placeholder="Type or select from list">
                 <option value="a" > </option>
                <?php foreach ($city as $c_name){
                			if($c_name['city_id']==$this->session->userdata['user_input']['cust_city']){?>
@@ -551,7 +551,8 @@
             <label class="" for="Field4">I authorize MyInsuranceClub &amp; its partners to Call/SMS for my application &amp; agree to the <a href="" class="link">Terms of Use</a>.</label>
           </div>
           <div class="form-group col-md-2" style="float:right">
-            <button class="btn btn-primary my" type="submit" id="sub_form">Show my options <i class="fa fa-chevron-right ar "></i> </button>
+          	<input name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="Show My Options &gt;">
+            
             <div class="load_spin"><img src="<?php echo base_url();?>/assets/images/ajax-loader.gif"></div>
           </div>
         </div>
