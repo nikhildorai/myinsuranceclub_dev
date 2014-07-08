@@ -349,6 +349,7 @@ padding:0
 .dropdown-menu {
 left: -415px;
 }
+.top_p_n{ font-size:40px;}
 }
  @media (max-width:990px) {
  .dropdown-menu.other {
@@ -362,6 +363,15 @@ margin-left:0px;
 .dropdown-menu {
 left: 0px;
 }
+.top_band {
+height: auto;
+}
+.border {
+border-right: 0px solid #34a5ef;
+text-align: center;
+}
+.col-md-5.noborder{ width:400px; position:relative; left:50%; margin-left:-200px;}
+.top_h_t {text-align: center !important;}
 }
  @media screen and (max-width: 990px) {
  .center h3 {
@@ -444,6 +454,9 @@ margin-left:-60px;
 }
 }
  @media screen and (max-width: 480px) {
+	 .top_p_n{ font-size:30px;}
+	 .col-md-5.noborder{ width:300px; margin-left:-150px;}
+
 .ui-state-default.ui-autocomplete-input {
  width:auto !important;
 }

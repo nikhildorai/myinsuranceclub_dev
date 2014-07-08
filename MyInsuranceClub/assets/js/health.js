@@ -229,26 +229,41 @@ $(document).ready(function() {
 			}
     });*/
 
- $.validator.addMethod("minAge", function(value, element, min) {
-	    var today = new Date();
-	    var birthDate = new Date(value);
-	    var age = today.getFullYear() - birthDate.getFullYear();
-	 
-	    if (age > min+1) {
+ $.validator.addMethod('checkUsername', function(value, element) {
+     return this.optional(element) || /[A-Za-z\s.]+$/.test(value);
+ }, "Accepts only alphabets,periods and spaces.");
+ 	
+ $.validator.addMethod('checkmobile', function(value, element) {
+     return this.optional(element) || /^[7-9]/.test(value);
+ }, "Should start with 7,8 or 9.");
+ 
+ $.validator.addMethod('minAge', function(value, element) {
+	// alert(1);
+	 console.log(value, element);
+	 if (this.optional(element)) {
 	        return true;
 	    }
 	 
-	    var m = today.getMonth() - birthDate.getMonth();
+	 var dateOfBirth = value;
+	 var arr_dateText = dateOfBirth.split("/");
+	 day = arr_dateText[0];         
+	 month = arr_dateText[1]; 
+	 year = arr_dateText[2];
 	 
-	    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-	        age--;
+	 var mydate = new Date();
+	 mydate.setFullYear(year, month-1, day);
+	 
+	 var maxDate = new Date();
+	    maxDate.setYear(maxDate.getYear() - 18);
+
+	    if (maxDate < mydate) {
+	        return false;
 	    }
-	 
-	    return age >= min;
-	}, "You are not old enough!");
- 	
+	    return true;
+	},'Age should be greater than 18 years.');
  
-  $( "#health_form" ).validate({
+ 
+ $( "#health_form" ).validate({
 				
 						/* @validation states + elements 
 						------------------------------------------- */
@@ -265,13 +280,14 @@ $(document).ready(function() {
 								cust_name: {
 								
 									required:true,
+									checkUsername:true
 							
 								},	
 								
-								cust_dob: {
+								desktop_cust_dob: {
 									
 									required:true,
-									minAge: 18
+									minAge:true
 								},
 								
 								cust_email: {
@@ -283,7 +299,8 @@ $(document).ready(function() {
   									
   									required: true,
   									number: true,
-  									minlength: 10
+  									minlength: 10,
+  									checkmobile:true
   									
   								}
 						},
@@ -301,13 +318,13 @@ $(document).ready(function() {
 							cust_mobile: {
 								
 								minlength: 'Please enter 10 digits for phone numbers',
-								number: 'Please enter digits',
+								number: 'This field accepts only numbers',
 								
 							},
 							
 							cust_dob: {
 								
-								minAge:'Minimum age is 18 years'
+								required:true
 							}
 							
 						},
@@ -329,7 +346,10 @@ $(document).ready(function() {
 						   }
 						}
 								
-				});	
+				
+						
+  
+  });	
 				
  
 				
@@ -397,7 +417,7 @@ $(document).ready(function() {
             wasOpen = false;
         $( "<a>" )
             .attr( "tabIndex", -1 )
-            .attr( "title", "Ã�Å¸Ã�Â¾Ã�ÂºÃ�Â°Ã�Â·Ã�Â°Ã‘â€šÃ‘Å’ Ã�Â²Ã‘ï¿½Ã�Âµ" )
+            .attr( "title", "ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ Ð²Ñ�Ðµ" )
             .tooltip()
             .appendTo( this.wrapper )
             .button({
@@ -456,7 +476,7 @@ $(document).ready(function() {
 
         this.input
             .val( "" )
-            .attr( "title", value + " Ã�Â½Ã�Âµ Ã‘ï¿½Ã‘Æ’Ã‘â€°Ã�ÂµÃ‘ï¿½Ã‘â€šÃ�Â²Ã‘Æ’Ã�ÂµÃ‘â€š" )
+            .attr( "title", value + " Ð½Ðµ Ñ�ÑƒÑ‰ÐµÑ�Ñ‚Ð²ÑƒÐµÑ‚" )
             .tooltip( "open" );
         this.element.val( "" );
         this._delay(function() {
@@ -495,6 +515,7 @@ $(document).ready(function() {
 	  	var am_v=ui.item.text;
    $("#loc").text(am_v);
    $("#cust_city_name").val(am_v);
+   
       }
       });
 	  
@@ -515,7 +536,7 @@ $(document).ready(function() {
 		$('#trigger').click(function() {
 					
 					$('#cust_dob').datepicker({
-						dateFormat: 'dd-mm-yy',
+						dateFormat: 'dd/mm/yy',
 					changeYear: true, yearRange : '1940:2014',
 					changeMonth: true,
 					prevText: '<i class="fa fa-chevron-left"></i>',

@@ -44,7 +44,7 @@ class basicMediclaim extends CI_Controller {
 		
 		$data=array();
 		
-		$data['cvg_amt']=array(	'1'=>'Below 1 Lakh',
+		$data['cvg_amt']=array(	//'1'=>'Below 1 Lakh',
 								'2'=>'1 Lakh',
 								'3'=>'2 Lakhs',
 								'4'=>'3 Lakhs',
@@ -57,21 +57,22 @@ class basicMediclaim extends CI_Controller {
 								'11'=>'50 Lakhs'
 								);
 		
-		$data['family_composition']=array(	'1A'=>'myself',
+		$data['family_composition']=array(	'1A'=>'Myself',
 											'2A'=>'Self + Spouse',
-											'1A1C'=>'Self + 1 Child',
-											'1A2C'=>'Self + 2 Children',
-											'1A3C'=>'Self + 3 Children',
-											'1A4C'=>'Self + 4 Children',
 											'2A1C'=>'Self + Spouse + 1 Child',
 											'2A2C'=>'Self + Spouse + 2 Children',
 											'2A3C'=>'Self + Spouse + 3 Children',
-											'2A4C'=>'Self + Spouse + 4 Children'
+											'2A4C'=>'Self + Spouse + 4 Children',
+											'1A1C'=>'Self + 1 Child',
+											'1A2C'=>'Self + 2 Children',
+											'1A3C'=>'Self + 3 Children',
+											'1A4C'=>'Self + 4 Children'
+											
 											);
 		
 		$data['city']=$this->city->get_city();
 		
-		$this->load->view('health_insurance/health_new',$data);
+		$this->load->view('health_insurance/health1',$data);
 	
 	}
 	
@@ -193,7 +194,7 @@ class basicMediclaim extends CI_Controller {
 					
 					/* age */
 					
-					$birthDate=explode('-',$birthage);
+					$birthDate=explode('/',$birthage);
 	
 					$age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
 							? ((date("Y") - $birthDate[2]) - 1)
@@ -263,7 +264,7 @@ class basicMediclaim extends CI_Controller {
 				if($this->input->post('cust_city_name')!='')
 				{
 					$user_input['cust_city_name']=$this->input->post('cust_city_name');
-					echo "test"/* $user_input['cust_city_name'] */;
+					/* $user_input['cust_city_name'] */;
 				}
 				
 				$this->session->set_userdata('user_input',$user_input);

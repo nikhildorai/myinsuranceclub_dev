@@ -156,7 +156,7 @@ $("#c_for_f li").click(function() {
    var am_v = $(this).text(); 
    var am_vid = $(this).data('compo-id');
 	$("#c_for").text(am_v);
-	if(am_v == 'myself'){
+	if(am_v == 'Myself'){
 		//alert
 		//$("#adlt_spc").fadeIn();
 		$("#adlt_spc,#one_c,#two_c,#three_c,#four_c").fadeOut();
@@ -248,13 +248,7 @@ $("#c_for_g li").click(function() {
 
 
 //FOUR
-$("#c_for_occupation li").click(function() {
-	   var am_v = $(this).text(); 
-		$("#oc").text(am_v);
-		$("#cust_occupation").val($(this).data('occupation-id'));
-		  mouseOverActiveElement2 = false; 
-		   $("#c_ch_g").fadeOut();
-	});
+
 
 
 $('#clickk_l').click(function(){
@@ -322,15 +316,15 @@ $(".ui-autocomplete li").click(function() {
  $("#c_term li").click(function() {
 
 	   var am_v = $(this).text(); 
-		$("#yr").text(am_v);
-		var am_vid = $(this).data('term-id');
+	var am_vid = $(this).data('term-id');
+	   $("#yr").text(am_v);
 		$("#policy_term").val(am_vid);
 		 $("#c_yr").fadeOut();
 	});
  /* js for policy term ends */
   
 /*$("#clickk").hover(function () {
-  $(".choice").slideToggle("fast");
+  $(".choice").slideToggle("slow");
 });*/
 
 
