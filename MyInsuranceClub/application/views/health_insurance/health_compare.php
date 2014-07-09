@@ -154,7 +154,7 @@
 
 						<div class="block">
 							<h6 class="fh3 c">
-								<a href="<?php echo site_url('health_insurance/basicMediclaim');?>">&lt;
+								<a href="<?php echo site_url('health-insurance');?>">&lt;
 									Modify your search</a>
 							</h6>
 						</div>

@@ -261,13 +261,37 @@ $(document).ready(function() {
 	    }
 	    return true;
 	},'Age should be greater than 18 years.');
- 
+ 	
+ $.validator.addMethod('childAge', function(value, element) {
+		// alert(1);
+		 console.log(value, element);
+		 if (this.optional(element)) {
+		        return true;
+		    }
+		 
+		 var dateOfBirth = value;
+		 var arr_dateText = dateOfBirth.split("/");
+		 day = arr_dateText[0];         
+		 month = arr_dateText[1]; 
+		 year = arr_dateText[2];
+		 
+		 var mydate = new Date();
+		 mydate.setFullYear(year, month-1, day);
+		 
+		 var maxDate = new Date();
+		    maxDate.setYear(maxDate.getYear() - 26);
+
+		    if (maxDate > mydate) {
+		        return false;
+		    }
+		    return true;
+		},'Childs age cannot be less than 26.');
  
  $( "#health_form" ).validate({
 				
 						/* @validation states + elements 
 						------------------------------------------- */
-						
+	 onkeyup: true, 
 						errorClass: "state-error",
 						validClass: "state-success",
 						errorElement: "em",
@@ -302,6 +326,37 @@ $(document).ready(function() {
   									minlength: 10,
   									checkmobile:true
   									
+  								},
+  								
+  								desktop_spouce_dob: {
+  									
+  									required:true,
+  									minAge:true
+  								},
+  								
+  								desktop_child1_dob:	{
+  									required:true,
+  									childAge:true
+  								},
+  								
+  								desktop_child2_dob:{
+  									required:true,
+  									childmaxAge:true
+  								},
+  								
+  								desktop_child3_dob:{
+  									required:true,
+  									childmaxAge:true
+  								},
+  								
+  								desktop_child4_dob:{
+  									required:true,
+  									childmaxAge:true
+  								},
+  								
+  								agree: {
+  									
+  									required:true
   								}
 						},
 						
@@ -325,6 +380,11 @@ $(document).ready(function() {
 							cust_dob: {
 								
 								required:true
+							},
+							
+							agree: {
+								
+								required:'Please Accept Terms of Use.'
 							}
 							
 						},
@@ -339,7 +399,7 @@ $(document).ready(function() {
 								$(element).closest('.field').removeClass(errorClass).addClass(validClass);
 						},
 						errorPlacement: function(error, element) {
-						   if (element.is(":radio") || element.is(":checkbox")) {
+						   if (element.is(":radio")) {//|| element.is(":checkbox")
 									element.closest('.option-group').after(error);
 						   } else {
 									error.insertAfter(element.parent());
@@ -532,13 +592,19 @@ $(document).ready(function() {
 		$("html").click(function(){ 
    // $( "#cust_dob" ).attr("placeholder", "Date of Birth");
 });
-
+		var d = new Date();
+		var year = d.getFullYear() - 18 ;
+		var child_age = d.getFullYear() - 26;
 		$('#trigger').click(function() {
 					
 					$('#cust_dob').datepicker({
-						dateFormat: 'dd/mm/yy',
-					changeYear: true, yearRange : '1940:2014',
+					//var curdate = new Date(); 	
+					dateFormat: 'dd/mm/yy',
+					changeYear: true, 
+					yearRange :'1940:'+ d,
 					changeMonth: true,
+					defaultDate: new Date(year,d.getMonth(), d.getDate()),
+					maxDate: new Date(),
 					prevText: '<i class="fa fa-chevron-left"></i>',
 					nextText: '<i class="fa fa-chevron-right"></i>',
 					
@@ -558,9 +624,11 @@ $(document).ready(function() {
 					
 					$('#spouce_dob').datepicker({
 						
-						dateFormat: 'dd-mm-yy',
-					changeYear: true, yearRange : '1940:2014',
+						dateFormat: 'dd/mm/yy',
+					changeYear: true, yearRange : '1940:' + d,
 					changeMonth: true,
+					defaultDate: new Date(year,d.getMonth(), d.getDate()),
+					maxDate: new Date(),
 					prevText: '<i class="fa fa-chevron-left"></i>',
 					nextText: '<i class="fa fa-chevron-right"></i>',
 					
@@ -571,8 +639,8 @@ $(document).ready(function() {
 		$('#trigger2').click(function() {
 					
 					$('#child1_dob').datepicker({
-						dateFormat: 'dd-mm-yy',
-					changeYear: true, yearRange : '1940:2014',
+						dateFormat: 'dd/mm/yy',
+					changeYear: true, yearRange : '1940:' + d,
 					changeMonth: true,
 					prevText: '<i class="fa fa-chevron-left"></i>',
 					nextText: '<i class="fa fa-chevron-right"></i>',
@@ -584,8 +652,8 @@ $(document).ready(function() {
 		$('#trigger3').click(function() {
 					
 					$('#child2_dob').datepicker({
-						dateFormat: 'dd-mm-yy',
-					changeYear: true, yearRange : '1940:2014',
+						dateFormat: 'dd/mm/yy',
+					changeYear: true, yearRange : '1940:' + d,
 					changeMonth: true,
 					prevText: '<i class="fa fa-chevron-left"></i>',
 					nextText: '<i class="fa fa-chevron-right"></i>',
@@ -597,8 +665,8 @@ $(document).ready(function() {
 		$('#trigger4').click(function() {
 					
 					$('#child3_dob').datepicker({
-						dateFormat: 'dd-mm-yy',
-					changeYear: true, yearRange : '1940:2014',
+						dateFormat: 'dd/mm/yy',
+					changeYear: true, yearRange : '1940:' + d,
 					changeMonth: true,
 					prevText: '<i class="fa fa-chevron-left"></i>',
 					nextText: '<i class="fa fa-chevron-right"></i>',
@@ -610,8 +678,8 @@ $(document).ready(function() {
 		$('#trigger5').click(function() {
 					
 					$('#child4_dob').datepicker({
-						dateFormat: 'dd-mm-yy',
-					changeYear: true, yearRange : '1940:2014',
+						dateFormat: 'dd/mm/yy',
+					changeYear: true, yearRange : '1940:' + d,
 					changeMonth: true,
 					prevText: '<i class="fa fa-chevron-left"></i>',
 					nextText: '<i class="fa fa-chevron-right"></i>',
@@ -707,3 +775,29 @@ $(".cal").keyup(function(e){
 	
 	
 	});
+
+
+
+
+/*MODIFY ON 09/07/2014*/
+
+
+function InitialCaps(theString) {
+    theString = theString.toLowerCase();
+	
+    theString = theString.substr(0, 1).toUpperCase() + theString.substring(1, theString.length);
+    var i = 0;
+    var j = 0;
+    while ((j = theString.indexOf(" ", i)) && (j !== -1)) {
+			theString = theString.substring(0, j + 1) + theString.substr(j + 1, 1).toUpperCase() + theString.substring(j + 2, theString.length);
+        i = j + 1;
+    }
+    return theString;
+}
+
+function validateName(tb) {
+    
+    $(tb).val(InitialCaps($(tb).val()));
+
+    return true;
+}

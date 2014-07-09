@@ -1,3 +1,4 @@
+.fader{ display:none;}
 .top_band{ width:100%; height:122px;border: 4px solid #2ca3ef; margin-top:20px;
 -webkit-border-radius: 4px; 
 -moz-border-radius: 4px;
@@ -46,18 +47,31 @@ border-radius: 4px;}
 .doc img.dimg{ margin-left:26px;}
 .addOnFilter span{ font-size:11px;}
 .h_d.mar-40{ margin-top:20px;}
-.thumb{color: rgb(255, 102, 51); float: left; position: absolute; width: 150px; top: 58px;}
+.thumb{color: rgb(255, 102, 51); float: left; position: absolute; width: 150px; top: 58px; right:0;}
 .thumb .text_t{color: rgb(0, 0, 0); font-size: 10px; margin-top: 3px; float: left; margin-right: 5px;}
 
 
 
 .hcom_simple_popdiv {
-    border: 2px solid #888;
+  
+}
+.hcom_urgency_popup {
+    border: medium none;
+    bottom: 45px; font-size:12px;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+    font-weight: bold;
+    padding: 20px;
+    position: fixed;
+    right: 15px;
+    width: 250px;
+}
+.fader {
+	  border: 2px solid #888;
     box-shadow: 0 0 7px #888;
     width: 350px;
     z-index: 100;
-}
-.hcom_urgency_popup {
     background: none repeat scroll 0 0 #39c;
     border: medium none;
     border-radius: 6px;
@@ -111,7 +125,6 @@ border-radius: 4px;}
     width: 16px;
 }
 .hcom_urgency_popup .close, #sense_of_urgency_close, #searchUrgencyPopupBox:after {
-    background: url("/static/common/54.0/images/common/sprites/sprite_icons_index.png") no-repeat scroll -50px -200px rgba(0, 0, 0, 0);
 }
 .hcom_urgency_popup a {
     color: #fff;
@@ -307,3 +320,127 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', end
 .odometer.odometer-auto-theme .odometer-value, .odometer.odometer-theme-default .odometer-value {
   text-align: center;
 }
+
+
+
+ @media screen and (max-width: 990px) {
+	.cus_res_hlth{ padding:0;} 
+ .cus_res_hlth .col-md-5 {
+ width:41%; float:left;
+}
+.cus_res_hlth .col-md-3 {
+ width:25%; float:left;
+}
+.cus_res_hlth .col-md-4 {
+ width:33%; float:left;
+}
+.cus_res_hlth .col-md-2 {
+ width:16%; float:left;
+}
+.cus_res_hlth .col-md-7 {
+ width:58%; float:left;
+}
+.cus_res_hlth .col-md-6 {
+ width:50%; float:left;
+}
+.sidebar.sidebar-left .inner{ margin-top:40px;}
+.img_bx_i{ max-width:70%; padding-bottom:15px; margin-top:2px;}
+}
+
+ @media screen and (max-width: 700px) {
+	 #search_sense_of_urgency_popup{ display:none;}
+	 .search_icon {
+top: 10px;
+}
+.col-md-3.border.m_a{ float:left; width:50%;}
+	   .col-md-2.border.c_o{ width:25%; float:left;}#sh4{ display:none !important;}
+	 .thumb{ right:-10px;}
+	 .logo_ins{ display:none;}
+	 .plan_cmpre{ display:none;}
+	 .anc {
+font-size: 16px;
+margin: 0px;
+padding: 25px 0px 0px 0px;
+}
+.col-md-5.plan{ width:25%;}
+.col-md-3.an{ width:75%}
+.col-md-7.m_anc{ width:75%; padding-right:0px;}
+.col-md-7.m_anc .col-md-4.pad_r_10{ padding-right:5px;}
+.cus_res_hlth .accordion_a .col-md-7 {
+width: 100%;
+float: left;
+padding-right: 10px !important;
+padding-left: 10px !important;
+}
+.cus_res_hlth .accordion_a .col-md-5{ width:100%;}
+.h_d.mar-40 {
+margin-left: 0px !important;
+}
+.doc{ margin-left:0px; padding-left:5px;}
+#highlighted .container .accordion_a .col-md-12{ padding:5px !important;}
+ }
+  @media screen and (max-width: 530px) {
+ .col-md-4.pad_r_10{ padding:0;}
+ .col-md-5.plan {
+padding: 0px 0px 0px 5px;
+}
+#sh4{ display:none !important;}
+
+
+  .col-md-2.border.c_o{ width:50%; float:left;}
+  }
+  
+    @media screen and (max-width: 430px) {
+		
+		 .col-md-5.plan {
+font-size:11px;}
+.col-md-3.an{
+font-size:11px;
+}
+		.col-md-7.m_anc{ padding-right:5px; padding-left:5px;}
+		.fa.fa-thumbs-up{position: absolute;
+float: left;
+bottom: 0px;
+right: 0px;}
+.thumb {
+position: absolute;
+width: auto;
+top: 58px;
+right: 0;
+}
+
+	
+	 }
+	   @media screen and (max-width: 404px) { 
+	   .col-md-7.medical{ display:none;}
+	   .down_cnt_up{display: none;
+position: absolute;
+top: 40px;
+right: -5px;
+  }
+  .down_cnt {
+width:20px;font-size: 15px;
+top: 0px;
+height:auto;
+float:left;
+color:#999999;
+right:-6px; position:absolute;
+}
+	  .cus_res_hlth .col-md-6.no_pad_l{ width:33%;}
+	 .cus_res_hlth .col-md-4.pad_r_10{ width:50%;}
+	 .cus_res_hlth .col-md-2 {
+width: auto;
+float: left;
+}
+.cus_res_hlth .col-md-6.no_pad_l {
+width: 50%;
+padding: 0;
+}
+.cus_res_hlth .col-md-4.pad_r_10 {
+width: auto;
+float: right;
+}
+
+	   }
+	    @media screen and (max-width: 320px) {.col-md-7.medical{ display:none;} }
+		 @media screen and (max-width: 300px) {.down_cnt{ display:none;}.col-md-7.medical{ display:none;} }

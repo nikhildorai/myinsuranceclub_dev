@@ -208,42 +208,76 @@ class basicMediclaim extends CI_Controller {
 				{
 					$user_input['cust_gender']=$this->input->post('cust_gender');
 				}
-				if($this->input->post('spouse_dob')!='')
+				
+				
+				if($this->input->post('desktop_spouce_dob')!='')
 				{
-					$user_input['spouse_dob']=$this->input->post('spouse_dob');
+					$user_input['spouse_dob']=$this->input->post('desktop_spouce_dob');
+					
 				}
+				elseif($this->input->post('mobile_spouse_dob')!='')
+				{
+					$user_input['spouse_dob']=$this->input->post('mobile_spouse_dob');
+					
+				}
+				
 				if($this->input->post('spouse_gender')!='')
 				{
 					$user_input['spouse_gender']=$this->input->post('spouse_gender');
 				}
-				if($this->input->post('child1_dob')!='')
+				
+				if($this->input->post('desktop_child1_dob')!='')
 				{
-					$user_input['child1_dob']=$this->input->post('child1_dob');
+					$user_input['child1_dob']=$this->input->post('desktop_child1_dob');
 				}
+				elseif($this->input->post('mobile_child1_dob')!='')
+				{
+					$user_input['child1_dob']=$this->input->post('mobile_child1_dob');
+				}
+				
+				
 				if($this->input->post('child1_gender')!='')
 				{
 					$user_input['child1_gender']=$this->input->post('child1_gender');
 				}
-				if($this->input->post('child2_dob')!='')
+				
+				if($this->input->post('desktop_child2_dob')!='')
 				{
-					$user_input['child2_dob']=$this->input->post('child2_dob');
+					$user_input['child2_dob']=$this->input->post('desktop_child2_dob');
 				}
+				elseif($this->input->post('mobile_child2_dob')!='')
+				{
+					$user_input['child2_dob']=$this->input->post('mobile_child2_dob');
+				}
+				
 				if($this->input->post('child2_gender')!='')
 				{
 					$user_input['child2_gender']=$this->input->post('child2_gender');
 				}
-				if($this->input->post('child3_dob')!='')
+				
+				if($this->input->post('desktop_child3_dob')!='')
 				{
-					$user_input['child3_dob']=$this->input->post('child3_dob');
+					$user_input['child3_dob']=$this->input->post('desktop_child3_dob');
 				}
+				elseif($this->input->post('mobile_child3_dob')!='')
+				{
+					$user_input['child3_dob']=$this->input->post('mobile_child3_dob');
+				}
+				
 				if($this->input->post('child3_gender')!='')
 				{
 					$user_input['child3_gender']=$this->input->post('child3_gender');
 				}
-				if($this->input->post('child4_dob')!='')
+				
+				if($this->input->post('desktop_child4_dob')!='')
 				{
-					$user_input['child4_dob']=$this->input->post('child4_dob');
+					$user_input['child4_dob']=$this->input->post('desktop_child4_dob');
 				}
+				elseif($this->input->post('mobile_child4_dob')!='')
+				{
+					$user_input['child4_dob']=$this->input->post('mobile_child4_dob');
+				}
+				
 				if($this->input->post('child4_gender')!='')
 				{
 					$user_input['child4_gender']=$this->input->post('child4_gender');

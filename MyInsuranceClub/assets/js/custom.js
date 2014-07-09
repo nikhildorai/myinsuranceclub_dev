@@ -238,14 +238,37 @@ $('#clickk_g').live('mouseenter', function(){
 });*/
 
 
-$("#c_for_g li").click(function() {
-   var am_v = $(this).text(); 
-	$("#ge").text(am_v);
-	$("#cust_gender").val(am_v);
-	  mouseOverActiveElement2 = false; 
-	   $("#c_ch_g").fadeOut();
-});
 
+
+
+
+
+$('.css-label.a.radGroup2.sel_m').css('backgroundPosition', '0 0');
+$('.css-label.a.radGroup2.ss.sel_f').css('backgroundPosition', '0 -15px');
+
+
+$("#c_for_g li").click(function() {
+var am_v = $(this).text(); 
+if(am_v=="Male")
+{
+	
+$('.css-label.a.radGroup2.sel_m').css('backgroundPosition', '0 0');
+
+$('.css-label.a.radGroup2.ss.sel_f').css('backgroundPosition', '0 -15px');
+
+}
+else
+{
+$('.css-label.a.radGroup2.sel_m').css('backgroundPosition', '0 -15px');
+
+$('.css-label.a.radGroup2.ss.sel_f').css('backgroundPosition', '0 0');
+}
+
+$("#ge").text(am_v);
+$("#cust_gender").val(am_v);
+mouseOverActiveElement2 = false; 
+$("#c_ch_g").fadeOut();
+});
 
 //FOUR
 

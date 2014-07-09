@@ -316,7 +316,7 @@
 	padding:2px 5px
 }
 .ui-datepicker td span, .ui-datepicker td a {
-	padding:0px;
+	padding:0px; font-size:15px;
 	display:block;
 	text-align:center;
 	text-decoration:none;

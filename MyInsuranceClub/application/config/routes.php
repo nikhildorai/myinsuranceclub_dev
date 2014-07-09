@@ -57,7 +57,13 @@ $route['admin/dashboard'] = "admin/auth_public/dashboard";
 $route['admin/company'] = "admin/company/index";
 $route['admin/company/(:any)'] = "admin/company/$1";
 
+//critical illness
+$route['criticalIllness'] = "health_insurance/criticalIllness/index";
 
+//mediclaim routes
+$route['health-insurance'] = "health_insurance/basicMediclaim/index";
+$route['health-insurance/search-results'] = "health_insurance/basicMediclaim/health_policy";
+$route['health-insurance/compare-results'] = "health_insurance/basicMediclaim/compare_policies";
 
 //$route['admin/(:any)'] = "admin/auth/$1";
 //$route['admin'] = "admin/auth/login";

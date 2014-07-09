@@ -82,7 +82,7 @@
               </div>
             </div>
           </div>
-          </span> cover for <span id="clickk_f" style="position:relative;"><span class="dotted c_for" id="c_for"><?php if(isset($this->session->userdata['user_input']['plan_type_name'])){ echo $this->session->userdata['user_input']['plan_type_name'];}else{?>myself<?php }?></span>
+          </span> cover for <span id="clickk_f" style="position:relative;"><span class="dotted c_for" id="c_for"><?php if(isset($this->session->userdata['user_input']['plan_type_name'])){ echo $this->session->userdata['user_input']['plan_type_name'];}else{?>Myself<?php }?></span>
           <div data-bind="" style="display: none;" class="choice l self" id="c_ch_f">
             <div class="choice-leftcol" data-bind="">
               <ul class="years active scroll-pane" id="c_for_f" data-bind="jScrollPane">
@@ -118,13 +118,10 @@
           <div data-bind="" style="display: none; left:0px;  max-width: 350px; width: 400px;" class="choice l cit" id="c_ch_l">
             <div class="choice-leftcol" data-bind="">
               <select  name="cust_city" id="combobox" style="height:auto;" placeholder="Type or select from list">
-                <option value="" >  </option>
+                <option value="a" > </option>
                <?php foreach ($city as $c_name){
-               	if(!isset($this->session->userdata['user_input']['cust_city'])){?>
-               	               	<option value="590" selected="selected">Mumbai</option>
-               	               			
-               	<?php }elseif($c_name['city_id']==$this->session->userdata['user_input']['cust_city']){?>
-               <option value="<?php echo $c_name['city_id']; ?>" selected="selected"><?php echo $c_name['mic_city_name']; ?></option>
+               			if($c_name['city_id']==$this->session->userdata['user_input']['cust_city']){?>
+               <option value="<?php echo $this->session->userdata['user_input']['cust_city']; ?>" selected="selected"><?php echo $c_name['mic_city_name']; ?></option>
                <?php }else{?>
                <option value="<?php echo $c_name['city_id']; ?>" ><?php echo $c_name['mic_city_name']; ?></option>
                		<?php }?>
@@ -173,7 +170,7 @@
                     																					}else 
                     																					{?>1A<?php }?>">
               <input type="hidden" id="cust_city_name" name="cust_city_name" value="<?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?>">
-              <input type="hidden" id="plan_type_name" name="plan_type_name" value="<?php if(isset($this->session->userdata['user_input']['plan_type_name'])){ echo $this->session->userdata['user_input']['plan_type_name'];}else{?>myself<?php }?>">
+              <input type="hidden" id="plan_type_name" name="plan_type_name" value="">
               <input type="hidden" id="product_name" name="product_name" value="Health Insurance">
               <input type="hidden" id="product_type" name="product_type" value="Mediclaim">
               </label>

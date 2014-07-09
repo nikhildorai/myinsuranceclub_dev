@@ -1023,7 +1023,7 @@ html * .slideshow .ls-container .ls-nav-next {
 
 
 .sidebar.sidebar-left .inner {
-  padding:0px 0px 0px 0px;
+  padding:0px 0px 0px 0px; float:left;
 }
 .sidebar.sidebar-left .inner .block {
   padding:0px 20px 0px 10px;
@@ -1426,7 +1426,7 @@ background-position: 0 -29px; cursor:pointer;
 .cus_cont .checkbox {
     display: block;
     margin-bottom: 10px;
-    margin-top: -10px;
+    margin-top: 4px;
     min-height: 20px;
     padding-left: 0px;
 }

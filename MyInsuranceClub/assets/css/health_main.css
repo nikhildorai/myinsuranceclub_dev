@@ -1,6 +1,7 @@
 .cus_cont {
     width: 860px;
 }
+
 #one_c, #two_c, #three_c, #four_c {
     float: left;
     width: 50%;
@@ -14,15 +15,20 @@
     width: 70px;
 }
 .css-label.radGroup2.ss {
-    left: 16px;
+    left: 15px;
 }
-.icon-append.fa.fa-female{ padding-left:30px;}
+.icon-append.fa.fa-female{ padding-left:32px;}
+.input.gen_r{ left:10px;}
 .cus_cont .pos1 .col-md-2 {
     float: left;
     width: 190px;
 }
 .pos1{  margin-left: 35px;}
+.cus_border.form-control.sel{background:#f7f4f4;} 
+.cus_border.form-control.sel .label.css-label,.cus_border.form-control.sel .icon-append { cursor:default !important; }
+
 @media screen and (max-width: 990px) {
+	.pos1{  margin-left: 0px;}
 	.cus_cont {
     width: 760px;
 }
