@@ -38,6 +38,10 @@
 }
 </style>
 
+<script src="<?php echo base_url();?>/assets/js/jquery.min.js"></script>
+
+<script src="<?php echo base_url();?>/assets/js/jquery.bxslider.min.js" type="text/javascript"></script>
+
 <!-- HTML5 shiv & respond.js for IE6-8 support of HTML5 elements & media queries -->
 <!--[if lt IE 9]>
     <script src="plugins/html5shiv/dist/html5shiv.js"></script>
@@ -98,7 +102,7 @@
                       <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Money Back Plans</strong></a> </li>
                       <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Pension Plans</strong></a> </li>
                   
-                  </li>
+                  
                 </ul>
               </li>
               
@@ -113,7 +117,7 @@
                       <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Pension Plans</strong></a> </li>
                       <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Endowment Plans</strong></a> </li>
                       <li class="col-md-4" > <a role="menuitem" href="<?php echo site_url('criticalIllness');?>" tabindex="-1" class="menu-item"><strong>Critical Illness</strong></a> </li>
-                      <li class="col-md-4" > <a role="menuitem" href="<?php echo site_url('health_insurance/personalAccident');?>" tabindex="-1" class="menu-item"><strong>Personal Accident</strong></a> </li>
+                      <li class="col-md-4" > <a role="menuitem" href="<?php echo site_url('health_insurance/personal_accident');?>" tabindex="-1" class="menu-item"><strong>Personal Accident</strong></a> </li>
                    
                 </ul>
               </li>

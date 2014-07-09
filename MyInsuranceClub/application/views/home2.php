@@ -1,3 +1,4 @@
+<?php /*?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,6 +46,8 @@
 
 <body class="page page-index">
 <?php echo $this->load->view('partial_view/header_new');?>
+*/ ?>
+
 <div id="highlighted" >
   <div class="container mar-20 ce">
     <div class="col-md-9 pad-30_a no_pad_l">
@@ -381,8 +384,13 @@
 			</li>
 						</ul></div></div></div>
 </div>
-<?php echo $this->load->view('partial_view/footer_new');?>
 
+
+
+
+
+<?php /*?>
+<?php echo $this->load->view('partial_view/footer_new');?>
       <!--<div class="container" style="width:100%; padding:0px;">
       
     <div style="" class="more-less-content col-md-10"> 
@@ -410,49 +418,23 @@
 <!-- Bootstrap JS --> 
 
 <!--Bootstrap third-party plugins--> 
-
-<!--JS plugins--> 
-<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-
-<script src="<?php echo base_url();?>/assets/js/jquery.min.js"></script> 
-
-
-<!--Legacy jQuery support for quicksand plugin--> 
-<script src="<?php echo base_url();?>/assets/js/jquery-migrate-1.2.1.min.js"></script> 
-
-<!-- Bootstrap JS --> 
-<script src="<?php echo base_url();?>/assets/js/bootstrap.min.js"></script> 
-
-<!--Bootstrap third-party plugins--> 
-<script src="<?php echo base_url();?>/assets/js/bootstrap-hover-dropdown.min.js"></script> 
-
-<!--JS plugins--> 
-<script src="<?php echo base_url();?>/assets/js/jquery.clingify.min.js"></script> 
-<script src="<?php echo base_url();?>/assets/js/jquery.jpanelmenu.min.js"></script> 
+ */	?>
 <script src="<?php echo base_url();?>/assets/js/jRespond.js"></script> 
 
 
-<!--Custom scripts mainly used to trigger libraries --> 
-<script src="<?php echo base_url();?>/assets/js/script.min.js"></script> 
-<script src="<?php echo base_url();?>/assets/js/jquery.bxslider.min.js" type="text/javascript"></script> 
+<!--Custom scripts mainly used to trigger libraries  
+<script src="<?php echo base_url();?>/assets/js/script.min.js"></script>--> 
 <script type='text/javascript' src='<?php echo base_url();?>/assets/js/jquery.carouFredSel.js'></script>
 <script type='text/javascript' src='<?php echo base_url();?>/assets/js/clients.js'></script>
-<script src="<?php echo base_url();?>/assets/js/jquery.slicknav.js"></script>
 
- <script src="<?php echo base_url();?>/assets/js/custom.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#menu').slicknav();
-});
-</script>
+<?php /*?>
 <script type="text/javascript">
          $(document).ready(function () {           
              $('.bxslider').bxSlider({
                  mode: 'horizontal',
                  slideMargin: 3,
 				 touchEnabled:false,
-				                 auto:true
+				 auto:true
              });   
 			 
 				/*$('.navbar-nav  li').hover(function () {        
@@ -460,7 +442,7 @@ $(document).ready(function(){
    sm.css({color:'#000'});
 }, function () {            
    sm.css({color:'#fff'});
-});          */
+});          *//*
          });
     </script>
    <!-- <link href="city/sty.css" rel="stylesheet">
@@ -494,7 +476,7 @@ $(document).ready(function(){
 				
 				
 				  });*/
-				  
+				  /*
 				 $(document).ready(function() { 
 				 
 		
@@ -532,10 +514,11 @@ $(document).ready(function(){
 				 $('.more-less-content').css({
 	                'margin-top': '-0px'
 	            });
-        });*/
+        });*//*
 		
 		
 		});
 </script>
 </body>
 </html>
+*/ ?>

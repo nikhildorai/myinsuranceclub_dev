@@ -1,7 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>Compare Insurance Policies and Plans in India | MyInsuranceClub.com</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="Description" content="Compare and get free quotes for the best life insurance, health insurance, travel insurance, car and auto insurance plans, policies and schemes in India offered by different insurance companies only at MyInsuranceClub.com" />
+<meta name="Keywords" content="compare insurance, best life insurance, best health insurance, cheap car insurance, auto insurance quote, cheap travel insurance, affordable insurance, best insurance policy, insurance companies in India" />
+
+<!-- Bootstrap CSS -->
+<link href="<?php echo base_url();?>/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap third-party plugins css -->
 <link href="<?php echo base_url();?>/assets/css/bootstrap/bootstrap-switch.min.css" media="screen" rel="stylesheet" />
+<!-- Font Awesome -->
+<link href="<?php echo base_url();?>/assets/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Plugins -->
+
+<!-- style -->
+<link href="<?php echo base_url();?>/assets/css/theme-style.min.css" rel="stylesheet">
+<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/responsive.css">
+<!-- custom override -->
+<link href="<?php echo base_url();?>/assets/css/custom-style.css" rel="stylesheet">
 <link href="<?php echo base_url();?>/assets/css/clingify.css" rel="stylesheet">
 <link href="<?php echo base_url();?>/assets/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url();?>assets/css/slick.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/slick.css"/>
+<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/slicknav.css">
+
+<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/custom.css">
+
+<link type="text/css" href="<?php echo base_url();?>/assets/css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+
+		<style type="text/css" id="page-css">
+			/* Styles specific to this particular page */
+			.scroll-pane
+			{
+				width: 100%;
+				height: 200px;
+				overflow: auto;
+			}
+			
+		</style>
+
+<!-- HTML5 shiv & respond.js for IE6-8 support of HTML5 elements & media queries -->
+<!--[if lt IE 9]>
+    <script src="plugins/html5shiv/dist/html5shiv.js"></script>
+    <![endif]-->
+
+<!-- Le fav and touch icons - @todo: fill with your icons or remove -->
+<link rel="shortcut icon" href="/assets/img/icons/favicon.png">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+
+<!--Retina.js plugin - @see: http://retinajs.com/-->
+<script src="<?php echo base_url();?>/assets/plugins/js/retina-1.1.0.min.js"></script>
+</head>
+
+<!-- ======== @Region: body ======== -->
+<body class="page page-index">
+
+<?php $this->load->view('partial_view/header_new');?>
 
 <span id="o_touch"></span>
 
@@ -382,29 +441,65 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
   
   
 </div>
+
+<?php echo $this->load->view('partial_view/footer_new');?>
+
+<!-- ======== @Region: #navigation ======== --> 
+
+<!--Scripts --> 
+
+<!--Legacy jQuery support for quicksand plugin--> 
+
+<!-- Bootstrap JS --> 
+
+<!--Bootstrap third-party plugins--> 
+
+<!--JS plugins--> 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
 
+<script src="<?php echo base_url();?>/assets/js/jquery.min.js"></script> 
+
+
+<!--Legacy jQuery support for quicksand plugin--> 
+<script src="<?php echo base_url();?>/assets/js/jquery-migrate-1.2.1.min.js"></script> 
+
+<!-- Bootstrap JS --> 
+<script src="<?php echo base_url();?>/assets/js/bootstrap.min.js"></script> 
+
+<!--Bootstrap third-party plugins--> 
+<script src="<?php echo base_url();?>/assets/js/bootstrap-hover-dropdown.min.js"></script> 
 <script src="<?php echo base_url();?>/assets/js/bootstrap-switch.min.js"></script> 
 
 <!--JS plugins--> 
+<script src="<?php echo base_url();?>/assets/js/jquery.clingify.min.js"></script> 
 <script src="<?php echo base_url();?>/assets/js/jquery.jpanelmenu.min.js"></script> 
 <script src="<?php echo base_url();?>/assets/js/jRespond.js"></script> 
 
 
+<!--Custom scripts mainly used to trigger libraries --> 
+<script src="<?php echo base_url();?>/assets/js/script.min.js"></script> 
+<script src="<?php echo base_url();?>/assets/js/jquery.bxslider.min.js" type="text/javascript"></script> 
 <script type='text/javascript' src='<?php echo base_url();?>/assets/js/jquery.carouFredSel.js'></script>
-<script src="<?php echo base_url();?>/assets/js/jquery.ui.accordion.min.js"></script>
-<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/jquery.cluetip.css" type="text/css" />
+  <script src="<?php echo base_url();?>/assets/js/jquery.ui.accordion.min.js"></script>
 
-<script src="<?php echo base_url();?>/assets/js/jquery.cluetip.js"></script>
+<script src="<?php echo base_url();?>/assets/js/jquery.slicknav.js"></script>
+
+  <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/jquery.cluetip.css" type="text/css" />
+
+ <script src="<?php echo base_url();?>/assets/js/jquery.cluetip.js"></script>
   <!-- <script src="../lib/jquery.cluetip.compat.js"></script> -->
-<script src="<?php echo base_url();?>/assets/js/demo.js"></script>  
+  <script src="<?php echo base_url();?>/assets/js/demo.js"></script>  
   
-<script type="text/javascript" src="<?php echo base_url();?>/assets/js/jquery.mousewheel.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>/assets/js/jquery.mousewheel.js"></script>
 		<!-- the jScrollPane script -->
-<script type="text/javascript" src="<?php echo base_url();?>/assets/js/jquery.jscrollpane.min.js"></script>
-<script src="<?php echo base_url();?>/assets/js/scrolltopcontrol.js"></script>
+		<script type="text/javascript" src="<?php echo base_url();?>/assets/js/jquery.jscrollpane.min.js"></script>
+ <script src="<?php echo base_url();?>/assets/js/scrolltopcontrol.js"></script>
 		
+  <script src="<?php echo base_url();?>/assets/js/custom.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	$('#menu').slicknav();
+});
 
 (function($) {
 	$(document).ready(function() {
@@ -428,7 +523,7 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
 			 
 				          
          });
-</script>
+    </script>
  
 </body>
 </html>

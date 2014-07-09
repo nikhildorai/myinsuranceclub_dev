@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Personal_accident extends CI_Controller {
+class Travel extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -27,7 +27,7 @@ class Personal_accident extends CI_Controller {
 		$this->load->library('user_agent');
 		$this->load->database();
 		$this->load->model('mic_dbtest');
-		$this->load->model('annual_premium_personal_accident_model');
+		$this->load->model('annual_premium_travel_model');
 		$this->load->model('city');
 		$this->load->helper('form');
 		$this->load->helper('url');
@@ -50,10 +50,7 @@ class Personal_accident extends CI_Controller {
 
 		$data['occupation']=$occupation;
 		
-		$this->template->set_template('frontend');
-		$this->template->write_view('content', 'personal_accident/home', $data, TRUE);
-		$this->template->render();
-		//$this->load->view('personal_accident/home',$data);
+		$this->load->view('personal_accident/home',$data);
 
 		/* $user_info['session_id'] = $this->session->userdata('session_id');
 

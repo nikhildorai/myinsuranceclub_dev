@@ -28,6 +28,19 @@ class User_info extends CI_Controller {
 		$this->load->model('visitor_information');
 		//$this->load->library('util');
 		date_default_timezone_set('Asia/Kolkata');
+		$currentModule = $this->util->getUrl('module');
+		//	load different views for backend and front end
+		if (!empty($currentModule))
+		{
+			if ($currentModule == 'admin')
+				$this->template->set_template('default');
+			else 
+				$this->template->set_template('frontend');
+		}
+		else 
+		{
+			$this->template->set_template('frontend');	
+		}
 	}
 	
 	

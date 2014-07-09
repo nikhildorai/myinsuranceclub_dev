@@ -10,6 +10,7 @@ class Cron extends CI_Controller {
 		$this->load->library('session');
         $this->load->library('curl');
         $this->load->library('util');
+        $this->load->library('DisqusLib');
         $this->load->model('disqus_comments_model');
  		
 		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.

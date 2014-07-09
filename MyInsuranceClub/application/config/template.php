@@ -10,7 +10,6 @@
 |
 */
 $template['active_template'] = 'default';
-
 /*
 |--------------------------------------------------------------------------
 | Explaination of template group variables
@@ -55,7 +54,7 @@ $template['active_template'] = 'default';
 | Default Template Configuration (adjust this or create your own)
 |--------------------------------------------------------------------------
 */
-
+//	backend template
 $template['default']['template'] = 'template';
 $template['default']['regions'] = array(
     'header',
@@ -65,6 +64,18 @@ $template['default']['regions'] = array(
 $template['default']['parser'] = 'parser';
 $template['default']['parser_method'] = 'parse';
 $template['default']['parse_template'] = FALSE;
+
+
+//	front end template
+$template['frontend']['template'] = 'frontend';
+$template['frontend']['regions'] = array(
+    'header',
+   'content',
+   'footer',
+);
+$template['frontend']['parser'] = 'parser';
+$template['frontend']['parser_method'] = 'parse';
+$template['frontend']['parse_template'] = FALSE;
 //$template['default']['regions']['header'] = array('content' => array('<h1>CI Rocks!</h1>'));
 //$template['default']['regions']['footer'] = array('content' => array('<p id="copyright">© Our Company Inc.</p>'));
 /* End of file template.php */

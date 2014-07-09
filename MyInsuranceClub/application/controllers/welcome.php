@@ -38,8 +38,7 @@ class Welcome extends CI_Controller {
 	
 	public function index()
 	{
-		$this->load->view('home');
-		
+		$data = array();
 		$user_info['session_id'] = $this->session->userdata('session_id');
 		
 		$user_info['timestamp'] = date('H:i:s',$this->session->userdata('last_activity'));
@@ -65,6 +64,11 @@ class Welcome extends CI_Controller {
 		 
 		 	$this->mic_dbtest->get_user_info($user_info);
 		 	
+	//	$this->template->write_view('content', 'home', $data, TRUE);
+	//	$this->template->render();
+		 	
+		$this->load->view('home');
+		
 	}
 	
 	

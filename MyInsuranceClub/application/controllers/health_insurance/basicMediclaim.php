@@ -72,6 +72,9 @@ class basicMediclaim extends CI_Controller {
 		
 		$data['city']=$this->city->get_city();
 		
+		$this->template->set_template('frontend');
+		$this->template->write_view('content', 'health_insurance/health1', $data, TRUE);
+		//$this->template->render();
 		$this->load->view('health_insurance/health1',$data);
 	
 	}
