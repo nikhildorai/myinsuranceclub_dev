@@ -1,0 +1,6 @@
+.bx-wrapper .bx-pager .bx-pager-item,
+.bx-wrapper .bx-controls-auto .bx-controls-auto-item,.bx-controls-direction {
+	display: none;
+	*zoom: 1;
+	*display: none;
+}

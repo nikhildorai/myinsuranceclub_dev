@@ -1,47 +1,5 @@
-<!DOCTYPE html>
-<html lang="en"  ng-app="myApp">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<title>Compare Insurance Policies and Plans in India | MyInsuranceClub.com</title>
-<meta charset="utf-8">
-<meta name=viewport content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
-<meta name="Description" content="Compare and get free quotes for the best life insurance, health insurance, travel insurance, car and auto insurance plans, policies and schemes in India offered by different insurance companies only at MyInsuranceClub.com" />
-<meta name="Keywords" content="compare insurance, best life insurance, best health insurance, cheap car insurance, auto insurance quote, cheap travel insurance, affordable insurance, best insurance policy, insurance companies in India" />
-<link rel="shortcut icon" href="assets/img/icons/favicon.png">
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
-<!-- Bootstrap CSS -->
-<link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 
-<!-- Bootstrap third-party plugins css -->
-<!-- Font Awesome -->
-<link href="assets/css/font-awesome.min.css" rel="stylesheet">
-
-<!-- Plugins -->
-
-<!-- style -->
-<link href="assets/css/theme-style.min.css" rel="stylesheet">
-
-<!-- custom override -->
-<link href="assets/css/custom-style.css" rel="stylesheet">
-
-<link rel="stylesheet" href="assets/css/slicknav.css">
-
-<link rel="stylesheet" href="assets/css/custom.css">
-<link rel="stylesheet" href="assets/css/health.css">
-<link rel="stylesheet" href="assets/css/responsive.css">
-
-<!-- HTML5 shiv & respond.js for IE6-8 support of HTML5 elements & media queries -->
-<!--[if lt IE 9]>
-    <script src="plugins/html5shiv/dist/html5shiv.js"></script>
-    <![endif]-->
-<!--Retina.js plugin - @see: http://retinajs.com/-->
-<script src="assets/plugins/js/retina-1.1.0.min.js"></script>
-</head>
-
-<!-- ======== @Region: body ======== -->
-<body class="page page-index">
-<?php require_once "include/header_compare.php" ?>
+<?php $this->load->view('partial_view/header_resultpage');?>
 
 <span id="o_touch"></span>
 
@@ -52,11 +10,53 @@
    <div class="top_band">
    <div class="col-md-3  border m_a">
        <div class="top_h">Your Search</div>
-       <div class="top_p">Coverage Amount = Rs. 3,00,000</div>
-      <div class="top_p"> Members = 2 Adults & 4 Children</div>
-       <div class="top_m"><i class="fa fa-angle-left"></i> <a href="health.php">Modify Your Search</a></div>
+       <div class="top_p">Coverage Amount = &#8377; <?php if(isset($this->session->userdata['user_input']['coverage_amount'])){echo $this->session->userdata['user_input']['coverage_amount'];}?></div>
+      <div class="top_p"> Members = <?php if(isset($this->session->userdata['user_input']['plan_type_name'])){echo $this->session->userdata['user_input']['plan_type_name'];}?></div>
+       <div class="top_m"><i class="fa fa-angle-left"></i> <a href="<?php echo site_url('health-insurance');?>">Modify Your Search</a></div>
    </div>
-   
+	<?php   
+			$newVal = array();
+			$preexisitng_disease_discard = array();
+        foreach($customer_details as $k=>$v)
+        {
+           	if(!in_array($v['company_id'], $newVal))
+        	{
+        		$aNew [] = $v;
+       	 	}
+       	 	$newVal [] = $v['company_id'];
+       	 	
+       	 	
+       	 	if($v['preexisting_diseases']!='Not Covered')
+			{
+       	 		if(!in_array($v['preexisting_diseases'],$preexisitng_disease_discard))
+       	 		{
+       	 			$preexist_filter [] = $v['preexisting_diseases'];
+       	 		}
+
+       	 		$preexisitng_disease_discard [] = $v['preexisting_diseases'];
+			}
+        }
+                   				
+		
+        $min_annual_premium='';
+        $max_annual_premium='';
+        if(count($customer_details) > 0)
+        {
+        	$anuual_premium = array_map(function($detail)
+        	{
+        		return $detail['annual_premium'];
+        	}, $customer_details);
+        	$min_annual_premium=min($anuual_premium);
+        	$max_annual_premium=max($anuual_premium);
+        }
+        elseif(count($customer_details) == 0)
+        {
+        	$min_annual_premium='0';
+        	$max_annual_premium='0';
+        }
+?>
+      
+      
     <div class="col-md-2  border c_o">
     <div id="sh1" style="display:none">
        <div class="top_h_t">Companies</div>
@@ -80,7 +80,7 @@
    </div>
    
    </div>
-  <div id="loader"><!--<img src="assets/images/loader.gif" border="0">--></div>
+  <div id="loader"><img src="<?php echo base_url();?>/assets/images/loader.gif" border="0"></div>
    <div class="" style="margin-top:20px; display:none;" id="prdt_dis">
             <div class="col-md-9 col-md-push-3 cus_res_hlth" style="padding-right:0px;">
             
@@ -101,17 +101,39 @@
                 
                 </div>
                 
-                
+                <?php foreach($customer_details as $detail){
+                	$preexist_diseases='';
+                if(trim($detail['preexisting_diseases'])!='Not Covered')
+                 						{
+                 							$preexist_diseases='Waiting period of '.$detail['preexisting_diseases'].' years';
+                 						}
+                 						else
+                 						{
+                 							$preexist_diseases=$detail['preexisting_diseases'];
+                 						}
+										$variant='';
+										if($detail['variant_name']!='Base')
+										{
+											$variant=' '.$detail['variant_name'];
+										}
+										else{
+											$variant='';
+										}
+										
+										$compare_data=$detail['variant_id'].'-'.$detail['annual_premium'].'-'.$detail['age'];
+										
+										?>
+										
                 <div class="cmp_tbl">
                 <div class="cus_tb clearfix" >
                 
                 <div class="col-md-2 pad-right-10 logo_ins">
                <div class="img_bx" >
-            <img src="assets/images/client/bhartiaxa.jpg" border="0" class="img_bx_i">
+            <img src="<?php echo base_url();?>/assets/images/client/bhartiaxa.jpg" border="0" class="img_bx_i">
             <div class="check_bx">
             <div class="checkbox">
             <label>
-            <input type="checkbox" name="c_name" id="c_name" class="">
+            <input type="checkbox" name="c_name" id="c_name" class="" value="<?php echo $compare_data;?>">
             <label class="chk" for="Field4"></label>
           </label></div>
             </div>
@@ -122,15 +144,15 @@
                 
                 <div class="col-md-3 pad-left-10">
                <div class="c_t" >
-            <span class="title_c" style="width:100%;">Bharti AXA</span><span class="sub_tit" >Smart Health Insurance</span>
+            <span class="title_c" style="width:100%;"><?php echo $detail['company_shortname'];?></span><span class="sub_tit" ><?php echo $detail['policy_name'].$variant;?></span>
           </div>
                 </div>
                 
                  <div class="col-md-7 m_anc">
                 
                 <div class="col-md-6 no_pad_l">
-                 <h3 class="anc">Rs. 12,340</h3>
-                 <p class="sub_tit">for cover of Rs. 3,00,000</p>
+                 <h3 class="anc">&#8377; <?php echo $detail['annual_premium'];?></h3>
+                 <p class="sub_tit">for cover of &#8377; <?php echo $detail['sum_assured'];?></p>
                  </div>
                  
                   <div class="col-md-2" style="padding:0px">
@@ -163,13 +185,13 @@
          
 <tr class="odd">
 <td>Cashless treatment</td>
-<td class="cus_width">4000 network hospitals</td></tr>
+<td class="cus_width"><?php echo $detail['cashless_treatment'];?></td></tr>
 <tr>
 <td>Pre-existing diseases</td>
-<td class="cus_width">Covered after 4 years</td></tr>
+<td class="cus_width"><?php echo $preexist_diseases;?></td></tr>
 <tr class="odd">
 <td>Auto recharge of Sum Insured</td>
-<td class="cus_width">Yes</td></tr>
+<td class="cus_width"><?php echo $detail['autorecharge_SI'];?></td></tr>
 <tr>
 <td>Hospitalisation expenses
     <ul><li><i class="fa fa-angle-right"></i> Room Rent</li>
@@ -178,34 +200,31 @@
 <td class="cus_width">
 
 <ul class="no"><li>
-Rs.3,000/day</li>
-<li>Rs.6,000/day</li>
-<li>As per actuals</li></ul></td></tr>
+<?php echo $detail['room_rent'];?></li>
+<li><?php echo $detail['icu_rent'];?></li>
+<li><?php echo $detail['doctor_fee']?></li></ul></td></tr>
 <tr class="odd">
 <td>Pre-hospitalisation</td>
-<td class="cus_width">30 days before hospitalisation</td></tr>
+<td class="cus_width"><?php echo $detail['pre_hosp'];?></td></tr>
 <tr>
 <td>Post-hospitalisation</td>
-<td class="cus_width">60 days after discharge</td></tr>
+<td class="cus_width"><?php echo $detail['post_hosp'];?></td></tr>
 <tr class="odd">
 <td>Day care expenses</td>
-<td class="cus_width">Covered</td></tr>
+<td class="cus_width"><?php echo $detail['day_care'];?></td></tr>
 <tr >
 <td>Maternity Benefits</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto Recharge of Sum Insured</td>
-<td class="cus_width">Yes – only if hospitalisation due to Accident</td></tr>
+<td class="cus_width"><?php echo $detail['maternity'];?></td></tr>
 <tr >
 <td>Health Check up</td>
-<td class="cus_width">Up to 1% of Average SI after every 4 continuous claim free policy years</td></tr>
+<td class="cus_width"><?php echo $detail['check_up'];?></td></tr>
 
 <tr class="odd">
 <td>Ayurvedic Treatment</td>
-<td class="cus_width">Up to Rs.25,000 per year</td></tr>
+<td class="cus_width"><?php echo $detail['ayurvedic'];?></td></tr>
 <tr>
 <td>Co-payment</td>
-<td class="cus_width">10% for every claim or all insured above the age of 80 years</td></tr>
+<td class="cus_width"><?php echo $detail['co_pay'];?></td></tr>
 </tbody>
 </table>
 </div>
@@ -267,8 +286,8 @@ Rs.3,000/day</li>
                               <h4 class="h_d mar-40" style="margin-left:50px;">Documents</h4>
 
 <ul class="doc">
-<li>Policy Brouchure <a href="javascript:void(0)"><img src="assets/images/pdf.jpg"></a></li>
-<li>Policy Wordings <a href="javascript:void(0)"><img src="assets/images/pdf.jpg" class="dimg"></a></li></ul>
+<li>Policy Brouchure <a href="javascript:void(0)"><img src="<?php echo base_url();?>/assets/images/pdf.jpg"></a></li>
+<li>Policy Wordings <a href="javascript:void(0)"><img src="<?php echo base_url();?>/assets/images/pdf.jpg" class="dimg"></a></li></ul>
 </ul>
                
                </div> 
@@ -280,1472 +299,15 @@ Rs.3,000/day</li>
                 
                 </div>
                </div> 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <div class="cmp_tbl">
-                   <div class="cus_tb clearfix" >
-                
-                <div class="col-md-2 pad-right-10 logo_ins">
-               <div class="img_bx" >
-            <img src="assets/images/client/birla.jpg" border="0" class="img_bx_i">
-            <div class="check_bx">
-            <div class="checkbox">
-            <label>
-            <input type="checkbox" name="c_name" id="c_name" class="">
-            <label class="chk" for="Field4"></label>
-          </label></div>
-            </div>
-            
-            
-            </div>
-                </div>
-                
-                <div class="col-md-3  pad-left-10">
-               <div class="c_t" >
-            <span class="title_c" style="width:100%;">Birla Sun Life</span><span class="sub_tit" >MediPrime Insurance</span>
-          </div>
-                </div>
-                
-                 <div class="col-md-7 m_anc">
-                
-                <div class="col-md-6 no_pad_l">
-                 <h3 class="anc">Rs. 12,340</h3>
-                 <p class="sub_tit">for cover of Rs. 3,00,000</p>
-                 </div>
-                 
-                  <div class="col-md-2" style="padding:0px">
-                 
-                 <div class="down_cnt" style="width:20px; height:auto; float:left; color:#999999;"><i class="fa fa-th"></i>
-                
-                 </div>
-  <div class="down_cnt_up" style=""><i class="fa fa-angle-up"></i> 
-                
-                 </div>
-                 </div>
-                 
-                  <div class="col-md-4 pad_r_10">
-                
-                  <a class="btn_offer_block" href="#">Buy Now <i class="fa fa-angle-right"></i></a>
-                  <div class="thumb"><i class="fa fa-thumbs-up"></i><div class="text_t"> 12 people chose this plan</div></div>
-                 </div>
-                 
-                </div>
-                </div>
-
-                <div class="accordion_a">
-                 <div class="col-md-12">
-                <div class="col-md-12 mar-10">
-               <h4 class="h_d">Key Features</h4>
-               <div class="custom-table-1">
-<table width="100%">
-
-<tbody>
+   				<?php }?>
          
-<tr class="odd">
-<td>Cashless treatment</td>
-<td class="cus_width">4000 network hospitals</td></tr>
-<tr>
-<td>Pre-existing diseases</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto recharge of Sum Insured</td>
-<td class="cus_width">Yes</td></tr>
-<tr>
-<td>Hospitalisation expenses
-    <ul><li><i class="fa fa-angle-right"></i> Room Rent</li>
-   <li><i class="fa fa-angle-right"></i> ICU Rent</li>
-    <li><i class="fa fa-angle-right"></i> Fees of Surgeon, Anesthetist,  Medicines, Nurses, etc</li></ul> </td>
-<td class="cus_width">
-
-<ul class="no"><li>
-Rs.3,000/day</li>
-<li>Rs.6,000/day</li>
-<li>As per actuals</li></ul></td></tr>
-<tr class="odd">
-<td>Pre-hospitalisation</td>
-<td class="cus_width">30 days before hospitalisation</td></tr>
-<tr>
-<td>Post-hospitalisation</td>
-<td class="cus_width">60 days after discharge</td></tr>
-<tr class="odd">
-<td>Day care expenses</td>
-<td class="cus_width">Covered</td></tr>
-<tr >
-<td>Maternity Benefits</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto Recharge of Sum Insured</td>
-<td class="cus_width">Yes – only if hospitalisation due to Accident</td></tr>
-<tr >
-<td>Health Check up</td>
-<td class="cus_width">Up to 1% of Average SI after every 4 continuous claim free policy years</td></tr>
-
-<tr class="odd">
-<td>Ayurvedic Treatment</td>
-<td class="cus_width">Up to Rs.25,000 per year</td></tr>
-<tr>
-<td>Co-payment</td>
-<td class="cus_width">10% for every claim or all insured above the age of 80 years</td></tr>
-</tbody>
-</table>
-</div>
-
-                </div>
                 
-                   
-<div class="col-md-7 medical" style="padding-right:0px;margin-bottom: 0px;">                <h4 class="h_d mar-40" >List of Hospitals with Cashless Facility</h4>
-               
-               <div class="cus_d" style="padding:5px;">
-               <div style="float: left; width: 100%; margin-top: 10px;">
-               
-               <div style="float: right; width: 100%; padding-left: 15px;"><div class="form-group col-md-12" style="margin-bottom:0px;">
-                    <label for="" class="sr-only">Search by Pin Code</label>
-                    <input type="text" placeholder="Search by Pin Code or Hospital Name" name="pin" id="" data-id="hos_class" autocomplete="off" spellcheck="false" class="form-control brdr typeahead tt-query med_search">
-                    <!--<div class="bs-example">
-        <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false">
-    </div>-->
-                    <div class="search_icon"><i class="fa fa-search"></i></div>
-                  </div></div>
-                  
-                  
-                  
-                  
-<div class="loc_d hos" id="" style="padding:0px 15px; border:none; display:none; margin-top:20px;">
-               
-               <div class="col-md-12">
-              <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index:1; display: block; right: auto;">
-<div class="tt-dataset-accounts">
-  <div class="city_m">
-    <div class="city_a">Hospital Name</div>
-    <div class="city_b">City</div>
-    <div class="city_c">Pin Code</div>
-  </div>
-  <span class="tt-suggestions resultTable" id="" style="display: block;">
-  
-  
-
-  </span></div>
-</span>
-                  </div>
-               <div style="float: left; position: absolute; bottom: 0px; margin-bottom: 10px;" class="">Note: This list is subject to change without any notice</div>
-               
                </div>
-
-                  
-               </div>
-               
-               
-               
-               
-               
-               
-               </div>
-               
-                </div>
-               <div class="col-md-5">
-                              <h4 class="h_d mar-40" style="margin-left:50px;">Documents</h4>
-
-<ul  class="doc">
-<li>Policy Brouchure <a href="javascript:void(0)"><img src="assets/images/pdf.jpg"></a></li>
-<li>Policy Wordings <a href="javascript:void(0)"><img src="assets/images/pdf.jpg" class="dimg"></a></li></ul>
-</ul>
-               
-               </div> 
-                
-                <div class="col-md-12  hide_d" >Hide details <i class="fa fa-angle-up"></i></div>
-                
-                
-                </div>
-                
-                </div>
-                
-             </div>   
-                
-                
-                
-                
-                
-                
-               <div class="cmp_tbl">
-                   <div class="cus_tb clearfix" >
-                
-                <div class="col-md-2 pad-right-10 logo_ins">
-               <div class="img_bx" >
-            <img src="assets/images/client/apolo.jpg" border="0" class="img_bx_i">
-            <div class="check_bx">
-            <div class="checkbox">
-            <label>
-            <input type="checkbox" name="c_name" id="c_name" class="">
-            <label class="chk" for="Field4"></label>
-          </label></div>
+             
             </div>
             
-            
-            </div>
-                </div>
-                
-                <div class="col-md-3  pad-left-10">
-               <div class="c_t" >
-            <span class="title_c" style="width:100%;">Apollo Munich </span><span class="sub_tit" >Optima Restore</span>
-          </div>
-                </div>
-                
-                 <div class="col-md-7 m_anc">
-                
-                <div class="col-md-6 no_pad_l">
-                 <h3 class="anc">Rs. 12,340</h3>
-                 <p class="sub_tit">for cover of Rs. 3,00,000</p>
-                 </div>
-                 
-                  <div class="col-md-2" style="padding:0px">
-                 
-                 <div class="down_cnt" style="width:20px; height:auto; float:left; color:#999999;"><i class="fa fa-th"></i>
-                
-                 </div>
-  <div class="down_cnt_up" style=""><i class="fa fa-angle-up"></i> 
-                
-                 </div>
-                 </div>
-                 
-                  <div class="col-md-4 pad_r_10">
-                
-                  <a class="btn_offer_block" href="#">Buy Now <i class="fa fa-angle-right"></i></a>
-                  <div class="thumb"><i class="fa fa-thumbs-up"></i><div class="text_t"> 12 people chose this plan</div></div>
-                 </div>
-                 
-                </div>
-                </div>
-
-                <div class="accordion_a">
-                 <div class="col-md-12">
-                <div class="col-md-12 mar-10">
-               <h4 class="h_d">Key Features</h4>
-               <div class="custom-table-1">
-<table width="100%">
-
-<tbody>
-         
-<tr class="odd">
-<td>Cashless treatment</td>
-<td class="cus_width">4000 network hospitals</td></tr>
-<tr>
-<td>Pre-existing diseases</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto recharge of Sum Insured</td>
-<td class="cus_width">Yes</td></tr>
-<tr>
-<td>Hospitalisation expenses
-    <ul><li><i class="fa fa-angle-right"></i> Room Rent</li>
-   <li><i class="fa fa-angle-right"></i> ICU Rent</li>
-    <li><i class="fa fa-angle-right"></i> Fees of Surgeon, Anesthetist,  Medicines, Nurses, etc</li></ul> </td>
-<td class="cus_width">
-
-<ul class="no"><li>
-Rs.3,000/day</li>
-<li>Rs.6,000/day</li>
-<li>As per actuals</li></ul></td></tr>
-<tr class="odd">
-<td>Pre-hospitalisation</td>
-<td class="cus_width">30 days before hospitalisation</td></tr>
-<tr>
-<td>Post-hospitalisation</td>
-<td class="cus_width">60 days after discharge</td></tr>
-<tr class="odd">
-<td>Day care expenses</td>
-<td class="cus_width">Covered</td></tr>
-<tr >
-<td>Maternity Benefits</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto Recharge of Sum Insured</td>
-<td class="cus_width">Yes – only if hospitalisation due to Accident</td></tr>
-<tr >
-<td>Health Check up</td>
-<td class="cus_width">Up to 1% of Average SI after every 4 continuous claim free policy years</td></tr>
-
-<tr class="odd">
-<td>Ayurvedic Treatment</td>
-<td class="cus_width">Up to Rs.25,000 per year</td></tr>
-<tr>
-<td>Co-payment</td>
-<td class="cus_width">10% for every claim or all insured above the age of 80 years</td></tr>
-</tbody>
-</table>
-</div>
-
-                </div>
-                
-                   
-<div class="col-md-7 medical" style="padding-right:0px;margin-bottom: 0px;"> <h4 class="h_d mar-40" >List of Hospitals with Cashless Facility</h4>
-               
-               <div class="cus_d" style="padding:5px;">
-               <div style="float: left; width: 100%; margin-top: 10px;">
-               
-               <div style="float: right; width: 100%; padding-left: 15px;"><div class="form-group col-md-12" style="margin-bottom:0px;">
-                    <label for="" class="sr-only">Search by Pin Code</label>
-                    <input type="text" placeholder="Search by Pin Code or Hospital Name" name="pin" id="" data-id="hos_class" autocomplete="off" spellcheck="false" class="form-control brdr typeahead tt-query med_search">
-                    <!--<div class="bs-example">
-        <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false">
-    </div>-->
-                    <div class="search_icon"><i class="fa fa-search"></i></div>
-                  </div></div>
-                  
-                  
-                  
-                  
-<div class="loc_d hos"  style="padding:0px 15px; border:none; display:none; margin-top:20px;">
-               
-               <div class="col-md-12">
-              <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index:1; display: block; right: auto;">
-<div class="tt-dataset-accounts">
-  <div class="city_m">
-    <div class="city_a">Hospital Name</div>
-    <div class="city_b">City</div>
-    <div class="city_c">Pin Code</div>
-  </div>
-  <span class="tt-suggestions resultTable" id="" style="display: block;">
-  
-  
-
-  </span></div>
-</span>
-                  </div>
-               <div style="float: left; position: absolute; bottom: 0px; margin-bottom: 10px;" class="">Note: This list is subject to change without any notice</div>
-               
-               </div>
-
-                  
-               </div>
-               
-               
-               
-               
-               
-               
-               </div>
-               
-                </div>
-               <div class="col-md-5">
-                              <h4 class="h_d mar-40" style="margin-left:50px;">Documents</h4>
-
-<ul class="doc">
-<li>Policy Brouchure <a href="javascript:void(0)"><img src="assets/images/pdf.jpg"></a></li>
-<li>Policy Wordings <a href="javascript:void(0)"><img src="assets/images/pdf.jpg" class="dimg"></a></li></ul>
-</ul>
-               
-               </div> 
-                
-                <div class="col-md-12  hide_d" >Hide details <i class="fa fa-angle-up"></i></div>
-                
-                
-                </div>
-                
-                </div>
-                
-             </div> 
-                
-                
-                <div class="cmp_tbl">
-                <div class="cus_tb clearfix" >
-                
-                <div class="col-md-2 pad-right-10 logo_ins">
-               <div class="img_bx" >
-            <img src="assets/images/client/bhartiaxa.jpg" border="0" class="img_bx_i">
-            <div class="check_bx">
-            <div class="checkbox">
-            <label>
-            <input type="checkbox" name="c_name" id="c_name" class="">
-            <label class="chk" for="Field4"></label>
-          </label></div>
-            </div>
-            
-            
-            </div>
-                </div>
-                
-                <div class="col-md-3 pad-left-10">
-               <div class="c_t" >
-            <span class="title_c" style="width:100%;">Bharti AXA</span><span class="sub_tit" >Smart Health Insurance</span>
-          </div>
-                </div>
-                
-                 <div class="col-md-7 m_anc">
-                
-                <div class="col-md-6 no_pad_l">
-                 <h3 class="anc">Rs. 12,340</h3>
-                 <p class="sub_tit">for cover of Rs. 3,00,000</p>
-                 </div>
-                 
-                  <div class="col-md-2" style="padding:0px">
-                 
-                 <div class="down_cnt" style="width:20px; height:auto; float:left; color:#999999;"><i class="fa fa-th"></i>
-                
-                 </div>
-  <div class="down_cnt_up" style=""><i class="fa fa-angle-up"></i> 
-                
-                 </div>
-                 </div>
-                 
-                  <div class="col-md-4 pad_r_10">
-                
-                  <a class="btn_offer_block" href="#">Buy Now <i class="fa fa-angle-right"></i></a>
-                  <div class="thumb"><i class="fa fa-thumbs-up"></i><div class="text_t"> 12 people chose this plan</div></div>
-                 </div>
-                 
-                </div>
-                </div>
-                
-                <div class="accordion_a">
-                 <div class="col-md-12">
-                <div class="col-md-12 mar-10">
-               <h4 class="h_d">Key Features</h4>
-               <div class="custom-table-1">
-<table width="100%">
-
-<tbody>
-         
-<tr class="odd">
-<td>Cashless treatment</td>
-<td class="cus_width">4000 network hospitals</td></tr>
-<tr>
-<td>Pre-existing diseases</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto recharge of Sum Insured</td>
-<td class="cus_width">Yes</td></tr>
-<tr>
-<td>Hospitalisation expenses
-    <ul><li><i class="fa fa-angle-right"></i> Room Rent</li>
-   <li><i class="fa fa-angle-right"></i> ICU Rent</li>
-    <li><i class="fa fa-angle-right"></i> Fees of Surgeon, Anesthetist,  Medicines, Nurses, etc</li></ul> </td>
-<td class="cus_width">
-
-<ul class="no"><li>
-Rs.3,000/day</li>
-<li>Rs.6,000/day</li>
-<li>As per actuals</li></ul></td></tr>
-<tr class="odd">
-<td>Pre-hospitalisation</td>
-<td class="cus_width">30 days before hospitalisation</td></tr>
-<tr>
-<td>Post-hospitalisation</td>
-<td class="cus_width">60 days after discharge</td></tr>
-<tr class="odd">
-<td>Day care expenses</td>
-<td class="cus_width">Covered</td></tr>
-<tr >
-<td>Maternity Benefits</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto Recharge of Sum Insured</td>
-<td class="cus_width">Yes – only if hospitalisation due to Accident</td></tr>
-<tr >
-<td>Health Check up</td>
-<td class="cus_width">Up to 1% of Average SI after every 4 continuous claim free policy years</td></tr>
-
-<tr class="odd">
-<td>Ayurvedic Treatment</td>
-<td class="cus_width">Up to Rs.25,000 per year</td></tr>
-<tr>
-<td>Co-payment</td>
-<td class="cus_width">10% for every claim or all insured above the age of 80 years</td></tr>
-</tbody>
-</table>
-</div>
-
-                </div>
-                
-                   
-<div class="col-md-7 medical" style="padding-right:0px;margin-bottom: 0px;">                 <h4 class="h_d mar-40" >List of Hospitals with Cashless Facility</h4>
-               
-               <div class="cus_d" style="padding:5px;">
-               <div style="float: left; width: 100%; margin-top: 10px;">
-               
-               <div style="float: right; width: 100%; padding-left: 15px;"><div class="form-group col-md-12" style="margin-bottom:0px;">
-                    <label for="" class="sr-only">Search by Pin Code</label>
-                    <input type="text" placeholder="Search by Pin Code or Hospital Name" name="pin" id="" data-id="hos_class" autocomplete="off" spellcheck="false" class="form-control brdr typeahead tt-query med_search">
-                    <!--<div class="bs-example">
-        <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false">
-    </div>-->
-                    <div class="search_icon"><i class="fa fa-search"></i></div>
-                  </div></div>
-                  
-                  
-                  
-                  
-<div class="loc_d hos"  style="padding:0px 15px; border:none; display:none; margin-top:20px;">
-               
-               <div class="col-md-12">
-              <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index:1; display: block; right: auto;">
-<div class="tt-dataset-accounts">
-  <div class="city_m">
-    <div class="city_a">Hospital Name</div>
-    <div class="city_b">City</div>
-    <div class="city_c">Pin Code</div>
-  </div>
-  <span class="tt-suggestions resultTable" id="" style="display: block;">
-  
-  
-
-  </span></div>
-</span>
-                  </div>
-                  <div style="float: left; position: absolute; bottom: 0px; margin-bottom: 10px;" class="">Note: This list is subject to change without any notice</div>
-               
-               
-               </div>
-
-                  
-               </div>
-               
-               
-               
-               
-               
-               
-               </div>
-               
-                </div>
-               <div class="col-md-5">
-                              <h4 class="h_d mar-40" style="margin-left:50px;">Documents</h4>
-
-<ul class="doc">
-<li>Policy Brouchure <a href="javascript:void(0)"><img src="assets/images/pdf.jpg"></a></li>
-<li>Policy Wordings <a href="javascript:void(0)"><img src="assets/images/pdf.jpg" class="dimg"></a></li></ul>
-</ul>
-               
-               </div> 
-                
-                <div class="col-md-12  hide_d" >Hide details <i class="fa fa-angle-up"></i></div>
-                
-                
-                </div>
-                
-                </div>
-               </div>
-               
-               
-               <div class="cmp_tbl">
-                <div class="cus_tb clearfix" >
-                
-                <div class="col-md-2 pad-right-10 logo_ins">
-               <div class="img_bx" >
-            <img src="assets/images/client/bhartiaxa.jpg" border="0" class="img_bx_i">
-            <div class="check_bx">
-            <div class="checkbox">
-            <label>
-            <input type="checkbox" name="c_name" id="c_name" class="">
-            <label class="chk" for="Field4"></label>
-          </label></div>
-            </div>
-            
-            
-            </div>
-                </div>
-                
-                <div class="col-md-3 pad-left-10">
-               <div class="c_t" >
-            <span class="title_c" style="width:100%;">Bharti AXA</span><span class="sub_tit" >Smart Health Insurance</span>
-          </div>
-                </div>
-                
-                 <div class="col-md-7 m_anc">
-                
-                <div class="col-md-6 no_pad_l">
-                 <h3 class="anc">Rs. 12,340</h3>
-                 <p class="sub_tit">for cover of Rs. 3,00,000</p>
-                 </div>
-                 
-                  <div class="col-md-2" style="padding:0px">
-                 
-                 <div class="down_cnt" style="width:20px; height:auto; float:left; color:#999999;"><i class="fa fa-th"></i>
-                
-                 </div>
-  <div class="down_cnt_up" style=""><i class="fa fa-angle-up"></i> 
-                
-                 </div>
-                 </div>
-                 
-                  <div class="col-md-4 pad_r_10">
-                
-                  <a class="btn_offer_block" href="#">Buy Now <i class="fa fa-angle-right"></i></a>
-                  <div class="thumb"><i class="fa fa-thumbs-up"></i><div class="text_t"> 12 people chose this plan</div></div>
-                 </div>
-                 
-                </div>
-                </div>
-                
-                <div class="accordion_a">
-                 <div class="col-md-12">
-                <div class="col-md-12 mar-10">
-               <h4 class="h_d">Key Features</h4>
-               <div class="custom-table-1">
-<table width="100%">
-
-<tbody>
-         
-<tr class="odd">
-<td>Cashless treatment</td>
-<td class="cus_width">4000 network hospitals</td></tr>
-<tr>
-<td>Pre-existing diseases</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto recharge of Sum Insured</td>
-<td class="cus_width">Yes</td></tr>
-<tr>
-<td>Hospitalisation expenses
-    <ul><li><i class="fa fa-angle-right"></i> Room Rent</li>
-   <li><i class="fa fa-angle-right"></i> ICU Rent</li>
-    <li><i class="fa fa-angle-right"></i> Fees of Surgeon, Anesthetist,  Medicines, Nurses, etc</li></ul> </td>
-<td class="cus_width">
-
-<ul class="no"><li>
-Rs.3,000/day</li>
-<li>Rs.6,000/day</li>
-<li>As per actuals</li></ul></td></tr>
-<tr class="odd">
-<td>Pre-hospitalisation</td>
-<td class="cus_width">30 days before hospitalisation</td></tr>
-<tr>
-<td>Post-hospitalisation</td>
-<td class="cus_width">60 days after discharge</td></tr>
-<tr class="odd">
-<td>Day care expenses</td>
-<td class="cus_width">Covered</td></tr>
-<tr >
-<td>Maternity Benefits</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto Recharge of Sum Insured</td>
-<td class="cus_width">Yes – only if hospitalisation due to Accident</td></tr>
-<tr >
-<td>Health Check up</td>
-<td class="cus_width">Up to 1% of Average SI after every 4 continuous claim free policy years</td></tr>
-
-<tr class="odd">
-<td>Ayurvedic Treatment</td>
-<td class="cus_width">Up to Rs.25,000 per year</td></tr>
-<tr>
-<td>Co-payment</td>
-<td class="cus_width">10% for every claim or all insured above the age of 80 years</td></tr>
-</tbody>
-</table>
-</div>
-
-                </div>
-                
-                   
-<div class="col-md-7 medical" style="padding-right:0px;margin-bottom: 0px;">                 <h4 class="h_d mar-40" >List of Hospitals with Cashless Facility</h4>
-               
-               <div class="cus_d" style="padding:5px;">
-               <div style="float: left; width: 100%; margin-top: 10px;">
-               
-               <div style="float: right; width: 100%; padding-left: 15px;"><div class="form-group col-md-12" style="margin-bottom:0px;">
-                    <label for="" class="sr-only">Search by Pin Code</label>
-                    <input type="text" placeholder="Search by Pin Code or Hospital Name" name="pin" id="" data-id="hos_class" autocomplete="off" spellcheck="false" class="form-control brdr typeahead tt-query med_search">
-                    <!--<div class="bs-example">
-        <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false">
-    </div>-->
-                    <div class="search_icon"><i class="fa fa-search"></i></div>
-                  </div></div>
-                  
-                  
-                  
-                  
-<div class="loc_d hos"  style="padding:0px 15px; border:none; display:none; margin-top:20px;">
-               
-               <div class="col-md-12">
-              <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index:1; display: block; right: auto;">
-<div class="tt-dataset-accounts">
-  <div class="city_m">
-    <div class="city_a">Hospital Name</div>
-    <div class="city_b">City</div>
-    <div class="city_c">Pin Code</div>
-  </div>
-  <span class="tt-suggestions resultTable" id="" style="display: block;">
-  
-  
-
-  </span></div>
-</span>
-                  </div>
-                  <div style="float: left; position: absolute; bottom: 0px; margin-bottom: 10px;" class="">Note: This list is subject to change without any notice</div>
-               
-               
-               </div>
-
-                  
-               </div>
-               
-               
-               
-               
-               
-               
-               </div>
-               
-                </div>
-               <div class="col-md-5">
-                              <h4 class="h_d mar-40" style="margin-left:50px;">Documents</h4>
-
-<ul class="doc">
-<li>Policy Brouchure <a href="javascript:void(0)"><img src="assets/images/pdf.jpg"></a></li>
-<li>Policy Wordings <a href="javascript:void(0)"><img src="assets/images/pdf.jpg" class="dimg"></a></li></ul>
-</ul>
-               
-               </div> 
-                
-                <div class="col-md-12  hide_d" >Hide details <i class="fa fa-angle-up"></i></div>
-                
-                
-                </div>
-                
-                </div>
-               </div>
-               
-               
-               
-               <div class="cmp_tbl">
-                <div class="cus_tb clearfix" >
-                
-                <div class="col-md-2 pad-right-10 logo_ins">
-               <div class="img_bx" >
-            <img src="assets/images/client/bhartiaxa.jpg" border="0" class="img_bx_i">
-            <div class="check_bx">
-            <div class="checkbox">
-            <label>
-            <input type="checkbox" name="c_name" id="c_name" class="">
-            <label class="chk" for="Field4"></label>
-          </label></div>
-            </div>
-            
-            
-            </div>
-                </div>
-                
-                <div class="col-md-3 pad-left-10">
-               <div class="c_t" >
-            <span class="title_c" style="width:100%;">Bharti AXA</span><span class="sub_tit" >Smart Health Insurance</span>
-          </div>
-                </div>
-                
-                 <div class="col-md-7 m_anc">
-                
-                <div class="col-md-6 no_pad_l">
-                 <h3 class="anc">Rs. 12,340</h3>
-                 <p class="sub_tit">for cover of Rs. 3,00,000</p>
-                 </div>
-                 
-                  <div class="col-md-2" style="padding:0px">
-                 
-                 <div class="down_cnt" style="width:20px; height:auto; float:left; color:#999999;"><i class="fa fa-th"></i>
-                
-                 </div>
-  <div class="down_cnt_up" style=""><i class="fa fa-angle-up"></i> 
-                
-                 </div>
-                 </div>
-                 
-                  <div class="col-md-4 pad_r_10">
-                
-                  <a class="btn_offer_block" href="#">Buy Now <i class="fa fa-angle-right"></i></a>
-                  <div class="thumb"><i class="fa fa-thumbs-up"></i><div class="text_t"> 12 people chose this plan</div></div>
-                 </div>
-                 
-                </div>
-                </div>
-                
-                <div class="accordion_a">
-                 <div class="col-md-12">
-                <div class="col-md-12 mar-10">
-               <h4 class="h_d">Key Features</h4>
-               <div class="custom-table-1">
-<table width="100%">
-
-<tbody>
-         
-<tr class="odd">
-<td>Cashless treatment</td>
-<td class="cus_width">4000 network hospitals</td></tr>
-<tr>
-<td>Pre-existing diseases</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto recharge of Sum Insured</td>
-<td class="cus_width">Yes</td></tr>
-<tr>
-<td>Hospitalisation expenses
-    <ul><li><i class="fa fa-angle-right"></i> Room Rent</li>
-   <li><i class="fa fa-angle-right"></i> ICU Rent</li>
-    <li><i class="fa fa-angle-right"></i> Fees of Surgeon, Anesthetist,  Medicines, Nurses, etc</li></ul> </td>
-<td class="cus_width">
-
-<ul class="no"><li>
-Rs.3,000/day</li>
-<li>Rs.6,000/day</li>
-<li>As per actuals</li></ul></td></tr>
-<tr class="odd">
-<td>Pre-hospitalisation</td>
-<td class="cus_width">30 days before hospitalisation</td></tr>
-<tr>
-<td>Post-hospitalisation</td>
-<td class="cus_width">60 days after discharge</td></tr>
-<tr class="odd">
-<td>Day care expenses</td>
-<td class="cus_width">Covered</td></tr>
-<tr >
-<td>Maternity Benefits</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto Recharge of Sum Insured</td>
-<td class="cus_width">Yes – only if hospitalisation due to Accident</td></tr>
-<tr >
-<td>Health Check up</td>
-<td class="cus_width">Up to 1% of Average SI after every 4 continuous claim free policy years</td></tr>
-
-<tr class="odd">
-<td>Ayurvedic Treatment</td>
-<td class="cus_width">Up to Rs.25,000 per year</td></tr>
-<tr>
-<td>Co-payment</td>
-<td class="cus_width">10% for every claim or all insured above the age of 80 years</td></tr>
-</tbody>
-</table>
-</div>
-
-                </div>
-                
-                   
-<div class="col-md-7 medical" style="padding-right:0px;margin-bottom: 0px;">                 <h4 class="h_d mar-40" >List of Hospitals with Cashless Facility</h4>
-               
-               <div class="cus_d" style="padding:5px;">
-               <div style="float: left; width: 100%; margin-top: 10px;">
-               
-               <div style="float: right; width: 100%; padding-left: 15px;"><div class="form-group col-md-12" style="margin-bottom:0px;">
-                    <label for="" class="sr-only">Search by Pin Code</label>
-                    <input type="text" placeholder="Search by Pin Code or Hospital Name" name="pin" id="" data-id="hos_class" autocomplete="off" spellcheck="false" class="form-control brdr typeahead tt-query med_search">
-                    <!--<div class="bs-example">
-        <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false">
-    </div>-->
-                    <div class="search_icon"><i class="fa fa-search"></i></div>
-                  </div></div>
-                  
-                  
-                  
-                  
-<div class="loc_d hos"  style="padding:0px 15px; border:none; display:none; margin-top:20px;">
-               
-               <div class="col-md-12">
-              <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index:1; display: block; right: auto;">
-<div class="tt-dataset-accounts">
-  <div class="city_m">
-    <div class="city_a">Hospital Name</div>
-    <div class="city_b">City</div>
-    <div class="city_c">Pin Code</div>
-  </div>
-  <span class="tt-suggestions resultTable" id="" style="display: block;">
-  
-  
-
-  </span></div>
-</span>
-                  </div>
-                  <div style="float: left; position: absolute; bottom: 0px; margin-bottom: 10px;" class="">Note: This list is subject to change without any notice</div>
-               
-               
-               </div>
-
-                  
-               </div>
-               
-               
-               
-               
-               
-               
-               </div>
-               
-                </div>
-               <div class="col-md-5">
-                              <h4 class="h_d mar-40" style="margin-left:50px;">Documents</h4>
-
-<ul class="doc">
-<li>Policy Brouchure <a href="javascript:void(0)"><img src="assets/images/pdf.jpg"></a></li>
-<li>Policy Wordings <a href="javascript:void(0)"><img src="assets/images/pdf.jpg" class="dimg"></a></li></ul>
-</ul>
-               
-               </div> 
-                
-                <div class="col-md-12  hide_d" >Hide details <i class="fa fa-angle-up"></i></div>
-                
-                
-                </div>
-                
-                </div>
-               </div>
-               
-               
-               <div class="cmp_tbl">
-                <div class="cus_tb clearfix" >
-                
-                <div class="col-md-2 pad-right-10 logo_ins">
-               <div class="img_bx" >
-            <img src="assets/images/client/bhartiaxa.jpg" border="0" class="img_bx_i">
-            <div class="check_bx">
-            <div class="checkbox">
-            <label>
-            <input type="checkbox" name="c_name" id="c_name" class="">
-            <label class="chk" for="Field4"></label>
-          </label></div>
-            </div>
-            
-            
-            </div>
-                </div>
-                
-                <div class="col-md-3 pad-left-10">
-               <div class="c_t" >
-            <span class="title_c" style="width:100%;">Bharti AXA</span><span class="sub_tit" >Smart Health Insurance</span>
-          </div>
-                </div>
-                
-                 <div class="col-md-7 m_anc">
-                
-                <div class="col-md-6 no_pad_l">
-                 <h3 class="anc">Rs. 12,340</h3>
-                 <p class="sub_tit">for cover of Rs. 3,00,000</p>
-                 </div>
-                 
-                  <div class="col-md-2" style="padding:0px">
-                 
-                 <div class="down_cnt" style="width:20px; height:auto; float:left; color:#999999;"><i class="fa fa-th"></i>
-                
-                 </div>
-  <div class="down_cnt_up" style=""><i class="fa fa-angle-up"></i> 
-                
-                 </div>
-                 </div>
-                 
-                  <div class="col-md-4 pad_r_10">
-                
-                  <a class="btn_offer_block" href="#">Buy Now <i class="fa fa-angle-right"></i></a>
-                  <div class="thumb"><i class="fa fa-thumbs-up"></i><div class="text_t"> 12 people chose this plan</div></div>
-                 </div>
-                 
-                </div>
-                </div>
-                
-                <div class="accordion_a">
-                 <div class="col-md-12">
-                <div class="col-md-12 mar-10">
-               <h4 class="h_d">Key Features</h4>
-               <div class="custom-table-1">
-<table width="100%">
-
-<tbody>
-         
-<tr class="odd">
-<td>Cashless treatment</td>
-<td class="cus_width">4000 network hospitals</td></tr>
-<tr>
-<td>Pre-existing diseases</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto recharge of Sum Insured</td>
-<td class="cus_width">Yes</td></tr>
-<tr>
-<td>Hospitalisation expenses
-    <ul><li><i class="fa fa-angle-right"></i> Room Rent</li>
-   <li><i class="fa fa-angle-right"></i> ICU Rent</li>
-    <li><i class="fa fa-angle-right"></i> Fees of Surgeon, Anesthetist,  Medicines, Nurses, etc</li></ul> </td>
-<td class="cus_width">
-
-<ul class="no"><li>
-Rs.3,000/day</li>
-<li>Rs.6,000/day</li>
-<li>As per actuals</li></ul></td></tr>
-<tr class="odd">
-<td>Pre-hospitalisation</td>
-<td class="cus_width">30 days before hospitalisation</td></tr>
-<tr>
-<td>Post-hospitalisation</td>
-<td class="cus_width">60 days after discharge</td></tr>
-<tr class="odd">
-<td>Day care expenses</td>
-<td class="cus_width">Covered</td></tr>
-<tr >
-<td>Maternity Benefits</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto Recharge of Sum Insured</td>
-<td class="cus_width">Yes – only if hospitalisation due to Accident</td></tr>
-<tr >
-<td>Health Check up</td>
-<td class="cus_width">Up to 1% of Average SI after every 4 continuous claim free policy years</td></tr>
-
-<tr class="odd">
-<td>Ayurvedic Treatment</td>
-<td class="cus_width">Up to Rs.25,000 per year</td></tr>
-<tr>
-<td>Co-payment</td>
-<td class="cus_width">10% for every claim or all insured above the age of 80 years</td></tr>
-</tbody>
-</table>
-</div>
-
-                </div>
-                
-                   
-<div class="col-md-7 medical" style="padding-right:0px;margin-bottom: 0px;">                 <h4 class="h_d mar-40" >List of Hospitals with Cashless Facility</h4>
-               
-               <div class="cus_d" style="padding:5px;">
-               <div style="float: left; width: 100%; margin-top: 10px;">
-               
-               <div style="float: right; width: 100%; padding-left: 15px;"><div class="form-group col-md-12" style="margin-bottom:0px;">
-                    <label for="" class="sr-only">Search by Pin Code</label>
-                    <input type="text" placeholder="Search by Pin Code or Hospital Name" name="pin" id="" data-id="hos_class" autocomplete="off" spellcheck="false" class="form-control brdr typeahead tt-query med_search">
-                    <!--<div class="bs-example">
-        <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false">
-    </div>-->
-                    <div class="search_icon"><i class="fa fa-search"></i></div>
-                  </div></div>
-                  
-                  
-                  
-                  
-<div class="loc_d hos"  style="padding:0px 15px; border:none; display:none; margin-top:20px;">
-               
-               <div class="col-md-12">
-              <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index:1; display: block; right: auto;">
-<div class="tt-dataset-accounts">
-  <div class="city_m">
-    <div class="city_a">Hospital Name</div>
-    <div class="city_b">City</div>
-    <div class="city_c">Pin Code</div>
-  </div>
-  <span class="tt-suggestions resultTable" id="" style="display: block;">
-  
-  
-
-  </span></div>
-</span>
-                  </div>
-                  <div style="float: left; position: absolute; bottom: 0px; margin-bottom: 10px;" class="">Note: This list is subject to change without any notice</div>
-               
-               
-               </div>
-
-                  
-               </div>
-               
-               
-               
-               
-               
-               
-               </div>
-               
-                </div>
-               <div class="col-md-5">
-                              <h4 class="h_d mar-40" style="margin-left:50px;">Documents</h4>
-
-<ul class="doc">
-<li>Policy Brouchure <a href="javascript:void(0)"><img src="assets/images/pdf.jpg"></a></li>
-<li>Policy Wordings <a href="javascript:void(0)"><img src="assets/images/pdf.jpg" class="dimg"></a></li></ul>
-</ul>
-               
-               </div> 
-                
-                <div class="col-md-12  hide_d" >Hide details <i class="fa fa-angle-up"></i></div>
-                
-                
-                </div>
-                
-                </div>
-               </div>
-               
-               
-               <div class="cmp_tbl">
-                <div class="cus_tb clearfix" >
-                
-                <div class="col-md-2 pad-right-10 logo_ins">
-               <div class="img_bx" >
-            <img src="assets/images/client/bhartiaxa.jpg" border="0" class="img_bx_i">
-            <div class="check_bx">
-            <div class="checkbox">
-            <label>
-            <input type="checkbox" name="c_name" id="c_name" class="">
-            <label class="chk" for="Field4"></label>
-          </label></div>
-            </div>
-            
-            
-            </div>
-                </div>
-                
-                <div class="col-md-3 pad-left-10">
-               <div class="c_t" >
-            <span class="title_c" style="width:100%;">Bharti AXA</span><span class="sub_tit" >Smart Health Insurance</span>
-          </div>
-                </div>
-                
-                 <div class="col-md-7 m_anc">
-                
-                <div class="col-md-6 no_pad_l">
-                 <h3 class="anc">Rs. 12,340</h3>
-                 <p class="sub_tit">for cover of Rs. 3,00,000</p>
-                 </div>
-                 
-                  <div class="col-md-2" style="padding:0px">
-                 
-                 <div class="down_cnt" style="width:20px; height:auto; float:left; color:#999999;"><i class="fa fa-th"></i>
-                
-                 </div>
-  <div class="down_cnt_up" style=""><i class="fa fa-angle-up"></i> 
-                
-                 </div>
-                 </div>
-                 
-                  <div class="col-md-4 pad_r_10">
-                
-                  <a class="btn_offer_block" href="#">Buy Now <i class="fa fa-angle-right"></i></a>
-                  <div class="thumb"><i class="fa fa-thumbs-up"></i><div class="text_t"> 12 people chose this plan</div></div>
-                 </div>
-                 
-                </div>
-                </div>
-                
-                <div class="accordion_a">
-                 <div class="col-md-12">
-                <div class="col-md-12 mar-10">
-               <h4 class="h_d">Key Features</h4>
-               <div class="custom-table-1">
-<table width="100%">
-
-<tbody>
-         
-<tr class="odd">
-<td>Cashless treatment</td>
-<td class="cus_width">4000 network hospitals</td></tr>
-<tr>
-<td>Pre-existing diseases</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto recharge of Sum Insured</td>
-<td class="cus_width">Yes</td></tr>
-<tr>
-<td>Hospitalisation expenses
-    <ul><li><i class="fa fa-angle-right"></i> Room Rent</li>
-   <li><i class="fa fa-angle-right"></i> ICU Rent</li>
-    <li><i class="fa fa-angle-right"></i> Fees of Surgeon, Anesthetist,  Medicines, Nurses, etc</li></ul> </td>
-<td class="cus_width">
-
-<ul class="no"><li>
-Rs.3,000/day</li>
-<li>Rs.6,000/day</li>
-<li>As per actuals</li></ul></td></tr>
-<tr class="odd">
-<td>Pre-hospitalisation</td>
-<td class="cus_width">30 days before hospitalisation</td></tr>
-<tr>
-<td>Post-hospitalisation</td>
-<td class="cus_width">60 days after discharge</td></tr>
-<tr class="odd">
-<td>Day care expenses</td>
-<td class="cus_width">Covered</td></tr>
-<tr >
-<td>Maternity Benefits</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto Recharge of Sum Insured</td>
-<td class="cus_width">Yes – only if hospitalisation due to Accident</td></tr>
-<tr >
-<td>Health Check up</td>
-<td class="cus_width">Up to 1% of Average SI after every 4 continuous claim free policy years</td></tr>
-
-<tr class="odd">
-<td>Ayurvedic Treatment</td>
-<td class="cus_width">Up to Rs.25,000 per year</td></tr>
-<tr>
-<td>Co-payment</td>
-<td class="cus_width">10% for every claim or all insured above the age of 80 years</td></tr>
-</tbody>
-</table>
-</div>
-
-                </div>
-                
-                   
-<div class="col-md-7 medical" style="padding-right:0px;margin-bottom: 0px;">                 <h4 class="h_d mar-40" >List of Hospitals with Cashless Facility</h4>
-               
-               <div class="cus_d" style="padding:5px;">
-               <div style="float: left; width: 100%; margin-top: 10px;">
-               
-               <div style="float: right; width: 100%; padding-left: 15px;"><div class="form-group col-md-12" style="margin-bottom:0px;">
-                    <label for="" class="sr-only">Search by Pin Code</label>
-                    <input type="text" placeholder="Search by Pin Code or Hospital Name" name="pin" id="" data-id="hos_class" autocomplete="off" spellcheck="false" class="form-control brdr typeahead tt-query med_search">
-                    <!--<div class="bs-example">
-        <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false">
-    </div>-->
-                    <div class="search_icon"><i class="fa fa-search"></i></div>
-                  </div></div>
-                  
-                  
-                  
-                  
-<div class="loc_d hos"  style="padding:0px 15px; border:none; display:none; margin-top:20px;">
-               
-               <div class="col-md-12">
-              <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index:1; display: block; right: auto;">
-<div class="tt-dataset-accounts">
-  <div class="city_m">
-    <div class="city_a">Hospital Name</div>
-    <div class="city_b">City</div>
-    <div class="city_c">Pin Code</div>
-  </div>
-  <span class="tt-suggestions resultTable" id="" style="display: block;">
-  
-  
-
-  </span></div>
-</span>
-                  </div>
-                  <div style="float: left; position: absolute; bottom: 0px; margin-bottom: 10px;" class="">Note: This list is subject to change without any notice</div>
-               
-               
-               </div>
-
-                  
-               </div>
-               
-               
-               
-               
-               
-               
-               </div>
-               
-                </div>
-               <div class="col-md-5">
-                              <h4 class="h_d mar-40" style="margin-left:50px;">Documents</h4>
-
-<ul class="doc">
-<li>Policy Brouchure <a href="javascript:void(0)"><img src="assets/images/pdf.jpg"></a></li>
-<li>Policy Wordings <a href="javascript:void(0)"><img src="assets/images/pdf.jpg" class="dimg"></a></li></ul>
-</ul>
-               
-               </div> 
-                
-                <div class="col-md-12  hide_d" >Hide details <i class="fa fa-angle-up"></i></div>
-                
-                
-                </div>
-                
-                </div>
-               </div>
-               
-               
-               <div class="cmp_tbl">
-                <div class="cus_tb clearfix" >
-                
-                <div class="col-md-2 pad-right-10 logo_ins">
-               <div class="img_bx" >
-            <img src="assets/images/client/bhartiaxa.jpg" border="0" class="img_bx_i">
-            <div class="check_bx">
-            <div class="checkbox">
-            <label>
-            <input type="checkbox" name="c_name" id="c_name" class="">
-            <label class="chk" for="Field4"></label>
-          </label></div>
-            </div>
-            
-            
-            </div>
-                </div>
-                
-                <div class="col-md-3 pad-left-10">
-               <div class="c_t" >
-            <span class="title_c" style="width:100%;">Bharti AXA</span><span class="sub_tit" >Smart Health Insurance</span>
-          </div>
-                </div>
-                
-                 <div class="col-md-7 m_anc">
-                
-                <div class="col-md-6 no_pad_l">
-                 <h3 class="anc">Rs. 12,340</h3>
-                 <p class="sub_tit">for cover of Rs. 3,00,000</p>
-                 </div>
-                 
-                  <div class="col-md-2" style="padding:0px">
-                 
-                 <div class="down_cnt" style="width:20px; height:auto; float:left; color:#999999;"><i class="fa fa-th"></i>
-                
-                 </div>
-  <div class="down_cnt_up" style=""><i class="fa fa-angle-up"></i> 
-                
-                 </div>
-                 </div>
-                 
-                  <div class="col-md-4 pad_r_10">
-                
-                  <a class="btn_offer_block" href="#">Buy Now <i class="fa fa-angle-right"></i></a>
-                  <div class="thumb"><i class="fa fa-thumbs-up"></i><div class="text_t"> 12 people chose this plan</div></div>
-                 </div>
-                 
-                </div>
-                </div>
-                
-                <div class="accordion_a">
-                 <div class="col-md-12">
-                <div class="col-md-12 mar-10">
-               <h4 class="h_d">Key Features</h4>
-               <div class="custom-table-1">
-<table width="100%">
-
-<tbody>
-         
-<tr class="odd">
-<td>Cashless treatment</td>
-<td class="cus_width">4000 network hospitals</td></tr>
-<tr>
-<td>Pre-existing diseases</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto recharge of Sum Insured</td>
-<td class="cus_width">Yes</td></tr>
-<tr>
-<td>Hospitalisation expenses
-    <ul><li><i class="fa fa-angle-right"></i> Room Rent</li>
-   <li><i class="fa fa-angle-right"></i> ICU Rent</li>
-    <li><i class="fa fa-angle-right"></i> Fees of Surgeon, Anesthetist,  Medicines, Nurses, etc</li></ul> </td>
-<td class="cus_width">
-
-<ul class="no"><li>
-Rs.3,000/day</li>
-<li>Rs.6,000/day</li>
-<li>As per actuals</li></ul></td></tr>
-<tr class="odd">
-<td>Pre-hospitalisation</td>
-<td class="cus_width">30 days before hospitalisation</td></tr>
-<tr>
-<td>Post-hospitalisation</td>
-<td class="cus_width">60 days after discharge</td></tr>
-<tr class="odd">
-<td>Day care expenses</td>
-<td class="cus_width">Covered</td></tr>
-<tr >
-<td>Maternity Benefits</td>
-<td class="cus_width">Covered after 4 years</td></tr>
-<tr class="odd">
-<td>Auto Recharge of Sum Insured</td>
-<td class="cus_width">Yes – only if hospitalisation due to Accident</td></tr>
-<tr >
-<td>Health Check up</td>
-<td class="cus_width">Up to 1% of Average SI after every 4 continuous claim free policy years</td></tr>
-
-<tr class="odd">
-<td>Ayurvedic Treatment</td>
-<td class="cus_width">Up to Rs.25,000 per year</td></tr>
-<tr>
-<td>Co-payment</td>
-<td class="cus_width">10% for every claim or all insured above the age of 80 years</td></tr>
-</tbody>
-</table>
-</div>
-
-                </div>
-                
-                   
-<div class="col-md-7 medical" style="padding-right:0px;margin-bottom: 0px;">                 <h4 class="h_d mar-40" >List of Hospitals with Cashless Facility</h4>
-               
-               <div class="cus_d" style="padding:5px;">
-               <div style="float: left; width: 100%; margin-top: 10px;">
-               
-               <div style="float: right; width: 100%; padding-left: 15px;"><div class="form-group col-md-12" style="margin-bottom:0px;">
-                    <label for="" class="sr-only">Search by Pin Code</label>
-                    <input type="text" placeholder="Search by Pin Code or Hospital Name" name="pin" id="" data-id="hos_class" autocomplete="off" spellcheck="false" class="form-control brdr typeahead tt-query med_search">
-                    <!--<div class="bs-example">
-        <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false">
-    </div>-->
-                    <div class="search_icon"><i class="fa fa-search"></i></div>
-                  </div></div>
-                  
-                  
-                  
-                  
-<div class="loc_d hos"  style="padding:0px 15px; border:none; display:none; margin-top:20px;">
-               
-               <div class="col-md-12">
-              <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index:1; display: block; right: auto;">
-<div class="tt-dataset-accounts">
-  <div class="city_m">
-    <div class="city_a">Hospital Name</div>
-    <div class="city_b">City</div>
-    <div class="city_c">Pin Code</div>
-  </div>
-  <span class="tt-suggestions resultTable" id="" style="display: block;">
-  
-  
-
-  </span></div>
-</span>
-                  </div>
-                  <div style="float: left; position: absolute; bottom: 0px; margin-bottom: 10px;" class="">Note: This list is subject to change without any notice</div>
-               
-               
-               </div>
-
-                  
-               </div>
-               
-               
-               
-               
-               
-               
-               </div>
-               
-                </div>
-               <div class="col-md-5">
-                              <h4 class="h_d mar-40" style="margin-left:50px;">Documents</h4>
-
-<ul class="doc">
-<li>Policy Brouchure <a href="javascript:void(0)"><img src="assets/images/pdf.jpg"></a></li>
-<li>Policy Wordings <a href="javascript:void(0)"><img src="assets/images/pdf.jpg" class="dimg"></a></li></ul>
-</ul>
-               
-               </div> 
-                
-                <div class="col-md-12  hide_d" >Hide details <i class="fa fa-angle-up"></i></div>
-                
-                
-                </div>
-                
-                </div>
-               </div>
-                
-                
-                
-               </div>
-               
-               
-               
-              
-            </div>
             <!--Sidebar-->
+            <?php echo form_open('health_insurance/basicMediclaim/health_policy',array('id'=>'search'));?>
             <div class="col-md-3 col-md-pull-9 sidebar sidebar-left" style="padding:0px;">
               <div class="inner" style="margin-bottom:50px;">
                 
@@ -1814,38 +376,30 @@ Rs.3,000/day</li>
 				</p>
                 
                 
-                
+                <?php if(isset($preexist_filter))
+                 		{
+                 			sort($preexist_filter);?>
                 <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
 				</p> 
                 
                  <h6 class="fh3">Pre-existing diseases</h6>
                  <p class="addOnFilter" >
-                 
-					 <div class="checkbox">
+                 <?php 
+                 		
+                 		foreach($preexist_filter as $p){?>
+					<div class="checkbox">
             <label>
-            <input type="checkbox" id="" name="10"  class="field checkbox" value="10">
-            <label class="" for="10">Plans which cover after 2 years
+            
+            <input type="checkbox" id="" name="10"  class="field checkbox" value="<?php echo $p;?>">
+            <label class="" for="10">Plans which cover after <?php echo $p;?> years
+					
 					</label>
-          </label></div>
-                     <div class="checkbox">
-            <label>
-            <input type="checkbox" id="" name="11"  class="field checkbox" value="11">
-            <label class="" for="11">Plans which cover after 3 years
-					</label>
-          </label></div>
-                      <div class="checkbox">
-            <label>
-            <input type="checkbox" id="" name="12"  class="field checkbox" value="12">
-            <label class="" for="12">Plans which cover after 4 years
-					</label>
-          </label></div>
-                     <div class="checkbox">
-            <label>
-            <input type="checkbox" id="" name="13"  class="field checkbox" value="13">
-            <label class="" for="13">Plans which cover after 5 years
-					</label>
-          </label></div>
+         	
+          </label>
+          
+          </div><?php }}?>
+               
 				</p>
                 
                 <p class="addOnFilter" style="margin:0px; padding:0px;">
@@ -1854,63 +408,20 @@ Rs.3,000/day</li>
                 
                 
                  <h6 class="fh3">Company </h6>
+                 <?php foreach($aNew as $comp){?>
                  <div class="addOnFilter clearfix" >
                  
                     
                     <div style="width: 100%; float: left;">
                     <div class="checkbox" style="width: auto; float: left; margin: 0px;">
             <label>
-            <input type="checkbox" value="23" class="field checkbox" name="23" id="">
-            <label for="23" class="">Relaince Life 
-					</label>
+            
+            <input type="checkbox" value="<?php echo $comp['company_id'];?>" class="field checkbox" name="23" id="">
+            <label for="23" class=""><?php echo $comp['company_shortname'];?></label>
+           
           </label></div> <span style="float:right;"> Rs. 12,340</span></div>
-                    
-                    
- <div style="width: 100%; float: left;">
-                    <div class="checkbox" style="width: auto; float: left; margin: 0px;">
-            <label>
-            <input type="checkbox" value="23" class="field checkbox" name="23a" id="23a">
-            <label for="23a" class="">Max Life </label>
-          </label></div> <span style="float:right;"> Rs. 13,340</span></div>
- <div style="width: 100%; float: left;">
-                    <div class="checkbox" style="width: auto; float: left; margin: 0px;">
-            <label>
-            <input type="checkbox" value="23" class="field checkbox" name="23b" id="23b">
-            <label for="23b" class="">Aviva </label>
-          </label></div> <span style="float:right;"> Rs. 13,340</span></div>
- <div style="width: 100%; float: left;">
-                    <div class="checkbox" style="width: auto; float: left; margin: 0px;">
-            <label>
-            <input type="checkbox" value="23" class="field checkbox" name="23c" id="23c">
-            <label for="23c" class="">HDFC Life </label>
-          </label></div> <span style="float:right;"> Rs. 13,340</span></div>
- <div style="width: 100%; float: left;">
-                    <div class="checkbox" style="width: auto; float: left; margin: 0px;">
-            <label>
-            <input type="checkbox" value="23" class="field checkbox" name="23d" id="23d">
-            <label for="23d" class="">Max Life </label>
-          </label></div> <span style="float:right;"> Rs. 13,340</span></div>
- <div style="width: 100%; float: left;">
-                    <div class="checkbox" style="width: auto; float: left; margin: 0px;">
-            <label>
-            <input type="checkbox" value="23" class="field checkbox" name="23e" id="23e">
-            <label for="23e" class="">Canara HSBC OBC </label>
-          </label></div> <span style="float:right;"> Rs. 13,340</span></div>
- <div style="width: 100%; float: left;">
-                    <div class="checkbox" style="width: auto; float: left; margin: 0px;">
-            <label>
-            <input type="checkbox" value="23" class="field checkbox" name="23f" id="23f">
-            <label for="23f" class="">LIC </label>
-          </label></div> <span style="float:right;"> Rs. 13,340</span></div>
- <div style="width: 100%; float: left;margin-bottom:10px;">
-                    <div class="checkbox" style="width: auto; float: left; margin: 0px;">
-            <label>
-            <input type="checkbox" value="23" class="field checkbox" name="23g" id="23g">
-            <label for="23g" class="">Star Union Daiichi </label>
-          </label></div> <span style="float:right;"> Rs. 13,340</span></div>
-                   
-                    
-				</div>
+              
+				</div><?php }?>
                  
                  <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
@@ -1989,8 +500,8 @@ Rs.3,000/day</li>
 			
 			<p class="displayStaticRange clearFix" style="padding-bottom:0px; margin-bottom:0px; margin-top:15px;">
 			
-                <span class="fLeft"><span data-pr="6437" class="INR">&#8377;</span>6,437</span>
-				<span class="fRight"><span data-pr="42306" class="INR">&#8377;</span>42,306</span>
+                <span class="fLeft"><span data-pr="<?php echo $min_annual_premium;?>" class="INR">&#8377;</span><?php echo $min_annual_premium;?></span>
+				<span class="fRight"><span data-pr="<?php echo $max_annual_premium;?>" class="INR">&#8377;</span><?php echo $max_annual_premium;?></span>
 			</p>
 	
 			<input type="hidden" name="price" value="6437-32293">
@@ -2034,6 +545,7 @@ Rs.3,000/day</li>
                 
               </div>
             </div>
+            <?php echo form_close();?>
           </div>
 </div>
 
@@ -2043,7 +555,7 @@ Rs.3,000/day</li>
 </div>
 
 
-<div id="search_sense_of_urgency_popup" class="hcom_simple_popdiv hcom_urgency_popup" style="display: block;">
+<div id="search_sense_of_urgency_popup" class="hcom_simple_popdiv hcom_urgency_popup" style="display: none;">
     <div class="arrow">
       <div class="outer"></div>
       <div class="inner"></div>
@@ -2065,9 +577,12 @@ Rs.3,000/day</li>
 <div class="tutorial">
 </div>
 
-
-
-
+<script type="text/javascript">
+var company_count = "<?= count($aNew);?>";
+var plan_count = "<?= count($customer_details);?>";
+var min_premium = "<?= $min_annual_premium;?>";
+var max_premium = "<?= $max_annual_premium;?>";
+</script>
 
 
 
@@ -2083,56 +598,4 @@ Rs.3,000/day</li>
 
  
 
-<?php require_once "include/footer_compare.php" ?>
-<!-- ======== @Region: #navigation ======== --> 
-
-<!--Scripts --> 
-
-<!--Legacy jQuery support for quicksand plugin--> 
-
-<!-- Bootstrap JS --> 
-
-<!--Bootstrap third-party plugins--> 
-
-<!--JS plugins--> 
-  <!--<link href="city/sty.css" rel="stylesheet">
-
-    <div class="mouseout modal" aria-hidden="false" style="display: none;"><div class="housing-logo"></div>
-    <div class="content">
-<div class="left-content">
-<div class="call-bubble call-image"></div>
-<div class="call-image">
-<i class="icon-phone"></i>
-</div>
-</div>
-<div class="right-content">
-<div class="text1">Call us at</div>
-<div class="number">03-333-333-333</div>
-<div class="text2">AND WE WILL HELP YOU BEST INSURANCE POLICY</div>
-</div>
-</div></div>-->
-
-
-<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-
-<script src="assets/js/jquery.min.js"></script> 
-
-
-<script src="assets/js/number.js"></script>
-
-<script src="assets/js/jquery-ui.min.js"></script> 
-<script src="assets/js/jquery.ui.touch-punch.min.js"></script> 
-
-
-<script src="assets/js/compare.js"></script>
-  
-<script  type="text/javascript" src="assets/js/typeahead.min.js"></script>
-
-
-
-
-
-
-
-</body>
-</html>
+<?php $this->load->view('partial_view/footer_resultpage');?>

@@ -8,6 +8,7 @@ border-radius: 4px;}
 .top_h{ font-size:16px; color:#999999; padding:10px 0px 5px 10px;}
 .top_p{ font-size:12px;  padding:0px 0px 0px 10px;}
 .top_m{ font-size:13px; color:#2ca3ef; padding:10px 0px 0px 10px;  cursor:pointer;}
+.top_m a{color:#2ca3ef;}
 .clearfix:after {
      visibility: hidden;
      display: block;
@@ -39,7 +40,7 @@ border-radius: 4px;}
 .cmp_p_s{ color:#2ca3ef; padding-right:10px;}
 .custom-table-1 ul{ padding-left:25px; list-style-type:none;}
 .custom-table-1 ul li{ line-height:20px;}
-.search_icon{ position:absolute; top:5px; right:20px; color:#2ca3ef;}
+.search_icon{ position:absolute; top:5px; right:25px; color:#2ca3ef;}
 .hide_d{float:right; color:#2ca3ef; text-align:right; margin-bottom:10px; font-size:12px; cursor:pointer;}
 .doc{ list-style-type:none; margin-left:10px; line-height:30px;}
 .doc li{ font-size:11px;}
@@ -47,9 +48,9 @@ border-radius: 4px;}
 .doc img.dimg{ margin-left:26px;}
 .addOnFilter span{ font-size:11px;}
 .h_d.mar-40{ margin-top:20px;}
-.thumb{color: rgb(255, 102, 51); float: left; position: absolute; width: 150px; top: 58px; right:0;}
+.thumb{color: rgb(255, 102, 51); float: left; position: absolute; width: 150px; top: 58px; right:-2px;}
 .thumb .text_t{color: rgb(0, 0, 0); font-size: 10px; margin-top: 3px; float: left; margin-right: 5px;}
-
+.custom-table-1 td.cus_width{ width:30% ;}
 
 
 .hcom_simple_popdiv {

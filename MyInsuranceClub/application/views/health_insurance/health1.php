@@ -120,7 +120,11 @@
                     																						echo $this->session->userdata['user_input']['plan_type'];
                     																					}else 
                     																					{?>1A<?php }?>">
-              <input type="hidden" id="plan_type_name" name="plan_type_name" value="">
+              <input type="hidden" id="plan_type_name" name="plan_type_name" value="<?php if(isset($this->session->userdata['user_input']['plan_type_name']))
+                    																					{
+                    																						echo $this->session->userdata['user_input']['plan_type_name'];
+                    																					}else 
+                    																					{?>Myself<?php }?>">
               <input type="hidden" id="product_name" name="product_name" value="Health Insurance">
               <input type="hidden" id="product_type" name="product_type" value="Mediclaim">
               

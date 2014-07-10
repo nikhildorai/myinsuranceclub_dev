@@ -115,9 +115,7 @@ $("#c_amt li").click(function() {
 //alert('a');
    var am_v = $(this).text(); // gets text contents of clicked li
 	$("#rs").text(am_v);
-	var am_vid = $(this).data('cvg-id');
 	$("#coverage_amount").val(am_v);
-	$("#coverage_amount_literal").val(am_vid);
  mouseOverActiveElement = false; 
   if (!mouseOverActiveElement) {
 		 
@@ -238,37 +236,33 @@ $('#clickk_g').live('mouseenter', function(){
 });*/
 
 
-
-
-
-
-
-$('.css-label.a.radGroup2.sel_m').css('backgroundPosition', '0 0');
-$('.css-label.a.radGroup2.ss.sel_f').css('backgroundPosition', '0 -15px');
-
-
+	$('.css-label.a.radGroup2.sel_m').css('backgroundPosition', '0 0');
+		$('.css-label.a.radGroup2.ss.sel_f').css('backgroundPosition', '0 -15px');
 $("#c_for_g li").click(function() {
-var am_v = $(this).text(); 
-if(am_v=="Male")
-{
+   var am_v = $(this).text(); 
+   if(am_v=="Male")
+   {
+ 
 	
-$('.css-label.a.radGroup2.sel_m').css('backgroundPosition', '0 0');
-
-$('.css-label.a.radGroup2.ss.sel_f').css('backgroundPosition', '0 -15px');
-
-}
-else
-{
-$('.css-label.a.radGroup2.sel_m').css('backgroundPosition', '0 -15px');
-
-$('.css-label.a.radGroup2.ss.sel_f').css('backgroundPosition', '0 0');
-}
-
-$("#ge").text(am_v);
-$("#cust_gender").val(am_v);
-mouseOverActiveElement2 = false; 
-$("#c_ch_g").fadeOut();
+		$('.css-label.a.radGroup2.sel_m').css('backgroundPosition', '0 0');
+       
+		$('.css-label.a.radGroup2.ss.sel_f').css('backgroundPosition', '0 -15px');
+      
+ 
+   }
+   else
+   {
+	   $('.css-label.a.radGroup2.sel_m').css('backgroundPosition', '0 -15px');
+       
+		$('.css-label.a.radGroup2.ss.sel_f').css('backgroundPosition', '0 0');
+   }
+   
+	$("#ge").text(am_v);
+	$("#cust_gender").val(am_v);
+	  mouseOverActiveElement2 = false; 
+	   $("#c_ch_g").fadeOut();
 });
+
 
 //FOUR
 
@@ -312,10 +306,9 @@ $("#c_for_l li").click(function() {
    var am_v = $(this).text(); 
    var rrr = $("#combobox").val();
    alert(rrr);
-	//var am_vid=$(this).data('city-id');
+	var am_vid=$(this).data('city-id');
    $("#loc").text(am_v);
-   $("#cust_city_name").val(am_v);
-	//$("#cust_city").val(am_vid);
+	$("#cust_city").val(am_vid);
 	 	  mouseOverActiveElement3 = false; 
 		  $("#c_ch_l").fadeOut();
 
@@ -329,7 +322,7 @@ $(".ui-autocomplete li").click(function() {
 
 /* js for policy term list */
  
-  $('#clickk_p').mouseenter(function(){
+ /* $('#clickk_p').mouseenter(function(){
 	  $("#c_yr").stop().slideDown();
 	  }); 
 	  $('#c_yr').mouseleave(function(){
@@ -339,15 +332,14 @@ $(".ui-autocomplete li").click(function() {
  $("#c_term li").click(function() {
 
 	   var am_v = $(this).text(); 
-	var am_vid = $(this).data('term-id');
-	   $("#yr").text(am_v);
-		$("#policy_term").val(am_vid);
+		$("#yr").text(am_v);
+		$("#policy_term").val(am_v);
 		 $("#c_yr").fadeOut();
-	});
+	});*/
  /* js for policy term ends */
   
 /*$("#clickk").hover(function () {
-  $(".choice").slideToggle("slow");
+  $(".choice").slideToggle("fast");
 });*/
 
 

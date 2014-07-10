@@ -1,0 +1,92 @@
+.cus_cont {
+    width: 860px;
+}
+
+#one_c, #two_c, #three_c, #four_c {
+    float: left;
+    width: 50%;
+}
+.input.gen_r.rm{ margin-right:7px;}
+.gen_text {
+    color: #999;
+    float: left;
+    font-weight: normal;
+    position: relative;
+    width: 70px;
+}
+.css-label.radGroup2.ss {
+    left: 15px;
+}
+.icon-append.fa.fa-female{ padding-left:32px;}
+.input.gen_r{ left:10px;}
+.cus_cont .pos1 .col-md-2 {
+    float: left;
+    width: 190px;
+}
+.pos1{  margin-left: 35px;}
+.cus_border.form-control.sel{background:#f7f4f4;} 
+.cus_border.form-control.sel .label.css-label,.cus_border.form-control.sel .icon-append { cursor:default !important; }
+
+@media screen and (max-width: 990px) {
+	.pos1{  margin-left: 0px;}
+	.cus_cont {
+    width: 760px;
+}
+.cus_cont .col-md-2.m_s {
+ width: 170px;  float:left;
+}	
+.cus_cont .col-md-3,.cus_cont .col-md-6 {
+ width: 190px; float:left;
+}
+.cus_cont .col-md-4 {
+ width: 200px; float:left;
+}
+.gen_text {
+width: 49px;
+}
+}
+@media screen and (max-width: 820px) {
+	.clearfix1{ content:""; display:table;}
+	.cus_cont {
+    width: 380px;
+}
+.cus_cont .col-md-2.m_s {
+ width: 190px;  float:left;
+}	
+.cus_cont .col-md-3,.cus_cont .col-md-6 {
+ width: 190px; float:left;
+}
+.cus_cont .col-md-4 {
+ width: 190px; float:left;
+}
+.gen_text {
+width: 49px;
+}
+}
+@media screen and (max-width: 480px) {
+	.pos1{  margin-left: 0px;}
+	.clearfix1 {
+content: "";
+display: block;
+}
+	.cus_cont {
+    width: 100%;
+}
+.cus_cont .col-md-2.m_s {
+ width: 100%;  float:left; padding:0;
+}	
+.cus_cont .col-md-3,.cus_cont .col-md-6 {
+width: 100%;  float:left;padding:0;
+}
+.cus_cont .col-md-4 {
+width: 100%;  float:left;padding:0;
+}
+.gen_text {
+width: 49px;
+}
+#one_c, #two_c, #three_c, #four_c, #adlt_spc {
+float: left;
+width: 100%;
+margin-top: 10px;
+}
+}

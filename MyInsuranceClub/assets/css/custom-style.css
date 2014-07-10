@@ -1112,7 +1112,7 @@ i.searchSprite, .searchSprite, .withNotch .tracker, .rangeHandle, .withArrows li
 	.h_d{ font-weight:normal; font-size:14px; color:#2ca3ef; }
 	.h_d3{ font-weight:normal; font-size:13px; }
 	.odd{ background:#f6f6f6;}
-	.custom-table-1 td{ padding:5px 5px; font-size:12px; width:40%;}
+	.custom-table-1 td{ padding:5px 5px; font-size:12px; width:25%;}
 	.no li{ list-style-type:none;} .no{ padding-left:0 !important; margin-top: 15px;}
 	.cus_d{border:1px  solid #dadada; width:100%; min-height:65px; height:100%;border-radius: 4px; float:left;
 	-moz-border-radius: 4px;

@@ -72,9 +72,6 @@ class basicMediclaim extends CI_Controller {
 		
 		$data['city']=$this->city->get_city();
 		
-		$this->template->set_template('frontend');
-		$this->template->write_view('content', 'health_insurance/health1', $data, TRUE);
-		//$this->template->render();
 		$this->load->view('health_insurance/health1',$data);
 	
 	}
@@ -365,7 +362,7 @@ class basicMediclaim extends CI_Controller {
 			}
 			else
 			{
-				$this->load->view('health_insurance/health_compare',$data);//,$data
+				$this->load->view('health_insurance/search_results',$data);//,$data
 			}
 			/* Email config */
 			/* if(!($this->input->is_ajax_request()))
