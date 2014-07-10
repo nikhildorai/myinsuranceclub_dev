@@ -187,7 +187,12 @@ class Util {
     public function getUserSearchFiltersHtml($customer_details = array(), $type = "health")
     {
     	$return = '';
-    	 
+		$con = &get_instance();
+		$folderUrl = $con->config->config['folder_path']['company'];
+		$fileUrl = $con->config->config['url_path']['company'];
+		$pfolderUrl = $con->config->config['folder_path']['policy'];
+		$pfileUrl = $con->config->config['url_path']['policy'];
+		
     	if($type == "health")
     	{
     		if(empty($customer_details))
@@ -759,9 +764,12 @@ class Util {
 								<div class="cmp_tbl">
 									<div class="cus_tb clearfix">
 										<div class="col-md-2 pad-right-10 logo_ins">
-											<div class="img_bx">
-												<img src="'.base_url().'assets/images/client/bhartiaxa.jpg" border="0" class="img_bx_i">
-												<div class="check_bx">
+											<div class="img_bx">';
+												if (!empty($detail['logo_image_2']) && file_exists($folderUrl.$detail['logo_image_2']))
+												{
+													$return .= '<img src="'.$fileUrl.$detail['logo_image_2'].'" border="0" class="img_bx_i">';
+												}
+					$return .= 					'<div class="check_bx">
 													<div class="checkbox">
 														<label> 
 															<input type="checkbox" name="compare[]" id="c_name" class="refundable" value="'.$compare_data.'"> 
@@ -887,10 +895,17 @@ class Util {
 											</div>
 											<div class="col-md-5">
 												<h4 class="h_d mar-40" style="margin-left: 50px;">Documents</h4>
-												<ul class="doc">
-													<li>Policy Brouchure <a href="javascript:void(0)"><img src="'.base_url().'assets/images/pdf.jpg"> </a></li>
-													<li>Policy Wordings <a href="javascript:void(0)"><img src="'.base_url().'assets/images/pdf.jpg" class="dimg"> </a></li>
-												</ul>
+												<ul class="doc">';
+    			
+													if (!empty($detail['brochure']) && file_exists($pfolderUrl.$detail['brochure']))
+													{
+														$return .=	'<li>Policy Brouchure <a href="'.base_url().'admin/policy/download/'.$detail['policy_id'].'/brochure"><img src="'.base_url().'assets/images/pdf.jpg"> </a></li>';
+													}
+													if (!empty($detail['policy_wordings']) && file_exists($pfolderUrl.$detail['policy_wordings']))
+													{
+														$return .=	'<li>Policy Wordings <a href="'.base_url().'admin/policy/download/'.$detail['policy_id'].'/policy_wordings"><img src="'.base_url().'assets/images/pdf.jpg" class="dimg"> </a></li>';
+													}
+							$return .=			'</ul>
 											</div>
 											<div class="col-md-12  hide_d">
 												Hide details <i class="fa fa-angle-up"></i>

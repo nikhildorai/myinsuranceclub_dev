@@ -79,7 +79,9 @@
 							<a href="javascript:void(0);" id="comparePolicy" class="cmp_p_s">Compare Plans</a>
 						</div>
 					</div>
-					<?php echo $this->util->getUserSearchFiltersHtml($customer_details, $type = "personalAccident");?>
+					<div  id="cmp_tbl_result">
+						<?php echo $this->util->getUserSearchFiltersHtml($customer_details, $type = "personalAccident");?>
+					</div>
 					<?php echo form_close();?>
 				</div>
 
@@ -233,15 +235,10 @@ var max_premium = "<?php echo $max_annual_premium;?>";
 
 </script>
 
-<script src="<?php echo base_url();?>assets/js/number.js"></script>
-<script src="<?php echo base_url();?>assets/js/jquery-ui.min.js"></script> 
-<script src="<?php echo base_url();?>assets/js/jquery.ui.touch-punch.min.js"></script> 
-<script src="<?php echo base_url();?>assets/js/compare.js"></script>
-<script src="<?php echo base_url();?>assets/js/typeahead.min.js"></script>
 
 
 <script type="text/javascript">
-(function($) {
+
 	$(document).ready(function() {
 
 		$('#comparePolicy').on('click',function(){
@@ -255,22 +252,22 @@ var max_premium = "<?php echo $max_annual_premium;?>";
 				$('#compare').submit();
 			}
 		});
+
+		$('.search_filter').on('click',function(){
+			data = $('#search').serialize();
+
+			 $.ajax({
+					type:"post", 
+					url:"<?php echo base_url().'health_insurance/personal_accident/get_personal_accident_results'?>",
+					data:data,
+					success:function(data)
+					{
+						$('#cmp_tbl_result').html(data);
+					}
+				});
+		});
 	});
 
-	$('.search_filter').on('click',function(){
-		data = $('#search').serialize();
-
-		 $.ajax({
-				type:"post", 
-				url:"<?php echo base_url().'health_insurance/personal_accident/get_personal_accident_results'?>",
-				data:data,
-				success:function(data)
-				{
-					$('#cmp_tbl').html(data);
-				}
-			});
-	});
-})(jQuery);
 </script>
 
 
