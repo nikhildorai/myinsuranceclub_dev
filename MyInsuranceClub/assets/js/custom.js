@@ -48,10 +48,12 @@ $('.bxslider').bxSlider({
 
 
  $('#soi').mouseover(function(){
+	 
+	 var base_url = CI_ROOT+"/include/social.php";
          $('#soi').addClass('active');   
 	  if ( $("#tes" ).hasClass( "tes" ) ) {
 		  
-		   $("#target").load("include/social.php"); 
+		   $("#target").load(base_url); 
 		  
 		  } 
 		        });
@@ -345,10 +347,37 @@ $(".ui-autocomplete li").click(function() {
 
 
 
+//	occupation drodown
 
 
 
+ $('#clickk_occupation').click(function(){
+   //$("#c_ch_f").stop().slideDown();
+	 	$("#c_ch_occupoation").show();
+	 	$('#c_for_occupation').jScrollPane({
+		    verticalDragMinHeight: 50,
+		    verticalDragMaxHeight: 50
+		});
+   }); 
+  
 
+ var mouseOverActiveElementOccupation = false;
+ $('#clickk_occupation').live('mouseenter', function(){
+	 mouseOverActiveElementOccupation = true; 
+ }).live('mouseleave', function(){ 
+	 mouseOverActiveElementOccupation = false; 
+ 	$("#c_ch_occupoation").fadeOut();
+ });
+
+ $("#c_for_occupation li").click(function() {
+	 var am_v = $(this).text(); 
+	 var am_vid = $(this).data('occupation-id');
+	 $("#occupation_text").text(am_v);
+	 $("#cust_occupation_name").val(am_v);
+	 $("#cust_occupation").val(am_vid);
+	 mouseOverActiveElementOccupation = false; 
+	 $("#c_ch_occupoation").fadeOut();
+ });
 
 
 

@@ -86,6 +86,5 @@ $(document).ready(function(){
 	$('#menu').slicknav();
 });
 </script>
-
 </body>
 </html>

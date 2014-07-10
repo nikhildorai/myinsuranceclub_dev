@@ -733,58 +733,63 @@ class Util {
     		{
     			foreach($customer_details as $detail)
     			{
-    				$return	.=	'<div class="cmp_tbl"><div style="min-height: 74px; height: auto; margin-top: 10px; background: #effdfe; border: 2px solid #dadada;" class="main_acc">
-									<div class="col-md-5">
-										<label for="1_1_refundable" style="margin-top: -5px; margin-bottom: 0px; padding: 25px 0px 20px 0px;">';
-    
-    			/*	if($detail['preexisting_age']!='Not Covered')
-    				{
-    					$preexist_diseases='Waiting period of '.$detail['preexisting_age'].' years';
-    				}
-    				else
-    				{
-    					$preexist_diseases=$detail['preexisting_age'];
-    				}
-    				*/
     				$preexist_diseases = '';
     				$variant='';
     				if($detail['variant_name']!='Base')
-    				{
     					$variant=' '.$detail['variant_name'];
-    				}
-    				else{
-    					$variant='';
-    				}
+    				
     				$compare_data=$detail['variant_id'].'-'.$detail['annual_premium'];//.'-'.$detail['age'];
-    				$return	.=	'<input type="checkbox" name="compare[]" class="refundable" value="'.$compare_data.'" />
-										<span class="title_c">'.$detail['company_shortname'].'</span>
-										<span class="sub_tit">('.$detail['policy_name'].$variant.')</span>
-										</label>
-									</div>';
-    
-    
-    				$return	.=	'<div class="col-md-7">
-										<div class="col-md-6 no_pad_l">
-											<h3 class="anc">Rs. '.number_format($detail['annual_premium']).'</h3>
-											<p class="anc_f">for cover of Rs. '.number_format($detail['sum_assured']).'</p>
-										</div>
-    
-										<div class="col-md-2">
-											<div class="down_cnt">
-												<img src="'.base_url().'assets/images/down_ar.jpg" border="0">
+    				
+					$return .= '
+								<div class="cmp_tbl">
+									<div class="cus_tb clearfix">
+										<div class="col-md-2 pad-right-10 logo_ins">
+											<div class="img_bx">
+												<img src="'.base_url().'assets/images/client/bhartiaxa.jpg" border="0" class="img_bx_i">
+												<div class="check_bx">
+													<div class="checkbox">
+														<label> 
+															<input type="checkbox" name="compare[]" id="c_name" class="refundable" value="'.$compare_data.'"> 
+															<label class="chk" for="Field4"></label> 
+														</label>
+													</div>
+												</div>
 											</div>
 										</div>
-    
-										<div class="col-md-3">
-											<button type="submit" class="btn btn-primary my" style="margin-top: 18px;">Buy Now &gt;</button>
+										<div class="col-md-3 pad-left-10">
+											<div class="c_t">
+												<span class="title_c" style="width: 100%;">'.$detail['company_shortname'].'</span>
+												<span class="sub_tit">'.$detail['policy_name'].$variant.'</span>
+											</div>
+										</div>
+										<div class="col-md-7 m_anc">
+											<div class="col-md-6 no_pad_l">
+												<h3 class="anc">Rs. '.number_format($detail['annual_premium']).'</h3>
+												<p class="sub_tit">for cover of Rs. '.number_format($detail['sum_assured']).'</p>
+											</div>
+											<div class="col-md-2" style="padding: 0px">
+												<div class="down_cnt" style="width: 20px; height: auto; float: left; color: #999999;">
+													<i class="fa fa-th"></i>
+												</div>
+												<div class="down_cnt_up" style="">
+													<i class="fa fa-angle-up"></i>
+												</div>
+											</div>
+			
+											<div class="col-md-4 pad_r_10">
+												<a class="btn_offer_block" href="#">Buy Now <i class="fa fa-angle-right"></i> </a>
+												<div class="thumb">
+													<i class="fa fa-thumbs-up"></i>
+													<div class="text_t">12 people chose this plan</div>
+												</div>
+											</div>
 										</div>
 									</div>
-									';
-    
-    				$return	.=	'<div class="accordion_a">
+			
+									<div class="accordion_a">
 										<div class="col-md-12">
-											<div class="col-md-8">
-												<h4 class="h_d">Plan Details</h4>
+											<div class="col-md-12 mar-10">
+												<h4 class="h_d">Key Features</h4>
 												<div class="custom-table-1">
 													<table width="100%">
 														<tbody>';
@@ -792,21 +797,33 @@ class Util {
     												$featureKeys = array_keys($featureList);
     												$i = 1;
     												foreach ($detail as $k1=>$v1)
-    												{	
+    												{
     													if (in_array($k1, $featureKeys) && !empty($v1))
     													{
     														if ($i == 1)
 								    							$return .=	'<tr class="odd">';
 								    						else 
 								    							$return .=	'<tr>';
+								    							
 																$return .=		'<td>'.$featureList[$k1].'</td>
-																				<td>';
+																				<td class="cus_width">';
+																
 									    						if ($k1 == 'major_exclusions')
 									    						{
-									    							$return .= 			implode('<br>', unserialize($v1));
+									    							$v1 = unserialize($v1);
+									    							if (!empty($v1))
+									    							{
+											    						$return .=	'<ul class="no">';
+											    								foreach ($v1 as $k2=>$v2)
+											    								{
+																			$return .=	'<ll>'.$v2.'</li>';
+											    								}
+																		$return .=	'</ul>';
+									    							}
 									    						}
 									    						else 
 									    							$return .=			$v1;
+									    							
 																$return .=		'</td>
 																			</tr>';
 						    								$i++;
@@ -814,46 +831,58 @@ class Util {
 						    									$i = 1;
     													}
     												}
-    							$return .=					'<tr>
-																<td></td>
-																<td>'."".'</td>
-															</tr>
+					$return .=							'
 														</tbody>
 													</table>
 												</div>
-											</div>';
-    					
-    				$return	.=	'<div class="col-md-4 no_pad_lr">
-												<h4 class="h_d mar-40">Product Brouchure <img src="'.base_url().'assets/images/pdf.png" border="0"></h4>
-    
-												<div style="padding: 5px;">
-							
-													<div style="float: left; width: 100%;">
-    
-														<div style="float: right; width: 150px;">
-								
+											</div>
+			
+			
+											<div class="col-md-7 medical" style="padding-right: 0px; margin-bottom: 0px;">
+												<h4 class="h_d mar-40">List of Hospitals with Cashless Facility</h4>
+												<div class="cus_d" style="padding: 5px;">
+													<div style="float: left; width: 100%; margin-top: 10px;">
+														<div style="float: right; width: 100%; padding-left: 15px;">
+															<div class="form-group col-md-12" style="margin-bottom: 0px;">
+																<label for="" class="sr-only">Search by Pin Code</label> 
+																<input type="text" placeholder="Search by Pin Code or Hospital Name" name="pin" id="" data-id="hos_class" autocomplete="off" spellcheck="false" class="form-control brdr typeahead tt-query med_search">
+																<div class="search_icon">
+																	<i class="fa fa-search"></i>
+																</div>
+															</div>
+														</div>
+														<div class="loc_d hos" style="padding: 0px 15px; border: none; display: none; margin-top: 20px;">
+															<div class="col-md-12">
+																<span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 1; display: block; right: auto;">
+																	<div class="tt-dataset-accounts">
+																		<div class="city_m">
+																			<div class="city_a">Hospital Name</div>
+																			<div class="city_b">City</div>
+																			<div class="city_c">Pin Code</div>
+																		</div>
+																		<span class="tt-suggestions resultTable" id=""
+																			style="display: block;"> </span>
+																	</div> 
+																</span>
+															</div>
+															<div style="float: left; position: absolute; bottom: 0px; margin-bottom: 10px;" class="">Note: This list is subject to change without any notice</div>
 														</div>
 													</div>
-    
-    
-													<div>
-    
-														<div class="col-md-12">
-								
-														</div>
-    
-														<div class=" col-md-12">
-								
-														</div>
-    
-    
-													</div>';
-    
-    				$return	.=	'</div>
+												</div>
+											</div>
+											<div class="col-md-5">
+												<h4 class="h_d mar-40" style="margin-left: 50px;">Documents</h4>
+												<ul class="doc">
+													<li>Policy Brouchure <a href="javascript:void(0)"><img src="'.base_url().'assets/images/pdf.jpg"> </a></li>
+													<li>Policy Wordings <a href="javascript:void(0)"><img src="'.base_url().'assets/images/pdf.jpg" class="dimg"> </a></li>
+												</ul>
+											</div>
+											<div class="col-md-12  hide_d">
+												Hide details <i class="fa fa-angle-up"></i>
 											</div>
 										</div>
 									</div>
-								</div></div>';
+								</div>';
     			}
     		}
     

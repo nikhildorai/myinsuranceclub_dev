@@ -66,7 +66,7 @@ $template['default']['parser_method'] = 'parse';
 $template['default']['parse_template'] = FALSE;
 
 
-//	front end template
+//	default front end template
 $template['frontend']['template'] = 'frontend';
 $template['frontend']['regions'] = array(
     'header',
@@ -76,6 +76,19 @@ $template['frontend']['regions'] = array(
 $template['frontend']['parser'] = 'parser';
 $template['frontend']['parser_method'] = 'parse';
 $template['frontend']['parse_template'] = FALSE;
+
+
+//	front end template for search result
+$template['frontendsearch']['template'] = 'frontendsearch';
+$template['frontendsearch']['regions'] = array(
+    'header',
+   'content',
+   'footer',
+);
+$template['frontendsearch']['parser'] = 'parser';
+$template['frontendsearch']['parser_method'] = 'parse';
+$template['frontendsearch']['parse_template'] = FALSE;
+
 //$template['default']['regions']['header'] = array('content' => array('<h1>CI Rocks!</h1>'));
 //$template['default']['regions']['footer'] = array('content' => array('<p id="copyright">© Our Company Inc.</p>'));
 /* End of file template.php */
