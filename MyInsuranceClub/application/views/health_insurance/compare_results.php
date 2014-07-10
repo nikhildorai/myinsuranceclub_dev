@@ -5,27 +5,27 @@
 <title>Untitled Document</title>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
 <!-- Bootstrap CSS -->
-<link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap third-party plugins css -->
 <!-- Font Awesome -->
-<link href="assets/css/font-awesome.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>/assets/css/font-awesome.min.css" rel="stylesheet">
 <!-- style -->
-<link href="assets/css/theme-style.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>/assets/css/theme-style.min.css" rel="stylesheet">
 <!-- custom override -->
-<link href="assets/css/custom-style.css" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/slicknav.css">
-<link rel="stylesheet" href="assets/css/custom.css">
-<link rel="stylesheet" href="assets/css/responsive.css">
-<link rel="stylesheet" href="assets/css/jquery.qtip.css">
-<link rel="stylesheet" href="assets/css/smart-pricing1.css">
+<link href="<?php echo base_url();?>/assets/css/custom-style.css" rel="stylesheet">
+<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/slicknav.css">
+<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/custom.css">
+<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/responsive.css">
+<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/jquery.qtip.css">
+<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/smart-pricing1.css">
 </head>
 
 <body class="page page-index">
-<?php require_once "include/header_compare.php" ?>
+<?php $this->load->view('partial_view/header_resultpage'); ?>
 <div id="page-wrap" class="container" style="margin-bottom:100px;">
   <div class="smart-grids">
     <div class="smart-wrapper">
-      <div class="back_to"><i class="fa fa-angle-left arrow_left"></i><a href="health_search.php">Back to Search Results</a></div>
+      <div class="back_to"><i class="fa fa-angle-left arrow_left"></i><a href="<?php echo base_url();?>health-insurance/search-results">Back to Search Results</a></div>
       <div class="difference">
         <div class="checkbox">
           <label>
@@ -206,7 +206,7 @@
     </div>
   </div>
 </div>
-<?php require_once "include/footer_compare.php" ?>
+<?php $this->load->view('partial_view/footer_resultpage'); ?>
 <!-- ======== @Region: #navigation ======== --> 
 
 <!--Scripts --> 
@@ -236,8 +236,8 @@
 </div></div>--> 
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script> 
-<script src="assets/js/jquery.min.js"></script> 
-<script type="text/javascript" src="assets/js/jquery.qtip.js"></script> 
+<script src="<?php echo base_url();?>/assets/js/jquery.min.js"></script> 
+<script type="text/javascript" src="<?php echo base_url();?>/assets/js/jquery.qtip.js"></script> 
 <script type="text/javascript">
 
 

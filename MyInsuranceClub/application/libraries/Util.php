@@ -199,11 +199,11 @@ class Util {
     		{
     			foreach($customer_details as $detail)
     			{
-    				$return	.=	'<div class="cmp_tbl"><div style="min-height: 74px; height: auto; margin-top: 10px; background: #effdfe; border: 2px solid #dadada;" class="main_acc">
-									<div class="col-md-5">
-										<label for="1_1_refundable" style="margin-top: -5px; margin-bottom: 0px; padding: 25px 0px 20px 0px;">';
-    
-    				if($detail['preexisting_diseases']!='Not Covered')
+    					
+    				 
+    				$preexist_diseases='';
+    			
+    				if(trim($detail['preexisting_diseases'])!='Not Covered')
     				{
     					$preexist_diseases='Waiting period of '.$detail['preexisting_diseases'].' years';
     				}
@@ -219,154 +219,169 @@ class Util {
     				else{
     					$variant='';
     				}
+    				 
     				$compare_data=$detail['variant_id'].'-'.$detail['annual_premium'].'-'.$detail['age'];
-    				$return	.=	'<input type="checkbox" name="compare[]" class="refundable" value="'.$compare_data.'" />
-										<span class="title_c">'.$detail['company_shortname'].'</span>
-										<span class="sub_tit">('.$detail['policy_name'].$variant.')</span>
-										</label>
-									</div>';
-    
-    
-    				$return	.=	'<div class="col-md-7">
-										<div class="col-md-6 no_pad_l">
-											<h3 class="anc">Rs. '.number_format($detail['annual_premium']).'</h3>
-											<p class="anc_f">for cover of Rs. '.number_format($detail['sum_assured']).'</p>
-										</div>
-    
-										<div class="col-md-2">
-											<div class="down_cnt">
-												<img src="'.base_url().'assets/images/down_ar.jpg" border="0">
-											</div>
-										</div>
-    
-										<div class="col-md-3">
-											<button type="submit" class="btn btn-primary my" style="margin-top: 18px;">Buy Now &gt;</button>
-										</div>
-									</div>
-									';
-    
-    				$return	.=	'<div class="accordion_a">
-										<div class="col-md-12">
-											<div class="col-md-8">
-												<h4 class="h_d">Plan Details</h4>
-												<div class="custom-table-1">
-													<table width="100%">
-														<tbody>
-															<tr class="odd">
-																<td>Cashless treatment</td>
-																<td>'.$detail['cashless_treatment'].'</td>
-															</tr>
-															<tr>
-																<td>Pre-existing diseases</td>
-																<td>'.$preexist_diseases.'</td>
-															</tr>
-    
-															<tr class="odd">
-																<td>Auto recharge of Sum Insured</td>
-																<td>'.$detail['autorecharge_SI'].'</td>
-															</tr>
-															<tr>
-																<td>Hospitalisation expenses
-																	<ul>
-																		<li>Room Rent</li>
-																		<li>ICU Rent</li>
-																		<li>Fees of Surgeon, Anesthetist, Medicines, Nurses, etc</li>
-																	</ul>
-																</td>
-																<td>
-																	<ul class="no">
-																		<li>'.$detail['room_rent'].'</li>
-																		<li>'.$detail['icu_rent'].'</li>
-																		<li>'.$detail['doctor_fee'].'</li>
-																	</ul>
-																</td>
-															</tr>
-															<tr class="odd">
-																<td>Pre-hospitalisation</td>
-																<td>'.$detail['pre_hosp'].'</td>
-															</tr>
-															<tr>
-																<td>Post-hospitalisation</td>
-																<td>'.$detail['post_hosp'].'</td>
-															</tr>
-    
-															<tr class="odd">
-																<td>Day care expenses</td>
-																<td>'.$detail['day_care'].'</td>
-															</tr>
-    
-															<tr>
-																<td>Maternity Benefits</td>
-																<td>'.$detail['maternity'].'</td>
-															</tr>
-															<tr class="odd">
-																<td>Auto Recharge of Sum Insured</td>
-																<td>Yes – only if hospitalisation due to Accident</td>
-															</tr>
-															<tr>
-																<td>Health Check up</td>
-																<td>'.$detail['check_up'].'</td>
-															</tr>
-    
-															<tr class="odd">
-																<td>Ayurvedic Treatment</td>
-																<td>'.$detail['ayurvedic'].'</td>
-															</tr>
-															<tr>
-																<td>Co-payment</td>
-																<td>'.$detail['co_pay'].'</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-											</div>';
+    				 
+    				 
     					
-    				$return	.=	'<div class="col-md-4 no_pad_lr">
-												<h4 class="h_d mar-40">Product Brouchure <img src="'.base_url().'assets/images/pdf.png" border="0"></h4>
-    
-												<div class="cus_d" style="padding: 5px;">
-													<h4 class="h_d3">List of Cashless Hospitalization facility</h4>
-													<div style="float: left; width: 100%;">
-														<div style="float: left;">
-															<h4 class="h_d" style="margin-top: 7px">Enter Pincode</h4>
-														</div>
-														<div style="float: right; width: 150px;">
-															<div class="form-group col-md-12">
-																<label class="sr-only" for="">Enter Pincode</label> <input
-																	type="text" class="form-control brdr" id="pin"
-																	name="pin" placeholder="Enter Pincode">
-															</div>
-														</div>
-													</div>
-    
-    
-													<div class="loc_d">
-    
-														<div class="col-md-12">
-															<label for="1_1_refundable22"> <input type="radio"
-																name="loc_current1" value="Mumbai" class="loc_fnt">
-																Mumbai
-															</label> <label for="1_1_refundable2"> <input type="radio"
-																name="loc_current1" value="Anywhere in India"
-																class="loc_fnt"> Anywhere in India
-															</label>
-														</div>
-    
-														<div class=" col-md-12">
-															<label class="sr-only" for="">Enter Pincode</label> <input
-																type="text" class="form-control brdr" id="pin"
-																name="pin1" placeholder="Search by name of hospital">
-																<div><ul style="list-style-type: none;"><li></li></ul></div>
-														</div>
-    
-    
-													</div>';
-    
-    				$return	.=	'</div>
-											</div>
-										</div>
-									</div>
-								</div></div>';
+    				$return .= '<div class="cmp_tbl">
+        			                	<div class="cus_tb clearfix" >
+        			                		<div class="col-md-2 pad-right-10 logo_ins">
+        			               				<div class="img_bx" >
+        			            					<img src="'.base_url().'/uploads/company/'.$detail['logo_image_2'].'" border="0" class="img_bx_i">
+        			            						<div class="check_bx">
+        			            							<div class="checkbox">
+        			            								<label>
+        			            									<input type="checkbox" name="compare[]" id="c_name" class="cmpplans" value="'.$compare_data.'">
+        			            										<label class="chk" for="Field4"></label>
+        			          									</label>
+        			            							</div>
+        			            						</div>
+        			            				</div>
+        			                	</div>';
+    				 
+    				$return .= '<div class="col-md-3 pad-left-10">
+        			               		<div class="c_t" >
+        			            			<span class="title_c" style="width:100%;">'.$detail['company_shortname'].'</span><span class="sub_tit" >'.$detail['policy_name'].$variant.'</span>
+        			          			</div>
+        			                </div>';
+    				 
+    				$return .= '<div class="col-md-7 m_anc">
+        			                	<div class="col-md-6 no_pad_l">
+        			                 		<h3 class="anc">&#8377;'.$detail['annual_premium'].'</h3>
+        			                 			<p class="sub_tit">for cover of &#8377;'.$detail['sum_assured'].'</p>
+        			                 	</div>
+        			                  			<div class="col-md-2" style="padding:0px">
+        			                 				<div class="down_cnt" style="width:20px; height:auto; float:left; color:#999999;"><i class="fa fa-th"></i>
+		        			                 		</div>
+        			  									<div class="down_cnt_up" style=""><i class="fa fa-angle-up"></i>
+        			                 					</div>
+        			                			 </div>
+        			                  					<div class="col-md-4 pad_r_10">
+        			                  						<a class="btn_offer_block" href="#">Buy Now <i class="fa fa-angle-right"></i></a>
+        			                  							<div class="thumb"><i class="fa fa-thumbs-up"></i><div class="text_t"> 12 people chose this plan</div></div>
+        			                					 </div>
+        			               			 </div>
+        			                </div>';
+    				 
+    				$return .= '<div class="accordion_a">
+        			                 	<div class="col-md-12">
+        			                		<div class="col-md-12 mar-10">
+        			               				<h4 class="h_d">Key Features</h4>
+        			               					<div class="custom-table-1">
+        												<table width="100%">
+        													<tbody>
+        														<tr class="odd">
+        															<td>Cashless treatment</td>
+        															<td class="cus_width">'.$detail['cashless_treatment'].'
+        															</td>
+        														</tr>
+        														<tr>
+        															<td>Pre-existing diseases</td>
+        															<td class="cus_width">'.$preexist_diseases.'
+        															</td>
+        														</tr>
+        														<tr class="odd">
+        															<td>Auto recharge of Sum Insured</td>
+        															<td class="cus_width">'.$detail['autorecharge_SI'].'
+        															</td>
+        														</tr>
+        														<tr>
+        															<td>Hospitalisation expenses
+        			    												<ul><li><i class="fa fa-angle-right"></i> Room Rent</li>
+        			   														<li><i class="fa fa-angle-right"></i> ICU Rent</li>
+        			    													<li><i class="fa fa-angle-right"></i> Fees of Surgeon, Anesthetist,  Medicines, Nurses, etc</li>
+        																</ul>
+        															</td>
+        															<td class="cus_width">
+        																<ul class="no">
+        																	<li>'.$detail['room_rent'].'</li>
+        																	<li>'.$detail['icu_rent'].'</li>
+        																	<li>'.$detail['doctor_fee'].'</li>
+        																</ul>
+        															</td>
+        														</tr>';
+    				$return .= ' <tr class="odd">
+        							<td>Pre-hospitalisation</td>
+        							<td class="cus_width">'.$detail['pre_hosp'].'</td>
+        						</tr>
+        						<tr>
+        							<td>Post-hospitalisation</td>
+        							<td class="cus_width">'.$detail['post_hosp'].'</td>
+        						</tr>
+        						<tr class="odd">
+        							<td>Day care expenses</td>
+        							<td class="cus_width">'.$detail['day_care'].'</td>
+        						</tr>
+        						<tr>
+        							<td>Maternity Benefits</td>
+        							<td class="cus_width">'.$detail['maternity'].'</td>
+        						</tr>
+        						<tr >
+        							<td>Health Check up</td>
+        							<td class="cus_width">'.$detail['check_up'].'</td>
+        						</tr>
+        						<tr class="odd">
+        							<td>Ayurvedic Treatment</td>
+        							<td class="cus_width">'.$detail['ayurvedic'].'</td>
+        						</tr>
+        						<tr>
+        							<td>Co-payment</td>
+        							<td class="cus_width">'.$detail['co_pay'].'</td>
+        						</tr>';
+    				 
+    				$return .='</tbody>
+        							</table>
+        							</div>
+        			               </div>';
+    				 
+    			
+    				$return .= '<div class="col-md-7 medical" style="padding-right:0px;margin-bottom: 0px;">
+        					 		<h4 class="h_d mar-40" >List of Hospitals with Cashless Facility</h4>
+        			               		<div class="cus_d" style="padding:5px;">
+        			               			<div style="float: left; width: 100%; margin-top: 10px;">
+        			               				<div style="float: right; width: 100%; padding-left: 15px;">
+        											<div class="form-group col-md-12" style="margin-bottom:0px;">
+        			                   					 <label for="" class="sr-only">Search by Pin Code</label>
+        			                    					<input type="text" placeholder="Search by Pin Code or Hospital Name" name="pin" id="" data-id="hos_class" autocomplete="off" spellcheck="false" class="form-control brdr typeahead tt-query med_search">
+        			                   						 <!--<div class="bs-example">
+        			        									<input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false">
+        			    									</div>-->
+        			                    						<div class="search_icon"><i class="fa fa-search"></i></div>
+        			                  				</div>
+        										</div>';
+    				 
+    				$return .= '<div class="loc_d hos"  style="padding:0px 15px; border:none; display:none; margin-top:20px;">
+        			               	<div class="col-md-12">
+        			              		<span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index:1; display: block; right: auto;">
+        									<div class="tt-dataset-accounts">
+        			  							<div class="city_m">
+        			   								 <div class="city_a">Hospital Name</div>
+        			   									 <div class="city_b">City</div>
+        			    									<div class="city_c">Pin Code</div>
+        			  							</div>
+        			  						<span class="tt-suggestions resultTable" id="" style="display: block;"></span>
+        									</div>
+        								</span>
+        			                </div>
+        			            <div style="float: left; position: absolute; bottom: 0px; margin-bottom: 10px;" class="">Note: This list is subject to change without any notice</div>
+    			
+        						</div>
+        			    	</div>
+        			  	</div>
+        			 </div>
+        			       	<div class="col-md-5">
+        			        	<h4 class="h_d mar-40" style="margin-left:50px;">Documents</h4>
+        							<ul class="doc">
+        								<li>Policy Brouchure <a href="javascript:void(0)"><img src="'.base_url().'/assets/images/pdf.jpg"></a></li>
+        								<li>Policy Wordings <a href="javascript:void(0)"><img src="'.base_url().'/assets/images/pdf.jpg" class="dimg"></a></li></ul>
+        							</ul>
+        			        </div>
+        			           <div class="col-md-12  hide_d" >Hide details <i class="fa fa-angle-up"></i></div>
+        			</div>
+        		</div>
+        	</div> ';
+    			
     			}
     		}
     		//return $return;
