@@ -1,5 +1,4 @@
 
-<?php $this->load->view('partial_view/header_resultpage');?>
 
 <span id="o_touch"></span>
 
@@ -59,7 +58,18 @@
       
     <div class="col-md-2  border c_o">
     <div id="sh1" style="display:none">
-       <div class="top_h_t">Companies</div>
+    <?php 
+    	$comp_name = '';
+    	if (count($aNew) > 1)
+		{
+			$comp_name = "Companies";
+		}
+		else
+		{
+			$comp_name = "Company";
+		}
+		?>
+       <div class="top_h_t"><?php echo $comp_name;?></div>
        <div id="com_c" class="top_p_n odometer">0</div>
       </div> 
       
@@ -387,7 +397,8 @@ var company_count = "<?= count($aNew);?>";
 var plan_count = "<?= count($customer_details);?>";
 var min_premium = "<?= $min_annual_premium;?>";
 var max_premium = "<?= $max_annual_premium;?>";
-//var health_filter_url = "<? //=base_url().'health_insurance/basicMediclaim/health_policy' ?>";
+var hospital_list_url = "<?php echo base_url().'health_insurance/basicMediclaim/get_hospital_list'?>";
+
 
 
 $(document).ready(function() {
@@ -407,19 +418,3 @@ $(document).ready(function() {
 });
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-<?php $this->load->view('partial_view/footer_resultpage');?>

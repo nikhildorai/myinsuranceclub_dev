@@ -20,7 +20,7 @@
             <div class="choice-leftcol" data-bind="">
               <ul data-bind="jScrollPane" id="c_amt" class="years active scroll-pane">
                 <?php foreach($cvg_amt as $k=>$v){?>
-                <li><a href="javascript:void(0);"><?php echo $v;?></a></li>
+                <li data-coverage-literalid="<?php echo $k; ?>"><a href="javascript:void(0);"><?php echo $v;?></a></li>
               			<?php } ?>
               </ul>
               <div class="stepwrap years-stepwrap">
@@ -115,6 +115,16 @@
  																										echo $this->session->userdata['user_input']['coverage_amount'];
                      																				}else
 																										{?>3 Lakhs<?php }?>">
+             
+             <input type="hidden" id="coverage_amount_literal" name="coverage_amount_literal" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount_literal']))
+                     																				{
+ 																										echo $this->session->userdata['user_input']['coverage_amount_literal'];
+                     																				}else
+																										{?>300000<?php }?>">
+             
+             
+             
+             
               <input type="hidden" id="plan_type" name="plan_type" value="<?php if(isset($this->session->userdata['user_input']['plan_type']))
                     																					{
                     																						echo $this->session->userdata['user_input']['plan_type'];

@@ -98,35 +98,38 @@ $(document).ready(function() {
 
 
 $(".med_search").keyup(function () {
-	var id=$(this);
-	var minlength = 1;
-        var that = this,
-        value = $(this).val();
-
-        if (value.length >= minlength ) {
-            $.ajax({
-                type: "GET",
-                url: "source/medical.php",
-                data: {
-                    'search_keyword' : value
-                },
-               
-                success: function(response){
-				
-					id.parent().parent().parent().find('.hos').show();
-				
-				   id.parent().parent().parent().find('.resultTable').html(response);
-                }
-            });
-        }
-		
-		
-		
-    });
+						
+						
+//var data = $('#getlist').serialize();
+var company_id = $(this).data('company-id');
+var hospital_list_id = $(this).data('hospital-list-id');
+var id=$(this);
+var minlength = 1;
+var that = this,
+	value = $(this).val();
+					        
+	if (value.length >= minlength ) {
+		$.ajax({
+				type: "GET",
+				url: hospital_list_url,
+				data: {
+					   'search_keyword' : value,
+					   'company_id': company_id
+					  },
+					               
+					   success: function(response){
+									
+						id.parent().parent().parent().find('.hos').show();
+						$('#'+ hospital_list_id).html(response);
+						//id.parent().parent().parent().find('.resultTable').html(response);
+					    }
+					});
+				}
+						
+		});
 	
 	
-	
-		$('.down_cnt').click(function() {
+		$(document).delegate('.down_cnt','click',function() {
 			//$('.accordion_a').slideToggle();
 			
 		//	$('.down_cnt').closest('.accordion_a').slideToggle();
@@ -252,6 +255,27 @@ $(function () {
 });
 
     $(document).ready(function(){
+    	
+    	$('#comparePolicy').on('click',function(){
+    		if(!($('.cmpplans:checked').length>1))
+    		{
+    			alert('Please Select At Least 2 Plans To Compare.');
+    			return false;
+    		}
+    		else if ($('.cmpplans:checked').length>3)
+    		{
+    			alert('You can select maximum of 3 plans to compare.');
+    			return false;
+    		}
+    		else
+    		{
+    			$('#compare').submit();
+    		}
+    	});	
+    	
+    	
+    	
+    	
     fadeLoop()
     function fadeLoop() {
 

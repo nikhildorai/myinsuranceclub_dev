@@ -45,16 +45,16 @@ class basicMediclaim extends CI_Controller {
 		$data=array();
 		
 		$data['cvg_amt']=array(	//'1'=>'Below 1 Lakh',
-								'2'=>'1 Lakh',
-								'3'=>'2 Lakhs',
-								'4'=>'3 Lakhs',
-								'5'=>'4 Lakhs',
-								'6'=>'5 Lakhs',
-								'7'=>'7.5 Lakhs',
-								'8'=>'10 Lakhs',
-								'9'=>'15 Lakhs',
-								'10'=>'20 Lakhs',
-								'11'=>'50 Lakhs'
+								'100000'=>'1 Lakh',
+								'200000'=>'2 Lakhs',
+								'300000'=>'3 Lakhs',
+								'400000'=>'4 Lakhs',
+								'500000'=>'5 Lakhs',
+								'750000'=>'7.5 Lakhs',
+								'1000000'=>'10 Lakhs',
+								'1500000'=>'15 Lakhs',
+								'2000000'=>'20 Lakhs',
+								'5000000'=>'50 Lakhs'
 								);
 		
 		$data['family_composition']=array(	'1A'=>'Myself',
@@ -72,7 +72,11 @@ class basicMediclaim extends CI_Controller {
 		
 		$data['city']=$this->city->get_city();
 		
-		$this->load->view('health_insurance/health1',$data);
+		
+		$this->template->set_template('frontend');
+		$this->template->write_view('content', 'health_insurance/health1', $data, TRUE);
+		$this->template->render();
+		//$this->load->view('health_insurance/health1',$data);
 	
 	}
 	
@@ -123,15 +127,24 @@ class basicMediclaim extends CI_Controller {
 				{
 					$user_input['plan_type']=$this->input->post('plan_type');
 				}
+				
 				if($this->input->post('plan_type_name')!='')
 				{
 					$user_input['plan_type_name']=$this->input->post('plan_type_name');
 				}
+				
 				if($this->input->post('coverage_amount')!='')
 				{
 					$user_input['coverage_amount']=$this->input->post('coverage_amount');
 					
 				}
+				
+				if($this->input->post('coverage_amount_literal')!='')
+				{
+					$user_input['coverage_amount_literal']=$this->input->post('coverage_amount_literal');
+						
+				}
+				
 				if($this->input->post('adult')!='')
 				{
 					$user_input['adult']=$this->input->post('adult');
@@ -362,36 +375,53 @@ class basicMediclaim extends CI_Controller {
 			}
 			else
 			{
-				$this->load->view('health_insurance/search_results',$data);//,$data
+				$this->template->set_template('frontendsearch');
+				$this->template->write_view('content', 'health_insurance/search_results', $data, TRUE);
+				$this->template->render();
+				
 			}
-			/* Email config */
-			/* if(!($this->input->is_ajax_request()))
-			 {
-			$message=$this->load->view('email/send_email',$data,TRUE);
-			$config = Array(
-					'protocol' => 'smtp',
-					'smtp_host' => 'ssl://smtp.googlemail.com',
-					'smtp_port' => 465,
-					'smtp_user' => 'nikhildorai@gmail.com',
-					'smtp_pass' => 'Hammit123',
-					'mailtype' => 'html',
-					'charset'  => 'utf-8',
-					'priority' => '1',
-					'wordwrap' => TRUE,);
-	
-			$this->load->library('email',$config);
-			$this->email->set_newline("\r\n"); /* Important*/
-	
-			/*	$this->email->from('myinsuranceclub.com', 'nikhil dorai');
-			 $this->email->to("$user_input[cust_email]");
-			$this->email->subject('MIC: Your Search Results!!');
-			$this->email->message($message);
-			$this->email->send();
-			} */
-			/* Email config Ends */
+			
 		}
 	}
 	
+	
+	public function get_hospital_list()
+	{
+		
+		
+		$this->load->model('get_hospital_list');
+		
+		if($_GET != '')
+		{
+			
+			$company_hospitals = $_GET['search_keyword'];
+			$company_id = $_GET['company_id'];
+		}	
+		
+		$response = '';
+		$result = $this->get_hospital_list->get_list($company_id,$company_hospitals);
+		/* echo "<pre>";
+		var_dump($result); */
+		if(empty($result))
+		{
+			$response = '<div class="tt-suggestion clearfix" style="white-space: nowrap;"><p style="white-space: normal;">Hospital List Not Available For This Company</div>';
+		}
+		
+		if(!empty($result))
+		{	
+			
+			
+			foreach($result as $k=>$v)
+			{
+				$response.='<div class="tt-suggestion clearfix" style="white-space: nowrap;"><p style="white-space: normal;">';
+				
+				$response .= "<span class='city_a'>".$v['hospital_name']."</span><span class='city_b'>".$v['hospital_city']."</span><span class='city_c'>".$v['hospital_pincode']."</span>";
+				
+				$response .='</p></div>';
+			}
+		}
+		echo $response;
+	}
 	
 	public function compare_policies()
 	{
@@ -442,7 +472,7 @@ class basicMediclaim extends CI_Controller {
 		}
 		$data['result']=$result;
 	
-		$this->load->view('health_insurance/health_comparison_results',$data);
+		$this->load->view('health_insurance/compare_results',$data);
 	}
 	
 }

@@ -204,10 +204,9 @@ class Util {
     		{
     			foreach($customer_details as $detail)
     			{
-    					
-    				 
+    				
     				$preexist_diseases='';
-    			
+    				 
     				if(trim($detail['preexisting_diseases'])!='Not Covered')
     				{
     					$preexist_diseases='Waiting period of '.$detail['preexisting_diseases'].' years';
@@ -224,16 +223,24 @@ class Util {
     				else{
     					$variant='';
     				}
-    				 
-    				$compare_data=$detail['variant_id'].'-'.$detail['annual_premium'].'-'.$detail['age'];
-    				 
-    				 
     					
+    				$compare_data=$detail['variant_id'].'-'.$detail['annual_premium'].'-'.$detail['age'];
+    					
+    				if(trim($detail['sum_assured']) != $con->session->userdata['user_input']['coverage_amount_literal'])
+    				{
+    					$sum_assured = "<span style='color: #ff6633;'>&#8377;".number_format($detail['sum_assured'])."</span>";
+    				}
+    				else
+    				{
+    					$sum_assured = "<span>&#8377;".number_format($detail['sum_assured'])."</span>";
+    				}
+    				
+    				
     				$return .= '<div class="cmp_tbl">
         			                	<div class="cus_tb clearfix" >
         			                		<div class="col-md-2 pad-right-10 logo_ins">
         			               				<div class="img_bx" >
-        			            					<img src="'.base_url().'/uploads/company/'.$detail['logo_image_2'].'" border="0" class="img_bx_i">
+        			            					<img src="'.$fileUrl.$detail['logo_image_2'].'" border="0" class="img_bx_i">
         			            						<div class="check_bx">
         			            							<div class="checkbox">
         			            								<label>
@@ -244,17 +251,17 @@ class Util {
         			            						</div>
         			            				</div>
         			                	</div>';
-    				 
+    					
     				$return .= '<div class="col-md-3 pad-left-10">
         			               		<div class="c_t" >
         			            			<span class="title_c" style="width:100%;">'.$detail['company_shortname'].'</span><span class="sub_tit" >'.$detail['policy_name'].$variant.'</span>
         			          			</div>
         			                </div>';
-    				 
+    					
     				$return .= '<div class="col-md-7 m_anc">
         			                	<div class="col-md-6 no_pad_l">
-        			                 		<h3 class="anc">&#8377;'.$detail['annual_premium'].'</h3>
-        			                 			<p class="sub_tit">for cover of &#8377;'.$detail['sum_assured'].'</p>
+        			                 		<h3 class="anc">&#8377;'.number_format($detail['annual_premium']).'</h3>
+        			                 			<p class="sub_tit">for cover of '.$sum_assured.'</p>
         			                 	</div>
         			                  			<div class="col-md-2" style="padding:0px">
         			                 				<div class="down_cnt" style="width:20px; height:auto; float:left; color:#999999;"><i class="fa fa-th"></i>
@@ -268,7 +275,7 @@ class Util {
         			                					 </div>
         			               			 </div>
         			                </div>';
-    				 
+    					
     				$return .= '<div class="accordion_a">
         			                 	<div class="col-md-12">
         			                		<div class="col-md-12 mar-10">
@@ -334,13 +341,13 @@ class Util {
         							<td>Co-payment</td>
         							<td class="cus_width">'.$detail['co_pay'].'</td>
         						</tr>';
-    				 
+    					
     				$return .='</tbody>
         							</table>
         							</div>
         			               </div>';
-    				 
-    			
+    					
+    					
     				$return .= '<div class="col-md-7 medical" style="padding-right:0px;margin-bottom: 0px;">
         					 		<h4 class="h_d mar-40" >List of Hospitals with Cashless Facility</h4>
         			               		<div class="cus_d" style="padding:5px;">
@@ -348,14 +355,15 @@ class Util {
         			               				<div style="float: right; width: 100%; padding-left: 15px;">
         											<div class="form-group col-md-12" style="margin-bottom:0px;">
         			                   					 <label for="" class="sr-only">Search by Pin Code</label>
-        			                    					<input type="text" placeholder="Search by Pin Code or Hospital Name" name="pin" id="" data-id="hos_class" autocomplete="off" spellcheck="false" class="form-control brdr typeahead tt-query med_search">
-        			                   						 <!--<div class="bs-example">
+        			                    					<input type="text" placeholder="Search by Pin Code or Hospital Name" name="hospital_list" id="" data-company-id="'.$detail['company_id'].'" data-hospital-list-id="resultTable_'.$detail['variant_id'].'" data-id="hos_class" autocomplete="off" spellcheck="false" class="form-control brdr typeahead tt-query med_search">
+        			       
+        			                    							<!--<div class="bs-example">
         			        									<input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false">
         			    									</div>-->
         			                    						<div class="search_icon"><i class="fa fa-search"></i></div>
         			                  				</div>
         										</div>';
-    				 
+    					
     				$return .= '<div class="loc_d hos"  style="padding:0px 15px; border:none; display:none; margin-top:20px;">
         			               	<div class="col-md-12">
         			              		<span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index:1; display: block; right: auto;">
@@ -365,17 +373,19 @@ class Util {
         			   									 <div class="city_b">City</div>
         			    									<div class="city_c">Pin Code</div>
         			  							</div>
-        			  						<span class="tt-suggestions resultTable" id="" style="display: block;"></span>
+        			  						<span class="tt-suggestions resultTable" id="resultTable_'.$detail['variant_id'].'" style="display: block;"></span>
         									</div>
         								</span>
         			                </div>
         			            <div style="float: left; position: absolute; bottom: 0px; margin-bottom: 10px;" class="">Note: This list is subject to change without any notice</div>
-    			
+    
         						</div>
         			    	</div>
         			  	</div>
-        			 </div>
-        			       	<div class="col-md-5">
+        			 </div>';
+    				
+    				
+    				$return .= '<div class="col-md-5">
         			        	<h4 class="h_d mar-40" style="margin-left:50px;">Documents</h4>
         							<ul class="doc">
         								<li>Policy Brouchure <a href="javascript:void(0)"><img src="'.base_url().'/assets/images/pdf.jpg"></a></li>
@@ -386,7 +396,7 @@ class Util {
         			</div>
         		</div>
         	</div> ';
-    			
+    				
     			}
     		}
     		//return $return;
