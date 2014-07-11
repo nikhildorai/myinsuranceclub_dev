@@ -30,25 +30,24 @@ class Download extends CI_Controller {
 		redirect('home');
 	}
 	
-	public function policy($policyName = null, $field = null)
+	public function policy($slug = null, $field = null)
 	{
-		if (!empty($policyName))
+		if (!empty($slug))
 		{
+			$slug = explode('-', $slug);
+			$policy_id = end($slug);
+			array_pop($slug);
+			$slug = implode('-', $slug);
 			//	check if policy id exists
 			$where = array();
 			$where[0]['field'] = 'policy_id';
 			$where[0]['value'] = (int)$policy_id;
 			$where[0]['compare'] = 'equal';
 			$exist = $this->util->getTableData($modelName='Policy_master_model', $type="single", $where, $fields = array());
-			if (empty($exist))
-			{
-				$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
-				$this->data['msgType'] = 'error';
-				redirect('admin/policy/index');
-			}
-			else 
+			if (!empty($exist) && $slug == $exist['slug'])
 			{
 				$policyModel = $exist;
+								
 				if (empty($field))
 					$field = 'brochure';
 				$this->load->helper('download');
@@ -58,12 +57,17 @@ class Download extends CI_Controller {
 				force_download($policyModel[$field], $data);
 				//if ($pol)
 			}
+			else
+			{
+				return false;
+			}
+			
 		}
 		else
 		{
 			$this->session->set_flashdata('message', '<p class="error_msg">Invalid record.</p>');
 			$this->data['msgType'] = 'error';
-			redirect('admin/policy/index');
+			redirect(base_url());
 		}	
 	}
 	

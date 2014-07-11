@@ -76,30 +76,9 @@ $(document).ready(function() {
 				 
 				$('.mouseout.modal').show();
         });*/
-			
- $('#soi').mouseover(function(){
-         $('#soi').addClass('active');   
-	  if ( $("#tes" ).hasClass( "tes" ) ) {
-		  
-		   $("#target").load("include/social.php"); 
-		  
-		  } 
-		        });
-				
-				
-					$('#footer').mouseleave(function(){
-				 
-				 $('#soi').removeClass('active');  
-	     $("#tes").remove();
-        });
 
 
-
-
-
-$(".med_search").keyup(function () {
-						
-						
+$(".med_search").keyup(function () {	
 //var data = $('#getlist').serialize();
 var company_id = $(this).data('company-id');
 var hospital_list_id = $(this).data('hospital-list-id');
