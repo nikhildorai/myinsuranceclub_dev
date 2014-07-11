@@ -31,7 +31,7 @@ class Annual_premium_personal_accident_model EXTENDS CI_Model{
 	
 	public function get_comparison($variant,$annual_premium,$age)
 	{
-		$comparison="SELECT DISTINCT i.company_shortname,p.policy_name,v.variant_name,concat('Rs.',ap.annual_premium,'.00') as annual_premium,f.* 
+		$comparison="SELECT DISTINCT i.company_shortname,p.policy_name,v.variant_name,ap.annual_premium as annual_premium,f.* 
 					FROM insurance_company_master i, policy_master p,
 		policy_variants_master v,annual_premium_personal_accident ap,policy_features_personal_accident f WHERE i.company_id=p.company_id AND p.policy_id=v.policy_id AND v.variant_id=ap.variant_id
 		AND f.variant_id = ap.variant_id

@@ -1,299 +1,213 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="myApp">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<title>Compare Insurance Policies and Plans in India |
-	MyInsuranceClub.com</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="Description"
-	content="Compare and get free quotes for the best life insurance, health insurance, travel insurance, car and auto insurance plans, policies and schemes in India offered by different insurance companies only at MyInsuranceClub.com" />
-<meta name="Keywords"
-	content="compare insurance, best life insurance, best health insurance, cheap car insurance, auto insurance quote, cheap travel insurance, affordable insurance, best insurance policy, insurance companies in India" />
-
-<!-- Bootstrap CSS -->
-<link
-	href="<?php echo base_url();?>/assets/css/bootstrap/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- Bootstrap third-party plugins css -->
-<link
-	href="<?php echo base_url();?>/assets/css/bootstrap/bootstrap-switch.min.css"
-	media="screen" rel="stylesheet" />
-<!-- Font Awesome -->
-<link href="<?php echo base_url();?>/assets/css/font-awesome.min.css"
-	rel="stylesheet">
-
-<!-- Plugins -->
-
-<!-- style -->
-<link href="<?php echo base_url();?>/assets/css/theme-style.min.css"
-	rel="stylesheet">
-
-<!-- custom override -->
-<link href="<?php echo base_url();?>/assets/css/custom-style.css"
-	rel="stylesheet">
-<link href="<?php echo base_url();?>/assets/css/clingify.css"
-	rel="stylesheet">
-<link href="<?php echo base_url();?>/assets/css/jquery.bxslider.css"
-	rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css"
-	href="<?php echo base_url();?>/assets/css/slick.css" />
-<link rel="stylesheet"
-	href="<?php echo base_url();?>/assets/css/slicknav.css">
-
-<link rel="stylesheet"
-	href="<?php echo base_url();?>/assets/css/custom.css">
-
-<link href="<?php echo base_url();?>/assets/css/angular.rangeSlider.css"
-	rel="stylesheet">
-
-<style type="text/css" id="page-css">
-/* Styles specific to this particular page */
-.scroll-pane {
-	width: 100%;
-	height: 200px;
-	overflow: auto;
-}
-</style>
-
-<!-- HTML5 shiv & respond.js for IE6-8 support of HTML5 elements & media queries -->
-<!--[if lt IE 9]>
-    <script src="plugins/html5shiv/dist/html5shiv.js"></script>
-    <![endif]-->
-
-<!-- Le fav and touch icons - @todo: fill with your icons or remove -->
-<link rel="shortcut icon"
-	href="<?php echo base_url();?>/assets/img/icons/favicon.png">
-<link
-	href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300'
-	rel='stylesheet' type='text/css'>
-
-<!--Retina.js plugin - @see: http://retinajs.com/-->
-<script
-	src="<?php echo base_url();?>/assets/plugins/js/retina-1.1.0.min.js"></script>
-</head>
-
-<!-- ======== @Region: body ======== -->
-<body class="page page-index">
-
-<?php $this->load->view('partial_view/header_resultpage');?>
-
-	<span id="o_touch"></span>
-
-	<div id="highlighted"
-		style="background: #fff; padding-bottom: 50px; margin-bottom: 0px;">
-
-		<div class="container">
-			<div class="row" style="margin-top: 40px;">
-			
-			
-<table border='1'>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery.qtip.css">
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/smart-pricing1.css">
 <?php 
-	if (!empty($result))
-	{	
-		foreach ($result as $k1=>$v1)
-		{
-			echo '<tr>';
-			
-				echo '<td><b>'.$k1.'</b></td>';
-				foreach ($v1 as $k2=>$v2)
-				{
-					if (!empty($v2))
-					{
-						if($v2=='Base')
-						{
-							$v2='N/A';
-						}
-						if($k1!='Policy Renewable Age Limit' && trim($v2) == 'Yes')
-						{
-							$v2 = "<i class='fa fa-check fa-2' style='color:#2bbd1c'></i>";
-						}
-						if($k1!='Policy Renewable Age Limit' && trim($v2) == 'No')
-						{
-							$v2 = "<i class='fa fa-times fa-2' style='color:red'></i>";
-						}
-						if ($k1 == 'Major exclusions')
-						{
-							$v2 = implode('<br>', unserialize($v2));
-						}
-						echo '<td style="text-align:center;">'.ucfirst($v2).'</td>';
-					}
-					else 
-						echo '<td>N/A</td>';
-				}
-				
-			echo '</tr>';
-		}
-	}
+	$arrHeaderColorLite = array("blue-lite","green-lite","orange-lite");
+	$arrHeaderColorDark = array("blue-dark","green-dark","orange-dark");
+	$arrBuyBtnColor = array('blue-btn','green-btn','orange-btn');
 ?>
-
-</table>
-
-			
-			
-			
+<div id="page-wrap" class="container" style="margin-bottom: 100px;">
+	<div class="smart-grids">
+		<div class="smart-wrapper">
+			<div class="back_to">
+				<i class="fa fa-angle-left arrow_left"></i>
+				<a href="<?php echo base_url().'health_insurance/personal_accident/get_personal_accident_results'?>">Back to Search Results</a>
+			</div>
+			<div class="difference">
+				<div class="checkbox">
+					<label class="highlightDiff"> 
+						<input id="Field4" name="agree" type="checkbox" class="field checkbox" value="agree"> 
+						<label for="Field4" class="">Highlight Differences</label> 
+					</label>
+				</div>
+			</div>
+			<div class="smart-pricing">
+				<div class="pricing-tables elegant-style four-colm">
+<?php 
+				if (!empty($result))
+				{	
+					$resultCount = count($result['company_shortname']);
+					?>
+					<table>
+						<thead>
+							<tr>
+								<th style="background: #fff; color: #000; padding: 0; border: none;" class="colm">
+									<div class="pricing-header ann">
+										<h2>
+											<span>Annual Premium</span>
+										</h2>
+									</div>
+								</th>
+<?php 
+								for ($i = 0; $i < $resultCount; $i++)
+								{	?>			
+									<th style="background: none; padding: 0px; border: none;" class="colm">
+										<div class="pricing-header header-colored">
+											<h1 class="<?php echo $arrHeaderColorLite[$i];?>">
+												<?php echo $result['company_shortname'][$i];	?>
+												<p class="smart_p"><?php echo $result['policy_name'][$i];	?></p>
+											</h1>
+											<h2 class="<?php echo $arrHeaderColorDark[$i];?>">
+												<span>&#8377;<?php echo number_format($result['annual_premium'][$i]);	?></span>
+												<!--<p class="signup"><a href="#" class="btn_offer_block">Buy Now <i class="fa fa-angle-right"></i></a></p>-->
+											</h2>
+										</div>
+									</th>
+<?php 							}	?>	
+							</tr>
+						</thead>
+						<tbody>
+<?php 
+						$return = '';
+						$featureList = Util::featureList('personalAccident');
+						$featureKeys = array_keys($featureList);
+						$i = 1;
+						$arrSkip = array('major_exclusions');
+						$arrFormat1 = array();
+						$arrFormat2 = array();
+						foreach ($result as $k1=>$v1)
+						{
+							if (in_array($k1, $featureKeys) && !empty($v1) && !in_array($k1, $arrSkip))
+							{
+								if (count(array_unique($v1)) === 1) 
+									$return .=	'<tr class="sameCol">';
+								else
+									$return .=	'<tr class="diffCol">';
+									$return .= 		'<td class="colm">';
+									if (isset($featureList[$k1]['tooltip']) && !empty($featureList[$k1]['tooltip']))
+										$return .= 		'<ul class="tool_icon">';
+									else 
+										$return .= 		'<ul>';
+											$return .= 		'<li>
+																<a href="javascript:void(0)" title="'.$featureList[$k1]['tooltip'].'">'.$featureList[$k1]['name'].'</a>
+															</li>
+														</ul>
+													</td>';
+													foreach ($v1 as $k2=>$v2)
+													{			
+										$return .=		'<td class="colm pad_l">';
+														if (!empty($v2))
+														{
+															if(trim(strtolower($v2))=='base')
+															{
+																$return .= 'N/A';
+															}
+															else if(trim(strtolower($v2)) == 'yes')
+															{
+																$return .= "<i class='fa fa-check fa-2' style='color:#2bbd1c'></i>";
+															}
+															else if(trim(strtolower($v2)) == 'no')
+															{
+																$return .= "<i class='fa fa-times fa-2' style='color:red'></i>";
+															}
+															else if ($k1 == 'major_exclusions')
+															{
+																$v2 = unserialize($v2);
+																if (!empty($v2))
+																{
+																	$return .=	'<ul>
+																					<li class="hospital">
+																						<span class="cmp_ul pa_t">';
+																			foreach ($v2 as $k3=>$v3)
+																			{
+																				if (!empty($v3))
+																					$return .=	'<span class="ul_t">'.$v3.'</span>';
+																			}
+																		$return .=		'</span>
+																					</li>
+																				</ul>';
+																}
+															}
+															else
+																$return .=	$v2;
+														}
+														else
+											$return .=		'N/A';
+										$return .=		'</td>';
+													}
+									$return .=	'</tr>';
+							}
+						}
+						echo $return;
+?>						
+								<tr>
+									<td class="colm" style="background: #fff; border: none; padding: 5px;"></td>
+<?php 
+								for ($i = 0; $i < $resultCount; $i++)
+								{	?>				
+									<td class="colm" style="padding: 20px;">
+										<div class="pricing-footer" style="border: none; padding: 0px;">
+											<button type="button" class="pricing-button <?php echo $arrBuyBtnColor[$i];?> grad-button">Buy Now</button>
+										</div>
+									</td>
+<?php 							}	?>			
+								</tr>
+						</tbody>
+					</table>
+<?php 			}
+				else 
+				{
+					echo 'No policy selected';
+				}
+?>				
+				</div>
 			</div>
 		</div>
 	</div>
+</div>
+<style>
+<!--
+.diffColClass{
+-webkit-box-shadow: 0px 1px 22px 2px rgba(148,148,148,0.82);
+-moz-box-shadow: 0px 1px 22px 2px rgba(148,148,148,0.82);
+box-shadow: 0 0 0 2px #F2CF71;
+}
+-->
+</style>
+<script
+	type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.qtip.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('.highlightDiff').click(function(e){
+		if($('#Field4:checked').length == 1)
+		{
+			$('.diffCol').addClass('diffColClass');
+		}
+		else
+		{
+			$('.diffCol').removeClass('diffColClass');
+		}
+	});
+	
+	//$('a[title]').qtip({ style: { name: 'cream', tip: true } })
+	
+	 $('a[title]').each(function () {
+        $(this).qtip({
+            
+            style: {
+                classes: 'qtip-shadow qtip-bootstrap'
+            },
+            position: {
+                my: 'center left', // Position my top left...
+                at: 'center right', // at the bottom right of...
+            }
 
-<?php echo $this->load->view('partial_view/footer_resultpage');?>
-
-
-	<!-- ======== @Region: #navigation ======== -->
-
-	<!--Scripts -->
-
-	<!--Legacy jQuery support for quicksand plugin-->
-
-	<!-- Bootstrap JS -->
-
-	<!--Bootstrap third-party plugins-->
-
-	<!--JS plugins-->
-	<script
-		src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-
-	<script src="<?php echo base_url();?>/assets/js/jquery.min.js"></script>
-
-
-	<!--Legacy jQuery support for quicksand plugin-->
-	<script
-		src="<?php echo base_url();?>/assets/js/jquery-migrate-1.2.1.min.js"></script>
-
-	<!-- Bootstrap JS -->
-	<script src="<?php echo base_url();?>/assets/js/bootstrap.min.js"></script>
-
-	<!--Bootstrap third-party plugins-->
-	<script
-		src="<?php echo base_url();?>/assets/js/bootstrap-hover-dropdown.min.js"></script>
-	<script src="<?php echo base_url();?>/assets/js/bootstrap-switch.min.js"></script>
-
-	<!--JS plugins-->
-	<script src="<?php echo base_url();?>/assets/js/jquery.clingify.min.js"></script>
-	<script
-		src="<?php echo base_url();?>/assets/js/jquery.jpanelmenu.min.js"></script>
-	<script src="<?php echo base_url();?>/assets/js/jRespond.js"></script>
-
-
-	<!--Custom scripts mainly used to trigger libraries -->
-	<script src="<?php echo base_url();?>/assets/js/script.min.js"></script>
-	<script src="<?php echo base_url();?>/assets/js/jquery.bxslider.min.js"
-		type="text/javascript"></script>
-	<script type='text/javascript' src='<?php echo base_url();?>/assets/js/jquery.carouFredSel.js'></script>
-	<script
-		src="<?php echo base_url();?>/assets/js/jquery.ui.accordion.min.js"></script>
-
-	<script src="<?php echo base_url();?>/assets/js/jquery.slicknav.js"></script>
-
-
-	<script src="<?php echo base_url();?>/assets/js/jquery.cluetip.js"></script>
-	<!-- <script src="../lib/jquery.cluetip.compat.js"></script> -->
-	<script src="<?php echo base_url();?>/assets/js/demo.js"></script>
-
-	<script type="text/javascript"
-		src="<?php echo base_url();?>/assets/js/jquery.mousewheel.js"></script>
-	<!-- the jScrollPane script -->
-	<script type="text/javascript"
-		src="<?php echo base_url();?>/assets/js/jquery.jscrollpane.min.js"></script>
-	<script src="<?php echo base_url();?>/assets/js/scrolltopcontrol.js"></script>
-	<script src="<?php echo base_url();?>/assets/js/angular.min.js"></script>
-	<!-- and out directive code -->
-	<script src="<?php echo base_url();?>/assets/js/angular.rangeSlider.js"></script>
-
-	<script src="<?php echo base_url();?>/assets/js/custom.js"></script>
-	<script>
-		// basic angular app setup
-		var app = angular.module('myApp', ['ui-rangeSlider']);
-
-		app.controller('DemoController',
-        	function DemoController($scope) {
-
-        		// just some values for the sliders
-        		$scope.demo2 = {
-					range: {
-						min:<?php echo $min_annual_premium;?>,
-						max: <?php echo $max_annual_premium;?>
-					},
-					minPrice: <?php echo $min_annual_premium;?>,
-					maxPrice: <?php echo $max_annual_premium;?>
-
-					
-				};
-
-        	}
+        });
+    });
+	
+	$('#soi').mouseover(function(){
+         $('#soi').addClass('active');   
+	  if ( $("#tes" ).hasClass( "tes" ) ) {
+		  
+		   $("#target").load("include/social.php"); 
+		  
+		  } 
+		        });
 				
-        );
-
-
-		app.controller('DemoController34',
-        	function DemoController34($scope) {
-
-        		// just some values for the sliders
-        		$scope.demo1 = {
-    min:0,
-    max: 100
-};
-
-        	}
-			
-        );
-	</script>
-	<script type="text/javascript">
-$(document).ready(function(){
-	$('#menu').slicknav();
-	
-	$(document).delegate('.down_cnt','click',function() {
-			//$('.accordion_a').slideToggle();
-		//	$('.down_cnt').closest('.accordion_a').slideToggle();
-		//$('.accordion_a').slideToggle();
-$(this).parent().parent().parent().find('.accordion_a').slideToggle();
-		
-	});	
-	
-});
-
-(function($) {
-	$(document).ready(function() {
-
-		$('#comparePolicy').on('click',function(){
-			if(!($('.refundable:checked').length>1))
-			{
-				alert('Please Select At Least 2 Plans To Compare.');
-				return false;
-			}
-			else
-			{
-				$('#compare').submit();
-			}
-		});
-
-		$('.accordion').accordion({
-			collapsible: true,
-			heightStyle : 'content'
-			
-		});
-		$('.accordion.closed').accordion("option", "active", false );
-	});
-
-	$('.search_filter').on('click',function(){
-		data = $('#search').serialize();
-
-		 $.ajax({
-			type:"post", 
-			url:"<?php echo base_url().'index.php/health_insurance/basicMediclaim/health_policy'?>",
-			data:data,
-			 success:function(data)
-			{ $('#cmp_tbl').html(data);
-			}
-			});
-	});
-})(jQuery);
+				
+					$('#footer').mouseleave(function(){
+				 
+				 $('#soi').removeClass('active');  
+	     $("#tes").remove();
+        });
+});		
 </script>
-
-
-
-
-</body>
-</html>

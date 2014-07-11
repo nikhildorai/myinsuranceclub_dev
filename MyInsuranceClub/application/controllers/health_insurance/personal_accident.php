@@ -155,9 +155,9 @@ class Personal_accident extends CI_Controller {
 	
 	public function compare_policies()
 	{
-		$data=$variant=$annual_premium=$age=array();
+		$data=$variant=$annual_premium=$age=$result=array();
 		if($this->input->post('compare')!=null)
-		{	
+		{
 			foreach($this->input->post('compare') as $k=>$v)
 			{
 				$compare=explode('-',$v);
@@ -167,26 +167,32 @@ class Personal_accident extends CI_Controller {
 			}
 			$variant = implode(',', $variant);
 			$annual_premium = implode(',', $annual_premium);
-		}
-		$data['comparison_results']=$this->annual_premium_personal_accident_model->get_comparison($variant,$annual_premium,$age);
-	
-		foreach ($data['comparison_results'] as $k1=>$v1)
-		{
-				
-			foreach ($v1 as $k2=>$v2)
+		
+			$data['comparison_results']=$this->annual_premium_personal_accident_model->get_comparison($variant,$annual_premium,$age);
+		
+			foreach ($data['comparison_results'] as $k1=>$v1)
 			{
-				if ($k2 == 'company_shortname')
+					
+				foreach ($v1 as $k2=>$v2)
 				{
-					$key = 'Company';
+				/*	if ($k2 == 'company_shortname')
+					{
+						$key = 'Company';
+					}
+					else
+					{
+						$key = ucfirst(str_replace(array('_','-',' '), ' ', $k2));
+						$key = $k2;
+					}
+					*/
+					$result[$k2][] = $v2;
 				}
-				else
-				{
-					$key = ucfirst(str_replace(array('_','-',' '), ' ', $k2));
-				}
-				$result[$key][] = $v2;
 			}
 		}
 		$data['result']=$result;
-		$this->load->view('personal_accident/compare_results', $data);
+		//$this->load->view('personal_accident/compare_results', $data);
+		$this->template->set_template('frontendsearch');
+		$this->template->write_view('content', 'personal_accident/compare_results', $data, TRUE);
+		$this->template->render();
 	}
 }
