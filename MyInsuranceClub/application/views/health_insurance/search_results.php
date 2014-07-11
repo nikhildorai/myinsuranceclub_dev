@@ -393,10 +393,10 @@
 </div>
 
 <script type="text/javascript">
-var company_count = "<?= count($aNew);?>";
-var plan_count = "<?= count($customer_details);?>";
-var min_premium = "<?= $min_annual_premium;?>";
-var max_premium = "<?= $max_annual_premium;?>";
+var company_count = "<?php echo count($aNew);?>";
+var plan_count = "<?php echo  count($customer_details);?>";
+var min_premium = "<?php echo  $min_annual_premium;?>";
+var max_premium = "<?php echo  $max_annual_premium;?>";
 var hospital_list_url = "<?php echo base_url().'health_insurance/basicMediclaim/get_hospital_list'?>";
 
 
