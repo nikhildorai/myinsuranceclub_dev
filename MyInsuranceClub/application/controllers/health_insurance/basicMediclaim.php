@@ -457,7 +457,7 @@ class basicMediclaim extends CI_Controller {
 				
 			foreach ($v1 as $k2=>$v2)
 			{
-				if ($k2 == 'company_shortname')
+				/* if ($k2 == 'company_shortname')
 				{
 					$key = 'Company';
 				}
@@ -465,14 +465,18 @@ class basicMediclaim extends CI_Controller {
 				else
 				{
 					$key = ucfirst(str_replace(array('_','-',' '), ' ', $k2));
-				}
+				} */
 	
-				$result[$key][] = $v2;
+				$result[$k2][] = $v2;
 			}
 		}
 		$data['result']=$result;
-	
-		$this->load->view('health_insurance/compare_results',$data);
+		
+		$this->template->set_template('frontendsearch');
+		$this->template->write_view('content', 'health_insurance/compare_results', $data, TRUE);
+		$this->template->render();
+		
+		//$this->load->view('health_insurance/compare_results',$data);
 	}
 	
 }

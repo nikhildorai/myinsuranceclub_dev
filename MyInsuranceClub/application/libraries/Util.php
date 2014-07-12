@@ -782,7 +782,7 @@ class Util {
 					$return .= 					'<div class="check_bx">
 													<div class="checkbox">
 														<label> 
-															<input type="checkbox" name="compare[]" id="c_name" class="cmpplans" value="'.$compare_data.'"> 
+															<input type="checkbox" name="compare[]" id="c_name" class="refundable" value="'.$compare_data.'"> 
 															<label class="chk" for="Field4"></label> 
 														</label>
 													</div>
@@ -878,7 +878,7 @@ class Util {
 														<div style="float: right; width: 100%; padding-left: 15px;">
 															<div class="form-group col-md-12" style="margin-bottom: 0px;">
 																<label for="" class="sr-only">Search by Pin Code</label> 
-																<input type="text" placeholder="Search by Pin Code or Hospital Name" name="hospital_list" id="" data-company-id="'.$detail['company_id'].'" data-hospital-list-id="resultTable_'.$detail['variant_id'].'" data-id="hos_class" autocomplete="off" spellcheck="false" class="form-control brdr typeahead tt-query med_search">
+																<input type="text" placeholder="Search by Pin Code or Hospital Name" name="pin" id="" data-id="hos_class" autocomplete="off" spellcheck="false" class="form-control brdr typeahead tt-query med_search">
 																<div class="search_icon">
 																	<i class="fa fa-search"></i>
 																</div>
@@ -893,7 +893,8 @@ class Util {
 																			<div class="city_b">City</div>
 																			<div class="city_c">Pin Code</div>
 																		</div>
-																		<span class="tt-suggestions resultTable" id="resultTable_'.$detail['variant_id'].'" style="display: block;"></span>
+																		<span class="tt-suggestions resultTable" id=""
+																			style="display: block;"> </span>
 																	</div> 
 																</span>
 															</div>
@@ -908,11 +909,11 @@ class Util {
     			
 													if (!empty($detail['brochure']) && file_exists($pfolderUrl.$detail['brochure']))
 													{
-														$return .=	'<li>Policy Brouchure <a href="'.base_url().'download/policy/'.$detail['policy_slug'].'-'.$detail['policy_id'].'/brochure"><img src="'.base_url().'assets/images/pdf.jpg"> </a></li>';
+														$return .=	'<li>Policy Brouchure <a href="'.base_url().'admin/policy/download/'.$detail['policy_id'].'/brochure"><img src="'.base_url().'assets/images/pdf.jpg"> </a></li>';
 													}
 													if (!empty($detail['policy_wordings']) && file_exists($pfolderUrl.$detail['policy_wordings']))
 													{
-														$return .=	'<li>Policy Wordings <a href="'.base_url().'download/policy/'.$detail['policy_slug'].'-'.$detail['policy_id'].'/policy_wordings"><img src="'.base_url().'assets/images/pdf.jpg" class="dimg"> </a></li>';
+														$return .=	'<li>Policy Wordings <a href="'.base_url().'admin/policy/download/'.$detail['policy_id'].'/policy_wordings"><img src="'.base_url().'assets/images/pdf.jpg" class="dimg"> </a></li>';
 													}
 							$return .=			'</ul>
 											</div>
@@ -1365,6 +1366,29 @@ echo '=================>';
 				'permanent_total_disablity_per_child'=>array('name'=>'Permanent Total Disablity Per Child','tooltip'=>''),
 				'permanent_partial_disablity_per_child'=>array('name'=>'Permanent Partial Disablity Per Child','tooltip'=>''),
 				'tution_fees_per_child'=>array('name'=>'Tution Fees Per Child','tooltip'=>''),
+			);
+		}
+		
+		elseif($featureType == 'Mediclaim')
+		{
+			$value = array(
+					'cashless_treatment'=>array('name'=>'Cashless treatment','tooltip'=>'Cashless treatment'),
+					'preexisitng_diseases'=>array('name'=>'Pre-existing diseases','tooltip'=>'Pre-Existing Diseases'),
+					'autorecharge_SI'=>array('name'=>'Auto recharge of Sum Insured','tooltip'=>''),
+					'pre_hosp'=>array('name'=>'Pre-hospitalisation','tooltip'=>''),
+					'post_hosp'=>array('name'=>'Post-hospitalisation','tooltip'=>''),
+					'daycare'=>array('name'=>'Day care expenses','tooltip'=>''),
+					'maternity'=>array('name'=>'Maternity benefits','tooltip'=>''),
+					'check_up'=>array('name'=>'Health Check up','tooltip'=>''),
+					'room_rent'=>array('name'=>'Room Rent','tooltip'=>''),
+					'icu_rent'=>array('name'=>'Icu Rent','tooltip'=>''),
+					'doctor_fee'=>array('name'=>'Fees of Surgeon, Anesthetist, Nurses, etc','tooltip'=>''),
+					'buying_mode'=>array('name'=>'Buying Mode','tooltip'=>''),
+					'ayurvedic'=>array('name'=>'Ayurvedic Treatment','tooltip'=>''),
+					'co_pay'=>array('name'=>'Co-payment','tooltip'=>''),
+					'buy_online'=>array('name'=>'Buy Online','tooltip'=>''),
+					'tax_benefits'=>array('name'=>'Tax Benefits','tooltip'=>'')
+					
 			);
 		}
 		return $value;

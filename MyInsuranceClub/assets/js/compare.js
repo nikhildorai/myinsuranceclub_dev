@@ -78,7 +78,7 @@ $(document).ready(function() {
         });*/
 
 
-$(".med_search").keyup(function () {	
+$(document).delegate('.med_search','keyup',function () {	
 //var data = $('#getlist').serialize();
 var company_id = $(this).data('company-id');
 var hospital_list_id = $(this).data('hospital-list-id');
@@ -128,7 +128,7 @@ $(this).parent().parent().parent().parent().find('.accordion_a').slideToggle();
 		
 	});	
 	
-	$('.down_cnt_up').click(function() {
+	$(document).delegate('.down_cnt_up','click',function() {
 			//$('.accordion_a').slideToggle();
 			
 		//	$('.down_cnt').closest('.accordion_a').slideToggle();
@@ -139,7 +139,7 @@ $(this).hide();
 		
 	});	
 	
-	$('.hide_d').click(function() {
+	$(document).delegate('.hide_d','click',function() {
 			//$('.accordion_a').slideToggle();
 			
 		//	$('.down_cnt').closest('.accordion_a').slideToggle();
