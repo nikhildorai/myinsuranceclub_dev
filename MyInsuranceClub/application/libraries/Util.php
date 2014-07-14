@@ -195,7 +195,7 @@ class Util {
 		
     	if($type == "health")
     	{
-    		if(empty($customer_details))
+    		/* if(empty($customer_details))
     		{
     			$return.='<div>There are no plans that match your selection criteria.</div>';
     		}
@@ -398,7 +398,7 @@ class Util {
         	</div> ';
     				
     			}
-    		}
+    		} */
     		//return $return;
     	}
     	elseif($type == "criticalillness")
