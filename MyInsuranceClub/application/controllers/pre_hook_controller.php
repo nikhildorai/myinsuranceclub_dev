@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User_info extends CI_Controller {
+class Pre_Hook_Controller extends MIC_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,14 +21,14 @@ class User_info extends CI_Controller {
 	{
 		// Call the Controller constructor
 		parent::__construct();
-		//$this->load->library('email');
 		$this->load->library('session');
 		$this->load->library('user_agent');
 		$this->load->database();
+		$this->load->model('model_get_wls_detail');
 		$this->load->model('visitor_information');
-		//$this->load->library('util');
-		date_default_timezone_set('Asia/Kolkata');
-		$currentModule = $this->util->getUrl('module');
+		
+		$currentModule = $this->util->getUrl('module')
+		;
 		//	load different views for backend and front end
 		if (!empty($currentModule))
 		{
@@ -46,11 +46,27 @@ class User_info extends CI_Controller {
 	
 	public function index()
 	{
+		try{
+			//print_r($_SERVER['HTTP_HOST']);
+		$WLSDetails = $this->model_get_wls_detail->get_wls($_SERVER['HTTP_HOST']);
+		if ($WLSDetails != null)
+		{
+			$_REQUEST["WLSDetails"] = $WLSDetails;
+		}
 		
+		//echo "<pre>";
+		//print_r($this->router->config->base_url());
+		//var_dump();
+		// Now you would make a DB call where in you would pass $_SERVER['HTTP_HOST'] as paramtere. 
+		//exit;
+		//print_r('-----------------------');
+		
+		//print_r($this->uri);
+		//exit;
+		
+		// Fetching user info from the request and storing it in the database.
 		$user_info['session_id'] = $this->session->userdata('session_id');
-		
 		$user_info['timestamp'] = date('H:i:s',$this->session->userdata('last_activity'));
-		
 		if($this->agent->is_browser())
 		{
 			$user_info['browser']=$this->agent->browser();
@@ -69,8 +85,13 @@ class User_info extends CI_Controller {
 		else {
 			$user_info['referrer']='';
 		}
-			
-		$this->visitor_information->get_user_info($user_info);
+		//$this->visitor_information->get_user_info($user_info);
+		
+		}
+		catch (Exception $ex)
+		{
+			// error has to be reported and the app should redirect the user to some default url.
+		}
 	}
 
 }
