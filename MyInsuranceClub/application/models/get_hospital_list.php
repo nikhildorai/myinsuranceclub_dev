@@ -12,8 +12,18 @@ class Get_Hospital_List EXTENDS CI_Model{
 
 	public function get_list($company_id,$company_hospitals)
 	{
+		$search_data = array();
 		
-		$hospital_list_query= $this->db->query("CALL sp_getHospitalList(?,?)",array($company_id,$company_hospitals));
+		if(!is_numeric($company_hospitals))
+		{
+			$search_data = array($company_id,$company_hospitals,'');
+		}
+		else
+		{
+			$search_data = array($company_id,'',$company_hospitals);
+		}
+		
+		$hospital_list_query= $this->db->query("CALL sp_getHospitalList(?,?,?)",array($company_id,$company_hospitals));
 		
 		return $hospital_list_query->result_array();
 	}
