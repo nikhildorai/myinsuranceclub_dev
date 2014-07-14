@@ -115,7 +115,10 @@
                 </div>
                 <div id="cmp_tbl">
 					
-					  <?php echo $this->util->getUserSearchFiltersHtml($customer_details, $type='health');?>       			
+					  <?php 
+		
+							$this->load->view('health_insurance/ajaxPostResultView');
+							//echo $this->util->getUserSearchFiltersHtml($customer_details, $type='health');?>       			
          		</div>
          	
                 <?php echo form_close();?>
@@ -134,7 +137,7 @@
                 
                 
                 <div class="block1" style="position:relative;">
-                 <h6 class="fh3 l"> 4 of 4 plans</h6>
+                 <h6 class="fh3 l"> <?php if (isset($this->session->userdata['filter_count'])){echo $this->session->userdata['filter_count'];}?> of <?php echo  count($customer_details);?> plans</h6>
                  
                  <h6 class="fh3"> Premium</h6>
                  

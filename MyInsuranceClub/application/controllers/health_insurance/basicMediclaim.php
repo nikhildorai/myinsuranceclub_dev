@@ -381,10 +381,16 @@ class basicMediclaim extends MIC_Controller {
 							unset($data['customer_details'][$k]);
 						}
 					}
+					
 				}
+				$filter_count = count($data['customer_details']);
+				$this->session->set_userdata('filter_count',$filter_count);
+				$filter_count=$this->session->userdata('filter_count',$filter_count);
 					
-				echo $this->util->getUserSearchFiltersHtml($data['customer_details'], $type = "health");
-					
+				$data['filter_count'] = $filter_count;
+				
+				//$data['filter_count'] = count($data['customer_details']);
+				$this->load->view('health_insurance/ajaxPostResultView',$data);	
 			}
 			else
 			{
