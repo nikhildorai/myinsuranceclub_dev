@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Occupation_group_model EXTENDS CI_Model{
+class Occupation_group_model EXTENDS MIC_Model{
 
 	function __construct()
 	{

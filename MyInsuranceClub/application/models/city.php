@@ -2,7 +2,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class City EXTENDS CI_Model{
+class City EXTENDS MIC_Model{
 
 	function __construct()
 	{

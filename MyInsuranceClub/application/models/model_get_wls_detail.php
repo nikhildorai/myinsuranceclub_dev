@@ -3,7 +3,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class model_get_wls_detail EXTENDS CI_Model{
+class model_get_wls_detail EXTENDS MIC_Model{
 
 	function __construct()
 	{

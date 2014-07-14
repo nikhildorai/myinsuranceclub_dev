@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Demo_user_profiles_model EXTENDS CI_Model{
+class Demo_user_profiles_model EXTENDS MIC_Model{
 
 	function __construct()
 	{

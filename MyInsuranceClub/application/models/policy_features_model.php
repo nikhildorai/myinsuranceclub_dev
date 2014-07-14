@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Policy_features_model EXTENDS CI_Model{
+class Policy_features_model EXTENDS MIC_Model{
 
 	function __construct()
 	{

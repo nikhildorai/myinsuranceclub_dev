@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Disqus_comments_model EXTENDS CI_Model{
+class Disqus_comments_model EXTENDS MIC_Model{
 
 	function __construct()
 	{

@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class mic_dbtest EXTENDS CI_Model{
+class mic_dbtest EXTENDS MIC_Model{
 
 	function __construct()
 	{

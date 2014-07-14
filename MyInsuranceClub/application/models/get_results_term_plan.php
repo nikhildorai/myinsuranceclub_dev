@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Get_results_term_plan EXTENDS CI_Model{
+class Get_results_term_plan EXTENDS MIC_Model{
 
 	function __construct()
 	{

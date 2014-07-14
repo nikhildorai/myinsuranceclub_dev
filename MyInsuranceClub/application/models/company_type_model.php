@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Company_type_model EXTENDS CI_Model{
+class Company_type_model EXTENDS MIC_Model{
 
 	function __construct()
 	{

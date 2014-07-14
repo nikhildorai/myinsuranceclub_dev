@@ -1,6 +1,6 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class compare_health_policies EXTENDS CI_Model{
+class compare_health_policies EXTENDS MIC_Model{
 
 	function __construct()
 	{

@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Annual_premium_personal_accident_model EXTENDS CI_Model{
+class Annual_premium_personal_accident_model EXTENDS MIC_Model{
 
 	function __construct()
 	{

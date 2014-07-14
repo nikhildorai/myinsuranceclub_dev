@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Visitor_Information EXTENDS CI_Model{
+class Visitor_Information EXTENDS MIC_Model{
 
 	function __construct()
 	{

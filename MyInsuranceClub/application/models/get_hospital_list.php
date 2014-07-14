@@ -2,7 +2,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Get_Hospital_List EXTENDS CI_Model{
+class Get_Hospital_List EXTENDS MIC_Model{
 
 	function __construct()
 	{
