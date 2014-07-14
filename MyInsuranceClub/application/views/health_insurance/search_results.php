@@ -14,15 +14,18 @@
        <div class="top_m"><i class="fa fa-angle-left"></i> <a href="<?php echo site_url('health-insurance');?>">Modify Your Search</a></div>
    </div>
 	<?php   
-			$newVal = array();
-			$preexisitng_disease_discard = array();
+	$newVal = array();
+	$preexisitng_disease_discard = array();
+	$aNew = array();
+	if(!empty($customer_details))
+	{
+			
         foreach($customer_details as $k=>$v)
         {
-           	if(!in_array($v['company_id'], $newVal))
-        	{
-        		$aNew [] = $v;
-       	 	}
-       	 	$newVal [] = $v['company_id'];
+           	
+        	$aNew[$v['company_id']]['company'] = $v;
+        	$aNew[$v['company_id']]['premium'][] = $v['annual_premium'];
+       	 	
        	 	
        	 	
        	 	if($v['preexisting_diseases']!='Not Covered')
@@ -36,7 +39,7 @@
 			}
         }
                    				
-		
+	}	
         $min_annual_premium='';
         $max_annual_premium='';
         if(count($customer_details) > 0)
@@ -223,20 +226,29 @@
                 
                 
                  <h6 class="fh3">Company </h6>
-                 <?php foreach($aNew as $comp){?>
+                 
                  <div class="addOnFilter clearfix" >
                  
-                    
+                 <?php 
+                 if(!empty($aNew))
+                 {
+                 	//echo "<pre>";
+                 	//print_r($aNew);	
+                 	foreach($aNew as $company){
+                    	
+                    	$premium = $company['premium'];
+	                   	sort($premium);?>
                     <div style="width: 100%; float: left;">
                     <div class="checkbox" style="width: auto; float: left; margin: 0px;">
             <label>
             
-            <input type="checkbox" value="<?php echo $comp['company_id'];?>" class="search_filter" name="company_name[]">
-            <label for="23" class=""><?php echo $comp['company_shortname'];?></label>
+            <input type="checkbox" value="<?php echo $company['company']['company_id'];?>" class="search_filter" name="company_name[]">
+            <label for="23" class=""><?php echo $company['company']['company_shortname'];?></label>
            
-          </label></div> <span style="float:right;"> &#8377; <?php echo $comp['annual_premium'].'- &#8377; '.$comp['annual_premium']?></span></div>
-              
-				</div><?php }?>
+          </label></div> <span style="float:right;"> &#8377;<?php echo reset($premium).' - &#8377; '.end($premium);?></span></div>
+              <?php }
+                 }?>
+				</div>
                  
                  <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
@@ -391,6 +403,7 @@
 
 <div class="tutorial">
 </div>
+
 
 <script type="text/javascript">
 var company_count = "<?php echo count($aNew);?>";
