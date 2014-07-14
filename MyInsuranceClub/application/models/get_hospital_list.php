@@ -23,7 +23,7 @@ class Get_Hospital_List EXTENDS CI_Model{
 			$search_data = array($company_id,'',$company_hospitals);
 		}
 		
-		$hospital_list_query= $this->db->query("CALL sp_getHospitalList(?,?,?)",array($company_id,$company_hospitals));
+		$hospital_list_query= $this->db->query("CALL sp_getHospitalList(?,?,?)",$search_data);
 		
 		return $hospital_list_query->result_array();
 	}
