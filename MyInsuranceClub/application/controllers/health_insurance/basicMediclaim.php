@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class basicMediclaim extends CI_Controller {
+class basicMediclaim extends MIC_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -19,21 +19,13 @@ class basicMediclaim extends CI_Controller {
 	 */
 	function __construct()
 	{
+		// please load the common module and models in base class controller.
 		// Call the Controller constructor
 		parent::__construct();
-		//$this->load->library('email');
-		$this->load->library('session');
-		$this->load->library('table');
-		$this->load->library('user_agent');
-		$this->load->database();
-		$this->load->model('mic_dbtest');
-		$this->load->model('visitor_information');
-		$this->load->helper('form');
-		$this->load->helper('url');
-		$this->load->library('form_validation');
-		$this->load->library('util');
-		$this->load->helper('html');
-		date_default_timezone_set('Asia/Kolkata');
+		
+		
+		
+		
 	}
 	
 	
@@ -90,6 +82,7 @@ class basicMediclaim extends CI_Controller {
 			$post = $this->session->userdata('user_input');
 		}
 	
+		// Please create a validation util function and do these validations there.
 		$this->form_validation->set_rules('cust_name', 'Full Name', 'required|alpha');
 	
 		$this->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|phone_789|exact_length[10]');
@@ -154,7 +147,8 @@ class basicMediclaim extends CI_Controller {
 					$user_input['child']=$this->input->post('child');
 				}
 				/*  customer policy details ends 	*/
-					
+				
+				//create function for name field in util.
 				if($this->input->post('cust_name')!='')		/* customer personal details starts */
 				{
 					$user_input['full_name'] = $this->input->post('cust_name');
@@ -323,9 +317,28 @@ class basicMediclaim extends CI_Controller {
 			
 			$this->mic_dbtest->customer_personal_search_details($user_input);
 			
-			$data['customer_details']=$this->mic_dbtest->get_policy_results($user_input);
-	
+			
+			$cacheFileName = 'sr_'.$user_input['product_type'].$user_input['plan_type'].$user_input['coverage_amount'].$user_input['cust_age'].$user_input['cust_gender'].$user_input['cust_city'] ;
+			
+			if(Util::getCachedFile($cacheFileName) != null)
+			{
+				// get result set from cache
+				
+				$data['customer_details']=Util::getCachedFile($cacheFileName); 
+			}
+				
+			else
+			{
+				//get result set from DB and save in cache
+				
+				$data['customer_details']=$this->mic_dbtest->get_policy_results($user_input);
+				
+				Util::saveResultToCache($cacheFileName,$data['customer_details']);
+			}
+			
+			
 			/* Filter Data Received From Ajax Post */
+			
 			if($this->input->is_ajax_request())
 			{
 				$search_filter=$_POST;
@@ -402,14 +415,13 @@ class basicMediclaim extends CI_Controller {
 		$result = $this->get_hospital_list->get_list($company_id,$company_hospitals);
 		/* echo "<pre>";
 		var_dump($result); */
-		if(empty($result))
+		if(empty($result) && !in_array($company_id,$result))
 		{
-			$response = '<div class="tt-suggestion clearfix" style="white-space: nowrap;"><p style="white-space: normal;">Hospital List Not Available For This Company</div>';
+			$response .= '<div class="tt-suggestion clearfix" style="white-space: nowrap;"><p style="white-space: normal;">No Matches Found.</div>';
 		}
 		
-		if(!empty($result))
+		elseif(!empty($result))
 		{	
-			
 			
 			foreach($result as $k=>$v)
 			{

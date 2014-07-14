@@ -1070,7 +1070,57 @@ class Util {
     	return $return;
     }
     
+    /**
+     * @abstract: Get search result from cache
+     * @author: Nikhil Dorai.
+     * @date: 14 July 2014.
+     * @param: string $cacheFileName
+     * @return: array()
+     */
+    public static function getCachedFile($cacheFileName='')
+    {
+    	$CI = &get_instance();
     
+    	$CI->load->driver('cache', array('adapter' => 'file'));
+    
+    	$returnCacheFile = '';
+    
+    	if($CI->cache->get($cacheFileName) != null)
+    	{
+    		$returnCacheFile = $CI->cache->get($cacheFileName);
+    
+    		return $returnCacheFile;
+    	}
+    
+    
+    }
+    
+    /**
+     * @abstract: Save database result set to cache.
+     * @author: Nikhil Dorai.
+     * @date: 14 July 2014.
+     * @param: string $cacheFileName.
+     * @param: array $customer_details.
+     * @return: true/false.
+     */
+    public static function saveResultToCache($cacheFileName='',$customer_details=array())
+    {
+    	$CI = &get_instance();
+    
+    	$CI->load->driver('cache', array('adapter' => 'file'));
+    
+    	$saveCacheFile = '';
+    
+    	if(!empty($cacheFileName) && !empty($customer_details))
+    	{
+    		$saveCacheFile = $CI->cache->save($cacheFileName, $customer_details, 120);
+    			
+    		return $saveCacheFile;
+    	}
+    }
+	
+	
+	
 	public function addUpdateClaimRatio($model, $company_id)
 	{	
 		$save  = false;
