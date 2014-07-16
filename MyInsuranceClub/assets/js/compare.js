@@ -14,17 +14,21 @@ var formatNumber = function(number)
 };
 
 
-function show_prem(a,b) {
+function show_prem(x,y,a,b) {
 	  
-	  var x = Math.floor((Math.random() * 20) + 110);
-	  var y = Math.floor((Math.random() * 40) + 200);
+	  //var x = Math.floor((Math.random() * 20) + 110);
+	  //var y = Math.floor((Math.random() * 40) + 200);
+	 
+	//  var a = company_count;
+	 // var b = plan_count;
+	//  var x = min_premium;
+	//  var y = max_premium;
 	  
-	  
-  	  com_c.innerHTML = x;
-  	  plan_c.innerHTML = y;
+  	  com_c.innerHTML = a;
+  	  plan_c.innerHTML = b;
   
-  	 pr_ra.innerHTML = a;
-	  pr_rb.innerHTML = b;
+  	 pr_ra.innerHTML = x;
+	  pr_rb.innerHTML = y;
   
 }
 var timeoutID;
@@ -37,21 +41,21 @@ function slowAlert() {
 	
 	$("#sh1").fadeIn();
   com_c.innerHTML = company_count;
-  timeoutID = window.setTimeout(slowAlert1, 2000);
+  timeoutID = window.setTimeout(slowAlert1, 500);
 }
 
 function slowAlert1() {
 	$("#sh2").fadeIn();
 	 plan_c.innerHTML = plan_count;
-	 timeoutID = window.setTimeout(slowAlert3,3000);
+	 timeoutID = window.setTimeout(slowAlert3,750);
 }
 
 function slowAlert3() {
 	$("#sh3").fadeIn();
 	 pr_ra.innerHTML = min_premium;
 	  pr_rb.innerHTML = max_premium;
-	  timeoutID = window.setTimeout(slowAlert4,4000);
-	  timeoutID = window.setTimeout(slowAlert5,2000);
+	  timeoutID = window.setTimeout(slowAlert4,1200);
+	  timeoutID = window.setTimeout(slowAlert5,1500);
 }
 
 function slowAlert4() {
@@ -65,7 +69,10 @@ function slowAlert5() {
 
 $(document).ready(function() {
 	
-	
+	$('#sub_form').on('click',function(){
+
+		$('#health_form').bind('submit').submit();
+		});
 	
 	
 	 /*$(document).mouseover(function(){
@@ -76,9 +83,30 @@ $(document).ready(function() {
 				 
 				$('.mouseout.modal').show();
         });*/
+			
+ $('#soi').mouseover(function(){
+         $('#soi').addClass('active');   
+	  if ( $("#tes" ).hasClass( "tes" ) ) {
+		  
+		   $("#target").load("include/social.php"); 
+		  
+		  } 
+		        });
+				
+				
+					$('#footer').mouseleave(function(){
+				 
+				 $('#soi').removeClass('active');  
+	     $("#tes").remove();
+        });
 
 
-$(document).delegate('.med_search','keyup',function () {	
+
+
+
+$(document).delegate('.med_search','keyup',function () {
+						
+						
 //var data = $('#getlist').serialize();
 var company_id = $(this).data('company-id');
 var hospital_list_id = $(this).data('hospital-list-id');
@@ -166,7 +194,7 @@ $('html, body').animate({scrollTop: $(this).parent().parent().parent().offset().
       range: true,
       min: 100,
       max: 5000,
-      values: [ 1000, 4000 ],
+      values: [ 1000, 5000 ],
       slide: function( event, ui ) {
         $( "#amount" ).val( "₹ " + formatNumber(ui.values[ 0 ]));
 		$( "#amount1" ).val( "₹ " + formatNumber(ui.values[ 1 ] ));
@@ -181,22 +209,21 @@ $('html, body').animate({scrollTop: $(this).parent().parent().parent().offset().
 	   
 	    $( "#slider-range1" ).slider({
       range: true,
-      min: 1000,
-      max: 17000,
-      values: [ 3000, 7000 ],
+      min: 2845,
+      max: 5961,
+      values: [ min_premium, max_premium ],
       slide: function( event, ui ) {
         $("#amount_a" ).val( "₹ " + formatNumber(ui.values[ 0 ]));
 		$("#amount1_a" ).val( "₹ " + formatNumber(ui.values[ 1 ]));
 		var val_pa = ui.values[ 0 ];
   		var val_pb = ui.values[ 1 ];
 		
-		show_prem(val_pa,val_pb);
+		show_prem(val_pa,val_pb,company_count,plan_count);
 		
       }
     });
-    $( "#amount_a" ).val( "₹ " + $( "#slider-range" ).slider( "values", 0 ));
-	   $( "#amount1_a" ).val( "₹ " + $( "#slider-range" ).slider( "values", 1 ) );
-	   
+    $( "#amount_a" ).val( "₹ " + $( "#slider-range1" ).slider( "values", 0 ));
+	   $( "#amount1_a" ).val( "₹ " + $( "#slider-range1" ).slider( "values", 1 ) );	 
   
 
 });
@@ -251,6 +278,8 @@ $(function () {
     			$('#compare').submit();
     		}
     	});	
+  
+    	
     	
     	
     	

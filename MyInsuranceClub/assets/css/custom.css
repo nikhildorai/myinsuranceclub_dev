@@ -259,17 +259,6 @@
 .ui-datepicker .ui-state-disabled span {
 	color:#d9dde5
 }
-
-.ui-datepicker-current-day{
-	font-weight:700;
-	background:#2ca3ef !important;
-	-webkit-border-radius:3px;
-	-moz-border-radius:3px;
-	-o-border-radius:3px;
-	border-radius:3px;
-	color:#fff; 
-}
-
 .ui-timepicker-div .ui-widget-header, .ui-datepicker .ui-datepicker-header {
 	position:relative;
 	background:#2ca3ef;
@@ -321,6 +310,15 @@
 	text-align:center;
 	font-weight:bold;
 	border:0
+}
+.ui-datepicker-current-day{
+	font-weight:700;
+	background:#2ca3ef !important;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	-o-border-radius:3px;
+	border-radius:3px;
+	color:#fff; 
 }
 .ui-datepicker td {
 	border:0;
@@ -461,7 +459,7 @@
     position: absolute;
     text-align: center;
     top: 5px;
-    width: 29px;
+    width: 29px; cursor:pointer;
 }
 
 .car-ins .input .icon-append + input, .car-ins .textarea .icon-append + textarea {

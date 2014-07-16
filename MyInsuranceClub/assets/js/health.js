@@ -291,7 +291,9 @@ $(document).ready(function() {
 				
 						/* @validation states + elements 
 						------------------------------------------- */
-	 onkeyup: true, 
+	 						onkeyup: true,
+	 						//onfocusout: true,
+	 						//focusInvalid: true,
 						errorClass: "state-error",
 						validClass: "state-success",
 						errorElement: "em",
@@ -477,7 +479,7 @@ $(document).ready(function() {
             wasOpen = false;
         $( "<a>" )
             .attr( "tabIndex", -1 )
-            .attr( "title", "ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ Ð²Ñ�Ðµ" )
+            .attr( "title", "Ã�Å¸Ã�Â¾Ã�ÂºÃ�Â°Ã�Â·Ã�Â°Ã‘â€šÃ‘Å’ Ã�Â²Ã‘ï¿½Ã�Âµ" )
             .tooltip()
             .appendTo( this.wrapper )
             .button({
@@ -536,7 +538,7 @@ $(document).ready(function() {
 
         this.input
             .val( "" )
-            .attr( "title", value + " Ð½Ðµ Ñ�ÑƒÑ‰ÐµÑ�Ñ‚Ð²ÑƒÐµÑ‚" )
+            .attr( "title", value + " Ã�Â½Ã�Âµ Ã‘ï¿½Ã‘Æ’Ã‘â€°Ã�ÂµÃ‘ï¿½Ã‘â€šÃ�Â²Ã‘Æ’Ã�ÂµÃ‘â€š" )
             .tooltip( "open" );
         this.element.val( "" );
         this._delay(function() {
