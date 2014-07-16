@@ -2039,7 +2039,17 @@ class CI_DB_active_record extends CI_DB_driver {
 
 		$this->_reset_run($ar_reset_items);
 	}
+
+	function freeDBResource($dbh){
+		while(mysqli_next_result($dbh)){
+			if($l_result = mysqli_store_result($dbh)){
+				mysqli_free_result($l_result);
+			}
+		}
+	}
+
 }
+
 
 /* End of file DB_active_rec.php */
 /* Location: ./system/database/DB_active_rec.php */

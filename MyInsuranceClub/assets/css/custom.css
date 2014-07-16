@@ -259,6 +259,17 @@
 .ui-datepicker .ui-state-disabled span {
 	color:#d9dde5
 }
+
+.ui-datepicker-current-day{
+	font-weight:700;
+	background:#2ca3ef !important;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	-o-border-radius:3px;
+	border-radius:3px;
+	color:#fff; 
+}
+
 .ui-timepicker-div .ui-widget-header, .ui-datepicker .ui-datepicker-header {
 	position:relative;
 	background:#2ca3ef;

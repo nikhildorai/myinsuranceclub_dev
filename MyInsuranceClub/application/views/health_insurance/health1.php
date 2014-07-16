@@ -9,8 +9,8 @@
         <div class="col-md-1"></div>
         <h1 class="col-md-11" style="text-align:left;">Compare & Buy Health Insurance Plans</h1>
         <div class="col-md-12">
-          <div class="col-md-1"></div>
-          <p class="col-md-11" style="text-align:left; padding-left:7px;">Choose from 56 plans from 18 companies</p>
+          <div class="col-md-1"></div>															
+          <p class="col-md-11" style="text-align:left; padding-left:7px;">Choose from <?php echo $company_plan_count[1]['companyCount'];?> plans from <?php echo $company_plan_count[0]['companyCount'];?> companies</p>
         </div>
       </div>
       <div class="col-md-12 center m_h" style=" position:relative;">
@@ -65,14 +65,15 @@
           </span><span style=""> & I stay in</span> <span id="clickk_l" style="position:relative; "><span class="dotted loc" id="loc"><?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?></span>
           <div data-bind="" style="display: none; left:0px;  max-width: 350px; width: 400px;" class="choice l cit" id="c_ch_l">
             <div class="choice-leftcol" data-bind="">
-              <select name="cust_city" placeholder="Type or select from list" id="combobox" style="height:auto;">
-                <option value=" " >  </option>
+              <select name="cust_city" placeholder="Type your city" id="combobox" style="height:auto;">
+                <option value="" >  </option>
+                <option value="590">Mumbai</option>
                <?php foreach ($city as $c_name){
-               			if($c_name['city_id']==$this->session->userdata['user_input']['cust_city']){?>
-               <option value="<?php echo $this->session->userdata['user_input']['cust_city']; ?>" selected="selected"><?php echo $c_name['mic_city_name']; ?></option>
-               <?php }else{?>
+               			//if($c_name['city_id']==$this->session->userdata['user_input']['cust_city']){?>
+               <!-- option value="<?php //echo $this->session->userdata['user_input']['cust_city']; ?>" selected="selected"><?php //echo $c_name['mic_city_name']; ?></option> -->
+               <?php //}else{?>
                <option value="<?php echo $c_name['city_id']; ?>" ><?php echo $c_name['mic_city_name']; ?></option>
-               		<?php }?>
+               		<?php // }?>
                <?php }?>
               </select>
               <div class="stepwrap years-stepwrap">
@@ -618,6 +619,7 @@
             <label class="" for="Field4">I authorize MyInsuranceClub &amp; its partners to Call/SMS for my application &amp; agree to the <a href="" class="link">Terms of Use</a>.</label>
           </div>
           <div class="form-group col-md-2" style="float:right">
+          <!-- button class="btn btn-primary my" type="submit" id="sub_form"  name="submit">Show my options <i class="fa fa-chevron-right ar "></i> </button--> 
           	<input name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="Show My Options &gt;">
             
             <div class="load_spin"><img src="<?php echo base_url();?>/assets/images/ajax-loader.gif"></div>
@@ -854,5 +856,11 @@
     <div class="col-md-12 text-rightp"><a href="javascript:void(0)">More Guides <span class="ic">+</span></a></div>
   </div>
 </div>
+<script type="text/javascript">
+//$(document).ready(function(){
+	
+	
+//});
+</script>
 <?php $this->load->view('partial_view/footer_new'); ?>
 

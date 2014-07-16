@@ -21,8 +21,11 @@ class basicMediclaim extends MIC_Controller {
 	{
 		// please load the common module and models in base class controller.
 		// Call the Controller constructor
+		
 		parent::__construct();
 		
+		$this->load->model('city');
+		$this->load->model('get_company_plans_count');
 		
 		
 		
@@ -31,12 +34,14 @@ class basicMediclaim extends MIC_Controller {
 	
 	public function index()
 	{
-		
-		$this->load->model('city');
-		
 		$data=array();
 		
-		$data['cvg_amt']=array(	//'1'=>'Below 1 Lakh',
+		$data['city'] = $this->city->get_city();
+		$this->db->freeDBResource($this->db->conn_id);
+		
+		
+		$data['cvg_amt']=array(	'50000'=>'50 Thousand',
+								'75000'=>'75 Thousand',
 								'100000'=>'1 Lakh',
 								'200000'=>'2 Lakhs',
 								'300000'=>'3 Lakhs',
@@ -49,26 +54,17 @@ class basicMediclaim extends MIC_Controller {
 								'5000000'=>'50 Lakhs'
 								);
 		
-		$data['family_composition']=array(	'1A'=>'Myself',
-											'2A'=>'Self + Spouse',
-											'2A1C'=>'Self + Spouse + 1 Child',
-											'2A2C'=>'Self + Spouse + 2 Children',
-											'2A3C'=>'Self + Spouse + 3 Children',
-											'2A4C'=>'Self + Spouse + 4 Children',
-											'1A1C'=>'Self + 1 Child',
-											'1A2C'=>'Self + 2 Children',
-											'1A3C'=>'Self + 3 Children',
-											'1A4C'=>'Self + 4 Children'
-											
-											);
+		$data['family_composition']= Util::getFamilyComposition('mediclaim');
 		
-		$data['city']=$this->city->get_city();
+		$product_name = "mediclaim";
 		
+		$data['company_plan_count'] = $this->get_company_plans_count->get_count($product_name);
+		
+		$this->db->freeDBResource($this->db->conn_id);
 		
 		$this->template->set_template('frontend');
 		$this->template->write_view('content', 'health_insurance/health1', $data, TRUE);
 		$this->template->render();
-		//$this->load->view('health_insurance/health1',$data);
 	
 	}
 	
@@ -313,10 +309,13 @@ class basicMediclaim extends MIC_Controller {
 			
 			$user_input=$this->session->userdata('user_input',$user_input);
 			
+			
+			$this->input->set_cookie('mic_userdata',serialize($user_input),'864000');
+			
 			$data['user_input'] = $user_input;
 			
 			$this->mic_dbtest->customer_personal_search_details($user_input);
-			
+			$this->db->freeDBResource($this->db->conn_id);
 			
 			$cacheFileName = 'sr_'.$user_input['product_type'].$user_input['plan_type'].$user_input['coverage_amount'].$user_input['cust_age'].$user_input['cust_gender'].$user_input['cust_city'] ;
 			

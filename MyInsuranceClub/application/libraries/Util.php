@@ -184,6 +184,44 @@ class Util {
     	return $userDetails;
     }
     
+    /**
+     *
+     * @param string $sub_product
+     * @return Ambigous <multitype:, multitype:string >
+     */
+    
+    public static function getFamilyComposition($sub_product='')
+    {
+    	$family_composition = array();
+    	if($sub_product == 'mediclaim')
+    	{
+    		$family_composition = 	array(	'1A'=>'Myself',
+    				'2A'=>'Self + Spouse',
+    				'2A1C'=>'Self + Spouse + 1 Child',
+    				'2A2C'=>'Self + Spouse + 2 Children',
+    				'2A3C'=>'Self + Spouse + 3 Children',
+    				'2A4C'=>'Self + Spouse + 4 Children',
+    				'1A1C'=>'Self + 1 Child',
+    				'1A2C'=>'Self + 2 Children',
+    				'1A3C'=>'Self + 3 Children',
+    				'1A4C'=>'Self + 4 Children'
+    		);
+    	}
+    	 
+    	elseif($sub_product == 'personal accident')
+    	{
+    		$family_composition = 	array(	'1A'=>'Myself',
+    				'2A'=>'Self + Spouse',
+    				'2A1C'=>'Self + Spouse + 1 Child',
+    				'2A2C'=>'Self + Spouse + 2 Children',
+    				'2A3C'=>'Self + Spouse + 3 Children',
+    				'2A4C'=>'Self + Spouse + 4 Children'
+    		);
+    	}
+    	return $family_composition;
+    }
+    
+    
     public function getUserSearchFiltersHtml($customer_details = array(), $type = "health")
     {
     	$return = '';
