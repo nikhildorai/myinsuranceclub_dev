@@ -215,7 +215,17 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 						                <div class="form-group">
 						                    <label for="" class="col-sm-3">Policy Name</label>
 						                    <div class="col-sm-9">
-						                        <input type="text" class="form-control" placeholder="" id="policy_name" name="policyModel[policy_name]" value="<?php echo array_key_exists( 'policy_name',$policyModel) ? $policyModel['policy_name'] : '';?>"  >
+			                    			<span class="icon glyphicon glyphicon-star"></span>
+						                        <input type="text" required class="form-control" placeholder="" id="policy_name" name="policyModel[policy_name]" value="<?php echo array_key_exists( 'policy_name',$policyModel) ? $policyModel['policy_name'] : '';?>"  >
+						                    </div>
+						                </div>
+						                
+						                
+						                <div class="form-group">
+						                    <label for="" class="col-sm-3">Policy UIN</label>
+						                    <div class="col-sm-9">
+			                    			<span class="icon glyphicon glyphicon-star"></span>
+						                        <input type="text" required  class="form-control" placeholder="" id="policy_uin" name="policyModel[policy_uin]" value="<?php echo array_key_exists( 'policy_uin',$policyModel) ? $policyModel['policy_uin'] : '';?>"  >
 						                    </div>
 						                </div>
 						                
@@ -224,10 +234,11 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 						                    <label for="" class="col-sm-3">Show in Search</label>
 						                    <div class="col-sm-9">
 						                    	<label class="switch switch-success">
+			                    					<span class="icon glyphicon glyphicon-star"></span>
 							                    	<?php if (isset($policyModel['show_in_search']) && $policyModel['show_in_search'] == 'yes' ) {?>
-							                    		<input type="checkbox" checked id="show_in_search" name="policyModel[show_in_search]" value="yes"  >
+							                    		<input type="checkbox"  required checked id="show_in_search" name="policyModel[show_in_search]" value="yes"  >
 							                    	<?php }else {?>
-							                    		<input type="checkbox"  id="show_in_search" name="policyModel[show_in_search]" value="yes"  >
+							                    		<input type="checkbox"  required  id="show_in_search" name="policyModel[show_in_search]" value="yes"  >
 							                    	<?php }?>
 							                    	<i></i>
 						                    	</label>
@@ -238,7 +249,8 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 						                <div class="form-group">
 						                    <label for="" class="col-sm-3">SEO Title</label>
 						                    <div class="col-sm-9">
-						                        <input type="text" class="form-control" required  placeholder="SEO Title" maxlength="90" maxlength="90"  id="seo_title" name="policyModel[seo_title]" value="<?php echo array_key_exists( 'seo_title',$policyModel) ? $policyModel['seo_title'] : '';?>" >
+			                    				<span class="icon glyphicon glyphicon-star"></span>
+						                        <input type="text" class="form-control" required  placeholder="SEO Title" maxlength="90"  id="seo_title" name="policyModel[seo_title]" value="<?php echo array_key_exists( 'seo_title',$policyModel) ? $policyModel['seo_title'] : '';?>" >
 						                        <span class="help-block">Max length 90 characters.</span>
 						                    </div>
 						                </div>
@@ -246,14 +258,16 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 						                <div class="form-group">
 						                    <label for="" class="col-sm-3">SEO Description</label>
 						                    <div class="col-sm-9">
-						                        <textarea class="form-control" rows="5"  required maxlength="175" id="seo_description" name="policyModel[seo_description]"><?php echo array_key_exists( 'seo_description',$policyModel) ? $policyModel['seo_description'] : '';?></textarea>
-						                        <span class="help-block">Max length 175 characters.</span>
+			                    				<span class="icon glyphicon glyphicon-star"></span>
+						                        <textarea class="form-control" rows="5"  required maxlength="250" id="seo_description" name="policyModel[seo_description]"><?php echo array_key_exists( 'seo_description',$policyModel) ? $policyModel['seo_description'] : '';?></textarea>
+						                        <span class="help-block">Max length 250 characters.</span>
 						                    </div>
 						                </div>
 						                
 						                <div class="form-group">
 						                    <label for="" class="col-sm-3">SEO Keywords</label>
 						                    <div class="col-sm-9">
+			                    				<span class="icon glyphicon glyphicon-star"></span>
 						                        <textarea class="form-control" rows="4" required maxlength="175" id="seo_keywords" name="policyModel[seo_keywords]"><?php echo array_key_exists( 'seo_keywords',$policyModel) ? $policyModel['seo_keywords'] : '';?></textarea>
 						                    </div>
 						                </div>
@@ -265,6 +279,7 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 						                <div class="form-group">
 						                    <label for="" class="col-sm-3">URL</label>
 						                    <div class="col-sm-9">
+			                    				<span class="icon glyphicon glyphicon-star"></span>
 						                        <input type="text" class="form-control"  required placeholder="URL"  id="url" name="policyModel[slug]" value="<?php echo array_key_exists( 'slug',$policyModel) ? $policyModel['slug'] : '';?>"  >
 						                    </div>
 						                </div>
@@ -286,8 +301,8 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 			                        <span class="help-block">Max upload 5MB</span>
 			                    
 			                    <?php 
-											$folderUrl = $this->config->config['folder_path']['policy'];
-											$fileUrl = $this->config->config['url_path']['policy'];
+											$folderUrl = $this->config->config['folder_path']['policy']['brochure'];
+											$fileUrl = $this->config->config['url_path']['policy']['brochure'];
 											
 											if (isset($policyModel['brochure']) && !empty($policyModel['brochure']))
 											{
@@ -315,6 +330,9 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 			                        <input type="file" id="logo1" name="policyModel[policy_wordings]"  title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'policy_wordings',$policyModel) ? $policyModel['policy_wordings'] : '';?>">
 			                        <span class="help-block">Max upload 5MB</span>
 			                    <?php 
+											$folderUrl = $this->config->config['folder_path']['policy']['policy_wordings'];
+											$fileUrl = $this->config->config['url_path']['policy']['policy_wordings'];
+											
 											if (isset($policyModel['policy_wordings']) && !empty($policyModel['policy_wordings']))
 											{
 												if (file_exists($folderUrl.$policyModel['policy_wordings']))
@@ -330,6 +348,36 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 								</div>
 			                 							
 			                </div>
+							
+			                <div class="form-group">
+			                </div>
+			                <div class="form-group">
+			                </div>
+			                <div class="form-group">
+			                </div>
+			                
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">Policy Logo:</label>
+			                    <div class="col-sm-9">
+			                        <input type="file" id="logo1" name="policyModel[policy_logo]"  title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'policy_logo',$policyModel) ? $policyModel['policy_logo'] : '';?>">
+			                        <span class="help-block">Image size: 172px X 68px <br>If policy logo is not uploaded, sytem will take default as company logo.</span>
+			                    
+			                    <?php 
+											$folderUrl = $this->config->config['folder_path']['policy']['policy_logo'];
+											$fileUrl = $this->config->config['url_path']['policy']['policy_logo'];
+											
+											if (isset($policyModel['policy_logo']) && !empty($policyModel['policy_logo']))
+											{
+												if (file_exists($folderUrl.$policyModel['policy_logo']))
+												{
+													echo 	'<div class="divider"></div>
+				                    						<img src="'.$fileUrl.$policyModel['policy_logo'].'">';
+												}
+											}
+											?>
+								</div>
+			                </div>
+			                
 		           	  
 			                <div class="form-group">
 			                </div>
@@ -343,16 +391,26 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 			                    <div class="col-sm-9">
 			                    <?php 
 			                    $keyFeatures = array();
-			                    if(array_key_exists( 'key_features',$policyModel) &&  $policyModel['key_features'])
+			                    if(array_key_exists( 'key_features',$policyModel) &&  !empty($policyModel['key_features']))
 			                    {
 			                    	$keyFeatures = unserialize( $policyModel['key_features']);			                    	
-			                    }
+			                    }	                    
 			                    for ($i = 0; $i < $this->config->config['policy']['keyFeatures']; $i++)
 			                    {
+			                    	if($i==0){ echo '<span class="icon glyphicon glyphicon-star"></span>';}
 			                    ?>
-			                        <input type="text" class="form-control"  <?php echo ($i==0) ? "required" : '';?> placeholder="Key feature <?php echo $i+1;?>"  id="url" name="policyModel[key_features][]" value="<?php echo array_key_exists( $i,$keyFeatures) ? $keyFeatures[$i] : '';?>"  >
+			                        <input type="text" class="form-control"  <?php echo ($i==0) ? "required" : '';?> placeholder="Key feature <?php echo $i+1;?>"  id="url" name="policyModel[key_features][]" value="<?php if (!empty($keyFeatures)) { echo array_key_exists( $i,$keyFeatures) ? $keyFeatures[$i] : ''; }?>"  >
 			                        <div class="divider"></div>
 			             <?php 	}?>
+			                    </div>
+			                </div>
+			                
+										
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">Tweet Property</label>
+			                    <div class="col-sm-9">
+			                        <input type="text" class="form-control" placeholder="Tweet property" maxlength="125" id="tweet_property" name="policyModel[tweet_property]" value="<?php echo array_key_exists( 'tweet_property',$policyModel) ? $policyModel['tweet_property'] : '';?>"  >
+			                        <span class="help-block">Max length 125 characters.</span>
 			                    </div>
 			                </div>
 			                

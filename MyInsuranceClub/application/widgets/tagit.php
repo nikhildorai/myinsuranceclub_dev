@@ -124,6 +124,7 @@ var allowedTags = [];
 	<div class="form-group">
      	<label for="" class="col-sm-3">Tag</label>
         <div class="col-sm-9">
+			    <span class="icon glyphicon glyphicon-star"></span>
                 <input type="text" class="form-control" id="singleFieldTags2"  required placeholder="Tag"  name="tag[name]" value="<?php echo $tags;?>" >
                 <span class="help-block"><p class="text-danger" id="tagInfoMsg"></p></span>
                 <input type="hidden" id="tag_for" name="tag[tag_for]" value="<?php echo $tagFor;?>" >

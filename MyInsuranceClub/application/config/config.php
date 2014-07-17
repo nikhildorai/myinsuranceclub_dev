@@ -380,31 +380,37 @@ $config['pagination']['cur_tag_open'] 		= 	'<a href="javascript:void(0);" class=
 $config['pagination']['cur_tag_close'] 		= 	'</a>';
 $config['pagination']['show_goto']			=	TRUE;
 $config['pagination']['full_tag_open'] 		=	'<div class="btn-group">';
-$config['pagination']['full_tag_close'] 		=	'</div>'; 
-//$config['pagination']['cur_tag_open'] 		= 	'<a href="javascript:void(0);" class="badge badge-primary">';
-//$config['pagination']['anchor_class']		=	'btn btn-info';
-//$config['pagination']['uri_segment']       	= 	3;
-//$config['pagination']['use_page_numbers']  	= 	TRUE;
-//$config['pagination']['first_tag_open'] = $config['pagination']['last_tag_open']= $config['pagination']['next_tag_open']= $config['pagination']['prev_tag_open'] = $config['pagination']['num_tag_open'] = '<li>';
-//$config['pagination']['first_tag_close'] = $config['pagination']['last_tag_close']= $config['pagination']['next_tag_close']= $config['pagination']['prev_tag_close'] = $config['pagination']['num_tag_close'] = '</li>';
+$config['pagination']['full_tag_close'] 	=	'</div>'; 
 
 
 
 //	upload url path
-$config['url_path']['company'] = $config['base_url'].'uploads/company/';
-$config['url_path']['policy'] = $config['base_url'].'uploads/policy/';
+$config['url_path']['company']['all'] 				= $config['base_url'].'uploads/company/';
+$config['url_path']['company']['companyPageLogo'] 	= $config['base_url'].'uploads/company/company_page_172x68/';
+$config['url_path']['company']['searchResultLogo'] 	= $config['base_url'].'uploads/company/search_result_80x50/';
+
+$config['url_path']['policy']['all'] 				= $config['base_url'].'uploads/policy/';
+$config['url_path']['policy']['brochure'] 			= $config['base_url'].'uploads/policy/brochure/';
+$config['url_path']['policy']['policy_wordings'] 	= $config['base_url'].'uploads/policy/policy_wordings/';
+$config['url_path']['policy']['policy_logo'] 		= $config['base_url'].'uploads/policy/logo/';
 
 //	upload folder paths
-$config['folder_path']['company'] = realpath(APPPATH . '../uploads').'/company/';
-$config['folder_path']['policy'] = realpath(APPPATH . '../uploads').'/policy/';
+$config['folder_path']['company']['all'] 				= realpath(APPPATH . '../uploads').'/company/';
+$config['folder_path']['company']['companyPageLogo'] 	= realpath(APPPATH . '../uploads').'/company/company_page_172x68/';
+$config['folder_path']['company']['searchResultLogo'] 	= realpath(APPPATH . '../uploads').'/company/search_result_80x50/';
+
+$config['folder_path']['policy']['all'] 				= realpath(APPPATH . '../uploads').'/policy/';
+$config['folder_path']['policy']['brochure'] 			= realpath(APPPATH . '../uploads').'/policy/brochure/';
+$config['folder_path']['policy']['policy_wordings'] 	= realpath(APPPATH . '../uploads').'/policy/policy_wordings/';
+$config['folder_path']['policy']['policy_logo'] 		= realpath(APPPATH . '../uploads').'/policy/logo/';
 
 $config['policy']['descriptionCount'] = 10;
-$config['policy']['keyFeatures'] = 15;
+$config['policy']['keyFeatures'] = 4;
 
 
 //	disqus comments parameters
 $config['disqus']['disqus_shortname'] 		= 	'mictest';
-$config['disqus']['disqus_developer'] 		= 	1;
+$config['disqus']['disqus_developer'] 		= 	1; //	make it 0 in live environment
 $config['disqus']['disqus_identifier'] 		= 	'';
 $config['disqus']['disqus_title'] 			= 	'';
 $config['disqus']['disqus_url'] 			= 	'';

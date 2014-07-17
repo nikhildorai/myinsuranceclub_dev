@@ -245,15 +245,25 @@ class Company extends CI_Controller {
 					$ext = end(explode('.', $v1));
 					if (empty($ext))
 						$ext = 'jpg';
-					$name = $this->util->getSlug($_POST['companyModel']['company_display_name']);
-					if ($i == 2)
-						$name .= '-small';
+					$name = $this->util->getSlug($_POST['companyModel']['company_display_name']).'-logo';
+					
+					//	set name & upload path for each file 
+					if ($k1 == 'logo_image_1')
+					{
+						$name .= '-172x68';
+					}
+					else if ($k1 == 'logo_image_2')	
+					{
+						$name .= '-80x50';
+					}
+					else
+					{
+						$name .= '-'.$i;
+					}
 					$name .= '.'.$ext;
 					$arrFileNames[$k1] = $name;
 					if (empty($v1))
-					{
 						$_POST['companyModel'][$k1] = $companyModel[$k1];
-					}
 					else
 						$_POST['companyModel'][$k1] = $name;
 					$i++;
@@ -264,7 +274,8 @@ class Company extends CI_Controller {
 				//	set previous file name in post
 				$_POST['companyModel']['image_logo_1'] = $companyModel['image_logo_1'];
 				$_POST['companyModel']['image_logo_2'] = $companyModel['image_logo_2'];
-			}	
+			}
+							
 			//	set default values
 			$_POST['companyModel']['company_display_name'] = (isset($_POST['companyModel']['company_display_name']) && !empty($_POST['companyModel']['company_display_name'])) ? $_POST['companyModel']['company_display_name'] :  $_POST['companyModel']['company_name'];
 			$arrParams = $this->input->post('companyModel');
@@ -290,16 +301,17 @@ class Company extends CI_Controller {
 				array('field' => 'companyModel[slug]', 'label' => 'url', 'rules' => 'required|callback_validateInsuranceCompany[slug#'.$arrParams["slug"].',modelType#'.$modelType.',company_id#'.$company_id.',company_type_id#'.$companyTypeId.']'),
 				
 				//	company contact detail validation
-				array('field' => 'companyDetailModel[website]', 'label' => 'website', 'rules' => 'required|trim|max_length[256]|xss_clean|prep_url|valid_url_format|url_exists'),
-				//array('field' => 'companyDetailModel[facebook]', 'label' => 'facebook', 'rules' => 'required|trim|max_length[256]|xss_clean|prep_url|valid_url_format|url_exists'),
+		/*		array('field' => 'companyDetailModel[website]', 'label' => 'website', 'rules' => 'required|trim|max_length[256]|xss_clean|prep_url|valid_url_format|url_exists'),
+				array('field' => 'companyDetailModel[facebook]', 'label' => 'facebook', 'rules' => 'required|trim|max_length[256]|xss_clean|prep_url|valid_url_format|url_exists'),
 				array('field' => 'companyDetailModel[phone]', 'label' => 'phone', 'rules' => 'required'),
 				array('field' => 'companyDetailModel[email]', 'label' => 'email', 'rules' => 'required|valid_emails'),
 				array('field' => 'companyDetailModel[address]', 'label' => 'address', 'rules' => 'required|'),
+				
 				array('field' => 'companyDetailModel[heading_1]', 'label' => 'heading 1', 'rules' => 'required'),
 				array('field' => 'companyDetailModel[heading_2]', 'label' => 'heading 2', 'rules' => 'required'),
 				array('field' => 'companyDetailModel[description_1]', 'label' => 'description 1', 'rules' => 'required'),
 				array('field' => 'companyDetailModel[description_2]', 'label' => 'description 2', 'rules' => 'required'),
-				
+				*/
 			);
 			$companyDetailModel = $_POST['companyDetailModel'];
 			$claimRatioPost = $_POST['claimRatio'];	
@@ -322,20 +334,19 @@ class Company extends CI_Controller {
 					else 
 						$saveData[] = false;
 						
+				    $this->data['file_upload_error'] = array();
 					if (!empty($company_id))
 					{
 						// 	save records for files
 						if (!empty($_FILES))
 						{
 							$this->data['file_upload_error'] = array();
-					        $config['upload_path'] = $this->config->config['folder_path']['company'];
+					        $config['upload_path'] = $this->config->config['folder_path']['company']['all'];
 					        $config['file_name'] = $arrFileNames;
-					        $config['allowed_types'] = 'gif|jpg|png';
-					        $config['max_size'] = '200';
-					        $config['max_width']  = '400';
-					        $config['max_height']  = '250';
+					        $config['extra_config'] = Util::getConfigForFileUpload('company');
 							$this->load->library('upload', $config);
 							$this->upload->initialize($config); 	
+							
 							if($this->upload->do_multi_upload("companyModel"))
 							{
 				              	$this->data['file_upload'] = $this->upload->get_multi_upload_data();
@@ -345,7 +356,7 @@ class Company extends CI_Controller {
 				                $this->data['file_upload_error'][] = $this->upload->display_errors();
 							}
 				            $this->data['file_upload'] = $this->upload->get_multi_upload_data();
-				             
+				            
 				            if (empty($this->data['file_upload_error']))
 				            {
 								$saveData[] = true;
@@ -364,8 +375,8 @@ class Company extends CI_Controller {
 				            {
 								$saveData[] = true;
 				            }
-						}		
-						
+						}	
+
 						if (!empty($companyDetailModel))
 						{
 							$companyDetailModel['company_id'] = $company_id;
@@ -380,14 +391,24 @@ class Company extends CI_Controller {
 						}
 						
 						//	save post for claim ratio
-						$saveClaim = $savedRecords = $errorClaim = array();
+						$saveClaim = $saveEmptyClaim = $savedRecords = $errorClaim = array();
 						if (!empty($claimRatioPost))
 						{
 							$variantErrors = array();
 							$arrSkip = array('claim_ratio_id');
 							foreach ($claimRatioPost as $k1=>$v1)
 							{
-								if (!empty($v1['claim_ratio']) && $v1['claim_ratio'] <= 100 && $v1['claim_ratio'] >= 0)
+								if (empty($v1['claim_ratio']) && !empty($v1['claim_ratio_id']))
+								{		
+									foreach ($v1 as $k2=>$v2)
+									{
+										$saveEmptyClaim[$k1][$k2] = $v2;
+									}
+									$saveEmptyClaim[$k1]['year_from'] = $k1-1;
+									$saveEmptyClaim[$k1]['year_to'] = $k1;
+									$saveEmptyClaim[$k1]['company_id'] = $company_id;
+								}
+								else if (!empty($v1['claim_ratio']) && $v1['claim_ratio'] <= 100 && $v1['claim_ratio'] >= 0)
 								{	
 									foreach ($v1 as $k2=>$v2)
 									{
@@ -401,11 +422,17 @@ class Company extends CI_Controller {
 								{
 									$errorClaim[] = false;
 								}
-							}
-			
+							}	
 							if (!empty($saveClaim))
 							{
 								foreach ($saveClaim as $k3=>$v3)
+								{
+									$savedRecords[] = $this->util->addUpdateClaimRatio($model = $v3, $company_id);
+								}
+							}
+							if (!empty($saveEmptyClaim))	
+							{
+								foreach ($saveEmptyClaim as $k3=>$v3)
 								{
 									$savedRecords[] = $this->util->addUpdateClaimRatio($model = $v3, $company_id);
 								}

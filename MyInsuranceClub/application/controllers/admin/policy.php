@@ -194,6 +194,8 @@ class Policy extends CI_Controller {
 						$name .= '-brochure';
 					else if ($k1 == 'policy_wordings')
 						$name .= '-policy-wordings';
+					else if ($k1 == 'policy_logo')
+						$name .= '-policy-logo';
 					else 
 						$name .= '-doc-'.date('dmy').time();
 					$name .= '.'.$ext;
@@ -233,7 +235,7 @@ class Policy extends CI_Controller {
 			$validation_rules = array(
 				array('field' => 'policyModel[policy_name]', 'label' => 'policy name', 'rules' => 'required'),
 				array('field' => 'policyModel[company_id]', 'label' => 'company name', 'rules' => 'required'),
-				array('field' => 'policyModel[product_id]', 'label' => 'health plan type', 'rules' => 'required'),
+				array('field' => 'policyModel[product_id]', 'label' => 'product', 'rules' => 'required'),
 				array('field' => 'policyModel[seo_title]', 'label' => 'seo title', 'rules' => 'required'),
 				array('field' => 'policyModel[seo_description]', 'label' => 'seo description', 'rules' => 'required'),
 				array('field' => 'policyModel[seo_keywords]', 'label' => 'seo keywords', 'rules' => 'required'),
@@ -278,10 +280,9 @@ class Policy extends CI_Controller {
 						if (!empty($_FILES))
 						{
 							$this->data['file_upload_error'] = array();
-					        $config['upload_path'] = $this->config->config['folder_path']['policy'];
+					        $config['upload_path'] = $this->config->config['folder_path']['policy']['all'];
 					        $config['file_name'] = $arrFileNames;
-					        $config['allowed_types'] = '*';
-					        $config['max_size'] = '5120';
+					        $config['extra_config'] = Util::getConfigForFileUpload('policy');
 							$this->load->library('upload', $config);
 							$this->upload->initialize($config); 	
 							if($this->upload->do_multi_upload("policyModel"))
@@ -840,8 +841,16 @@ class Policy extends CI_Controller {
 				if (empty($field))
 					$field = 'brochure';
 				$this->load->helper('download');
-				$folderUrl = $this->config->config['folder_path']['policy'];
-				$fileUrl = $this->config->config['url_path']['policy'];
+				if ($field == 'brochure')
+				{
+					$folderUrl = $this->config->config['folder_path']['policy']['brochure'];
+					$fileUrl = $this->config->config['url_path']['policy']['brochure'];
+				}
+				else if ($field == 'policy_wordings')
+				{
+					$folderUrl = $this->config->config['folder_path']['policy']['policy_wordings'];
+					$fileUrl = $this->config->config['url_path']['policy']['policy_wordings'];
+				}
 				$data = file_get_contents($fileUrl.$policyModel[$field]);
 				force_download($policyModel[$field], $data);
 				//if ($pol)
@@ -880,8 +889,16 @@ class Policy extends CI_Controller {
 					if (empty($field))
 						$field = 'brochure';
 					$this->load->helper('download');
-					$folderUrl = $this->config->config['folder_path']['policy'];
-					$fileUrl = $this->config->config['url_path']['policy'];
+					if ($field == 'brochure')
+					{
+						$folderUrl = $this->config->config['folder_path']['policy']['brochure'];
+						$fileUrl = $this->config->config['url_path']['policy']['brochure'];
+					}
+					else if ($field == 'policy_wordings')
+					{
+						$folderUrl = $this->config->config['folder_path']['policy']['policy_wordings'];
+						$fileUrl = $this->config->config['url_path']['policy']['policy_wordings'];
+					}
 			//		if (file_exists($folderUrl.$policyModel[$field]))
 			//			@unlink($folderUrl.$policyModel[$field]);
 					$arrParams[$field] = null;

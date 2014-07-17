@@ -93,7 +93,8 @@
             <label class="" for="Field4">I authorize MyInsuranceClub &amp; its partners to Call/SMS for my application &amp; agree to the <a href="" class="link">Terms of Use</a>.</label>
           </div>
           <div class="form-group col-md-2" style="float:right">
-          	<input name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="Show My Options &gt;">
+          	<!-- <input name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="Show My Options &gt;">-->
+            <button class="btn btn-primary my" type="submit" id="sub_form" name="submit" value="submit">Show my options <i class="fa fa-chevron-right ar "></i> </button>
             
             <div class="load_spin"><img src="<?php echo base_url();?>/assets/images/ajax-loader.gif"></div>
           </div>

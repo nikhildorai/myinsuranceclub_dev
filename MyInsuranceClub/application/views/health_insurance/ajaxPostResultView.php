@@ -2,13 +2,11 @@
 
 
 <?php 
-
 $con = &get_instance();
 $folderUrl = $con->config->config['folder_path']['company'];
 $fileUrl = $con->config->config['url_path']['company'];
 $pfolderUrl = $con->config->config['folder_path']['policy'];
 $pfileUrl = $con->config->config['url_path']['policy'];
-
 
 if(empty($customer_details))
 {?>

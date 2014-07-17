@@ -10193,3 +10193,8 @@ button.toast-close-button {
 .form-validation .ng-invalid.ng-dirty {
   border-color: #e94b3b;
 }
+.form-group .col-sm-9 .icon {
+    position: absolute;
+    right: 25px;
+    top: 10px;
+}

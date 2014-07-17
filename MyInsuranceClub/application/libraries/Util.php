@@ -57,7 +57,7 @@ class Util {
 		return $value;
 	}
 	
-	function getTableData($modelName = '', $type="all", $where = array(), $fields = array('id'), $sqlFilter = array())
+	function getTableData($modelName, $type="all", $where = array(), $fields = array('id'), $sqlFilter = array())
 	{
 		$result = $value = array();
 		$model = &get_instance();
@@ -820,7 +820,7 @@ class Util {
 					$return .= 					'<div class="check_bx">
 													<div class="checkbox">
 														<label> 
-															<input type="checkbox" name="compare[]" id="c_name" class="refundable" value="'.$compare_data.'"> 
+															<input type="checkbox" name="compare[]" id="c_name" class="cmpplans" value="'.$compare_data.'"> 
 															<label class="chk" for="Field4"></label> 
 														</label>
 													</div>
@@ -1189,8 +1189,13 @@ class Util {
 			}
 			
 			$isExist = $this->getTableData($modelName='company_claim_ratio_model', $type="all", $where, $fields = array());
+			
 			$model1 = &get_instance();	
 			$model1->load->model('company_claim_ratio_model');		
+			if (empty($model['claim_ratio']))
+				$model['status'] = 'inactive';
+			else  
+				$model['status'] = 'active';
 			if (!empty($isExist))
 			{
 				foreach ($isExist as $k1=>$v1)
@@ -1480,6 +1485,73 @@ echo '=================>';
 			);
 		}
 		return $value;
+	}
+	
+	public static function setCookies($cookieName, $cookieData = '', $time = '864000')
+	{
+		$ci = &get_instance();
+		$ci->load->helper('cookie');
+		if (!empty($cookieName))
+		{
+			//	check if cookie exists
+			if (isset($_COOKIE[$cookieName]) && !empty($_COOKIE[$cookieName]))
+			{
+				$cookie = unserialize($_COOKIE[$cookieName]);
+				$cookieData = array_merge($cookie, $cookieData);
+				$ci->input->set_cookie($cookieName,serialize($cookieData),$time);		
+			}
+			else 
+			{
+				$ci->input->set_cookie($cookieName,serialize($cookieData),$time);
+			}
+		}
+	}
+	
+	public static function getConfigForFileUpload($type = 'company')
+	{
+		$config = array();
+		$ci = &get_instance();
+		if ($type == 'company')
+		{
+			$config['logo_image_1']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+												'max_size'		=>	'200',
+												'max_width'		=>	'172',
+												'max_height'	=>	'68',
+												'upload_path'	=>	$ci->config->config['folder_path']['company']['companyPageLogo'],
+											);
+			$config['logo_image_2']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+												'max_size'		=>	'200',
+												'max_width'		=>	'80',
+												'max_height'	=>	'50',
+												'upload_path'	=>	$ci->config->config['folder_path']['company']['searchResultLogo'],
+											);
+		}
+		else if ($type == 'policy')
+		{
+			$config['brochure']			=	array(	'allowed_types'	=>	'*',
+												'max_size'		=>	'5120',
+												'max_width'		=>	'2000',
+												'max_height'	=>	'2000',
+												'upload_path'	=>	$ci->config->config['folder_path']['policy']['brochure'],
+											);
+			$config['policy_wordings']	=	array(	'allowed_types'	=>	'*',
+												'max_size'		=>	'5120',
+												'max_width'		=>	'2000',
+												'max_height'	=>	'2000',
+												'upload_path'	=>	$ci->config->config['folder_path']['policy']['policy_wordings'],
+											);
+			$config['policy_logo']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+												'max_size'		=>	'200',
+												'max_width'		=>	'172',
+												'max_height'	=>	'68',
+												'upload_path'	=>	$ci->config->config['folder_path']['policy']['policy_logo'],
+											);
+		}
+		else 
+		{
+			
+		}
+		return $config;
 	}
 }
 

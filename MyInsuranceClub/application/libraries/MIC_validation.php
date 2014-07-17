@@ -10,7 +10,7 @@
  * @created 11/19/2010
  */
  
-class MY_validation extends CI_validation{
+class MIC_validation extends CI_validation{
      
     function MY_validation(){
         parent::CI_validation();

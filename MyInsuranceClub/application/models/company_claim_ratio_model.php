@@ -35,10 +35,7 @@ class Company_claim_ratio_model EXTENDS MIC_Model{
 			{
 				if (!in_array($k1, array('claim_ratio_id')))
 				{
-					if (is_numeric($v1))
-						$values[$k1] = (int)trim($v1);
-					else
-						$values[$k1] = trim($v1);
+					$values[$k1] = trim($v1);
 				}
 			}
 			if ($dmodelType == 'create')

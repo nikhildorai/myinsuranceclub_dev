@@ -80,7 +80,9 @@
 						</div>
 					</div>
 					<div  id="cmp_tbl_result">
-						<?php echo $this->util->getUserSearchFiltersHtml($customer_details, $type = "personalAccident");?>
+						<?php 
+							//$this->load->view('personal_accident/ajaxPostResultView');
+							echo $this->util->getUserSearchFiltersHtml($customer_details, $type = "personalAccident");?>
 					</div>
 					<?php echo form_close();?>
 				</div>

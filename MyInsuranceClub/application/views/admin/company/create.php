@@ -8,7 +8,7 @@ $(".form-horizontal :input").prop("disabled", true);
 });
 //-->
 </script>
-<div class="page" data-ng-controller="signupCtrl">
+<div class="page" data-ng-controller="formConstraintsCtrl">
 <?php 	$attributes = array('class'=>"form-horizontal form-validation");
 		echo form_open_multipart(current_url(), $attributes);	?>
 	<div class="panel panel-primary">
@@ -82,6 +82,7 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <div class="form-group">
 			                    <label for="" class="col-sm-3">Name</label>
 			                    <div class="col-sm-9">
+			                    	<span class="icon glyphicon glyphicon-star"></span>
 			                        <input type="text" class="form-control" required placeholder="Company Name" id="company_name" name="companyModel[company_name]" value="<?php echo array_key_exists( 'company_name',$companyModel) ? $companyModel['company_name'] : '';?>" >
 			                    </div>
 			                </div>
@@ -90,7 +91,8 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <div class="form-group">
 			                    <label for="" class="col-sm-3">Display Name</label>
 			                    <div class="col-sm-9">
-			                        <input type="text" class="form-control" required  placeholder="Company Display Name" id="company_display_name" name="companyModel[company_display_name]" value="<?php echo array_key_exists( 'company_display_name',$companyModel) ? $companyModel['company_display_name'] : '';?>">
+			                    	<span class="icon glyphicon glyphicon-star"></span>
+			                        <input type="text" class="form-control"  required  placeholder="Company Display Name" id="company_display_name" name="companyModel[company_display_name]" value="<?php echo array_key_exists( 'company_display_name',$companyModel) ? $companyModel['company_display_name'] : '';?>">
 			                    </div>
 			                </div>
 			                
@@ -98,6 +100,7 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <div class="form-group">
 			                    <label for="" class="col-sm-3">Short Name</label>
 			                    <div class="col-sm-9">
+			                    	<span class="icon glyphicon glyphicon-star"></span>
 			                        <input type="text" class="form-control" required  placeholder="Company Short Name" id="company_shortname" name="companyModel[company_shortname]" value="<?php echo array_key_exists( 'company_shortname',$companyModel) ? $companyModel['company_shortname'] : '';?>" >
 			                    </div>
 			                </div>
@@ -106,6 +109,7 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <div class="form-group">
 			                    <label for="" class="col-sm-3">SEO Title</label>
 			                    <div class="col-sm-9">
+			                    	<span class="icon glyphicon glyphicon-star"></span>
 			                        <input type="text" class="form-control" required  placeholder="SEO Title" maxlength="90" id="seo_title" name="companyModel[seo_title]" maxlength="90" value="<?php echo array_key_exists( 'seo_title',$companyModel) ? $companyModel['seo_title'] : '';?>" >
 			                        <span class="help-block">Max length 90 characters.</span>
 			                    </div>
@@ -114,14 +118,16 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <div class="form-group">
 			                    <label for="" class="col-sm-3">SEO Description</label>
 			                    <div class="col-sm-9">
-			                        <textarea class="form-control" rows="5"  required maxlength="175" id="seo_description" name="companyModel[seo_description]"><?php echo array_key_exists( 'seo_description',$companyModel) ? $companyModel['seo_description'] : '';?></textarea>
-			                        <span class="help-block">Max length 175 characters.</span>
+			                    	<span class="icon glyphicon glyphicon-star"></span>
+			                        <textarea class="form-control" rows="5" required maxlength="250" id="seo_description" name="companyModel[seo_description]"><?php echo array_key_exists( 'seo_description',$companyModel) ? $companyModel['seo_description'] : '';?></textarea>
+			                        <span class="help-block">Max length 250 characters.</span>
 			                    </div>
 			                </div>
 			                
 			                <div class="form-group">
 			                    <label for="" class="col-sm-3">SEO Keywords</label>
 			                    <div class="col-sm-9">
+			                    	<span class="icon glyphicon glyphicon-star"></span>
 			                        <textarea class="form-control" rows="4" required  maxlength="175" id="seo_keywords" name="companyModel[seo_keywords]"><?php echo array_key_exists( 'seo_keywords',$companyModel) ? $companyModel['seo_keywords'] : '';?></textarea>
 			                    </div>
 			                </div>
@@ -129,6 +135,7 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <div class="form-group">
 			                    <label for="" class="col-sm-3">URL</label>
 			                    <div class="col-sm-9">
+			                    	<span class="icon glyphicon glyphicon-star"></span>
 			                        <input type="text" class="form-control"  required placeholder="URL"  name="companyModel[slug]" value="<?php echo array_key_exists( 'slug',$companyModel) ? $companyModel['slug'] : '';?>" >
 			                    </div>
 			                </div>
@@ -140,12 +147,12 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <div class="form-group">
 			                    <label for="" class="col-sm-3">Logo for Company Page:</label>
 			                    <div class="col-sm-9">
-			                        <input type="file" id="logo1" name="companyModel[logo_image_1]"  title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'logo_image_1',$companyModel) ? $companyModel['logo_image_1'] : '';?>">
-			                        <span class="help-block">Image size: 400px X 250px</span>
+			                        <input type="file" id="logo1" name="companyModel[logo_image_1]" accept="image/*" title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'logo_image_1',$companyModel) ? $companyModel['logo_image_1'] : '';?>">
+			                        <span class="help-block">Image size: 172px X 68px</span>
 			                    
 			                    <?php 
-											$folderUrl = $this->config->config['folder_path']['company'];
-											$fileUrl = $this->config->config['url_path']['company'];
+											$folderUrl = $this->config->config['folder_path']['company']['companyPageLogo'];
+											$fileUrl = $this->config->config['url_path']['company']['companyPageLogo'];
 											
 											if (isset($companyModel['logo_image_1']) && !empty($companyModel['logo_image_1']))
 											{
@@ -162,9 +169,11 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <div class="form-group">
 			                    <label for="" class="col-sm-3">Logo for Search Results:</label>
 			                    <div class="col-sm-9">
-			                        <input type="file" id="logo1" name="companyModel[logo_image_2]"  title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'logo_image_2',$companyModel) ? $companyModel['logo_image_2'] : '';?>">
-			                        <span class="help-block">Image size: 400px X 250px</span>
+			                        <input type="file" id="logo1" name="companyModel[logo_image_2]" accept="image/*" title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'logo_image_2',$companyModel) ? $companyModel['logo_image_2'] : '';?>">
+			                        <span class="help-block">Image size: 80px X 50px</span>
 			                    <?php 
+											$folderUrl = $this->config->config['folder_path']['company']['searchResultLogo'];
+											$fileUrl = $this->config->config['url_path']['company']['searchResultLogo'];
 											if (isset($companyModel['logo_image_2']) && !empty($companyModel['logo_image_2']))
 											{
 												if (file_exists($folderUrl.$companyModel['logo_image_2']))
@@ -194,7 +203,8 @@ $(".form-horizontal :input").prop("disabled", true);
 		                <div class="form-group">
 		                    <label for="" class="col-sm-3">Corporate Office</label>
 		                    <div class="col-sm-9">
-		                    	<textarea class="form-control"  required rows="4" maxlength="175" id="address" name="companyDetailModel[address]" ><?php echo array_key_exists( 'address',$companyDetailModel) ? $companyDetailModel['address'] : '';?></textarea>
+		                    	<textarea class="form-control" rows="4"  maxlength="175" id="address" name="companyDetailModel[address]" ><?php echo array_key_exists( 'address',$companyDetailModel) ? $companyDetailModel['address'] : '';?></textarea>
+		                    	
 		                   </div>
 		                </div>
 		                
@@ -202,7 +212,8 @@ $(".form-horizontal :input").prop("disabled", true);
 		                <div class="form-group">
 		                    <label for="" class="col-sm-3">Website</label>
 		                    <div class="col-sm-9">
-		                        <input type="text" class="form-control" required  placeholder="Website"name="companyDetailModel[website]" value="<?php echo array_key_exists( 'website',$companyDetailModel) ? $companyDetailModel['website'] : '';?>" >
+		                        <input type="text" class="form-control" placeholder="Website"name="companyDetailModel[website]" value="<?php echo array_key_exists( 'website',$companyDetailModel) ? $companyDetailModel['website'] : '';?>" >
+		                        
 		                    </div>
 		                </div>
 		                
@@ -232,7 +243,7 @@ $(".form-horizontal :input").prop("disabled", true);
 		                <div class="form-group">
 		                    <label for="" class="col-sm-3">Phone</label>
 		                    <div class="col-sm-9">
-		                        <input type="text" class="form-control input-lg" required  placeholder="Add phone number" name="companyDetailModel[phone]" value="<?php echo array_key_exists( 'phone',$companyDetailModel) ? $companyDetailModel['phone'] : '';?>" >
+		                        <input type="text" class="form-control input-lg" placeholder="Add phone number" name="companyDetailModel[phone]" value="<?php echo array_key_exists( 'phone',$companyDetailModel) ? $companyDetailModel['phone'] : '';?>" >
 		                        <div class="divider"></div>
 		                        <input type="text" class="form-control input-lg" placeholder="Add phone number" name="companyDetailModel[phone2]" value="<?php echo array_key_exists( 'phone2',$companyDetailModel) ? $companyDetailModel['phone2'] : '';?>" >
 		                        <div class="divider"></div>
@@ -244,7 +255,7 @@ $(".form-horizontal :input").prop("disabled", true);
 		                <div class="form-group">
 		                    <label for="" class="col-sm-3">Email</label>
 		                    <div class="col-sm-9">
-		                    	<input type="text" class="form-control" required  placeholder="Add coporate email"  name="companyDetailModel[email]" value="<?php echo array_key_exists( 'email',$companyDetailModel) ? $companyDetailModel['email'] : '';?>" >
+		                    	<input type="text" class="form-control" placeholder="Add coporate email"  name="companyDetailModel[email]" value="<?php echo array_key_exists( 'email',$companyDetailModel) ? $companyDetailModel['email'] : '';?>" >
 		                   	</div>
 		                </div>
 		                
@@ -272,12 +283,14 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <div class="form-group">
 			                    <label for="" class="col-sm-2">Heading 1</label>
 			                    <div class="col-sm-10">
+			                    	<span class="icon glyphicon glyphicon-star"></span>
 			                        <input type="text" class="form-control" placeholder="" name="companyDetailModel[heading_1]" value="<?php echo array_key_exists( 'heading_1',$companyDetailModel) ? $companyDetailModel['heading_1'] : '';?>" >
 			                    </div>
 			                </div>
 			                <div class="form-group">
 			                    <label for="" class="col-sm-2">Description 1</label>
 			                    <div class="col-sm-10">
+			                    	<span class="icon glyphicon glyphicon-star"></span>
 			                        <textarea class="form-control" name="companyDetailModel[description_1]" id="description_1" ><?php echo array_key_exists( 'description_1',$companyDetailModel) ? $companyDetailModel['description_1'] : '';?></textarea>
 			                        <?php echo display_ckeditor($ckeditor1); ?>
 			                    </div>
@@ -291,12 +304,14 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <div class="form-group">
 			                    <label for="" class="col-sm-2">Heading 2</label>
 			                    <div class="col-sm-10">
+			                    	<span class="icon glyphicon glyphicon-star"></span>
 			                        <input type="text" class="form-control" placeholder="" name="companyDetailModel[heading_2]" value="<?php echo array_key_exists( 'heading_2',$companyDetailModel) ? $companyDetailModel['heading_2'] : '';?>" >
 			                    </div>
 			                </div>
 			                <div class="form-group">
 			                    <label for="" class="col-sm-2">Description 2</label>
 			                    <div class="col-sm-10">
+			                    	<span class="icon glyphicon glyphicon-star"></span>
 			                        <textarea class="form-control" name="companyDetailModel[description_2]" id="description_2" ><?php echo array_key_exists( 'description_2',$companyDetailModel) ? $companyDetailModel['description_2'] : '';?></textarea>
 			                        <?php echo display_ckeditor($ckeditor2); ?>
 			                    </div>
@@ -345,7 +360,7 @@ $(".form-horizontal :input").prop("disabled", true);
 															<input type="hidden" name="claimRatio[<?php echo $cur;?>][financial_year]" value="<?php echo $prev.'-'.$cur; ?>">
 														</td>
 														<td>
-															<input type="number" name="claimRatio[<?php echo $cur;?>][claim_ratio]" value="<?php echo isset($ratioModel[$cur]) ? $ratioModel[$cur]['claim_ratio'] : '';?>"/>&nbsp;&nbsp;%
+															<input type="text" name="claimRatio[<?php echo $cur;?>][claim_ratio]" value="<?php echo isset($ratioModel[$cur]) ? $ratioModel[$cur]['claim_ratio'] : '';?>"/>&nbsp;&nbsp;%
 														</td>
 													</tr>
 								<?php 				$i++;
