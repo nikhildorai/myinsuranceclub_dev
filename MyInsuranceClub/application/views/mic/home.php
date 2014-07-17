@@ -169,17 +169,23 @@
   <div class="container "> 
     
     <!-- Tab panes -->
-    <div class="tab-content  mar-70" >
+  <div class="tab-content  mar-70" >
       <div class="tab-pane fade in active" id="htmlcss">
         <article class="row">
-          <div class="col-md-5 col-sm-5 fadeInLeft visible" > <img class="img-responsive" src="<?php echo base_url();?>assets/images/why.jpg" alt="starbuck"> </div>
+          <div class="col-md-5 col-sm-5 fadeInLeft visible" > <img class="img-responsive" src="assets/images/why.jpg" alt="starbuck"> </div>
           <div class="col-md-7 col-sm-6 text-left fadeInRight visible" >
             <h6>Why Compare Insurance with Us?</h6>
-            <p>We insure for peace of mind. Whether it is life insurance, health insurance, motor insurance, home insurance or any other insurance policy, we need to ensure that our assests are secure. While insurance is important, we realise that <span class="highlight">affordable insurance</span> is equally important.</p>
+            <p>There are close to 50 insurance companies in India providing protection to our lives and our assets. Whether it is life insurance, health insurance, motor insurance, home insurance or any other insurance policy, we need to ensure that our assets are secure. <span class="highlight">At MyInsuranceClub</span>, we strive to cut through the clutter and the jargon to help you select the best insurance solution.</p>
             <ul class="sub-list noli" style="padding:0px;">
-              <li><i class="fa fa-check-square-o fa-2"></i>By comparing, you can get the <span class="highlight">best insurance policy</span> for your needs.</li>
-              <li><i class="fa fa-check-square-o fa-2"></i>Save money by buying feature rich insurance plans at <span class="highlight">lower premiums</span>.</li>
-              <li><i class="fa fa-check-square-o fa-2"></i>Oh yes, ours is a <span class="highlight">free service!</span> </li>
+             
+              
+              <li><i class="fa fa-slack fa-2"></i>By comparing, you can get the <span class="highlight">best insurance policy</span> for your needs</li>
+
+ <li><i class="fa fa-slack fa-2"></i>Save money by buying feature rich insurance plans at <span class="highlight">lower premiums</span></li>
+
+ <li><i class="fa fa-slack fa-2"></i>We are <span class="highlight">un-biased</span> and don't have faourites</li>
+
+ <li><i class="fa fa-slack fa-2"></i>Oh yes, ours is a <span class="highlight">free service!</span></li>
             </ul>
           </div>
         </article>
@@ -188,12 +194,12 @@
     <article class="node-2 node node-page view-mode-full clearfix">
     
      <div class="col-md-12">
-        <ul class="bxslider">
+     <ul class="bxslider">
           <li>
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="<?php echo base_url();?>/assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Thank you once again for your free and very valuable information on 
+                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Thank you once again for your free and very valuable information on 
                     insurance. Best wishes to your team and keep up the good work!&nbsp;&nbsp;</strong></p>
                   <p class="col-md-12 aln_right">- Pravin Bhandare, Bangalore</p>
                 </div>
@@ -204,8 +210,29 @@
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="<?php echo base_url();?>/assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus. Fusce condimentum eleifend enim.&nbsp;&nbsp;</strong></p>
+                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;I was looking for a term plan and it was tough choosing the right one as there were too many choices. I am glad that you helped patiently.&nbsp;&nbsp;</strong></p>
                   <p class="col-md-12 aln_right">- Anita Viswas, Mumbai</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          
+           <li>
+            <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+              <div class="field-items">
+                <div class="field-item even">
+                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;This is cool. Usually go with the options provided by my car dealer for my car insurance. Spending a few minutes here save me money.&nbsp;&nbsp;</strong></p>
+                  <p class="col-md-12 aln_right">- Arun Kumar, Chennai</p>
+                </div>
+              </div>
+            </div>
+          </li>
+           <li>
+            <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+              <div class="field-items">
+                <div class="field-item even">
+                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Fun, non-intrusive and informative. Your health insurance comparison is great. It would have been better if you can recommend plans also.&nbsp;&nbsp;</strong></p>
+                  <p class="col-md-12 aln_right">- Abhinav Kumar, New Delhi</p>
                 </div>
               </div>
             </div>
