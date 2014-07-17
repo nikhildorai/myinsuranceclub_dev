@@ -192,25 +192,42 @@ $('html, body').animate({scrollTop: $(this).parent().parent().parent().offset().
 
     $( "#slider-range" ).slider({
       range: true,
-      min: 100,
-      max: 5000,
-      values: [ 1000, 5000 ],
+      step:5,
+      min: 0,
+      max: 100,
+      values: [ 0,100 ],
       slide: function( event, ui ) {
-        $( "#amount" ).val( "₹ " + formatNumber(ui.values[ 0 ]));
-		$( "#amount1" ).val( "₹ " + formatNumber(ui.values[ 1 ] ));
+        $( "#amount" ).val(formatNumber(ui.values[ 0 ]) + " %");
+		$( "#amount1" ).val(formatNumber(ui.values[ 1 ] + " %"));
 		
 		
-      }
+      },
+      
+      stop: function( event, ui ) {
+			data = $('#search').serialize();
+	  		
+			 $.ajax({
+				 
+			type:"post", 
+			url: annual_premium_search_url,
+			data:data,
+			success:function(data)
+			{ 
+				$('#cmp_tbl').html(data);
+			}
+			});
+		
+		}
     });
-    $( "#amount" ).val( "₹ " + $( "#slider-range" ).slider( "values", 0 ));
-	$( "#amount1" ).val( "₹ " + $( "#slider-range" ).slider( "values", 1 ) );
+    $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) + " %");
+	$( "#amount1" ).val($( "#slider-range" ).slider( "values", 1 ) + " %");
 	   
 	   
 	   
 	    $( "#slider-range1" ).slider({
       range: true,
-      min: 2845,
-      max: 5961,
+      min: parseInt(min_premium),
+      max: parseInt(max_premium),
       values: [ min_premium, max_premium ],
       slide: function( event, ui ) {
         $("#amount_a" ).val( "₹ " + formatNumber(ui.values[ 0 ]));
@@ -220,7 +237,22 @@ $('html, body').animate({scrollTop: $(this).parent().parent().parent().offset().
 		
 		show_prem(val_pa,val_pb,company_count,plan_count);
 		
-      }
+      },
+      
+      stop: function( event, ui ) {
+			data = $('#search').serialize();
+	  		
+			 $.ajax({
+				 
+			type:"post", 
+			url: annual_premium_search_url,
+			data:data,
+			success:function(data)
+			{ 
+				$('#cmp_tbl').html(data);
+			}
+			});
+			 
     });
     $( "#amount_a" ).val( "₹ " + $( "#slider-range1" ).slider( "values", 0 ));
 	   $( "#amount1_a" ).val( "₹ " + $( "#slider-range1" ).slider( "values", 1 ) );	 

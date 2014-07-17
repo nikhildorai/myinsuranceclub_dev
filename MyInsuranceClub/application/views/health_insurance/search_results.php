@@ -17,6 +17,7 @@
 	$newVal = array();
 	$preexisitng_disease_discard = array();
 	$aNew = array();
+	$pph = array();
 	if(!empty($customer_details))
 	{
 			
@@ -37,6 +38,12 @@
 
        	 		$preexisitng_disease_discard [] = $v['preexisting_diseases'];
 			}
+        
+       		if(!in_array($v['public_private_health'],$pph))
+       		{
+       			$pph[] = $v['public_private_health'];
+       		}
+				$pph_disacrd[] = $v['public_private_health'];
         }
                    				
 	}	
@@ -137,7 +144,7 @@
                 
                 
                 <div class="block1" style="position:relative;">
-                 <h6 class="fh3 l"> <?php if (isset($this->session->userdata['filter_count'])){echo $this->session->userdata['filter_count'];}?> of <?php echo  count($customer_details);?> plans</h6>
+                 <h6 class="fh3 l"> <?php echo count($customer_details);?> of <?php echo  count($customer_details);?> plans</h6>
                  
                  <h6 class="fh3"> Premium</h6>
                  
@@ -146,8 +153,8 @@
                  <div class="filterContent ">
 				
 			<div style="float: left; width: 100%; position: relative; top: -30px;">
-  <input type="text" id="amount_a" readonly="" class="s_l">
-   <input type="text" id="amount1_a" readonly="" class="s_r">
+  <input type="text" id="amount_a" readonly="" class="s_l search_filter" name="min_premium_amt" value="">
+   <input type="text" id="amount1_a" readonly="" class="s_r search_filter" name="max_premium_amt" value="">
 </div>
                 <div id="slider-range1"></div>
                 
@@ -157,8 +164,8 @@
 							
 			
 			<p class="displayStaticRange clearFix" style="padding-bottom:0px; margin-bottom:0px;">
-				<span class="fLeft"><span data-pr="6437" class="INR">&#8377;</span>6,437</span>
-				<span class="fRight"><span data-pr="42306" class="INR">&#8377;</span>42,306</span>
+				<span class="fLeft"><span data-pr="6437" class="INR">&#8377;</span><?php echo $min_annual_premium;?></span>
+				<span class="fRight"><span data-pr="42306" class="INR">&#8377;</span><?php echo $max_annual_premium;?></span>
 			</p>
 	
 			<input type="hidden" name="price" value="6437-32293">
@@ -197,92 +204,88 @@
 				</p>
                 
                 
-                <?php if(isset($preexist_filter))
-                 		{
-                 			sort($preexist_filter);?>
-                <p class="addOnFilter" style="margin:0px; padding:0px;">
-						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
-				</p> 
-                
-                 <h6 class="fh3">Pre-existing diseases</h6>
+             <?php if(isset($preexist_filter))
+                 	{
+                 		sort($preexist_filter);?>
+                			<p class="addOnFilter" style="margin:0px; padding:0px;">
+									<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
+							</p> 
+                 			<h6 class="fh3">Pre-existing diseases</h6>
                  <p class="addOnFilter" >
-                 <?php 
-                 		
-                 		foreach($preexist_filter as $p){?>
+                 <?php foreach($preexist_filter as $p){?>
+                 
 					<div class="checkbox">
-            <label>
-            
-            <input type="checkbox" id="" name="precover[]" class="search_filter" value="<?php echo $p;?>">
-            <label class="" for="10">Plans which cover after <?php echo $p;?> years
-					
-					</label>
-         	
-          </label>
-          
-          </div><?php }}?>
-               
+            				<label>
+            					<input type="checkbox" id="" name="precover[]" class="search_filter" value="<?php echo $p;?>">
+           							 <label class="" for="10">Plans which cover after <?php echo $p;?> years
+									</label>
+         					 </label>
+          			</div>
+          			<?php }
+                 		
+                 	}?>
 				</p>
-                
                 <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
 				</p> 
-                
-                
                  <h6 class="fh3">Company </h6>
-                 
-                 <div class="addOnFilter clearfix" >
+                 	<div class="addOnFilter clearfix" >
                  
                  <?php 
                  if(!empty($aNew))
                  {
-                 	//echo "<pre>";
-                 	//print_r($aNew);	
+                 	
                  	foreach($aNew as $company){
                     	
                     	$premium = $company['premium'];
-	                   	sort($premium);?>
+	                   	sort($premium);
+	              ?>
+	              
                     <div style="width: 100%; float: left;">
-                    <div class="checkbox" style="width: auto; float: left; margin: 0px;">
-            <label>
-            
-            <input type="checkbox" value="<?php echo $company['company']['company_id'];?>" class="search_filter" name="company_name[]">
-            <label for="23" class=""><?php echo $company['company']['company_shortname'];?></label>
-           
-          </label></div> <span style="float:right;"> &#8377;<?php echo reset($premium).' - &#8377; '.end($premium);?></span></div>
+                    	<div class="checkbox" style="width: auto; float: left; margin: 0px;">
+            				<label>
+            					<input type="checkbox" value="<?php echo $company['company']['company_id'];?>" class="search_filter" name="company_name[]">
+            						<label for="23" class=""><?php echo $company['company']['company_shortname'];?></label>
+          					</label>
+          				</div> <span style="float:right;"> &#8377; <?php echo reset($premium).' - &#8377; '.end($premium);?></span>
+          			</div>
+          			
               <?php }
                  }?>
 				</div>
-                 
                  <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
 				</p> 
                  <h6 class="fh3">Co-payment</h6>
                  <p class="addOnFilter" >
-                 
 					 <div class="checkbox">
-            <label>
-            <input type="checkbox" id="" name="14"  class="search_filter" value="14">
-            <label class="" for="14">Plans with no co-payment
-					</label>
-          </label></div>
+            			<label>
+            				<input type="checkbox" id="" name="14"  class="search_filter" value="14">
+            					<label class="" for="14">Plans with no co-payment
+								</label>
+          				</label>
+          			</div>
                      <div class="checkbox">
-            <label>
-            <input type="checkbox" id="" name="15"  class="search_filter" value="15">
-            <label class="" for="15">Plans with 10% co-payment
-					</label>
-          </label></div>
+            				<label>
+            					<input type="checkbox" id="" name="15"  class="search_filter" value="15">
+            						<label class="" for="15">Plans with 10% co-payment
+									</label>
+          					</label>
+          			</div>
                       <div class="checkbox">
-            <label>
-            <input type="checkbox" id="" name="16"  class="search_filter" value="16">
-            <label class="" for="16">Plans with 20% co-payment
-					</label>
-          </label></div>
+            				<label>
+            					<input type="checkbox" id="" name="16"  class="search_filter" value="16">
+            						<label class="" for="16">Plans with 20% co-payment
+									</label>
+          					</label>
+          			</div>
                       <div class="checkbox">
-            <label>
-            <input type="checkbox" id="" name="17"  class="search_filter" value="17">
-            <label class="" for="17">CPlans with 30% co-payment
-					</label>
-          </label></div>
+            				<label>
+            					<input type="checkbox" id="" name="17"  class="search_filter" value="17">
+            						<label class="" for="17">CPlans with 30% co-payment
+									</label>
+          					</label>
+          			</div>
 				</p>
                 
                  <p class="addOnFilter" style="margin:0px; padding:0px;">
@@ -318,8 +321,8 @@
               
                 <p>
 
-  <input type="text" id="amount" readonly class="s_l">
-   <input type="text" id="amount1" readonly  class="s_r">
+  <input type="text" id="amount" readonly class="s_l" name="min_claim_ratio">
+   <input type="text" id="amount1" readonly  class="s_r" name="max_claim_ratio">
 </p>
                 <div id="slider-range"></div>
                 
@@ -330,8 +333,8 @@
 			
 			<p class="displayStaticRange clearFix" style="padding-bottom:0px; margin-bottom:0px; margin-top:15px;">
 			
-                <span class="fLeft"><span data-pr="<?php echo $min_annual_premium;?>" class="INR">&#8377;</span><?php echo $min_annual_premium;?></span>
-				<span class="fRight"><span data-pr="<?php echo $max_annual_premium;?>" class="INR">&#8377;</span><?php echo $max_annual_premium;?></span>
+                <span class="fLeft"><span data-pr="" class="INR"></span>0 %</span>
+				<span class="fRight"><span data-pr="" class="INR"></span>100 %</span>
 			</p>
 	
 			<input type="hidden" name="price" value="6437-32293">
@@ -346,30 +349,46 @@
                  <h6 class="fh3">Company type</h6>
                  <p class="addOnFilter" >
                  
-					 <div class="checkbox">
-            <label>
-            <input type="checkbox" id="" name="sector[]"  class="search_filter" value="2">
-            <label class="" for="20">Plans from Private Sector companies
-					</label>
-          </label></div>
-                    <div class="checkbox">
-            <label>
-            <input type="checkbox" id="" name="sector[]"  class="search_filter" value="1">
-            <label class="" for="21">Plans from Public Sector companies
-					</label>
-          </label></div>
+                 <?php foreach($pph as $k=>$v){?>
+					 
+					 <?php if($v == '2'){?>
+					 
+					 	<div class="checkbox">
+            				<label>
+            					<input type="checkbox" id="" name="sector[]"  class="search_filter" value="2">
+            						<label class="" for="20">Plans from Private Sector companies
+									</label>
+          					</label>
+          				</div>
+          				
+          			<?php }?>
+          			
+          			<?php if($v == '1'){?>
+          			
+                    	<div class="checkbox">
+            				<label>
+            					<input type="checkbox" id="" name="sector[]"  class="search_filter" value="1">
+            						<label class="" for="21">Plans from Public Sector companies
+									</label>
+          					</label>
+          				</div>
+          				
+                    <?php }?>
                     
-                    <div class="checkbox">
-            <label>
-            <input type="checkbox" id="" name="sector[]"  class="search_filter" value="3">
-            <label class="" for="22">Plans from Health Insurance companies
-					</label>
-          </label></div>
+                    <?php if($v== '3'){?>
                     
+                    	<div class="checkbox">
+            				<label>
+            					<input type="checkbox" id="" name="sector[]"  class="search_filter" value="3">
+           							 <label class="" for="22">Plans from Health Insurance companies
+									</label>
+          					</label>
+          				</div>
+          				
+          			<?php }?>
+                 
+           		<?php }?>
 				</p>
-               
-                
-                
                 
                 </div>
                 
@@ -377,36 +396,26 @@
             </div>
             <?php echo form_close();?>
           </div>
+		</div>
+	</div>
 </div>
-
-
-
-</div>
-</div>
-
-
 <div id="search_sense_of_urgency_popup" class="hcom_simple_popdiv hcom_urgency_popup" style="display: none;">
     <div class="arrow">
       <div class="outer"></div>
       <div class="inner"></div>
     </div>
     <div id="searchUrgencyPopupBox">
-    
 <div class="fader"><div class="arrow-w arrowlocation1" style="font-size:1em;" ></div><div id="tutorial1" class="tutorial createquestion1">Just booked Health Policy 7 minutes ago from United Kingdom.</div></div>
 <div class="fader"><div class="arrow-w arrowlocation1" style="font-size:1em;" ></div><div id="tutorial1" class="tutorial createquestion1">In 2013-14, Exide Life Insurance recorded doubling in profits to Rs 53 crore driven by growth in renewal premiums and improvements in efficiency and product mix.</div></div>
 <div class="fader"><div class="arrow-w arrowlocation1" style="font-size:1em;" ></div><div id="tutorial1" class="tutorial createquestion1">Reliance Life Insurance launches Claims Guarantee service.</div></div>
 <div class="fader"><div class="arrow-w arrowlocation1" style="font-size:1em;" ></div><div id="tutorial1" class="tutorial createquestion1">IDBI Federal Life Insurance today launched a bouquet of individual products catering to various life stage needs of customers along with group solutions.</div></div>
-
-
-
-  <div>
-   </div>
+<div>
+</div>
 </div>
 </div>
 
 <div class="tutorial">
 </div>
-
 
 <script type="text/javascript">
 var company_count = "<?php echo count($aNew);?>";
@@ -414,7 +423,7 @@ var plan_count = "<?php echo  count($customer_details);?>";
 var min_premium = "<?php echo  $min_annual_premium;?>";
 var max_premium = "<?php echo  $max_annual_premium;?>";
 var hospital_list_url = "<?php echo base_url().'health_insurance/basicMediclaim/get_hospital_list'?>";
-
+var annual_premium_search_url = "<?php echo base_url().'health_insurance/basicMediclaim/health_policy'?>";
 
 
 $(document).ready(function() {

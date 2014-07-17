@@ -91,11 +91,11 @@
 															{
 																$return .= 'N/A';
 															}
-															else if(trim(strtolower($v2)) == 'yes')
+															else if(trim(strtolower($v2)) == 'Covered')
 															{
 																$return .= "<i class='fa fa-check fa-2' style='color:#2bbd1c'></i>";
 															}
-															else if(trim(strtolower($v2)) == 'no')
+															else if(trim(strtolower($v2)) == 'Not Covered')
 															{
 																$return .= "<i class='fa fa-times fa-2' style='color:red'></i>";
 															}
@@ -157,9 +157,13 @@
 <style>
 <!--
 .diffColClass{
--webkit-box-shadow: 0px 1px 22px 2px rgba(148,148,148,0.82);
+/* -webkit-box-shadow: 0px 1px 22px 2px rgba(148,148,148,0.82);
 -moz-box-shadow: 0px 1px 22px 2px rgba(148,148,148,0.82);
-box-shadow: 0 0 0 2px #F2CF71;
+box-shadow: 0 0 0 2px #F2CF71; */
+
+font-weight: bold;
+font-style: oblique;
+color: green;
 }
 -->
 </style>
@@ -171,10 +175,13 @@ $(function() {
 		if($('#Field4:checked').length == 1)
 		{
 			$('.diffCol').addClass('diffColClass');
+			//$('.sameCol').addClass('diffColClass');
+			
 		}
 		else
 		{
 			$('.diffCol').removeClass('diffColClass');
+			//$('.sameCol').removeClass('diffColClass');
 		}
 	});
 	

@@ -37,6 +37,7 @@ class basicMediclaim extends MIC_Controller {
 		$data=array();
 		
 		$data['city'] = $this->city->get_city();
+		
 		$this->db->freeDBResource($this->db->conn_id);
 		
 		
@@ -61,6 +62,7 @@ class basicMediclaim extends MIC_Controller {
 		$data['company_plan_count'] = $this->get_company_plans_count->get_count($product_name);
 		
 		$this->db->freeDBResource($this->db->conn_id);
+		
 		
 		$this->template->set_template('frontend');
 		$this->template->write_view('content', 'health_insurance/health1', $data, TRUE);
@@ -381,15 +383,62 @@ class basicMediclaim extends MIC_Controller {
 						}
 					}
 					
-				}
-				$filter_count = count($data['customer_details']);
-				$this->session->set_userdata('filter_count',$filter_count);
-				$filter_count=$this->session->userdata('filter_count',$filter_count);
 					
-				$data['filter_count'] = $filter_count;
+					if(isset($search_filter['min_premium_amt']))
+					{
+						$min_amt_arr = explode('₹ ',$search_filter['min_premium_amt']);
+						
+						$min_premium = (int) str_replace(',','',$min_amt_arr[1]);
+						
+						if(!($v['annual_premium'] >= $min_premium))
+						{
+							unset($data['customer_details'][$k]);
+						}
+					}
+					
+					if(isset($search_filter['max_premium_amt']))
+					{
+						$max_amt_arr = explode('₹ ',$search_filter['max_premium_amt']);
+						
+						$max_premium = (int) str_replace(',','',$max_amt_arr[1]);
+						
+						if(!($v['annual_premium'] <= $max_premium))
+						{
+							unset($data['customer_details'][$k]);
+						}
+					}
+					
+					/* if(isset($search_filter['min_claim_ratio']))
+					{
+						
+						$min_claims_ratio = (int) str_replace(' %','',$search_filter['min_claim_ratio']);
+						
+						if($v['claim_ratio'] <= $min_claims_ratio)
+						{
+							unset($data['customer_details'][$k]);
+						}
+					}
+					
+					if(isset($search_filter['max_claim_ratio']))
+					{
+						
+						$max_claims_ratio = (int) str_replace(' %','',$search_filter['max_claim_ratio']);
+					
+						if($v['claim_ratio'] >= $max_claims_ratio)
+						{
+							unset($data['customer_details'][$k]);
+						}
+					} */
+				}
+					
+				//$data['filter_count'] = $filter_count;
 				
 				//$data['filter_count'] = count($data['customer_details']);
-				$this->load->view('health_insurance/ajaxPostResultView',$data);	
+				/* $return['html'] =  */
+				$this->load->view('health_insurance/ajaxPostResultView',$data);
+				/* $return['company'] = 8;
+				$return['plan'] = 10;
+				echo  json_encode($return); */
 			}
 			else
 			{

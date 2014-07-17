@@ -1,3 +1,6 @@
+
+
+
 <?php 
 
 $con = &get_instance();
@@ -13,6 +16,10 @@ if(empty($customer_details))
 <?php }
     
 elseif(! empty ( $customer_details )) {
+	$plans = count($customer_details);
+	?>
+	
+	<?php 
 	foreach ( $customer_details as $detail ) {
 		
 		$preexist_diseases = '';
@@ -31,8 +38,9 @@ elseif(! empty ( $customer_details )) {
 		
 		$compare_data = $detail ['variant_id'] . '-' . $detail ['annual_premium'] . '-' . $detail ['age'];
 		
-		if (trim ( $detail ['sum_assured'] ) != $con->session->userdata ['user_input'] ['coverage_amount_literal']) {
-			$sum_assured = "<span style='color: #ff6633;'>&#8377;" . number_format ( $detail ['sum_assured'] ) . "</span>";
+		if ((int) (trim ( $detail ['sum_assured'] )) != (int) $con->session->userdata ['user_input'] ['coverage_amount_literal']) {
+				
+				$sum_assured = "<span style='color: #ff6633;'>&#8377;" . number_format ( $detail ['sum_assured'] ) . "</span>";
 		} else {
 			$sum_assured = "<span>&#8377;" . number_format ( $detail ['sum_assured'] ) . "</span>";
 		}
@@ -216,10 +224,19 @@ elseif(! empty ( $customer_details )) {
 			<div class="col-md-5">
 				<h4 class="h_d mar-40" style="margin-left: 50px;">Documents</h4>
 				<ul class="doc">
-					<li>Policy Brouchure <a href="javascript:void(0)"><img
-							src="<?php echo base_url();?>/assets/images/pdf.jpg"></a></li>
-					<li>Policy Wordings <a href="javascript:void(0)"><img
+				<?php if (!empty($detail['brochure']) && file_exists($pfolderUrl.$detail['brochure']))?>
+					
+					<?php {?>
+							<li>Policy Brouchure <a href="<?php echo $pfileUrl.$detail['brochure'];?>"><img
+									src="<?php echo base_url();?>/assets/images/pdf.jpg"></a></li>
+					<?php }?>
+					
+				<?php if (!empty($detail['policy_wordings']) && file_exists($pfolderUrl.$detail['policy_wordings']))?>
+					
+					<?php {?>
+							<li>Policy Wordings <a href="<?php $pfileUrl.$detail['policy_wordings']?>"><img
 							src="<?php echo base_url();?>/assets/images/pdf.jpg" class="dimg"></a></li>
+					<?php }?>
 				</ul>
 				</ul>
 			</div>
@@ -233,3 +250,4 @@ elseif(! empty ( $customer_details )) {
 <?php 		}
 		}
 ?>
+

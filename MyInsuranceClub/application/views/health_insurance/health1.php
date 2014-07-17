@@ -67,13 +67,15 @@
             <div class="choice-leftcol" data-bind="">
               <select name="cust_city" placeholder="Type your city" id="combobox" style="height:auto;">
                 <option value="" >  </option>
-                <option value="590">Mumbai</option>
-               <?php foreach ($city as $c_name){
-               			//if($c_name['city_id']==$this->session->userdata['user_input']['cust_city']){?>
-               <!-- option value="<?php //echo $this->session->userdata['user_input']['cust_city']; ?>" selected="selected"><?php //echo $c_name['mic_city_name']; ?></option> -->
-               <?php //}else{?>
+                <?php if(isset($this->session->userdata['user_input']['cust_city_name']) && isset($this->session->userdata['user_input']['cust_city'])){?>
+                <option value="<?php echo $this->session->userdata['user_input']['cust_city'];?>" selected="selected"><?php echo $this->session->userdata['user_input']['cust_city_name']?></option>
+                <?php } else{?>
+                <option value="590" selected="selected">Mumbai</option>
+                <?php }?>
+               <?php foreach ($city as $c_name){?>
+               			
                <option value="<?php echo $c_name['city_id']; ?>" ><?php echo $c_name['mic_city_name']; ?></option>
-               		<?php // }?>
+               		
                <?php }?>
               </select>
               <div class="stepwrap years-stepwrap">
