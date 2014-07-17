@@ -252,7 +252,7 @@ $('html, body').animate({scrollTop: $(this).parent().parent().parent().offset().
 				$('#cmp_tbl').html(data);
 			}
 			});
-			 
+      }	 
     });
     $( "#amount_a" ).val( "₹ " + $( "#slider-range1" ).slider( "values", 0 ));
 	   $( "#amount1_a" ).val( "₹ " + $( "#slider-range1" ).slider( "values", 1 ) );	 
