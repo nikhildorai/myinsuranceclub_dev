@@ -294,7 +294,7 @@
           			</div>
 				</p>
                 
-                 <p class="addOnFilter" style="margin:0px; padding:0px;">
+                 <!-- >p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
 				</p> 
                 
@@ -318,7 +318,7 @@
                 <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
 				</p -->
-                
+                <!-- 
                                 <h6 class="fh3">Claims ratio of company</h6>
 
                 
@@ -327,7 +327,7 @@
               
                 <p>
 
-  <input type="text" id="amount" readonly class="s_l" name="min_claim_ratio">
+  <!-- input type="text" id="amount" readonly class="s_l" name="min_claim_ratio">
    <input type="text" id="amount1" readonly  class="s_r" name="max_claim_ratio">
 </p>
                 <div id="slider-range"></div>
@@ -347,7 +347,7 @@
 	
 				
 		</div>
-                
+                -->
                 
                <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
@@ -405,7 +405,7 @@
 		</div>
 	</div>
 </div>
-<div id="search_sense_of_urgency_popup" class="hcom_simple_popdiv hcom_urgency_popup" style="display: none;">
+<div id="search_sense_of_urgency_popup" class="hcom_simple_popdiv hcom_urgency_popup" style="display: block;">
     <div class="arrow">
       <div class="outer"></div>
       <div class="inner"></div>
