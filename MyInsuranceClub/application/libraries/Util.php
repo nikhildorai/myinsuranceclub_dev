@@ -240,7 +240,7 @@ class Util {
     	}
     	elseif(count($customer_details) == 0)
     	{
-    		$min_max_premium['min_premium'] == '0';
+    		$min_max_premium['min_premium'] = '0';
     		$min_max_premium['max_premium'] = '0';
     	}
     
