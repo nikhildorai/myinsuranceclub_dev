@@ -39,7 +39,7 @@
               <li><a href="#" class=" menu-item" >Two Wheeler Insurance </a></li>
               <li><a href="<?php echo site_url('health-insurance');?>" class=" menu-item" >Health Insurance </a></li>
                    <li><a href="#" class=" menu-item" >Travel Insurance</a></li>
-              <li><a href="#" class="dropdown-toggle menu-item" id="features-drop" data-toggle="dropdown" data-hover="dropdown">Life Insurance&nbsp;&nbsp; <span class="fa fa-sort-asc po"></span></a> 
+              <li><a href="#" class="dropdown-toggle menu-item" id="features-drop" data-toggle="dropdown" data-hover="dropdown">Life Insurance&nbsp;&nbsp; <span class="fa fa-sort-desc po"></span></a> 
                 <!-- Dropdown Menu - Mega Menu -->
                 <ul class="dropdown-menu mega-menu" role="menu" aria-labelledby="features-drop">
                  
@@ -59,7 +59,7 @@
               
              
               
-               <li><a href="#" class="dropdown-toggle menu-item last" data-toggle="dropdown" data-hover="dropdown">Other Plans&nbsp;&nbsp; <span class="fa fa-sort-asc po"></span></a> 
+               <li><a href="#" class="dropdown-toggle menu-item last" data-toggle="dropdown" data-hover="dropdown">Other Plans&nbsp;&nbsp; <span class="fa fa-sort-desc po"></span></a> 
                
                 <ul class="dropdown-menu mega-menu other" role="menu" aria-labelledby="features-drop">
                  
