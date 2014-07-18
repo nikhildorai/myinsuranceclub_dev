@@ -263,7 +263,7 @@
             					<input type="checkbox" value="<?php echo $company['company']['company_id'];?>" class="search_filter" name="company_name[]">
             						<label for="23" class=""><?php echo $company['company']['company_shortname'];?></label>
           					</label>
-          				</div> <span style="float:right;"> &#8377;<?php echo $range;//echo reset($premium).' - &#8377;'.end($premium);?></span>
+          				</div> <span style="float:right;"><?php echo $range;//echo reset($premium).' - &#8377;'.end($premium);?></span>
           			</div>
           			
               <?php }
