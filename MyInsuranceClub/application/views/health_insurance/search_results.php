@@ -11,7 +11,7 @@
        <div class="top_h">Your Search</div>
        <div class="top_p">Coverage Amount = &#8377;<?php if(isset($this->session->userdata['user_input']['coverage_amount'])){echo $this->session->userdata['user_input']['coverage_amount'];}?></div>
       <div class="top_p"> Members = <?php if(isset($this->session->userdata['user_input']['plan_type_name'])){echo $this->session->userdata['user_input']['plan_type_name'];}?></div>
-       <div class="top_m"><i class="fa fa-angle-left"></i> <a href="<?php echo site_url('health-insurance');?>">Modify Your Search</a></div>
+       <div class="top_m"><i class="fa fa-angle-left" style="font-size: 18px;"></i> <a href="<?php echo site_url('health-insurance');?>">Modify Your Search</a></div>
    </div>
 	<?php   
 	
