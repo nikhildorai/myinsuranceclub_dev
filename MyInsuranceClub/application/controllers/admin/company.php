@@ -445,7 +445,7 @@ class Company extends CI_Controller {
 					}
 					
 					//	if all records are stored then on show success and redirect to index 
-					if(!in_array(false, $saveData))
+					if(!in_array(false, $saveData) && empty($errorClaim))
 					{
 						$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
 						redirect('admin/company/index');
@@ -454,16 +454,6 @@ class Company extends CI_Controller {
 					{
 						$this->data['message'] = '<p class="status_msg">Records added successfully.</p>';
 						$this->data['message'] .= '<p class="error_msg">Records with claim ratio cannot be greater than 100 or less than 0 could not be saved.</p>';
-					}
-					else if (in_array(false, $saveData) && empty($errorClaim))
-					{
-						$this->data['message'] = '<p class="status_msg">Records added successfully.</p>';
-						$this->data['msgType'] = 'success';
-					}
-					else if (!empty($errorClaim))
-					{
-						//	show error if validation fails
-						$this->data['message'] = '<p class="error_msg">Claim ratio cannot be greater than 100.</p>';
 						$this->data['msgType'] = 'error';
 					}
 					else 
