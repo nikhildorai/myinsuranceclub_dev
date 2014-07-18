@@ -261,8 +261,8 @@ $('html, body').animate({scrollTop: $(this).parent().parent().parent().offset().
       max: parseInt(max_premium),
       values: [ min_premium, max_premium ],
       slide: function( event, ui ) {
-        $("#amount_a" ).val( "₹ " + formatNumber(ui.values[ 0 ]));
-		$("#amount1_a" ).val( "₹ " + formatNumber(ui.values[ 1 ]));
+        $("#amount_a" ).val( "₹" + formatNumber(ui.values[ 0 ]));
+		$("#amount1_a" ).val( "₹" + formatNumber(ui.values[ 1 ]));
 		var val_pa = ui.values[ 0 ];
   		var val_pb = ui.values[ 1 ];
 		
@@ -277,8 +277,8 @@ $('html, body').animate({scrollTop: $(this).parent().parent().parent().offset().
       }
 			 
     });
-    $( "#amount_a" ).val( "₹ " + formatNumber($( "#slider-range1" ).slider( "values", 0 )));
-	   $( "#amount1_a" ).val( "₹ " + formatNumber($( "#slider-range1" ).slider( "values", 1 )) );	 
+    $( "#amount_a" ).val( "₹" + formatNumber($( "#slider-range1" ).slider( "values", 0 )));
+	   $( "#amount1_a" ).val( "₹" + formatNumber($( "#slider-range1" ).slider( "values", 1 )) );	 
   
 
 });

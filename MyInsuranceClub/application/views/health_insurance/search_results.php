@@ -9,7 +9,7 @@
    <div class="top_band">
    <div class="col-md-3  border m_a">
        <div class="top_h">Your Search</div>
-       <div class="top_p">Coverage Amount = &#8377; <?php if(isset($this->session->userdata['user_input']['coverage_amount'])){echo $this->session->userdata['user_input']['coverage_amount'];}?></div>
+       <div class="top_p">Coverage Amount = &#8377;<?php if(isset($this->session->userdata['user_input']['coverage_amount'])){echo $this->session->userdata['user_input']['coverage_amount'];}?></div>
       <div class="top_p"> Members = <?php if(isset($this->session->userdata['user_input']['plan_type_name'])){echo $this->session->userdata['user_input']['plan_type_name'];}?></div>
        <div class="top_m"><i class="fa fa-angle-left"></i> <a href="<?php echo site_url('health-insurance');?>">Modify Your Search</a></div>
    </div>
@@ -238,6 +238,8 @@
                  	<div class="addOnFilter clearfix" >
                  
                  <?php 
+                 
+                 $range = '';
                  if(!empty($aNew))
                  {
                  	
@@ -245,6 +247,14 @@
                     	
                     	$premium = $company['premium'];
 	                   	sort($premium);
+	                   	if(end($premium) != reset($premium))
+	                   	{
+	                   		$range = '&#8377;'. reset($premium).' - &#8377;'.end($premium);
+	                   	}
+	                   	else 
+	                   	{
+	                   		$range = '&#8377;'. reset($premium);
+	                   	}
 	              ?>
 	              
                     <div style="width: 100%; float: left;">
@@ -253,7 +263,7 @@
             					<input type="checkbox" value="<?php echo $company['company']['company_id'];?>" class="search_filter" name="company_name[]">
             						<label for="23" class=""><?php echo $company['company']['company_shortname'];?></label>
           					</label>
-          				</div> <span style="float:right;"> &#8377; <?php echo reset($premium).' - &#8377; '.end($premium);?></span>
+          				</div> <span style="float:right;"> &#8377;<?php echo $range;//echo reset($premium).' - &#8377;'.end($premium);?></span>
           			</div>
           			
               <?php }
