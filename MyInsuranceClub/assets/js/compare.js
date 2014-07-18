@@ -14,15 +14,42 @@ var formatNumber = function(number)
 };
 
 
+/**
+ * 
+ * @param  controller_url is the method
+ *         where filter parameters are passed.
+ * 
+ * @methods using this function are Annual Premium
+ *          & Claims Ratio Sliders, Search Filter
+ *          Checkboxes.
+ */
+function send_ajax_post(controller_url)
+{
+	
+	data = $('#search').serialize();
+		
+	 $.ajax({
+		 
+	type:"post", 
+	url: controller_url,
+	data:data,
+	success:function(data)
+	{ 
+		var s = $.parseJSON(data);
+		
+		$('#cmp_tbl').html(s.html);
+		$('#plan_cnt').html(s.plan);
+		plan_count = s.plan;
+		company_count = s.company;
+		min_premium = s.minPremium;
+		max_premium = s.maxPremium;
+		
+		show_prem(min_premium,max_premium,company_count,plan_count);
+	}
+	});
+}
+
 function show_prem(x,y,a,b) {
-	  
-	  //var x = Math.floor((Math.random() * 20) + 110);
-	  //var y = Math.floor((Math.random() * 40) + 200);
-	 
-	//  var a = company_count;
-	 // var b = plan_count;
-	//  var x = min_premium;
-	//  var y = max_premium;
 	  
   	  com_c.innerHTML = a;
   	  plan_c.innerHTML = b;
@@ -31,6 +58,7 @@ function show_prem(x,y,a,b) {
 	  pr_rb.innerHTML = y;
   
 }
+
 var timeoutID;
 delayedAlert();
 function delayedAlert() {
@@ -47,6 +75,7 @@ function slowAlert() {
 function slowAlert1() {
 	$("#sh2").fadeIn();
 	 plan_c.innerHTML = plan_count;
+	 plan_cnt.innerHTML = plan_count;
 	 timeoutID = window.setTimeout(slowAlert3,750);
 }
 
@@ -223,8 +252,10 @@ $('html, body').animate({scrollTop: $(this).parent().parent().parent().offset().
 	$( "#amount1" ).val($( "#slider-range" ).slider( "values", 1 ) + " %");
 	   
 	   
-	   
-	    $( "#slider-range1" ).slider({
+	
+	/****************** Annual Premium Slider ****************/	   
+	 
+	 $( "#slider-range1" ).slider({
       range: true,
       min: parseInt(min_premium),
       max: parseInt(max_premium),
@@ -235,31 +266,34 @@ $('html, body').animate({scrollTop: $(this).parent().parent().parent().offset().
 		var val_pa = ui.values[ 0 ];
   		var val_pb = ui.values[ 1 ];
 		
-		show_prem(val_pa,val_pb,company_count,plan_count);
+		
 		
       },
       
-      stop: function( event, ui ) {
-			data = $('#search').serialize();
-	  		
-			 $.ajax({
-				 
-			type:"post", 
-			url: annual_premium_search_url,
-			data:data,
-			success:function(data)
-			{ 
-				$('#cmp_tbl').html(data);
-			}
-			});
-      }	 
+      stop: function( event, ui )
+      {
+			
+    	  send_ajax_post(annual_premium_search_url);
+      }
+			 
     });
-    $( "#amount_a" ).val( "₹ " + $( "#slider-range1" ).slider( "values", 0 ));
-	   $( "#amount1_a" ).val( "₹ " + $( "#slider-range1" ).slider( "values", 1 ) );	 
+    $( "#amount_a" ).val( "₹ " + formatNumber($( "#slider-range1" ).slider( "values", 0 )));
+	   $( "#amount1_a" ).val( "₹ " + formatNumber($( "#slider-range1" ).slider( "values", 1 )) );	 
   
 
 });
 
+	/******************************************************/
+
+
+	/***************** Search Filter Checboxes ************/
+
+$('.search_filter').on('click',function(){
+	
+		send_ajax_post(annual_premium_search_url);
+});
+
+	/*****************************************************/
 $(function () {
    
  /* var msie6 = $.browser == 'msie' && $.browser.version < 7;

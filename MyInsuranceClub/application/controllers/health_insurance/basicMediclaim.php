@@ -343,7 +343,7 @@ class basicMediclaim extends MIC_Controller {
 			if($this->input->is_ajax_request())
 			{
 				$search_filter=$_POST;
-					
+				
 				foreach($data['customer_details'] as $k => $v)
 				{
 					if(isset($search_filter['room_rent']))
@@ -429,16 +429,33 @@ class basicMediclaim extends MIC_Controller {
 							unset($data['customer_details'][$k]);
 						}
 					} */
-				}
-					
-				//$data['filter_count'] = $filter_count;
 				
-				//$data['filter_count'] = count($data['customer_details']);
-				/* $return['html'] =  */
-				$this->load->view('health_insurance/ajaxPostResultView',$data);
-				/* $return['company'] = 8;
-				$return['plan'] = 10;
-				echo  json_encode($return); */
+					
+					
+				}
+				$company_discard = array();
+				
+				$companycnt = array();
+				
+				foreach($data['customer_details'] as $k=>$v)
+				{
+					
+				if(!in_array($v['company_id'],$companycnt))
+				{
+					$companycnt[] = $v['company_id'];
+				}
+				$company_discard[] = $v['company_id'];
+				}
+				
+				$premiums_from_ajax = Util::getMinAndMaxPremium($data['customer_details']);
+				//var_dump($premiums_from_ajax);
+				//exit;
+				$return['html'] = $this->load->view('health_insurance/ajaxPostResultView',$data,true);
+				$return['company'] = count($companycnt);
+				$return['plan'] = count($data['customer_details']);
+				$return['minPremium'] = $premiums_from_ajax['min_premium'];
+				$return['maxPremium'] = $premiums_from_ajax['max_premium'];
+				echo  json_encode($return);
 			}
 			else
 			{

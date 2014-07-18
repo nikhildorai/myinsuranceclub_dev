@@ -14,6 +14,11 @@
        <div class="top_m"><i class="fa fa-angle-left"></i> <a href="<?php echo site_url('health-insurance');?>">Modify Your Search</a></div>
    </div>
 	<?php   
+	
+	 
+	$premiums = Util::getMinAndMaxPremium($customer_details);
+	//var_dump($premiums);
+	
 	$newVal = array();
 	$preexisitng_disease_discard = array();
 	$aNew = array();
@@ -47,7 +52,7 @@
         }
                    				
 	}	
-        $min_annual_premium='';
+       /*  $min_annual_premium='';
         $max_annual_premium='';
         if(count($customer_details) > 0)
         {
@@ -62,7 +67,7 @@
         {
         	$min_annual_premium='0';
         	$max_annual_premium='0';
-        }
+        } */
 ?>
       
       
@@ -144,7 +149,7 @@
                 
                 
                 <div class="block1" style="position:relative;">
-                 <h6 class="fh3 l"> <?php echo count($customer_details);?> of <?php echo  count($customer_details);?> plans</h6>
+                 <h6 class="fh3 l"><span id="plan_cnt"></span> of <?php echo  count($customer_details);?> plans</h6>
                  
                  <h6 class="fh3"> Premium</h6>
                  
@@ -164,8 +169,9 @@
 							
 			
 			<p class="displayStaticRange clearFix" style="padding-bottom:0px; margin-bottom:0px;">
-				<span class="fLeft"><span data-pr="6437" class="INR">&#8377;</span><?php echo $min_annual_premium;?></span>
-				<span class="fRight"><span data-pr="42306" class="INR">&#8377;</span><?php echo $max_annual_premium;?></span>
+				<span class="fLeft"><span data-pr="6437" class="INR">&#8377;</span><?php echo number_format($premiums['min_premium']);?></span>
+				
+				<span class="fRight"><span data-pr="42306" class="INR">&#8377;</span><?php echo number_format($premiums['max_premium']);?></span>
 			</p>
 	
 			<input type="hidden" name="price" value="6437-32293">
@@ -420,26 +426,15 @@
 <script type="text/javascript">
 var company_count = "<?php echo count($aNew);?>";
 var plan_count = "<?php echo  count($customer_details);?>";
-var min_premium = "<?php echo  $min_annual_premium;?>";
-var max_premium = "<?php echo  $max_annual_premium;?>";
+var min_premium = "<?php echo  $premiums['min_premium']?>";
+var max_premium = "<?php echo  $premiums['max_premium'];?>";
 var hospital_list_url = "<?php echo base_url().'health_insurance/basicMediclaim/get_hospital_list'?>";
 var annual_premium_search_url = "<?php echo base_url().'health_insurance/basicMediclaim/health_policy'?>";
 
-
-$(document).ready(function() {
-	$('.search_filter').on('click',function(){
-		
-		data = $('#search').serialize();
-
-		 $.ajax({
-		type:"post", 
-		url:"<?php echo base_url().'health_insurance/basicMediclaim/health_policy'?>",
-		data:data,
-		 success:function(data)
-		{ $('#cmp_tbl').html(data);
-			}
-		});
-	});
-});
-
+function buy_now_msg(variant_id)
+{
+	$('#buy_now_message_' + variant_id).show();
+	$('#buy_now_btn_' + variant_id).hide();
+	return false;
+}
 </script>

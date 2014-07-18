@@ -222,6 +222,33 @@ class Util {
     }
     
     
+    /**
+     * @abstract returns Min & Max Premium From Result Array
+     */
+    public static function getMinAndMaxPremium($premium_array = array())
+    {
+    	$min_max_premium = array();
+    	 
+    	if(count($premium_array) > 0)
+    	{
+    		$anuual_premium = array_map(function($detail)
+    		{
+    			return $detail['annual_premium'];
+    		}, $premium_array);
+    		$min_max_premium['min_premium'] = min($anuual_premium);
+    		$min_max_premium['max_premium'] = max($anuual_premium);
+    	}
+    	elseif(count($customer_details) == 0)
+    	{
+    		$min_max_premium['min_premium'] == '0';
+    		$min_max_premium['max_premium'] = '0';
+    	}
+    
+    	return $min_max_premium;
+    }
+    
+    
+    
     public function getUserSearchFiltersHtml($customer_details = array(), $type = "health")
     {
     	$return = '';
