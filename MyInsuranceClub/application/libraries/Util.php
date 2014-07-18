@@ -238,7 +238,7 @@ class Util {
     		$min_max_premium['min_premium'] = min($anuual_premium);
     		$min_max_premium['max_premium'] = max($anuual_premium);
     	}
-    	elseif(count($customer_details) == 0)
+    	elseif(count($premium_array) == 0)
     	{
     		$min_max_premium['min_premium'] = '0';
     		$min_max_premium['max_premium'] = '0';
