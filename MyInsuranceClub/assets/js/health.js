@@ -231,11 +231,11 @@ $(document).ready(function() {
 
  $.validator.addMethod('checkUsername', function(value, element) {
      return this.optional(element) || /[A-Za-z\s.]+$/.test(value);
- }, "Accepts only alphabets,periods and spaces.");
+ }, "Accepts only alphabets, periods and spaces");
  	
  $.validator.addMethod('checkmobile', function(value, element) {
      return this.optional(element) || /^[7-9]/.test(value);
- }, "Should start with 7,8 or 9.");
+ }, "Should start with 7, 8 or 9");
  
  $.validator.addMethod('minAge', function(value, element) {
 	// alert(1);
@@ -260,7 +260,7 @@ $(document).ready(function() {
 	        return false;
 	    }
 	    return true;
-	},'Age should be greater than 18 years.');
+	},'Age should be greater than 18 years');
  	
  $.validator.addMethod('childAge', function(value, element) {
 		// alert(1);
@@ -285,7 +285,7 @@ $(document).ready(function() {
 		        return false;
 		    }
 		    return true;
-		},'Childs age cannot be more than 26.');
+		},'Childs age cannot be more than 26 years');
  
  $( "#health_form" ).validate({
 				
@@ -386,7 +386,7 @@ $(document).ready(function() {
 							
 							agree: {
 								
-								required:'Please Accept Terms of Use.'
+								required:'Please accept Terms of Use.'
 							}
 							
 						},
