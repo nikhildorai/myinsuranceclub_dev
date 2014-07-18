@@ -690,10 +690,10 @@
               
               .</p>
             <ul class="sub-list noli" style="padding:0px;">
-              <li><i class="fa fa-check  fa-2"></i>With our <span class="highlight">instant online calculator</span>, you can compare health  insurance premiums easily</li>
-              <li><i class="fa fa-check  fa-2"></i>With the plan features, you do get the <span class="highlight">Best Health Insurance Comparison</span></li>
-              <li><i class="fa fa-check  fa-2"></i>Yes, we are <span class="highlight">Completely Un-biased</span> in our comparison</li>
-              <li><i class="fa fa-check  fa-2"></i>MyInsuranceClub does this for you at no cost - <span class="highlight">It's Free!</span> </li>
+              <li><i class="fa fa-slack fa-2"></i>With our <span class="highlight">instant online calculator</span>, you can compare health  insurance premiums easily</li>
+              <li><i class="fa fa-slack fa-2"></i>With the plan features, you do get the <span class="highlight">Best Health Insurance Comparison</span></li>
+              <li><i class="fa fa-slack fa-2"></i>Yes, we are <span class="highlight">Completely Un-biased</span> in our comparison</li>
+              <li><i class="fa fa-slack fa-2"></i>MyInsuranceClub does this for you at no cost - <span class="highlight">It's Free!</span> </li>
             </ul>
           </div>
         </article>
