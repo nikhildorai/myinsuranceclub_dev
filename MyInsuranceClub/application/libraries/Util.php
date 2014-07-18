@@ -1211,7 +1211,11 @@ class Util {
 			}
 			
 		}
-		return $save;
+		if (!empty($save) && is_numeric($save))
+			return true;
+		else 
+			return false;
+		//return $save;
 	}
 	
 	public function getStatusIcon($status)

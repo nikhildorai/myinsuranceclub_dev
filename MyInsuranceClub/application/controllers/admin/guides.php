@@ -129,7 +129,7 @@ class guides extends CI_Controller {
 		$this->data['ckeditor'] = array(
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'description',
-			'path'	=>	'js/ckeditor',
+			'path'	=>	'JS/ckeditor',
 			//Optionnal values
 			'config' => array(
 				'toolbar' 	=> 	"Full", 	//Using the Full toolbar

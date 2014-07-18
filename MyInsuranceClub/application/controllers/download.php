@@ -51,8 +51,16 @@ class Download extends CI_Controller {
 				if (empty($field))
 					$field = 'brochure';
 				$this->load->helper('download');
-				$folderUrl = $this->config->config['folder_path']['policy'];
-				$fileUrl = $this->config->config['url_path']['policy'];
+				if ($field == 'brochure')
+				{
+					$folderUrl = $this->config->config['folder_path']['policy']['brochure'];
+					$fileUrl = $this->config->config['url_path']['policy']['brochure'];
+				}
+				else if ($field == 'policy_wordings')
+				{
+					$folderUrl = $this->config->config['folder_path']['policy']['policy_wordings'];
+					$fileUrl = $this->config->config['url_path']['policy']['policy_wordings'];
+				}
 				$data = file_get_contents($fileUrl.$policyModel[$field]);
 				force_download($policyModel[$field], $data);
 				//if ($pol)

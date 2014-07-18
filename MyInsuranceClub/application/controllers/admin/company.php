@@ -149,7 +149,7 @@ class Company extends CI_Controller {
 		$this->data['ckeditor1'] = array(
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'description_1',
-			'path'	=>	'js/ckeditor',
+			'path'	=>	'JS/ckeditor',
 			//Optionnal values
 			'config' => array(
 				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
@@ -160,7 +160,7 @@ class Company extends CI_Controller {
 		$this->data['ckeditor2'] = array(
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'description_2',
-			'path'	=>	'js/ckeditor',
+			'path'	=>	'JS/ckeditor',
 			//Optionnal values
 			'config' => array(
 				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
@@ -423,50 +423,48 @@ class Company extends CI_Controller {
 									$errorClaim[] = false;
 								}
 							}	
+							
 							if (!empty($saveClaim))
 							{
 								foreach ($saveClaim as $k3=>$v3)
 								{
-									$savedRecords[] = $this->util->addUpdateClaimRatio($model = $v3, $company_id);
+									$saveData[] = $this->util->addUpdateClaimRatio($model = $v3, $company_id);
 								}
 							}
 							if (!empty($saveEmptyClaim))	
 							{
 								foreach ($saveEmptyClaim as $k3=>$v3)
 								{
-									$savedRecords[] = $this->util->addUpdateClaimRatio($model = $v3, $company_id);
+									$saveData[] = $this->util->addUpdateClaimRatio($model = $v3, $company_id);
 								}
 							}
-							if (!empty($savedRecords) && !empty($errorClaim))
-							{
-								$this->data['message'] = '<p class="status_msg">Records added successfully.</p>';
-								$this->data['message'] .= '<p class="error_msg">Records with claim ratio cannot be greater than 100 could not be saved.</p>';
-							}
-							else if (!empty($savedRecords) && empty($errorClaim))
-							{
-								$this->data['message'] = '<p class="status_msg">Records added successfully.</p>';
-								$this->data['msgType'] = 'success';
-							}
-							else if (!empty($errorClaim))
-							{
-								//	show error if validation fails
-								$this->data['message'] = '<p class="error_msg">Claim ratio cannot be greater than 100.</p>';
-								$this->data['msgType'] = 'error';
-							}
-					  		else
-					  		{
-								//	show error if no record saved
-								$this->data['message'] = '<p class="error_msg">Minimum 1 record is required.</p>';
-								$this->data['msgType'] = 'error';
-					  		}
+												
+//var_dump($savedRecords, $saveData, $errorClaim, $this->data);die;	
 					  		$ratioModel = $saveClaim;
 						}
-					}			
-					//	if policy and varients records are stored then on show success and redirect to index 
+					}
+					
+					//	if all records are stored then on show success and redirect to index 
 					if(!in_array(false, $saveData))
 					{
 						$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
 						redirect('admin/company/index');
+					}	
+					else if (in_array(false, $saveData) && !empty($errorClaim))
+					{
+						$this->data['message'] = '<p class="status_msg">Records added successfully.</p>';
+						$this->data['message'] .= '<p class="error_msg">Records with claim ratio cannot be greater than 100 or less than 0 could not be saved.</p>';
+					}
+					else if (in_array(false, $saveData) && empty($errorClaim))
+					{
+						$this->data['message'] = '<p class="status_msg">Records added successfully.</p>';
+						$this->data['msgType'] = 'success';
+					}
+					else if (!empty($errorClaim))
+					{
+						//	show error if validation fails
+						$this->data['message'] = '<p class="error_msg">Claim ratio cannot be greater than 100.</p>';
+						$this->data['msgType'] = 'error';
 					}
 					else 
 					{

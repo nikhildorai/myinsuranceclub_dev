@@ -160,7 +160,7 @@ class Policy extends CI_Controller {
 			$this->data[$ck] = array(
 			//ID of the textarea that will be replaced
 			'id' 	=> 	$des,
-			'path'	=>	'js/ckeditor',
+			'path'	=>	'JS/ckeditor',
 			//Optionnal values
 			'config' => array(
 				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
