@@ -137,7 +137,7 @@
                </div>
              
             </div>
-            
+            <?php if(!empty($customer_details)) {$display = 'style=""';} else{$display = 'style="display: none;"';}?>
             <!--Sidebar-->
             <?php echo form_open('health_insurance/basicMediclaim/health_policy',array('id'=>'search'));?>
             

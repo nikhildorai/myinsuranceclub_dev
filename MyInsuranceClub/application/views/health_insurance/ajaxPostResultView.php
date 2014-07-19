@@ -7,8 +7,8 @@
 $con = &get_instance();
 $folderUrl = $con->config->config['folder_path']['company']['searchResultLogo'];
 $fileUrl = $con->config->config['url_path']['company']['searchResultLogo'];
-$pfolderUrl = $con->config->config['folder_path']['policy'];
-$pfileUrl = $con->config->config['url_path']['policy'];
+$pfolderUrl = $con->config->config['folder_path']['policy']['brochure'];;
+$pfileUrl = $con->config->config['url_path']['policy']['policy_wordings'];
 
 
 if(empty($customer_details))
