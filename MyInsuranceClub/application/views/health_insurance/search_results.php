@@ -396,7 +396,7 @@
                     	<div class="checkbox">
             				<label>
             					<input type="checkbox" id="" name="health_comp[]"  class="search_filter" value="3">
-           							 <label class="" for="22">Plans from Health Insurance companies
+           							 <label class="" for="22">Plans from Specialised Health Insurers
 									</label>
           					</label>
           				</div>

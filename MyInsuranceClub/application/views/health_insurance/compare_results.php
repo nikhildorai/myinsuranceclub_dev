@@ -162,7 +162,7 @@
 box-shadow: 0 0 0 2px #F2CF71; */
 
 font-weight: bold;
-font-style: oblique;
+font-size: 15px;
 color: green;
 }
 -->
