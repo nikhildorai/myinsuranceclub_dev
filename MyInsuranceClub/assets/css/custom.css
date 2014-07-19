@@ -296,8 +296,11 @@
 .ui-datepicker select.ui-datepicker-month-year {
 	width:100%
 }
-.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+.ui-datepicker select.ui-datepicker-month {
 	width:40%
+}
+.ui-datepicker select.ui-datepicker-year {
+	width:45%
 }
 .ui-datepicker table {
 	width:100%;
