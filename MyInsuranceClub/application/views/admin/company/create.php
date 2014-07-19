@@ -5,6 +5,26 @@ $(document).ready(function(){
 <?php if (isset($companyModel['status']) && !empty($companyModel['status']) && in_array($companyModel['status'], array( 'inactive', 'delete'))) {?>
 $(".form-horizontal :input").prop("disabled", true);
 <?php }?>	
+
+	$('.changeDropDown').change(function(){
+		appendUrl();
+	});
+
+	function appendUrl()
+	{
+		var companySlug = $('#company_type_id').find(':selected').data('slug');
+		if(companySlug != "")
+		{
+			$('#companyTypeSlug').text(companySlug);
+		}
+		else
+		{
+			$('#companyTypeSlug').text("");
+		}
+	}
+	$('.slug').keyup(function(){
+		appendUrl();
+	});
 });
 //-->
 </script>
@@ -16,7 +36,7 @@ $(".form-horizontal :input").prop("disabled", true);
         	<strong>
         		<span class="glyphicon glyphicon-th-list"></span> <?php echo (isset($companyModel['company_id']) && !empty($companyModel['company_id'])) ? 'Update Company' : 'Create Company';?> 
         	</strong>
-        	<a href="<?php echo $base_url;?>admin/company/" class="btn btn-w-md btn-gap-v btn-default btn-sm" style="float: right; margin-top: -5px;">Back</a>
+        	<a href="<?php echo $base_url;?>admin/company/" class="btn btn-w-md btn-gap-v btn-default btn-sm" style="float: right; margin-top: -5px;">Cancel</a>
        </div>
 		<?php 	if (! empty($message))
 				{
@@ -54,21 +74,36 @@ $(".form-horizontal :input").prop("disabled", true);
 		                <div class="panel-body">
 		                
 			                <div class="form-group">
-			                    <label for="Company Type" class="col-sm-3">Vertical</label>
-			                    <div class="col-sm-9">
+			                    <label for="Company Type" class="col-sm-3">Type</label>
+			                    <div class="col-sm-9" style="height: 40px;">
 									<span class="ui-select "> 
 									<?php 
+										$currentCompanyTypeSlug= "";
 										$selected = array_key_exists( 'company_type_id',$companyModel) ?  $companyModel['company_type_id'] : '';
-										$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Company_type_model', $optionKey = 'company_type_id', $optionValue = 'company_type_name', $defaultEmpty = "Please Select");
-										echo form_dropdown('companyModel[company_type_id]', $options, $selected, ' id="company_type_id" class="tooltip_trigger" required title="Search by company type." style="width: 345px;margin-top: 0px;"');
-									?>		
+										$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Company_type_model', $optionKey = 'company_type_id', $optionValue = 'company_type_name', $defaultEmpty = "Please Select",$extraKeys = true);
+										$optionsText = '<option value="" data-company_type_id="" data-slug="">Please Select</option>';
+												foreach ($options as $k1=>$v1)
+												{
+													if ($selected == $v1['company_type_id'])
+													{
+														$optionsText .= '<option value="'.$v1['company_type_id'].'" data-slug="'.$v1['slug'].'" selected>'.$v1['company_type_name'].'</option>';
+														$currentCompanyTypeSlug = $v1['slug'];
+													}
+													else
+														$optionsText .= '<option value="'.$v1['company_type_id'].'" data-slug="'.$v1['slug'].'">'.$v1['company_type_name'].'</option>';
+												}
+											//	echo form_dropdown('policyModel[company_id]', $options, $selected, ' id="company_id" class="tooltip_trigger" title="Select company name."');
+												?>
+												<select id="company_type_id" class="changeDropDown" name="companyModel[company_type_id]" title="Select company Type" style="width: 345px;margin-top: 0px;">
+													<?php echo $optionsText;?>
+												</select>	
 									</span> 
 			                    </div>
 			                </div>
 			                
 			                <div class="form-group">
-			                    <label for="Company Type" class="col-sm-3">Type</label>
-			                    <div class="col-sm-9">
+			                    <label for="Company Type" class="col-sm-3">Ownership</label>
+			                    <div class="col-sm-9" style="height: 40px;">
 									<span class="ui-select "> 
 									<?php 
 										$selected = array_key_exists( 'public_private_health',$companyModel) ?  $companyModel['public_private_health'] : '';
@@ -105,13 +140,36 @@ $(".form-horizontal :input").prop("disabled", true);
 			                    </div>
 			                </div>
 			                
+						                
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">Is Partner</label>
+			                    <div class="col-sm-9">
+                    					<span class="icon glyphicon glyphicon-star"></span>
+					                    <?php 
+										$selected = array_key_exists( 'is_partner',$companyModel) ? $companyModel['is_partner'] : 'no';
+										$options = array('yes'=>'Yes', 'no'=>'No');			
+										foreach ($options as $k1=>$v1)
+										{
+											$op = array(
+											    'name'        => 'companyModel[is_partner]',
+											    'value'       => $k1,
+											    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+											    'style'       => 'margin:10px',
+											    );
+											echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+										}
+										?>
+			                    </div>
+			                </div>
+			                
 			                
 			                <div class="form-group">
 			                    <label for="" class="col-sm-3">SEO Title</label>
 			                    <div class="col-sm-9">
 			                    	<span class="icon glyphicon glyphicon-star"></span>
-			                        <input type="text" class="form-control" required  placeholder="SEO Title" maxlength="90" id="seo_title" name="companyModel[seo_title]" maxlength="90" value="<?php echo array_key_exists( 'seo_title',$companyModel) ? $companyModel['seo_title'] : '';?>" >
-			                        <span class="help-block">Max length 90 characters.</span>
+			                        <input type="text" class="form-control charecterCount" required  placeholder="SEO Title" maxlength="90" id="seo_title" name="companyModel[seo_title]" maxlength="90" value="<?php echo array_key_exists( 'seo_title',$companyModel) ? $companyModel['seo_title'] : '';?>" >
+			                         <span class="help-block" style="margin-bottom: -5px;">Max 90 chars | Recommended 60 chars</span>
+			                        <span class="help-block currentLength"><?php echo array_key_exists( 'seo_title',$companyModel) ? 'Current length: '.strlen($companyModel['seo_title']).' chars' : '0'.' chars';?></span>
 			                    </div>
 			                </div>
 			                
@@ -119,8 +177,9 @@ $(".form-horizontal :input").prop("disabled", true);
 			                    <label for="" class="col-sm-3">SEO Description</label>
 			                    <div class="col-sm-9">
 			                    	<span class="icon glyphicon glyphicon-star"></span>
-			                        <textarea class="form-control" rows="5" required maxlength="250" id="seo_description" name="companyModel[seo_description]"><?php echo array_key_exists( 'seo_description',$companyModel) ? $companyModel['seo_description'] : '';?></textarea>
-			                        <span class="help-block">Max length 250 characters.</span>
+			                        <textarea class="form-control charecterCount" rows="5" required maxlength="250" id="seo_description" name="companyModel[seo_description]"><?php echo array_key_exists( 'seo_description',$companyModel) ? $companyModel['seo_description'] : '';?></textarea>
+			                        <span class="help-block" style="margin-bottom: -5px;">Max 250 chars | Recommended 150 chars</span>
+			                        <span class="help-block currentLength"><?php echo array_key_exists( 'seo_description',$companyModel) ? 'Current length: '.strlen($companyModel['seo_description']).' chars' : '0'.' chars';?></span>
 			                    </div>
 			                </div>
 			                
@@ -128,7 +187,9 @@ $(".form-horizontal :input").prop("disabled", true);
 			                    <label for="" class="col-sm-3">SEO Keywords</label>
 			                    <div class="col-sm-9">
 			                    	<span class="icon glyphicon glyphicon-star"></span>
-			                        <textarea class="form-control" rows="4" required  maxlength="175" id="seo_keywords" name="companyModel[seo_keywords]"><?php echo array_key_exists( 'seo_keywords',$companyModel) ? $companyModel['seo_keywords'] : '';?></textarea>
+			                        <textarea class="form-control charecterCount" rows="4" required  maxlength="175" id="seo_keywords" name="companyModel[seo_keywords]"><?php echo array_key_exists( 'seo_keywords',$companyModel) ? $companyModel['seo_keywords'] : '';?></textarea>
+			                        <span class="help-block" style="margin-bottom: -5px;">Max 175 chars | Recommended 150 chars</span>
+			                        <span class="help-block currentLength"><?php echo array_key_exists( 'seo_keywords',$companyModel) ? 'Current length: '.strlen($companyModel['seo_keywords']).' chars' : '0'.' chars';?></span>
 			                    </div>
 			                </div>
 			                
@@ -136,7 +197,14 @@ $(".form-horizontal :input").prop("disabled", true);
 			                    <label for="" class="col-sm-3">URL</label>
 			                    <div class="col-sm-9">
 			                    	<span class="icon glyphicon glyphicon-star"></span>
-			                        <input type="text" class="form-control"  required placeholder="URL"  name="companyModel[slug]" value="<?php echo array_key_exists( 'slug',$companyModel) ? $companyModel['slug'] : '';?>" >
+<?php 								if (isset($companyModel['slug']))	{?>
+			                        	<input type="text" class="form-control slug" disabled placeholder="URL"  name="companyModel[slug]" value="<?php echo $companyModel['slug'];?>" >
+			                        	<span class="help-block" style="color:black;font-size: 12px"><a href="<?php echo base_url().$currentCompanyTypeSlug.'/companies/'.$companyModel['slug'];?>"><?php echo base_url().$currentCompanyTypeSlug.'/companies/'.$companyModel['slug'];?></a></span>
+<?php 								}else{	?>
+			                        	<input type="text" class="form-control slug"  tooltip="Once created you cannot edit this field" data-toggle="tooltip" data-placement="top" tooltip-trigger="focus" required placeholder="URL"  name="companyModel[slug]" value="" >
+			                        	<span class="help-block" style="color:black;font-size: 12px"><?php echo base_url();?><span id="companyTypeSlug"><?php echo $currentCompanyTypeSlug;?></span>/companies/<span class="slug"><?php echo array_key_exists( 'slug',$companyModel) ? $companyModel['slug'] : '';?></span></span>
+<?php 								}?>			                        
+			                        
 			                    </div>
 			                </div>
 			                
@@ -159,11 +227,40 @@ $(".form-horizontal :input").prop("disabled", true);
 												if (file_exists($folderUrl.$companyModel['logo_image_1']))
 												{
 													echo 	'<div class="divider"></div>
-				                    						<img src="'.$fileUrl.$companyModel['logo_image_1'].'">';
+				                    						<img src="'.$fileUrl.$companyModel['logo_image_1'].'">
+											                <div class="form-group">
+											                </div>';
 												}
 											}
 											?>
 								</div>
+			                </div>
+							
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">Logo for Partner section:</label>
+			                    <div class="col-sm-9">
+			                        <input type="file" id="logo1" name="companyModel[logo_image_partner]" accept="image/*" title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'logo_image_partner',$companyModel) ? $companyModel['logo_image_partner'] : '';?>">
+			                        <span class="help-block">Image size: 147px X 107px</span>
+			                    
+			                    <?php 
+											$folderUrl = $this->config->config['folder_path']['company']['partnerLogo'];
+											$fileUrl = $this->config->config['url_path']['company']['partnerLogo'];
+											
+											if (isset($companyModel['logo_image_partner']) && !empty($companyModel['logo_image_partner']))
+											{
+												if (file_exists($folderUrl.$companyModel['logo_image_partner']))
+												{
+													echo 	'<div class="divider"></div>
+				                    						<img src="'.$fileUrl.$companyModel['logo_image_partner'].'">
+											                <div class="form-group">
+											                </div>';
+												}
+											}
+											?>
+								</div>
+			                </div>
+			                
+			                <div class="form-group">
 			                </div>
 			                
 			                <div class="form-group">
@@ -203,8 +300,9 @@ $(".form-horizontal :input").prop("disabled", true);
 		                <div class="form-group">
 		                    <label for="" class="col-sm-3">Corporate Office</label>
 		                    <div class="col-sm-9">
-		                    	<textarea class="form-control" rows="4"  maxlength="175" id="address" name="companyDetailModel[address]" ><?php echo array_key_exists( 'address',$companyDetailModel) ? $companyDetailModel['address'] : '';?></textarea>
-		                    	
+		                    	<textarea class="form-control charecterCount" rows="6"  maxlength="250" id="address" name="companyDetailModel[address]" ><?php echo array_key_exists( 'address',$companyDetailModel) ? $companyDetailModel['address'] : '';?></textarea>
+		                    	<span class="help-block" style="margin-bottom: -5px;">Max 250 chars</span>
+			                    <span class="help-block currentLength"><?php echo array_key_exists( 'address',$companyDetailModel) ? 'Current length: '.strlen($companyDetailModel['address']).' chars' : '0'.' chars';?></span>
 		                   </div>
 		                </div>
 		                

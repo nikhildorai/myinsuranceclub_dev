@@ -14,19 +14,46 @@ $('.remove').prop('disabled', true);
 
 	$('.changeDropDown').change(function(){
 		var companyTypeId = $('#company_id').find(':selected').data('company_type_id');
+		var companySlug = $('#company_id').find(':selected').data('company-slug');
+		var prodSlug = '';
+		var subProdSlug = '';
 		var changeType = $(this).data('change-type'); 
 
 		var options = $('#product_id option:selected');
-
 		var productId = $.map(options ,function(option) {
 		    return option.value;
-		});
-
+		});      
+	        
 		var options = $('#sub_product_id option:selected');
-
 		var subProductId = $.map(options ,function(option) {
 		    return option.value;
 		});
+		
+
+		 $('#product_id :selected').each(function (i, selected) {
+			prodSlug = $(selected).data('slug');
+	     });   
+	        
+		 $('#sub_product_id :selected').each(function (i, selected) {
+			 console.log($(selected).data('slug'));
+				subProdSlug = $(selected).data('slug');
+		 });  
+
+		 
+		if(companyTypeId == 1)
+		{
+			$('#companyTypeSlug').text('life-insurance/companies/'+companySlug+'/');
+		}
+		else if(prodSlug != "" && subProdSlug == "" && subProdSlug != 'undefined')
+		{
+			$('#companyTypeSlug').text(prodSlug+'/');
+		}
+		else if(prodSlug != "" && subProdSlug != "")
+		{	
+			$('#companyTypeSlug').text(subProdSlug+'/');
+		}
+		else
+			$('#companyTypeSlug').text("");
 		
 		var formData = {companyTypeId:companyTypeId, productId:productId, subProductId:subProductId, changeType:changeType };
 		$('#'+changeType).empty()
@@ -36,27 +63,30 @@ $('.remove').prop('disabled', true);
 			$('#productSubIdDiv').hide();
 			
 		}
-		$.ajax({
-				url:"<?php echo base_url().'/admin/policy/getProductSubProductDropDown'?>",
-				type: "post",
-				data: formData,
-				success:function(result)
-				{
-					if(changeType == 'product_id')
+		if(changeType != "sub_product_type")
+		{
+			$.ajax({
+					url:"<?php echo base_url().'/admin/policy/getProductSubProductDropDown'?>",
+					type: "post",
+					data: formData,
+					success:function(result)
 					{
-						$('#'+changeType).empty().append(result);
-						$('#productIdDiv').show();
-						$('#productSubIdDiv').hide();
-						
-					}
-					if(changeType == 'sub_product_id')
-					{
-						$('#'+changeType).empty().append(result);
-						$('#productIdDiv').show();
-						$('#productSubIdDiv').show();
-					}
-		    	}
-		});	
+						if(changeType == 'product_id')
+						{
+							$('#'+changeType).empty().append(result);
+							$('#productIdDiv').show();
+							$('#productSubIdDiv').hide();
+							
+						}
+						if(changeType == 'sub_product_id')
+						{
+							$('#'+changeType).empty().append(result);
+							$('#productIdDiv').show();
+							$('#productSubIdDiv').show();
+						}
+			    	}
+			});	
+		}
 	});
 var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionCount'];?>;
 	$(document).delegate('.showMoreLess','click',function(e){
@@ -102,7 +132,7 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
         		<span class="glyphicon glyphicon-th-list"></span> <?php echo (isset($policyModel['policy_id']) && !empty($policyModel['policy_id'])) ? 'Update Policy' : 'Create Policy';?> 
         	</strong>
         	
-        	<a href="<?php echo $base_url;?>admin/policy/" class="btn btn-w-md btn-gap-v btn-default btn-sm" style="float: right; margin-top: -5px;">Back</a>
+        	<a href="<?php echo $base_url;?>admin/policy/" class="btn btn-w-md btn-gap-v btn-default btn-sm" style="float: right; margin-top: -5px;">Cancel</a>
         	
         </div>
         
@@ -138,20 +168,26 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 					                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Policy Details</strong></div>
 					                <div class="panel-body">
 					                
-						                <div class="form-group">
+						                <div class="form-group" style="margin-bottom: 5px;">
 						                    <label for="Company Type" class="col-sm-3">Company Name</label>
 						                    <div class="col-sm-9">
 												<span class="ui-select "> 
 													<?php 					
+													$currentCompanyTypeSlug= "";
 													$selected = array_key_exists( 'company_id',$policyModel) ? $policyModel['company_id'] : '';
 													$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Insurance_company_master_model', $optionKey = 'company_id', $optionValue = 'company_name', $defaultEmpty = "Please Select", $extraKeys = true);
+													
 													$optionsText = '<option value="" data-company_type_id="">Please Select</option>';
 													foreach ($options as $k1=>$v1)
 													{
 														if ($selected == $v1['company_id'])
-															$optionsText .= '<option value="'.$v1['company_id'].'" data-company_type_id="'.$v1['company_type_id'].'" selected>'.$v1['company_name'].'</option>';
+														{
+															if($v1['company_type_id']==1)
+																$currentCompanyTypeSlug = 'life-insurance/companies/'.$v1['slug'].'/';
+															$optionsText .= '<option value="'.$v1['company_id'].'" data-company_type_id="'.$v1['company_type_id'].'" data-company-slug="'.$v1['slug'].'" selected>'.$v1['company_name'].'</option>';
+														}
 														else
-															$optionsText .= '<option value="'.$v1['company_id'].'" data-company_type_id="'.$v1['company_type_id'].'">'.$v1['company_name'].'</option>';
+															$optionsText .= '<option value="'.$v1['company_id'].'" data-company_type_id="'.$v1['company_type_id'].'" data-company-slug="'.$v1['slug'].'" >'.$v1['company_name'].'</option>';
 													}
 												//	echo form_dropdown('policyModel[company_id]', $options, $selected, ' id="company_id" class="tooltip_trigger" title="Select company name."');
 													?>
@@ -179,16 +215,33 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 											$where[0]['value'] = $compType['company_type_id'];
 											$where[0]['compare'] = 'findInSet';
 										}
-										$selected = array_key_exists( 'product_id',$policyModel) ? explode(',',$policyModel['product_id']) : '';
+										$selected = array_key_exists( 'product_id',$policyModel) ? explode(',',$policyModel['product_id']) : array();
 										$sqlFilter['orderBy'] = 'product_name';
-										$healthOptions = $this->util->getCompanyTypeDropDownOptions($modelName ='Product_model', $optionKey = 'product_id', $optionValue = 'product_name', $defaultEmpty = "Please Select", $extraKeys = false, $where, $sqlFilter); 		
+										$productOptions = $this->util->getCompanyTypeDropDownOptions($modelName ='Product_model', $optionKey = 'product_id', $optionValue = 'product_name', $defaultEmpty = "Please Select", $extraKeys = true, $where, $sqlFilter);										
+										if (!empty($productOptions))
+										{
+											$prodOptionsText = '<option value="" data-company_type_id="">Please Select</option>';
+											foreach ($productOptions as $k1=>$v1)
+											{
+												if (in_array($v1['product_id'], $selected))
+												{
+													$currentCompanyTypeSlug = $v1['slug'].'/';
+													$prodOptionsText .= '<option value="'.$v1['product_id'].'" data-slug="'.$v1['slug'].'" selected>'.$v1['product_name'].'</option>';
+												}
+												else
+													$prodOptionsText .= '<option value="'.$v1['product_id'].'" data-slug="'.$v1['slug'].'" >'.$v1['product_name'].'</option>';
+											}
+										} 		
 										?>			
-						                <div id = "productIdDiv" class="form-group">
+						                <div id = "productIdDiv" class="form-group" style="margin-bottom: 5px;">
 						                    <label for="Company Type" class="col-sm-3">Product</label>
 						                    <div class="col-sm-9">
 												<span class="ui-select "> 
+													<select id="product_id" class="changeDropDown" data-change-type="sub_product_id" multiple name="policyModel[product_id][]" style="width: 345px;margin-top: 0px;">
+														<?php echo $prodOptionsText;?>
+													</select>
 												<?php 
-													echo form_dropdown('policyModel[product_id][]', $healthOptions, $selected, 'multiple id="product_id" class="tooltip_trigger changeDropDown" data-change-type="sub_product_id" title="Search by health type." style="width: 345px;"');
+													//echo form_dropdown('policyModel[product_id][]', $productOptions, $selected, 'multiple id="product_id" class="tooltip_trigger changeDropDown" data-change-type="sub_product_id" title="Search by health type." style="width: 345px; margin-bottom: 0px;"');
 												?>		
 												</span> 
 						                    </div>
@@ -196,16 +249,34 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 						                
 										<?php
 										$where = array();
-										$selected = array_key_exists( 'sub_product_id',$policyModel) ? explode(',', $policyModel['sub_product_id']) : '';
+										$selected = array_key_exists( 'sub_product_id',$policyModel) ? explode(',', $policyModel['sub_product_id']) : array();
+	
 										$sqlFilter['orderBy'] = 'sub_product_name';
-										$healthOptions = $this->util->getCompanyTypeDropDownOptions($modelName ='Sub_product_model', $optionKey = 'sub_product_id', $optionValue = 'sub_product_name', $defaultEmpty = "Please Select", $extraKeys = false, $where, $sqlFilter);
+										$subProductOptions = $this->util->getCompanyTypeDropDownOptions($modelName ='Sub_product_model', $optionKey = 'sub_product_id', $optionValue = 'sub_product_name', $defaultEmpty = "Please Select", $extraKeys = true, $where, $sqlFilter);
+										if (!empty($subProductOptions))
+										{
+											$subProdOptionsText = '<option value="" data-company_type_id="">Please Select</option>';
+											foreach ($subProductOptions as $k1=>$v1)
+											{
+												if (in_array($v1['sub_product_id'], $selected))
+												{
+													$currentCompanyTypeSlug = $v1['slug'].'/';
+													$subProdOptionsText .= '<option value="'.$v1['sub_product_id'].'" data-slug="'.$v1['slug'].'" selected>'.$v1['sub_product_name'].'</option>';
+												}
+												else
+													$subProdOptionsText .= '<option value="'.$v1['sub_product_id'].'" data-slug="'.$v1['slug'].'" >'.$v1['sub_product_name'].'</option>';
+											}
+										}
 										?>		
-						                <div id= "productSubIdDiv" class="form-group" >
+						                <div id= "productSubIdDiv" class="form-group"  style="margin-bottom: 5px;">
 						                    <label for="Company Type" class="col-sm-3">Sub Product</label>
 						                    <div class="col-sm-9">
 												<span class="ui-select "> 
+													<select id="sub_product_id" class="changeDropDown" data-change-type="sub_product_type" multiple name="policyModel[sub_product_id][]" style="width: 345px;margin-top: 0px;">
+														<?php echo $subProdOptionsText;?>
+													</select>
 												<?php 
-													echo form_dropdown('policyModel[sub_product_id][]', $healthOptions, $selected, 'multiple id="sub_product_id" class="tooltip_trigger" data-change-type="sub_product_id" title="Search by health type." style="width: 345px;"');
+													//echo form_dropdown('policyModel[sub_product_id][]', $subProductOptions, $selected, 'multiple id="sub_product_id" class="tooltip_trigger" data-change-type="sub_product_id" title="Search by health type." style="width: 345px;"');
 												?>		
 												</span> 
 						                    </div>
@@ -233,56 +304,77 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 						                <div class="form-group">
 						                    <label for="" class="col-sm-3">Show in Search</label>
 						                    <div class="col-sm-9">
-						                    	<label class="switch switch-success">
-			                    					<span class="icon glyphicon glyphicon-star"></span>
-							                    	<?php if (isset($policyModel['show_in_search']) && $policyModel['show_in_search'] == 'yes' ) {?>
-							                    		<input type="checkbox"  required checked id="show_in_search" name="policyModel[show_in_search]" value="yes"  >
-							                    	<?php }else {?>
-							                    		<input type="checkbox"  required  id="show_in_search" name="policyModel[show_in_search]" value="yes"  >
-							                    	<?php }?>
-							                    	<i></i>
-						                    	</label>
+							                    <?php 
+												$selected = array_key_exists( 'show_in_search',$policyModel) ? $policyModel['show_in_search'] : 'no';
+												$options = array('yes'=>'Yes', 'no'=>'No');			
+												foreach ($options as $k1=>$v1)
+												{
+													$op = array(
+													    'name'        => 'policyModel[show_in_search]',
+													    'value'       => $k1,
+													    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+													    'style'       => 'margin:10px',
+													    );
+													echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+												}
+												?>
 						                    </div>
 						                </div>
 						                
+								                
+					                <div class="form-group">
+					                    <label for="" class="col-sm-3">SEO Title</label>
+					                    <div class="col-sm-9">
+					                    	<span class="icon glyphicon glyphicon-star"></span>
+					                        <input type="text" class="form-control charecterCount" required  placeholder="SEO Title" maxlength="90" id="seo_title" name="policyModel[seo_title]" maxlength="90" value="<?php echo array_key_exists( 'seo_title',$policyModel) ? $policyModel['seo_title'] : '';?>" >
+					                         <span class="help-block" style="margin-bottom: -5px;">Max 90 chars | Recommended 60 chars</span>
+					                        <span class="help-block currentLength"><?php echo array_key_exists( 'seo_title',$policyModel) ? 'Current length: '.strlen($policyModel['seo_title']).' chars' : '0'.' chars';?></span>
+					                    </div>
+					                </div>
+					                
+					                <div class="form-group">
+					                    <label for="" class="col-sm-3">SEO Description</label>
+					                    <div class="col-sm-9">
+					                    	<span class="icon glyphicon glyphicon-star"></span>
+					                        <textarea class="form-control charecterCount" rows="5" required maxlength="250" id="seo_description" name="policyModel[seo_description]"><?php echo array_key_exists( 'seo_description',$policyModel) ? $policyModel['seo_description'] : '';?></textarea>
+					                        <span class="help-block" style="margin-bottom: -5px;">Max 250 chars | Recommended 150 chars</span>
+					                        <span class="help-block currentLength"><?php echo array_key_exists( 'seo_description',$policyModel) ? 'Current length: '.strlen($policyModel['seo_description']).' chars' : '0'.' chars';?></span>
+					                    </div>
+					                </div>
+					                
+					                <div class="form-group">
+					                    <label for="" class="col-sm-3">SEO Keywords</label>
+					                    <div class="col-sm-9">
+					                    	<span class="icon glyphicon glyphicon-star"></span>
+					                        <textarea class="form-control charecterCount" rows="4" required  maxlength="175" id="seo_keywords" name="policyModel[seo_keywords]"><?php echo array_key_exists( 'seo_keywords',$policyModel) ? $policyModel['seo_keywords'] : '';?></textarea>
+					                        <span class="help-block" style="margin-bottom: -5px;">Max 175 chars | Recommended 150 chars</span>
+					                        <span class="help-block currentLength"><?php echo array_key_exists( 'seo_keywords',$policyModel) ? 'Current length: '.strlen($policyModel['seo_keywords']).' chars' : '0'.' chars';?></span>
+					                    </div>
+					                </div>
+								                
 						                
-						                <div class="form-group">
-						                    <label for="" class="col-sm-3">SEO Title</label>
-						                    <div class="col-sm-9">
-			                    				<span class="icon glyphicon glyphicon-star"></span>
-						                        <input type="text" class="form-control" required  placeholder="SEO Title" maxlength="90"  id="seo_title" name="policyModel[seo_title]" value="<?php echo array_key_exists( 'seo_title',$policyModel) ? $policyModel['seo_title'] : '';?>" >
-						                        <span class="help-block">Max length 90 characters.</span>
-						                    </div>
-						                </div>
 						                
-						                <div class="form-group">
-						                    <label for="" class="col-sm-3">SEO Description</label>
-						                    <div class="col-sm-9">
-			                    				<span class="icon glyphicon glyphicon-star"></span>
-						                        <textarea class="form-control" rows="5"  required maxlength="250" id="seo_description" name="policyModel[seo_description]"><?php echo array_key_exists( 'seo_description',$policyModel) ? $policyModel['seo_description'] : '';?></textarea>
-						                        <span class="help-block">Max length 250 characters.</span>
-						                    </div>
-						                </div>
-						                
-						                <div class="form-group">
-						                    <label for="" class="col-sm-3">SEO Keywords</label>
-						                    <div class="col-sm-9">
-			                    				<span class="icon glyphicon glyphicon-star"></span>
-						                        <textarea class="form-control" rows="4" required maxlength="175" id="seo_keywords" name="policyModel[seo_keywords]"><?php echo array_key_exists( 'seo_keywords',$policyModel) ? $policyModel['seo_keywords'] : '';?></textarea>
-						                    </div>
-						                </div>
 						                
 										<?php 
 										//	tagit widget
 										echo widget::run('tagit'); ?>
 										
+			                
 						                <div class="form-group">
 						                    <label for="" class="col-sm-3">URL</label>
 						                    <div class="col-sm-9">
-			                    				<span class="icon glyphicon glyphicon-star"></span>
-						                        <input type="text" class="form-control"  required placeholder="URL"  id="url" name="policyModel[slug]" value="<?php echo array_key_exists( 'slug',$policyModel) ? $policyModel['slug'] : '';?>"  >
+						                    	<span class="icon glyphicon glyphicon-star"></span>
+			<?php 								if (isset($policyModel['slug']))	{?>
+						                        	<input type="text" class="form-control slug" disabled placeholder="URL"  name="policyModel[slug]" value="<?php echo $policyModel['slug'];?>" >
+						                        	<span class="help-block" style="color:black;font-size: 12px"><a href="<?php echo base_url().$currentCompanyTypeSlug.$policyModel['slug'];?>"><?php echo base_url().$currentCompanyTypeSlug.$policyModel['slug'];?></a></span>
+			<?php 								}else{	?>
+						                        	<input type="text" class="form-control slug"  tooltip="Once created you cannot edit this field" data-toggle="tooltip" data-placement="top" tooltip-trigger="focus" required placeholder="URL"  name="policyModel[slug]" value="" >
+						                        	<span class="help-block" style="color:black;font-size: 12px"><?php echo base_url();?><span id="companyTypeSlug"><?php echo $currentCompanyTypeSlug;?></span><span class="slug"><?php echo array_key_exists( 'slug',$policyModel) ? $policyModel['slug'] : '';?></span></span>
+			<?php 								}?>			                        
+						                        
 						                    </div>
 						                </div>
+						                
 					                </div>
 					            </section>
 					        </div>
@@ -575,7 +667,7 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 								                        <textarea class="form-control" name="policyFeaturesModel[description<?php echo $i; ?>]" id="description<?php echo $i; ?>" ><?php echo array_key_exists( 'description'.$i,$policyFeaturesModel) ? $policyFeaturesModel['description'.$i] : '';?></textarea>
 								                        <?php 
 								                        $ck = 'ckeditor'.$i;
-								                        echo display_ckeditor($this->data['ckeditor'.$i]); ?>
+								                 //       echo display_ckeditor($this->data['ckeditor'.$i]); ?>
 								                    </div>
 									                <div class="form-group">
 									                </div>

@@ -76,7 +76,7 @@ class Common extends CI_Controller {
 				{
 					if ($v['status'] == 'active')
 					{
-						$response[$k]['label'] = !empty($v['tag_for']) ? $v['tag_for'].' - '.$v['name'] : $v['name'];
+						$response[$k]['label'] = !empty($v['tag_for']) ? $v['tag_for'].' - '.$v['name'].' - '.$v['comments'] : $v['name'];
 						$response[$k]['value'] = $v['name'];
 					}
 				}

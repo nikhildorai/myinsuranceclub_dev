@@ -31,7 +31,8 @@ class Widget
         $this->_assign_libraries();
     }
     
-    function run($name) {        
+    function run($name, $data = array()) {     
+        extract($data);   
         $args = func_get_args();
         
         require_once APPPATH.'widgets/'.$name.EXT;

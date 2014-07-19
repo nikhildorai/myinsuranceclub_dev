@@ -339,6 +339,7 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  padding: 6px 29px 6px 12px !important;
 }
 
 a {
@@ -2227,8 +2228,9 @@ output {
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;
+  font-weight: bold;
   line-height: 1.42857;
-  color: #767676;
+  color: #000000;
   background-color: white;
   background-image: none;
   border: 1px solid #cbd5dd;
@@ -2246,7 +2248,8 @@ output {
 }
 .form-control::-moz-placeholder {
   color: #999999;
-  opacity: 1;
+  opacity: 0.5;
+  font-weight:normal;
 }
 .form-control:-ms-input-placeholder {
   color: #999999;
@@ -2360,8 +2363,8 @@ select[multiple].input-sm,
 .input-group-sm > .input-group-btn > select[multiple].btn {
   height: auto;
 }
-
-.input-lg, .input-group-lg > .form-control,
+/*.input-lg,*/ 
+.input-group-lg > .form-control,
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .btn {
   height: 46px;
@@ -6933,6 +6936,8 @@ span.block {
 }
 .ui-radio input[type="radio"] + span {
   font-weight: normal;
+  font-weight: bold;
+  color:#000000;
 }
 .ui-radio input[type="radio"] + span:before {
   content: "";
@@ -7148,8 +7153,8 @@ input.input-danger:focus {
   position: relative;
 /*  text-transform: uppercase; */
   font-size: 14px;
- /* font-weight: bold;*/
-  color: #515253;
+  font-weight: bold;
+  color: #000000;
   text-indent: 0.01px;
   text-overflow: "";
   -webkit-appearance: none;

@@ -21,6 +21,8 @@ $server = base_url();//$this->util->getUrl('currentPageUrl');
         <link rel="stylesheet" href="<?php echo $server;?>css/tagit.ui-zendesk.css">
     	<script src="<?php echo $server;?>JS/jquery-ui.1.9.2.min.js" type="text/javascript"></script>
         <script src="<?php echo $server;?>JS/tag-it.js" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo $server;?>assets/js/common.js" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo $server;?>assets/js/jquery.slugify.js" type="text/javascript" charset="utf-8"></script>
         
         <!-- end needs images -->
 
