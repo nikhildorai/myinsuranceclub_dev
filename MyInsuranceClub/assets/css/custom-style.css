@@ -1348,6 +1348,10 @@ background-position: 0 -59px; cursor:pointer;
 background-position: 0 -29px; cursor:pointer;
 
 }
+.yt{
+background-position: 0 -89px; cursor:pointer;
+
+}
 
 .more-less-content{
     display: none;
