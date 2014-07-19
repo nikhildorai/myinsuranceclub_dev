@@ -375,6 +375,16 @@ class basicMediclaim extends MIC_Controller {
 							unset($data['customer_details'][$k]);
 						}
 					}
+					
+					if(isset($search_filter['health_comp']))
+					{
+						//echo $search_filter['health_comp'];
+						if (!(in_array(trim($v['company_type_id']),$search_filter['health_comp'])))
+						{
+							unset($data['customer_details'][$k]);
+						}
+					}
+					
 					if(isset($search_filter['company_name']))
 					{
 						if (!(in_array(trim($v['company_id']),$search_filter['company_name'])))

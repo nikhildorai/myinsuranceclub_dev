@@ -391,19 +391,16 @@
           				
                     <?php }?>
                     
-                    <?php if($v== '3'){?>
+                   <?php }?>
                     
                     	<div class="checkbox">
             				<label>
-            					<input type="checkbox" id="" name="sector[]"  class="search_filter" value="3">
+            					<input type="checkbox" id="" name="health_comp[]"  class="search_filter" value="3">
            							 <label class="" for="22">Plans from Health Insurance companies
 									</label>
           					</label>
           				</div>
-          				
-          			<?php }?>
-                 
-           		<?php }?>
+          			
 				</p>
                 
                 </div>
