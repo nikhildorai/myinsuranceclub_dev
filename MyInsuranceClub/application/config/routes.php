@@ -61,9 +61,9 @@ $route['admin/company/(:any)'] = "admin/company/$1";
 $route['criticalIllness'] = "health_insurance/criticalIllness/index";
 
 //mediclaim routes
-$route['health-insurance'] = "health_insurance/basicMediclaim/index";
-$route['health-insurance/search-results'] = "health_insurance/basicMediclaim/health_policy";
-$route['health-insurance/compare-results'] = "health_insurance/basicMediclaim/compare_policies";
+$route['health-insurance'] = "health_insurance/controller_basicMediclaim/index";
+$route['health-insurance/search-results'] = "health_insurance/controller_basicMediclaim/health_policy";
+$route['health-insurance/compare-results'] = "health_insurance/controller_basicMediclaim/compare_policies";
 
 //$route['admin/(:any)'] = "admin/auth/$1";
 //$route['admin'] = "admin/auth/login";

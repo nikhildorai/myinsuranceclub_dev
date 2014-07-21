@@ -1,12 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Visitor_Information EXTENDS MIC_Model{
+class model_visitor_information EXTENDS MIC_Model{
 
 	function __construct()
 	{
 		// Call the Model constructor
 		parent::__construct();
-		$this->load->library('session');
+		
 	}
 	
 	

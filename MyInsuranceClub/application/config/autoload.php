@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('visitor_information','mic_dbtest');
+$autoload['model'] = array('model_visitor_information','mic_dbtest','model_city');
 $autoload['plugin'] = array('widget_pi');
 
 /* End of file autoload.php */

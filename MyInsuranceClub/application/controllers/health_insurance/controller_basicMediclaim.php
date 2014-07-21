@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class basicMediclaim extends MIC_Controller {
+class controller_basicMediclaim extends MIC_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -24,8 +24,8 @@ class basicMediclaim extends MIC_Controller {
 		
 		parent::__construct();
 		
-		$this->load->model('city');
-		$this->load->model('get_company_plans_count');
+		$this->load->model('model_city');
+		$this->load->model('model_get_company_plans_count');
 		
 		
 		
@@ -36,7 +36,7 @@ class basicMediclaim extends MIC_Controller {
 	{
 		$data=array();
 		
-		$data['city'] = $this->city->get_city();
+		$data['city'] = $this->model_city->get_city();
 		
 		$this->db->freeDBResource($this->db->conn_id);
 		
@@ -59,7 +59,7 @@ class basicMediclaim extends MIC_Controller {
 		
 		$product_name = "mediclaim";
 		
-		$data['company_plan_count'] = $this->get_company_plans_count->get_count($product_name);
+		$data['company_plan_count'] = $this->model_get_company_plans_count->get_count($product_name);
 		
 		$this->db->freeDBResource($this->db->conn_id);
 		
@@ -72,6 +72,9 @@ class basicMediclaim extends MIC_Controller {
 	
 	public function health_policy()
 	{
+		
+		// Discussion: Put form validations in common function in Util
+		
 		/* Form Validation Rules */
 		$post='';
 	
@@ -100,6 +103,8 @@ class basicMediclaim extends MIC_Controller {
 			$this->index();
 		}
 		else{
+			
+			// Discussion:Common for user input from all forms in Util
 			$search_filter=array();
 	
 			$user_input=array();/* array passed to database */
@@ -324,7 +329,7 @@ class basicMediclaim extends MIC_Controller {
 			if(Util::getCachedFile($cacheFileName) != null)
 			{
 				// get result set from cache
-				
+				// Discussion - The function for fetching the cache object should be called once.
 				$data['customer_details']=Util::getCachedFile($cacheFileName); 
 			}
 				
@@ -333,11 +338,12 @@ class basicMediclaim extends MIC_Controller {
 				//get result set from DB and save in cache
 				
 				$data['customer_details']=$this->mic_dbtest->get_policy_results($user_input);
-				
+				// Discussion - Now each DB call is going to return either the result set
+				// or NULL. If the return value is NULL, then do not store it in Cache.
 				Util::saveResultToCache($cacheFileName,$data['customer_details']);
 			}
 			
-			
+			//$data['customer_details'] = $customer_details;
 			/* Filter Data Received From Ajax Post */
 			
 			if($this->input->is_ajax_request())
@@ -378,7 +384,7 @@ class basicMediclaim extends MIC_Controller {
 					
 					if(isset($search_filter['health_comp']))
 					{
-						//echo $search_filter['health_comp'];
+						
 						if (!(in_array(trim($v['company_type_id']),$search_filter['health_comp'])))
 						{
 							unset($data['customer_details'][$k]);
@@ -396,7 +402,7 @@ class basicMediclaim extends MIC_Controller {
 					
 					if(isset($search_filter['min_premium_amt']))
 					{
-						$min_amt_arr = explode('₹',$search_filter['min_premium_amt']);
+						$min_amt_arr = explode('₹ ',$search_filter['min_premium_amt']);
 						
 						$min_premium = (int) str_replace(',','',$min_amt_arr[1]);
 						
@@ -408,7 +414,7 @@ class basicMediclaim extends MIC_Controller {
 					
 					if(isset($search_filter['max_premium_amt']))
 					{
-						$max_amt_arr = explode('₹',$search_filter['max_premium_amt']);
+						$max_amt_arr = explode('₹ ',$search_filter['max_premium_amt']);
 						
 						$max_premium = (int) str_replace(',','',$max_amt_arr[1]);
 						
@@ -443,6 +449,8 @@ class basicMediclaim extends MIC_Controller {
 					
 					
 				}
+				
+				
 				$company_discard = array();
 				
 				$companycnt = array();
@@ -460,7 +468,9 @@ class basicMediclaim extends MIC_Controller {
 				$premiums_from_ajax = Util::getMinAndMaxPremium($data['customer_details']);
 				//var_dump($premiums_from_ajax);
 				//exit;
-				$return['html'] = $this->load->view('health_insurance/ajaxPostResultView',$data,true);
+				$this->session->set_userdata('search_filters',$search_filter);
+				//var_dump($search_filter);
+				$return['html'] = $this->load->view('health_insurance/ajaxPostResultView',$data,TRUE);
 				$return['company'] = count($companycnt);
 				$return['plan'] = count($data['customer_details']);
 				$return['minPremium'] = $premiums_from_ajax['min_premium'];
@@ -468,7 +478,8 @@ class basicMediclaim extends MIC_Controller {
 				echo  json_encode($return);
 			}
 			else
-			{
+			{	
+					
 				$this->template->set_template('frontendsearch');
 				$this->template->write_view('content', 'health_insurance/search_results', $data, TRUE);
 				$this->template->render();
@@ -533,6 +544,8 @@ class basicMediclaim extends MIC_Controller {
 				
 			foreach($this->input->post('compare') as $k=>$v)
 			{
+				//Discussion - Please check the length of the $compare and it should be 3. Otherwise
+				// Redirect the user to the error page.
 				$compare=explode('-',$v);
 	
 				$variant[]=$compare[0];

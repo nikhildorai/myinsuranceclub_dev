@@ -2,7 +2,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class get_company_plans_count EXTENDS MIC_Model{
+class model_get_company_plans_count EXTENDS MIC_Model{
 
 	function __construct()
 	{
