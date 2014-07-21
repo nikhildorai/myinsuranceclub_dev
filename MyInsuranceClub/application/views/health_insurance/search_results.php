@@ -213,8 +213,8 @@
            // } else{
            // 	$checked == "";
          //   }?>
-            <input type="checkbox" id="" name="maternity"  class="search_filter" value="1" <?php //echo $checked;?>>
-            <label class="" for="Field6">Show plans with maternity benefits</label>
+            <input type="checkbox" id="maternity" name="maternity"  class="search_filter" value="1" <?php //echo $checked;?>>
+            <label class="" for="maternity">Show plans with maternity benefits</label>
           </label></div>
 					 
 				</p>
@@ -228,16 +228,16 @@
 							</p> 
                  			<h6 class="fh3">Pre-existing diseases</h6>
                  <p class="addOnFilter" >
-                 <?php foreach($preexist_filter as $p){?>
+                 <?php $sl = 1; foreach($preexist_filter as $p){?>
                  
 					<div class="checkbox">
             				<label>
-            					<input type="checkbox" id="" name="precover[]" class="search_filter" value="<?php echo $p;?>">
-           							 <label class="" for="10">Plans which cover after <?php echo $p;?> years
+            					<input type="checkbox" id="precover[<?php echo $sl; ?>]" name="precover[]" class="search_filter" value="<?php echo $p;?>">
+           							 <label class="" for="precover[<?php echo $sl; ?>]">Plans which cover after <?php echo $p;?> years
 									</label>
          					 </label>
           			</div>
-          			<?php }
+          			<?php $sl++;}
                  		
                  	}?>
 				</p>
@@ -269,8 +269,8 @@
                     <div style="width: 100%; float: left;">
                     	<div class="checkbox" style="width: auto; float: left; margin: 0px;">
             				<label>
-            					<input type="checkbox" value="<?php echo $company['company']['company_id'];?>" class="search_filter" name="company_name[]">
-            						<label for="23" class=""><?php echo $company['company']['company_shortname'];?></label>
+            					<input type="checkbox" value="<?php echo $company['company']['company_id'];?>" class="search_filter" id="company_name[<?php echo $company['company']['company_id'];?>]" name="company_name[]">
+            						<label for="company_name[<?php echo $company['company']['company_id'];?>]" class=""><?php echo $company['company']['company_shortname'];?></label>
           					</label>
           				</div> <span style="float:right;"><?php echo $display_premium;?></span>
           			</div>
@@ -285,29 +285,29 @@
                  <p class="addOnFilter" >
 					 <div class="checkbox">
             			<label>
-            				<input type="checkbox" id="" name="14"  class="search_filter" value="14">
-            					<label class="" for="14">Plans with no co-payment
+            				<input type="checkbox" id="c14" name="c14"  class="search_filter" value="14">
+            					<label class="" for="c14">Plans with no co-payment
 								</label>
           				</label>
           			</div>
                      <div class="checkbox">
             				<label>
-            					<input type="checkbox" id="" name="15"  class="search_filter" value="15">
-            						<label class="" for="15">Plans with 10% co-payment
+            					<input type="checkbox" id="c15" name="c15"  class="search_filter" value="15">
+            						<label class="" for="c15">Plans with 10% co-payment
 									</label>
           					</label>
           			</div>
                       <div class="checkbox">
             				<label>
-            					<input type="checkbox" id="" name="16"  class="search_filter" value="16">
-            						<label class="" for="16">Plans with 20% co-payment
+            					<input type="checkbox" id="c16" name="c16"  class="search_filter" value="16">
+            						<label class="" for="c16">Plans with 20% co-payment
 									</label>
           					</label>
           			</div>
                       <div class="checkbox">
             				<label>
-            					<input type="checkbox" id="" name="17"  class="search_filter" value="17">
-            						<label class="" for="17">CPlans with 30% co-payment
+            					<input type="checkbox" id="c17" name="c17"  class="search_filter" value="17">
+            						<label class="" for="c17">CPlans with 30% co-payment
 									</label>
           					</label>
           			</div>
@@ -322,14 +322,14 @@
                  
 					 <div class="checkbox">
             <label>
-            <input type="checkbox" id="" name="18"  class="field checkbox" value="18">
-            <label class="" for="18">Online
+            <input type="checkbox" id="p18" name="p18"  class="field checkbox" value="18">
+            <label class="" for="p18">Online
 					</label>
           </label></div>
                     <div class="checkbox">
             <label>
-            <input type="checkbox" id="" name="19"  class="field checkbox" value="19">
-            <label class="" for="19">Not Online
+            <input type="checkbox" id="p19" name="p19"  class="field checkbox" value="19">
+            <label class="" for="p19">Not Online
 					</label>
           </label></div>
                     
@@ -380,8 +380,8 @@
 					 
 					 	<div class="checkbox">
             				<label>
-            					<input type="checkbox" id="" name="sector[]"  class="search_filter" value="2">
-            						<label class="" for="20">Plans from Private Sector companies
+            					<input type="checkbox" id="sector_1" name="sector[]"  class="search_filter" value="2">
+            						<label class="" for="sector_1">Plans from Private Sector companies
 									</label>
           					</label>
           				</div>
@@ -392,8 +392,8 @@
           			
                     	<div class="checkbox">
             				<label>
-            					<input type="checkbox" id="" name="sector[]"  class="search_filter" value="1">
-            						<label class="" for="21">Plans from Public Sector companies
+            					<input type="checkbox" id="sector_2" name="sector[]"  class="search_filter" value="1">
+            						<label class="" for="sector_2">Plans from Public Sector companies
 									</label>
           					</label>
           				</div>
@@ -406,8 +406,8 @@
                     
                     	<div class="checkbox">
             				<label>
-            					<input type="checkbox" id="" name="health_comp[]"  class="search_filter" value="3">
-           							 <label class="" for="22">Plans from Specialised Health Insurers									</label>
+            					<input type="checkbox" id="health_comp1" name="health_comp[]"  class="search_filter" value="3">
+           							 <label class="" for="health_comp1">Plans from Specialised Health Insurers									</label>
           					</label>
           				</div>
           				
