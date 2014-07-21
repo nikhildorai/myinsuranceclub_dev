@@ -1318,6 +1318,7 @@ class Util {
 				{
 					$arrParams['slug'] = $this->getSlug($v1);
 					$arrParams['tag_for'] = $post['tag_for'];
+					$arrParams['comments'] = $post['comments'];
 					$recordId = Master_tags_model::saveRecord($arrParams, $modelType='create');					
 					if ($recordId != false)
 						$tagIds[] = $recordId;
@@ -1556,6 +1557,12 @@ echo '=================>';
 												'max_height'	=>	'50',
 												'upload_path'	=>	$ci->config->config['folder_path']['company']['searchResultLogo'],
 											);
+			$config['logo_image_partner']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+												'max_size'		=>	'200',
+												'max_width'		=>	'147',
+												'max_height'	=>	'107',
+												'upload_path'	=>	$ci->config->config['folder_path']['company']['partnerLogo'],
+											);
 		}
 		else if ($type == 'policy')
 		{
@@ -1581,6 +1588,20 @@ echo '=================>';
 		else 
 		{
 			
+		}
+		return $config;
+	}
+	
+	public static function getCKEditorConfig($params = array())
+	{
+		$config = array(
+				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
+				'width' 	=> 	"100%",	//Setting a custom width
+				'height' 	=> 	'300px',	//Setting a custom height
+			);
+		if (!empty($params))
+		{
+			$config = array_merge($config, $params);
 		}
 		return $config;
 	}

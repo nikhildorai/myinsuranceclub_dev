@@ -151,22 +151,14 @@ class Company extends CI_Controller {
 			'id' 	=> 	'description_1',
 			'path'	=>	'JS/ckeditor',
 			//Optionnal values
-			'config' => array(
-				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
-				'width' 	=> 	"100%",	//Setting a custom width
-				'height' 	=> 	'300px',	//Setting a custom height
-			),
+			'config' => Util::getCKEditorConfig(),
 		);
 		$this->data['ckeditor2'] = array(
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'description_2',
 			'path'	=>	'JS/ckeditor',
 			//Optionnal values
-			'config' => array(
-				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
-				'width' 	=> 	"100%",	//Setting a custom width
-				'height' 	=> 	'100px',	//Setting a custom height
-			),
+			'config' => Util::getCKEditorConfig(array('height' 	=> 	'100px')),
 		);
 		
 			
@@ -230,9 +222,11 @@ class Company extends CI_Controller {
 		//	check if post data is available
 		if ($this->input->post('companyModel') && $isActive == true)
 		{
+			
 			//	save tags
 			if (isset($_POST['tag']) && !empty($_POST['tag']))
 			{
+				$_POST['tag']['comments'] = $_POST['companyModel']['company_name'];
 				$tag = $this->util->addUpdateTags($_POST['tag']);
 				$_POST['companyModel']['tag'] = $tag;
 			}
@@ -256,6 +250,10 @@ class Company extends CI_Controller {
 					{
 						$name .= '-80x50';
 					}
+					else if ($k1 == 'logo_image_partner')	
+					{
+						$name .= '-147x107';
+					}
 					else
 					{
 						$name .= '-'.$i;
@@ -274,15 +272,19 @@ class Company extends CI_Controller {
 				//	set previous file name in post
 				$_POST['companyModel']['image_logo_1'] = $companyModel['image_logo_1'];
 				$_POST['companyModel']['image_logo_2'] = $companyModel['image_logo_2'];
+				$_POST['companyModel']['image_logo_partner'] = $companyModel['image_logo_partner'];
 			}
 							
 			//	set default values
+			if (!empty($company_id))
+				$_POST['companyModel']['slug'] = $this->util->getSlug($exist['slug']);
+			else 
+				$_POST['companyModel']['slug'] = (isset($_POST['companyModel']['slug']) && !empty($_POST['companyModel']['slug'])) ? $this->util->getSlug($_POST['companyModel']['slug']) :  '';
+			
 			$_POST['companyModel']['company_display_name'] = (isset($_POST['companyModel']['company_display_name']) && !empty($_POST['companyModel']['company_display_name'])) ? $_POST['companyModel']['company_display_name'] :  $_POST['companyModel']['company_name'];
 			$arrParams = $this->input->post('companyModel');
 			$companyTypeId = (isset($arrParams['company_type_id']) && !empty($arrParams['company_type_id'])) ? $arrParams['company_type_id'] : '';
 			$company_id = (isset($arrParams['company_id']) && !empty($arrParams['company_id'])) ? $arrParams['company_id'] : '';	
-			$_POST['companyModel']['slug'] = (isset($_POST['companyModel']['slug']) && !empty($_POST['companyModel']['slug'])) ? $this->util->getSlug($_POST['companyModel']['slug']) :  '';
-			
 			
 			//	set validation rules
 			$validation_rules = array(
@@ -298,6 +300,7 @@ class Company extends CI_Controller {
 				array('field' => 'companyModel[tag]', 'label' => 'tag', 'rules' => 'required'),
 		//		array('field' => 'companyModel[image_logo_1]', 'label' => 'logo image 1', 'rules' => 'required'),
 		//		array('field' => 'companyModel[image_logo_2]', 'label' => 'logo image 2', 'rules' => 'required'),
+		//		array('field' => 'companyModel[image_logo_partner]', 'label' => 'partner logo image', 'rules' => 'required'),
 				array('field' => 'companyModel[slug]', 'label' => 'url', 'rules' => 'required|callback_validateInsuranceCompany[slug#'.$arrParams["slug"].',modelType#'.$modelType.',company_id#'.$company_id.',company_type_id#'.$companyTypeId.']'),
 				
 				//	company contact detail validation
@@ -322,8 +325,7 @@ class Company extends CI_Controller {
 				//	run validation on complete company post data
 				$validate = $this->validateInsuranceCompany($arrParams, 'modelType#'.$modelType.',company_id#'.$company_id);	
 				if ($validate == true)
-				{
-				
+				{		
 					//	save record for company 
 					$recordId = $this->insurance_company_master_model->saveCompanyRecord($arrParams, $modelType);	
 					if ($recordId != false)
@@ -487,6 +489,7 @@ class Company extends CI_Controller {
 		$this->data['tag_for'] = 'company';
 		$this->data['tagLimit'] = 1;
 		$this->data['status'] = isset($companyModel['status']) ? $companyModel['status'] : '';
+		$this->data['modelName'] = 'companyModel';
 		
 		$this->template->write_view('content', 'admin/company/create', $this->data, TRUE);
 		$this->template->render();

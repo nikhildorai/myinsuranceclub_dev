@@ -128,6 +128,7 @@ var allowedTags = [];
                 <input type="text" class="form-control" id="singleFieldTags2"  required placeholder="Tag"  name="tag[name]" value="<?php echo $tags;?>" >
                 <span class="help-block"><p class="text-danger" id="tagInfoMsg"></p></span>
                 <input type="hidden" id="tag_for" name="tag[tag_for]" value="<?php echo $tagFor;?>" >
+                <input type="hidden" id="tag_for" name="tag[comments]" value="<?php echo isset($tagComments) ? $tagComments : '';?>" >
 		</div>
 	</div>
 <?php                 

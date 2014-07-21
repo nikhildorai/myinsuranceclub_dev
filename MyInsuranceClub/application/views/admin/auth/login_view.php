@@ -4,7 +4,7 @@
         <div class="container text-center">
             <section class="logo">
 				<a href="<?php echo base_url().'admin'?>" title="My Insurance Club">
-					<img src="<?php echo $includes_dir;?>images/logo.gif" alt="myinsuranceclub.com" />
+					<img src="<?php echo base_url();?>assets/images/logo.png" alt="myinsuranceclub.com" />
 				</a>
             </section>
         </div>

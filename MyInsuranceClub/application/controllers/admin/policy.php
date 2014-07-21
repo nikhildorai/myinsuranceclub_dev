@@ -804,15 +804,15 @@ class Policy extends CI_Controller {
 				$sqlFilter['orderBy'] = 'sub_product_name';
 			}
 		
-			$healthOptions = $this->util->getCompanyTypeDropDownOptions($modelName, $optionKey, $optionValue, $defaultEmpty = "Please Select", $extraKeys = false, $where, $sqlFilter); 
+			$healthOptions = $this->util->getCompanyTypeDropDownOptions($modelName, $optionKey, $optionValue, $defaultEmpty = "Please Select", $extraKeys = true, $where, $sqlFilter);
 			if (!empty($healthOptions))
 			{
 				foreach ($healthOptions as $k1=>$v1)
 				{
 					if (in_array($k1, $selected))
-						$result .= '<option value="'.$k1.'" selected>'.$v1.'</option>';
+						$result .= '<option value="'.$k1.'" selected data-slug="'.$v1['slug'].'">'.$v1['product_name'].'</option>';
 					else
-						$result .= '<option value="'.$k1.'">'.$v1.'</option>';
+						$result .= '<option value="'.$k1.'" data-slug="'.$v1['slug'].'">'.$v1['product_name'].'</option>';
 				}
 			}
 		}		
