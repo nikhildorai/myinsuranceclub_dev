@@ -297,7 +297,7 @@
 	width:100%
 }
 .ui-datepicker select.ui-datepicker-month {
-	width:40%
+	width:41%
 }
 .ui-datepicker select.ui-datepicker-year {
 	width:45%
@@ -462,7 +462,7 @@
     position: absolute;
     text-align: center;
     top: 5px;
-    width: 29px; cursor:pointer;
+    width: 29px;cursor:pointer;
 }
 
 .car-ins .input .icon-append + input, .car-ins .textarea .icon-append + textarea {
@@ -1475,7 +1475,7 @@ margin: 0;
     margin-top: 10px;
     min-height: 84px;}
 	
-a.btn_offer_block { font-size:14px; float: left; color: #ffffff !important;  position: relative; }
+	a.btn_offer_block { font-size:14px; float: left; color: #ffffff !important;  position: relative; }
 
 a.btn_offer_block{float: right; margin: 0 auto; display: block; width: auto; padding:5px 8px 5px 8px; margin-top:23px;}
 a.btn_offer_block { background-color: #5fb41d;box-shadow: 0 2px 2px #59a61d; text-decoration: none !important; }
@@ -1484,6 +1484,8 @@ a.btn_offer_block:hover { background: #74cd2f; text-decoration: none }
 a.btn_offer_block:hover:after { border-left: 7px solid #f99800; }
 a.btn_offer_block:active { background-color: #74cd2f !important; top: 2px; }
 a.btn_offer_block:active:after { border-left: 7px solid #fb7203; }
+	
+
 #sh4{ color: #2ca3ef;
     font-size: 20px;
     position: absolute;

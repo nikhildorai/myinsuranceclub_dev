@@ -325,6 +325,8 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', end
 
 
  @media screen and (max-width: 990px) {
+	 .col-md-3.border.m_a{ float:left; width:50%;}
+	   .col-md-2.border.c_o{ width:25%; float:left;}#sh4{ display:none !important;}
 	.cus_res_hlth{ padding:0;} 
  .cus_res_hlth .col-md-5 {
  width:41%; float:left;
@@ -385,7 +387,7 @@ margin-left: 0px !important;
  .col-md-5.plan {
 padding: 0px 0px 0px 5px;
 }
-#sh4{ display:none !important;}
+#sh4,#search_sense_of_urgency_popup{ display:none !important;}
 
 
   .col-md-2.border.c_o{ width:50%; float:left;}

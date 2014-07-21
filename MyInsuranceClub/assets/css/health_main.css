@@ -64,6 +64,7 @@ width: 49px;
 }
 }
 @media screen and (max-width: 480px) {
+	.clearfix1{width:100%;}
 	.pos1{  margin-left: 0px;}
 
 	.cus_cont {
