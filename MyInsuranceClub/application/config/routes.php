@@ -76,7 +76,8 @@ $route['health-insurance/compare-results'] = "health_insurance/controller_basicM
 $route['life-insurance'] = "lifeInsurance/index/";
 $route['life-insurance/companies'] = "lifeInsurance/companies/";
 $route['life-insurance/companies/(:any)'] = "lifeInsurance/companies/$1";
-$route['general-insurance-companies'] = "generalInsurance/general-insurance-companies/";
+$route['general-insurance-companies'] = "generalInsurance/companies/";
+$route['general-insurance-companies/(:any)'] = "generalInsurance/companies/$1";
 
 #########################	frontend routes ends	##############################
 

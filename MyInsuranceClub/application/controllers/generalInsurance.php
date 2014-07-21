@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class LifeInsurance extends MIC_Controller {
+class GeneralInsurance extends MIC_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -37,13 +37,13 @@ class LifeInsurance extends MIC_Controller {
 	}
 	
 	/*
-	 * controller for mic/life-insurance/companies/
-	 * controller for mic/life-insurance/companies/any_company_name
+	 * controller for mic/general-insurance/companies/
+	 * controller for mic/general-insurance/companies/any_company_name
 	 */
 	public function companies($companyName = null)
 	{
 		$data = array();
-		$arrParams['company_type_slug'] = $companyType = 'life-insurance';
+		$arrParams['company_type_slug'] = $companyType = 'general-insurance';
 		$arrParams['company_slug'] = $companyName;
 		$cacheFileName = 'company_'.$companyType;
 		if (!empty($companyName))
@@ -54,7 +54,7 @@ class LifeInsurance extends MIC_Controller {
 		if(!empty($cacheResult))
 		{
 			// get result set from cache
-			$data['companyDetails']=$cacheResult;
+			$data['companyDetails'] = $cacheResult;
 		}
 		else
 		{
@@ -62,7 +62,7 @@ class LifeInsurance extends MIC_Controller {
 			$data['companyDetails']=$this->insurance_company_master_model->get_insurance_companies($arrParams);
 			Util::saveResultToCache($cacheFileName,$data['companyDetails']);
 		}
-		
+//var_dump($data['companyDetails']);die;
 		//	if company name is defined, show specific company details
 		if (!empty($companyName))
 		{
@@ -74,7 +74,7 @@ class LifeInsurance extends MIC_Controller {
 		{
 			//	if company name is not defined show all company listing
 			$this->template->set_template('frontend');
-			$this->template->write_view('content', 'company_page/liCompany', $data, TRUE);
+			$this->template->write_view('content', 'company_page/giCompany', $data, TRUE);
 			$this->template->render();
 		}
 	}
