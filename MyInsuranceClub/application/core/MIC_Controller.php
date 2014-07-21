@@ -4,22 +4,22 @@ class MIC_Controller extends CI_Controller {
     {
         parent::__construct();
         
-        $this->load->helper('form');
-        $this->load->helper('html');
-        $this->load->helper('url');
-        $this->load->helper('cookie');
+        //$this->load->helper('form');
+        //$this->load->helper('html');
+        //$this->load->helper('url');
+       // $this->load->helper('cookie');
         
-		$this->load->library('table');
-		$this->load->library('user_agent');
-        $this->load->library('form_validation');
-        $this->load->library('session');
-        $this->load->library('util');
-        $this->load->library('session');
+		//$this->load->library('table');
+		//$this->load->library('user_agent');
+        //$this->load->library('form_validation');
+        //$this->load->library('session');
+        //$this->load->library('util');
+        //$this->load->library('session');
         
-        $this->load->model('visitor_information');
-        $this->load->model('mic_dbtest');
+      //  $this->load->model('visitor_information');
+       // $this->load->model('mic_dbtest');
         
-        $this->load->database();
+       // $this->load->database();
         $this->load->driver('cache', array('adapter' => 'file'));
         date_default_timezone_set('Asia/Kolkata');
         
