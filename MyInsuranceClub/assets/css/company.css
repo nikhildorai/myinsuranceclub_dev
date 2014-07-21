@@ -1,0 +1,299 @@
+.listsocial {
+	background: none repeat scroll 0 0 #f2f2f2;
+	float: left;
+	padding-left:10px;
+	height: 38px;
+	list-style-type: none;
+	width: 100%;
+}
+.listsocial li {
+	float: left;
+	line-height: 30px;
+	padding: 10px;
+	width:62px;
+}
+.listsocial li.last {
+	float:right;
+	width:auto;
+	padding:5px 10px;
+}
+.t_cmp_header {
+	font-size:18px;
+	font-weight:400;
+	color:#ff6633;
+	border-bottom:1px solid #e6e6e6;
+	padding-bottom:10px;
+	margin-top:35px;
+	float:left;
+	width:100%;
+}
+.title-divider_h2{font-size:22px;
+	font-weight:400;
+	color:#ff6633;
+	border-bottom:1px solid #e6e6e6;	padding-bottom:10px;}
+	.title-divider_h2_inn{font-size:18px;
+	font-weight:400; margin-top:20px;
+	color:#393c3d; }
+.sub_h_cmp {
+	font-size:16px;
+	font-weight:600;
+}
+.cmp_ul {
+	padding-left: 0px;
+	list-style-type:none;
+}
+.cmp_ul a{ color:#2e84d3; }
+.company_term .col-md-6.fst{
+	padding-left:0;
+}
+.cmp_ul .cmp_link{ text-align:right; }
+.cmp_ul .cmp_link i{ color: #6bc43f;
+    float: right;
+    font-size: 10px;
+    margin-left: 5px;
+    margin-top: 5px;}
+.cmp_ul .cmp_link a{color:#ff6633;}
+.company_abt{ float:left; width:100%;}
+.company_abt p{ float:left; line-height:25px;}
+.company_abt .mar-20{ float:left;margin-top: 20px;}
+.company_abt img.cus_border_im{background:#f8f8f8;
+    margin: 7px 25px 20px 0 !important;
+    padding: 15px;}
+.company_abt p,.company_abt table td{ color:#5A5A5A;}
+.company_abt .widget img.img_t {
+height: 100%;
+margin-top: 35px;
+width: 100%;
+}
+.company_abt .round_image{ border-radius:160px; border:2px solid #4a4a49;}
+.company_abt .art_cnt.widget.video {
+width: 100%;
+}
+.company_abt .col-md-6 em{color: #fc4c4e;
+    font-size: 30px;
+    padding-right: 10px;
+    width: 43px; float:left;}
+.t_h{ margin-bottom:10px;}
+.road{ line-height:25px; float:left;}
+.phone,.web,.mail{ float:left; width:100%; line-height:30px; padding-bottom:12px;}
+.follow{ float:left; margin-top:12px; width:100%;}
+
+
+
+
+
+
+
+
+
+/* 
+	Max width before this PARTICULAR table gets nasty
+	This query will take effect for any screen smaller than 760px
+	and also iPads specifically.
+	*/
+	
+	/* 
+	Generic Styling, for Desktops/Laptops 
+	*/
+	.claim_r table { 
+		width: 100%; margin-top:10px; float:left;
+		border-collapse: collapse; 
+	}
+	/* Zebra striping */
+	.claim_r tr:nth-of-type(odd) { 
+		background: #F5F5F5; 
+	}
+	.claim_r th { 
+		background: #FF6633; 
+		color: white; 
+		font-weight: 500; 
+	}
+	.claim_r td,.claim_r th { 
+		padding: 6px; 
+		border: 1px solid #ccc; 
+		text-align: left; 
+	}
+	@media 
+	only screen and (max-width: 760px),
+	(min-device-width: 768px) and (max-device-width: 1024px)  {
+	
+		/* Force table to not be like tables anymore */
+		table, thead, tbody, th, td, tr { 
+			display: block; 
+		}
+		
+		/* Hide table headers (but not display: none;, for accessibility) */
+		thead tr { 
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+		
+		tr { border: 1px solid #ccc; }
+		
+		td { 
+			/* Behave  like a "row" */
+			border: none;
+			border-bottom: 1px solid #eee; 
+			position: relative;
+			padding-left: 50%; 
+		}
+		
+		td:before { 
+			/* Now like a table header */
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 6px;
+			left: 6px;
+			width: 45%; 
+			padding-right: 10px; 
+			white-space: nowrap;
+		}
+		
+		/*
+		Label the data
+		*/
+	/*	td:nth-of-type(1):before { content: "First Name"; }
+		td:nth-of-type(2):before { content: "Last Name"; }
+		td:nth-of-type(3):before { content: "Job Title"; }
+		td:nth-of-type(4):before { content: "Favorite Color"; }
+		td:nth-of-type(5):before { content: "Wars of Trek?"; }
+		td:nth-of-type(6):before { content: "Porn Name"; }
+		td:nth-of-type(7):before { content: "Date of Birth"; }
+		td:nth-of-type(8):before { content: "Dream Vacation City"; }
+		td:nth-of-type(9):before { content: "GPA"; }
+		td:nth-of-type(10):before { content: "Arbitrary Data"; }*/
+	}
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.view {
+   width: 100%;
+   height: 100%;
+   margin: 10px 10px 10px -15px;
+   float: left;
+   border: 10px solid #fff;
+   overflow: hidden;
+   position: relative;
+   text-align: center;
+   -webkit-box-shadow: 1px 1px 9px #e6e6e6;
+   -moz-box-shadow: 1px 1px 9px #e6e6e6;
+   box-shadow: 1px 1px 9px #e6e6e6;
+   cursor: default;
+}
+.view .mask,.view .content {
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   overflow: hidden;
+   top: 0;
+   left: 0;
+}
+.view img {
+
+   position: relative;
+}
+.view h2 {
+   
+   color: #fff;
+   text-align: center; font-weight:normal;
+   position: relative;
+   font-size: 14px;
+   padding: 10px; 
+   background: rgba(0, 0, 0, 0.8);
+   margin: 20px 0 0 0;
+}
+
+.view a.info {
+   display: inline-block;
+   text-decoration: none;
+   padding: 5px 14px;
+   background: #000;
+   color: #fff; margin-top:10px; font-size:12px;
+   text-transform: uppercase;
+   -webkit-box-shadow: 0 0 1px #000;
+   -moz-box-shadow: 0 0 1px #000;
+   box-shadow: 0 0 1px #000;
+}
+.view a.info: hover {
+   -webkit-box-shadow: 0 0 5px #000;
+   -moz-box-shadow: 0 0 5px #000;
+   box-shadow: 0 0 5px #000;
+}
+
+.view-fifth img {
+   -webkit-transition: all 0.3s ease-in-out;
+   -moz-transition: all 0.3s ease-in-out;
+   -o-transition: all 0.3s ease-in-out;
+   -ms-transition: all 0.3s ease-in-out;
+   transition: all 0.3s ease-in-out;
+}
+.view-fifth .mask {
+   background-color: rgba(146,96,91,0.3);
+   -webkit-transform: translateX(-300px);
+   -moz-transform: translateX(-300px);
+   -o-transform: translateX(-300px);
+   -ms-transform: translateX(-300px);
+   transform: translateX(-300px);
+   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
+   filter: alpha(opacity=100);
+   opacity: 1;
+   -webkit-transition: all 0.3s ease-in-out;
+   -moz-transition: all 0.3s ease-in-out;
+   -o-transition: all 0.3s ease-in-out;
+   -ms-transition: all 0.3s ease-in-out;
+   transition: all 0.3s ease-in-out;
+}
+.view-fifth h2 {
+   background: rgba(255, 255, 255, 0.5);
+   color: #000;
+   -webkit-box-shadow: 0px 1px 3px rgba(159, 141, 140, 0.5);
+   -moz-box-shadow: 0px 1px 3px rgba(159, 141, 140, 0.5);
+   box-shadow: 0px 1px 3px rgba(159, 141, 140, 0.5);
+}
+.view-fifth p {
+   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+   filter: alpha(opacity=0);
+   opacity: 0;
+   color: #333;
+   -webkit-transition: all 0.2s linear;
+   -moz-transition: all 0.2s linear;
+   -o-transition: all 0.2s linear;
+   -ms-transition: all 0.2s linear;
+   transition: all 0.2s linear;
+}
+.view-fifth:hover .mask {
+   -webkit-transform: translateX(0px);
+   -moz-transform: translateX(0px);
+   -o-transform: translateX(0px);
+   -ms-transform: translateX(0px);
+   transform: translateX(0px);
+}
+.view-fifth:hover img {
+   -webkit-transform: translateX(300px);
+   -moz-transform: translateX(300px);
+   -o-transform: translateX(300px);
+   -ms-transform: translateX(300px);
+   transform: translateX(300px);
+}
+.view-fifth:hover p {
+   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
+   filter: alpha(opacity=100);
+   opacity: 1;
+}
