@@ -8,6 +8,7 @@ border-radius: 4px;}
 .top_h{ font-size:16px; color:#999999; padding:10px 0px 5px 10px;}
 .top_p{ font-size:12px;  padding:0px 0px 0px 10px;}
 .top_m{ font-size:13px; color:#2ca3ef; padding:10px 0px 0px 10px;  cursor:pointer;}
+.top_m .fa-angle-left{ font-size: 14px; font-weight: bold;}
 .top_m a{color:#2ca3ef;}
 .clearfix:after {
      visibility: hidden;

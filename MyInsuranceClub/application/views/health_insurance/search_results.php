@@ -112,7 +112,7 @@
             
                <div class="col-md-12" style="padding:0px;">
               <?php echo form_open('health-insurance/compare-results',array('id'=>'compare'));?>
-               <div style=" height:auto; padding:10px 0px 30px 0px; background:#ededec;  border-radius: 4px;">
+               <div style=" height:auto; padding:10px 0px 30px 0px; background:#ededec;  border-radius: 4px; font-weight:bold;">
                 <div class="col-md-5 plan">
                 Plan Details
                 </div>

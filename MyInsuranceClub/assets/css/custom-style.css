@@ -1040,7 +1040,7 @@ html * .slideshow .ls-container .ls-nav-next {
     border-bottom: 1px solid #E6E6E6;
     padding-bottom: 15px;
 }
-.fh3{ font-size:14px; font-weight:normal; color:#000000;}
+.fh3{ font-size:14px; font-weight:bold; color:#8c8b8b;}
 .c{ color:#2fa2eb;}
 .l { padding-bottom:10px; border-bottom:1px solid #c9c9c9;}
 
@@ -1097,7 +1097,7 @@ i.searchSprite, .searchSprite, .withNotch .tracker, .rangeHandle, .withArrows li
 	.anc_f{ font-size:14px; margin:0px; padding:0px;   line-height: 20px;}
 	.down_cnt{color: #999999;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 25px;}
 	.down_cnt_up{
     cursor: pointer; display:none;
