@@ -1,0 +1,601 @@
+/* portfolio filters */
+
+.portfolio .filters {
+	float: right;
+	margin: -35px 20px 20px 0; 
+}
+
+.portfolio .filters a {
+	display: inline-block;
+	margin-left: 20px;
+	padding: 3px 2px;
+	color: #999;
+	text-decoration: none;
+}
+
+.portfolio .filters a:hover {
+	color: #666;
+}
+
+.portfolio .filters a.filter-active {
+	color: #666;
+	border-bottom: 1px solid #47dfff;
+}
+
+/* portfolio list */
+
+.portfolio .list {
+	 float:left;list-style-type:none; width:100%;
+}
+
+.portfolio .list li {
+	float: left;
+	margin: 0 20px 10px 0;
+}
+
+.portfolio .list .thumb {
+	position: relative;
+	width: auto;
+	height: auto;
+	margin-bottom: 14px;
+	overflow: hidden;
+}
+
+.portfolio .list .thumb img {
+	max-width: 100%;
+	height: auto;
+	vertical-align: top;
+}
+
+.portfolio .list .view {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	background: #fff;
+	background: rgba(255,255,255,0.8);
+	border: 1px solid #fff;
+	text-align: center;
+	line-height: 0;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: opacity 0.3s, visibility 0s linear .3s;
+	-moz-transition: opacity 0.3s, visibility 0s linear .3s;
+	-o-transition: opacity 0.3s, visibility 0s linear .3s;
+	transition: opacity 0.3s, visibility 0s linear .3s;
+	-webkit-transform: translate3d(0,0,0);
+}
+
+.portfolio .list .thumb:hover .view {
+	visibility: visible;
+	opacity: 1;
+	-webkit-transition-delay: 0s;
+	-moz-transition-delay: 0s;
+	-o-transition-delay: 0s;
+	transition-delay: 0s;
+}
+
+.portfolio .list .view .button { 
+	position: relative;
+	top: 50%;
+	margin-top: -17px;
+}
+
+.portfolio .list h4 {
+	text-align: center;	
+}
+
+.portfolio .list h4 a {
+	text-decoration: none;
+}
+
+.portfolio .colio-active-item h4 a {
+	background: #ccc;
+	padding: 2px 10px;
+}
+
+.portfolio .list p {
+	text-align: center;
+	font-size: 12px;
+	line-height: 1.3em;
+}
+
+
+
+/* #Page Styles
+================================================== */
+
+/* #Media Queries
+================================================== */
+
+	/* Smaller than standard 960 (devices and browsers) */
+	@media only screen and (max-width: 959px) {}
+
+	/* Tablet Portrait size to standard 960 (devices and browsers) */
+	@media only screen and (min-width: 768px) and (max-width: 959px) {
+		.colio { margin-right: 24px!important; }
+		.portfolio .list .thumb { width: 228px; height: 143px; }
+	}
+
+	/* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 767px) {
+		h1, h2, h3, h4, h5, h6 { text-align: center; }
+		.preview-theme + p { margin-bottom: 42px; }
+		.main-header { margin: 21px 0 0!important; }
+		.purchase { text-align: center; padding-top: 21px; }
+		.portfolio .filters { float: left; margin-top: 0; text-align: center; width: 100%; }
+		.portfolio .filters a { margin: 0 10px; }
+		.portfolio .list li { float: none; margin-right: 0; }
+		.colio { margin-right: 0!important; }
+		.portfolio .list .thumb { width: 420px; height: 260px; }
+		footer { text-align: center; margin-bottom: 14px!important; }
+		
+	}
+
+	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+	@media only screen and (min-width: 480px) and (max-width: 767px) {
+	}
+
+	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+	@media only screen and (max-width: 479px) {
+		.portfolio .list .thumb { width: 300px; height: 187px; }
+	}
+
+
+
+/* Colio - Basic Styles
+================================================== */
+
+.colio {
+	position: relative;
+	height: 0;
+	clear: both;
+	overflow: hidden;
+}
+
+.colio-container {
+	padding: 30px 0 0;
+	height: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.colio-content {
+	display: none;
+	overflow: hidden;
+}
+
+.colio-close,
+.colio-prev,
+.colio-next {
+	outline: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.colio-no-prev,
+.colio-no-next {
+	cursor: default;
+	opacity: 0.2;
+}
+
+/* navigation, close */
+
+.colio-close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.colio-navigation {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+.colio-navigation a {
+	margin-right: 5px;	
+}
+
+/* placement */
+
+.colio-placement-inside,
+.colio-placement-before {
+	margin-bottom: 20px;
+}
+
+.colio-placement-after {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+/* Colio - Black Theme
+================================================== */
+
+
+/* container */
+
+.colio-theme-black {
+	margin-right: 20px;
+}
+
+.colio-theme-black .colio-container {
+	background: #333;
+}
+
+/* colio close */
+
+.colio-theme-black .colio-close span {
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	text-indent: -9999px;
+}
+
+.colio-theme-black .colio-close {
+	position: absolute;
+	top: 36px;
+	right: 26px;
+}
+
+.colio-theme-black .colio-close span {
+	background: url(../images/controls.png) no-repeat -48px 0;
+}
+
+.colio-theme-black .colio-close:hover {
+	opacity: 0.8;
+}
+
+/* colio navigation */
+
+.colio-theme-black .colio-navigation span {
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	text-indent: -9999px;
+}
+
+.colio-theme-black .colio-navigation {
+	position: absolute;
+	top: 60px;
+	left: 60px;
+}
+
+.colio-theme-black .colio-navigation a {
+	float: left;
+	padding: 5px;
+	margin-right: 5px;
+	background: #ff5452;
+	-webkit-transition: background .1s;
+	-moz-transition: background .1s;
+	-o-transition: background .1s;
+	transition: background .1s;
+}
+
+.colio-theme-black .colio-navigation a:hover {
+	background: #555;
+}
+
+.colio-theme-black .colio-prev span {
+	background: url(../images/controls.png) no-repeat 0 0;
+}
+
+.colio-theme-black .colio-next span {
+	background: url(../images/controls.png) no-repeat -24px 0;
+}
+
+.colio-theme-black .colio-no-prev,
+.colio-theme-black .colio-no-next {
+	background: #555!important;
+}
+
+/* content */
+
+.colio-theme-black .main {
+	float: left;
+	width: 100%;
+	padding: 0px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+/*.colio-content img{ max-width:30%;}*/
+
+.colio-theme-black .side {
+	float: left;
+	padding: 20px;
+	width: 55%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* typography */
+
+.colio-theme-black {
+	color: #999;
+}
+
+.colio-theme-black h3 {
+	padding: 0;
+	margin: 0 0 35px 100px;
+	color: #ccc;
+}
+
+.colio-theme-black a,
+.colio-theme-black a:visited {
+	color: #ccc;
+	font-style: italic;
+	text-decoration: underline;
+}
+
+.colio-theme-black a:hover {
+	color: #eee;
+}
+
+.colio-theme-black a.visit-link {
+	display: inline-block;
+	padding: 5px 15px;
+	border: 2px solid #ccc;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-style: normal;
+	line-height: 21px;
+	font-size: 12px;
+	letter-spacing: 0.05px;
+}
+
+/* photo feed */
+
+.colio-theme-black .feed {
+	margin: 0;
+	list-style: none;
+}
+
+.colio-theme-black .feed li {
+	float: left;
+	margin: 0 5px 5px 0;
+	width: 130px;
+	height: 130px;
+	overflow: hidden;
+	background: #ff5452 url(images/plus.png) no-repeat center;
+}
+
+.colio-theme-black .feed img {
+	height: 100%;
+	width: auto;
+	vertical-align: top;
+	-webkit-transition: opacity .2s;
+	-moz-transition: opacity .2s;
+	-o-transition: opacity .2s;
+	transition: opacity .2s;
+}
+
+.colio-theme-black .feed li:hover img {
+	opacity: 0.2;
+}
+
+/* social icons */
+
+.colio-theme-black .social {
+	width: 100%;
+	margin-bottom: 21px;
+	overflow: hidden;
+}
+
+.colio-theme-black .social li {
+	float: left;
+	margin: 0 7px 0 0;
+}
+
+.colio-theme-black .social a {
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	text-indent: -9999px;
+	opacity: 0.8;
+	border-radius: 12px;
+	-moz-border-radius: 12px;
+	background-size: 24px 24px !important;
+}
+
+.colio-theme-black .social a:hover {
+	opacity: 1;
+	-webkit-transition: opacity .2s;
+	-moz-transition: opacity .2s;
+	-o-transition: opacity .2s;
+	transition: opacity .2s;
+}
+
+.colio-theme-black .social .delicious { background: url(images/social/delicious.png) no-repeat center; }
+.colio-theme-black .social .digg { background: url(images/social/digg.png) no-repeat center; }
+.colio-theme-black .social .dribble { background: url(images/social/dribble.png) no-repeat center; }
+.colio-theme-black .social .ember { background: url(images/social/ember.png) no-repeat center; }
+.colio-theme-black .social .facebook { background: url(images/social/facebook.png) no-repeat center; }
+.colio-theme-black .social .flickr { background: url(images/social/flickr.png) no-repeat center; }
+.colio-theme-black .social .forrst { background: url(images/social/forrst.png) no-repeat center; }
+.colio-theme-black .social .google { background: url(images/social/google.png) no-repeat center; }
+.colio-theme-black .social .last_fm { background: url(images/social/last_fm.png) no-repeat center; }
+.colio-theme-black .social .linkedin { background: url(images/social/linkedin.png) no-repeat center; }
+.colio-theme-black .social .my_space { background: url(images/social/my_space.png) no-repeat center; }
+.colio-theme-black .social .quora { background: url(images/social/quora.png) no-repeat center; }
+.colio-theme-black .social .rss { background: url(images/social/rss.png) no-repeat center; }
+.colio-theme-black .social .sharethis { background: url(images/social/sharethis.png) no-repeat center; }
+.colio-theme-black .social .skype { background: url(images/social/skype.png) no-repeat center; }
+.colio-theme-black .social .stumbleupon { background: url(images/social/stumbleupon.png) no-repeat center; }
+.colio-theme-black .social .tumblr { background: url(images/social/tumblr.png) no-repeat center; }
+.colio-theme-black .social .twitter { background: url(images/social/twitter.png) no-repeat center; }
+.colio-theme-black .social .vimeo { background: url(images/social/vimeo.png) no-repeat center; }
+.colio-theme-black .social .youtube { background: url(images/social/you_tube.png) no-repeat center; }
+
+
+/* Retina
+================================================== */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) {
+	.colio-theme-black .colio-prev span {
+		background: url(images/controls@2x.png) no-repeat 0 0;
+		background-size: 72px 24px;
+	}
+	
+	.colio-theme-black .colio-next span {
+		background: url(images/controls@2x.png) no-repeat -24px 0;
+		background-size: 72px 24px;
+	}
+	
+	.colio-theme-black .colio-close span {
+		background: url(images/controls@2x.png) no-repeat -48px 0;
+		background-size: 72px 24px;
+	}
+}
+
+
+/* Media queries
+================================================== */
+
+/* Smaller than standard 960 (devices and browsers) */
+@media only screen and (max-width: 959px) { }
+
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+@media only screen and (min-width: 768px) and (max-width: 959px) {}
+
+/* All Mobile Sizes (devices and browser) */
+@media only screen and (max-width: 767px) {
+	
+	.colio-theme-black .main, 
+	.colio-theme-black .side { clear: both; width: 100%; padding: 0; margin-bottom: 40px; }
+	.colio-theme-black .side { margin-bottom: 0; }
+	.colio-theme-black .colio-navigation { left: 40px; top: 40px; }
+	.colio-theme-black .main h3 { float: none; margin: 60px 0 20px; text-align: left; }
+	
+}
+
+/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+@media only screen and (min-width: 480px) and (max-width: 767px) {}
+
+/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+@media only screen and (max-width: 479px) {
+	
+	.colio-theme-black .colio-container { padding: 30px; }
+	.colio-theme-black .colio-navigation { left: 30px; top: 30px; }
+	.colio-theme-black .feed li { width: 115px; height: 115px; }
+	
+}
+
+	/* these styles are for the demo, but are not required for the plugin */
+		.zoom {
+			display:inline-block;
+			position: relative;
+		}
+		
+		/* magnifying glass icon */
+		.zoom:after {
+			content:'';
+			display:block; 
+			width:33px; 
+			height:33px; 
+			position:absolute; 
+			top:0;
+			right:0;
+			background:url(icon.png);
+		}
+
+		.zoom img {
+			display: block;
+		}
+
+		.zoom img::selection { background-color: transparent; }
+
+		#ex2 img:hover { cursor: url(grab.cur), default; }
+		#ex2 img:active { cursor: url(grabbed.cur), default; }
+		
+		
+		
+		.fz-animate
+{
+	-webkit-transition-property: -webkit-transform;
+	-moz-transition-property: -moz-transform;
+	-ms-transition-property: -ms-transform;
+	-o-transition-property: -o-transform;
+	transition-property: transform;
+}
+
+.fz-animate2
+{
+	-webkit-transition-property: top left;
+	-moz-transition-property: top left;
+	-ms-transition-property: top left;
+	-o-transition-property: top left;
+	transition-property: top left;
+}
+
+
+.fz-marker
+{
+	cursor:pointer;
+	width:32px;
+	height:32px;
+	position:absolute;
+	background-repeat:no-repeat;
+	background-image:url(marker.png);
+}
+
+.fz-toolbar
+{
+	display:none;
+ 	background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px 5px 5px 5px;
+    position: absolute;
+	z-index:10000;
+}
+
+.fz-zoomin
+{
+	cursor:pointer;
+	width:50px;
+	height:50px;
+	float:left;
+	background-repeat:no-repeat;
+	background-image:url(zoomin.png);
+}
+
+.fz-zoomout
+{
+	cursor:pointer;
+	width:50px;
+	height:50px;
+	float:left;
+	background-repeat:no-repeat;
+	background-image:url(zoomout.png);
+}
+
+.fz-reset
+{
+	cursor:pointer;
+	width:50px;
+	height:50px;
+	float:left;
+	background-repeat:no-repeat;
+	background-image:url(reset.png);
+}
+
+
+.fz-loader
+{
+	width:100%;
+	height:100%;
+	position:absolute;
+	left:0;
+	top:0;
+	background-image:url(loader.gif);
+	background-position:center; 
+	background-repeat:no-repeat;
+	background-color:white;
+	z-index:100001;
+	overflow:hidden;
+}
