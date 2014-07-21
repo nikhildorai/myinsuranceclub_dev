@@ -62,7 +62,7 @@ class LifeInsurance extends MIC_Controller {
 			$data['companyDetails']=$this->insurance_company_master_model->get_insurance_companies($arrParams);
 			Util::saveResultToCache($cacheFileName,$data['companyDetails']);
 		}
-			
+//var_dump($data);
 		//	if company name is defined, show specific company details
 		if (!empty($companyName))
 		{

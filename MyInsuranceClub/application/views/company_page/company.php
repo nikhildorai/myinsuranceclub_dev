@@ -6,11 +6,21 @@
        <div class="col-md-12" style="padding-right:0px;">
         <h2 class="title-divider_h2"> <span>Life Insurance Companies in India</span> </h2>
         <div class="company_abt">
-        <h2 class="title-divider_h2_inn">There are 26 Life insurance companies in India.</h2>
+        <h2 class="title-divider_h2_inn">There are <?php echo !empty($companyDetails) ? count(companyDetails) : '0';?> Life insurance companies in India.</h2>
         <p >Life Insurance Corporation of India (LIC) is the only Public Sector insurance company, the rest all being private insurance players. The Life Insurance sector was opened up for private players to participate in the year 2000. Most of the private players have tied up with international insurance biggies for their life insurance foray. </p><p>At MyInsuranceClub.com you can compare life insurance policies from top insurance companies to find policies that best suits you and your family at the lowest cost.</p>
         </div>
         
-        
+<?php 
+		if (!empty($companyDetails))
+		{
+			$folderUrl = $this->config->config['folder_path']['company']['partnerLogo']; 
+			$fileUrl = $this->config->config['url_path']['company']['partnerLogo'];
+			foreach ($companyDetails as $k1=>$v1)
+			{
+				
+			}
+		}
+?>        
         <div class="col-md-3">
          <div class="view view-fifth">
                     <img src="assets/images/logo/147x107/aegon_religare_logo_147x107.jpg" />

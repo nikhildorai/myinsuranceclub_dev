@@ -277,7 +277,7 @@ class Company extends CI_Controller {
 							
 			//	set default values
 			if (!empty($company_id))
-				$_POST['companyModel']['slug'] = $this->util->getSlug($exist['slug']);
+				$_POST['companyModel']['slug'] = (isset($_POST['companyModel']['slug']) && !empty($_POST['companyModel']['slug'])) ? $this->util->getSlug($_POST['companyModel']['slug']) :  '';//$this->util->getSlug($exist['slug']);
 			else 
 				$_POST['companyModel']['slug'] = (isset($_POST['companyModel']['slug']) && !empty($_POST['companyModel']['slug'])) ? $this->util->getSlug($_POST['companyModel']['slug']) :  '';
 			
