@@ -387,6 +387,7 @@ $config['pagination']['full_tag_close'] 	=	'</div>';
 //	upload url path
 $config['url_path']['company']['all'] 				= $config['base_url'].'uploads/company/';
 $config['url_path']['company']['companyPageLogo'] 	= $config['base_url'].'uploads/company/company_page_172x68/';
+$config['url_path']['company']['partnerLogo'] 		= $config['base_url'].'uploads/company/partner_logo_147x107/';
 $config['url_path']['company']['searchResultLogo'] 	= $config['base_url'].'uploads/company/search_result_80x50/';
 
 $config['url_path']['policy']['all'] 				= $config['base_url'].'uploads/policy/';
@@ -397,6 +398,7 @@ $config['url_path']['policy']['policy_logo'] 		= $config['base_url'].'uploads/po
 //	upload folder paths
 $config['folder_path']['company']['all'] 				= realpath(APPPATH . '../uploads').'/company/';
 $config['folder_path']['company']['companyPageLogo'] 	= realpath(APPPATH . '../uploads').'/company/company_page_172x68/';
+$config['folder_path']['company']['partnerLogo'] 		= realpath(APPPATH . '../uploads').'/company/partner_logo_147x107/';
 $config['folder_path']['company']['searchResultLogo'] 	= realpath(APPPATH . '../uploads').'/company/search_result_80x50/';
 
 $config['folder_path']['policy']['all'] 				= realpath(APPPATH . '../uploads').'/policy/';
@@ -404,7 +406,7 @@ $config['folder_path']['policy']['brochure'] 			= realpath(APPPATH . '../uploads
 $config['folder_path']['policy']['policy_wordings'] 	= realpath(APPPATH . '../uploads').'/policy/policy_wordings/';
 $config['folder_path']['policy']['policy_logo'] 		= realpath(APPPATH . '../uploads').'/policy/logo/';
 
-$config['policy']['descriptionCount'] = 10;
+$config['policy']['descriptionCount'] = 1;
 $config['policy']['keyFeatures'] = 4;
 
 
