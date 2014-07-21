@@ -310,7 +310,7 @@ class controller_basicMediclaim extends MIC_Controller {
 			$user_input=$this->session->userdata('user_input',$user_input);
 			
 			
-			$this->input->set_cookie('mic_userdata',$this->session->userdata('session_id'),'864000');
+			$this->input->set_cookie('mic_userdata',serialize($user_input),'864000');
 			
 			$data['user_input'] = $user_input;
 			
@@ -461,7 +461,7 @@ class controller_basicMediclaim extends MIC_Controller {
 				$premiums_from_ajax = Util::getMinAndMaxPremium($data['customer_details']);
 				//var_dump($premiums_from_ajax);
 				//exit;
-				$this->session->set_userdata('search_filters',$search_filter);
+				//$this->session->set_userdata('search_filters',$search_filter);
 				//var_dump($search_filter);
 				$return['html'] = $this->load->view('health_insurance/ajaxPostResultView',$data,TRUE);
 				$return['company'] = count($companycnt);
