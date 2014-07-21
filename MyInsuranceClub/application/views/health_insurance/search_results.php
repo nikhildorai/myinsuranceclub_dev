@@ -9,9 +9,9 @@
    <div class="top_band">
    <div class="col-md-3  border m_a">
        <div class="top_h">Your Search</div>
-       <div class="top_p">Coverage Amount = &#8377;<?php if(isset($this->session->userdata['user_input']['coverage_amount'])){echo $this->session->userdata['user_input']['coverage_amount'];}?></div>
+       <div class="top_p">Coverage Amount = &#8377; <?php if(isset($this->session->userdata['user_input']['coverage_amount'])){echo $this->session->userdata['user_input']['coverage_amount'];}?></div>
       <div class="top_p"> Members = <?php if(isset($this->session->userdata['user_input']['plan_type_name'])){echo $this->session->userdata['user_input']['plan_type_name'];}?></div>
-       <div class="top_m"><i class="fa fa-angle-left" style="font-size: 18px;"></i> <a href="<?php echo site_url('health-insurance');?>">Modify Your Search</a></div>
+       <div class="top_m"><i class="fa fa-angle-left"></i> <a href="<?php echo site_url('health-insurance');?>">Modify Your Search</a></div>
    </div>
 	<?php   
 	
@@ -111,7 +111,7 @@
             
             
                <div class="col-md-12" style="padding:0px;">
-              <?php echo form_open('health_insurance/basicMediclaim/compare_policies',array('id'=>'compare'));?>
+              <?php echo form_open('health-insurance/compare-results',array('id'=>'compare'));?>
                <div style=" height:auto; padding:10px 0px 30px 0px; background:#ededec;  border-radius: 4px;">
                 <div class="col-md-5 plan">
                 Plan Details
@@ -128,8 +128,11 @@
                 <div id="cmp_tbl">
 					
 					  <?php 
-		
-							$this->load->view('health_insurance/ajaxPostResultView');
+							
+					  //var_dump($ajax);	
+					  //exit;	
+					  //echo $ajax ;
+							$this->load->view('health_insurance/ajaxPostResultView');//,array('customer_details'=>$customer_details)
 							//echo $this->util->getUserSearchFiltersHtml($customer_details, $type='health');?>       			
          		</div>
          	
@@ -139,6 +142,7 @@
             </div>
             <?php if(!empty($customer_details)) {$display = 'style=""';} else{$display = 'style="display: none;"';}?>
             <!--Sidebar-->
+            <div <?php echo $display;?>>
             <?php echo form_open('health_insurance/basicMediclaim/health_policy',array('id'=>'search'));?>
             
             <div class="col-md-3 col-md-pull-9 sidebar sidebar-left" style="padding:0px;">
@@ -203,7 +207,13 @@
                  
                  <div class="checkbox">
             <label>
-            <input type="checkbox" id="" name="maternity"  class="search_filter" value="1">
+            <?php //if(isset($this->session->userdata['search_filters']['maternity'])){
+            	
+            	//$checked == "checked";
+           // } else{
+           // 	$checked == "";
+         //   }?>
+            <input type="checkbox" id="" name="maternity"  class="search_filter" value="1" <?php //echo $checked;?>>
             <label class="" for="Field6">Show plans with maternity benefits</label>
           </label></div>
 					 
@@ -238,8 +248,6 @@
                  	<div class="addOnFilter clearfix" >
                  
                  <?php 
-                 
-                 $range = '';
                  if(!empty($aNew))
                  {
                  	
@@ -247,14 +255,6 @@
                     	
                     	$premium = $company['premium'];
 	                   	sort($premium);
-	                   	if(end($premium) != reset($premium))
-	                   	{
-	                   		$range = '&#8377;'. number_format(reset($premium)).' - &#8377;'.number_format(end($premium));
-	                   	}
-	                   	else 
-	                   	{
-	                   		$range = '&#8377;'. number_format(reset($premium));
-	                   	}
 	              ?>
 	              
                     <div style="width: 100%; float: left;">
@@ -263,7 +263,7 @@
             					<input type="checkbox" value="<?php echo $company['company']['company_id'];?>" class="search_filter" name="company_name[]">
             						<label for="23" class=""><?php echo $company['company']['company_shortname'];?></label>
           					</label>
-          				</div> <span style="float:right;"><?php echo $range;//echo reset($premium).' - &#8377;'.end($premium);?></span>
+          				</div> <span style="float:right;"> &#8377; <?php echo reset($premium).' - &#8377; '.end($premium);?></span>
           			</div>
           			
               <?php }
@@ -304,7 +304,7 @@
           			</div>
 				</p>
                 
-                 <!-- >p class="addOnFilter" style="margin:0px; padding:0px;">
+                 <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
 				</p> 
                 
@@ -328,7 +328,7 @@
                 <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
 				</p -->
-                <!-- 
+                
                                 <h6 class="fh3">Claims ratio of company</h6>
 
                 
@@ -337,7 +337,7 @@
               
                 <p>
 
-  <!-- input type="text" id="amount" readonly class="s_l" name="min_claim_ratio">
+  <input type="text" id="amount" readonly class="s_l" name="min_claim_ratio">
    <input type="text" id="amount1" readonly  class="s_r" name="max_claim_ratio">
 </p>
                 <div id="slider-range"></div>
@@ -357,7 +357,7 @@
 	
 				
 		</div>
-                -->
+                
                 
                <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
@@ -389,18 +389,22 @@
           					</label>
           				</div>
           				
+                    	<?php }?>
+                    
                     <?php }?>
                     
-                   <?php }?>
+                    
                     
                     	<div class="checkbox">
             				<label>
             					<input type="checkbox" id="" name="health_comp[]"  class="search_filter" value="3">
-           							 <label class="" for="22">Plans from Specialised Health Insurers
-									</label>
+           							 <label class="" for="22">Plans from Specialised Health Insurers									</label>
           					</label>
           				</div>
+          				
           			
+                 
+           		
 				</p>
                 
                 </div>
@@ -408,11 +412,11 @@
               </div>
             </div>
             <?php echo form_close();?>
-          </div>
+          </div></div>
 		</div>
 	</div>
 </div>
-<div id="search_sense_of_urgency_popup" class="hcom_simple_popdiv hcom_urgency_popup" style="display: block;">
+<div id="search_sense_of_urgency_popup" class="hcom_simple_popdiv hcom_urgency_popup" style="display: none;">
     <div class="arrow">
       <div class="outer"></div>
       <div class="inner"></div>
@@ -429,14 +433,16 @@
 
 <div class="tutorial">
 </div>
+<?php if(empty($customer_details)){?>
 
+<?php }?>
 <script type="text/javascript">
 var company_count = "<?php echo count($aNew);?>";
 var plan_count = "<?php echo  count($customer_details);?>";
 var min_premium = "<?php echo  $premiums['min_premium']?>";
 var max_premium = "<?php echo  $premiums['max_premium'];?>";
-var hospital_list_url = "<?php echo base_url().'health_insurance/basicMediclaim/get_hospital_list'?>";
-var annual_premium_search_url = "<?php echo base_url().'health_insurance/basicMediclaim/health_policy'?>";
+var hospital_list_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/get_hospital_list'?>";
+var annual_premium_search_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/health_policy'?>";
 
 function buy_now_msg(variant_id)
 {
