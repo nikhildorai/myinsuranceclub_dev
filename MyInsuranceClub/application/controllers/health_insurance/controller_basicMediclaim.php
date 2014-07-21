@@ -310,7 +310,7 @@ class controller_basicMediclaim extends MIC_Controller {
 			$user_input=$this->session->userdata('user_input',$user_input);
 			
 			
-			$this->input->set_cookie('mic_userdata',serialize($user_input),'864000');
+			$this->input->set_cookie('mic_userdata',$this->session->userdata('session_id'),'864000');
 			
 			$data['user_input'] = $user_input;
 			
