@@ -1168,19 +1168,19 @@ class Util {
      * @param: string $cacheFileName
      * @return: array()
      */
-    public static function getCachedFile($cacheFileName='')
+public static function getCachedObject($cacheKey='')
     {
     	$CI = &get_instance();
     
     	$CI->load->driver('cache', array('adapter' => 'file'));
     
-    	$returnCacheFile = array();
+    	$returnCacheObject = array();
     
-    	if($CI->cache->get($cacheFileName) != null)
+    	if($CI->cache->get($cacheKey) != null)
     	{
-    		$returnCacheFile = $CI->cache->get($cacheFileName);
+    		$returnCacheObject = $CI->cache->get($cacheKey);
     	}
-    	return $returnCacheFile;
+    	return $returnCacheObject;
     }
     
     /**

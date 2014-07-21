@@ -309,8 +309,8 @@ class controller_basicMediclaim extends MIC_Controller {
 			
 			$user_input=$this->session->userdata('user_input',$user_input);
 			
-			
-			$this->input->set_cookie('mic_userdata',serialize($user_input),'864000');
+			//,serialize($user_input)
+			$this->input->set_cookie('mic_userdata',$this->session->userdata('session_id'),'864000');
 			
 			$data['user_input'] = $user_input;
 			
@@ -319,11 +319,12 @@ class controller_basicMediclaim extends MIC_Controller {
 			
 			$cacheFileName = 'sr_'.$user_input['product_type'].$user_input['plan_type'].$user_input['coverage_amount'].$user_input['cust_age'].$user_input['cust_gender'].$user_input['cust_city'] ;
 			
-			if(Util::getCachedFile($cacheFileName) != null)
+			$cacheObject = Util::getCachedObject($cacheFileName);
+			
+			if($cacheObject != null)
 			{
 				// get result set from cache
-				// Discussion - The function for fetching the cache object should be called once.
-				$data['customer_details']=Util::getCachedFile($cacheFileName); 
+				$data['customer_details'] = $cacheObject; 
 			}
 				
 			else
@@ -331,12 +332,14 @@ class controller_basicMediclaim extends MIC_Controller {
 				//get result set from DB and save in cache
 				
 				$data['customer_details']=$this->mic_dbtest->get_policy_results($user_input);
-				// Discussion - Now each DB call is going to return either the result set
-				// or NULL. If the return value is NULL, then do not store it in Cache.
-				Util::saveResultToCache($cacheFileName,$data['customer_details']);
+				
+				if(!empty($data['customer_details']))
+				{
+					Util::saveResultToCache($cacheFileName,$data['customer_details']);
+				}
 			}
 			
-			//$data['customer_details'] = $customer_details;
+			
 			/* Filter Data Received From Ajax Post */
 			
 			if($this->input->is_ajax_request())
