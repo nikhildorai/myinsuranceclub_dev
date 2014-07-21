@@ -402,7 +402,7 @@ class controller_basicMediclaim extends MIC_Controller {
 					
 					if(isset($search_filter['min_premium_amt']))
 					{
-						$min_amt_arr = explode('₹ ',$search_filter['min_premium_amt']);
+						$min_amt_arr = explode('₹',$search_filter['min_premium_amt']);
 						
 						$min_premium = (int) str_replace(',','',$min_amt_arr[1]);
 						
@@ -414,7 +414,7 @@ class controller_basicMediclaim extends MIC_Controller {
 					
 					if(isset($search_filter['max_premium_amt']))
 					{
-						$max_amt_arr = explode('₹ ',$search_filter['max_premium_amt']);
+						$max_amt_arr = explode('₹',$search_filter['max_premium_amt']);
 						
 						$max_premium = (int) str_replace(',','',$max_amt_arr[1]);
 						
