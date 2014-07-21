@@ -27,9 +27,10 @@
 <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/slicknav.css">
 <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/custom.css">
 <link type="text/css" href="<?php echo base_url();?>/assets/css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
-<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/responsive.css">
+
 <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/health_main.css">
 <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/health.css">
+<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/responsive.css">
 
 <script src="<?php echo base_url();?>/assets/js/jquery.min.js"></script>
 

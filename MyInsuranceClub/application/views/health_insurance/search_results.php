@@ -191,7 +191,7 @@
                  <div class="checkbox">
             <label>
             <input type="checkbox" id="room_rent" name="room_rent" value="1"  class="search_filter">
-            <label class="" for="Field4">Show plans without room rent caps</label>
+            <label class="" for="room_rent">Show plans without room rent caps</label>
           </label></div>
 					
                     
