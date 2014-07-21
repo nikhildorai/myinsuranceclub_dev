@@ -334,15 +334,15 @@
           </label></div>
                     
 				</p>
-                <p class="addOnFilter" style="margin:0px; padding:0px;">
+                <!--  <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
-				</p -->
+				</p>
                 
-                                <h6 class="fh3">Claims ratio of company</h6>
+                               <h6 class="fh3">Claims ratio of company</h6>
 
                 
-                     <!--<div class="" ng-controller="DemoController34" style="margin-top:30px;">
-                <div range-slider min="0" max="100" model-min="demo1.min" model-max="demo1.max"></div>-->
+                  <div class="" ng-controller="DemoController34" style="margin-top:30px;">
+                <div range-slider min="0" max="100" model-min="demo1.min" model-max="demo1.max"></div>
               
                 <p>
 
@@ -370,7 +370,7 @@
                 
                <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
-				</p> 
+				</p>  -->
                  <h6 class="fh3">Company type</h6>
                  <p class="addOnFilter" >
                  
