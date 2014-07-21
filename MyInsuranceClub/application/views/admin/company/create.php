@@ -15,7 +15,10 @@ $(".form-horizontal :input").prop("disabled", true);
 		var companySlug = $('#company_type_id').find(':selected').data('slug');
 		if(companySlug != "")
 		{
-			$('#companyTypeSlug').text(companySlug);
+			if(companySlug == "life-insurance")
+				$('#companyTypeSlug').text(companySlug+'/companies/');
+			else
+				$('#companyTypeSlug').text(companySlug+'/');
 		}
 		else
 		{
@@ -199,10 +202,11 @@ $(".form-horizontal :input").prop("disabled", true);
 			                    	<span class="icon glyphicon glyphicon-star"></span>
 <?php 								if (isset($companyModel['slug']))	{?>
 			                        	<input type="text" class="form-control slug" placeholder="URL"  name="companyModel[slug]" value="<?php echo $companyModel['slug'];?>" >
-			                        	<span class="help-block" style="color:black;font-size: 12px"><a href="<?php echo base_url().$currentCompanyTypeSlug.'/companies/'.$companyModel['slug'];?>"><?php echo base_url().$currentCompanyTypeSlug.'/companies/'.$companyModel['slug'];?></a></span>
+			                        	<?php /*?><span class="help-block" style="color:black;font-size: 12px"><a href="<?php echo ($currentCompanyTypeSlug == 'life-insurance') ? base_url().$currentCompanyTypeSlug.'/companies/'.$companyModel['slug'] : base_url().$currentCompanyTypeSlug.'/'.$companyModel['slug'];?>"><?php echo ($currentCompanyTypeSlug == 'life-insurance') ? base_url().$currentCompanyTypeSlug.'/companies/'.$companyModel['slug'] : base_url().$currentCompanyTypeSlug.'/'.$companyModel['slug'];?></a></span> */ ?>			                        	
+			                        	<span class="help-block" style="color:black;font-size: 12px"><?php echo base_url();?><span id="companyTypeSlug"><?php echo ($currentCompanyTypeSlug == 'life-insurance') ? $currentCompanyTypeSlug.'/companies/' : $currentCompanyTypeSlug.'/';?></span><span class="slug"><?php echo array_key_exists( 'slug',$companyModel) ? $companyModel['slug'] : '';?></span>/</span>
 <?php 								}else{	?>
 			                        	<input type="text" class="form-control slug"  tooltip="Once created you cannot edit this field" data-toggle="tooltip" data-placement="top" tooltip-trigger="focus" required placeholder="URL"  name="companyModel[slug]" value="" >
-			                        	<span class="help-block" style="color:black;font-size: 12px"><?php echo base_url();?><span id="companyTypeSlug"><?php echo $currentCompanyTypeSlug;?></span>/companies/<span class="slug"><?php echo array_key_exists( 'slug',$companyModel) ? $companyModel['slug'] : '';?></span></span>
+			                        	<span class="help-block" style="color:black;font-size: 12px"><?php echo base_url();?><span id="companyTypeSlug"><?php echo ($currentCompanyTypeSlug == 'life-insurance') ? $currentCompanyTypeSlug.'/companies/' : $currentCompanyTypeSlug.'/';?></span><span class="slug"><?php echo array_key_exists( 'slug',$companyModel) ? $companyModel['slug'] : '';?></span>/</span>
 <?php 								}?>			                        
 			                        
 			                    </div>
