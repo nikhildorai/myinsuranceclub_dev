@@ -245,6 +245,7 @@ $(document).ready(function() {
 	    }
 	 
 	 var dateOfBirth = value;
+
 	 var arr_dateText = dateOfBirth.split("/");
 	 day = arr_dateText[0];         
 	 month = arr_dateText[1]; 
@@ -291,7 +292,7 @@ $(document).ready(function() {
 				
 						/* @validation states + elements 
 						------------------------------------------- */
-	 						onkeyup: true,
+	 					//	onkeyup: true, 
 	 						//onfocusout: true,
 	 						//focusInvalid: true,
 						errorClass: "state-error",
@@ -316,19 +317,19 @@ $(document).ready(function() {
 									minAge:true
 								},
 								
-								cust_email: {
-										required: true,
-										email: true
-								 },
+								
   								
   								cust_mobile: {
-  									
   									required: true,
   									number: true,
   									minlength: 10,
   									checkmobile:true
   									
   								},
+								cust_email: {
+										required: true,
+										email: true
+								 },
   								
   								desktop_spouce_dob: {
   									
@@ -479,7 +480,7 @@ $(document).ready(function() {
             wasOpen = false;
         $( "<a>" )
             .attr( "tabIndex", -1 )
-            .attr( "title", "Ã�Å¸Ã�Â¾Ã�ÂºÃ�Â°Ã�Â·Ã�Â°Ã‘â€šÃ‘Å’ Ã�Â²Ã‘ï¿½Ã�Âµ" )
+            .attr( "title", "" )
             .tooltip()
             .appendTo( this.wrapper )
             .button({
@@ -538,7 +539,7 @@ $(document).ready(function() {
 
         this.input
             .val( "" )
-            .attr( "title", value + " Ã�Â½Ã�Âµ Ã‘ï¿½Ã‘Æ’Ã‘â€°Ã�ÂµÃ‘ï¿½Ã‘â€šÃ�Â²Ã‘Æ’Ã�ÂµÃ‘â€š" )
+            .attr( "title", value + " " )
             .tooltip( "open" );
         this.element.val( "" );
         this._delay(function() {
@@ -610,7 +611,13 @@ $(document).ready(function() {
 					prevText: '<i class="fa fa-chevron-left"></i>',
 					nextText: '<i class="fa fa-chevron-right"></i>',
 					
+						  onSelect: function(dateStr) {
+        $('#health_form').validate().element(this);
+    }
+					
 				});
+				
+				
       
 	});
 		/*$('.cal').datepicker({
