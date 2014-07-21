@@ -201,19 +201,12 @@ class controller_basicMediclaim extends MIC_Controller {
 				}
 					/* birthdate ends */
 					
-					
 					/* age */
 					
-					$birthDate=explode('/',$birthage);
-	
-					$age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
-							? ((date("Y") - $birthDate[2]) - 1)
-							: (date("Y") - $birthDate[2]));
-	
+					$age = Util::convertBirthdateToAge($birthage);
+					
 					$user_input['cust_age']=$age;
 					
-					/* age ends */
-				
 				if($this->input->post('cust_gender')!='')
 				{
 					$user_input['cust_gender']=$this->input->post('cust_gender');

@@ -44,6 +44,8 @@ $route['404_override'] = '';
 /*
  * custom routes
  */		
+
+#########################	Admin routes start	##############################
 //auth/login
 $route['admin'] = "admin/auth";
 $route['admin/register'] = "admin/auth/register_account";
@@ -53,10 +55,15 @@ $route['admin/resend_activation_token'] = "admin/auth/resend_activation_token";
 $route['admin/logout'] = "admin/auth_public/logout";
 $route['admin/dashboard'] = "admin/auth_public/dashboard";
 
-//company
+//admin company
 $route['admin/company'] = "admin/company/index";
 $route['admin/company/(:any)'] = "admin/company/$1";
 
+#########################	Admin routes ends	##############################
+
+
+
+#########################	frontend routes start	##############################
 //critical illness
 $route['criticalIllness'] = "health_insurance/criticalIllness/index";
 
@@ -65,9 +72,13 @@ $route['health-insurance'] = "health_insurance/controller_basicMediclaim/index";
 $route['health-insurance/search-results'] = "health_insurance/controller_basicMediclaim/health_policy";
 $route['health-insurance/compare-results'] = "health_insurance/controller_basicMediclaim/compare_policies";
 
-//$route['admin/(:any)'] = "admin/auth/$1";
-//$route['admin'] = "admin/auth/login";
-//$route['admin/(:any)'] = "admin/auth/$1";
+//	company 
+$route['life-insurance'] = "lifeInsurance/index/";
+$route['life-insurance/companies'] = "lifeInsurance/companies/";
+$route['life-insurance/companies/(:any)'] = "lifeInsurance/companies/$1";
+$route['general-insurance-companies'] = "generalInsurance/general-insurance-companies/";
+
+#########################	frontend routes ends	##############################
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

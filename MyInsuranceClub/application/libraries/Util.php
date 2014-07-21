@@ -1,6 +1,32 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Util {
+	
+	/**
+	 *
+	 * @param string $birthDate
+	 * @return number|NULL
+	 */
+	public static function convertBirthdateToAge($birthDate = '')
+	{
+		$returnAge = '';
+	
+		if(!empty($birthDate))
+		{
+			$birthDateArray = explode('/',$birthDate);
+				
+			$returnAge = (date("md", date("U", mktime(0, 0, 0, $birthDateArray[0], $birthDateArray[1], $birthDateArray[2]))) > date("md")
+					? ((date("Y") - $birthDateArray[2]) - 1)
+					: (date("Y") - $birthDateArray[2]));
+	
+			return $returnAge;
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
 
 	function get_css_folder()
 	{
@@ -1148,16 +1174,13 @@ class Util {
     
     	$CI->load->driver('cache', array('adapter' => 'file'));
     
-    	$returnCacheFile = '';
+    	$returnCacheFile = array();
     
     	if($CI->cache->get($cacheFileName) != null)
     	{
     		$returnCacheFile = $CI->cache->get($cacheFileName);
-    
-    		return $returnCacheFile;
     	}
-    
-    
+    	return $returnCacheFile;
     }
     
     /**

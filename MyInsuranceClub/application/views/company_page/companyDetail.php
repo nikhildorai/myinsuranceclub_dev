@@ -1,0 +1,1 @@
+<h1>company Detail page</h1>

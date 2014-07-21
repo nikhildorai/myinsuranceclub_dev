@@ -1,8 +1,4 @@
-
-<link rel="stylesheet" href="assets/css/company.css">
-
-
-
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/company.css">
 <div id="highlighted" style="background:#fff; padding-bottom:50px; margin-bottom:0px;" >
   <div class="container">
     <div class="row">
