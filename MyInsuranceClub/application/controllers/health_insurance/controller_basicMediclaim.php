@@ -529,7 +529,7 @@ class controller_basicMediclaim extends MIC_Controller {
 	
 	public function compare_policies()
 	{
-		$this->load->model('compare_health_policies');
+		$this->load->model('model_compare_mediclaim_policies');
 	
 		$data=array();
 	
@@ -556,7 +556,7 @@ class controller_basicMediclaim extends MIC_Controller {
 			}
 				
 		}
-		$data['comparison_results']=$this->compare_health_policies->get_comparison($variant,$annual_premium,$age);
+		$data['comparison_results']=$this->model_compare_mediclaim_policies->get_comparison($variant,$annual_premium,$age);
 	
 		foreach ($data['comparison_results'] as $k1=>$v1)
 		{
