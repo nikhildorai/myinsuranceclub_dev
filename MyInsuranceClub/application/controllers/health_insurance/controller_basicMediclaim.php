@@ -203,11 +203,9 @@ class controller_basicMediclaim extends MIC_Controller {
 					
 					/* age */
 					
-				$age = Util::convertBirthdateToAge($birthage);
+					$age = Util::convertBirthdateToAge($birthage);
 					
-				$user_input['cust_age']=$age;
-					
-				/****//
+					$user_input['cust_age']=$age;
 					
 				if($this->input->post('cust_gender')!='')
 				{
