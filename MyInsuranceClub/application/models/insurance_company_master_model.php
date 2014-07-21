@@ -106,4 +106,18 @@ class Insurance_company_master_model EXTENDS MIC_Model{
 	{
 		return $this->db->query($sql);
 	}
+	
+
+	public function get_insurance_companies($arrParams)
+	{	
+		$query = "CALL sp_getInsuranceCompany(?,?)";
+		
+		$queryData = array($arrParams['company_type_slug'],$arrParams['company_slug'],"");
+		
+		$resultData = $this->db->query($query,$queryData);
+		if (!empty($resultData))
+			return $resultData->result_array();
+		else 
+			return array();
+	}
 }

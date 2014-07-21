@@ -29,8 +29,8 @@
                       <li><a href="">Insurance Articles</a></li>
                       <li><a href="">Insurance Guides</a></li>
                       <li><a href="">Insurance News</a></li>
-                      <li><a href="">Life Insurance Companies in India</a></li>
-                      <li><a href="">General Insurance Companies in India</a></li>
+                      <li><a href="<?php echo base_url().'life-insurance/companies/';?>">Life Insurance Companies in India</a></li>
+                      <li><a href="<?php echo base_url().'general-insurance-companies/';?>">General Insurance Companies in India</a></li>
                       <li><a href="">Terms of Use</a></li>
                     </ul>
           </div>

@@ -198,7 +198,7 @@ $(".form-horizontal :input").prop("disabled", true);
 			                    <div class="col-sm-9">
 			                    	<span class="icon glyphicon glyphicon-star"></span>
 <?php 								if (isset($companyModel['slug']))	{?>
-			                        	<input type="text" class="form-control slug" disabled placeholder="URL"  name="companyModel[slug]" value="<?php echo $companyModel['slug'];?>" >
+			                        	<input type="text" class="form-control slug" placeholder="URL"  name="companyModel[slug]" value="<?php echo $companyModel['slug'];?>" >
 			                        	<span class="help-block" style="color:black;font-size: 12px"><a href="<?php echo base_url().$currentCompanyTypeSlug.'/companies/'.$companyModel['slug'];?>"><?php echo base_url().$currentCompanyTypeSlug.'/companies/'.$companyModel['slug'];?></a></span>
 <?php 								}else{	?>
 			                        	<input type="text" class="form-control slug"  tooltip="Once created you cannot edit this field" data-toggle="tooltip" data-placement="top" tooltip-trigger="focus" required placeholder="URL"  name="companyModel[slug]" value="" >
@@ -519,7 +519,7 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <?php }else {	?>
 			                		<div class="space"><div class="space"><input type="submit" name="submit" value="Submit" class="btn btn-success btn-lg  " />
 			                <?php }	?>   
-			                	<a href = "<?php echo $base_url; ?>admin/company"  class="btn btn-lg btn-default">Cancel</a>     
+			                	<a href = "<?php echo $base_url; ?>admin/company"  class="btn btn-lg btn-default"  style="margin-left: 30px;">Cancel</a>     
 					           <?php 	
 					                 if (isset($companyModel['company_id']) && !empty($companyModel['company_id']))
 					                 {	?>

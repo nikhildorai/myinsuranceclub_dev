@@ -1174,16 +1174,13 @@ class Util {
     
     	$CI->load->driver('cache', array('adapter' => 'file'));
     
-    	$returnCacheFile = '';
+    	$returnCacheFile = array();
     
     	if($CI->cache->get($cacheFileName) != null)
     	{
     		$returnCacheFile = $CI->cache->get($cacheFileName);
-    
-    		return $returnCacheFile;
     	}
-    
-    
+    	return $returnCacheFile;
     }
     
     /**
