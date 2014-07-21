@@ -248,6 +248,7 @@
                  	<div class="addOnFilter clearfix" >
                  
                  <?php 
+                 $display_premium = '';
                  if(!empty($aNew))
                  {
                  	
@@ -255,6 +256,14 @@
                     	
                     	$premium = $company['premium'];
 	                   	sort($premium);
+	                   	if (reset($premium) != end($premium))
+	                   	{
+	                   		$display_premium = '&#8377;'.reset($premium).' - &#8377;'.end($premium);
+	                   	}
+	                   	else
+	                   	{
+	                   		$display_premium = '&#8377;'.reset($premium);
+	                   	}
 	              ?>
 	              
                     <div style="width: 100%; float: left;">
@@ -263,7 +272,7 @@
             					<input type="checkbox" value="<?php echo $company['company']['company_id'];?>" class="search_filter" name="company_name[]">
             						<label for="23" class=""><?php echo $company['company']['company_shortname'];?></label>
           					</label>
-          				</div> <span style="float:right;"> &#8377; <?php echo reset($premium).' - &#8377; '.end($premium);?></span>
+          				</div> <span style="float:right;"><?php echo $display_premium;?></span>
           			</div>
           			
               <?php }
