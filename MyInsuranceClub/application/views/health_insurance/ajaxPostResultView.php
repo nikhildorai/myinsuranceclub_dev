@@ -56,9 +56,9 @@ elseif(! empty ( $customer_details )) {
 					class="img_bx_i">
 				<div class="check_bx">
 					<div class="checkbox">
-						<label> <input type="checkbox" name="compare[]" id="c_name"
+						<label> <input type="checkbox" name="compare[]" id="c_name_<?php echo $detail ['variant_id'];?>"
 							class="cmpplans" value="<?php echo $compare_data?>"> <label
-							class="chk" for="Field4"></label>
+							class="chk" for="c_name_<?php echo $detail ['variant_id'];?>"></label>
 						</label>
 					</div>
 				</div>
