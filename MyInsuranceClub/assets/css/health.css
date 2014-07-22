@@ -448,3 +448,7 @@ float: right;
 	   }
 	    @media screen and (max-width: 320px) {.col-md-7.medical{ display:none;} }
 		 @media screen and (max-width: 300px) {.down_cnt{ display:none;}.col-md-7.medical{ display:none;} }
+     .post_msg{ font-size: 12px;
+    margin-top: 30px;
+    padding: 0;
+    text-align: center;}
