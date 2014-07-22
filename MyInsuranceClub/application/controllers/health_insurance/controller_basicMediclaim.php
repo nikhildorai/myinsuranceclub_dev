@@ -534,6 +534,8 @@ class controller_basicMediclaim extends MIC_Controller {
 			$this->model_buyNow_count->increase_count($increase_count_arr);
 		}
 	}
+	
+	
 	public function compare_policies()
 	{
 		$this->load->model('model_compare_mediclaim_policies');
