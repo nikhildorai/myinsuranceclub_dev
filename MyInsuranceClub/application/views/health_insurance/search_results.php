@@ -262,7 +262,7 @@
 	                   	}
 	                   	else
 	                   	{
-	                   		$display_premium = '&#8377;'.reset($premium);
+	                   		$display_premium = '&#8377;'.number_format(reset($premium));
 	                   	}
 	              ?>
 	              
