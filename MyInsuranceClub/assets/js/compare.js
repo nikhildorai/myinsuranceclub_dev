@@ -331,12 +331,17 @@ $(function () {
     	$('#comparePolicy').on('click',function(){
     		if(!($('.cmpplans:checked').length>1))
     		{
-    			alert('Please Select At Least 2 Plans To Compare.');
+    		//	alert('Please Select At Least 2 Plans To Compare.');
+ $(".al_msg_cmp").text('Please Select At Least 2 Plans To Compare.');
+    			 $(".alert_cmp,#modal_bak").show();
+
     			return false;
     		}
     		else if ($('.cmpplans:checked').length>3)
     		{
-    			alert('You can select maximum of 3 plans to compare.');
+    			//alert('You can select maximum of 3 plans to compare.');
+    			 $(".al_msg_cmp").text('You can select maximum of 3 plans to compare.');
+    			 $(".alert_cmp,#modal_bak").show();
     			return false;
     		}
     		else
@@ -344,8 +349,12 @@ $(function () {
     			$('#compare').submit();
     		}
     	});	
-  
-    	
+
+
+  	$('.close34').on('click',function(){
+ $(".alert_cmp,#modal_bak").hide();
+
+    	});	
     	
     	
     	

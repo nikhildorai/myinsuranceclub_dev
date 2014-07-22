@@ -442,6 +442,12 @@
 
 <div class="tutorial">
 </div>
+<div class="modal-backdrop fade in" id="modal_bak" style="display:none;"></div>
+
+<div class="alert_cmp">
+    <div class="close34" >&times;</div>
+    <strong>Error!</strong> <span class="al_msg_cmp"></span>
+</div>
 <?php if(empty($customer_details)){?>
 
 <?php }?>

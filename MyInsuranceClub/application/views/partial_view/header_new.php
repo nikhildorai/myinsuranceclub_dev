@@ -13,6 +13,7 @@
 <!-- Bootstrap CSS -->
 <link href="<?php echo base_url();?>/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 
+
 <!-- Bootstrap third-party plugins css -->
 <!-- Font Awesome -->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
