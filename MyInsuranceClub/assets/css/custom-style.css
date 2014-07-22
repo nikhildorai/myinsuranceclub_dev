@@ -1072,17 +1072,8 @@ i.searchSprite, .searchSprite, .withNotch .tracker, .rangeHandle, .withArrows li
     background-repeat: no-repeat;
 }
 
-.filters .INR {
-    margin-right: 2px;
-}
-.INR {
-    font-family: 'WebRupee';
-    font-size: 94%;
-    font-weight: normal;
-    line-height: 0.5em;
-    margin-right: 0;
-    opacity: 0.6;
-}
+
+
 
 .fRight {
     float: right;
