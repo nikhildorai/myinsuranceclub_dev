@@ -381,7 +381,7 @@
 					 	<div class="checkbox">
             				<label>
             					<input type="checkbox" id="sector_1" name="sector[]"  class="search_filter" value="2">
-            						<label class="" for="sector_1">Plans from Private Sector companies
+            						<label class="" for="sector_1">Plans from Private Sector Companies
 									</label>
           					</label>
           				</div>
@@ -393,7 +393,7 @@
                     	<div class="checkbox">
             				<label>
             					<input type="checkbox" id="sector_2" name="sector[]"  class="search_filter" value="1">
-            						<label class="" for="sector_2">Plans from Public Sector companies
+            						<label class="" for="sector_2">Plans from Public Sector Companies
 									</label>
           					</label>
           				</div>
