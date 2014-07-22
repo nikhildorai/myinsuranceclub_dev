@@ -620,6 +620,23 @@ $(document).ready(function() {
 				
       
 	});
+		$('#cust_dob').datepicker({
+					dateFormat: 'dd/mm/yy',
+					changeYear: true, 
+					yearRange :'1940:'+ d,
+					changeMonth: true,
+					defaultDate: new Date(year,d.getMonth(), d.getDate()),
+					maxDate: new Date(),
+					prevText: '<i class="fa fa-chevron-left"></i>',
+					nextText: '<i class="fa fa-chevron-right"></i>',
+					
+						  onSelect: function(dateStr) {
+        $('#health_form').validate().element(this);
+    }
+					
+				});
+
+
 		/*$('.cal').datepicker({
 					changeYear: true, yearRange : '1940:2014',
 					changeMonth: true,
@@ -644,6 +661,18 @@ $(document).ready(function() {
 				});
       
 	});
+
+		$('#spouce_dob').datepicker({
+						
+						dateFormat: 'dd/mm/yy',
+					changeYear: true, yearRange : '1940:' + d,
+					changeMonth: true,
+					defaultDate: new Date(year,d.getMonth(), d.getDate()),
+					maxDate: new Date(),
+					prevText: '<i class="fa fa-chevron-left"></i>',
+					nextText: '<i class="fa fa-chevron-right"></i>',
+					
+				});
 	
 		$('#trigger2').click(function() {
 					
@@ -657,6 +686,15 @@ $(document).ready(function() {
 				});
       
 	});
+
+		$('#child1_dob').datepicker({
+						dateFormat: 'dd/mm/yy',
+					changeYear: true, yearRange : '1940:' + d,
+					changeMonth: true,
+					prevText: '<i class="fa fa-chevron-left"></i>',
+					nextText: '<i class="fa fa-chevron-right"></i>',
+					
+				});
 	
 		$('#trigger3').click(function() {
 					
@@ -670,6 +708,15 @@ $(document).ready(function() {
 				});
       
 	});
+
+			$('#child2_dob').datepicker({
+						dateFormat: 'dd/mm/yy',
+					changeYear: true, yearRange : '1940:' + d,
+					changeMonth: true,
+					prevText: '<i class="fa fa-chevron-left"></i>',
+					nextText: '<i class="fa fa-chevron-right"></i>',
+					
+				});
 	
 		$('#trigger4').click(function() {
 					
@@ -683,6 +730,15 @@ $(document).ready(function() {
 				});
       
 	});
+
+			$('#child3_dob').datepicker({
+						dateFormat: 'dd/mm/yy',
+					changeYear: true, yearRange : '1940:' + d,
+					changeMonth: true,
+					prevText: '<i class="fa fa-chevron-left"></i>',
+					nextText: '<i class="fa fa-chevron-right"></i>',
+					
+				});
 	
 		$('#trigger5').click(function() {
 					
@@ -696,6 +752,15 @@ $(document).ready(function() {
 				});
       
 	});
+
+		$('#child4_dob').datepicker({
+						dateFormat: 'dd/mm/yy',
+					changeYear: true, yearRange : '1940:' + d,
+					changeMonth: true,
+					prevText: '<i class="fa fa-chevron-left"></i>',
+					nextText: '<i class="fa fa-chevron-right"></i>',
+					
+				});
 	
 	
 	var width =$(window).width();

@@ -357,7 +357,7 @@ $('.cmpplans').on('click',function(){
   var n = $( "input:checked" ).length;
  if (n>3)
     		{
- $(".alert_cmp strong").text('Sorry, we tried. But it looks terrible.');
+ 				 $(".alert_cmp strong").text('Sorry, we tried. But it looks terrible.');
     			 $(".al_msg_cmp").text('You can select maximum of 3 plans to compare.');
     			 $(".alert_cmp,#modal_bak").show();
     			return false;

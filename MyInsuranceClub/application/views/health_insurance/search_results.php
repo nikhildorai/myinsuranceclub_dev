@@ -425,7 +425,7 @@
 		</div>
 	</div>
 </div>
-<div id="search_sense_of_urgency_popup" class="hcom_simple_popdiv hcom_urgency_popup" style="display: none;">
+<div id="search_sense_of_urgency_popup" class="hcom_simple_popdiv hcom_urgency_popup" style="display: block;">
     <div class="arrow">
       <div class="outer"></div>
       <div class="inner"></div>
