@@ -423,3 +423,24 @@ $('.cmpplans').on('click',function(){
     });
     });
 
+    
+    /**
+     *@abstract counter for buy now button
+     */
+   
+    function buy_now_msg(variant_id,policy_id)
+    {
+    	$('#buy_now_message_' + variant_id).show();
+    	$('#buy_now_btn_' + variant_id).hide();
+    	
+
+    	$.ajax({
+    		 
+    		type:"post", 
+    		url: increment_buyNow_url,
+    		data:{'policy_id':policy_id}
+    	
+    	});
+
+    	return false;
+    }    

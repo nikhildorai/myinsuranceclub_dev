@@ -458,11 +458,6 @@ var min_premium = "<?php echo  $premiums['min_premium']?>";
 var max_premium = "<?php echo  $premiums['max_premium'];?>";
 var hospital_list_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/get_hospital_list'?>";
 var annual_premium_search_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/health_policy'?>";
+var increment_buyNow_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/increment_count'?>";
 
-function buy_now_msg(variant_id)
-{
-	$('#buy_now_message_' + variant_id).show();
-	$('#buy_now_btn_' + variant_id).hide();
-	return false;
-}
 </script>

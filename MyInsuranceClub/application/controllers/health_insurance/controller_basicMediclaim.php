@@ -34,6 +34,7 @@ class controller_basicMediclaim extends MIC_Controller {
 	
 	public function index()
 	{
+		$product_name = "mediclaim";
 		$data=array();
 		
 		$data['city'] = $this->model_city->get_city();
@@ -55,9 +56,7 @@ class controller_basicMediclaim extends MIC_Controller {
 								'5000000'=>'50 Lakhs'
 								);
 		
-		$data['family_composition']= Util::getFamilyComposition('mediclaim');
-		
-		$product_name = "mediclaim";
+		$data['family_composition']= Util::getFamilyComposition($product_name);
 		
 		$data['company_plan_count'] = $this->model_get_company_plans_count->get_count($product_name);
 		
@@ -309,7 +308,7 @@ class controller_basicMediclaim extends MIC_Controller {
 			
 			$user_input=$this->session->userdata('user_input',$user_input);
 			
-			//,serialize($user_input)
+			//serialize($user_input),
 			$this->input->set_cookie('mic_userdata',$this->session->userdata('session_id'),'864000');
 			
 			$data['user_input'] = $user_input;
@@ -338,7 +337,6 @@ class controller_basicMediclaim extends MIC_Controller {
 					Util::saveResultToCache($cacheFileName,$data['customer_details']);
 				}
 			}
-			
 			
 			/* Filter Data Received From Ajax Post */
 			
@@ -523,6 +521,19 @@ class controller_basicMediclaim extends MIC_Controller {
 		echo $response;
 	}
 	
+	public function increment_count()
+	{
+		$this->load->model('model_buyNow_count');
+		
+		$increase_count_arr = '';
+		
+		if(!empty($_POST))
+		{
+			$increase_count_arr = $_POST['policy_id'];
+			
+			$this->model_buyNow_count->increase_count($increase_count_arr);
+		}
+	}
 	public function compare_policies()
 	{
 		$this->load->model('model_compare_mediclaim_policies');

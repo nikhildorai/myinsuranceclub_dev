@@ -90,11 +90,11 @@ elseif(! empty ( $customer_details )) {
 			Call 100100100 to buy this policy
 			</div>
 			<div class="col-md-4 pad_r_10" id="buy_now_btn_<?php echo $detail['variant_id'];?>">
-				<a class="btn_offer_block" href="#" onclick="return buy_now_msg(<?php echo $detail['variant_id'];?>);">Buy Now <i
+				<a class="btn_offer_block" href="#" onclick="return buy_now_msg(<?php echo $detail['variant_id']?>,<?php echo $detail['policy_id'];?>);">Buy Now <i
 					class="fa fa-angle-right"></i></a>
 				<div class="thumb">
 					<i class="fa fa-thumbs-up"></i>
-					<div class="text_t">12 people chose this plan</div>
+					<div class="text_t"><?php echo $detail['buy_now_click_count']?> people chose this plan</div>
 				</div>
 			</div>
 		</div>
