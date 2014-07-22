@@ -2,7 +2,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class model_buyNow_count EXTENDS MIC_Model{
+class model_buynow_count EXTENDS MIC_Model{
 
 	function __construct()
 	{
@@ -15,7 +15,7 @@ class model_buyNow_count EXTENDS MIC_Model{
 		
 		if(!empty($increase_count_arr))
 		{
-			//updatecounter
+			
 			$callSP= $this->db->query("CALL sp_incrementBuyNowCount(?);",array($increase_count_arr));
 			
 			

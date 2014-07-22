@@ -26,7 +26,7 @@ class controller_basicMediclaim extends MIC_Controller {
 		
 		$this->load->model('model_city');
 		$this->load->model('model_get_company_plans_count');
-		$this->load->model('model_buyNow_count');
+		
 		
 		
 	}
@@ -523,6 +523,7 @@ class controller_basicMediclaim extends MIC_Controller {
 	
 	public function increment_count()
 	{
+		$this->load->model('model_buynow_count');
 		
 		$increase_count_arr = '';
 		
@@ -530,11 +531,9 @@ class controller_basicMediclaim extends MIC_Controller {
 		{
 			$increase_count_arr = $_POST['policy_id'];
 			
-			$this->model_buyNow_count->increase_count($increase_count_arr);
+			$this->model_buynow_count->increase_count($increase_count_arr);
 		}
 	}
-	
-	
 	public function compare_policies()
 	{
 		$this->load->model('model_compare_mediclaim_policies');
