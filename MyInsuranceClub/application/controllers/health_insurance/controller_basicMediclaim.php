@@ -26,7 +26,7 @@ class controller_basicMediclaim extends MIC_Controller {
 		
 		$this->load->model('model_city');
 		$this->load->model('model_get_company_plans_count');
-		
+		$this->load->model('model_buyNow_count');
 		
 		
 	}
@@ -523,7 +523,6 @@ class controller_basicMediclaim extends MIC_Controller {
 	
 	public function increment_count()
 	{
-		$this->load->model('model_buyNow_count');
 		
 		$increase_count_arr = '';
 		
