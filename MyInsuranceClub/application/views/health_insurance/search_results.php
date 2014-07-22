@@ -258,7 +258,7 @@
 	                   	sort($premium);
 	                   	if (reset($premium) != end($premium))
 	                   	{
-	                   		$display_premium = '&#8377;'.reset($premium).' - &#8377;'.end($premium);
+	                   		$display_premium = '&#8377;'.number_format(reset($premium)).' - &#8377;'.number_format(end($premium));
 	                   	}
 	                   	else
 	                   	{
