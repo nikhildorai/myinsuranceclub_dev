@@ -332,7 +332,8 @@ $(function () {
     		if(!($('.cmpplans:checked').length>1))
     		{
     		//	alert('Please Select At Least 2 Plans To Compare.');
- $(".al_msg_cmp").text('Please Select At Least 2 Plans To Compare.');
+    		 $(".alert_cmp strong").text('Oh ho!');
+ $(".al_msg_cmp").text('Please select at least 2 plans to compare.');
     			 $(".alert_cmp,#modal_bak").show();
 
     			return false;
@@ -340,6 +341,7 @@ $(function () {
     		else if ($('.cmpplans:checked').length>3)
     		{
     			//alert('You can select maximum of 3 plans to compare.');
+    			 $(".alert_cmp strong").text('Sorry, we tried. But it looks terrible.');
     			 $(".al_msg_cmp").text('You can select maximum of 3 plans to compare.');
     			 $(".alert_cmp,#modal_bak").show();
     			return false;
@@ -349,6 +351,22 @@ $(function () {
     			$('#compare').submit();
     		}
     	});	
+
+
+$('.cmpplans').on('click',function(){
+  var n = $( "input:checked" ).length;
+ if (n>3)
+    		{
+ $(".alert_cmp strong").text('Sorry, we tried. But it looks terrible.');
+    			 $(".al_msg_cmp").text('You can select maximum of 3 plans to compare.');
+    			 $(".alert_cmp,#modal_bak").show();
+    			return false;
+
+}
+
+
+	});	
+ 
 
 
   	$('.close34').on('click',function(){

@@ -121,7 +121,7 @@
                  Annual Premium
                 </div>
                  <div class="col-md-4 text-right plan_cmpre">
-                 <a href="javascript:void(0);" class="cmp_p_s" id="comparePolicy">Compare Plans</a>
+                 <a href="javascript:void(0);" class="cmp_p_s" id="comparePolicy" title="Compare upto 3 plans">Compare Plans</a>
                 </div>
                 
                 </div>
@@ -445,8 +445,8 @@
 <div class="modal-backdrop fade in" id="modal_bak" style="display:none;"></div>
 
 <div class="alert_cmp">
-    <div class="close34" >&times;</div>
-    <strong>Error!</strong> <span class="al_msg_cmp"></span>
+    <div class="close34" ><span>Ok got it</span> &times;</div>
+    <strong>Oh ho!</strong> <br/><div class="al_msg_cmp"></div>
 </div>
 <?php if(empty($customer_details)){?>
 
