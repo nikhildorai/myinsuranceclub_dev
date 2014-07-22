@@ -86,7 +86,7 @@ elseif(! empty ( $customer_details )) {
 					<i class="fa fa-angle-up"></i>
 				</div>
 			</div>
-			<div class="col-md-4 pad_r_10" id="buy_now_message_<?php echo $detail['variant_id'];?>" style="display:none">
+			<div class="col-md-4 post_msg" id="buy_now_message_<?php echo $detail['variant_id'];?>" style="display:none">
 			Call 100100100 to buy this policy
 			</div>
 			<div class="col-md-4 pad_r_10" id="buy_now_btn_<?php echo $detail['variant_id'];?>">
