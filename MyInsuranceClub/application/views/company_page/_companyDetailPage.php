@@ -63,7 +63,7 @@ if (!empty($policies))
 <?php 
 		if (count($policies) > 1)
 		{	?>
-			<div class="col-md-6 fst">
+			<div class="col-md-6 ">
 	<?php 
 			$i = 1;
 			foreach ($policies as $k1=>$v1)
@@ -374,9 +374,10 @@ if (!empty($policies))
 						<a href="javascript:void(0)">View Older Data <span class="ic">+</span>
 						</a>
 					</div>
+					</div>
 <?php */ ?>
 
-	</div>
+	
 
 	<!--<div class="company_abt one_time" id="ad_show_premium">
   <div class="col-md-12 mar-25 no_pad_lr">
@@ -538,6 +539,11 @@ if (!empty($policies))
 			</div>
 		</div>
 	</div>
+	</div>
+
+
+
+
 	<div class="col-md-3 sidebar sidebar-right">
 		<div class="inner">
 			<div class="block"></div>
