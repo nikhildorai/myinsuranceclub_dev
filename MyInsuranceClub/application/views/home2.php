@@ -29,7 +29,7 @@
                   </h3>
                </li>
             </a>
-            <a href="<?php echo site_url('health_insurance/basicMediclaim');?>">
+            <a href="<?php echo site_url('health-insurance');?>">
                <li class="service box animated flipInY visible" data-animation="flipInY" data-animation-delay="400">
                   <strong class="service-logo prdt_spri1 img_cen2"> </strong>
                   <h3 class="ser_h">Health<br/>
@@ -91,7 +91,7 @@
             <p class="lst arr">
                <a href="#" class="flt"><i class="prdt_spri img_cen_m"> </i><b>Car Insurance</b> <span class="truncate">Compare & Save BIG</span></a>
                <a href="#" class="flt"><i class="prdt_spri img_cen_m1">  </i><b>Two Wheeler Insurance</b> <span class="truncate">Protect your bike in minutes</span></a>
-               <a href="#" class="flt"><i class="prdt_spri img_cen_m2"> </i><b>Health Insurance</b> <span class="truncate">Get the best plan</span></a>    
+               <a href="<?php echo site_url('health-insurance');?>" class="flt"><i class="prdt_spri img_cen_m2"> </i><b>Health Insurance</b> <span class="truncate">Get the best plan</span></a>    
                <a href="#" class="flt"><i class="prdt_spri img_cen_m3"></i><b>Travel Insurance</b> <span class="truncate">Travel safe</span></a>
                <a href="#" class="flt"><i class="prdt_spri img_cen_m4"> </i><b>Term Insurance</b> <span class="truncate">Protect your family</span></a>
                <a href="#" class="flt"><i class="prdt_spri img_cen_m5"> </i><b>Child Plans</b> <span class="truncate">Secure their future</span></a>   
