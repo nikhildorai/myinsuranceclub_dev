@@ -29,7 +29,7 @@
                   </h3>
                </li>
             </a>
-            <a href="<?php echo site_url('health-insurance');?>">
+            <a href="<?php echo site_url('health-insurance')."/";?>">
                <li class="service box animated flipInY visible" data-animation="flipInY" data-animation-delay="400">
                   <strong class="service-logo prdt_spri1 img_cen2"> </strong>
                   <h3 class="ser_h">Health<br/>
