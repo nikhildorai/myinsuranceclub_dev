@@ -192,11 +192,11 @@ class controller_basicMediclaim extends MIC_Controller {
 					$birthage=$this->input->post('desktop_cust_dob');
 					
 				}
-				elseif($this->input->post('mobile_cust_dob')!='')
+				elseif($this->input->post('m_cust_dob1')!='')
 				{
-					$user_input['cust_birthdate']=$this->input->post('mobile_cust_dob');
+					$user_input['cust_birthdate']=$this->input->post('m_cust_dob1');
 					
-					$birthage=$this->input->post('mobile_cust_dob');
+					$birthage=$this->input->post('m_cust_dob1');
 				}
 					/* birthdate ends */
 					
