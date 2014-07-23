@@ -531,3 +531,23 @@ var annual_premium_search_url = "<?php echo base_url().'health_insurance/control
 var increment_buyNow_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/increment_count'?>";
 
 </script>
+<script>
+$(function() {
+  $("#share_link,#backgroundPopup").delay(2000).fadeIn(500);
+  
+  setTimeout(function(){
+   $('#share_link').css({opacity: 1});
+   
+}, 2000);
+  
+  $('.fac_link').html('<div class="fb-share-button" data-href="http://www.myinsuranceclub.com/health-insurance/"></div>');
+  
+  
+  $('.modal_close').click(function() {
+    $("#share_link,#backgroundPopup").fadeOut(500);
+     $("#share_link").css({opacity: 0});
+    
+    });
+    
+});
+</script>
