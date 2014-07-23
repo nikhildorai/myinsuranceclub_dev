@@ -4,9 +4,9 @@
 		{
 			$folderUrl = $this->config->config['folder_path']['company']['partnerLogo']; 
 			$fileUrl = $this->config->config['url_path']['company']['partnerLogo'];
-			$imgUrl = $fileUrl.'logo_missing_147x107.jpg';
 			foreach ($companyDetails as $k1=>$v1)
 			{
+				$imgUrl = $fileUrl.'logo_missing_147x107.jpg';
 				if (!empty($v1['logo_image_partner']) && file_exists($folderUrl.$v1['logo_image_partner']))
 					$imgUrl = $fileUrl.$v1['logo_image_partner'];	?>
 				

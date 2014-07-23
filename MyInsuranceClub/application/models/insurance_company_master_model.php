@@ -106,18 +106,177 @@ class Insurance_company_master_model EXTENDS MIC_Model{
 	{
 		return $this->db->query($sql);
 	}
-	
+
 
 	public function get_insurance_companies($arrParams)
 	{	
 		$query = "CALL sp_getInsuranceCompany(?,?)";
 		
-		$queryData = array($arrParams['company_type_slug'],$arrParams['company_slug'],"");
+		$queryData = array($arrParams['company_type_slug'],$arrParams['company_slug']);
 		
 		$resultData = $this->db->query($query,$queryData);
 		if (!empty($resultData))
 			return $resultData->result_array();
 		else 
 			return array();
+	}
+
+	public function get_single_insurance_company_all_details($arrParams)
+	{	
+		$query = "CALL sp_getSingleInsuranceCompanyAllDetails(?)";
+		
+		$queryData = array($arrParams['company_slug']);
+		
+		$resultData = $this->db->query($query,$queryData);
+		if (!empty($resultData))
+			return $resultData->result_array();
+		else 
+			return array();
+	}
+	
+	public function callStoreProcedure($type, $arrParams = array())
+	{
+		$query = '';
+		
+		if ($type == 'singleCompanyAllDetails')
+			$query = "CALL sp_getSingleInsuranceCompanyAllDetails(?)";
+		else if ($type == 'singleCompanyDetails')
+			$query = "CALL sp_getSingleInsuranceCompanyDetails(?)";
+		else if ($type == 'allPolicyOfSingleCompany')
+			$query = "CALL sp_getAllPolicyOfSingleCompany(?)";
+			
+		$queryData = $arrParams;
+		
+		$resultData = $this->db->query($query,$queryData);
+		if (!empty($resultData))
+			return $resultData->result_array();
+		else 
+			return array();
+	}
+
+	public static function getSingleInsuranceCompanyDetails($arrParams)
+	{
+		$data = $data['claimRatio'] = $data['companyDetails'] = $policies = $policy = array();
+		if (!empty($arrParams))
+		{
+			$cacheFileName = 'company';
+			foreach ($arrParams as $k1=>$v1)
+			{
+				if (!empty($v1))
+					$cacheFileName .= '_'.$v1;
+			}
+			$cacheResult = Util::getCachedObject($cacheFileName);			
+			//	check if cache file exist
+			if(!empty($cacheResult))
+			{
+				// get result set from cache
+				$details = $cacheResult;
+			}
+			else
+			{
+				//get resultset from DB and save in cache
+				$db = &get_instance();
+				unset($arrParams['company_type_slug']);
+				$details = $db->insurance_company_master_model->callStoreProcedure($type = 'singleCompanyAllDetails', $arrParams);
+				Util::saveResultToCache($cacheFileName,$details);
+			}
+			$data['companyDetails'] = reset($details);
+			if (!isset($data['companyDetails']['claim_ratio']))
+				$data['claimRatio'] = array();
+			else 
+				$data['claimRatio'] = $details;
+			
+			//	get all the plans for a single company
+			if (!empty($data['companyDetails']))
+			{
+				$arrParams = array();
+				$arrParams['company_id'] = $data['companyDetails']['company_id'];
+				$cacheFileName .= '_all_policies';	
+				$cacheResult = Util::getCachedObject($cacheFileName);				
+				//	check if cache file exist
+				if(!empty($cacheResult))
+				{
+					// get result set from cache
+					$policies = $cacheResult;
+				}
+				else
+				{
+					//get resultset from DB and save in cache
+					$db = &get_instance();
+					$db->db->freeDBResource($db->db->conn_id);
+					$policy = $db->insurance_company_master_model->callStoreProcedure($type = 'allPolicyOfSingleCompany', $arrParams);
+					if (!empty($policy))
+					{
+						foreach ($policy as $k1=>$v1)
+						{
+							if ($v1['company_type_slug'] == 'life-insurance')
+							{
+								$policyUrl = $v1['company_type_slug'].'/companies/'.$v1['company_slug'].'/'.$v1['slug'];
+							}
+							else
+							{
+								if (!empty($v1['product_slug']) && $v1['product_slug'] == 'health-insurance')
+									$policyUrl = $v1['product_slug'].'/'.$v1['slug'];
+								else if (!empty($v1['sub_product_slug']))
+									$policyUrl = $v1['sub_product_slug'].'/'.$v1['slug'];
+								else if (!empty($v1['product_slug']))
+									$policyUrl = $v1['product_slug'].'/'.$v1['slug'];
+							} 
+							$policies[$v1['product_name']]['product_slug'] = $v1['product_slug'];
+							$policies[$v1['product_name']]['product_name'] = $v1['product_name'];
+							$policies[$v1['product_name']]['sub_product_slug'] = $v1['sub_product_slug'];
+							$policies[$v1['product_name']]['sub_product_name'] = $v1['sub_product_name'];
+							$policies[$v1['product_name']]['policy'][$k1] = $v1;
+							$policies[$v1['product_name']]['policy'][$k1]['policy_url'] = $policyUrl;
+						}
+					}
+					Util::saveResultToCache($cacheFileName,$policies);
+				}
+				$data['policies'] = $policies;
+			}
+		
+		foreach ($policies as $k1=>$v1)
+		{
+//var_dump($k1, $v1);die;			
+		}
+//var_dump($data);die;
+//echo '<pre>';print_r($policies);die;			
+			
+			//	seo data
+	        $data['title'] = $data['companyDetails']['seo_title'];
+	        $data['keywords'] = $data['companyDetails']['seo_keywords'];
+	        $data['description'] = $data['companyDetails']['seo_description'];
+		}
+		return $data;
+	}
+	
+
+	public static function getInsuranceCompaniesByCompanyType($arrParams)
+	{
+		$data = array();
+		if (!empty($arrParams))
+		{	
+			$cacheFileName = 'company_';
+			foreach ($arrParams as $k1=>$v1)
+			{
+				if (!empty($v1))
+					$cacheFileName .= $v1;
+			}
+			$cacheResult = Util::getCachedObject($cacheFileName);
+			//	check if cache file exist
+			if(!empty($cacheResult))
+			{
+				// get result set from cache
+				$data['companyDetails']=$cacheResult;
+			}
+			else
+			{
+				//get resultset from DB and save in cache
+				$db = &get_instance();
+				$data['companyDetails']=$db->insurance_company_master_model->get_insurance_companies($arrParams);
+				Util::saveResultToCache($cacheFileName,$data['companyDetails']);
+			}
+		}
+		return $data;
 	}
 }

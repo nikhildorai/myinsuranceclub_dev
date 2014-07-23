@@ -45,33 +45,17 @@ class GeneralInsurance extends MIC_Controller {
 		$data = array();
 		$arrParams['company_type_slug'] = $companyType = 'general-insurance';
 		$arrParams['company_slug'] = $companyName;
-		$cacheFileName = 'company_'.$companyType;
-		if (!empty($companyName))
-			$cacheFileName .= '_'.$companyName;
-
-		$cacheResult = Util::getCachedFile($cacheFileName);
-		//	check if cache file exist
-		if(!empty($cacheResult))
-		{
-			// get result set from cache
-			$data['companyDetails'] = $cacheResult;
-		}
-		else
-		{
-			//get resultset from DB and save in cache
-			$data['companyDetails']=$this->insurance_company_master_model->get_insurance_companies($arrParams);
-			Util::saveResultToCache($cacheFileName,$data['companyDetails']);
-		}
-//var_dump($data['companyDetails']);die;
 		//	if company name is defined, show specific company details
 		if (!empty($companyName))
 		{
+			$data = Insurance_company_master_model::getSingleInsuranceCompanyDetails($arrParams);
 			$this->template->set_template('frontend');
 			$this->template->write_view('content', 'company_page/companyDetail', $data, TRUE);
 			$this->template->render();
 		}
 		else 
 		{
+			$data = Insurance_company_master_model::getInsuranceCompaniesByCompanyType($arrParams);			
 			//	if company name is not defined show all company listing
 			$this->template->set_template('frontend');
 			$this->template->write_view('content', 'company_page/giCompany', $data, TRUE);

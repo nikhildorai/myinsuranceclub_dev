@@ -254,6 +254,10 @@ class Company extends CI_Controller {
 					{
 						$name .= '-147x107';
 					}
+					else if ($k1 == 'logo_image_leadership')	
+					{
+						$name .= '-160x160';
+					}
 					else
 					{
 						$name .= '-'.$i;
@@ -273,6 +277,7 @@ class Company extends CI_Controller {
 				$_POST['companyModel']['image_logo_1'] = $companyModel['image_logo_1'];
 				$_POST['companyModel']['image_logo_2'] = $companyModel['image_logo_2'];
 				$_POST['companyModel']['image_logo_partner'] = $companyModel['image_logo_partner'];
+				$_POST['companyModel']['logo_image_leadership'] = $companyModel['logo_image_leadership'];
 			}
 							
 			//	set default values

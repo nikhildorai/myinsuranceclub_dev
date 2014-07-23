@@ -809,10 +809,11 @@ class Policy extends CI_Controller {
 			{
 				foreach ($healthOptions as $k1=>$v1)
 				{
+					$name = ($changeType == 'product_id') ? $v1['product_name'] : $v1['sub_product_name'];
 					if (in_array($k1, $selected))
-						$result .= '<option value="'.$k1.'" selected data-slug="'.$v1['slug'].'">'.$v1['product_name'].'</option>';
+						$result .= '<option value="'.$k1.'" selected data-slug="'.$v1['slug'].'">'.$name.'</option>';
 					else
-						$result .= '<option value="'.$k1.'" data-slug="'.$v1['slug'].'">'.$v1['product_name'].'</option>';
+						$result .= '<option value="'.$k1.'" data-slug="'.$v1['slug'].'">'.$name.'</option>';
 				}
 			}
 		}		

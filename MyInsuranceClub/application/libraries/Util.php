@@ -1617,6 +1617,12 @@ echo '=================>';
 												'max_height'	=>	'107',
 												'upload_path'	=>	$ci->config->config['folder_path']['company']['partnerLogo'],
 											);
+			$config['logo_image_leadership']=	array(	'allowed_types'	=>	'gif|jpg|png',
+												'max_size'		=>	'200',
+												'max_width'		=>	'160',
+												'max_height'	=>	'160',
+												'upload_path'	=>	$ci->config->config['folder_path']['company']['companyLeadership'],
+											);
 		}
 		else if ($type == 'policy')
 		{
@@ -1659,6 +1665,7 @@ echo '=================>';
 		}
 		return $config;
 	}
+	
 }
 
 // END Util class

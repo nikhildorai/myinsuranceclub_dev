@@ -203,10 +203,10 @@ $(".form-horizontal :input").prop("disabled", true);
 <?php 								if (isset($companyModel['slug']))	{?>
 			                        	<input type="text" class="form-control slug" placeholder="URL"  name="companyModel[slug]" value="<?php echo $companyModel['slug'];?>" >
 			                        	<?php /*?><span class="help-block" style="color:black;font-size: 12px"><a href="<?php echo ($currentCompanyTypeSlug == 'life-insurance') ? base_url().$currentCompanyTypeSlug.'/companies/'.$companyModel['slug'] : base_url().$currentCompanyTypeSlug.'/'.$companyModel['slug'];?>"><?php echo ($currentCompanyTypeSlug == 'life-insurance') ? base_url().$currentCompanyTypeSlug.'/companies/'.$companyModel['slug'] : base_url().$currentCompanyTypeSlug.'/'.$companyModel['slug'];?></a></span> */ ?>			                        	
-			                        	<span class="help-block" style="color:black;font-size: 12px"><?php echo base_url();?><span id="companyTypeSlug"><?php echo ($currentCompanyTypeSlug == 'life-insurance') ? $currentCompanyTypeSlug.'/companies/' : $currentCompanyTypeSlug.'/';?></span><span class="slug"><?php echo array_key_exists( 'slug',$companyModel) ? $companyModel['slug'] : '';?></span>/</span>
+			                        	<span class="help-block" style="color:black;font-size: 12px"><?php echo base_url();?><span id="companyTypeSlug"><?php echo ($currentCompanyTypeSlug == 'life-insurance') ? $currentCompanyTypeSlug.'/companies/' : $currentCompanyTypeSlug.'/';?></span><span class="slug"><?php echo array_key_exists( 'slug',$companyModel) ? $this->util->getSlug($companyModel['slug']) : '';?></span>/</span>
 <?php 								}else{	?>
 			                        	<input type="text" class="form-control slug"  tooltip="Once created you cannot edit this field" data-toggle="tooltip" data-placement="top" tooltip-trigger="focus" required placeholder="URL"  name="companyModel[slug]" value="" >
-			                        	<span class="help-block" style="color:black;font-size: 12px"><?php echo base_url();?><span id="companyTypeSlug"><?php echo ($currentCompanyTypeSlug == 'life-insurance') ? $currentCompanyTypeSlug.'/companies/' : $currentCompanyTypeSlug.'/';?></span><span class="slug"><?php echo array_key_exists( 'slug',$companyModel) ? $companyModel['slug'] : '';?></span>/</span>
+			                        	<span class="help-block" style="color:black;font-size: 12px"><?php echo base_url();?><span id="companyTypeSlug"><?php echo ($currentCompanyTypeSlug == 'life-insurance') ? $currentCompanyTypeSlug.'/companies/' : $currentCompanyTypeSlug.'/';?></span><span class="slug"><?php echo array_key_exists( 'slug',$companyModel) ? $this->util->getSlug($companyModel['slug']) : '';?></span>/</span>
 <?php 								}?>			                        
 			                        
 			                    </div>
@@ -314,7 +314,7 @@ $(".form-horizontal :input").prop("disabled", true);
 		                <div class="form-group">
 		                    <label for="" class="col-sm-3">Website</label>
 		                    <div class="col-sm-9">
-		                        <input type="text" class="form-control" placeholder="Website"name="companyDetailModel[website]" value="<?php echo array_key_exists( 'website',$companyDetailModel) ? $companyDetailModel['website'] : '';?>" >
+		                        <input type="text" class="form-control" placeholder="Website" name="companyDetailModel[website]" value="<?php echo array_key_exists( 'website',$companyDetailModel) ? $companyDetailModel['website'] : '';?>" >
 		                        
 		                    </div>
 		                </div>
@@ -369,6 +369,27 @@ $(".form-horizontal :input").prop("disabled", true);
 		                </div>
 		                
 		           	  
+			                
+		                <div class="form-group">
+		                    <label for="" class="col-sm-3">Photo for Leadership:</label>
+		                    <div class="col-sm-9">
+		                        <input type="file" id="logo_image_leadership" name="companyModel[logo_image_leadership]" accept="image/*" title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'logo_image_leadership',$companyModel) ? $companyModel['logo_image_leadership'] : '';?>">
+		                        <span class="help-block">Image size: 160px X 160px</span>
+		                    <?php 
+										$folderUrl = $this->config->config['folder_path']['company']['companyLeadership'];
+										$fileUrl = $this->config->config['url_path']['company']['companyLeadership'];
+										if (isset($companyModel['logo_image_leadership']) && !empty($companyModel['logo_image_leadership']))
+										{
+											if (file_exists($folderUrl.$companyModel['logo_image_leadership']))
+											{
+												echo 	'<div class="divider"></div>
+			                    						<img src="'.$fileUrl.$companyModel['logo_image_leadership'].'">';
+											}
+										}
+							?>		   
+							</div>
+		                 							
+		                </div>
 		                </div>
 		            </section>
 		        </div>

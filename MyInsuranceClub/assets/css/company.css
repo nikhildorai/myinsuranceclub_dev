@@ -57,7 +57,7 @@
 .company_abt p{ float:left; line-height:25px;}
 .company_abt .mar-20{ float:left;margin-top: 20px;}
 .company_abt img.cus_border_im{background:#f8f8f8;
-    margin: 7px 25px 20px 0 !important;
+    margin: 6px 25px 20px 0 !important;
     padding: 15px;}
 .company_abt p,.company_abt table td{ color:#5A5A5A;}
 .company_abt .widget img.img_t {
@@ -76,7 +76,7 @@ width: 100%;
 .t_h{ margin-bottom:10px;}
 .road{ line-height:25px; float:left;}
 .phone,.web,.mail{ float:left; width:100%; line-height:30px; padding-bottom:12px;}
-.follow{ float:left; margin-top:12px; width:100%;}
+.follow{ float:left; margin-top:12px; width:100%;line-height:30px;}
 
 
 

@@ -389,6 +389,7 @@ $config['url_path']['company']['all'] 				= $config['base_url'].'uploads/company
 $config['url_path']['company']['companyPageLogo'] 	= $config['base_url'].'uploads/company/company_page_172x68/';
 $config['url_path']['company']['partnerLogo'] 		= $config['base_url'].'uploads/company/partner_logo_147x107/';
 $config['url_path']['company']['searchResultLogo'] 	= $config['base_url'].'uploads/company/search_result_80x50/';
+$config['url_path']['company']['companyLeadership'] = $config['base_url'].'uploads/company/company_leadership_160x160/';
 
 $config['url_path']['policy']['all'] 				= $config['base_url'].'uploads/policy/';
 $config['url_path']['policy']['brochure'] 			= $config['base_url'].'uploads/policy/brochure/';
@@ -400,6 +401,7 @@ $config['folder_path']['company']['all'] 				= realpath(APPPATH . '../uploads').
 $config['folder_path']['company']['companyPageLogo'] 	= realpath(APPPATH . '../uploads').'/company/company_page_172x68/';
 $config['folder_path']['company']['partnerLogo'] 		= realpath(APPPATH . '../uploads').'/company/partner_logo_147x107/';
 $config['folder_path']['company']['searchResultLogo'] 	= realpath(APPPATH . '../uploads').'/company/search_result_80x50/';
+$config['folder_path']['company']['companyLeadership'] 	= realpath(APPPATH . '../uploads').'/company/company_leadership_160x160/';
 
 $config['folder_path']['policy']['all'] 				= realpath(APPPATH . '../uploads').'/policy/';
 $config['folder_path']['policy']['brochure'] 			= realpath(APPPATH . '../uploads').'/policy/brochure/';
