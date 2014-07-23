@@ -139,7 +139,8 @@ class Company extends CI_Controller {
 
     public function create($company_id = null)
 	{
-		$modelType = 'create';
+		$modelType = $dmodelType = $cmodelType ='create';
+		$isActive = true;
 		$companyModel = $companyDetailModel = $saveData = $ratioModel = array();
 		$this->data['message'] = '';
 		$this->data['file_upload'] = array();
@@ -169,7 +170,6 @@ class Company extends CI_Controller {
 			$where[0]['field'] = 'company_id';
 			$where[0]['value'] = (int)$company_id;
 			$where[0]['compare'] = 'equal';
-			$isActive = true;
 			$exist = $this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $where, $fields = array());
 			//$this =& get_instance();
 			if (empty($exist))
@@ -222,7 +222,6 @@ class Company extends CI_Controller {
 		//	check if post data is available
 		if ($this->input->post('companyModel') && $isActive == true)
 		{
-			
 			//	save tags
 			if (isset($_POST['tag']) && !empty($_POST['tag']))
 			{
@@ -265,7 +264,7 @@ class Company extends CI_Controller {
 					$name .= '.'.$ext;
 					$arrFileNames[$k1] = $name;
 					if (empty($v1))
-						$_POST['companyModel'][$k1] = $companyModel[$k1];
+						$_POST['companyModel'][$k1] = (isset($companyModel[$k1]) && !empty($companyModel[$k1])) ? $companyModel[$k1] : '';
 					else
 						$_POST['companyModel'][$k1] = $name;
 					$i++;

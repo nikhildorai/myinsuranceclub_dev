@@ -35,7 +35,6 @@ $('.remove').prop('disabled', true);
 	     });   
 	        
 		 $('#sub_product_id :selected').each(function (i, selected) {
-			 console.log($(selected).data('slug'));
 				subProdSlug = $(selected).data('slug');
 		 });  
 
@@ -50,7 +49,10 @@ $('.remove').prop('disabled', true);
 		}
 		else if(prodSlug != "" && subProdSlug != "")
 		{	
-			$('#companyTypeSlug').text(subProdSlug+'/');
+			if(prodSlug == 'health-insurance')
+				$('#companyTypeSlug').text(prodSlug+'/');
+			else
+				$('#companyTypeSlug').text(subProdSlug+'/');
 		}
 		else
 			$('#companyTypeSlug').text("");
@@ -359,7 +361,21 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 										//	tagit widget
 										echo widget::run('tagit'); ?>
 										
-			                
+						                <div class="form-group">
+						                    <label for="" class="col-sm-3">URL</label>
+						                    <div class="col-sm-9">
+						                    	<span class="icon glyphicon glyphicon-star"></span>
+			<?php 								if (isset($policyModel['slug']))	{?>
+						                        	<input type="text" class="form-control slug" placeholder="URL"  name="policyModel[slug]" value="<?php echo $policyModel['slug'];?>" >
+						                        	<?php /*?><span class="help-block" style="color:black;font-size: 12px"><a href="<?php echo ($currentCompanyTypeSlug == 'life-insurance') ? base_url().$currentCompanyTypeSlug.'/companies/'.$policyModel['slug'] : base_url().$currentCompanyTypeSlug.'/'.$policyModel['slug'];?>"><?php echo ($currentCompanyTypeSlug == 'life-insurance') ? base_url().$currentCompanyTypeSlug.'/companies/'.$policyModel['slug'] : base_url().$currentCompanyTypeSlug.'/'.$policyModel['slug'];?></a></span> */ ?>	
+			<?php 								}else{	?>
+						                        	<input type="text" class="form-control slug"  tooltip="Once created you cannot edit this field" data-toggle="tooltip" data-placement="top" tooltip-trigger="focus" required placeholder="URL"  name="policyModel[slug]" value="" >
+			<?php 								}?>		
+						                        	<span class="help-block" style="color:black;font-size: 12px"><?php echo base_url();?><span id="companyTypeSlug"><?php echo $currentCompanyTypeSlug;?></span><span class="slug"><?php echo array_key_exists( 'slug',$policyModel) ? $this->util->getSlug($policyModel['slug']) : '';?></span>/</span>	                        
+						                        
+						                    </div>
+						                </div>
+						              <?php /*?>  
 						                <div class="form-group">
 						                    <label for="" class="col-sm-3">URL</label>
 						                    <div class="col-sm-9">
@@ -374,7 +390,7 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 						                        
 						                    </div>
 						                </div>
-						                
+						                */ ?>
 					                </div>
 					            </section>
 					        </div>
