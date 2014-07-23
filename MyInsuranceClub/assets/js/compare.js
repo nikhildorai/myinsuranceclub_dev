@@ -63,37 +63,81 @@ function show_prem(x,y,a,b) {
 var timeoutID;
 delayedAlert();
 function delayedAlert() {
-  timeoutID = window.setTimeout(slowAlert, 1000);
-}
+	if(searchScroll == "yes")
+  	{
+		timeoutID = window.setTimeout(slowAlert, 1000);
+  	}
+	else
+		{
+		timeoutID = window.setTimeout(slowAlert, 0);
+		}
+  }
 
 function slowAlert() {
 	
-	$("#sh1").fadeIn();
-  com_c.innerHTML = company_count;
-  timeoutID = window.setTimeout(slowAlert1, 500);
+	com_c.innerHTML = company_count;
+  	if(searchScroll == "yes")
+  	{
+  		$("#sh1").fadeIn();
+  		timeoutID = window.setTimeout(slowAlert1, 500);
+  	}
+  	else
+  	{	
+  		$("#sh1").show();
+  		timeoutID = window.setTimeout(slowAlert1, 0);
+  	}
 }
 
 function slowAlert1() {
-	$("#sh2").fadeIn();
-	 plan_c.innerHTML = plan_count;
+	plan_c.innerHTML = plan_count;
 	 plan_cnt.innerHTML = plan_count;
-	 timeoutID = window.setTimeout(slowAlert3,750);
+	 if(searchScroll == "yes")
+	  	{
+		 $("#sh2").fadeIn();
+		 timeoutID = window.setTimeout(slowAlert3, 750);
+	  	}
+	 else{
+		 $("#sh2").show();
+		 timeoutID = window.setTimeout(slowAlert3, 0);
+	 	}
 }
 
 function slowAlert3() {
-	$("#sh3").fadeIn();
-	 pr_ra.innerHTML = min_premium;
+	pr_ra.innerHTML = min_premium;
 	  pr_rb.innerHTML = max_premium;
-	  timeoutID = window.setTimeout(slowAlert4,1200);
-	  timeoutID = window.setTimeout(slowAlert5,1500);
+	  if(searchScroll == "yes")
+	  	{
+		  $("#sh3").fadeIn();
+		  timeoutID = window.setTimeout(slowAlert4,1200);
+		  timeoutID = window.setTimeout(slowAlert5,1500);
+	  	}
+	  else
+	  {
+		  $("#sh3").show();
+		  timeoutID = window.setTimeout(slowAlert4,0);
+		  timeoutID = window.setTimeout(slowAlert5,0);
+	  }
 }
 
 function slowAlert4() {
-	 $("#loader").fadeOut();
-   $("#prdt_dis").fadeIn();
+	$("#loader").fadeOut();
+	if(searchScroll == "yes")
+	{
+		$("#prdt_dis").fadeIn();
+	}else
+		{
+		$("#prdt_dis").show();
+		}
 }
 function slowAlert5() {
-	$("#sh4").fadeIn();
+	if(searchScroll == "yes")
+	{
+		$("#sh4").fadeIn();
+	}
+	else
+		{
+		$("#sh4").show();
+		}
 	
 }
 

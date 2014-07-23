@@ -534,7 +534,7 @@ var max_premium = "<?php echo  $premiums['max_premium'];?>";
 var hospital_list_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/get_hospital_list'?>";
 var annual_premium_search_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/health_policy'?>";
 var increment_buyNow_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/increment_count'?>";
-
+var searchScroll = "<?php echo ($compareParam == "yes") ? 'no' : 'yes'?>";
 </script>
 <script>
 $(function() {
