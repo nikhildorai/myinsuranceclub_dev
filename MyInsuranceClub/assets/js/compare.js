@@ -25,7 +25,8 @@ var formatNumber = function(number)
  */
 function send_ajax_post(controller_url)
 {
-	
+	$('.no_odometer').addClass('odometer').removeClass('no_odometer');
+	Odometer.init();
 	data = $('#search').serialize();
 		
 	 $.ajax({

@@ -69,7 +69,7 @@ class controller_basicMediclaim extends MIC_Controller {
 	
 	}
 	
-	public function health_policy()
+	public function health_policy($param="no")
 	{
 		
 		// Discussion: Put form validations in common function in Util
@@ -194,6 +194,7 @@ class controller_basicMediclaim extends MIC_Controller {
 				}
 				elseif($this->input->post('m_cust_dob1')!='')
 				{
+					//echo $this->input->post('m_cust_dob1');
 					$user_input['cust_birthdate']=$this->input->post('m_cust_dob1');
 					
 					$birthage=$this->input->post('m_cust_dob1');
@@ -204,7 +205,8 @@ class controller_basicMediclaim extends MIC_Controller {
 					
 					$age = Util::convertBirthdateToAge($birthage);
 					
-					$user_input['cust_age']=$age;
+					$user_input['cust_age'] = $age;
+					
 					
 				if($this->input->post('cust_gender')!='')
 				{
@@ -310,9 +312,8 @@ class controller_basicMediclaim extends MIC_Controller {
 			
 			//serialize($user_input),
 			$this->input->set_cookie('mic_userdata',$this->session->userdata('session_id'),'864000');
-			
 			$data['user_input'] = $user_input;
-			
+			$data['compareParam'] = $param;
 			$this->mic_dbtest->customer_personal_search_details($user_input);
 			$this->db->freeDBResource($this->db->conn_id);
 			
@@ -342,6 +343,7 @@ class controller_basicMediclaim extends MIC_Controller {
 			
 			if($this->input->is_ajax_request())
 			{
+				
 				$search_filter=$_POST;
 				
 				foreach($data['customer_details'] as $k => $v)
@@ -463,7 +465,9 @@ class controller_basicMediclaim extends MIC_Controller {
 				//var_dump($premiums_from_ajax);
 				//exit;
 				//$this->session->set_userdata('search_filters',$search_filter);
-				//var_dump($search_filter);
+				
+				//$this->session->userdata('search_filter',$search_filter);
+				
 				$return['html'] = $this->load->view('health_insurance/ajaxPostResultView',$data,TRUE);
 				$return['company'] = count($companycnt);
 				$return['plan'] = count($data['customer_details']);

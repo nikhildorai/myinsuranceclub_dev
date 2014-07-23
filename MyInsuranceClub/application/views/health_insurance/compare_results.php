@@ -4,13 +4,14 @@
 	$arrHeaderColorLite = array("blue-lite","green-lite","orange-lite");
 	$arrHeaderColorDark = array("blue-dark","green-dark","orange-dark");
 	$arrBuyBtnColor = array('blue-btn','green-btn','orange-btn');
+	$param = "yes";
 ?>
 <div id="page-wrap" class="container" style="margin-bottom: 100px;">
 	<div class="smart-grids">
 		<div class="smart-wrapper">
 			<div class="back_to">
 				<i class="fa fa-angle-left arrow_left"></i>
-				<a href="<?php echo base_url().'health-insurance/search-results'?>">Back to Search Results</a>
+				<a href="<?php echo base_url().'health-insurance/search-results/'.$param ?>">Back to Search Results</a>
 			</div>
 			<div class="difference">
 				<div class="checkbox">

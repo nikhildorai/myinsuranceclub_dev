@@ -83,9 +83,19 @@
 		{
 			$comp_name = "Company";
 		}
+		
+		if($compareParam == 'yes')
+		{
+			$odometer = "no_odometer";
+		}
+		else
+		{
+			$odometer = "odometer";
+		}
 		?>
+		
        <div class="top_h_t"><?php echo $comp_name;?></div>
-       <div id="com_c" class="top_p_n odometer">0</div>
+       <div id="com_c" class="top_p_n <?php echo $odometer;?>">0</div>
       </div> 
       
    </div>
@@ -93,19 +103,19 @@
     <div class="col-md-2  border c_o">
     <div id="sh2" style="display:none">
        <div class="top_h_t">Plans</div>
-       <div id="plan_c" class="top_p_n odometer">0</div>
+       <div id="plan_c" class="top_p_n <?php echo $odometer;?>">0</div>
        </div>
    </div>
     <div class="col-md-5  noborder clearfix">
     <div id="sh3" style="display:none">
        <div class="top_h_t text-left">Price Range</div>
-       <div class="top_p_n text-left" style="float:left;"><span style="float:left; margin-top:7px;">&#8377;</span><span id="pr_ra"  class="odometer" style="float:left;">0</span><span style="float:left;margin-top:7px;""> &nbsp;- &#8377;</span><span id="pr_rb" class="odometer" style="float:left;">0</span></div>
+       <div class="top_p_n text-left" style="float:left;"><span style="float:left; margin-top:7px;">&#8377;</span><span id="pr_ra"  class="<?php echo $odometer;?>" style="float:left;">0</span><span style="float:left;margin-top:7px;""> &nbsp;- &#8377;</span><span id="pr_rb" class="<?php echo $odometer;?>" style="float:left;">0</span></div>
        </div>
        <div id="sh4" style="position:absolute;"><i class="fa fa-check-square-o"></i> </div>
    </div>
    
    </div>
-  <div id="loader"><img src="<?php echo base_url();?>/assets/images/loader.gif" border="0"></div>
+  <div id="loader" style="display: <?php echo (isset($compareParam) && !empty($compareParam)) ? 'none' : 'block'?>"><img src="<?php echo base_url();?>/assets/images/loader.gif" border="0"></div>
    <div class="" style="margin-top:20px; display:none;" id="prdt_dis">
             <div class="col-md-9 col-md-push-3 cus_res_hlth" style="padding-right:0px;">
             
@@ -127,13 +137,8 @@
                 </div>
                 <div id="cmp_tbl">
 					
-					  <?php 
-							
-					  //var_dump($ajax);	
-					  //exit;	
-					  //echo $ajax ;
-							$this->load->view('health_insurance/ajaxPostResultView');//,array('customer_details'=>$customer_details)
-							//echo $this->util->getUserSearchFiltersHtml($customer_details, $type='health');?>       			
+					  <?php $this->load->view('health_insurance/ajaxPostResultView');?>
+					
          		</div>
          	
                 <?php echo form_close();?>
