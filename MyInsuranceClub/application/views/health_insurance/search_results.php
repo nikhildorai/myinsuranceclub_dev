@@ -442,6 +442,76 @@
 
 <div class="tutorial">
 </div>
+
+
+<div id="backgroundPopup" >
+    
+    
+   
+    
+    </div>
+    
+    <div id="share_link" style="">
+      <div id="share_link-ct">
+        <div id="share_link-header">
+          <h2>Hi Akash Mishra,</h2>
+          <p>Can you do us a favour?</p>
+          <a class="modal_close" href="#"></a>
+        </div>
+        
+        <div id="strengths" class="box">
+                <p>If you found our comparison useful, pls share it with your friends.</p>
+                <ul>
+          <li>- They might find it useful</li>
+          <li>- It helps us reach out to more personal audience</li>
+          
+        </ul>
+                <p class="brdr_link">I used MyInsuranceClub to select a health insurance 
+plan for myself. Check it out. You might find it useful.</p>
+
+<div class="soc_link">
+    <div id="fb-root"></div>
+
+<div class="fac_link">
+    
+    </div>
+    
+   <div class="twi_link">
+   <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.myinsuranceclub.com/health-insurance/" data-size="large" data-dnt="true">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+   </div> 
+    </div>
+    
+    
+    
+    <div class="header">
+      <div class="h-card p-author" >
+  <div class="u-url profile">
+    <img class="u-photo avatar"  src="assets/images/deepak_mic.jpg" >
+    <span class="full-name">
+      
+      <span class="p-name" >Deepak Yohanna,</span>
+      <span class="p-nickname" ><b>CEO, MyInsuranceClub</b></span>
+    </span>
+    
+
+ </div>
+</div>
+
+      
+    </div>
+                </div>
+                
+                
+    
+    
+    
+    
+    
+      </div>
+    </div>
+
+
 <div class="modal-backdrop fade in" id="modal_bak" style="display:none;"></div>
 
 <div class="alert_cmp">

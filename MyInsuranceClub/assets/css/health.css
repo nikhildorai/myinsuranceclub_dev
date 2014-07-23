@@ -448,7 +448,107 @@ float: right;
 	   }
 	    @media screen and (max-width: 320px) {.col-md-7.medical{ display:none;} }
 		 @media screen and (max-width: 300px) {.down_cnt{ display:none;}.col-md-7.medical{ display:none;} }
-     .post_msg{ font-size: 12px;
-    margin-top: 30px;
-    padding: 0;
-    text-align: center;}
+
+
+#backgroundPopup {
+  background: none repeat scroll 0 0 #333;
+    height: 100%;
+    opacity: 0.7;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99999999; display:none;
+}
+
+  #share_link {
+
+     width: 404px;
+position: fixed; opacity:0; z-index: 99999999; right:5px;  margin-left: -202px; bottom:2px;
+
+    display:block; 
+
+
+    background: #FFF;
+        border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+        box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+       
+}
+.brdr_link{ border:1px solid #dadada; border-radius: 3px; padding:10px;}
+
+#share_link-header { /*background: url(../images/hd-bg.png); */padding: 18px 18px 0px 18px; /*border-bottom: 1px solid #CCC;*/ border-top-left-radius: 5px; -moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px; border-top-right-radius: 5px; -moz-border-radius-topright: 5px; -webkit-border-top-right-radius: 5px; }
+
+#share_link-header  h2 { color: #444; font-size: 23px; margin-top:0px; font-weight: 700; margin-bottom: 3px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5); }
+#share_link-header  p { color: #847d7d; font-size: 13px; margin: 0; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5); text-shadow: none; }
+
+#share_link .txt-fld { position: relative; width: 364px; padding: 14px 20px; border-bottom: 1px solid #EEE; text-align: right; }
+#share_link .btn-fld { width: 254px; overflow: hidden; padding: 12px 20px 12px 130px; }
+
+#share_link .txt-fld label { display: block; float: left; width: 90px; padding-top: 8px; color: #222; font-size: 1.3em; text-align: left;  }
+#share_link .txt-fld input { width: 244px; padding: 8px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; font-size: 1.2em; color: #222; background: #F7F7F7; font-family: "Helvetica Neue"; outline: none; border-top: 1px solid #CCC; border-left: 1px solid #CCC; border-right: 1px solid #E7E6E6; border-bottom: 1px solid #E7E6E6; }
+#share_link .txt-fld input.good_input { background: #DEF5E1 url(../img/good.png) 236px center no-repeat; }
+#share_link .txt-fld input.error_input { background: #FDE0E0; }
+.modal_close { position: absolute; top: 12px; right: 12px; display: block; width: 14px; height: 14px; background: url(../images/modal_close.png); z-index: 2; }
+
+.box {
+padding: 18px;color: #201f1f;
+
+}
+.box ul {
+list-style: none; margin-left:0px; padding-left:0px;
+font-size:14px;
+color: #201f1f;
+}
+#strengths li {
+
+padding-left: 10px;
+line-height: 140%;
+margin-bottom: 2px;
+}
+
+#share_link-ct .header {
+position: relative;
+_height: 58px;
+min-height: 58px;
+padding:15px 0 0px 0px;
+}
+
+
+#share_link-ct .header a {
+color: #707070;
+text-decoration: none;
+outline: 0;
+}
+
+
+#share_link-ct .header img {
+border: 0; float:left; border-radius: 4px;
+}
+
+ .header .profile .p-name {
+font-size: 16px;color: #292f33;font-weight: bold; line-height:16px;
+}
+
+ .header .profile .p-nickname {
+font-size: 14px;color: #707070;
+}
+.header b, .header i {
+font-style: normal;
+font-weight: normal;
+}
+
+
+ .header .profile .p-nickname::before {
+white-space: pre;
+content: "\A";
+}
+a.u-url.profile  {
+max-width: 100%;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+.full-name{ float:left;  margin-left:10px; margin-top:3px;}
+.soc_link{ min-height:40px; border-bottom:1px solid #dadada; padding-bottom:30px;}
+.fac_link{ width:auto; float:left; margin-left:200px; margin-top:2px;}
+.twi_link{ width:100px; float:right; margin-left:10px; margin-top:2px;}
+
