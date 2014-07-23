@@ -450,16 +450,25 @@
 
 
 <div id="backgroundPopup" >
-    
-    
+    	<?php 
+    		
+    	$name = '';
+    		if(isset($this->session->userdata['user_input']['full_name'])){
    
+    	 $name = $this->session->userdata['user_input']['full_name'];
+    	}
+    	 else 
+    	 {
+    	 	$name == "Guest";
+    	 }
+    	 ?>
     
     </div>
     
     <div id="share_link" style="">
       <div id="share_link-ct">
         <div id="share_link-header">
-          <h2>Hi Akash Mishra,</h2>
+          <h2>Hi <?php echo $name;?>,</h2>
           <p>Can you do us a favour?</p>
           <a class="modal_close" href="#"></a>
         </div>
