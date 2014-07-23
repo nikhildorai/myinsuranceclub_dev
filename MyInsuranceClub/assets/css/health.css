@@ -489,11 +489,11 @@ position: fixed; opacity:0; z-index: 99999999; right:5px;  margin-left: -202px; 
 #share_link .txt-fld input.error_input { background: #FDE0E0; }
 .modal_close { position: absolute; top: 12px; right: 12px; display: block; width: 14px; height: 14px; background: url(../images/modal_close.png); z-index: 2; }
 
-.box {
+#share_link .box {
 padding: 18px;color: #201f1f;
 
 }
-.box ul {
+#share_link .box ul {
 list-style: none; margin-left:0px; padding-left:0px;
 font-size:14px;
 color: #201f1f;
