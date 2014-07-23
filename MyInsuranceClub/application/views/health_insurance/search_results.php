@@ -115,7 +115,7 @@
    </div>
    
    </div>
-  <div id="loader" style="display: <?php echo (isset($compareParam) && !empty($compareParam)) ? 'none' : 'block'?>"><img src="<?php echo base_url();?>/assets/images/loader.gif" border="0"></div>
+  <div id="loader" style="display: <?php echo ($compareParam == "yes") ? 'none' : 'block'?>"><img src="<?php echo base_url();?>/assets/images/loader.gif" border="0"></div>
    <div class="" style="margin-top:20px; display:none;" id="prdt_dis">
             <div class="col-md-9 col-md-push-3 cus_res_hlth" style="padding-right:0px;">
             
