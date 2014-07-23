@@ -487,7 +487,7 @@ plan for myself. Check it out. You might find it useful.</p>
     <div class="header">
       <div class="h-card p-author" >
   <div class="u-url profile">
-    <img class="u-photo avatar"  src="assets/images/deepak_mic.jpg" >
+    <img class="u-photo avatar"  src="<?php echo base_url();?>assets/images/deepak_mic.jpg" >
     <span class="full-name">
       
       <span class="p-name" >Deepak Yohanna,</span>
