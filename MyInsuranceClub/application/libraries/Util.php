@@ -1583,7 +1583,7 @@ echo '=================>';
 			if (isset($_COOKIE[$cookieName]) && !empty($_COOKIE[$cookieName]))
 			{
 				$cookie = unserialize($_COOKIE[$cookieName]);
-				$cookieData = array_merge($cookie, $cookieData);
+				//$cookieData = array_merge($cookie, $cookieData);
 				$ci->input->set_cookie($cookieName,serialize($cookieData),$time);		
 			}
 			else 
