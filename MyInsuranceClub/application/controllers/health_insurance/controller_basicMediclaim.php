@@ -36,7 +36,7 @@ class controller_basicMediclaim extends MIC_Controller {
 	{
 		
 		$this->input->set_cookie('user_filter','');
-		$this->input->set_cookie('compared_plans','');
+		//$this->input->set_cookie('compared_plans','');
 		$product_name = "mediclaim";
 		$data=array();
 		
