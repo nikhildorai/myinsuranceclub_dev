@@ -51,7 +51,7 @@ elseif(! empty ( $customer_details )) {
 		}
 		$compared_plans = array();
 		$plan_checked = '';
-		if($this->input->cookie('compared_plans'))
+		/* if($this->input->cookie('compared_plans'))
 		{
 			$compared_plans = unserialize($this->input->cookie('compared_plans'));
 			
@@ -63,7 +63,7 @@ elseif(! empty ( $customer_details )) {
 			else{
 				$plan_checked = "";
 			}
-		}
+		} */
 		
 		?>
 
