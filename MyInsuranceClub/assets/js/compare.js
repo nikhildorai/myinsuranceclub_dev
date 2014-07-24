@@ -399,7 +399,7 @@ $(function () {
 
 
 $('.cmpplans').on('click',function(){
-  var n = $( "input:checked" ).length;
+  var n = $( ".cmpplans:checked" ).length;
  if (n>3)
     		{
  				 $(".alert_cmp strong").text('Sorry, we tried. But it looks terrible.');
