@@ -34,6 +34,8 @@ class controller_basicMediclaim extends MIC_Controller {
 	
 	public function index()
 	{
+		
+		$this->input->set_cookie('user_filter','');
 		$product_name = "mediclaim";
 		$data=array();
 		
@@ -339,129 +341,44 @@ class controller_basicMediclaim extends MIC_Controller {
 				}
 			}
 			
+			$cookie_filter = Util::getCookie('user_filter');
+			
 			/* Filter Data Received From Ajax Post */
 			
-			if($this->input->is_ajax_request())
+			if($data['compareParam'] == "yes" && !empty($cookie_filter))
 			{
+				$data['cookie_customer_detail'] = Util::getFilteredData($data['customer_details'],$cookie_filter);
 				
-				$search_filter=$_POST;
+			}
 				
-				foreach($data['customer_details'] as $k => $v)
-				{
-					if(isset($search_filter['room_rent']))
-					{
-						if ( $v['room_rent'] != 'Fully Covered' )
-						{
-							unset($data['customer_details'][$k]);
-						}
-					}
-					if(isset($search_filter['maternity']))
-					{
-						if ( $v['maternity'] == 'Not Covered' )
-						{
-							unset($data['customer_details'][$k]);
-						}
-					}
-					if(isset($search_filter['precover']))
-					{
-						if (!(in_array(trim($v['preexisting_diseases']),$search_filter['precover'])))
-						{
-							unset($data['customer_details'][$k]);
-						}
-					}
-					if(isset($search_filter['sector']))
-					{
-	
-						if (!(in_array(trim($v['public_private_health']),$search_filter['sector'])))
-						{
-							unset($data['customer_details'][$k]);
-						}
-					}
-					
-					if(isset($search_filter['health_comp']))
-					{
-						
-						if (!(in_array(trim($v['company_type_id']),$search_filter['health_comp'])))
-						{
-							unset($data['customer_details'][$k]);
-						}
-					}
-					
-					if(isset($search_filter['company_name']))
-					{
-						if (!(in_array(trim($v['company_id']),$search_filter['company_name'])))
-						{
-							unset($data['customer_details'][$k]);
-						}
-					}
-					
-					
-					if(isset($search_filter['min_premium_amt']))
-					{
-						$min_amt_arr = explode('₹',$search_filter['min_premium_amt']);
-						
-						$min_premium = (int) str_replace(',','',$min_amt_arr[1]);
-						
-						if(!($v['annual_premium'] >= $min_premium))
-						{
-							unset($data['customer_details'][$k]);
-						}
-					}
-					
-					if(isset($search_filter['max_premium_amt']))
-					{
-						$max_amt_arr = explode('₹',$search_filter['max_premium_amt']);
-						
-						$max_premium = (int) str_replace(',','',$max_amt_arr[1]);
-						
-						if(!($v['annual_premium'] <= $max_premium))
-						{
-							unset($data['customer_details'][$k]);
-						}
-					}
-					
-					/* if(isset($search_filter['min_claim_ratio']))
-					{
-						
-						$min_claims_ratio = (int) str_replace(' %','',$search_filter['min_claim_ratio']);
-						
-						if($v['claim_ratio'] <= $min_claims_ratio)
-						{
-							unset($data['customer_details'][$k]);
-						}
-					}
-					
-					if(isset($search_filter['max_claim_ratio']))
-					{
-						
-						$max_claims_ratio = (int) str_replace(' %','',$search_filter['max_claim_ratio']);
-					
-						if($v['claim_ratio'] >= $max_claims_ratio)
-						{
-							unset($data['customer_details'][$k]);
-						}
-					} */
+			
+			if($this->input->is_ajax_request())
+			{	
+				$search_filter = array();
 				
-					
-					
-				}
+					Util::setCookies('user_filter',$_POST);
+				
+					$search_filter=$_POST;
+				
+				$data['customer_details'] = Util::getFilteredData($data['customer_details'],$search_filter);
 				
 				
 				$company_discard = array();
-				
+					
 				$companycnt = array();
-				
+					
 				foreach($data['customer_details'] as $k=>$v)
 				{
+						
+					if(!in_array($v['company_id'],$companycnt))
+					{
+						$companycnt[] = $v['company_id'];
+					}
+					$company_discard[] = $v['company_id'];
+				}
 					
-				if(!in_array($v['company_id'],$companycnt))
-				{
-					$companycnt[] = $v['company_id'];
-				}
-				$company_discard[] = $v['company_id'];
-				}
-				
 				$premiums_from_ajax = Util::getMinAndMaxPremium($data['customer_details']);
+				
 				//var_dump($premiums_from_ajax);
 				//exit;
 				//$this->session->set_userdata('search_filters',$search_filter);

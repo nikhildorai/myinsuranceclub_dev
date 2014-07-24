@@ -9,7 +9,11 @@ $folderUrl = $con->config->config['folder_path']['company']['searchResultLogo'];
 $fileUrl = $con->config->config['url_path']['company']['searchResultLogo'];
 $pfolderUrl = $con->config->config['folder_path']['policy']['brochure'];;
 $pfileUrl = $con->config->config['url_path']['policy']['policy_wordings'];
-
+$temp = $customer_details;
+if($compareParam == 'yes' && !empty($cookie_customer_detail))
+{
+	$customer_details = $cookie_customer_detail;
+}
 
 if(empty($customer_details))
 {?>
@@ -253,5 +257,8 @@ elseif(! empty ( $customer_details )) {
 
 <?php 		}
 		}
+
+		 $customer_details = $temp;		
+		
 ?>
 

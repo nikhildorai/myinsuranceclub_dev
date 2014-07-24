@@ -1,5 +1,23 @@
-
-
+<?php 
+	
+	/* $temp = $customer_details;
+	$temp_premiums = Util::getMinAndMaxPremium($temp);
+	$plan_count='';
+	
+	if($compareParam == 'yes' && !empty($cookie_customer_detail))
+	{	
+		$customer_details = $cookie_customer_detail;
+	}
+	
+	if(count($temp) >= count($customer_details))
+	{
+		$plan_count = count($temp);
+	}
+	elseif(count($customer_details) >= count($temp))
+	{
+		$plan_count = count($customer_details);
+	} */
+	?>
 <span id="o_touch"></span>
 
 <div id="highlighted" style=" background:#fff; padding-bottom:50px; margin-bottom:0px;" >
@@ -15,10 +33,9 @@
    </div>
 	<?php   
 	
-	 
-	$premiums = Util::getMinAndMaxPremium($customer_details);
-	//var_dump($premiums);
 	
+	//var_dump($premiums);
+	$premiums = Util::getMinAndMaxPremium($customer_details);
 	$newVal = array();
 	$preexisitng_disease_discard = array();
 	$aNew = array();
@@ -187,6 +204,46 @@
 	
 				
 		</div>
+                 <?php 
+                 	
+                 	$checked_roomrent='';
+                 	$checked_maternity='';
+                 	$checked_company="";
+                 	if($this->input->cookie('user_filter')){
+                 		
+						$filters = unserialize($this->input->cookie('user_filter'));
+						
+                 		if(isset($filters['room_rent']))
+
+                 		{
+                 			$checked_roomrent = "checked='checked'";
+                 		}
+                 		
+                 		else 
+						{
+							$checked_roomrent = "";
+						}
+						
+						if(isset($filters['maternity']))
+						
+						{
+							$checked_maternity = "checked='checked'";
+						}
+						 
+						else
+						{
+							$checked_maternity = "";
+						}
+						
+						if(isset($filters['health_comp']))
+						{
+							$checked_company = "checked='checked'";
+						}
+						else{
+						
+							$checked_company = "";
+						}
+                 }?>
                  
                 <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
@@ -195,7 +252,7 @@
                 <p class="addOnFilter" >
                  <div class="checkbox">
             <label>
-            <input type="checkbox" id="room_rent" name="room_rent" value="1"  class="search_filter">
+            <input type="checkbox" id="room_rent" name="room_rent" value="1"  class="search_filter" <?php echo $checked_roomrent;?>>
             <label class="" for="room_rent">Show plans without room rent caps</label>
           </label></div>
 					
@@ -212,13 +269,8 @@
                  
                  <div class="checkbox">
             <label>
-            <?php //if(isset($this->session->userdata['search_filters']['maternity'])){
-            	
-            	//$checked == "checked";
-           // } else{
-           // 	$checked == "";
-         //   }?>
-            <input type="checkbox" id="maternity" name="maternity"  class="search_filter" value="1" <?php //echo $checked;?>>
+            
+            <input type="checkbox" id="maternity" name="maternity"  class="search_filter" value="1" <?php echo $checked_maternity;?>>
             <label class="" for="maternity">Show plans with maternity benefits</label>
           </label></div>
 					 
@@ -226,18 +278,29 @@
                 
                 
              <?php if(isset($preexist_filter))
-                 	{
+                 	
+             
+             		{
                  		sort($preexist_filter);?>
                 			<p class="addOnFilter" style="margin:0px; padding:0px;">
 									<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
 							</p> 
                  			<h6 class="fh3">Pre-existing diseases</h6>
                  <p class="addOnFilter" >
-                 <?php $sl = 1; foreach($preexist_filter as $p){?>
-                 
+                 <?php $sl = 1; foreach($preexist_filter as $p){
+                 					
+                 						if(isset($filters['precover']) && in_array($p,$filters['precover']))
+                 						{
+                 							$checked_precover = "checked='checked'";
+                 						}
+                 						else{
+											$checked_precover="";
+										}
+                 ?>
+					
 					<div class="checkbox">
             				<label>
-            					<input type="checkbox" id="precover[<?php echo $sl; ?>]" name="precover[]" class="search_filter" value="<?php echo $p;?>">
+            					<input type="checkbox" id="precover[<?php echo $sl; ?>]" name="precover[]" class="search_filter" value="<?php echo $p;?>" <?php echo $checked_precover;?>>
            							 <label class="" for="precover[<?php echo $sl; ?>]">Plans which cover after <?php echo $p;?> years
 									</label>
          					 </label>
@@ -259,7 +322,16 @@
                  	
                  	foreach($aNew as $company){
                     	
-                    	$premium = $company['premium'];
+                    	
+						if(isset($filters['company_name']) && in_array($company['company']['company_id'],$filters['company_name']))
+						{
+							$checked_company = "checked='checked'";
+						}
+						else{
+							$checked_company="";
+						}
+						
+						$premium = $company['premium'];
 	                   	sort($premium);
 	                   	if (reset($premium) != end($premium))
 	                   	{
@@ -274,7 +346,7 @@
                     <div style="width: 100%; float: left;">
                     	<div class="checkbox" style="width: auto; float: left; margin: 0px;">
             				<label>
-            					<input type="checkbox" value="<?php echo $company['company']['company_id'];?>" class="search_filter" id="company_name[<?php echo $company['company']['company_id'];?>]" name="company_name[]">
+            					<input type="checkbox" value="<?php echo $company['company']['company_id'];?>" class="search_filter" id="company_name[<?php echo $company['company']['company_id'];?>]" name="company_name[]" <?php echo $checked_company;?>>
             						<label for="company_name[<?php echo $company['company']['company_id'];?>]" class=""><?php echo $company['company']['company_shortname'];?></label>
           					</label>
           				</div> <span style="float:right;"><?php echo $display_premium;?></span>
@@ -379,13 +451,29 @@
                  <h6 class="fh3">Company type</h6>
                  <p class="addOnFilter" >
                  
-                 <?php foreach($pph as $k=>$v){?>
+                 <?php $checked_sector = ''; 
+                 		
+                 			foreach($pph as $k=>$v){?>
+					 
+					 	<?php if(isset($filters['sector']) && in_array($v,$filters['sector'])){
+					 	
+					 			$checked_sector = 'checked="checked"';
+					 	}
+					 		else 
+					 		{
+					 			$checked_sector = "";
+					 		}
+					 	?>
+					 
 					 
 					 <?php if($v == '2'){?>
-					 
+					 		
+					 		
+					 	
+					 	
 					 	<div class="checkbox">
             				<label>
-            					<input type="checkbox" id="sector_1" name="sector[]"  class="search_filter" value="2">
+            					<input type="checkbox" id="sector_1" name="sector[]"  class="search_filter" value="2" <?php echo $checked_sector;?>>
             						<label class="" for="sector_1">Plans from Private Sector Companies
 									</label>
           					</label>
@@ -397,7 +485,7 @@
           			
                     	<div class="checkbox">
             				<label>
-            					<input type="checkbox" id="sector_2" name="sector[]"  class="search_filter" value="1">
+            					<input type="checkbox" id="sector_2" name="sector[]"  class="search_filter" value="1" <?php echo $checked_sector;?>> 
             						<label class="" for="sector_2">Plans from Public Sector Companies
 									</label>
           					</label>
@@ -411,7 +499,7 @@
                     
                     	<div class="checkbox">
             				<label>
-            					<input type="checkbox" id="health_comp1" name="health_comp[]"  class="search_filter" value="3">
+            					<input type="checkbox" id="health_comp1" name="health_comp[]"  class="search_filter" value="3" <?php echo $checked_company;?>>
            							 <label class="" for="health_comp1">Plans from Specialised Health Insurers									</label>
           					</label>
           				</div>
@@ -436,9 +524,9 @@
       <div class="inner"></div>
     </div>
     <div id="searchUrgencyPopupBox">
-<div class="fader"><div class="arrow-w arrowlocation1" style="font-size:1em;" ></div><div id="tutorial1" class="tutorial createquestion1">Just booked Health Policy 7 minutes ago from United Kingdom.</div></div>
+<!-- div class="fader"><div class="arrow-w arrowlocation1" style="font-size:1em;" ></div><div id="tutorial1" class="tutorial createquestion1">Just booked Health Policy 7 minutes ago from United Kingdom.</div></div>
 <div class="fader"><div class="arrow-w arrowlocation1" style="font-size:1em;" ></div><div id="tutorial1" class="tutorial createquestion1">In 2013-14, Exide Life Insurance recorded doubling in profits to Rs 53 crore driven by growth in renewal premiums and improvements in efficiency and product mix.</div></div>
-<div class="fader"><div class="arrow-w arrowlocation1" style="font-size:1em;" ></div><div id="tutorial1" class="tutorial createquestion1">Reliance Life Insurance launches Claims Guarantee service.</div></div>
+<div class="fader"><div class="arrow-w arrowlocation1" style="font-size:1em;" ></div><div id="tutorial1" class="tutorial createquestion1">Reliance Life Insurance launches Claims Guarantee service.</div></div> -->
 <div class="fader"><div class="arrow-w arrowlocation1" style="font-size:1em;" ></div><div id="tutorial1" class="tutorial createquestion1">IDBI Federal Life Insurance today launched a bouquet of individual products catering to various life stage needs of customers along with group solutions.</div></div>
 <div>
 </div>
@@ -470,7 +558,7 @@
         <div id="share_link-header">
           <h2>Hi <?php echo $name;?>,</h2>
           <p>Can you do us a favour?</p>
-          <a class="modal_close" href="#"></a>
+          <a class="modal_close" href="javascript:void(0);"></a>
         </div>
         
         <div id="strengths" class="box">
@@ -485,6 +573,13 @@ plan for myself. Check it out. You might find it useful.</p>
 
 <div class="soc_link">
     <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=163640157049519&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="fac_link">
     
@@ -538,7 +633,7 @@ plan for myself. Check it out. You might find it useful.</p>
 <script type="text/javascript">
 var company_count = "<?php echo count($aNew);?>";
 var plan_count = "<?php echo  count($customer_details);?>";
-var min_premium = "<?php echo  $premiums['min_premium']?>";
+var min_premium = "<?php echo  $premiums['min_premium'];?>";
 var max_premium = "<?php echo  $premiums['max_premium'];?>";
 var hospital_list_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/get_hospital_list'?>";
 var annual_premium_search_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/health_policy'?>";
@@ -565,3 +660,4 @@ $(function() {
     
 });
 </script>
+<?php //$customer_details = $temp;?>

@@ -1593,6 +1593,141 @@ echo '=================>';
 		}
 	}
 	
+	/**
+	 *
+	 * @param string $cookieName
+	 * @return Ambigous <multitype:, mixed>
+	 */
+	public static function getCookie($cookieName = '')
+	{
+		$cookie = array();
+	
+		if(!empty($cookieName))
+		{
+			$cookie = (isset($_COOKIE[$cookieName]) && !empty($_COOKIE[$cookieName])) ? unserialize($_COOKIE[$cookieName]) : array();
+				
+		}
+	
+		return $cookie;
+	
+	}
+	
+	
+	/**
+	 *
+	 * @param unknown $data
+	 * @param unknown $filter
+	 */
+	public static function getFilteredData($data,$search_filter = array())
+	{
+		if(!empty($data) && !empty($search_filter))
+		{
+				
+			foreach($data as $k => $v)
+			{
+				if(isset($search_filter['room_rent']))
+				{
+					if ( $v['room_rent'] != 'Fully Covered' )
+					{
+						unset($data[$k]);
+					}
+				}
+				if(isset($search_filter['maternity']))
+				{
+					if ( $v['maternity'] == 'Not Covered' )
+					{
+						unset($data[$k]);
+					}
+				}
+				if(isset($search_filter['precover']))
+				{
+					if (!(in_array(trim($v['preexisting_diseases']),$search_filter['precover'])))
+					{
+						unset($data[$k]);
+					}
+				}
+				if(isset($search_filter['sector']))
+				{
+						
+					if (!(in_array(trim($v['public_private_health']),$search_filter['sector'])))
+					{
+						unset($data[$k]);
+					}
+				}
+					
+				if(isset($search_filter['health_comp']))
+				{
+						
+					if (!(in_array(trim($v['company_type_id']),$search_filter['health_comp'])))
+					{
+						unset($data[$k]);
+					}
+				}
+					
+				if(isset($search_filter['company_name']))
+				{
+					if (!(in_array(trim($v['company_id']),$search_filter['company_name'])))
+					{
+						unset($data[$k]);
+					}
+				}
+					
+					
+				if(isset($search_filter['min_premium_amt']))
+				{
+					$min_amt_arr = explode('₹',$search_filter['min_premium_amt']);
+						
+					$min_premium = (int) str_replace(',','',$min_amt_arr[1]);
+						
+					if(!($v['annual_premium'] >= $min_premium))
+					{
+						unset($data[$k]);
+					}
+				}
+					
+				if(isset($search_filter['max_premium_amt']))
+				{
+					$max_amt_arr = explode('₹',$search_filter['max_premium_amt']);
+						
+					$max_premium = (int) str_replace(',','',$max_amt_arr[1]);
+						
+					if(!($v['annual_premium'] <= $max_premium))
+					{
+						unset($data[$k]);
+					}
+				}
+					
+				/* if(isset($search_filter['min_claim_ratio']))
+				 {
+					
+				$min_claims_ratio = (int) str_replace(' %','',$search_filter['min_claim_ratio']);
+					
+				if($v['claim_ratio'] <= $min_claims_ratio)
+				{
+				unset($data[$k]);
+				}
+				}
+					
+				if(isset($search_filter['max_claim_ratio']))
+				{
+					
+				$max_claims_ratio = (int) str_replace(' %','',$search_filter['max_claim_ratio']);
+					
+				if($v['claim_ratio'] >= $max_claims_ratio)
+				{
+				unset($data[$k]);
+				}
+				} */
+					
+	
+			}
+			//$data['plan_count'] = count($data);
+				
+		}
+	
+		return $data;
+	}
+	
 	public static function getConfigForFileUpload($type = 'company')
 	{
 		$config = array();
