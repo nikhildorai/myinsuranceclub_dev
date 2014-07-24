@@ -7,7 +7,7 @@
 		<ul class="listsocial">
 			<li class="google"><g:plusone size="medium"></g:plusone>
 			</li>
-			<li class="like" style="width: 79px; height: 10px;"><span
+			<li class="like" style="width: 105px; height: 10px;"><span
 				id="ctl00_cphBody_lblfacebook"> <iframe
 						src='//www.facebook.com/plugins/like.php?href=http://www.myinsuranceclub.com/life-insurance/companies/canara-hsbc&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=65'
 						scrolling='no' frameborder='0'
