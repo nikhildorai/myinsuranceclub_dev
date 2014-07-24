@@ -77,33 +77,33 @@ class controller_basicMediclaim extends MIC_Controller {
 		// Discussion: Put form validations in common function in Util
 		
 		/* Form Validation Rules */
-		$post='';
+		//$post='';
 	
-		if($this->input->post()=='')
-		{
-			$post = $this->session->userdata('user_input');
-		}
+		//if($this->input->post()=='')
+		//{
+			//$post = $this->session->userdata('user_input');
+		//}
 	
 		// Please create a validation util function and do these validations there.
-		$this->form_validation->set_rules('cust_name', 'Full Name', 'required|alpha');
+		//$this->form_validation->set_rules('cust_name', 'Full Name', 'required|alpha');
 	
-		$this->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|phone_789|exact_length[10]');
+		//$this->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|phone_789|exact_length[10]');
 	
-		$this->form_validation->set_rules('cust_email', 'Email', 'required|valid_email');
+		//$this->form_validation->set_rules('cust_email', 'Email', 'required|valid_email');
 	
 		//$this->form_validation->set_rules('cust_dob', 'Date of Birth', 'required|age_greater_than_18');
 	
 		//$this->form_validation->set_rules('MIC_terms', 'checkbox', 'required');
 	
-		$this->form_validation->set_error_delimiters('<div class="error" style="color: red;">', '</div>');
+		//$this->form_validation->set_error_delimiters('<div class="error" style="color: red;">', '</div>');
 	
 		/* Form Validation Rules Ends  */
 	
-		if (!($this->input->is_ajax_request()) && empty($post) && $this->form_validation->run() == FALSE)
-		{
-			$this->index();
-		}
-		else{
+		//if (!($this->input->is_ajax_request()) && empty($post) && $this->form_validation->run() == FALSE)
+		//{
+			//$this->index();
+		//}
+		//else{
 			
 			// Discussion:Common for user input from all forms in Util
 			$search_filter=array();
@@ -401,7 +401,7 @@ class controller_basicMediclaim extends MIC_Controller {
 				
 			}
 			
-		}
+		//}
 	}
 	
 	
