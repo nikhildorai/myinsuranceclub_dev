@@ -208,7 +208,7 @@
                  	
                  	$checked_roomrent='';
                  	$checked_maternity='';
-                 	$checked_company="";
+                 	$checked_company_health='';
                  	if($this->input->cookie('user_filter')){
                  		
 						$filters = unserialize($this->input->cookie('user_filter'));
@@ -233,15 +233,16 @@
 						else
 						{
 							$checked_maternity = "";
+							
 						}
 						
 						if(isset($filters['health_comp']))
 						{
-							$checked_company = "checked='checked'";
+							$checked_company_health = "checked='checked'";
 						}
 						else{
 						
-							$checked_company = "";
+							$checked_company_health = "";
 						}
                  }?>
                  
@@ -499,7 +500,7 @@
                     
                     	<div class="checkbox">
             				<label>
-            					<input type="checkbox" id="health_comp1" name="health_comp[]"  class="search_filter" value="3" <?php echo $checked_company;?>>
+            					<input type="checkbox" id="health_comp1" name="health_comp[]"  class="search_filter" value="3" <?php echo $checked_company_health;?>>
            							 <label class="" for="health_comp1">Plans from Specialised Health Insurers									</label>
           					</label>
           				</div>
@@ -641,13 +642,14 @@ var increment_buyNow_url = "<?php echo base_url().'health_insurance/controller_b
 var searchScroll = "<?php echo ($compareParam == "yes") ? 'no' : 'yes'?>";
 </script>
 <script>
+<?php if($compareParam !='yes') {?>
 $(function() {
-  $("#share_link,#backgroundPopup").delay(2000).fadeIn(500);
+  $("#share_link,#backgroundPopup").delay(15000).fadeIn(500);
   
   setTimeout(function(){
    $('#share_link').css({opacity: 1});
    
-}, 2000);
+}, 15000);
   
   $('.fac_link').html('<div class="fb-share-button" data-href="http://www.myinsuranceclub.com/health-insurance/"></div>');
   
@@ -659,5 +661,6 @@ $(function() {
     });
     
 });
+<?php }?>
 </script>
 <?php //$customer_details = $temp;?>
