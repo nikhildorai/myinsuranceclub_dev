@@ -36,6 +36,7 @@ class controller_basicMediclaim extends MIC_Controller {
 	{
 		
 		$this->input->set_cookie('user_filter','');
+		$this->input->set_cookie('compared_plans','');
 		$product_name = "mediclaim";
 		$data=array();
 		
@@ -405,6 +406,9 @@ class controller_basicMediclaim extends MIC_Controller {
 	}
 	
 	
+	/**
+	 * 
+	 */
 	public function get_hospital_list()
 	{
 		
@@ -442,6 +446,9 @@ class controller_basicMediclaim extends MIC_Controller {
 		echo $response;
 	}
 	
+	/**
+	 * 
+	 */
 	public function increment_count()
 	{
 		$this->load->model('model_buynow_count');
@@ -455,6 +462,10 @@ class controller_basicMediclaim extends MIC_Controller {
 			$this->model_buynow_count->increase_count($increase_count_arr);
 		}
 	}
+	
+	/**
+	 * 
+	 */
 	public function compare_policies()
 	{
 		$this->load->model('model_compare_mediclaim_policies');
@@ -484,6 +495,9 @@ class controller_basicMediclaim extends MIC_Controller {
 			}
 				
 		}
+		
+		Util::setCookies('compared_plans',$variant);
+		
 		$data['comparison_results']=$this->model_compare_mediclaim_policies->get_comparison($variant,$annual_premium,$age);
 	
 		foreach ($data['comparison_results'] as $k1=>$v1)

@@ -49,6 +49,22 @@ elseif(! empty ( $customer_details )) {
 		} else {
 			$sum_assured = "<span>&#8377;" . Util::moneyFormatIndia($detail ['sum_assured']) . "</span>";
 		}
+		$compared_plans = array();
+		$plan_checked = '';
+		if($this->input->cookie('compared_plans'))
+		{
+			$compared_plans = unserialize($this->input->cookie('compared_plans'));
+			
+			if(in_array($detail['variant_id'],$compared_plans))
+			{
+			
+				$plan_checked = "checked='checked'";
+			}
+			else{
+				$plan_checked = "";
+			}
+		}
+		
 		?>
 
 
@@ -61,7 +77,7 @@ elseif(! empty ( $customer_details )) {
 				<div class="check_bx">
 					<div class="checkbox">
 						<label> <input type="checkbox" name="compare[]" id="c_name_<?php echo $detail ['variant_id'];?>"
-							class="cmpplans" value="<?php echo $compare_data?>"> <label
+							class="cmpplans" value="<?php echo $compare_data?>" <?php echo $plan_checked; ?>> <label
 							class="chk" for="c_name_<?php echo $detail ['variant_id'];?>"></label>
 						</label>
 					</div>
