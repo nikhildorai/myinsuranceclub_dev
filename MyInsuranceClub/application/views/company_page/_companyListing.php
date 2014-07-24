@@ -13,18 +13,26 @@
 		        <div class="col-md-3">
 		         <div class="view view-fifth">
 		                    <img src="<?php echo $imgUrl;?>" />
-		                    <div class="mask">
-		                        <h2><?php echo $v1['company_shortname']?></h2>
-<?php 							if (!empty($v1['slug'])) 
+
+		                    <?php 							if (!empty($v1['slug'])) 
 								{
 									if ($v1['company_type_slug'] == 'life-insurance')
 										$url = base_url().'life-insurance/companies/'.$v1['slug'].'/';
 									else 
 										$url = base_url().'general-insurance-companies/'.$v1['slug'];
-	?>		                        
-		                        	<a href="<?php echo (!empty($v1['slug'])) ? $url : 'javascript:void(0);';?>" class="info">Read More</a>
-<?php 							}	?>		                        
+								}
+
+	?>	
+		                  <a href="<?php echo (!empty($v1['slug'])) ? $url : 'javascript:void(0);';?>" > 
+
+		                   <div class="mask">
+		                        <h2><?php echo $v1['company_shortname']?></h2>
+
+		                        	<span class="info">Know more <br/>Company & Plan Details</span>
+
 		                    </div>
+
+		                    </a>
 		                </div>
 		        </div>
 <?php 		}
