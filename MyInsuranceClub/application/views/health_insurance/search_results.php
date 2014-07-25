@@ -646,8 +646,8 @@ plan for myself. Check it out. You might find it useful.</p>
 
 <?php }?>
 <script type="text/javascript">
-var company_count = "<?php echo count($aNew);?>";
-var plan_count = "<?php echo  count($customer_details);?>";
+var company_count = "<?php echo count($companyCount);?>";
+var plan_count = "<?php echo  $planCount;?>";
 var min_premium = "<?php echo  $premiums['min_premium'];?>";
 var max_premium = "<?php echo  $premiums['max_premium'];?>";
 var all_min_premium = "<?php echo  (int)$allPremiums['min_premium'];?>";
