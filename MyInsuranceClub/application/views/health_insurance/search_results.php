@@ -256,11 +256,20 @@
             <input type="checkbox" id="room_rent" name="room_rent" value="1"  class="search_filter" <?php echo $checked_roomrent;?>>
             <label class="" for="room_rent">Show plans without room rent caps</label>
           </label></div>
-					
-                    
-                    
-                   
+				
 				</p>
+		<?php 	
+				$maternity_display = '';
+				if(trim($this->session->userdata['user_input']['cust_gender']) == 'Male' && in_array($this->session->userdata['user_input']['plan_type'],array('1A','1A1C','1A2C','1A3C','1A4C')))
+				{ 
+				 	$maternity_display = "style='display: none;'";
+				}
+				else 
+				{
+					$maternity_display = '';
+				} 
+		?>
+                <div <?php echo $maternity_display; ?>>	
                 <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
 				</p> 
@@ -276,7 +285,7 @@
           </label></div>
 					 
 				</p>
-                
+              </div>  
                 
              <?php if(isset($preexist_filter))
                  	
