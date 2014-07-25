@@ -154,7 +154,7 @@
 -->
               <div class="desk_cal">
                 <label class="input" style="position:relative"> <i class="icon-append fa fa-calendar " id="trigger"></i>
-                  <input type="text" name="desktop_cust_dob" id="cust_dob" class="form-control cal"   placeholder="Date of Birth" value="<?php if(isset($this->session->userdata['user_input']['cust_birthdate']))
+                  <input type="text" name="desktop_cust_dob" id="cust_dob" autocomplete="off" class="form-control cal"   placeholder="Date of Birth" value="<?php if(isset($this->session->userdata['user_input']['cust_birthdate']))
                     																											{
                     																												echo $this->session->userdata['user_input']['cust_birthdate'];
                     																											}else 
@@ -165,7 +165,7 @@
               </div>
               <div class="mob_cal">
                 <label class="input form-control" style="position:relative; margin:0px;"> <i class="icon-append fa fa-calendar "></i>
-                  <input type="date" name="mobile_cust_dob" id="m_cust_dob" class="native_date_picker" value="<?php if(isset($this->session->userdata['user_input']['cust_birthdate']))
+                  <input type="date" name="mobile_cust_dob" id="m_cust_dob" autocomplete="off" class="native_date_picker" value="<?php if(isset($this->session->userdata['user_input']['cust_birthdate']))
                     																											{
                     																												echo $this->session->userdata['user_input']['cust_birthdate'];
                     																											}else 
