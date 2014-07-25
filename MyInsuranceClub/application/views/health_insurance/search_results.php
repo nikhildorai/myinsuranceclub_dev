@@ -38,9 +38,6 @@
    </div>
 	<?php   
 	
-	
-	//var_dump($premiums);
-	$premiums = Util::getMinAndMaxPremium($customer_details);
 	$newVal = array();
 	$preexisitng_disease_discard = array();
 	$aNew = array();
@@ -74,22 +71,7 @@
         }
                    				
 	}	
-       /*  $min_annual_premium='';
-        $max_annual_premium='';
-        if(count($customer_details) > 0)
-        {
-        	$anuual_premium = array_map(function($detail)
-        	{
-        		return $detail['annual_premium'];
-        	}, $customer_details);
-        	$min_annual_premium=min($anuual_premium);
-        	$max_annual_premium=max($anuual_premium);
-        }
-        elseif(count($customer_details) == 0)
-        {
-        	$min_annual_premium='0';
-        	$max_annual_premium='0';
-        } */
+      
 ?>
       
       
@@ -642,16 +624,13 @@ plan for myself. Check it out. You might find it useful.</p>
     <div class="close34" ><span>Ok got it</span> &times;</div>
     <strong>Oh ho!</strong> <br/><div class="al_msg_cmp"></div>
 </div>
-<?php if(empty($customer_details)){?>
-
-<?php }?>
 <script type="text/javascript">
 var company_count = "<?php echo count($companyCount);?>";
 var plan_count = "<?php echo  $planCount;?>";
 var min_premium = "<?php echo  $premiums['min_premium'];?>";
 var max_premium = "<?php echo  $premiums['max_premium'];?>";
-var all_min_premium = "<?php echo  (int) $allPremiums['min_premium'];?>";
-var all_max_premium = "<?php echo  (int) $allPremiums['max_premium'];?>";
+var all_min_premium = "<?php echo  (int)$allPremiums['min_premium'];?>";
+var all_max_premium = "<?php echo  (int)$allPremiums['max_premium'];?>";
 var hospital_list_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/get_hospital_list'?>";
 var annual_premium_search_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/health_policy'?>";
 var increment_buyNow_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/increment_count'?>";
