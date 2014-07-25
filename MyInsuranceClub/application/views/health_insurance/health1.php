@@ -1,16 +1,18 @@
+
+
 <?php $this->load->view('partial_view/header_new'); ?>
 
 <span id="o_touch"></span>
-<div id="highlighted" style=" background:#fff; padding-bottom:50px; margin-bottom:0px;" >
+<div id="highlighted" class="health_page">
   <div class="container">
      <?php echo validation_errors();?>
 	<?php echo form_open('health-insurance/search-results',array('name'=>'health_form','id'=>'health_form','class'=>'health-form'));?>
       <div class="col-md-12 center ">
         <div class="col-md-1"></div>
-        <h1 class="col-md-11" style="text-align:left;">Compare & Buy Health Insurance Plans</h1>
+        <h1 class="col-md-11" style="text-align:center; margin-top:0px; width:100%;">Compare & Buy Health Insurance Plans</h1>
         <div class="col-md-12">
           <div class="col-md-1"></div>															
-          <p class="col-md-11" style="text-align:left; padding-left:7px;">Choose from <?php echo $company_plan_count[1]['companyCount'];?> plans from <?php echo $company_plan_count[0]['companyCount'];?> companies</p>
+          <p class="col-md-11" style="text-align:left; padding-left:32px;">Choose from <?php echo $company_plan_count[1]['companyCount'];?> plans from <?php echo $company_plan_count[0]['companyCount'];?> companies</p>
         </div>
       </div>
       <div class="col-md-12 center m_h" style=" position:relative;">
@@ -193,7 +195,7 @@
               </label>
             </div>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-4 pad_right_no">
             <div class="section">
               <label class="field prepend-icon">
               <label class="sr-only" for="signup-first-name">Email</label>
@@ -620,32 +622,39 @@
             <input id="Field4" 	type="checkbox"	 name="agree"  class="field checkbox"  value="agree" checked="checked" />
             <label class="" for="Field4">I authorize MyInsuranceClub &amp; its partners to Call/SMS for my application &amp; agree to the <a href="" class="link">Terms of Use</a>.</label>
           </div>
-          <div class="form-group col-md-2" style="float:right">
+          <div class="form-group col-md-2 pad_right_no" style="float:right">
           	<!-- <input name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="Show My Options &gt;">
              -->
-            <button name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="submit">Show my options <i class="fa fa-chevron-right ar "></i> </button>
+            <button name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="submit">Show me a list of plans<i class="fa fa-chevron-right ar "></i> </button>
             <div class="load_spin"><img src="<?php echo base_url();?>/assets/images/ajax-loader.gif"></div>
           </div>
         </div>
-        <div style="margin-top: 20px; float: left;" class="">
-          <div class="pos1" style="">
-            <div class="col-md-2">
+      
+      </div>
+   <?php echo form_close();?>
+
+
+   <div class="cus_cont" style=" ">
+   
+        <div style="margin-top: 40px; float: left; width:100%;" class="">
+          <div class="pos1" >
+            <div class="col-md-2 c_o">
               <p><img src="<?php echo base_url();?>/assets/images/star.png" border="0" class="mar-r8">Cashless claims </p>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 c_t">
               <p><img src="<?php echo base_url();?>/assets/images/star.png" border="0" class="mar-r8">Lifetime renewal</p>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 c_th">
               <p><img src="<?php echo base_url();?>/assets/images/star.png" border="0" class="mar-r8">Tax benefits</p>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 c_f" >
               <p><img src="<?php echo base_url();?>/assets/images/star.png" border="0" class="mar-r8">Free health checkups</p>
             </div>
           </div>
         </div>
       </div>
-   <?php echo form_close();?>
   </div>
+</div>
 </div>
 <div class="b-top"></div>
 <section id="feature-pannels" style="opacity: 1; bottom: 0px;" class="moving">

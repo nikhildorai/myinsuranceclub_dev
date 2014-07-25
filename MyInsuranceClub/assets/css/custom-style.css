@@ -981,12 +981,13 @@ html * .slideshow .ls-container .ls-nav-next {
 }
 .subfooter .list-inline>li {
  display: inline-block;
-    margin-left: -2px;
+    
     padding-left: 0;
     padding-right: 2px;
 }
-.subfooter ul{ padding:0px; margin:0px;color: #fff;
-    font-weight: bold; float:left; margin-left:100px;}
+.subfooter ul{ padding:0px 20px; margin:0px;color: #fff;
+    font-weight: bold; float:left; }
+	.subfooter ul.list-inline.footer-menu.main-menu{ float:right; padding:0px;}
 #footer .block {
 	margin-bottom:2em
 }

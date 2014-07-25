@@ -1,3 +1,4 @@
+
 .filterContent .ui-slider {
 	position:relative;
 	text-align:left
@@ -676,7 +677,7 @@ transition:all .2s ease;
 	margin-right:10px
 }
 .navbar-nav li a.home_fix {
-	padding-right:20px;
+	/*padding-right:20px;*/
 	background:#1c82c3;
 	border:none;
 	font-size:18px

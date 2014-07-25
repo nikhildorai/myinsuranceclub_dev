@@ -511,6 +511,9 @@ text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #fff, 0 0 4px #fff, 0 0 7px #ff
 	/* --------------- */
 	.sam_h{text-align: left; width:25%; float:left; padding-top:35px;
     line-height: 30px; padding-bottom:35px; background:#eee;}
+	.panel-container .sam_h{text-align: left; width:25%; float:left; padding-top:12px;
+    line-height: 30px; padding-bottom:85px; background:#eee;}
+	.panel-container .cal{ bottom:22px !important; }
 		
 	#pricing-table {
 	margin: 0px auto;

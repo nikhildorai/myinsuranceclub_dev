@@ -710,7 +710,6 @@ transition:margin .6s, opacity .6s
 .cus_cont .pos1 p{ color:#000; font-weight:bold; line-height:24px;}
 .cus_cont .pos1 .mar-r8 {  margin-top: -3px;}
 .cus_cont .col-md-2{ /*width:190px; float:left;*/}
-.cus_cont .pos1 .col-md-2 { margin:0; padding:0;}
 #one_c,#two_c,#three_c,#four_c{ width:380px; float:left;}
 
 
@@ -753,8 +752,8 @@ label[title]:hover:before{
 
 
 #sub_form{
-    float: right;
-    padding: 6px 25px;
+    float: right; border:2px solid #066B0E;
+    padding: 12px 25px; font-weight:bold;
 }
 .ar{   font-size: 12px;
     font-weight: normal;
@@ -1491,6 +1490,7 @@ a.btn_offer_block:active:after { border-left: 7px solid #fb7203; }
     position: absolute;
     right: 20px;
     top: 6px; display:none;}
+	.start_icon{position: absolute; left:145px; top: 43px; width:200px;}
 	
 	
 	

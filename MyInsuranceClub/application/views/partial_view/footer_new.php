@@ -9,7 +9,7 @@
                   </li>
                   <li><a href="#">Latest Product Launches </a></li>
                   |
-                  <li><a href="#">Resolve Insurance Queries </a></li>
+                  <li><a href="#">Resolve Queries </a></li>
                   |
                   <li><a href="#">Industry News </a></li>
                   |

@@ -23,9 +23,26 @@
     float: left;
     width: 190px;
 }
-.pos1{  margin-left: 35px;}
+.cus_cont .pos1 .col-md-2.c_f {
+    float: right;
+    width: 190px;
+}
+.cus_cont .pos1 { width:760px; margin:0px auto}
+
 .cus_border.form-control.sel{ /*border:2px solid #e7e5e5; */ background:#f7f4f4;} 
 .cus_border.form-control.sel .label.css-label,.cus_border.form-control.sel .icon-append { cursor:default !important; }
+.pos1 .c_o{ margin-left:0px; padding:0px;}
+.pos1 .c_t{ margin-left:0px;padding:0px; padding-left:10px;}
+.pos1 .c_th{ margin-left:0px;padding:0px; padding-left:30px;}
+.pos1 .c_f{ margin-left:0px; text-align:right;padding:0px; float:right; padding-right:3px;}
+.health_page{ background:#fff; height: 500px;
+    left: 50%;
+    margin-left: -585px;
+    margin-top: -200px;
+    position: absolute;
+    top: 50%; width:1170px !important;}
+    .pad_right_no{ padding-right: 0px;}
+
 
 @media screen and (max-width: 990px) {
 	.cus_cont {

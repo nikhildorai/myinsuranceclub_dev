@@ -6,6 +6,7 @@
    overflow: auto;
    }
 </style>
+<div style="height:100%; width:100%; ">
 <div id="navigation" class="wrapper">
    <div class="navbar-static-top">
       <div class="header" >
