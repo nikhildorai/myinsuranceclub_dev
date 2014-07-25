@@ -76,9 +76,9 @@ elseif(! empty ( $customer_details )) {
 					class="img_bx_i">
 				<div class="check_bx">
 					<div class="checkbox">
-						<label> <input type="checkbox" name="compare[]" id="c_name_<?php echo $detail ['variant_id'];?>"
+						<label> <input type="checkbox" name="compare[]" id="c_name_<?php echo $detail ['variant_id'].$detail['annual_premium'];?>"
 							class="cmpplans" value="<?php echo $compare_data?>" <?php echo $plan_checked; ?>> <label
-							class="chk" for="c_name_<?php echo $detail ['variant_id'];?>"></label>
+							class="chk" for="c_name_<?php echo $detail ['variant_id'].$detail['annual_premium'];?>"></label>
 						</label>
 					</div>
 				</div>
