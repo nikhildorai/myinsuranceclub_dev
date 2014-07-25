@@ -1,22 +1,27 @@
 <?php 
-	
-	/* $temp = $customer_details;
+		
+	$temp = $customer_details;
 	$temp_premiums = Util::getMinAndMaxPremium($temp);
-	$plan_count='';
-	
-	if($compareParam == 'yes' && !empty($cookie_customer_detail))
-	{	
+
+	$allPremiums = Util::getMinAndMaxPremium($customer_details);
+
+	//	if user is visiting from compare result show all the values from cookie
+
+	if(!empty($cookie_customer_detail) && $compareParam == 'yes')
+	{
 		$customer_details = $cookie_customer_detail;
 	}
 	
-	if(count($temp) >= count($customer_details))
+	foreach($customer_details as $k=>$v)
 	{
-		$plan_count = count($temp);
+		$companyCount[$v['company_id']] = $v['company_id'];
 	}
-	elseif(count($customer_details) >= count($temp))
-	{
-		$plan_count = count($customer_details);
-	} */
+	
+	$premiums = Util::getMinAndMaxPremium($customer_details);
+	
+	$planCount = count($customer_details);
+	
+	$customer_details = $temp;
 	?>
 <span id="o_touch"></span>
 
@@ -29,7 +34,7 @@
        <div class="top_h">Your Search</div>
        <div class="top_p">Coverage Amount = &#8377; <?php if(isset($this->session->userdata['user_input']['coverage_amount'])){echo $this->session->userdata['user_input']['coverage_amount'];}?></div>
       <div class="top_p"> Members = <?php if(isset($this->session->userdata['user_input']['plan_type_name'])){echo $this->session->userdata['user_input']['plan_type_name'];}?></div>
-       <div class="top_m"><i class="fa fa-angle-left"></i> <a href="<?php echo site_url('health-insurance');?>">&nbsp;Modify Your Search</a></div>
+       <div class="top_m"><i class="fa fa-angle-left"></i> <a href="<?php echo site_url('health-insurance')."/";?>">&nbsp;Modify Your Search</a></div>
    </div>
 	<?php   
 	
@@ -175,7 +180,7 @@
                 
                 
                 <div class="block1" style="position:relative;">
-                 <h6 class="fh3 l"><span id="plan_cnt"></span> of <?php echo  count($customer_details);?> plans</h6>
+                 <h6 class="fh3 l"><span id="plan_cnt"></span> of <?php  echo  count($temp);?> plans</h6>
                  
                  <h6 class="fh3"> Premium</h6>
                  
@@ -195,9 +200,9 @@
 							
 			
 			<p class="displayStaticRange clearFix" style="padding-bottom:0px; margin-bottom:0px;">
-				<span class="fLeft"><span data-pr="6437" class="INR">&#8377;</span><?php echo number_format($premiums['min_premium']);?></span>
+				<span class="fLeft"><span data-pr="6437" class="INR">&#8377;</span><?php echo number_format($temp_premiums['min_premium']);?></span>
 				
-				<span class="fRight"><span data-pr="42306" class="INR">&#8377;</span><?php echo number_format($premiums['max_premium']);?></span>
+				<span class="fRight"><span data-pr="42306" class="INR">&#8377;</span><?php echo number_format($temp_premiums['max_premium']);?></span>
 			</p>
 	
 			<input type="hidden" name="price" value="6437-32293">
@@ -645,6 +650,8 @@ var company_count = "<?php echo count($aNew);?>";
 var plan_count = "<?php echo  count($customer_details);?>";
 var min_premium = "<?php echo  $premiums['min_premium'];?>";
 var max_premium = "<?php echo  $premiums['max_premium'];?>";
+var all_min_premium = "<?php echo  (int)$allPremiums['min_premium'];?>";
+var all_max_premium = "<?php echo  (int)$allPremiums['max_premium'];?>";
 var hospital_list_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/get_hospital_list'?>";
 var annual_premium_search_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/health_policy'?>";
 var increment_buyNow_url = "<?php echo base_url().'health_insurance/controller_basicMediclaim/increment_count'?>";
@@ -672,4 +679,3 @@ $(function() {
 });
 <?php }?>
 </script>
-<?php //$customer_details = $temp;?>

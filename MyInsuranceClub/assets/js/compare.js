@@ -302,9 +302,9 @@ $('html, body').animate({scrollTop: $(this).parent().parent().parent().offset().
 	 
 	 $( "#slider-range1" ).slider({
       range: true,
-      min: parseInt(min_premium),
-      max: parseInt(max_premium),
-      values: [ min_premium, max_premium ],
+      min: parseInt(all_min_premium),
+      max: parseInt(all_max_premium),
+      values: [ parseInt(min_premium), parseInt(max_premium) ],
       slide: function( event, ui ) {
         $("#amount_a" ).val( "₹" + formatNumber(ui.values[ 0 ]));
 		$("#amount1_a" ).val( "₹" + formatNumber(ui.values[ 1 ]));
