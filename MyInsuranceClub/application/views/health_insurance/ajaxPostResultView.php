@@ -45,7 +45,7 @@ elseif(! empty ( $customer_details )) {
 		
 		if ((int) (trim ( $detail ['sum_assured'] )) != (int) $con->session->userdata ['user_input'] ['coverage_amount_literal']) {
 				
-				$sum_assured = "<span style='color: #ff6633;'>&#8377;" . Util::moneyFormatIndia($detail ['sum_assured']) . "</span>";
+				$sum_assured = "<span style='color: #2CA3EF;'>&#8377;" . Util::moneyFormatIndia($detail ['sum_assured']) . "</span>";
 		} else {
 			$sum_assured = "<span>&#8377;" . Util::moneyFormatIndia($detail ['sum_assured']) . "</span>";
 		}
