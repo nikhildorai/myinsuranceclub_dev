@@ -29,96 +29,114 @@
 
   <div class="container">
   
-   <div class="top_band">
+
+
+
+<div style=" width:100%; float:left;">
    <div class="col-md-3  border m_a">
-       <div class="top_h">Your Search</div>
-       <div class="top_p">Coverage Amount = &#8377; <?php if(isset($this->session->userdata['user_input']['coverage_amount'])){echo $this->session->userdata['user_input']['coverage_amount'];}?></div>
-      <div class="top_p"> Members = <?php if(isset($this->session->userdata['user_input']['plan_type_name'])){echo $this->session->userdata['user_input']['plan_type_name'];}?></div>
+       <div class="top_h">You searched for:</div>
+  
+  <div class="top_p"><strong>Coverage Amount</strong> = &#8377; <?php if(isset($this->session->userdata['user_input']['coverage_amount'])){echo $this->session->userdata['user_input']['coverage_amount'];}?></div>
+     <div class="top_p"><strong>Members</strong> = <?php if(isset($this->session->userdata['user_input']['plan_type_name'])){echo $this->session->userdata['user_input']['plan_type_name'];}?></div>
+    <div class="top_p"><strong>City</strong> = <?php if(isset($this->session->userdata['user_input']['cust_city_name'])){echo $this->session->userdata['user_input']['cust_city_name'];}?></div>
        <div class="top_m"><i class="fa fa-angle-left"></i> <a href="<?php echo site_url('health-insurance')."/";?>">&nbsp;Modify Your Search</a></div>
    </div>
-	<?php   
-	
-	$newVal = array();
-	$preexisitng_disease_discard = array();
-	$aNew = array();
-	$pph = array();
-	if(!empty($customer_details))
-	{
-			
+  <?php   
+  
+  $newVal = array();
+  $preexisitng_disease_discard = array();
+  $aNew = array();
+  $pph = array();
+  if(!empty($customer_details))
+  {
+      
         foreach($customer_details as $k=>$v)
         {
-           	
-        	$aNew[$v['company_id']]['company'] = $v;
-        	$aNew[$v['company_id']]['premium'][] = $v['annual_premium'];
-       	 	
-       	 	
-       	 	
-       	 	if($v['preexisting_diseases']!='Not Covered')
-			{
-       	 		if(!in_array($v['preexisting_diseases'],$preexisitng_disease_discard))
-       	 		{
-       	 			$preexist_filter [] = $v['preexisting_diseases'];
-       	 		}
+            
+          $aNew[$v['company_id']]['company'] = $v;
+          $aNew[$v['company_id']]['premium'][] = $v['annual_premium'];
+          
+          
+          
+          if($v['preexisting_diseases']!='Not Covered')
+      {
+            if(!in_array($v['preexisting_diseases'],$preexisitng_disease_discard))
+            {
+              $preexist_filter [] = $v['preexisting_diseases'];
+            }
 
-       	 		$preexisitng_disease_discard [] = $v['preexisting_diseases'];
-			}
+            $preexisitng_disease_discard [] = $v['preexisting_diseases'];
+      }
         
-       		if(!in_array($v['public_private_health'],$pph))
-       		{
-       			$pph[] = $v['public_private_health'];
-       		}
-				$pph_disacrd[] = $v['public_private_health'];
+          if(!in_array($v['public_private_health'],$pph))
+          {
+            $pph[] = $v['public_private_health'];
+          }
+        $pph_disacrd[] = $v['public_private_health'];
         }
-                   				
-	}	
+                          
+  } 
       
 ?>
-      
-      
+    
+
+
+
+
+
+
+  <div class="col-md-9" style="padding-right:0px;" >
+   <div class="top_band_com">
     <div class="col-md-2  border c_o">
     <div id="sh1" style="display:none">
     <?php 
-    	$comp_name = '';
-    	if (count($aNew) > 1)
-		{
-			$comp_name = "Companies";
-		}
-		else
-		{
-			$comp_name = "Company";
-		}
-		
-		if($compareParam == 'yes')
-		{
-			$odometer = "no_odometer";
-		}
-		else
-		{
-			$odometer = "odometer";
-		}
-		?>
-		
+      $comp_name = '';
+      if (count($aNew) > 1)
+    {
+      $comp_name = "Companies";
+    }
+    else
+    {
+      $comp_name = "Company";
+    }
+    
+    if($compareParam == 'yes')
+    {
+      $odometer = "no_odometer";
+    }
+    else
+    {
+      $odometer = "odometer";
+    }
+    ?>
+    
        <div class="top_h_t"><?php echo $comp_name;?></div>
        <div id="com_c" class="top_p_n <?php echo $odometer;?>">0</div>
       </div> 
       
    </div>
    
-    <div class="col-md-2  border c_o">
+     <div class="col-md-2  border c_o">
     <div id="sh2" style="display:none">
-       <div class="top_h_t">Plans</div>
-       <div id="plan_c" class="top_p_n <?php echo $odometer;?>">0</div>
-       </div>
-   </div>
-    <div class="col-md-5  noborder clearfix">
+      <div class="top_h_t">Plans</div>
+      <div id="plan_c" class="top_p_n <?php echo $odometer;?>">0</div>
+    </div>
+  </div>
+  <div class="col-md-8  noborder clearfix">
     <div id="sh3" style="display:none">
-       <div class="top_h_t text-left">Price Range</div>
-       <div class="top_p_n text-left" style="float:left;"><span style="float:left; margin-top:7px;">&#8377;</span><span id="pr_ra"  class="<?php echo $odometer;?>" style="float:left;">0</span><span style="float:left;margin-top:7px;""> &nbsp;- &#8377;</span><span id="pr_rb" class="<?php echo $odometer;?>" style="float:left;">0</span></div>
-       </div>
-       <div id="sh4" style="position:absolute;"><i class="fa fa-check-square-o"></i> </div>
-   </div>
+      <div class="top_h_t text-left">Price Range</div>
+      <div class="top_p_n text-left" style="float:left;"> <span style="float:left; margin-top:7px;">&#8377;</span> <span id="pr_ra"  class="<?php echo $odometer;?>" style="float:left;">0</span> <span style="float:left;margin-top:7px;""> &nbsp;- &#8377;</span> <span id="pr_rb" class="<?php echo $odometer;?>" style="float:left;">0</span> </div>
+    </div>
+    <div id="sh4" style="position:absolute;"><i class="fa fa-check-square-o"></i> </div>
+  </div>
    
    </div>
+   
+   
+   </div>
+   </div>
+
+
   <div id="loader" style="display: <?php echo ($compareParam == "yes") ? 'none' : 'block'?>"><img src="<?php echo base_url();?>/assets/images/loader.gif" border="0"></div>
    <div class="" style="margin-top:20px; display:none;" id="prdt_dis">
             <div class="col-md-9 col-md-push-3 cus_res_hlth" style="padding-right:0px;">
@@ -128,15 +146,13 @@
               <?php echo form_open('health-insurance/compare-results',array('id'=>'compare'));?>
                <div style=" height:auto; padding:10px 0px 30px 0px; background:#ededec;  border-radius: 4px; font-weight:bold;">
                 <div class="col-md-5 plan">
-                Plan Details
+                <div style="position: relative; float: left; margin-left: -2px; top: 2px; margin-right: 7px; color: rgb(95, 180, 29); font-size: 17px;"><i class="fa fa-level-up  fa-rotate-180"></i></div>  <div class="com_pl" style="float: left; font-weight: bold; color: rgb(44, 163, 239);"><a href="javascript:void(0);" class="cmp_p_s" id="comparePolicy" title="Compare upto 3 plans">Compare Plans</a></div>
                 </div>
                 
                  <div class="col-md-3 an">
                  Annual Premium
                 </div>
-                 <div class="col-md-4 text-right plan_cmpre">
-                 <a href="javascript:void(0);" class="cmp_p_s" id="comparePolicy" title="Compare upto 3 plans">Compare Plans</a>
-                </div>
+                
                 
                 </div>
                 <div id="cmp_tbl">

@@ -1087,10 +1087,10 @@ i.searchSprite, .searchSprite, .withNotch .tracker, .rangeHandle, .withArrows li
     margin:17px 0 4px;
     padding: 0;;}
 	.anc_f{ font-size:14px; margin:0px; padding:0px;   line-height: 20px;}
-	.down_cnt{color: #999999;
+	.down_cnt{color: #ff6633;
     cursor: pointer;
-    font-size: 18px;
-    margin-top: 25px;}
+    font-size: 25px;
+    margin-top: 20px;}
 	.down_cnt_up{
     cursor: pointer; display:none;
     font-size: 20px;

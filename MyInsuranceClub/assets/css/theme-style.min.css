@@ -683,7 +683,7 @@ transition:all .2s ease;
 	font-size:18px
 }
 .dropdown-menu.other {
-	left:-399px;
+	left:-390px;
 	margin-left:-1px
 }
 #header-hidden-link a.show-hide>i:before {
