@@ -44,6 +44,7 @@ function send_ajax_post(controller_url)
 		company_count = s.company;
 		min_premium = s.minPremium;
 		max_premium = s.maxPremium;
+		$('html, body').animate({scrollTop: $("#prdt_dis").offset().top}, 100);
 		
 		show_prem(min_premium,max_premium,company_count,plan_count);
 	}
@@ -216,16 +217,22 @@ var that = this,
 		//	$('.down_cnt').closest('.accordion_a').slideToggle();
 		//$('.accordion_a').hide();
 		 $(this).toggleClass("down_arw");
+		  $(this).find('i').toggleClass("fa-minus-square");
 		
 $(this).parent().parent().parent().parent().find('.accordion_a').slideToggle();
 
  if ( $( this ).hasClass( "down_arw" ) ) {
  
-       $(this).parent().find('.down_cnt_up').show();
+       $(this).parent().find('.down_cnt_up').hide();
+	 $(this).parent().parent().parent().addClass("border_hglt");
+	  $(this).parent().parent().parent().parent().find('.accordion_a').addClass("border_hglt");
+	 $('html, body').animate({scrollTop: $(this).parent().parent().parent().parent().offset().top}, 100);
  
     }
 	else{
 		$(this).parent().find('.down_cnt_up').hide();
+		 $(this).parent().parent().parent().removeClass("border_hglt");
+	   $(this).parent().parent().parent().parent().find('.accordion_a').removeClass("border_hglt");
 	}
 		
 	});	
@@ -248,6 +255,7 @@ $(this).hide();
 		//$('.accordion_a').hide();
 $(this).parent().parent().parent().find('.accordion_a').slideToggle();
 $(this).parent().parent().parent().find('.down_cnt').removeClass("down_arw");
+$(this).parent().parent().parent().find('.down_cnt i').removeClass("fa-minus-square");
 $(this).parent().parent().parent().find('.down_cnt_up').hide();
 
 $('html, body').animate({scrollTop: $(this).parent().parent().parent().offset().top}, 100);
@@ -336,6 +344,7 @@ $('html, body').animate({scrollTop: $(this).parent().parent().parent().offset().
 $('.search_filter').on('click',function(){
 	
 		send_ajax_post(annual_premium_search_url);
+		
 });
 
 	/*****************************************************/

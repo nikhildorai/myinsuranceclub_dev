@@ -1,9 +1,4 @@
-
-
-
 <?php 
-
-
 $con = &get_instance();
 $folderUrl = $con->config->config['folder_path']['company']['searchResultLogo'];
 $fileUrl = $con->config->config['url_path']['company']['searchResultLogo'];
@@ -97,15 +92,15 @@ elseif(! empty ( $customer_details )) {
 				<h3 class="anc">&#8377;<?php echo number_format($detail['annual_premium'])?></h3>
 				<p class="sub_tit">for cover of <?php echo $sum_assured ?></p>
 			</div>
-			<div class="col-md-2" style="padding: 0px">
-				<div class="down_cnt"
-					style="width: 20px; height: auto; float: left; color: #999999;">
-					<i class="fa fa-th"></i>
-				</div>
-				<div class="down_cnt_up" style="">
-					<i class="fa fa-angle-up"></i>
-				</div>
-			</div>
+			<div class="col-md-2" style="padding:0px">
+                 
+                 <div class="down_cnt" style="width:20px; height:auto; float:left; "><i class="fa fa-plus-square"></i>
+                
+                 </div>
+  <div class="down_cnt_up" style=""><i class="fa fa-angle-up"></i> 
+                
+                 </div>
+                 </div>
 			<div class="col-md-4 post_msg" id="buy_now_message_<?php echo $detail['variant_id'];?>" style="display:none">
 			Call 100100100 to buy this policy
 			</div>

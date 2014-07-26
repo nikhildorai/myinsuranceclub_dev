@@ -3,13 +3,14 @@
 <?php $this->load->view('partial_view/header_new'); ?>
 
 <span id="o_touch"></span>
-<div id="highlighted" class="health_page">
+<div class="min_height" style="height:auto; width:100%; ">
+<div id="highlighted" >
   <div class="container">
      <?php echo validation_errors();?>
 	<?php echo form_open('health-insurance/search-results',array('name'=>'health_form','id'=>'health_form','class'=>'health-form'));?>
       <div class="col-md-12 center ">
         <div class="col-md-1"></div>
-        <h1 class="col-md-11" style="text-align:center; margin-top:0px; width:100%;">Compare & Buy Health Insurance Plans</h1>
+        <h1 class="col-md-11" style="text-align:center; margin-top:30px; width:100%;">Compare & Buy Health Insurance Plans</h1>
         <div class="col-md-12">
           <div class="col-md-1"></div>															
           <p class="col-md-11" style="text-align:left; padding-left:32px;">Choose from <?php echo $company_plan_count[1]['companyCount'];?> plans from <?php echo $company_plan_count[0]['companyCount'];?> companies</p>
@@ -654,6 +655,7 @@
         </div>
       </div>
   </div>
+</div>
 </div>
 </div>
 <div class="b-top"></div>
