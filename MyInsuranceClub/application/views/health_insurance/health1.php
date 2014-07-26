@@ -626,7 +626,7 @@
           <div class="form-group col-md-2 pad_right_no" style="float:right">
           	<!-- <input name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="Show My Options &gt;">
              -->
-            <button name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="submit">Show me a list of plans<i class="fa fa-chevron-right ar "></i> </button>
+            <button name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="submit">Show plans<i class="fa fa-chevron-right ar "></i> </button>
             <div class="load_spin"><img src="<?php echo base_url();?>/assets/images/ajax-loader.gif"></div>
           </div>
         </div>
