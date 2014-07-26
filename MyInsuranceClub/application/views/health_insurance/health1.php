@@ -720,7 +720,7 @@
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Thank you once again for your free and very valuable information on 
+                  <p><strong><img src="<?php echo base_url();?>/assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Thank you once again for your free and very valuable information on 
                     insurance. Best wishes to your team and keep up the good work!&nbsp;&nbsp;</strong></p>
                   <p class="col-md-12 aln_right">- Pravin Bhandare, Bangalore</p>
                 </div>
@@ -731,7 +731,7 @@
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;I was looking for a term plan and it was tough choosing the right one as there were too many choices. I am glad that you helped patiently.&nbsp;&nbsp;</strong></p>
+                  <p><strong><img src="<?php echo base_url();?>/assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;I was looking for a term plan and it was tough choosing the right one as there were too many choices. I am glad that you helped patiently.&nbsp;&nbsp;</strong></p>
                   <p class="col-md-12 aln_right">- Anita Viswas, Mumbai</p>
                 </div>
               </div>
@@ -742,7 +742,7 @@
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;This is cool. Usually go with the options provided by my car dealer for my car insurance. Spending a few minutes here save me money.&nbsp;&nbsp;</strong></p>
+                  <p><strong><img src="<?php echo base_url();?>/assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;This is cool. Usually go with the options provided by my car dealer for my car insurance. Spending a few minutes here save me money.&nbsp;&nbsp;</strong></p>
                   <p class="col-md-12 aln_right">- Arun Kumar, Chennai</p>
                 </div>
               </div>
@@ -752,7 +752,7 @@
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Fun, non-intrusive and informative. Your health insurance comparison is great. It would have been better if you can recommend plans also.&nbsp;&nbsp;</strong></p>
+                  <p><strong><img src="<?php echo base_url();?>/assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Fun, non-intrusive and informative. Your health insurance comparison is great. It would have been better if you can recommend plans also.&nbsp;&nbsp;</strong></p>
                   <p class="col-md-12 aln_right">- Abhinav Kumar, New Delhi</p>
                 </div>
               </div>
