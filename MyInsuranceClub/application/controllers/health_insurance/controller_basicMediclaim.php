@@ -26,7 +26,7 @@ class controller_basicMediclaim extends Customer_Controller {
 		
 		$this->load->model('model_city');
 		$this->load->model('model_get_company_plans_count');
-		$this->load->model('model_get_mediclaim_search_results');
+		$this->load->model('model_get_results_mediclaim');
 		
 		
 	}
@@ -309,7 +309,7 @@ class controller_basicMediclaim extends Customer_Controller {
 			{
 				//get result set from DB and save in cache
 				
-				$data['customer_details']=$this->model_get_mediclaim_search_results->get_policy_results($user_input);
+				$data['customer_details']=$this->model_get_results_mediclaim->get_policy_results($user_input);
 				
 				if(!empty($data['customer_details']))
 				{
@@ -381,7 +381,7 @@ class controller_basicMediclaim extends Customer_Controller {
 	{
 		
 		
-		$this->load->model('get_hospital_list');
+		$this->load->model('model_get_hospital_list');
 		
 		if($_GET != '')
 		{
@@ -392,7 +392,7 @@ class controller_basicMediclaim extends Customer_Controller {
 		
 		$response = '';
 		
-		$result = $this->get_hospital_list->get_list($company_id,$company_hospitals);
+		$result = $this->model_get_hospital_list->get_list($company_id,$company_hospitals);
 		
 		
 		if(empty($result) && !in_array($company_id,$result))
