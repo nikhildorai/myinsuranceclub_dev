@@ -172,11 +172,11 @@ elseif(! empty ( $customer_details )) {
 							</tr>
 							<tr>
 								<td>Health Check up</td>
-								<td class="cus_width"><?php $detail['check_up']?></td>
+								<td class="cus_width"><?php echo $detail['check_up']?></td>
 							</tr>
 							<tr class="odd">
 								<td>Ayurvedic Treatment</td>
-								<td class="cus_width"><?php $detail['ayurvedic']?></td>
+								<td class="cus_width"><?php echo $detail['ayurvedic']?></td>
 							</tr>
 							<tr>
 								<td>Co-payment</td>
