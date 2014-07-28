@@ -26,9 +26,6 @@ class controller_basicMediclaim extends MIC_Controller {
 		
 		$this->load->model('model_city');
 		$this->load->model('model_get_company_plans_count');
-		
-		
-		
 	}
 	
 	
@@ -527,5 +524,17 @@ class controller_basicMediclaim extends MIC_Controller {
 		//$this->load->view('health_insurance/compare_results',$data);
 	}
 	
+	public function policyView($policySlug)
+	{
+		$data = $arrParams = array();
+		if (!empty($policySlug))
+		{
+			$arrParams['policy_slug'] = $policySlug;
+			$data = Policy_master_model::getSinglePolicyAllDetails($type = 'slug', $arrParams);
+		}	
+		$this->template->set_template('frontend');
+		$this->template->write_view('content', 'health_insurance/policyView', $data, TRUE);
+		$this->template->render();
+	}
 }
 /* End of basicMediclaim controller. */

@@ -7,7 +7,7 @@ class Tagit extends Widget{
 
     }
 
-    function run(){	
+    function run($ext = array()){
     	//	get all the tags
     //	$allTags = $this->util->getAllTags();//isset($this->data['allTags']) ? $this->data['allTags'] : array();
     	//	get the existing tag
@@ -125,7 +125,7 @@ var allowedTags = [];
      	<label for="" class="col-sm-3">Tag</label>
         <div class="col-sm-9">
 			    <span class="icon glyphicon glyphicon-star"></span>
-                <input type="text" class="form-control" id="singleFieldTags2"  required placeholder="Tag"  name="tag[name]" value="<?php echo $tags;?>" >
+                <input type="text" class="form-control" id="singleFieldTags2"  placeholder="Tag"  name="tag[name]" value="<?php echo $tags;?>" >
                 <span class="help-block"><p class="text-danger" id="tagInfoMsg"></p></span>
                 <input type="hidden" id="tag_for" name="tag[tag_for]" value="<?php echo $tagFor;?>" >
                 <input type="hidden" id="tag_for" name="tag[comments]" value="<?php echo isset($tagComments) ? $tagComments : '';?>" >

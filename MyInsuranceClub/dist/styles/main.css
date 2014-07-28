@@ -333,13 +333,18 @@ body {
 }
 
 input,
-button,
-select,
 textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
   padding: 6px 29px 6px 12px !important;
+}
+
+button,
+select{
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 a {

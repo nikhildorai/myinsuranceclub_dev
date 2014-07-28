@@ -293,12 +293,20 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 						                    </div>
 						                </div>
 						                
+						                <div class="form-group">
+						                    <label for="" class="col-sm-3">Policy Display Name</label>
+						                    <div class="col-sm-9">
+			                    			<span class="icon glyphicon glyphicon-star"></span>
+						                        <input type="text" required class="form-control" placeholder="" id="policy_display_name" name="policyModel[policy_display_name]" value="<?php echo array_key_exists( 'policy_display_name',$policyModel) ? $policyModel['policy_display_name'] : '';?>"  >
+						                    </div>
+						                </div>
+						                
 						                
 						                <div class="form-group">
 						                    <label for="" class="col-sm-3">Policy UIN</label>
 						                    <div class="col-sm-9">
 			                    			<span class="icon glyphicon glyphicon-star"></span>
-						                        <input type="text" required  class="form-control" placeholder="" id="policy_uin" name="policyModel[policy_uin]" value="<?php echo array_key_exists( 'policy_uin',$policyModel) ? $policyModel['policy_uin'] : '';?>"  >
+						                        <input type="text" class="form-control" placeholder="" id="policy_uin" name="policyModel[policy_uin]" value="<?php echo array_key_exists( 'policy_uin',$policyModel) ? $policyModel['policy_uin'] : '';?>"  >
 						                    </div>
 						                </div>
 						                
@@ -523,6 +531,14 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 			                </div>
 			                
 			                <div class="form-group">
+			                    <label for="" class="col-sm-3">Quick Overviews</label>
+			                    <div class="col-sm-9">
+			                    	<span class="icon glyphicon glyphicon-star"></span>
+			                        <textarea class="form-control" rows="5" required maxlength="250" id="quick_overview" name="policyModel[quick_overview]"><?php echo array_key_exists( 'quick_overview',$policyModel) ? $policyModel['quick_overview'] : '';?></textarea>
+			                    </div>
+			                </div>
+			                
+			                <div class="form-group">
 			                    <label for="Company Type" class="col-sm-3">Created By</label>
 			                    <div class="col-sm-9">
 									<span class="ui-select "> 
@@ -568,6 +584,7 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 									                    <th>#</th>
 									                    <th>Variant Names</th>
 									                    <th>Comments</th>
+									                    <th>Status</th>
 									                    <th  style="width: 74px;" align="center" >Remove</th>
 													</tr>
 							                	</thead> 
@@ -598,12 +615,15 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 												                    		<input type="hidden" name="variantModel[variant_id][]" value="<?php echo $v1['variant_id'];?>">
 												                    	</td>
 											     <?php          }		 ?>
-											     
+											     						<?php $isDisabled = (isset($v1['status']) && $v1['status'] != 'active') ? 'disabled' : '';?>
 												                    	<td>
-												                    		<input type="text" class="form-control"  placeholder="Variant Name"  name="variantModel[variant_name][]" value="<?php echo $v1['variant_name'];?>" >
+												                    		<input type="text" class="form-control" <?php echo $isDisabled;?> placeholder="Variant Name"  name="variantModel[variant_name][]" value="<?php echo $v1['variant_name'];?>" >
 												                    	</td>
 												                    	<td>
-												                    		<input type="text" class="form-control"  placeholder="Variant Comments"  name="variantModel[comments][]" value="<?php echo $v1['comments'];?>" >
+												                    		<input type="text" class="form-control" <?php echo $isDisabled;?> placeholder="Variant Comments"  name="variantModel[comments][]" value="<?php echo $v1['comments'];?>" >
+												                    	</td>
+												                    	<td class="variantStatus">
+												                    		<?php echo $this->util->getStatusIcon($v1['status']); ?>
 												                    	</td>
 										                     <?php 	
 																if ($i != 1)
@@ -642,6 +662,9 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 									        <?php       }	?>
 										                    	<td>
 										                    		<input type="text" class="form-control"  placeholder="Variant Comments"  name="variantModel[comments][]">
+										                    	</td>
+										                    	<td class="variantStatus">
+												                    <?php echo $this->util->getStatusIcon('active'); ?>
 										                    	</td>
 									                		</tr>
 									        <?php 	}	?>
@@ -683,22 +706,24 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 								                        <textarea class="form-control" name="policyFeaturesModel[description<?php echo $i; ?>]" id="description<?php echo $i; ?>" ><?php echo array_key_exists( 'description'.$i,$policyFeaturesModel) ? $policyFeaturesModel['description'.$i] : '';?></textarea>
 								                        <?php 
 								                        $ck = 'ckeditor'.$i;
-								                 //       echo display_ckeditor($this->data['ckeditor'.$i]); ?>
+								                        echo display_ckeditor($this->data['ckeditor'.$i]); ?>
 								                    </div>
 									                <div class="form-group">
 									                </div>
 								                </div>
 								                
 				<?php 						}
-						                ?>
-							                <div class="form-group">
-							                    <label for="" class="col-sm-2"></label>
-							                    <div class="col-sm-10">
-							                    	<input type="hidden" id="showMoreLessNum" value="2" />
-							                        <a href = "javascript:void(0);"  class="btn btn-sm btn-success showMoreLess" id="showMore" data-btnname="more">Show More</a>   
-							                        <a href = "javascript:void(0);"  class="btn btn-sm btn-warning showMoreLess" id="showLess" data-btnname="less" style="display: none;">Show Less</a>   
-							                    </div>
-							                </div>
+											if ($descCount > 2)
+											{    ?>
+								                <div class="form-group">
+								                    <label for="" class="col-sm-2"></label>
+								                    <div class="col-sm-10">
+								                    	<input type="hidden" id="showMoreLessNum" value="2" />
+								                        <a href = "javascript:void(0);"  class="btn btn-sm btn-success showMoreLess" id="showMore" data-btnname="more">Show More</a>   
+								                        <a href = "javascript:void(0);"  class="btn btn-sm btn-warning showMoreLess" id="showLess" data-btnname="less" style="display: none;">Show Less</a>   
+								                    </div>
+								                </div>
+							   <?php 		}	?>             
 						               	 	</div>
 						                </div>
 					            </section>
@@ -746,7 +771,7 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 						                <?php }else {	?>
 						                		<input type="submit" name="submit" value="Submit" class="btn btn-success btn-lg  " />
 						                <?php }	?>   
-						                	<a href = "<?php echo $base_url; ?>admin/company"  class="btn btn-lg btn-default">Cancel</a>     
+						                	<a href = "<?php echo $base_url; ?>admin/company" class="btn btn-lg btn-default" style="margin-left: 30px;">Cancel</a>     
 								           <?php 	
 								                 if (isset($policyModel['company_id']) && !empty($policyModel['company_id']))
 								                 {	?>
@@ -785,239 +810,3 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 		window.location.href = hrefVal;
 	}
 </script>
-<?php /* ?>
-
-
-<div class="content clearfix">
-	<div class="col100">
-	
-		<h2>Create Policy</h2>
-		<div class="download-row">
-			<a href="<?php echo $base_url;?>admin/policy" class="link_button">Back</a>
-		</div>
-		<br>
-		<br>							
-		<?php echo form_open_multipart(); ?>
-		<fieldset>
-			<legend>Company Details</legend>
-				<?php if (! empty($message)) { ?>
-					<div id="message">
-						<?php echo $message; ?>
-					</div>
-				<?php } ?>		
-			<ul>			
-				<li class="info_req">
-					<label for="search">Policy Name:</label>
-					<input type="text" id="policy_name" name="policyModel[policy_name]" value="<?php echo array_key_exists( 'policy_name',$policyModel) ? $policyModel['policy_name'] : '';?>" class="tooltip_trigger" title="Unique company name." /><br />
-				</li>
-				
-				<li class="info_req">
-					<label for="search">Company Name:</label>
-					<?php 					
-					$selected = array_key_exists( 'company_id',$policyModel) ? $policyModel['company_id'] : '';
-					$where = array();
-					$where[0]['field'] = 'company_id';
-					$where[0]['value'] = (int)$policyModel['company_id'];
-					$where[0]['compare'] = 'equal';
-					$compType = reset($this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $where, $fields = array('company_type_id')));					
-					$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Insurance_company_master_model', $optionKey = 'company_id', $optionValue = 'company_name', $defaultEmpty = "Please Select", $extraKeys = true);
-					$optionsText = '<option value="" data-company_type_id="">Please Select</option>';
-					foreach ($options as $k1=>$v1)
-					{
-						if ($selected == $v1['company_id'])
-							$optionsText .= '<option value="'.$v1['company_id'].'" data-company_type_id="'.$v1['company_type_id'].'" selected>'.$v1['company_name'].'</option>';
-						else
-							$optionsText .= '<option value="'.$v1['company_id'].'" data-company_type_id="'.$v1['company_type_id'].'">'.$v1['company_name'].'</option>';
-					}
-				//	echo form_dropdown('policyModel[company_id]', $options, $selected, ' id="company_id" class="tooltip_trigger" title="Select company name."');
-					?>
-					<select id="company_id" class="tooltip_trigger" name="policyModel[company_id]" title="Select company name.">
-						<?php echo $optionsText;?>
-					</select>
-				</li>
-				<?php 
-				$selected = array_key_exists( 'type_health_plan',$policyModel) ? $policyModel['type_health_plan'] : '';
-				$healthOptions = $this->util->getCompanyTypeDropDownOptions($modelName ='Product_model', $optionKey = 'product_id', $optionValue = 'product_name', $defaultEmpty = "Please Select");
-				if ($modelType == 'create' && empty($selected) && empty($_POST))
-				{
-					$healthOptions = array();
-					$pfTypeDisplay = 'none';
-				}
-				else if (!empty($_POST) && isset($_POST['type_health_plan']))
-				{
-					$pfTypeDisplay = 'block';
-				}
-				else if (!empty($selected))
-				{
-					$healthOptions = $allPolicyHealthType['data'][(int)$compType['company_type_id']];
-					$pfTypeDisplay = 'block';
-				}
-				else 
-				{
-					$healthOptions = array();
-					$pfTypeDisplay = 'block';
-				}
-				
-				if (empty($healthOptions))
-					$pfTypeDisplay = 'none';
-					
-				?>			
-				<li class="info_req" id="type_health_plan_li" style="display:<?php echo $pfTypeDisplay;?>;">
-					<label for="search">Product:</label>
-					<?php 
-					//
-					echo form_dropdown('policyModel[type_health_plan]', $healthOptions, $selected, 'multiple id="type_health_plan" class="tooltip_trigger" title="Search by health type."');
-					?>
-				</li>
-
-				<li class="info_req">
-					<label for="search">SEO Title:</label>
-					<input type="text" id="seo_title" name="policyModel[seo_title]" value="<?php echo array_key_exists( 'seo_title',$policyModel) ? $policyModel['seo_title'] : '';?>" class="tooltip_trigger" title="Add seo title" /><br />
-				</li>
-				
-				<li class="info_req">
-					<label for="search">SEO Description:</label>
-					<textarea id="seo_description" name="policyModel[seo_description]" class="tooltip_trigger" title=" Add seo description" ><?php echo array_key_exists( 'seo_description',$policyModel) ? $policyModel['seo_description'] : '';?></textarea><br />
-				</li>
-				
-				<li class="info_req">
-					<label for="search">SEO Keywords:</label>
-					<textarea id="seo_keywords" name="policyModel[seo_keywords]" class="tooltip_trigger" title="Add seo keywords"><?php echo array_key_exists( 'seo_keywords',$policyModel) ? $policyModel['seo_keywords'] : '';?></textarea><br />
-				</li>
-				
-				<li class="info_req">
-					<label for="search">URL:</label>
-					<input type="text" id="url" name="policyModel[slug]" value="<?php echo array_key_exists( 'slug',$policyModel) ? $policyModel['slug'] : '';?>" class="tooltip_trigger" title="Add URL" /><br />
-				</li>
-			</ul>
-		</fieldset>
-		
-		
-		
-		<fieldset>
-			<legend>Variant Details</legend>
-			
-		<?php 
-		$showBtn = true;
-		$i = 1;
-		$count = count($variantModel);
-		?>
-		<input type="hidden" id="tablerowcount" value="<?php echo $count;?>" />
-			<div style="display: inline-block;width: 100%">
-				<table class="dynatable tablesorter" style="border: 1px solid #aaa;">
-                	<thead>
-			            <tr style="background:none">
-			            
-			            	<td class="button-column" style="border-bottom:0; text-align: left;" colspan="3">
-			            		<a href="javascript:void(0);" class="add">Add More</a>
-			            	</td>
-			            
-			            </tr>
-                		<tr>
-		                    <th>#</th>
-		                    <th>Variant Names</th>
-		                    <th>Comments</th>
-		                    <th>Remove</th>
-						</tr>
-                	</thead> 
-                	<tbody>
-                	
-					<?php 
-						$i = 1;	
-						if (!empty($variantModel))
-						{
-							foreach ($variantModel as $k1=>$v1)
-							{	
-								if (!empty($v1))
-								{				
-									if ($i == 1)
-									{	?>
-										<tr id="tr<?php echo $i;?>" class="prototype"> 
-					                    	<td>
-					                    		<span id="spanId" class="incVal id add increment" ><?php echo $i;?><font color="red">*</font></span>
-					                    		<input type="hidden" name="variantModel[variant_id][]" value="<?php echo $v1['variant_id'];?>">
-					                    	</td>
-					<?php 			}	
-				                    else
-					                {	?>
-					                    <tr id="tr<?php echo $i;?>" class="<?php echo $i;?> item">
-					                    	<td>
-					                    		<span id="spanId" class="incVal" ><?php echo $i;?></span>
-					                    		<input type="hidden" name="variantModel[variant_id][]" value="<?php echo $v1['variant_id'];?>">
-					                    	</td>
-				     <?php          }		 ?>
-				     
-					                    	<td>
-					                    		<input type="text" name="variantModel[variant_name][]"  value="<?php echo $v1['variant_name'];?>">
-					                    	</td>
-					                    	<td>
-					                    		<input type="text" name="variantModel[comments][]" value="<?php echo $v1['comments'];?>">
-					                    	</td>
-			                     <?php 	
-									if ($i != 1)
-									{
-											echo '<td class="button-column"><a href="javascript:void(0);" class="remove">Remove</a></td>';
-									}	?>
-								</tr>
-				<?php 					
-									$i++;
-								}
-							}
-						}
-						else
-						{
-							if ($i == 1)
-							{	?>
-								<tr id="tr<?php echo $i;?>'" class="prototype"> 
-			                    	<td>
-			                    		<span id="spanId" class="incVal id add increment" ><?php echo $i;?><font color="red">*</font></span>
-			                    		<input type="hidden" name="variantModel[variant_id][]">
-			                    	</td>
-			          		     	<td>
-			                    		<input type="text" name="variantModel[variant_name][]" value="" >
-			                    	</td>
-			<?php 			}
-		                    else
-		                    {	?>
-		                    	<tr id="tr<?php echo $i;?>" class="<?php echo $i;?> item">
-			                    	<td>
-			                    		<span id="spanId" class="incVal" ><?php echo $i;?></span>
-			                    		<input type="hidden" name="variantModel[variant_id][]">
-			                    	</td>
-			          		     	<td>
-			                    		<input type="text" name="variantModel[variant_name][]" >
-			                    	</td>
-		        <?php       }	?>
-			                    	<td>
-			                    		<input type="text" name="variantModel[comments][]">
-			                    	</td>
-		                		</tr>
-		        <?php 	}	?>
-					</tbody>
-				</table>
-			</div>
-				
-		</fieldset>
-		
-		<fieldset>
-			<legend></legend>
-			<ul>
-				<li>
-					<input type="hidden" id="policy_id" name="policyModel[policy_id]" value="<?php echo array_key_exists( 'policy_id',$policyModel) ? $policyModel['policy_id'] : '';?>" />
-					<label for="search"></label>
-					<input type="submit" name="submit" value="Submit" class="link_button"/>
-					<a href="<?php echo $base_url; ?>admin/policy" class="link_button grey">Cancel</a>
-				</li>
-			</ul>
-		</fieldset>
-		
-		
-		
-		<?php echo form_close();?>
-	
-	</div>
-</div>
-<script type="text/javascript">		
-
-</script>
-	<?php */ ?>

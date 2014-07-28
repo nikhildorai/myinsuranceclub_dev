@@ -145,9 +145,9 @@ class Policy extends CI_Controller {
 		$where[0]['field'] = 'policy_id';
 		$where[0]['value'] = (int)$policy_id;
 		$where[0]['compare'] = 'equal';
-		$where[1]['field'] = 'status';
-		$where[1]['value'] = 'active';
-		$where[1]['compare'] = 'equal';
+//		$where[1]['field'] = 'status';
+//		$where[1]['value'] = 'active';
+//		$where[1]['compare'] = 'equal';
 		$variantModel = $this->util->getTableData($modelName='Policy_variants_master_model', $type="all", $where, $fields = array());
 		
 		//	initailze all policy feature ckeditor
@@ -162,11 +162,7 @@ class Policy extends CI_Controller {
 			'id' 	=> 	$des,
 			'path'	=>	'JS/ckeditor',
 			//Optionnal values
-			'config' => array(
-				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
-				'width' 	=> 	"100%",	//Setting a custom width
-				'height' 	=> 	'300px',	//Setting a custom height
-				),
+			'config' => Util::getCKEditorConfig(),
 			);
 		}	
 				
@@ -195,7 +191,7 @@ class Policy extends CI_Controller {
 					else if ($k1 == 'policy_wordings')
 						$name .= '-policy-wordings';
 					else if ($k1 == 'policy_logo')
-						$name .= '-policy-logo';
+						$name .= '-policy-logo-172x68';
 					else 
 						$name .= '-doc-'.date('dmy').time();
 					$name .= '.'.$ext;
@@ -214,6 +210,7 @@ class Policy extends CI_Controller {
 				//	set previous file name in post
 				$_POST['policyModel']['brochure'] = $policyModel['brochure'];
 				$_POST['policyModel']['policy_wordings'] = $policyModel['policy_wordings'];
+				$_POST['policyModel']['policy_logo'] = $policyModel['policy_logo'];
 			}	
 			
 			if (isset($_POST['policyModel']['product_id']) && !empty($_POST['policyModel']['product_id']))
@@ -230,6 +227,7 @@ class Policy extends CI_Controller {
 			$policy_id = (isset($arrParams['policy_id']) && !empty($arrParams['policy_id'])) ? $arrParams['policy_id'] : '';
 			$company_id = (isset($arrParams['company_id']) && !empty($arrParams['company_id'])) ? $arrParams['company_id'] : '';	
 			$_POST['policyModel']['slug'] = (isset($_POST['policyModel']['slug']) && !empty($_POST['policyModel']['slug'])) ? $this->util->getSlug($_POST['policyModel']['slug']) :  '';
+			$_POST['policyModel']['policy_display_name'] = (isset($_POST['policyModel']['policy_display_name']) && !empty($_POST['policyModel']['policy_display_name'])) ? $_POST['policyModel']['policy_display_name'] :  $_POST['policyModel']['policy_name'];
 			$_POST['modelType'] = $modelType;
 			//	set validation rules
 			$validation_rules = array(
@@ -465,7 +463,7 @@ class Policy extends CI_Controller {
 						$savedVarients[] = $this->addUpdateVariants($model, $policy_id);
 					}
 				}
-			
+
 				if (!empty($savedVarients))
 				{
 					$result = true;
@@ -525,14 +523,17 @@ class Policy extends CI_Controller {
 			*/
 			if (!empty($where))
 				$isExist = $this->util->getTableData($modelName='Policy_variants_master_model', $type="all", $where, $fields = array());
-			
+
 			if (!empty($isExist))
 			{
 				foreach ($isExist as $k1=>$v1)
-				{
-					$model['variant_id'] = (int)$v1['variant_id'];
-					$save = $this->policy_variants_master_model->saveRecord($arrParams = $model, $modelType = 'update');
-					break;	
+				{					
+					if ($v1['status'] == 'active' || $model['status'] == 'deleted')
+					{
+						$model['variant_id'] = (int)$v1['variant_id'];
+						$save = $this->policy_variants_master_model->saveRecord($arrParams = $model, $modelType = 'update');
+						break;	
+					}
 				}
 			}
 			else 

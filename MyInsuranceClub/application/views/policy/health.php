@@ -847,6 +847,8 @@
 <script src="assets/js/jquery.slicknav.js"></script> 
 <!-- the jScrollPane script --> 
 <script src="assets/js/jquery-ui.min.js"></script> 
+
+
 <script src="assets/js/page.js"></script> 
 <script src="assets/js/site.js"></script> 
 <script src="assets/js/highcharts.js"></script>

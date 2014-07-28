@@ -14,7 +14,9 @@
           prot.find(".id").text(id);
           prot.find('input[type=text]').attr({value:""});
           prot.find('input[type=hidden]').attr({value:""});
+          prot.find('.variantStatus').html('<span class="btn-icon-round btn-icon-round-sm bg-success"></span>');
           master.find("tbody").append(prot);
+console.log(prot);          
           prot.append('<td align="center" ><a href="javascript:void(0);" class="remove btn-icon-round btn-icon-round-sm bg-danger"><span class="glyphicon glyphicon-remove"></span></a></td>');
           
       });

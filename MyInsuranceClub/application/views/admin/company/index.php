@@ -31,7 +31,12 @@
     <!-- Accordion -->
         <section class="panel" data-ng-controller="AccordionDemoCtrl"  style="border-bottom-width: 0px;">
             <accordion close-others="oneAtATime" class="ui-accordion">
-                <accordion-group heading="Search Filter" is-open="false">
+            <?php 
+            $open = false;
+            if (isset($_GET['search']))
+            	$open = true;
+            ?>
+                <accordion-group heading="Search Filter" is-open="<?php echo $open;?>">
 					
 				<?php echo form_open('admin/company/index', array('method'=>'get'));	?>
 			        <div class="form-group">

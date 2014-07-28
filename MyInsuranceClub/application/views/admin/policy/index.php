@@ -32,7 +32,7 @@
         <section class="panel" data-ng-controller="AccordionDemoCtrl"  style="border-bottom-width: 0px;">
             <accordion close-others="oneAtATime" class="ui-accordion">
             <?php 
-            $open = false;
+            $open = true;
             if (isset($_GET['search']))
             	$open = true;
             ?>
@@ -52,8 +52,8 @@
 								<span class="ui-select "> 
 				<?php 
 						$selected = array_key_exists( 'company_id',$search_query) ? $search_query['company_id'] : '';
-						$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Insurance_company_master_model', $optionKey = 'company_id', $optionValue = 'company_name', $defaultEmpty = "All");
-						echo form_dropdown('company_id', $options, $selected, ' id="company_id" class="tooltip_trigger" title="Search by company name." style="width: 345px;margin-top: 0px;"');			
+						$companyOptions = $this->util->getCompanyTypeDropDownOptions($modelName ='Insurance_company_master_model', $optionKey = 'company_id', $optionValue = 'company_name', $defaultEmpty = "All");
+						echo form_dropdown('company_id', $companyOptions, $selected, ' id="company_id" class="tooltip_trigger" title="Search by company name." style="width: 345px;margin-top: 0px;"');			
 				?>
 								</span>
 		                	</div>
@@ -64,15 +64,64 @@
 		                    <label for="" class="col-sm-2">Product Type</label>
 		                    <div class="col-sm-10">
 								<span class="ui-select "> 
-				<?php 
-						$selected = array_key_exists( 'product_id',$search_query) ? $search_query['product_id'] : '';
-						$options = $this->util->getCompanyTypeDropDownOptions($modelName ='Product_model', $optionKey = 'product_id', $optionValue = 'product_name', $defaultEmpty = "All");						
-						echo form_dropdown('product_id', $options, $selected, ' id="product_id" class="tooltip_trigger" title="Search by health type." style="width: 345px;margin-top: 0px;"');
-				?>
+									<?php 	$allProducts = array();
+											$selected = array_key_exists( 'product_id',$search_query) ? $search_query['product_id'] : '';
+											$sqlFilter['orderBy'] = 'product_name';					
+											$productOptions = $this->util->getTableData($modelName='Product_model', $type="all", $where=array(), $fields = array(), $sqlFilter);									
+											if (!empty($productOptions))
+											{
+												$prodOptionsText = '<option value="" data-company_type_id="">Please Select</option>';
+												foreach ($productOptions as $k1=>$v1)
+												{
+													$allProducts[$v1['product_id']] = $v1;
+													if ($v1['product_id'] == $selected)
+													{
+														$currentCompanyTypeSlug = $v1['slug'].'/';
+														$prodOptionsText .= '<option value="'.$v1['product_id'].'" data-slug="'.$v1['slug'].'" selected>'.$v1['product_name'].'</option>';
+													}
+													else
+														$prodOptionsText .= '<option value="'.$v1['product_id'].'" data-slug="'.$v1['slug'].'" >'.$v1['product_name'].'</option>';
+												}
+											} 
+									?>
+									<select id="product_id" class="changeDropDown" data-change-type="sub_product_id" name="product_id" style="width: 345px;margin-top: 0px;">
+										<?php echo $prodOptionsText;?>
+									</select>
 								</span>
 		                	</div>
 		                </div>
 	
+		                
+				        <div class="form-group">
+		                    <label for="" class="col-sm-2">Sub Product Type</label>
+		                    <div class="col-sm-10">
+								<span class="ui-select "> 
+									<?php 	$allSubProducts = array();
+											$selected = array_key_exists( 'sub_product_id',$search_query) ? $search_query['sub_product_id'] : '';
+											$sqlFilter['orderBy'] = 'sub_product_name';
+											$subProductOptions = $this->util->getTableData($modelName='Sub_product_model', $type="all", $where=array(), $fields = array(), $sqlFilter);									
+											if (!empty($subProductOptions))
+											{
+												$subProdOptionsText = '<option value="" data-company_type_id="">Please Select</option>';
+												foreach ($subProductOptions as $k1=>$v1)
+												{
+													$allSubProducts[$v1['sub_product_id']] = $v1;
+													if ($v1['sub_product_id'] == $selected)
+													{
+														$currentCompanyTypeSlug = $v1['slug'].'/';
+														$subProdOptionsText .= '<option value="'.$v1['sub_product_id'].'" data-slug="'.$v1['slug'].'" selected>'.$v1['sub_product_name'].'</option>';
+													}
+													else
+														$subProdOptionsText .= '<option value="'.$v1['sub_product_id'].'" data-slug="'.$v1['slug'].'" >'.$v1['sub_product_name'].'</option>';
+												}
+											}
+									?>
+									<select id="sub_product_id" class="changeDropDown" data-change-type="sub_product_type" name="sub_product_id" style="width: 345px;margin-top: 0px;">
+										<?php echo $subProdOptionsText;?>
+									</select>
+								</span>
+		                	</div>
+		                </div>
 						                
 				        <div class="form-group">
 		                    <label for="" class="col-sm-2"></label>
@@ -107,7 +156,8 @@
                         </tr>
                     </thead>
 					<tbody>
-					<?php 
+					<?php 					
+//var_dump($companyOptions, $allProducts, $allSubProducts);die;										
 					if (!empty($records))
 					{
 						if ($records->num_rows() > 0)
@@ -124,21 +174,16 @@
 						   	{
 						   		if ($i > $min && $i <= $max)
 						   		{
-									$where = array();
-									$where[0]['field'] = 'company_id';
-									$where[0]['value'] = (int)$row['company_id'];
-									$where[0]['compare'] = 'equal';
-									$comp_name = reset($this->util->getTableData($modelName='Insurance_company_master_model', $type="single", $where, $fields = array('company_name')));
+									$comp_name = $companyOptions[(int)$row['company_id']];
 									$where = $productId = array();
 									if (!empty($row['product_id']))
 									{
-										$where[0]['field'] = 'product_id';
-										$where[0]['value'] = $row['product_id'];
-										$where[0]['compare'] = 'findInSet';				
-										$prod_type = $this->util->getTableData($modelName='Product_model', $type="single", $where, $fields = array('product_name'));
-										$productId = array();
-										foreach ($prod_type as $k1=>$v1)
-											$productId[] = $v1['product_name'];
+										$prod_type = explode(',', $row['product_id']);
+										foreach ($allProducts as $k1=>$v1)
+										{
+											if (in_array($v1['product_id'], $prod_type))
+												$productId[] = $v1['product_name'];
+										}
 									}
 									$actionBtn = '';
 									if ($row['status'] == 'active')
@@ -151,6 +196,17 @@
 									{
 										$actionBtn .= '<a href="'.$base_url.'admin/policy/create/'.$row['policy_id'].'">View</a>';
 									}
+									$variantType = '';
+									if (!empty($row['product_id']) && empty($row['sub_product_id']))
+									{
+										$variantType = $allProducts[(int)$row['product_id']]['slug'];
+									}
+									else if (!empty($row['product_id']) && !empty($row['sub_product_id']))
+									{
+										$variantType = $allSubProducts[(int)$row['sub_product_id']]['slug'];
+									}
+									$variantAction = Util::getControllerForPolicyVariantFeatures($variantType);
+
 			                    	if (strtolower($row['status']) != 'active'){?>
 			                    	<tr  class="danger odd" id="<?php echo $i;?>">
 			                  <?php }	else	{	?>
@@ -158,7 +214,7 @@
 			                 <?php 	}?>
 										<td><?php echo $row['policy_id'];?></td>
 										<td><?php echo $row['policy_name'];?></td>
-										<td><a href="<?php echo $base_url.'admin/company/create/'.$row['company_id']; ?>"><?php echo $comp_name['company_name']; ?></a></td>
+										<td><a href="<?php echo $base_url.'admin/company/create/'.$row['company_id']; ?>"><?php echo $comp_name; ?></a></td>
 										<td><?php echo implode('<br>', $productId);?></td>
 										<td><?php echo $this->util->getStatusIcon($row['status']);?></td>
 										<td><?php echo $actionBtn;?></td>
@@ -166,6 +222,14 @@
 									<tr class="even" style="display:none;">
 										<td colspan="6">
 											<?php 
+											
+											//	depending on policy product & sub product get variant feature controller & action
+											$featureAction = 'javascript:void(0);';
+											if (!empty($variantAction['backendFeatureAction']))
+											{
+												$featureAction = base_url().'admin/'.$variantAction['backendController'].'/'.$variantAction['backendFeatureAction'];
+											}
+											
 											//	get all existing variants
 											$where = array();
 											$where[0]['field'] = 'policy_id';
@@ -198,13 +262,13 @@
 															$action = '';
 															if (in_array($v1['status'], array('inactive', 'deleted')))
 															{
-													//			$action .= '<a href="'.$base_url.'admin/variants/changeStatus/'.$v1['variant_id'].'/active">Activate</a>';
+																$action .= '<a href="'.$base_url.'admin/variants/changeStatus/'.$v1['variant_id'].'/active">Activate</a>';
 															}
 															else 
 															{
-													//			$action .= '<a href="'.$base_url.'admin/variants/create/'.$v1['variant_id'].'">Update</a>';
-													//			$action .= ' | <a href="'.$base_url.'admin/variants/changeStatus/'.$v1['variant_id'].'/inactive">Inactive</a>';
-													//			$action .= ' | <a href="'.$base_url.'admin/variants/changeStatus/'.$v1['variant_id'].'/deleted">Delete</a>';
+																$action .= '<a href="'.$featureAction.'/'.$v1['variant_id'].'">Details</a>';
+																$action .= ' | <a href="'.$base_url.'admin/variants/changeStatus/'.$v1['variant_id'].'/inactive">Inactive</a>';
+																$action .= ' | <a href="'.$base_url.'admin/variants/changeStatus/'.$v1['variant_id'].'/deleted">Delete</a>';
 															}
 															echo '<td>'.$action.'</td>';
 														echo '</tr>';

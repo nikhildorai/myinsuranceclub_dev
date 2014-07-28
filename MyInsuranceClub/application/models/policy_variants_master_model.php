@@ -7,9 +7,6 @@ class Policy_variants_master_model EXTENDS MIC_Model{
 	{
 		// Call the Model constructor
 		parent::__construct();
-		$this->load->library('session');
-		$this->load->library('form_validation');
-        $this->load->helper('form');
 	}
 	
 	public function get_all_insurance_company($arrParams = array())
@@ -68,27 +65,6 @@ class Policy_variants_master_model EXTENDS MIC_Model{
 	}
 	
 	
-	public function getInsuranceCompany($arrParams)
-	{	
-		$sql = 'SELECT * FROM policy_variants_master WHERE status = "active"';
-		if (!empty($arrParams))
-		{
-			if (isset($arrParams['company_name']) && !empty($arrParams['company_name']))
-				$sql .= ' AND company_name = "'.$arrParams['company_name'].'" ';
-			if (isset($arrParams['company_shortname']) && !empty($arrParams['company_shortname']))
-				$sql .= ' AND company_shortname = "'.$arrParams['company_shortname'].'" ';
-			if (isset($arrParams['company_display_name']) && !empty($arrParams['company_display_name']))
-				$sql .= ' AND company_display_name = "'.$arrParams['company_display_name'].'" ';
-			if (isset($arrParams['company_type_id']) && !empty($arrParams['company_type_id']))
-				$sql .= ' AND company_type_id = '.$arrParams['company_type_id'];
-			if (isset($arrParams['slug']) && !empty($arrParams['slug']))
-				$sql .= ' AND slug = "'.$arrParams['slug'].'" ';
-		}
-//var_dump($sql);		
-		$result = $this->db->query($sql);
-		return $result;
-	}
-	
 	
 	public function getByWhere($id)
 	{
@@ -110,5 +86,35 @@ class Policy_variants_master_model EXTENDS MIC_Model{
 	public function excuteQuery($sql)
 	{
 		return $this->db->query($sql);
+	}
+	
+	public static function getAllPolicyVariantsDetails($arrParams = array())
+	{
+		$sql = 'SELECT 
+					i.company_id, i.company_name, i.company_display_name, i.slug as company_slug, i.status as company_status, ct.company_type_name, ct.slug as company_type_slug,
+  					p.policy_id, p.policy_display_name, p.policy_name, p.status as policy_status, v.*, pr.product_name, pr.slug as product_slug, spr.sub_product_name, spr.slug as sub_product_slug
+				FROM 
+				  	insurance_company_master i,
+				  	company_type ct,
+				  	policy_master p  
+				  	LEFT JOIN sub_product spr ON p.sub_product_id = spr.sub_product_id AND spr.status = "active" 
+				  	LEFT JOIN product pr ON p.product_id = pr.product_id AND pr.status = "active"
+				  	LEFT JOIN policy_variants_master v ON v.policy_id = p.policy_id AND v.status = "active"
+				WHERE 
+					i.status = "active" AND
+					i.company_shortname != "mic" AND
+					i.company_id = p.company_id AND
+					p.product_id = pr.product_id AND
+					i.company_type_id = ct.company_type_id';
+		if (!empty($arrParams))
+		{
+			foreach ($arrParams as $k1=>$v1)
+			{
+				$sql .= ' AND p.'.$k1.' = '.$v1;
+			}
+		} 
+		$ci = &get_instance();
+		$result=$ci->db->query($sql);
+		return $result->result_array();
 	}
 }

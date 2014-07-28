@@ -21,6 +21,8 @@ class Policy_master_model EXTENDS MIC_Model{
 				$sql .= ' AND company_id = '.$arrParams['company_id'];
 			if (isset($arrParams['product_id']) && !empty($arrParams['product_id']))
 				$sql .= ' AND product_id = '.$arrParams['product_id'];
+			if (isset($arrParams['sub_product_id']) && !empty($arrParams['sub_product_id']))
+				$sql .= ' AND sub_product_id = '.$arrParams['sub_product_id'];
 		}
 		$sql .= ' ORDER BY policy_name ASC, product_id ASC ';	
 		$result = $this->db->query($sql);
@@ -104,4 +106,45 @@ class Policy_master_model EXTENDS MIC_Model{
 	{
 		return $this->db->query($sql);
 	}
+	
+    /**
+     * @abstract: get all details of policy 
+     * @author: krishna maurya.
+     * @date: 23 July 2014.
+     * @param: string $type - type of query by slug or id or else.
+     * @param: array $arrParams - search criteria.
+     * @return: array.
+     */
+	public static function getSinglePolicyAllDetails($type = 'slug', $arrParams = array())
+	{
+		$data = array();
+		if (!empty($arrParams) && !empty($type))
+		{	
+			$cacheFileName = 'policy';
+			foreach ($arrParams as $k1=>$v1)
+			{
+				if (!empty($v1))
+					$cacheFileName .= '_'.$v1;
+			}
+			$cacheFileName = '_details';
+			$cacheResult = Util::getCachedObject($cacheFileName);
+			//	check if cache file exist
+			if(!empty($cacheResult))
+			{
+				// get result set from cache
+				$data['companyDetails']=$cacheResult;
+			}
+			else
+			{
+				//get resultset from DB and save in cache
+				if ($type == 'slug')
+					$type='getAllDetailsOfSingleHealthPolicy';
+					
+				$data = Util::callStoreProcedure($type, $arrParams);
+	//			Util::saveResultToCache($cacheFileName,$data['companyDetails']);
+			}
+		}
+//var_dump($data);die;				
+		return $data;
+	} 
 }

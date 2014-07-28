@@ -16,7 +16,7 @@ class Insurance_company_master_model EXTENDS MIC_Model{
 		if (!empty($arrParams))
 		{
 			if (array_key_exists('company', $arrParams) && !empty($arrParams['company']))
-				$sql .= ' AND (company_name LIKE "'.$arrParams['company'].'%" OR company_shortname LIKE "'.$arrParams['company'].'%" OR company_display_name LIKE "'.$arrParams['company'].'%") ';
+				$sql .= ' AND (company_name LIKE "%'.$arrParams['company'].'%" OR company_shortname LIKE "'.$arrParams['company'].'%" OR company_display_name LIKE "'.$arrParams['company'].'%") ';
 			if (array_key_exists('company_type', $arrParams) && !empty($arrParams['company_type']))
 				$sql .= ' AND company_type_id = '.$arrParams['company_type'];
 		}

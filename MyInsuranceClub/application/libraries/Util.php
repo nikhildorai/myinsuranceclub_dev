@@ -167,9 +167,9 @@ class Util {
 		{
 			if ($result->num_rows > 0)
 			{
-				$i = 0;
+				$i = 0;				
 				foreach ($result->result_array() as $k1=>$v1)
-				{			
+				{		
 					if (!empty($v1))
 					{	
 						if ($type == 'all')
@@ -1801,6 +1801,477 @@ echo '=================>';
 		return $config;
 	}
 	
+
+    /**
+     * @abstract: Call store procedure
+     * @author: krishna maurya.
+     * @date: 23 July 2014.
+     * @param: string $type - name of store procedure.
+     * @param: array $arrParams - query filter for store procedure.
+     * @return: array.
+     */
+	public static function callStoreProcedure($type, $arrParams = array())
+	{
+		$query = '';
+		$resultData = array();
+		$db = &get_instance();
+		if (!empty($type))
+		{
+			if ($type == 'singleCompanyAllDetails')
+				$query = "CALL sp_getSingleInsuranceCompanyAllDetails(?)";
+			else if ($type == 'singleCompanyDetails')
+				$query = "CALL sp_getSingleInsuranceCompanyDetails(?)";
+			else if ($type == 'allPolicyOfSingleCompany')
+				$query = "CALL sp_getAllPolicyOfSingleCompany(?)";
+			else if ($type == 'getAllDetailsOfSingleHealthPolicy')
+				$query = "CALL sp_getAllDetailsOfSingleHealthPolicy(?)";
+				
+			$queryData = $arrParams;
+			$resultData = $db->db->query($query,$queryData);
+		}
+		
+		if (!empty($resultData))
+			return $resultData->result_array();
+		else 
+			return array();
+	}
+	
+	public static function getControllerForPolicyVariantFeatures($variantType)
+	{
+		$return  = array();
+		if (!empty($variantType))
+		{
+			switch ($variantType)
+			{
+				case 'car-insurance':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'car_insurance';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'child':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'child';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'endowment':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'endowment';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'health-insurance':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'health_insurance';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'health-insurance-li-companies':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'health_insurance-li-companies';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'home-insurance':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'home_insurance';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'money-back':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'money_back';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'pension':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'pension';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'term-insurance':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'term_insurance';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'travel-insurance':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'travel_insurance';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'two-wheelar-insurance':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'two_wheelar_insurance';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'ulip':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'ulip';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'whole-life':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'whole_life';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'critical-illness':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'critical_illness';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'decreasing-term':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'decreasing_term';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'deferred-annutiy':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'deferred_annutiy';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'domestic-travel':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'domestic_travel';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'hospital-cash':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'hospital_cash';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'immediate-annuity':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'immediate_annuity';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'increasing-term':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'increasing_term';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'international-travel':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'international_travel';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'level-term':
+					$return['backendController'] = 'policy_features_level_term';
+					$return['backendFeatureAction'] = 'level_term';
+					$return['feature_table'] = 'policy_features_level_term';
+					$return['premium_table'] = 'annual_premium_term_plan';
+					break;
+				case 'mediclaim':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'mediclaim';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'opd':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'opd';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'personal-accident':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'personal_accident';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'special-plans':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'special_plans';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'super-top-up':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'super_top-up';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'top-up':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'top_up';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				case 'trop':
+					$return['backendController'] = 'policy_variants_master';
+					$return['backendFeatureAction'] = 'trop';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+				default :
+					$return['backendController'] = '';
+					$return['backendFeatureAction'] = '';
+					$return['feature_table'] = '';
+					$return['premium_table'] = '';
+					break;
+			}
+		}
+		return $return;
+	}
+	
+	public static function getPremiumPaymentMode()
+	{
+		return array('monthly'=>'Monthly', 'quaterly'=>'Quaterly', 'yearly'=>'Yearly');
+	}
+	
+	public static function getRiderSlugs($type)
+	{
+		$rider = array();
+		if (!empty($type))
+		{
+			switch ($type)
+			{
+				case 'car-insurance':
+					break;
+				case 'child':
+					break;
+				case 'endowment':
+					break;
+				case 'health-insurance':
+					break;
+				case 'health-insurance-li-companies':
+					break;
+				case 'home-insurance':
+					break;
+				case 'money-back':
+					break;
+				case 'pension':
+					break;
+				case 'term-insurance':
+					break;
+				case 'travel-insurance':
+					break;
+				case 'two-wheelar-insurance':
+					break;
+				case 'ulip':
+					break;
+				case 'whole-life':
+					break;
+				case 'critical-illness':
+					break;
+				case 'decreasing-term':
+					break;
+				case 'deferred-annutiy':
+					break;
+				case 'domestic-travel':
+					break;
+				case 'hospital-cash':
+					break;
+				case 'immediate-annuity':
+					break;
+				case 'increasing-term':
+					break;
+				case 'international-travel':
+					break;
+				case 'level-term':
+					$rider['rider_name'] 			= 	'';
+					$rider['rider_display_name'] 	= 	'';
+					$rider['rider_value'] 			= 	'';
+					$rider['comments'] 				= 	'';
+					$rider['slug'] 					= 	array('accidental-death-benefit'=>'Accidental Death Benefit', 'accidental-dismemberment-benefit'=>'Accidental Dismemberment Benefit', 'waiver-of-premium'=>'Waiver of Premium', 'critical-illness'=>'Critical illness',
+															'family-income-benefit'=>'Family Income Benefit', 'accelerated-sum-assured'=>'Accelerated Sum Assured', 'hospital-cash-benefit'=>'Hospital Cash Benefit');
+					break;
+				case 'mediclaim':
+					break;
+				case 'opd':
+					break;
+				case 'personal-accident':
+					break;
+				case 'special-plans':
+					break;
+				case 'super-top-up':
+					break;
+				case 'top-up':
+					break;
+				case 'trop':
+					break;
+				default :
+					$rider = array();
+					break;
+			}
+		}
+		return $rider;
+	} 
+	
+	/**
+	 * 
+	 * rearrange the riders as slug value pair
+	 * @param $riders : arraya
+	 * returns array()
+	 */
+	public static function rearrangeRiders($riders = array())
+	{
+		$return = array();
+		if (!empty($riders))
+		{
+			foreach ($riders as $k1=>$v1)
+			{
+				$return[$v1['slug']] = $v1;
+			}
+		}		
+		return $return;
+	}
+	
+	
+	
+	public static function saveRiderData($variant_id, $riderPost = array(), $riderModelName = '')
+	{
+		$return = $riderModel = array();
+		$result = false;
+		$ci = &get_instance();
+		$msg = '<p class="error_msg">Undefined error in riders.</p>';
+		if (!empty($riderPost))
+		{
+			foreach ($riderPost as $k1=>$v1)
+			{
+				foreach ($v1 as $k2=>$v2)
+				{
+					$riderModel[$k1][$k2] = $v2;
+					$riderModel[$k1]['variant_id'] = $variant_id;
+					$riderModel[$k1]['slug'] = $k1;
+				}
+			}
+			if (!empty($riderModel))
+			{
+				foreach ($riderModel as $k6=>$v6)
+				{		
+					$savedRiders[] = Util::addUpdateRiders($model = $v6, $variant_id, $riderModelName);
+				}
+			}	
+			if (!empty($savedRiders) && !in_array(false, $savedRiders))
+			{
+				$result = true;
+				$msg = 'Riders updated successfully';
+			}
+			else 
+			{
+				$result = false;
+				$msg = '<p class="error_msg">Rider cannot be updated.</p>';
+			}
+		}
+		else 
+		{
+			$result = false;
+			$msg = '<p class="error_msg">Rider cannot be blank.</p>';
+		}
+		$return = array('result'=>$result, 'msg'=>$msg, 'riderModel'=>$riderModel);
+		return $return;	
+	}
+
+	
+	public static function addUpdateRiders($model, $variant_id, $riderModelName)
+	{
+		$save  = false;
+		$ci = &get_instance();
+		if (!empty($model))
+		{	
+			//	check if record exists
+			$where = $isExist = array();
+			$arrSkip = array('variant_id', 'status', 'comments');
+			if (isset($model['variant_id']) && !empty($model['variant_id']))
+			{
+				$where[0]['field'] = 'variant_id';
+				$where[0]['value'] = $model['variant_id'];
+				$where[0]['compare'] = 'equal';
+			}
+			if (isset($model['slug']) && !empty($model['slug']))
+			{
+				$where[1]['field'] = 'slug';
+				$where[1]['value'] = $model['slug'];
+				$where[1]['compare'] = 'equal';
+			}
+			if (!empty($where))
+				$isExist = $ci->util->getTableData($modelName=$riderModelName, $type="all", $where, $fields = array());
+
+			$riderModelName = strtolower($riderModelName);
+
+			if (!empty($isExist))
+			{
+				foreach ($isExist as $k1=>$v1)
+				{					
+					if ($v1['status'] == 'active' || $model['status'] == 'deleted')
+					{
+						$model['rider_id'] = (int)$v1['rider_id'];
+						$save = $ci->$riderModelName->saveRecord($arrParams = $model, $modelType = 'update');
+						break;	
+					}
+				}
+			}
+			else 
+			{
+				$save = $ci->$riderModelName->saveRecord($arrParams = $model, $modelType = 'create');
+			}
+		}
+		return $save;
+	}
+	
+	
+	public static function updatePeerConnectionCountValue($newPeerComparision, $oldPeerComparision)
+	{
+		//	get new peer added in the group 
+		$newPeer = array_diff($newPeerComparision, $oldPeerComparision);
+		$ci = &get_instance();
+
+		if (!empty($newPeer)) 
+		{
+			foreach ($newPeer as $k1=>$v1)
+			{
+				if (!empty($v1))
+				{
+					$where[0]['field'] = 'variant_id';
+					$where[0]['value'] = $v1;
+					$where[0]['compare'] = 'equal';
+					$isExist = $ci->util->getTableData($modelName='Policy_variants_master_model', $type="single", $where, $fields = array());
+					if (!empty($isExist))
+					{
+						$isExist['peer_comparision_count'] = $isExist['peer_comparision_count'] + 1;
+						$save = $ci->policy_variants_master_model->saveRecord($arrParams = $isExist, $modelType = 'update');
+					}
+				}			
+			}
+		}
+		
+		//	get deleted peer in the group
+		$oldPeer = array_diff($oldPeerComparision, $newPeerComparision);
+
+		if (!empty($oldPeer)) 
+		{
+			foreach ($oldPeer as $k1=>$v1)
+			{
+				if (!empty($v1))
+				{
+					$where[0]['field'] = 'variant_id';
+					$where[0]['value'] = $v1;
+					$where[0]['compare'] = 'equal';
+					$isExist = $ci->util->getTableData($modelName='Policy_variants_master_model', $type="single", $where, $fields = array());
+					if (!empty($isExist))
+					{
+						$isExist['peer_comparision_count'] = ($isExist['peer_comparision_count'] > 0) ? $isExist['peer_comparision_count'] - 1 : 0;
+						$save = $ci->policy_variants_master_model->saveRecord($arrParams = $isExist, $modelType = 'update');
+					}
+				}			
+			}
+		}	
+	}
 }
 
 // END Util class
