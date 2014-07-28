@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('model_visitor_information','mic_dbtest','model_city','model_get_stored_sessions_data','policy_master_model');
+$autoload['model'] = array('model_visitor_information','model_customer_personal_and_search_details','model_city','model_get_stored_sessions_data','policy_master_model');
 $autoload['plugin'] = array('widget_pi');
 
 /* End of file autoload.php */

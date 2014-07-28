@@ -26,7 +26,7 @@ class controller_basicMediclaim extends Customer_Controller {
 		
 		$this->load->model('model_city');
 		$this->load->model('model_get_company_plans_count');
-		
+		$this->load->model('model_get_mediclaim_search_results');
 		
 		
 	}
@@ -291,7 +291,7 @@ class controller_basicMediclaim extends Customer_Controller {
 			
 			$data['compareParam'] = $param;
 			
-			$this->mic_dbtest->customer_personal_search_details($user_input);
+			$this->model_customer_personal_and_search_details->customer_personal_search_details($user_input);
 			
 			$this->db->freeDBResource($this->db->conn_id);
 			
@@ -309,7 +309,7 @@ class controller_basicMediclaim extends Customer_Controller {
 			{
 				//get result set from DB and save in cache
 				
-				$data['customer_details']=$this->mic_dbtest->get_policy_results($user_input);
+				$data['customer_details']=$this->model_get_mediclaim_search_results->get_policy_results($user_input);
 				
 				if(!empty($data['customer_details']))
 				{
