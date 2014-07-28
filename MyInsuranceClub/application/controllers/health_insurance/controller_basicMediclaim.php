@@ -33,8 +33,11 @@ class controller_basicMediclaim extends MIC_Controller {
 	{
 		
 		$this->input->set_cookie('user_filter','');
+		
 		$this->input->set_cookie('compared_plans','');
+		
 		$product_name = "mediclaim";
+		
 		$data=array();
 		
 		$data['city'] = $this->model_city->get_city();
@@ -72,38 +75,23 @@ class controller_basicMediclaim extends MIC_Controller {
 	public function health_policy($param="no")
 	{
 		
-		// Discussion: Put form validations in common function in Util
-		
 		/* Form Validation Rules */
-		//$post='';
+		$post='';
 	
-		//if($this->input->post()=='')
-		//{
-			//$post = $this->session->userdata('user_input');
-		//}
+		if($this->input->post()=='')
+		{
+			$post = $this->session->userdata('user_input');
+		}
 	
-		// Please create a validation util function and do these validations there.
-		//$this->form_validation->set_rules('cust_name', 'Full Name', 'required|alpha');
-	
-		//$this->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|phone_789|exact_length[10]');
-	
-		//$this->form_validation->set_rules('cust_email', 'Email', 'required|valid_email');
-	
-		//$this->form_validation->set_rules('cust_dob', 'Date of Birth', 'required|age_greater_than_18');
-	
-		//$this->form_validation->set_rules('MIC_terms', 'checkbox', 'required');
-	
-		//$this->form_validation->set_error_delimiters('<div class="error" style="color: red;">', '</div>');
-	
-		/* Form Validation Rules Ends  */
-	
-		//if (!($this->input->is_ajax_request()) && empty($post) && $this->form_validation->run() == FALSE)
-		//{
-			//$this->index();
-		//}
-		//else{
+		
+		$userInputValidation = Util::getUserInputValidationForMediclaim();
+		
+		if ($userInputValidation == FALSE && !($this->input->is_ajax_request()) && empty($post))
+		{
+			$this->index();
+		}
+		else{
 			
-			// Discussion:Common for user input from all forms in Util
 			$search_filter=array();
 	
 			$user_input=array();/* array passed to database */
@@ -112,8 +100,8 @@ class controller_basicMediclaim extends MIC_Controller {
 	
 			if ($this->input->post('submit'))			/* customer policy details start */
 			{
-	
-					
+				
+				
 				$user_input['product_name']=$this->input->post('product_name');
 				
 				$user_input['product_type']=$this->input->post('product_type');
@@ -144,43 +132,26 @@ class controller_basicMediclaim extends MIC_Controller {
 				{
 					$user_input['adult']=$this->input->post('adult');
 				}
+				
 				if($this->input->post('child')!='')
 				{
 					$user_input['child']=$this->input->post('child');
 				}
 				/*  customer policy details ends 	*/
 				
-				//create function for name field in util.
 				if($this->input->post('cust_name')!='')		/* customer personal details starts */
 				{
+					$explodedName = array();
+					
 					$user_input['full_name'] = $this->input->post('cust_name');
 					
-					$custname=explode(' ',$this->input->post('cust_name'));
+					$explodedName = Util::explodeFullName($this->input->post('cust_name'));
 					
-					if(sizeof($custname)==1)
-					{
-						$user_input['first_name']=$custname[0];
-							
-						$user_input['middle_name']="";
-							
-						$user_input['last_name']="";
-					}
-					elseif(sizeof($custname)==2)
-					{
-						$user_input['first_name']=$custname[0];
-							
-						$user_input['middle_name']="";
-							
-						$user_input['last_name']=$custname[1];
-					}
-					elseif(sizeof($custname)==3)
-					{
-						$user_input['first_name']=$custname[0];
-							
-						$user_input['middle_name']=$custname[1];
-							
-						$user_input['last_name']=$custname[2];
-					}
+					$user_input['first_name'] = $explodedName['first_name'];
+
+					$user_input['middle_name'] = $explodedName['middle_name'];
+					
+					$user_input['last_name'] = $explodedName['last_name'];
 						
 				}
 				if($this->input->post('desktop_cust_dob')!='')
@@ -192,9 +163,9 @@ class controller_basicMediclaim extends MIC_Controller {
 					$birthage=$this->input->post('desktop_cust_dob');
 					
 				}
+				
 				elseif($this->input->post('m_cust_dob1')!='')
 				{
-					//echo $this->input->post('m_cust_dob1');
 					$user_input['cust_birthdate']=$this->input->post('m_cust_dob1');
 					
 					$birthage=$this->input->post('m_cust_dob1');
@@ -302,7 +273,7 @@ class controller_basicMediclaim extends MIC_Controller {
 				if($this->input->post('cust_city_name')!='')
 				{
 					$user_input['cust_city_name']=$this->input->post('cust_city_name');
-					/* $user_input['cust_city_name'] */;
+					
 				}
 				
 				$this->session->set_userdata('user_input',$user_input);
@@ -310,11 +281,15 @@ class controller_basicMediclaim extends MIC_Controller {
 			
 			$user_input=$this->session->userdata('user_input',$user_input);
 			
-			//serialize($user_input),
+			
 			$this->input->set_cookie('mic_userdata',$this->session->userdata('session_id'),'864000');
+			
 			$data['user_input'] = $user_input;
+			
 			$data['compareParam'] = $param;
+			
 			$this->mic_dbtest->customer_personal_search_details($user_input);
+			
 			$this->db->freeDBResource($this->db->conn_id);
 			
 			$cacheFileName = 'sr_'.$user_input['product_type'].$user_input['plan_type'].$user_input['coverage_amount'].$user_input['cust_age'].$user_input['cust_gender'].$user_input['cust_city'] ;
@@ -340,26 +315,25 @@ class controller_basicMediclaim extends MIC_Controller {
 			}
 			
 			$cookie_filter = Util::getCookie('user_filter');
-			
-			/* Filter Data Received From Ajax Post */
+		
 			
 			if($data['compareParam'] == "yes" && !empty($cookie_filter))
 			{
 				$data['cookie_customer_detail'] = Util::getFilteredData($data['customer_details'],$cookie_filter);
 				
 			}
-				
+			
+			/* Filter Data Received From Ajax Post */
 			
 			if($this->input->is_ajax_request())
 			{	
 				$search_filter = array();
 				
-					Util::setCookies('user_filter',$_POST);
+				Util::setCookies('user_filter',$_POST);
 				
-					$search_filter=$_POST;
-				
+				$search_filter=$_POST;
+
 				$data['customer_details'] = Util::getFilteredData($data['customer_details'],$search_filter);
-				
 				
 				$company_discard = array();
 					
@@ -377,12 +351,6 @@ class controller_basicMediclaim extends MIC_Controller {
 					
 				$premiums_from_ajax = Util::getMinAndMaxPremium($data['customer_details']);
 				
-				//var_dump($premiums_from_ajax);
-				//exit;
-				//$this->session->set_userdata('search_filters',$search_filter);
-				
-				//$this->session->userdata('search_filter',$search_filter);
-				
 				$return['html'] = $this->load->view('health_insurance/ajaxPostResultView',$data,TRUE);
 				$return['company'] = count($companycnt);
 				$return['plan'] = count($data['customer_details']);
@@ -399,7 +367,7 @@ class controller_basicMediclaim extends MIC_Controller {
 				
 			}
 			
-		//}
+		}
 	}
 	
 	
@@ -420,9 +388,10 @@ class controller_basicMediclaim extends MIC_Controller {
 		}	
 		
 		$response = '';
+		
 		$result = $this->get_hospital_list->get_list($company_id,$company_hospitals);
-		/* echo "<pre>";
-		var_dump($result); */
+		
+		
 		if(empty($result) && !in_array($company_id,$result))
 		{
 			$response .= '<div class="tt-suggestion clearfix" style="white-space: nowrap;"><p style="white-space: normal;">No Matches Found.</div>';
@@ -480,8 +449,6 @@ class controller_basicMediclaim extends MIC_Controller {
 				
 			foreach($this->input->post('compare') as $k=>$v)
 			{
-				//Discussion - Please check the length of the $compare and it should be 3. Otherwise
-				// Redirect the user to the error page.
 				$compare=explode('-',$v);
 	
 				$variant[]=$compare[0];
@@ -502,16 +469,6 @@ class controller_basicMediclaim extends MIC_Controller {
 				
 			foreach ($v1 as $k2=>$v2)
 			{
-				/* if ($k2 == 'company_shortname')
-				{
-					$key = 'Company';
-				}
-	
-				else
-				{
-					$key = ucfirst(str_replace(array('_','-',' '), ' ', $k2));
-				} */
-	
 				$result[$k2][] = $v2;
 			}
 		}
@@ -521,7 +478,6 @@ class controller_basicMediclaim extends MIC_Controller {
 		$this->template->write_view('content', 'health_insurance/compare_results', $data, TRUE);
 		$this->template->render();
 		
-		//$this->load->view('health_insurance/compare_results',$data);
 	}
 	
 	public function policyView($policySlug)
