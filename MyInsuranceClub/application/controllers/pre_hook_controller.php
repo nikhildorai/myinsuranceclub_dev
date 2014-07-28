@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Pre_Hook_Controller extends MIC_Controller {
+class Pre_Hook_Controller extends Customer_Controller {
 
 	/**
 	 * Index Page for this controller.
