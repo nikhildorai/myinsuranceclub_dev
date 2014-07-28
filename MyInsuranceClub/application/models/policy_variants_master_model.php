@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Policy_variants_master_model EXTENDS MIC_Model{
+class Policy_variants_master_model EXTENDS Admin_Model{
 
 	function __construct()
 	{

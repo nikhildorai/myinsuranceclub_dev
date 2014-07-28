@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class my404 extends CI_Controller 
+class my404 extends Admin_Controller 
 {
     public function __construct() 
     {

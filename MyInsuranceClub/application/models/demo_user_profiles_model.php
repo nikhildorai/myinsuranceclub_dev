@@ -1,15 +1,12 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Demo_user_profiles_model EXTENDS MIC_Model{
+class Demo_user_profiles_model EXTENDS Admin_Model{
 
 	function __construct()
 	{
 		// Call the Model constructor
 		parent::__construct();
-		$this->load->library('session');
-		$this->load->library('form_validation');
-        $this->load->helper('form');
 	}
 
 	

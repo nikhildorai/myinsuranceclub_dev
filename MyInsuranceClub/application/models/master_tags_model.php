@@ -1,15 +1,12 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Master_tags_model EXTENDS MIC_Model{
+class Master_tags_model EXTENDS Admin_Model{
 
 	function __construct()
 	{
 		// Call the Model constructor
 		parent::__construct();
-		$this->load->library('session');
-		$this->load->library('form_validation');
-        $this->load->helper('form');
 	}
 	
 	public static function saveRecord($arrParams = array(), $modelType = 'update')

@@ -1,41 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User_guide extends CI_Controller {
+class User_guide extends Admin_Controller {
 	
 	function __construct() 
 	{
 		parent::__construct();
-
-		// To load the CI benchmark and memory usage profiler - set 1==1.
-		if (1==2) 
-		{
-			$sections = array(
-				'benchmarks' => TRUE, 'memory_usage' => TRUE, 
-				'config' => FALSE, 'controller_info' => FALSE, 'get' => FALSE, 'post' => FALSE, 'queries' => FALSE, 
-				'uri_string' => FALSE, 'http_headers' => FALSE, 'session_data' => FALSE
-			); 
-			$this->output->set_profiler_sections($sections);
-			$this->output->enable_profiler(TRUE);
-		}
-
-		// Load CI libraries and helpers.
-		$this->load->database();
-		$this->load->library('session');
 		$this->load->helper('text');
- 		$this->load->helper('url');
- 		$this->load->helper('form');
-
-  		// IMPORTANT! This global must be defined BEFORE the flexi auth library is loaded! 
- 		// It is used as a global that is accessible via both models and both libraries, without it, flexi auth will not work.
-		$this->auth = new stdClass;
-
-		// Load 'standard' flexi auth library by default.
-		$this->load->library('flexi_auth');	
-
-		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
-		$this->load->vars('base_url', base_url());
-		$this->load->vars('includes_dir', base_url().'/includes/');
-		$this->load->vars('current_url', $this->uri->uri_to_assoc(1));
 	}
 	
 	###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++###	

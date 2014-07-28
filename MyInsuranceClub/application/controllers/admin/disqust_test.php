@@ -1,12 +1,11 @@
 <?php
 
-class disqus_test extends Controller {
+class disqus_test extends Admin_Controller {
 
 	function disqus_test()
 	{
 		parent::Controller();
 		
-		$this->load->helper('url');
 		$this->load->library('disqus');
 		
 		$this->test_user_key = '';

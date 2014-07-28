@@ -63,7 +63,7 @@ $db['default']['database'] = 'myinsuranceclubDB';
 */
 
 $db['default']['dbdriver'] = 'mysqli';
-$db['default']['dbprefix'] = '';
+$db['default']['dbprefix'] = 'MIC_';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = TRUE;

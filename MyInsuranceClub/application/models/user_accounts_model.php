@@ -1,15 +1,12 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User_accounts_model EXTENDS MIC_Model{
+class User_accounts_model EXTENDS Admin_Model{
 
 	function __construct()
 	{
 		// Call the Model constructor
 		parent::__construct();
-		$this->load->library('session');
-		$this->load->library('form_validation');
-        $this->load->helper('form');
 	}
 	
 	function saveCompanyRecord($arrParams = array(), $modelType = 'update')

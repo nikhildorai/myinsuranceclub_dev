@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Guides_model EXTENDS MIC_Model{
+class Guides_model EXTENDS Admin_Model{
 
 	function __construct()
 	{

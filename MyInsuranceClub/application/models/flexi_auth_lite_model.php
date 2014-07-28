@@ -31,12 +31,10 @@
 * Requirements: PHP5 or above and Codeigniter 2.0+
 */
 
-class Flexi_auth_lite_model extends CI_Model
+class Flexi_auth_lite_model extends Admin_Model
 {
 	public function __construct()
 	{
-		$this->load->database();
-		$this->load->library('session');
 		$this->load->helper('cookie');
 		$this->load->config('flexi_auth', TRUE);
 		$this->lang->load('flexi_auth');

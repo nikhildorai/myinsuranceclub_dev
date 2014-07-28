@@ -54,6 +54,11 @@ class Admin_Controller extends MIC_Controller {
 		$this->load->vars('base_url', base_url());
 		$this->load->vars('includes_dir', base_url().'/includes/');
 		$this->load->vars('current_url', $this->uri->uri_to_assoc(1));
+		
+		// Load required CI libraries and helpers.
+        $this->load->library('upload');
+        $this->load->helper('ckeditor');
+        $this->load->plugin('widget_pi');
     }
 }
 

@@ -1,10 +1,8 @@
 <?php 
-class MIC_Model extends CI_Model {
+class Admin_Model extends CI_Model {
     function __construct()
     {
         parent::__construct();
-        
-        
     }
 }
 
