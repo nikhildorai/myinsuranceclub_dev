@@ -10,55 +10,45 @@ class Occupation_group_model EXTENDS Admin_Model{
 	}
 	
 	function saveRecord($arrParams = array(), $modelType = 'update')
-	{		
+	{
+		$saveRecord = false;
 		if (!empty($arrParams))
 		{
-			$colNames = $colValues = array();
+			$colNames = $colValues = $values = array();
+			foreach ($arrParams as $k1=>$v1)
+			{
+				if (!in_array($k1, array('occupation_group_id')))
+				{
+					$values[$k1] = trim($v1);
+				}
+			}
 			if ($modelType == 'create')
 			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, array('occupation_group_id')))
-					{
-						$colNames[] = trim($k1);
-						if (is_numeric($v1))
-							$colValues[] = trim($v1);
-						else
-							$colValues[] = '"'.trim($v1).'"';
-					}
-				}
-				$colNames = implode(', ', $colNames);
-				$colValues = implode(', ', $colValues);
-				$sql = 'INSERT INTO occupation_group ('.$colNames.') VALUES('.$colValues.')';
+				if ($this->db->insert($this->getTableName(), $values))
+					$saveRecord = true;
 			}
 			else
 			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, array('occupation_group_id')))
-					{
-						if (is_numeric($v1))
-							$colValues[] = trim($k1).'='.trim($v1);
-						else
-							$colValues[] = trim($k1).'='.'"'.trim($v1).'"';
-					}
-				}
-				$colValues = implode(', ', $colValues);
-				$sql = 'UPDATE occupation_group SET '.$colValues.' WHERE occupation_group_id = '.$arrParams['occupation_group_id'];		
-			}		
-			if ($this->db->query($sql))
-				return true;
+				$where = array('occupation_group_id'=> $arrParams['occupation_group_id']);
+				if ($this->db->update($this->getTableName(), $values, $where))
+					$saveRecord = true;
+			}
+		}		
+		if ($saveRecord == true)
+		{
+			if ($modelType == 'create')
+				return $this->db->insert_id();
 			else 
-				return false;
+				return $arrParams['occupation_group_id'];
 		}
 		else
-			return FALSE;
+			return false;				
 	}
 	
 	
 	public function getAll($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM occupation_group WHERE status !="deleted" ';
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE status !="deleted" ';
 		if (!empty($arrParams))
 		{
 			if (isset($arrParams['group_name']) && !empty($arrParams['group_name']))
@@ -73,7 +63,7 @@ class Occupation_group_model EXTENDS Admin_Model{
 	
 	public function getTableName()
 	{
-		return 'occupation_group';
+		return Util::getDbPrefix().'occupation_group';
 	}
 	
 	public function excuteQuery($sql)

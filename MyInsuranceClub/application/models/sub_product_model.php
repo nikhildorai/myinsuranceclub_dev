@@ -11,54 +11,47 @@ class Sub_product_model EXTENDS Admin_Model{
 	
 	function saveCompanyRecord($arrParams = array(), $modelType = 'update')
 	{
+		$saveRecord = false;
+		$db = &get_instance();
 		if (!empty($arrParams))
 		{
-			$colNames = $colValues = array();
+			$colNames = $colValues = $values = array();
+			foreach ($arrParams as $k1=>$v1)
+			{
+				if (!in_array($k1, array('sub_product_id')))
+				{
+					if (is_numeric($v1))
+						$values[$k1] = (int)trim($v1);
+					else
+						$values[$k1] = trim($v1);
+				}
+			}		
 			if ($modelType == 'create')
 			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, array('sub_product_id')))
-					{
-						$colNames[] = trim($k1);
-						if (is_numeric($v1))
-							$colValues[] = trim($v1);
-						else
-							$colValues[] = '"'.trim($v1).'"';
-					}
-				}
-				$colNames = implode(', ', $colNames);
-				$colValues = implode(', ', $colValues);
-				$sql = 'INSERT INTO sub_product ('.$colNames.') VALUES('.$colValues.')';
+				if ($db->db->insert($this->getTableName(), $values))
+					$saveRecord = true;
 			}
 			else
 			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, array('sub_product_id')))
-					{
-						if (is_numeric($v1))
-							$colValues[] = trim($k1).'='.trim($v1);
-						else
-							$colValues[] = trim($k1).'='.'"'.trim($v1).'"';
-					}
-				}
-				$colValues = implode(', ', $colValues);
-				$sql = 'UPDATE sub_product SET '.$colValues.' WHERE sub_product_id = '.$arrParams['sub_product_id'];
-//var_dump($arrParams, $colValues, $sql);die;				
-			}		
-			if ($this->db->query($sql))
-				return true;
+				$where = array('sub_product_id'=> $arrParams['sub_product_id']);
+				if ($db->db->update($this->getTableName(), $values, $where))
+					$saveRecord = true;
+			}
+		}	
+		if ($saveRecord == true)
+		{
+			if ($modelType == 'create')
+				return $db->db->insert_id();
 			else 
-				return false;
+				return $arrParams['sub_product_id'];
 		}
 		else
-			return FALSE;
+			return false;
 	}
 	
 	public function getTableName()
 	{
-		return 'sub_product';
+		return Util::getDbPrefix().'sub_product';
 	}
 	
 	public function excuteQuery($sql)

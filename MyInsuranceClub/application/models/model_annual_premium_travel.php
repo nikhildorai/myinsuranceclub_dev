@@ -10,7 +10,7 @@ class Annual_premium_travel_model EXTENDS MIC_Model{
 	
 	public function getTableName()
 	{
-		return 'annual_premium_travel';
+		return Util::getDbPrefix().'annual_premium_travel';
 	}
 	
 	public function excuteQuery($sql)

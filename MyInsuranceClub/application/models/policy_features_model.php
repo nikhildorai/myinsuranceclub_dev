@@ -50,7 +50,7 @@ class Policy_features_model EXTENDS Admin_Model{
 	
 	public function getTableName()
 	{
-		return 'policy_features';
+		return Util::getDbPrefix().'policy_features';
 	}
 	
 	public function excuteQuery($sql)

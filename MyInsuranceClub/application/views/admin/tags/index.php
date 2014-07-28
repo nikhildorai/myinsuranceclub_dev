@@ -81,6 +81,7 @@
                     </thead>
 					<tbody>
 					<?php 
+					
 					if (!empty($records))
 					{
 						if ($records->num_rows() > 0)
@@ -95,8 +96,8 @@
 					   		}   		
 						   	foreach ($records->result_array() as $row)
 						   	{
-						   		if ($i > $min && $i <= $max)
-						   		{
+						   //		if ($i > $min && $i <= $max)
+						  // 		{
 									$actionBtn = '';
 									if ($row['status'] == 'active')
 									{
@@ -120,7 +121,7 @@
 										<td><?php echo $this->util->getStatusIcon($row['status']);?></td>
 										<td><?php echo $actionBtn;?></td>
 									</tr>						
-			<?php 			   	}
+			<?php 			//   	}
 								$i++;
 							}
 						}

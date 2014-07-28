@@ -1,5 +1,5 @@
 <?php 
-class Admin_Common_Controller extends MIC_Controller {
+class Common_Controller extends MIC_Controller {
 	
     function __construct()
     {

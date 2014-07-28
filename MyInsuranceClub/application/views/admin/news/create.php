@@ -24,7 +24,7 @@ $( "#publish_date" ).datepicker({
 	<div class="panel panel-primary">
     	<div class="panel-heading">
         	<strong>
-        		<span class="glyphicon glyphicon-th-list"></span> <?php echo (isset($model['news_id']) && !empty($model['news_id'])) ? 'Update Article' : 'Create Article';?> 
+        		<span class="glyphicon glyphicon-th-list"></span> <?php echo (isset($model['news_id']) && !empty($model['news_id'])) ? 'Update News' : 'Create News';?> 
         	</strong>
         	
         	<a href="<?php echo $base_url;?>admin/news/" class="btn btn-w-md btn-gap-v btn-default btn-sm" style="float: right; margin-top: -5px;">Back</a>
@@ -224,7 +224,7 @@ $( "#publish_date" ).datepicker({
 			            <section class="panel panel-default">
 			                <div class="panel-body">
 				                <div class="form-group">
-									<?php echo $this->disqus->get_html();?>
+									<?php //echo $this->disqus->get_html();?>
 				               	</div>
 						              
 			                </div>

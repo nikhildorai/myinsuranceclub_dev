@@ -11,7 +11,8 @@ class Policy_master_model EXTENDS Admin_Model{
 	
 	public function get_all_policy($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM policy_master WHERE status !="deleted" ';
+		//	$sql = 'SELECT * FROM '.$this->getTableName().' WHERE status !="deleted" ';
+		$sql = 'status !="deleted" ';
 		if (!empty($arrParams))
 		{
 			if (isset($arrParams['policy_name']) && !empty($arrParams['policy_name']))
@@ -23,9 +24,10 @@ class Policy_master_model EXTENDS Admin_Model{
 			if (isset($arrParams['sub_product_id']) && !empty($arrParams['sub_product_id']))
 				$sql .= ' AND sub_product_id = '.$arrParams['sub_product_id'];
 		}
-		$sql .= ' ORDER BY policy_name ASC, product_id ASC ';	
-		$result = $this->db->query($sql);
-		return $result;
+		//	$sql .= ' ORDER BY policy_name ASC, product_id ASC ';	
+		//	$result = $this->db->query($sql);
+		//	return $result;
+		return $sql;
 	}
 	
 	function saveRecord($arrParams = array(), $modelType = 'update')
@@ -69,7 +71,7 @@ class Policy_master_model EXTENDS Admin_Model{
 	
 	public function getPolicy($arrParams)
 	{	
-		$sql = 'SELECT * FROM policy_master WHERE status = "active"';
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE status = "active"';
 		if (!empty($arrParams))
 		{
 			if (isset($arrParams['policy_name']) && !empty($arrParams['policy_name']))
@@ -86,19 +88,19 @@ class Policy_master_model EXTENDS Admin_Model{
 	
 	public function getByWhere($id)
 	{
-		$sql = 'SELECT * FROM policy_master WHERE policy_id = '.$id;		
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE policy_id = '.$id;		
 		return $this->db->query($sql);
 	}
 	
 	public function getAll()
 	{
-		$sql = 'SELECT * FROM policy_master';
+		$sql = 'SELECT * FROM '.$this->getTableName();
 		return $this->db->query($sql);
 	}
 	
 	public function getTableName()
 	{
-		return 'policy_master';
+		return Util::getDbPrefix().'policy_master';
 	}
 	
 	public function excuteQuery($sql)
@@ -142,8 +144,7 @@ class Policy_master_model EXTENDS Admin_Model{
 				$data = Util::callStoreProcedure($type, $arrParams);
 	//			Util::saveResultToCache($cacheFileName,$data['companyDetails']);
 			}
-		}
-//var_dump($data);die;				
+		}		
 		return $data;
 	} 
 }

@@ -157,7 +157,7 @@
                     </thead>
 					<tbody>
 					<?php 					
-//var_dump($companyOptions, $allProducts, $allSubProducts);die;										
+						
 					if (!empty($records))
 					{
 						if ($records->num_rows() > 0)
@@ -172,8 +172,8 @@
 					   		}   		
 						   	foreach ($records->result_array() as $row)
 						   	{
-						   		if ($i > $min && $i <= $max)
-						   		{
+					//	   		if ($i > $min && $i <= $max)
+					//	   		{
 									$comp_name = $companyOptions[(int)$row['company_id']];
 									$where = $productId = array();
 									if (!empty($row['product_id']))
@@ -283,7 +283,7 @@
 												?>
 										</td>
 									</tr>							
-			<?php 			   	}
+			<?php 			 //  	}
 								$i++;
 							}
 						}

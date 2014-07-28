@@ -18,18 +18,29 @@ class Policy extends Admin_Controller {
 	{
 		$this->load->library('table');
 		$this->load->library('pagination');
-		$arrParams 	= array();
+		
+		$arrParams 	= $records = array();
+		$where 	= $this->policy_master_model->get_all_policy($arrParams);		
+		$total = Util::getTotalRowTable('total','policy_master', $where);
+		
+		$limit = 0;
 		if (isset($_GET))
+		{
 			$arrParams = $_GET;
+			$limit = isset($_GET['per_page']) ? $_GET['per_page'] : 0 ; 
+		}
 		$this->data['search_query'] = $arrParams;
+		$where 	= $this->policy_master_model->get_all_policy($arrParams);
+		$orderBy = 'policy_name ASC, product_id ASC'; 
+		$this->data['records'] = Util::getTotalRowTable('all','policy_master', $where, $limit, $orderBy);
+		
 		// Set any returned status/error messages..		
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
 		$this->session->set_flashdata('message','');		
-		$this->data['records'] 	= $this->policy_master_model->get_all_policy($arrParams);
 
 		//	pagination
 		$config = $this->util->get_pagination_params();
-		$config['total_rows'] 	= $this->data['records']->num_rows();
+		$config['total_rows'] 	= $total;
 		$this->pagination->initialize($config); 		
         
 		$this->template->write_view('content', 'admin/policy/index', $this->data, TRUE);

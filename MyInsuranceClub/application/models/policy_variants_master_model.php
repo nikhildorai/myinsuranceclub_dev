@@ -11,7 +11,7 @@ class Policy_variants_master_model EXTENDS Admin_Model{
 	
 	public function get_all_insurance_company($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM policy_variants_master WHERE company_shortname != "mic" ';
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE company_shortname != "mic" ';
 		if (!empty($arrParams))
 		{
 			if (array_key_exists('company', $arrParams) && !empty($arrParams['company']))
@@ -68,19 +68,19 @@ class Policy_variants_master_model EXTENDS Admin_Model{
 	
 	public function getByWhere($id)
 	{
-		$sql = 'SELECT * FROM policy_variants_master WHERE company_id = '.$id;		
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE company_id = '.$id;		
 		return $this->db->query($sql);
 	}
 	
 	public function getAll()
 	{
-		$sql = 'SELECT * FROM policy_variants_master';
+		$sql = 'SELECT * FROM '.$this->getTableName();
 		return $this->db->query($sql);
 	}
 	
 	public function getTableName()
 	{
-		return 'policy_variants_master';
+		return Util::getDbPrefix().'policy_variants_master';
 	}
 	
 	public function excuteQuery($sql)

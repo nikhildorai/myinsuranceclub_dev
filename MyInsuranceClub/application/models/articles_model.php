@@ -7,76 +7,73 @@ class Articles_model EXTENDS Admin_Model{
 	{
 		// Call the Model constructor
 		parent::__construct();
-		$this->load->library('session');
-		$this->load->library('form_validation');
-        $this->load->helper('form');
 	}
 	
 	function saveRecord($arrParams = array(), $modelType = 'update')
-	{		
+	{
+		$saveRecord = false;
 		if (!empty($arrParams))
 		{
-			$colNames = $colValues = array();
+			$colNames = $colValues = $values = array();
+			foreach ($arrParams as $k1=>$v1)
+			{
+				if (!in_array($k1, array('article_id')))
+				{
+					if (is_numeric($v1))
+						$values[$k1] = (int)trim($v1);
+					else
+						$values[$k1] = trim($v1);
+				}
+			}
 			if ($modelType == 'create')
 			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, array('article_id')))
-					{
-						$colNames[] = trim($k1);
-						if (is_numeric($v1))
-							$colValues[] = trim($v1);
-						else
-							$colValues[] = '"'.trim($v1).'"';
-					}
-				}
-				$colNames = implode(', ', $colNames);
-				$colValues = implode(', ', $colValues);
-				$sql = 'INSERT INTO articles ('.$colNames.') VALUES('.$colValues.')';
+				if ($this->db->insert('articles', $values))
+					$saveRecord = true;
 			}
 			else
 			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, array('article_id')))
-					{
-						if (is_numeric($v1))
-							$colValues[] = trim($k1).'='.trim($v1);
-						else
-							$colValues[] = trim($k1).'='.'"'.trim($v1).'"';
-					}
-				}
-				$colValues = implode(', ', $colValues);
-				$sql = 'UPDATE articles SET '.$colValues.' WHERE article_id = '.$arrParams['article_id'];		
-			}		
-			if ($this->db->query($sql))
-				return true;
+				$where = array('article_id'=> $arrParams['article_id']);
+				if ($this->db->update('articles', $values, $where))
+					$saveRecord = true;
+			}
+		}
+		if ($saveRecord == true)
+		{
+			if ($modelType == 'create')
+				return $this->db->insert_id();
 			else 
-				return false;
+				return $arrParams['article_id'];
 		}
 		else
-			return FALSE;
+			return false;				
 	}
 	
 	
 	public function getAll($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM articles WHERE status !="deleted" ';
-		if (!empty($arrParams))
-		{
-			if (isset($arrParams['title']) && !empty($arrParams['title']))
-				$sql .= ' AND title LIKE "%'.$arrParams['title'].'%" ';
-			if (isset($arrParams['slug']) && !empty($arrParams['slug']))
-				$sql .= ' AND slug = "'.$arrParams['slug'].'"';
-		}
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE '.Articles_model::getWhere();
 		$sql .= ' ORDER BY title ASC, article_id ASC ';	
 		$result = $this->db->query($sql);
 		return $result;
 	}
 	
+	public static function getWhere($arrParams = array())
+	{	
+		$where = 'status !="deleted" ';
+		if (!empty($arrParams))
+		{
+			if (isset($arrParams['title']) && !empty($arrParams['title']))
+				$where .= ' AND title LIKE "%'.$arrParams['title'].'%" ';
+			if (isset($arrParams['slug']) && !empty($arrParams['slug']))
+				$where .= ' AND slug = "'.$arrParams['slug'].'"';
+		}
+		return $where;
+	}
+	
+	
 	public function getTableName()
 	{
-		return 'articles';
+		return Util::getDbPrefix().'articles';
 	}
 	
 	public function excuteQuery($sql)

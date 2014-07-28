@@ -11,7 +11,7 @@ class Insurance_company_master_detail_model EXTENDS Admin_Model{
 	
 	public function get_all_insurance_company($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM insurance_company_master_detail WHERE status != "deleted" AND company_shortname != "mic" ';
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE status != "deleted" AND company_shortname != "mic" ';
 		if (!empty($arrParams))
 		{
 			if (array_key_exists('company', $arrParams) && !empty($arrParams['company']))
@@ -65,7 +65,7 @@ class Insurance_company_master_detail_model EXTENDS Admin_Model{
 	
 	public function getInsuranceCompany($arrParams)
 	{	
-		$sql = 'SELECT * FROM insurance_company_master_detail WHERE status != "deleted"';
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE status != "deleted"';
 		if (!empty($arrParams))
 		{
 			if (isset($arrParams['company_name']) && !empty($arrParams['company_name']))
@@ -86,19 +86,19 @@ class Insurance_company_master_detail_model EXTENDS Admin_Model{
 	
 	public function getByWhere($condition)
 	{
-		$sql = 'SELECT * FROM insurance_company_master_detail WHERE '.$condition;		
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE '.$condition;		
 		return $this->db->query($sql);
 	}
 	
 	public function getAll()
 	{
-		$sql = 'SELECT * FROM insurance_company_master_detail';
+		$sql = 'SELECT * FROM '.$this->getTableName();
 		return $this->db->query($sql);
 	}
 	
 	public function getTableName()
 	{
-		return 'insurance_company_master_detail';
+		return Util::getDbPrefix().'insurance_company_master_detail';
 	}
 	
 	public function excuteQuery($sql)

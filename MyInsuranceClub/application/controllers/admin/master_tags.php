@@ -12,18 +12,37 @@ class Master_tags extends Admin_Controller {
 	{
 		$this->load->library('table');
 		$this->load->library('pagination');
-		$arrParams 	= array();
-		if (isset($_GET))
-			$arrParams = $_GET;
-		$this->data['search_query'] = $arrParams;
+		
 		// Set any returned status/error messages..		
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
 		$this->session->set_flashdata('message','');		
-		$this->data['records'] 	= $this->master_tags_model->getAll($arrParams);
+		
 
+		$arrParams 	= $records = array();
+		$where 	= 'status !="deleted"';		
+		$total = Util::getTotalRowTable('total','master_tags', $where);
+		
+		$limit = 0;
+		if (isset($_GET))
+		{
+			$arrParams = $_GET;
+			$limit = isset($_GET['per_page']) ? $_GET['per_page'] : 0 ; 
+		}
+		$this->data['search_query'] = $arrParams;
+		$where 	= 'status !="deleted"';
+		if (isset($arrParams['name']) && !empty($arrParams['name']))
+			$where .= ' AND name LIKE "%'.$arrParams['name'].'%" ';
+			
+		$orderBy = 'name ASC, tag_id ASC'; 
+		$this->data['records'] = Util::getTotalRowTable('all','master_tags', $where, $limit, $orderBy);
+		
+		
+		
+		
+		
 		//	pagination
 		$config = $this->util->get_pagination_params();
-		$config['total_rows'] 	= $this->data['records']->num_rows();
+		$config['total_rows'] 	= $total;
 		$this->pagination->initialize($config); 		
         
 		$this->template->write_view('content', 'admin/tags/index', $this->data, TRUE);

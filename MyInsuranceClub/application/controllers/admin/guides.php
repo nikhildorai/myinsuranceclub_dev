@@ -12,18 +12,31 @@ class guides extends Admin_Controller {
 	{
 		$this->load->library('table');
 		$this->load->library('pagination');
-		$arrParams 	= array();
-		if (isset($_GET))
-			$arrParams = $_GET;
-		$this->data['search_query'] = $arrParams;
 		// Set any returned status/error messages..		
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
 		$this->session->set_flashdata('message','');		
-		$this->data['records'] 	= $this->guides_model->getAll($arrParams);
 
+		$arrParams 	= $records = array();
+		$where 	= Guides_model::getWhere();	
+		$total = Util::getTotalRowTable('total','guides', $where);
+		
+		$limit = 0;
+		if (isset($_GET))
+		{
+			$arrParams = $_GET;
+			$limit = isset($_GET['per_page']) ? $_GET['per_page'] : 0 ; 
+		}
+		$this->data['search_query'] = $arrParams;
+		$where 	= Guides_model::getWhere($arrParams);
+			
+		$orderBy = 'title ASC, guide_id ASC'; 
+		$this->data['records'] = Util::getTotalRowTable('all','guides', $where, $limit, $orderBy);
+		
+		
+		
 		//	pagination
 		$config = $this->util->get_pagination_params();
-		$config['total_rows'] 	= $this->data['records']->num_rows();
+		$config['total_rows'] 	= $total;
 		$this->pagination->initialize($config); 		
         
 		$this->template->write_view('content', 'admin/guides/index', $this->data, TRUE);

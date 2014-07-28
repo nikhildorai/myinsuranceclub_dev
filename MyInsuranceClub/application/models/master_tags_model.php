@@ -52,7 +52,7 @@ class Master_tags_model EXTENDS Admin_Model{
 	
 	public function getAll($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM master_tags WHERE status !="deleted" ';
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE status !="deleted" ';
 		if (!empty($arrParams))
 		{
 			if (isset($arrParams['name']) && !empty($arrParams['name']))
@@ -65,7 +65,7 @@ class Master_tags_model EXTENDS Admin_Model{
 	
 	public function getTableName()
 	{
-		return 'master_tags';
+		return Util::getDbPrefix().'master_tags';
 	}
 	
 	public function excuteQuery($sql)

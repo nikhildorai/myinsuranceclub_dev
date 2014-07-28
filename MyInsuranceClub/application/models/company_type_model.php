@@ -9,21 +9,9 @@ class Company_type_model EXTENDS Admin_Model{
 		parent::__construct();
 	}
 	
-	public function getByWhere($id)
-	{
-		$sql = 'SELECT * FROM company_type WHERE company_type_id = '.$id;
-		return $this->db->query($sql);
-	}
-	
-	public function getAll()
-	{
-		$sql = 'SELECT * FROM company_type';
-		return $this->db->query($sql);
-	}
-	
 	public function getTableName()
 	{
-		return 'company_type';
+		return Util::getDbPrefix().'company_type';
 	}
 	
 	public function excuteQuery($sql)

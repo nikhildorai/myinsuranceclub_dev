@@ -10,69 +10,47 @@ class Disqus_threads_model EXTENDS Admin_Model{
 	}
 	
 	function saveRecord($arrParams = array(), $modelType = 'update')
-	{		
+	{
+		$saveRecord = false;
 		if (!empty($arrParams))
 		{
-			$colNames = $colValues = array();
+			$colNames = $colValues = $values = array();
+			foreach ($arrParams as $k1=>$v1)
+			{
+				if (!in_array($k1, array('id')))
+				{
+					if (is_numeric($v1))
+						$values[$k1] = (int)trim($v1);
+					else
+						$values[$k1] = trim($v1);
+				}
+			}
 			if ($modelType == 'create')
 			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, array('id')))
-					{
-						$colNames[] = trim($k1);
-						if (is_numeric($v1))
-							$colValues[] = trim($v1);
-						else
-							$colValues[] = '"'.trim($v1).'"';
-					}
-				}
-				$colNames = implode(', ', $colNames);
-				$colValues = implode(', ', $colValues);
-				$sql = 'INSERT INTO disqus_threads ('.$colNames.') VALUES('.$colValues.')';
+				if ($this->db->insert('disqus_threads', $values))
+					$saveRecord = true;
 			}
 			else
 			{
-				foreach ($arrParams as $k1=>$v1)
-				{
-					if (!in_array($k1, array('id')))
-					{
-						if (is_numeric($v1))
-							$colValues[] = trim($k1).'='.trim($v1);
-						else
-							$colValues[] = trim($k1).'='.'"'.trim($v1).'"';
-					}
-				}
-				$colValues = implode(', ', $colValues);
-				$sql = 'UPDATE disqus_threads SET '.$colValues.' WHERE id = '.$arrParams['id'];		
-			}		
-			if ($this->db->query($sql))
-				return true;
+				$where = array('id'=> $arrParams['id']);
+				if ($this->db->update('disqus_threads', $values, $where))
+					$saveRecord = true;
+			}
+		}
+		if ($saveRecord == true)
+		{
+			if ($modelType == 'create')
+				return $this->db->insert_id();
 			else 
-				return false;
+				return $arrParams['id'];
 		}
 		else
-			return FALSE;
-	}
-	
-	
-	public function getAll($arrParams = array())
-	{	
-		$sql = 'SELECT * FROM disqus_threads WHERE isDeleted != 1';
-
-		if (!empty($arrParams))
-		{
-			if (isset($arrParams['category']) && !empty($arrParams['category']))
-				$sql .= ' AND category = "'.$arrParams['category'].'"';
-		}
-		$sql .= ' ORDER BY id DESC ';		
-		$result = $this->db->query($sql);
-		return $result;
+			return false;				
 	}
 	
 	public function getTableName()
 	{
-		return 'disqus_threads';
+		return Util::getDbPrefix().'disqus_threads';
 	}
 	
 	public function excuteQuery($sql)

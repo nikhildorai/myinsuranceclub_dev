@@ -10,7 +10,7 @@ class Annual_premium_personal_accident_model EXTENDS MIC_Model{
 	
 	public function getTableName()
 	{
-		return 'annual_premium_personal_accident';
+		return Util::getDbPrefix().'annual_premium_personal_accident';
 	}
 	
 	public function excuteQuery($sql)

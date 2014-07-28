@@ -11,7 +11,7 @@ class Insurance_company_master_model EXTENDS Admin_Model{
 	
 	public function get_all_insurance_company($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM insurance_company_master WHERE status != "deleted" AND company_shortname != "mic" ';
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE status != "deleted" AND company_shortname != "mic" ';
 		if (!empty($arrParams))
 		{
 			if (array_key_exists('company', $arrParams) && !empty($arrParams['company']))
@@ -34,24 +34,21 @@ class Insurance_company_master_model EXTENDS Admin_Model{
 			{
 				if (!in_array($k1, array('company_id')))
 				{
-					if (is_numeric($v1))
-						$values[$k1] = (int)trim($v1);
-					else
-						$values[$k1] = trim($v1);
+					$values[$k1] = trim($v1);
 				}
 			}
 			if ($modelType == 'create')
 			{
-				if ($this->db->insert('insurance_company_master', $values))
+				if ($this->db->insert($this->getTableName(), $values))
 					$saveRecord = true;
 			}
 			else
 			{
 				$where = array('company_id'=> $arrParams['company_id']);
-				if ($this->db->update('insurance_company_master', $values, $where))
+				if ($this->db->update($this->getTableName(), $values, $where))
 					$saveRecord = true;
 			}
-		}
+		}		
 		if ($saveRecord == true)
 		{
 			if ($modelType == 'create')
@@ -65,7 +62,7 @@ class Insurance_company_master_model EXTENDS Admin_Model{
 	
 	public function getInsuranceCompany($arrParams)
 	{	
-		$sql = 'SELECT * FROM insurance_company_master WHERE status != "deleted"';
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE status != "deleted"';
 		if (!empty($arrParams))
 		{
 			if (isset($arrParams['company_name']) && !empty($arrParams['company_name']))
@@ -86,19 +83,19 @@ class Insurance_company_master_model EXTENDS Admin_Model{
 	
 	public function getByWhere($condition)
 	{
-		$sql = 'SELECT * FROM insurance_company_master WHERE '.$condition;		
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE '.$condition;		
 		return $this->db->query($sql);
 	}
 	
 	public function getAll()
 	{
-		$sql = 'SELECT * FROM insurance_company_master';
+		$sql = 'SELECT * FROM '.$this->getTableName();
 		return $this->db->query($sql);
 	}
 	
 	public function getTableName()
 	{
-		return 'insurance_company_master';
+		return Util::getDbPrefix().'insurance_company_master';
 	}
 	
 	public function excuteQuery($sql)

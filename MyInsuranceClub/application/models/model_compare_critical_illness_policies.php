@@ -6,7 +6,6 @@ class model_compare_critical_illness_policies EXTENDS MIC_Model{
 	{
 		// Call the Model constructor
 		parent::__construct();
-		$this->load->library('session');
 	}
 
 	public function get_comparison($variant,$annual_premium,$age)

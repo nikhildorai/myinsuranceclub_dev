@@ -52,7 +52,7 @@ class Product_model EXTENDS Admin_Model{
 
 	public function getAll($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM product WHERE status !="deleted" ';
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE status !="deleted" ';
 		if (!empty($arrParams))
 		{
 			if (isset($arrParams['product_name']) && !empty($arrParams['product_name']))
@@ -65,7 +65,7 @@ class Product_model EXTENDS Admin_Model{
 	
 	public function getTableName()
 	{
-		return 'product';
+		return Util::getDbPrefix().'product';
 	}
 	
 	public function excuteQuery($sql)

@@ -1,6 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Common extends Common_Controller {
+	
+    function __construct() 
+    {
+        parent::__construct();
+		// Load required CI libraries and helpers.
+		$this->load->model('master_tags_model');
+ 		
+	}
+	
 	public function getTags($term = null)
 	{
 		if (!empty($term))

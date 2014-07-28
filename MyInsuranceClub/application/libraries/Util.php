@@ -195,37 +195,18 @@ class Util {
 	{
 		$result = $value = array();
 		$model = &get_instance();
+		$db = &get_instance();
 		$model->load->model($modelName);
 		$condition = '';
 		$tableName = $model->$modelName->getTableName();
 		if (!empty($where))
 		{
-			foreach ($where as $k2=>$v2)
-			{
-				if (is_string($v2['value']))
-					$v2['value'] = '"'.$v2['value'].'"';
-				if ($v2['compare'] == 'equal')
-				{
-					$condition .= empty($condition) ? $v2['field'].' = '.$v2['value'] : ' AND '.$v2['field'].' = '.$v2['value'];
-				}
-				else if($v2['compare'] == 'empty')
-				{
-					$condition .= empty($condition) ? $v2['field'].' IS NULL ' : ' AND '.$v2['field'].' IS NULL ';
-				}
-				else if($v2['compare'] == 'notEmpty')
-				{
-					$condition .= empty($condition) ? $v2['field'].' IS NOT NULL ' : ' AND '.$v2['field'].' IS NOT NULL ';
-				}
-				else if($v2['compare'] == 'findInSet')
-				{
-					if (count(explode(',', $v2['value'])) > 1)			
-						$condition .= empty($condition) ? ' FIND_IN_SET('.$v2['field'].', '.$v2['value'].')' : ' AND FIND_IN_SET('.$v2['field'].', '.$v2['value'].')';
-					else
-						$condition .= empty($condition) ? ' FIND_IN_SET('.$v2['value'].', '.$v2['field'].')' : ' AND FIND_IN_SET('.$v2['value'].', '.$v2['field'].')';
-				}
-			}	
+			$condition = Util::formatWhereStatement($where);	
 		}
-		
+		$dbPrefix = Util::getDbPrefix();
+		$pos = strpos($tableName, $dbPrefix);
+		if ($pos === false)
+			$tableName = $dbPrefix.$tableName; 
 		$sql = 'SELECT * FROM '.$tableName;
 		if (!empty($condition))
 		{
@@ -267,6 +248,63 @@ class Util {
 			}
 		}
 		return $value;
+	}
+
+	public static function formatWhereStatement($where = array())
+	{
+		$condition = '';
+		if (!empty($where))
+		{
+			foreach ($where as $k2=>$v2)
+			{
+				if (is_string($v2['value']) && !in_array($v2['compare'], array('like', 'rightLike', 'leftLike')))
+					$v2['value'] = '"'.$v2['value'].'"';
+					
+				if ($v2['compare'] == 'equal')
+				{
+					$condition .= empty($condition) ? $v2['field'].' = '.$v2['value'] : ' AND '.$v2['field'].' = '.$v2['value'];
+				}
+				else if ($v2['compare'] == 'notEqual')
+				{
+					$condition .= empty($condition) ? $v2['field'].' != '.$v2['value'] : ' AND '.$v2['field'].' != '.$v2['value'];
+				}
+				else if ($v2['compare'] == 'like')
+				{
+					$condition .= empty($condition) ? $v2['field'].' LIKE "%'.$v2['value'].'%"' : ' AND LIKE "%'.$v2['value'].'%"';
+				}
+				else if ($v2['compare'] == 'rightLike')
+				{
+					$condition .= empty($condition) ? $v2['field'].' LIKE "'.$v2['value'].'%"' : ' AND LIKE "'.$v2['value'].'%"';
+				}
+				else if ($v2['compare'] == 'leftLike')
+				{
+					$condition .= empty($condition) ? $v2['field'].' LIKE "%'.$v2['value'].'"' : ' AND LIKE "%'.$v2['value'].'"';
+				}
+				else if($v2['compare'] == 'empty')
+				{
+					$condition .= empty($condition) ? $v2['field'].' IS NULL ' : ' AND '.$v2['field'].' IS NULL ';
+				}
+				else if($v2['compare'] == 'notEmpty')
+				{
+					$condition .= empty($condition) ? $v2['field'].' IS NOT NULL ' : ' AND '.$v2['field'].' IS NOT NULL ';
+				}
+				else if($v2['compare'] == 'findInSet')
+				{
+					if (count(explode(',', $v2['value'])) > 1)			
+						$condition .= empty($condition) ? ' FIND_IN_SET('.$v2['field'].', '.$v2['value'].')' : ' AND FIND_IN_SET('.$v2['field'].', '.$v2['value'].')';
+					else
+						$condition .= empty($condition) ? ' FIND_IN_SET('.$v2['value'].', '.$v2['field'].')' : ' AND FIND_IN_SET('.$v2['value'].', '.$v2['field'].')';
+				}
+			}	
+		}
+		return $condition;
+	}
+	
+	
+	public static function getdbPrefix()
+	{
+		$db = &get_instance();
+		return $db->db->dbprefix;
 	}
 	
 	public function getCompanyTypeDropDownOptions($modelName ='Company_type_model', $optionKey = 'id', $optionValue = 'id', $defaultEmpty = "Please Select", $extraKeys = false, $where = array(), $sqlFilter = array())
@@ -1396,7 +1434,7 @@ public static function getCachedObject($cacheKey='')
 	{
 		$db = &get_instance();	
 		$sql = 	'SELECT us.uacc_id, dp.upro_first_name,dp.upro_last_name,us.uacc_username 
-				FROM user_accounts us, demo_user_profiles dp 
+				FROM MIC_user_accounts us, MIC_demo_user_profiles dp 
 				WHERE us.uacc_active = 1 AND
 				us.uacc_id = dp.upro_uacc_fk 
 				AND FIND_IN_SET(uacc_group_fk, "2,3")';
@@ -1516,7 +1554,7 @@ public static function getCachedObject($cacheKey='')
 	public static function getUniqueTagFor()
 	{
 		$db = &get_instance();
-		$sql = 'SELECT DISTINCT tag_for FROM master_tags';
+		$sql = 'SELECT DISTINCT tag_for FROM '.Util::getdbPrefix().'master_tags';
 		$result = $db->db->query($sql);
 		$value = array();
 		if ($result->num_rows > 0)
@@ -2349,6 +2387,35 @@ echo '=================>';
 			}
 		}	
 	}
+	
+	public static function getTotalRowTable($type = "", $tableName, $where = '', $limit = 0, $orderBy = '')
+	{
+		$db = &get_instance();
+		
+		if (!empty($where))
+			$db->db->where($where);
+		
+		if ($type == 'total')
+		{
+			$db->db->from($tableName);
+			$record = $db->db->count_all_results();
+		}
+		else
+		{
+			if (!empty($limit))
+				$db->db->limit($db->config->config['pagination']['per_page'], $limit);
+			else 
+				$db->db->limit($db->config->config['pagination']['per_page'], 0);
+				
+			if (!empty($orderBy))
+				$db->db->order_by($orderBy);
+				
+	        $qry= $db->db->get($tableName);
+	        $record = $qry;
+		}
+		return $record;
+	}
+	
 }
 
 // END Util class

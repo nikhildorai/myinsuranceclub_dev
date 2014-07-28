@@ -52,7 +52,7 @@ class Policy_rider_level_term_model EXTENDS Admin_Model{
 	
 	public function getAll($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM policy_rider_level_term WHERE status !="deleted" ';
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE status !="deleted" ';
 		if (!empty($arrParams))
 		{
 			if (isset($arrParams['name']) && !empty($arrParams['name']))
@@ -65,7 +65,7 @@ class Policy_rider_level_term_model EXTENDS Admin_Model{
 	
 	public function getTableName()
 	{
-		return 'policy_rider_level_term';
+		return Util::getDbPrefix().'policy_rider_level_term';
 	}
 	
 	public function excuteQuery($sql)

@@ -18,7 +18,7 @@ class Demo_user_profiles_model EXTENDS Admin_Model{
 	
 	public function getTableName()
 	{
-		return 'demo_user_profiles';
+		return 'MIC_demo_user_profiles';
 	}
 	
 	public function excuteQuery($sql)
