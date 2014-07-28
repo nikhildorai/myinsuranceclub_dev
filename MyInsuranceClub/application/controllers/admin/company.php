@@ -6,10 +6,6 @@ class Company extends Admin_Controller {
     {
         parent::__construct();
 		// Load required CI libraries and helpers.
-        $this->load->library('upload');
-		$this->load->library('form_validation');
-        $this->load->helper('ckeditor');
-        $this->load->plugin('widget_pi');
 		$this->load->model('insurance_company_master_model');
 		$this->load->model('insurance_company_master_detail_model');
 		$this->load->model('company_claim_ratio_model');

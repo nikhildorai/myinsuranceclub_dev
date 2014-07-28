@@ -1,13 +1,12 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class News_model EXTENDS MIC_Model{
+class News_model EXTENDS Admin_Model{
 
 	function __construct()
 	{
 		// Call the Model constructor
 		parent::__construct();
-		$this->load->library('session');
 	}
 	
 	function saveRecord($arrParams = array(), $modelType = 'update')

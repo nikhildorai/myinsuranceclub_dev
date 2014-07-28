@@ -1,13 +1,12 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Company_claim_ratio_model EXTENDS MIC_Model{
+class Company_claim_ratio_model EXTENDS Admin_Model{
 
 	function __construct()
 	{
 		// Call the Model constructor
 		parent::__construct();
-		$this->load->library('session');
 	}
 	
 	public function get_all_insurance_company($arrParams = array())

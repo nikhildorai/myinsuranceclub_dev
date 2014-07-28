@@ -74,7 +74,7 @@ var allowedTags = [];
 			    	var filter = request.term.toLowerCase();
 			    	$.ajax({
 				    	type: "GET",
-				    	url: "<?php echo base_url().'admin/common/getTags'?>" + '/' + request.term,
+				    	url: "<?php echo base_url().'common/getTags'?>" + '/' + request.term,
 				    	dataType: "json",
 				    	success: function (data) {
 					    	if(data != "")

@@ -1,13 +1,12 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Insurance_company_master_model EXTENDS MIC_Model{
+class Insurance_company_master_model EXTENDS Admin_Model{
 
 	function __construct()
 	{
 		// Call the Model constructor
 		parent::__construct();
-		$this->load->library('session');
 	}
 	
 	public function get_all_insurance_company($arrParams = array())
