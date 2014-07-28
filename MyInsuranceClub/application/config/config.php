@@ -427,5 +427,23 @@ $config['disqus']['user_api_key'] 			= 	'aa8d1d13e8a043579a08373ad004e825';
 $config['disqus']['access_token'] 			= 	'aa8d1d13e8a043579a08373ad004e825';
 
 
+/*
+ * Autoloads all the extended base controllers
+| -------------------------------------------------------------------
+|  Native Auto-load
+| -------------------------------------------------------------------
+| 
+| Nothing to do with config/autoload.php, this allows PHP autoload to work
+| for base controllers and some third-party libraries.
+|
+*/
+function __autoload($class)
+{
+	if(strpos($class, 'CI_') !== 0)
+	{
+		@include_once( APPPATH . 'core/'. $class . EXT );
+	}
+}
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

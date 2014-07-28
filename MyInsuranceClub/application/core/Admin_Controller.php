@@ -1,5 +1,5 @@
 <?php 
-class MIC_back_Controller extends CI_Controller {
+class Admin_Controller extends MIC_Controller {
     function __construct()
     {
         parent::__construct();
@@ -39,24 +39,6 @@ class MIC_back_Controller extends CI_Controller {
 			}
 		}
 		
-		// Load required CI libraries and helpers.
-		$this->load->database();
-		$this->load->library('session');
-        $this->load->library('upload');
- 		$this->load->helper('url');
- 		$this->load->helper('form');
-		$this->load->library('form_validation');
-        $this->load->helper('ckeditor');
-        $this->load->plugin('widget_pi');
-		$this->load->model('insurance_company_master_model');
-		$this->load->model('insurance_company_master_detail_model');
-		$this->load->model('company_claim_ratio_model');
- 		
-		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
-		$this->load->vars('base_url', base_url());
-		$this->load->vars('includes_dir', base_url().'/includes/');
-		$this->load->vars('current_url', $this->uri->uri_to_assoc(1));
-		
 		// Define a global variable to store data that is then used by the end view page.
 		$this->data = null;
     
@@ -66,8 +48,12 @@ class MIC_back_Controller extends CI_Controller {
 			$this->session->set_flashdata('message', '<p class="error_msg">You do not have privileges.</p>');
 			redirect('admin/auth_admin');
 		}
-		
-    
+	
+		// Load required CI libraries and helpers.
+		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
+		$this->load->vars('base_url', base_url());
+		$this->load->vars('includes_dir', base_url().'/includes/');
+		$this->load->vars('current_url', $this->uri->uri_to_assoc(1));
     }
 }
 
