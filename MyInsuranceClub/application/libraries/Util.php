@@ -3,6 +3,83 @@
 class Util {
 	
 	/**
+	 * @abstract Validating UserInput In Mediclaim Forms
+	 */
+	public static function getUserInputValidationForMediclaim()
+	{
+		$CI = &get_instance();
+	
+		if(isset($_POST['cust_name']))
+		{
+			$CI->form_validation->set_rules('cust_name', 'Full Name', 'required|alpha');
+		}
+		if(isset($_POST['cust_email']))
+		{
+			$CI->form_validation->set_rules('cust_email', 'Email', 'required|valid_email');
+		}
+		if(isset($_POST['cust_dob']))
+		{
+			$CI->form_validation->set_rules('cust_dob', 'Date of Birth', 'required|age_greater_than_18');
+		}
+		if(isset($_POST['cust_mobile']))
+		{
+			$CI->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|phone_789|exact_length[10]');
+		}
+	
+	
+		$CI->form_validation->set_error_delimiters('<div class="error" style="color: red;">', '</div>');
+	
+		return $CI->form_validation->run();
+	
+	}
+	
+	
+	
+	/**
+	 *
+	 * @param unknown $custName
+	 * @return array
+	 */
+	public static function explodeFullName($custName = '')
+	{
+		$custName_arr = array();
+	
+		if(!empty($custName))
+		{
+			$explodedCustName = explode(' ',$custName);
+				
+			if(sizeof($custName) == 1)
+			{
+				$custName_arr['first_name'] = $explodedCustName[0];
+				$custName_arr['middle_name'] = "";
+				$custName_arr['last_name'] = "";
+			}
+				
+			elseif(sizeof($custName)==2)
+			{
+				$custName_arr['first_name']=$explodedCustName[0];
+					
+				$custName_arr['middle_name']="";
+					
+				$custName_arr['last_name']=$explodedCustName[1];
+			}
+			elseif(sizeof($custName)==3)
+			{
+				$custName_arr['first_name']=$explodedCustName[0];
+					
+				$custName_arr['middle_name']=$explodedCustName[1];
+					
+				$custName_arr['last_name']=$explodedCustName[2];
+			}
+		}
+	
+		return $custName_arr;
+	}
+	
+	
+	
+	
+	/**
 	 *
 	 * @param unknown $num
 	 * @return Ambigous <string, unknown>
