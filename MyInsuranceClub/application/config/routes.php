@@ -65,7 +65,10 @@ $route['admin/company/(:any)'] = "admin/company/$1";
 
 #########################	frontend routes start	##############################
 //critical illness
-$route['criticalIllness'] = "health_insurance/criticalIllness/index";
+$route['critical-illness'] = "health_insurance/controller_criticalIllness/index";
+$route['critical-illness/search-results'] = "health_insurance/controller_criticalIllness/get_critical_illness_results";
+$route['critical-illness/search-results/(:any)'] = "health_insurance/controller_criticalIllness/get_critical_illness_results/$1";
+$route['critical-illness/compare-results'] = "health_insurance/controller_criticalIllness/compare_policies";
 
 //mediclaim routes
 $route['health-insurance'] = "health_insurance/controller_basicMediclaim/index";
