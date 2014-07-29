@@ -300,6 +300,9 @@ class controller_criticalIllness extends Customer_Controller {
 		}
 		$data['result']=$result;
 	
-		$this->load->view('critical_illness/compare_results',$data);
+		$this->template->set_template('frontendsearch');
+		$this->template->write_view('content', 'critical_illness/compare_results', $data, TRUE);
+		$this->template->render();
+		//$this->load->view('critical_illness/compare_results',$data);
 	}
 }
