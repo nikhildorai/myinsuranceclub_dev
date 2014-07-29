@@ -71,7 +71,7 @@ class model_customer_personal_and_search_details EXTENDS MIC_Model{
 											'',
 											$birthdate_format,
 											$user_input['cust_age'],
-											$user_input['cust_gender'],
+											'',
 											''
 										);
 		
