@@ -1685,6 +1685,56 @@ echo '=================>';
 					
 			);
 		}
+		
+		elseif($featureType == 'Critical Illness')
+		{
+			$value = array(
+					'policy_renewable'=>array('name'=>'Policy Renewable','tooltip'=>'Policy Renewable'),
+					'medical_test_age'=>array('name'=>'Medical Test Age','tooltip'=>'Cashless treatment'),
+					'preexisting_age'=>array('name'=>'Preexisting Diseases','tooltip'=>''),
+					'copay'=>array('name'=>'Copayment','tooltip'=>'Cashless treatment'),
+					'tax_benifits'=>array('name'=>'Tax Benefits','tooltip'=>'Cashless treatment'),
+					'cancer'=>array('name'=>'Cancer','tooltip'=>'Cashless treatment'),
+					'cabg'=>array('name'=>'Coronary artery bypass surgery','tooltip'=>'Cashless treatment'),
+					'myocardial_infraction'=>array('name'=>'Myocardial Infraction','tooltip'=>'Cashless treatment'),
+					'kidney_faliure'=>array('name'=>'Kidney Faliure','tooltip'=>'Cashless treatment'),
+					'obt'=>array('name'=>'Organ/Bone Marrow Transplant','tooltip'=>'Cashless treatment'),
+					'stroke'=>array('name'=>'Stroke','tooltip'=>'Cashless treatment'),
+					'ags'=>array('name'=>'Aorta Graft Surgery','tooltip'=>'Cashless treatment'),
+					'ppah'=>array('name'=>'Primary Pulmonary Arterial Hypertension','tooltip'=>'Cashless treatment'),
+					'ms'=>array('name'=>'Multiple Scleriosis','tooltip'=>'Cashless treatment'),
+					'ppl'=>array('name'=>'Permenant Paralysis Of Limbs','tooltip'=>'Cashless treatment'),
+					'cad'=>array('name'=>'Coronary Artery Disease','tooltip'=>'Cashless treatment'),
+					'opr'=>array('name'=>'Open Heart Replacement','tooltip'=>'Cashless treatment'),
+					'aplastic_anemia'=>array('name'=>'Aplastic Anemia','tooltip'=>'Cashless treatment'),
+					'e_lu_d'=>array('name'=>'End Stage Lung Disease','tooltip'=>'Cashless treatment'),
+					'e_li_d'=>array('name'=>'End Stage Liver Disease','tooltip'=>'Cashless treatment'),
+					'coma'=>array('name'=>'Coma','tooltip'=>'Cashless treatment'),
+					'major_burns'=>array('name'=>'Major Burns','tooltip'=>'Cashless treatment'),
+					'mnd'=>array('name'=>'Motor Neuron Disease','tooltip'=>'Cashless treatment'),
+					'ti'=>array('name'=>'Terminal Illness','tooltip'=>'Cashless treatment'),
+					'bm'=>array('name'=>'Bacterial Meningitis','tooltip'=>'Cashless treatment'),
+					'parkinsons'=>array('name'=>'Parkinsons','tooltip'=>'Cashless treatment'),
+					'blindness'=>array('name'=>'Blindness','tooltip'=>'Cashless treatment'),
+					'speech_loss'=>array('name'=>'Speech Loss','tooltip'=>'Cashless treatment'),
+					'deafness'=>array('name'=>'Deafness','tooltip'=>'Cashless treatment'),
+					'md'=>array('name'=>'Muscular Dystrophy','tooltip'=>'Cashless treatment'),
+					'paraplegia'=>array('name'=>'Paraplegia','tooltip'=>'Cashless treatment'),
+					'hepatoma'=>array('name'=>'Hepatoma','tooltip'=>'Cashless treatment'),
+					'ovarian_c'=>array('name'=>'Ovarian Cancer','tooltip'=>'Cashless treatment'),
+					'vaginal_c'=>array('name'=>'Vaginal Cancer','tooltip'=>'Cashless treatment'),
+					'breast_c'=>array('name'=>'Breast Cancer','tooltip'=>'Cashless treatment'),
+					'cervical'=>array('name'=>'Cervical Cancer','tooltip'=>'Cashless treatment'),
+					'endometrial_c'=>array('name'=>'Endometrial Cancer','tooltip'=>'Cashless treatment'),
+					'fallopian_tube_c'=>array('name'=>'Fallopian Tube Cancer','tooltip'=>'Cashless treatment'),
+					'burns'=>array('name'=>'Burns','tooltip'=>'Cashless treatment'),
+					'paralysis_multitrauma'=>array('name'=>'Paralysis Multitrauma','tooltip'=>'Cashless treatment'),
+					'cdb'=>array('name'=>'Congenital Disability Benefit','tooltip'=>'Cashless treatment'),
+					'hvs'=>array('name'=>'Heart Valve Surgery','tooltip'=>'Cashless treatment'),
+					'quad'=>array('name'=>'Quadraplegia','tooltip'=>'Cashless treatment')
+						
+			);
+		}
 		return $value;
 	}
 	
@@ -1842,6 +1892,78 @@ echo '=================>';
 	
 		return $data;
 	}
+	
+	
+	public static function getFilteredDataForCriticalIllness($data,$search_filter = array())
+	{
+		if(!empty($data) && !empty($search_filter))
+		{
+			foreach($data as $k=>$v)
+			{
+				if(isset($search_filter['sum_assured']))
+				{
+	
+					if (!in_array($v['sum_assured'],$search_filter['sum_assured']))
+					{
+						unset($data[$k]);
+					}
+				}
+	
+				if(isset($search_filter['sector']))
+				{
+	
+					if (!(in_array($v['public_private_health'],$search_filter['sector'])))
+					{
+						unset($data[$k]);
+					}
+				}
+	
+				if(isset($search_filter['company_name']))
+				{
+					if (!(in_array(trim($v['company_id']),$search_filter['company_name'])))
+					{
+						unset($data[$k]);
+					}
+				}
+					
+				if(isset($search_filter['health_comp']))
+				{
+					if (!(in_array(trim($v['company_type_id']),$search_filter['health_comp'])))
+					{
+						unset($data[$k]);
+					}
+				}
+	
+				if(isset($search_filter['min_premium_amt']))
+				{
+					$min_amt_arr = explode('₹',$search_filter['min_premium_amt']);
+	
+					$min_premium = (int) str_replace(',','',$min_amt_arr[1]);
+	
+					if(!($v['annual_premium'] >= $min_premium))
+					{
+						unset($data[$k]);
+					}
+				}
+					
+				if(isset($search_filter['max_premium_amt']))
+				{
+					$max_amt_arr = explode('₹',$search_filter['max_premium_amt']);
+	
+					$max_premium = (int) str_replace(',','',$max_amt_arr[1]);
+	
+					if(!($v['annual_premium'] <= $max_premium))
+					{
+						unset($data[$k]);
+					}
+				}
+			}
+				
+		}
+		return $data;
+	}
+	
+	
 	
 	public static function getConfigForFileUpload($type = 'company')
 	{
