@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class CriticalIllness extends CI_Controller {
+class controller_criticalIllness extends Customer_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,21 +21,12 @@ class CriticalIllness extends CI_Controller {
 	{
 		// Call the Controller constructor
 		parent::__construct();
-		//$this->load->library('email');
-		$this->load->library('session');
-		$this->load->library('table');
-		$this->load->library('user_agent');
-		$this->load->database();
-		$this->load->model('mic_dbtest');
-		$this->load->model('get_results_critical_illness');
-		$this->load->model('compare_critical_illness_policies');
-		$this->load->model('city');
-		$this->load->helper('form');
-		$this->load->helper('url');
-		$this->load->library('form_validation');
-		$this->load->library('util');
-		$this->load->helper('html');
-		date_default_timezone_set('Asia/Kolkata');
+		
+		$this->load->model('model_get_results_critical_illness');
+		$this->load->model('model_compare_critical_illness_policies');
+		$this->load->model('model_get_company_plans_count');
+		//$this->load->model('model_city');
+		
 	}
 
 
@@ -43,63 +34,23 @@ class CriticalIllness extends CI_Controller {
 	{
 		$data=array();
 		
-		/* $data['cvg_amt']=array(	'1'=>'Below 1 Lakh',
-								'2'=>'1 Lakh',
-								'3'=>'2 Lakhs',
-								'4'=>'3 Lakhs',
-								'5'=>'4 Lakhs',
-								'6'=>'5 Lakhs',
-								'7'=>'7.5 Lakhs',
-								'8'=>'10 Lakhs',
-								'9'=>'15 Lakhs',
-								'10'=>'20 Lakhs',
-								'11'=>'50 Lakhs'
-								); */
+		$this->input->set_cookie('user_filter','');
 		
-		$data['family_composition']=array(	'1A'=>'myself',
-											'2A'=>'Self + Spouse',
-											'1A1C'=>'Self + 1 Child',
-											'1A2C'=>'Self + 2 Children',
-											'1A3C'=>'Self + 3 Children',
-											'1A4C'=>'Self + 4 Children',
-											'2A1C'=>'Self + Spouse + 1 Child',
-											'2A2C'=>'Self + Spouse + 2 Children',
-											'2A3C'=>'Self + Spouse + 3 Children',
-											'2A4C'=>'Self + Spouse + 4 Children'
-											);
+		$this->input->set_cookie('compared_plans','');
 		
-		$data['city']=$this->city->get_city();
+		$product_name = 'critical-illness';
 		
-		$this->load->view('critical_illness/home',$data);
-
-		/* $user_info['session_id'] = $this->session->userdata('session_id');
-
-		$user_info['timestamp'] = date('H:i:s',$this->session->userdata('last_activity'));
-
-		if($this->agent->is_browser())
-		{
-			$user_info['browser']=$this->agent->browser();
-
-			$user_info['os']=$this->agent->platform();
-		}
-		if($this->agent->is_mobile())
-		{
-			$user_info['device']=$this->agent->mobile();
-		}
-		if ($this->agent->is_referral())
-		{
-			$user_info['referrer']=$this->agent->referrer();
-
-		}
-		else {
-			$user_info['referrer']='';
-		}
-			
-		$this->mic_dbtest->get_user_info($user_info);
- */
+		$data['family_composition']= Util::getFamilyComposition($product_name);
+		
+		$data['company_plan_count'] = $this->model_get_company_plans_count->get_count($product_name);
+		
+		$this->template->set_template('frontend');
+		$this->template->write_view('content', 'critical_illness/home', $data, TRUE);
+		$this->template->render();
+	
 	}
 	
-	public function get_critical_illness_results()
+	public function get_critical_illness_results($param="no")
 	{
 		$data = array();
 		
@@ -122,9 +73,9 @@ class CriticalIllness extends CI_Controller {
 				$user_input['plan_type'] = $this->input->post('plan_type');//$this->input->post('plan_type');
 			}
 			
-			if($this->input->post('cust_gender')!='')
+			if($this->input->post('plan_type_name')!='')
 			{
-				$user_input['cust_gender'] = $this->input->post('cust_gender');
+				$user_input['plan_type_name'] = $this->input->post('plan_type_name');//$this->input->post('plan_type');
 			}
 			
 			if($this->input->post('cust_dob')!='')
@@ -133,11 +84,10 @@ class CriticalIllness extends CI_Controller {
 				
 				$birthage=$this->input->post('cust_dob');
 				
-				$birthDate=explode('-',$birthage);
+				//$birthDate=explode('-',$birthage);
 				
-				$age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")? ((date("Y") - $birthDate[2]) - 1): (date("Y") - $birthDate[2]));
 				
-				$user_input['cust_age']=$age;
+				$user_input['cust_age']= Util::convertBirthdateToAge($user_input['cust_birthdate']);
 				
 			}
 			
@@ -197,57 +147,113 @@ class CriticalIllness extends CI_Controller {
 		
 		$data['user_input'] = $user_input;
 		
-		$this->mic_dbtest->customer_personal_search_details($user_input);
+		$data['compareParam'] = $param;
 		
-		$data['customer_details'] = $this->get_results_critical_illness->get_results($user_input);
+		$this->input->set_cookie('mic_userdata',$this->session->userdata('session_id'),'864000');
+		
+		$this->model_customer_personal_and_search_details->customer_personal_search_details($user_input);
+		$this->db->freeDBResource($this->db->conn_id);
+		
+		$cacheFileName = 'sr_'.$user_input['product_type'].$user_input['plan_type'].$user_input['cust_age'];
+		
+		$cacheObject = Util::getCachedObject($cacheFileName);
+		
+		
+		if($cacheObject != null)
+		{
+			// get result set from cache
+			$data['customer_details'] = $cacheObject;
+		}
+		else
+		{
+			
+			$data['customer_details'] = $this->model_get_results_critical_illness->get_results($user_input);
+			
+				if(!empty($data['customer_details']))
+				{
+					Util::saveResultToCache($cacheFileName,$data['customer_details']);
+				}
+		}
+		
+		$cookie_filter = Util::getCookie('user_filter');
+		
+		if($data['compareParam'] == "yes" && !empty($cookie_filter))
+		{
+			$data['cookie_customer_detail'] = Util::getFilteredDataForCriticalIllness($data['customer_details'],$cookie_filter);
+		
+		}
 		
 		/* Filter Data Received From Ajax Post */
-		
 		if($this->input->is_ajax_request())
 		{
-			$search_filter=$_POST;
-			foreach($data['customer_details'] as $k => $v)
+			$search_filter = array();
+				
+				Util::setCookies('user_filter',$_POST);
+				
+				$search_filter=$_POST;
+
+				$data['customer_details'] = Util::getFilteredDataForCriticalIllness($data['customer_details'],$search_filter);
+			
+			$company_discard = array();
+				
+			$companycnt = array();
+				
+			foreach($data['customer_details'] as $k=>$v)
 			{
-				if(isset($search_filter['sum_assured']))
+			
+				if(!in_array($v['company_id'],$companycnt))
 				{
-					if (!in_array($v['sum_assured'],$search_filter['sum_assured']))
-					{
-						unset($data['customer_details'][$k]);
-					}
+					$companycnt[] = $v['company_id'];
 				}
-				
-				if(isset($search_filter['sector']))
-				{
-						
-					if (!(in_array($v['public_private_health'],$search_filter['sector'])))
-					{
-						unset($data['customer_details'][$k]);
-					}
-				}
-				
-				if(isset($search_filter['company_name']))
-				{
-					if (!(in_array(trim($v['company_id']),$search_filter['company_name'])))
-					{
-						unset($data['customer_details'][$k]);
-					}
-				}
+				$company_discard[] = $v['company_id'];
 			}
-			echo $this->util->getUserSearchFiltersHtml($data['customer_details'], $type = "criticalillness");
+				
+			$premiums_from_ajax = Util::getMinAndMaxPremium($data['customer_details']);
+			
+			$return['html'] = $this->load->view('critical_illness/ajaxPostResultView',$data,TRUE);
+			$return['company'] = count($companycnt);
+			$return['plan'] = count($data['customer_details']);
+			$return['minPremium'] = $premiums_from_ajax['min_premium'];
+			$return['maxPremium'] = $premiums_from_ajax['max_premium'];
+			echo  json_encode($return);
+			//$this->load->view('critical_illness/ajaxPostResultView',$data,TRUE);
+			//echo $this->util->getUserSearchFiltersHtml($data['customer_details'], $type = "criticalillness");
 		}
 		
 		/**************************************/
 		
 		else 
 		{
-			$this->load->view('critical_illness/search_results',$data);
+			$this->template->set_template('frontendsearch');
+			$this->template->write_view('content', 'critical_illness/search_results', $data, TRUE);
+			$this->template->render();
+			
+			//$this->load->view('critical_illness/search_results',$data);
 		}
 		
 	}
+
 	
-public function compare_policies()
+	/**
+	 * @abstract function to increase the buy now count in DB
+	 */
+	public function increment_count()
 	{
-		$this->load->model('compare_health_policies');
+		$this->load->model('model_buynow_count');
+		
+		$increase_count_arr = '';
+		
+		if(!empty($_POST))
+		{
+			$increase_count_arr = $_POST['policy_id'];
+				
+			$this->model_buynow_count->increase_count($increase_count_arr);
+		}
+	}
+	
+	public function compare_policies()
+	{
+		$this->load->model('model_compare_critical_illness_policies');
 	
 		$data=array();
 	
@@ -272,14 +278,14 @@ public function compare_policies()
 			}
 				
 		}
-		$data['comparison_results']=$this->compare_critical_illness_policies->get_comparison($variant,$annual_premium,$age);
+		$data['comparison_results']=$this->model_compare_critical_illness_policies->get_comparison($variant,$annual_premium,$age);
 	
 		foreach ($data['comparison_results'] as $k1=>$v1)
 		{
 				
 			foreach ($v1 as $k2=>$v2)
 			{
-				if ($k2 == 'company_shortname')
+				/* if ($k2 == 'company_shortname')
 				{
 					$key = 'Company';
 				}
@@ -287,9 +293,9 @@ public function compare_policies()
 				else
 				{
 					$key = ucfirst(str_replace(array('_','-',' '), ' ', $k2));
-				}
+				} */
 	
-				$result[$key][] = $v2;
+				$result[$k2][] = $v2;
 			}
 		}
 		$data['result']=$result;
