@@ -18,7 +18,7 @@
       </div>
       <div class="col-md-12 center m_h" style=" position:relative;">
         <h3>I want a <span id="clickk" style="position:relative; "><span class="dotted rs" id="rs"><?php if(isset($this->session->userdata['user_input']['coverage_amount'])){
- 																																	echo $this->session->userdata['user_input']['coverage_amount'];}else{?>10 Lakhs<?php }?></span>
+ 																																	echo $this->session->userdata['user_input']['coverage_amount'];}else{?>3 Lakhs<?php }?></span>
           <div data-bind="" style="display: none; left:0px; width:205px;" class="choice l amt" id="c_ch">
             <div class="choice-leftcol" data-bind="">
               <ul data-bind="jScrollPane" id="c_amt" class="years active scroll-pane">
@@ -51,7 +51,7 @@
           </span></h3>
       </div>
       <div class="col-md-12 center no-margin m_h">
-        <h3 style=""><span style="">I am </span> <span id="clickk_g" style="position:relative;"><span class="dotted ge" id="ge"><?php if(isset($this->session->userdata['user_input']['cust_gender'])){ echo $this->session->userdata['user_input']['cust_gender'];}else{?>Female<?php }?></span>
+        <h3 style=""><span style="">I am </span> <span id="clickk_g" style="position:relative;"><span class="dotted ge" id="ge"><?php if(isset($this->session->userdata['user_input']['cust_gender'])){ echo $this->session->userdata['user_input']['cust_gender'];}else{?>Male<?php }?></span>
           <div data-bind="" style="display: none;" class="choice  g" id="c_ch_g">
             <div class="choice-leftcol" data-bind="">
               <ul class="years active" id="c_for_g"  style="padding:0px 0 30px;">
@@ -113,20 +113,20 @@
                     																					{
                     																						echo $this->session->userdata['user_input']['cust_gender'];
                     																					}else 
-                    																					{?>Female<?php }?>">
+                    																					{?>Male<?php }?>">
               <input type="hidden" id="policy_term" name="policy_term" value="">
               <input type="hidden" id="cust_city_name" name="cust_city_name" value="<?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?>">
               <input type="hidden" id="coverage_amount" name="coverage_amount" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount']))
                      																				{
  																										echo $this->session->userdata['user_input']['coverage_amount'];
                      																				}else
-																										{?>10 Lakhs<?php }?>">
+																										{?>3 Lakhs<?php }?>">
              
              <input type="hidden" id="coverage_amount_literal" name="coverage_amount_literal" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount_literal']))
                      																				{
  																										echo $this->session->userdata['user_input']['coverage_amount_literal'];
                      																				}else
-																										{?>1000000<?php }?>">
+																										{?>300000<?php }?>">
              
              
              
