@@ -57,6 +57,7 @@ class Admin_Controller extends MIC_Controller {
 		
 		// Load required CI libraries and helpers.
         $this->load->library('upload');
+        $this->load->library('ResizeImage');
         $this->load->helper('ckeditor');
         $this->load->plugin('widget_pi');
     }

@@ -1,0 +1,125 @@
+/* $Id: example.css,v 1.5 2006/03/27 02:44:36 pat Exp $ */
+
+/*--------------------------------------------------
+  REQUIRED to hide the non-active tab content.
+  But do not hide them in the print stylesheet!
+  --------------------------------------------------*/
+.tabberlive .tabbertabhide {
+ display:none;
+}
+
+/*--------------------------------------------------
+  .tabber = before the tabber interface is set up
+  .tabberlive = after the tabber interface is set up
+  --------------------------------------------------*/
+.tabber {
+}
+.tabberlive {
+ margin-top:1em;
+}
+
+/*--------------------------------------------------
+  ul.tabbernav = the tab navigation list
+  li.tabberactive = the active tab
+  --------------------------------------------------*/
+ul.tabbernav
+{
+ margin:0;
+ padding: 10px 0;
+ border-bottom: 1px solid #aaa;
+ font: bold 12px Verdana, sans-serif;
+}
+
+ul.tabbernav li
+{
+ list-style: none;
+ margin: 0;
+ display: inline;
+}
+
+ul.tabbernav li a
+{
+ padding: 10px 1.5em;
+ margin-right: 3px;
+ border: 1px solid #999;
+ border-bottom: none;
+ background: #d7d7d7;
+ text-decoration: none;
+}
+
+ul.tabbernav li a:link { color: #111; }
+ul.tabbernav li a:visited { color: #111; }
+
+ul.tabbernav li a:hover
+{
+ color: #000;
+ background: #eee;
+ border-color: #999;
+}
+
+ul.tabbernav li.tabberactive a
+{
+ background-color: #fff;
+ border-bottom: 1px solid #fff;
+ color:#ea740a
+}
+
+ul.tabbernav li.tabberactive a:hover
+{
+ color: #ea740a;
+ background: white;
+ border-bottom: 1px solid white;
+}
+
+/*--------------------------------------------------
+  .tabbertab = the tab content
+  Add style only after the tabber interface is set up (.tabberlive)
+  --------------------------------------------------*/
+.tabberlive .tabbertab {
+ padding:12px;
+ border:1px solid #aaa;
+ border-top:0;
+
+ /* If you don't want the tab size changing whenever a tab is changed
+    you can set a fixed height */
+
+ /* height:200px; */
+
+ /* If you set a fix height set overflow to auto and you will get a
+    scrollbar when necessary */
+
+ /* overflow:auto; */
+}
+
+/* If desired, hide the heading since a heading is provided by the tab */
+.tabberlive .tabbertab h2 {
+ display:none;
+}
+.tabberlive .tabbertab h3 {
+ display:none;
+}
+
+/* Example of using an ID to set different styles for the tabs on the page */
+.tabberlive#tab1 {
+}
+.tabberlive#tab2 {
+}
+.tabberlive#tab2 .tabbertab {
+ height:200px;
+ overflow:auto;
+}
+#photo_upload_button input[type="submit"]{
+	background-color: #F3772E;
+	box-shadow: 0 1px 0 0 #FBAB7B inset;
+	background: none repeat scroll 0 0 #FF7E31;
+	border: 1px solid #A94A01;
+	border-radius: 2px 2px 2px 2px;
+	color: white;
+	cursor: pointer;
+	font-size: 12px;
+	padding: 3px 10px 5px;
+	text-shadow: 0 1px 0 #A94A01;
+	width: 150px;
+	font-size: 15px;
+	margin-top: 12px;
+}

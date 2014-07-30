@@ -28,6 +28,7 @@ class Policy_variants_master_model EXTENDS Admin_Model{
 	function saveRecord($arrParams = array(), $modelType = 'update')
 	{
 		$saveRecord = false;
+		$this->db->freeDBResource($this->db->conn_id);
 		if (!empty($arrParams))
 		{
 			$colNames = $colValues = $values = array();
@@ -90,31 +91,7 @@ class Policy_variants_master_model EXTENDS Admin_Model{
 	
 	public static function getAllPolicyVariantsDetails($arrParams = array())
 	{
-		$sql = 'SELECT 
-					i.company_id, i.company_name, i.company_display_name, i.slug as company_slug, i.status as company_status, ct.company_type_name, ct.slug as company_type_slug,
-  					p.policy_id, p.policy_display_name, p.policy_name, p.status as policy_status, v.*, pr.product_name, pr.slug as product_slug, spr.sub_product_name, spr.slug as sub_product_slug
-				FROM 
-				  	insurance_company_master i,
-				  	company_type ct,
-				  	policy_master p  
-				  	LEFT JOIN sub_product spr ON p.sub_product_id = spr.sub_product_id AND spr.status = "active" 
-				  	LEFT JOIN product pr ON p.product_id = pr.product_id AND pr.status = "active"
-				  	LEFT JOIN policy_variants_master v ON v.policy_id = p.policy_id AND v.status = "active"
-				WHERE 
-					i.status = "active" AND
-					i.company_shortname != "mic" AND
-					i.company_id = p.company_id AND
-					p.product_id = pr.product_id AND
-					i.company_type_id = ct.company_type_id';
-		if (!empty($arrParams))
-		{
-			foreach ($arrParams as $k1=>$v1)
-			{
-				$sql .= ' AND p.'.$k1.' = '.$v1;
-			}
-		} 
-		$ci = &get_instance();
-		$result=$ci->db->query($sql);
-		return $result->result_array();
+		$result = Util::callStoreProcedure('getAllPolicyVariantsDetails', $arrParams);
+		return $result;
 	}
 }

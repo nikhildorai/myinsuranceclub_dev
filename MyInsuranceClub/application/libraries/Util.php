@@ -218,7 +218,8 @@ class Util {
 			if (isset($sqlFilter['orderBy']))
 				$sql .= ' ORDER BY '.$sqlFilter['orderBy'].' '.$sort;
 		}
-
+		
+		$db->db->freeDBResource($db->db->conn_id);
 		$result = $model->$modelName->excuteQuery($sql);
 
 		if (!empty($result))
@@ -2068,6 +2069,7 @@ echo '=================>';
 		$query = '';
 		$resultData = array();
 		$db = &get_instance();
+		$db->db->freeDBResource($db->db->conn_id);
 		if (!empty($type))
 		{
 			if ($type == 'singleCompanyAllDetails')
@@ -2078,6 +2080,8 @@ echo '=================>';
 				$query = "CALL sp_getAllPolicyOfSingleCompany(?)";
 			else if ($type == 'getAllDetailsOfSingleHealthPolicy')
 				$query = "CALL sp_getAllDetailsOfSingleHealthPolicy(?)";
+			else if ($type == 'getAllPolicyVariantsDetails')
+				$query = "CALL sp_getAllPolicyVariantsDetails(?,?)";
 				
 			$queryData = $arrParams;
 			$resultData = $db->db->query($query,$queryData);
@@ -2229,7 +2233,7 @@ echo '=================>';
 					$return['premium_table'] = 'annual_premium_term_plan';
 					break;
 				case 'mediclaim':
-					$return['backendController'] = 'policy_variants_master';
+					$return['backendController'] = 'policy_features_mediclaim';
 					$return['backendFeatureAction'] = 'mediclaim';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
@@ -2344,6 +2348,7 @@ echo '=================>';
 															'family-income-benefit'=>'Family Income Benefit', 'accelerated-sum-assured'=>'Accelerated Sum Assured', 'hospital-cash-benefit'=>'Hospital Cash Benefit');
 					break;
 				case 'mediclaim':
+					$rider['slug']					=	array('critical-illness'=>'Critical Illness', 'waiver-of-room-rent-sub-limits'=>'Waiver of Room Rent Sub-limits');
 					break;
 				case 'opd':
 					break;
@@ -2464,6 +2469,7 @@ echo '=================>';
 					if ($v1['status'] == 'active' || $model['status'] == 'deleted')
 					{
 						$model['rider_id'] = (int)$v1['rider_id'];
+						$ci->db->freeDBResource($ci->db->conn_id);
 						$save = $ci->$riderModelName->saveRecord($arrParams = $model, $modelType = 'update');
 						break;	
 					}
@@ -2471,6 +2477,7 @@ echo '=================>';
 			}
 			else 
 			{
+				$ci->db->freeDBResource($ci->db->conn_id);
 				$save = $ci->$riderModelName->saveRecord($arrParams = $model, $modelType = 'create');
 			}
 		}
@@ -2483,7 +2490,7 @@ echo '=================>';
 		//	get new peer added in the group 
 		$newPeer = array_diff($newPeerComparision, $oldPeerComparision);
 		$ci = &get_instance();
-
+		$ci->db->freeDBResource($ci->db->conn_id);
 		if (!empty($newPeer)) 
 		{
 			foreach ($newPeer as $k1=>$v1)
@@ -2497,6 +2504,7 @@ echo '=================>';
 					if (!empty($isExist))
 					{
 						$isExist['peer_comparision_count'] = $isExist['peer_comparision_count'] + 1;
+						$ci->db->freeDBResource($ci->db->conn_id);
 						$save = $ci->policy_variants_master_model->saveRecord($arrParams = $isExist, $modelType = 'update');
 					}
 				}			
@@ -2519,6 +2527,7 @@ echo '=================>';
 					if (!empty($isExist))
 					{
 						$isExist['peer_comparision_count'] = ($isExist['peer_comparision_count'] > 0) ? $isExist['peer_comparision_count'] - 1 : 0;
+						$ci->db->freeDBResource($ci->db->conn_id);
 						$save = $ci->policy_variants_master_model->saveRecord($arrParams = $isExist, $modelType = 'update');
 					}
 				}			
@@ -2552,6 +2561,71 @@ echo '=================>';
 	        $record = $qry;
 		}
 		return $record;
+	}
+
+	public static function getAllowedImageExtensionType()
+	{
+		//$imageExt is dependent on $fileExt = Util::getFileTypeExt();
+		$imageExt = 'jpg,jpeg,png,gif';
+		return $imageExt;
+	}
+	
+	
+	/**
+	 * function to generate filename 
+	 * $extension 	:	Extension of file to be used
+	 * $isMD5		: 	decides wether to return md5 string or not. Default is no MD5
+	 * @return generated filename
+	 * */
+	
+	public static function generateFileName($isMD5 = false){
+		$random = ''; 
+		$i=0;
+		//crate random string of length 4
+		while($i<4) { 
+			/* selects random alphabets */
+			$random .= chr( (rand(0,1) ? 97:65) + mt_rand(0, 25) );
+			$i++;
+		}
+		
+		$t1 = time() * rand(); $x = substr(str_shuffle('_-'),0,1);
+		$return = substr(number_format($t1,0,'',''),0,11).$x.substr($t1,11,strlen($t1)).$x.$random;
+		return $isMD5 ? md5($return):$return;
+	}
+
+	public static function resizeForThumbnail($size = null)
+	{
+		if ($size ='resize_to_thumbnail')
+			return array('width'=>154, 'height'=>103);
+		else 
+			return array('width'=>154, 'height'=>103);
+	}
+	
+	public static function resizeImage($source, $destination, $scaling_type, $scaling_params=array())
+	{
+		$image = new ResizeImage();
+		$image->load($source);
+		switch($scaling_type)
+		{
+			case 'SCALE' :
+				$image->scale($scaling_params['scale']);
+			break;
+			
+			case 'RESIZE' :
+				$image->resize($scaling_params['width'],$scaling_params['height']);
+			break;
+			case 'RESIZE_AUTOMATICALLY':
+				$width = $image->getWidth();
+				$height= $image->getHeight();
+				//calculate $scaling values
+				$scaling_params['width'] =  430;
+				$scaling_params['height'] =  250;
+				//resize to new size
+				$image->resize($scaling_params['width'],$scaling_params['height']);
+				
+			break;
+		}
+		$image->save($destination);
 	}
 	
 }

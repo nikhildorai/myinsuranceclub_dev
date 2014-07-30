@@ -156,8 +156,7 @@
                         </tr>
                     </thead>
 					<tbody>
-					<?php 					
-						
+					<?php 											
 					if (!empty($records))
 					{
 						if ($records->num_rows() > 0)
