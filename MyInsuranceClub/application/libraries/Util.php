@@ -1918,9 +1918,17 @@ echo '=================>';
 					}
 				}
 				
-				if(isset($search_filter['precover']))
+			if(isset($search_filter['precover_4']))
 				{
-					if(!(in_array($v['preexisting_age'],$search_filter['sector'])))
+					if(!(in_array($v['preexisting_age'],$search_filter['precover_4'])))
+					{
+						unset($data[$k]);
+					}	
+				}
+				
+				if(isset($search_filter['precover_no']))
+				{
+					if(!(in_array($v['preexisting_age'],$search_filter['precover_no'])))
 					{
 						unset($data[$k]);
 					}

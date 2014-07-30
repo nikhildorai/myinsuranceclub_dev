@@ -225,6 +225,8 @@ $disease_filter = array();
                  	
                  	$checked_sumassured='';
                  	$checked_company_health='';
+                 	$checked_precover_4 = '';
+                 	$checked_precover_no = '';
                  	if($this->input->cookie('user_filter')){
                  		
 						$filters = unserialize($this->input->cookie('user_filter'));
@@ -236,6 +238,22 @@ $disease_filter = array();
 						else{
 						
 							$checked_company_health = "";
+						}
+						
+						if(isset($filters['precover_no']))
+						{
+							$checked_precover_no = "checked='checked'";
+						}
+						else{
+							$checked_precover_no="";
+						}
+						
+						if(isset($filters['precover_4']))
+						{
+							$checked_precover_4 = "checked='checked'";
+						}
+						else{
+							$checked_precover_4="";
 						}
 						
                  }?>
@@ -305,17 +323,18 @@ $disease_filter = array();
                 }?>
                 
                 </p>
-             <?php if(isset($preexist_filter))
+             <?php /* if(isset($preexist_filter))
                  	
              
              		{
-                 		sort($preexist_filter);?>
+                 		sort($preexist_filter); */?>
                 			<p class="addOnFilter" style="margin:0px; padding:0px;">
 									<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
 							</p> 
                  			<h6 class="fh3">Pre-existing diseases</h6>
                  <p class="addOnFilter" >
-                 <?php $sl = 1; foreach($preexist_filter as $p){
+                 <?php //$sl = 1; 
+                						/* foreach($preexist_filter as $p){
                  					
                  						if(isset($filters['precover']) && in_array($p,$filters['precover']))
                  						{
@@ -323,19 +342,26 @@ $disease_filter = array();
                  						}
                  						else{
 											$checked_precover="";
-										}
+										} */
                  ?>
 					
 					<div class="checkbox">
             				<label>
-            					<input type="checkbox" id="precover[<?php echo $sl; ?>]" name="precover[]" class="search_filter" value="<?php echo $p;?>" <?php echo $checked_precover;?>>
-           							 <label class="" for="precover[<?php echo $sl; ?>]">Plans which cover after <?php echo $p;?> years
+            					<input type="checkbox" id="precover_1" name="precover_no[]" class="search_filter" value="No" <?php echo $checked_precover_no;?>>
+           							 <label class="" for="precover_1">Plans with no waiting period
+									</label>
+         					 </label>
+            				</div>
+            		<div class="checkbox">
+            				<label>
+            					<input type="checkbox" id="precover_2" name="precover_4[]" class="search_filter" value="4" <?php echo $checked_precover_4;?>>
+           							 <label class="" for="precover_2">Plans which cover after 4 years
 									</label>
          					 </label>
           			</div>
-          			<?php $sl++;}
+          			<?php //$sl++;/* } */
                  		
-                 	}?>
+                 	/* } */?>
 				</p>
                 <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
@@ -383,7 +409,7 @@ $disease_filter = array();
               <?php }
                  }?>
 				</div>
-                 <p class="addOnFilter" style="margin:0px; padding:0px;">
+                 <!-- p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
 				</p> 
                  <h6 class="fh3">Co-payment</h6>
@@ -416,7 +442,7 @@ $disease_filter = array();
 									</label>
           					</label>
           			</div>
-				</p>
+				</p> -->
                 
                  <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
