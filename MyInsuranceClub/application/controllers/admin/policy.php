@@ -33,11 +33,15 @@ class Policy extends Admin_Controller {
 		$where 	= $this->policy_master_model->get_all_policy($arrParams);
 		$orderBy = 'policy_name ASC, product_id ASC'; 
 		$this->data['records'] = Util::getTotalRowTable('all','policy_master', $where, $limit, $orderBy);
+		if (isset($_GET) && isset($_GET['search']) == 'Search')
+		{
+//			$total = count($this->data['records']);
+		}
 		
 		// Set any returned status/error messages..		
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
 		$this->session->set_flashdata('message','');		
-
+		
 		//	pagination
 		$config = $this->util->get_pagination_params();
 		$config['total_rows'] 	= $total;

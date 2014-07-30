@@ -385,6 +385,7 @@ $config['pagination']['full_tag_close'] 	=	'</div>';
 
 
 //	upload url path
+$config['url_path']['temp']			 				= $config['base_url'].'uploads/temp/';
 $config['url_path']['company']['all'] 				= $config['base_url'].'uploads/company/';
 $config['url_path']['company']['companyPageLogo'] 	= $config['base_url'].'uploads/company/company_page_172x68/';
 $config['url_path']['company']['partnerLogo'] 		= $config['base_url'].'uploads/company/partner_logo_147x107/';
@@ -395,8 +396,13 @@ $config['url_path']['policy']['all'] 				= $config['base_url'].'uploads/policy/'
 $config['url_path']['policy']['brochure'] 			= $config['base_url'].'uploads/policy/brochure/';
 $config['url_path']['policy']['policy_wordings'] 	= $config['base_url'].'uploads/policy/policy_wordings/';
 $config['url_path']['policy']['policy_logo'] 		= $config['base_url'].'uploads/policy/logo/';
+$config['url_path']['policy']['brochure_image'] 		= $config['base_url'].'uploads/policy/brochure/image/';
+$config['url_path']['policy']['policy_wordings_image'] 	= $config['base_url'].'uploads/policy/policy_wordings/image/';
+$config['url_path']['policy']['brochure_thumbnail'] 		= $config['base_url'].'uploads/policy/brochure/thumbnail/';
+$config['url_path']['policy']['policy_wordings_thumbnail'] 	= $config['base_url'].'uploads/policy/policy_wordings/thumbnail/';
 
 //	upload folder paths
+$config['folder_path']['temp']			 				= realpath(APPPATH . '../uploads').'/temp/';
 $config['folder_path']['company']['all'] 				= realpath(APPPATH . '../uploads').'/company/';
 $config['folder_path']['company']['companyPageLogo'] 	= realpath(APPPATH . '../uploads').'/company/company_page_172x68/';
 $config['folder_path']['company']['partnerLogo'] 		= realpath(APPPATH . '../uploads').'/company/partner_logo_147x107/';
@@ -407,6 +413,10 @@ $config['folder_path']['policy']['all'] 				= realpath(APPPATH . '../uploads').'
 $config['folder_path']['policy']['brochure'] 			= realpath(APPPATH . '../uploads').'/policy/brochure/';
 $config['folder_path']['policy']['policy_wordings'] 	= realpath(APPPATH . '../uploads').'/policy/policy_wordings/';
 $config['folder_path']['policy']['policy_logo'] 		= realpath(APPPATH . '../uploads').'/policy/logo/';
+$config['folder_path']['policy']['brochure_image'] 			= realpath(APPPATH . '../uploads').'/policy/brochure/image/';
+$config['folder_path']['policy']['policy_wordings_image'] 	= realpath(APPPATH . '../uploads').'/policy/policy_wordings/image/';
+$config['folder_path']['policy']['brochure_thumbnail'] 			= realpath(APPPATH . '../uploads').'/policy/brochure/thumbnail/';
+$config['folder_path']['policy']['policy_wordings_thumbnail'] 	= realpath(APPPATH . '../uploads').'/policy/policy_wordings/thumbnail/';
 
 $config['policy']['descriptionCount'] = 1;
 $config['policy']['keyFeatures'] = 4;

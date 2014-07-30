@@ -556,11 +556,102 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 					                </div>
 					            </section>
 					        </div>
-					        
-					        
-					        
 					    </div>
 					    
+
+<?php /*?>					    
+			        	<div class="row">
+					        <div class="col-md-12">
+					            <section class="panel panel-default">
+					                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Policy Wording Images</strong></div>
+									<div class="panel-body">    
+						                <div class="col-sm-12">    
+
+
+
+
+<?php
+//var_dump(ApplicationConfig::app()->params['folder_path']['UploadedImage'], ApplicationConfig::app()->params['folder_path']['UploadedImageThumb1']);die;
+	$uurl = base_url().'multiFileUpload/processImage';
+	// here is our widget!
+	// here you include the post params you want the
+	// upload function to handle when a file is submitted
+	//'postParams'=>array(	),
+	$config = array(
+	    'use_query_string'=>false,
+	    //Use $this->createUrl method or define yourself
+	    'upload_url'=> $uurl,
+	   // This is a workaround to avoid certain
+	   // issues (check SWFUpload Forums)
+	   'file_size_limit'=>'5 MB',
+	   // Allowed file types
+	   
+	   'file_types'=>'*.jpg;*.jpeg;*.png;*.gif',
+	   // File types description (mine spanish)
+	   'file_types_description'=>'Image files',
+	   // unlimited number of files
+	   'file_upload_limit'=>100,
+	   // refer to handlers.js from here below
+	   'file_queue_error_handler'=>'js:fileQueueError',
+	   'file_dialog_complete_handler'=>'js:fileDialogComplete',
+	   'upload_progress_handler'=>'js:uploadProgress',
+	   'upload_error_handler'=>'js:uploadError',
+	   'upload_success_handler'=>'js:uploadSuccess',
+	   'upload_complete_handler'=>'js:uploadComplete',
+	   // what is our upload target layer?
+	   'custom_settings'=>array('progressTarget'=>'divFileProgressContainer','cancelButtonId'=>'btnCancel'),
+	   // where are we going to place the button?
+	   'button_placeholder_id'=>'swfupload',
+	   'button_width'=>175,
+	   'button_height'=>20,
+	   'button_text'=>'<span class="button">Select Files</span>',
+	   'button_text_style'=>'.button {font-size: 11pt; text-align: center;}',
+	   'button_text_top_padding'=>0,
+	   'button_text_left_padding'=>0,
+	   'button_window_mode'=>'js:SWFUpload.WINDOW_MODE.TRANSPARENT',
+	   'button_cursor'=>'js:SWFUpload.CURSOR.HAND',
+	);
+?>
+						                
+						                
+										<?php echo widget::run('CSwfUpload', array('config'=>$config)); ?>
+						                    
+						                
+    <div class="certificate_wrap">
+  		<ul class="certificate_list_wrap">
+    		<li id="thumbnails" class=""></li>
+    	</ul>
+    </div>
+    
+	<div id="divFileProgressContainer" class="fieldset flash"></div>
+    
+    <div class="photo_upload_buttons_container">
+	    <div class="swfupload" style=" margin-top:10px; float-right: right;display: inline; border: solid 1px #7FAAFF; background-color: #dddddd; padding: 4px; margin:0 5px 0 0; float:left;">
+	    	<span id="swfupload"></span>
+	    </div>
+    
+    	<input type="button" onclick="location.reload(true)" value="Cancel All Uploads" id="btnCancel" style="display: none"> 
+		<input type="button" onclick="location.reload(true)" value="Cancel All Uploads" id="btnCancel12" style="-webkit-appearance: none; background: none; border: none; text-decoration: underline; cursor:pointer">
+	   	<div class="row button">
+	    	<div id="photo_upload_button" style="display: none" >
+	    		
+	    	<?php 
+	    	//echo CHtml::button("Save", array('class'=>'btclass', 'style'=>"margin-left: 10px;", 'id'=>'chkBeforeSubmit'));
+	    	?>
+	    	</div>
+	    </div>
+	    
+	</div>    
+						                    
+						                    
+						                    
+						             	</div>
+						            </div>
+					            </section>
+					        </div>
+					    </div> 
+					    
+	*/ ?>				    					    
 			        	<div class="row">
 					        <div class="col-md-12">
 					            <section class="panel panel-default">
@@ -729,6 +820,8 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 					            </section>
 					        </div>
 					    </div> 
+					    
+					    
 			        	<div class="row">
 			        	
 					        <div class="col-md-12">

@@ -42,6 +42,30 @@
     position: absolute;
     top: 50%; width:1170px !important;}
     .pad_right_no{ padding-right: 0px;}
+	@media screen and (max-width: 1180px) {
+	.health_page{ 
+    margin-left: -485px;
+    width:970px !important;}
+   
+	}
+	
+	@media screen and (max-width: 999px) {
+	.health_page{ 
+    margin-left: -375px;  position:relative;
+    width:750px !important;}
+   
+	}
+	
+	@media only screen and (device-width: 768px) and (orientation:landscape) {
+    
+}
+
+
+@media only screen and (device-width: 768px) and (orientation:portrait) {
+   .health_page{ 
+    margin-left: -375px; position:relative; margin-top:-350px;
+    width:750px !important;}
+}
 
 
 @media screen and (max-width: 990px) {
@@ -61,12 +85,21 @@
 .gen_text {
 width: 49px;
 }
+
 }
 @media screen and (max-width: 820px) {
+	 .pad_right_no{ padding-right: 15px;}
 	.clearfix1{ content:""; display:table; float:left;}
 	.cus_cont {
     width: 380px;
 }
+.cus_cont .pos1 {
+    margin: 0 auto;
+    width: auto;
+}
+.pos1 .c_t{ margin-left:0px;padding:0px; padding-left:14px; float:right; text-align:left;}
+.pos1 .c_th{ margin-left:0px;padding:0px; padding-left:0px;}
+.pos1 .c_f{ margin-left:0px; text-align:right;padding:0px; float:right; padding-right:3px;}
 .cus_cont .col-md-2.m_s {
  width: 190px;  float:left;
 }	
@@ -80,7 +113,15 @@ width: 49px;
 width: 49px;
 }
 }
+
+
+	
 @media screen and (max-width: 480px) {
+	.health_page{ 
+    margin-left: -485px; position:relative;
+    width:970px !important;}
+   
+	
 	.clearfix1{width:100%;}
 	.pos1{  margin-left: 0px;}
 
