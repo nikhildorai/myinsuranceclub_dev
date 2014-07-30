@@ -305,12 +305,26 @@ $disease_filter = array();
                 <p class="addOnFilter" >
                 <?php if(!empty($DISEASE_FILTER)){
                 		
-                		foreach ($DISEASE_FILTER as $k=>$v){?>
+                		$checked_disease = '';
+                		
+                		foreach ($DISEASE_FILTER as $k=>$v){
+
+						if(isset($filters['disease_covered']) && in_array($k,$filters['disease_covered']))
+						{
+							$checked_disease = "checked='checked'";
+						}
+						else
+						{
+							$checked_disease = '';
+						}
+
+
+						?>
                 		
                 <div class="checkbox">
             
             <label>
-            <input type="checkbox" id="disease_covered" name="disease_covered[]"   class="search_filter" value="<?php echo $k?>">
+            <input type="checkbox" id="disease_covered" name="disease_covered[]"   class="search_filter" value="<?php echo $k?>" <?php echo $checked_disease;?>>
             <label class="" for=""><?php echo $v;?></label>
           </label>
           

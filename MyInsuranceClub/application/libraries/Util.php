@@ -1934,6 +1934,19 @@ echo '=================>';
 					}
 				}
 				
+				if(isset($search_filter['disease_covered']))
+				{
+						
+					foreach($search_filter['disease_covered'] as $k1=>$v1)
+					{
+				
+						if(isset($v[$v1]) && $v[$v1] == 'No')
+						{
+							unset($data[$k]);
+						}
+					}
+				}
+				
 				if(isset($search_filter['company_name']))
 				{
 					if (!(in_array(trim($v['company_id']),$search_filter['company_name'])))
