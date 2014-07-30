@@ -46,6 +46,8 @@
   $preexisitng_disease_discard = array();
   $aNew = array();
   $pph = array();
+  
+  //$diseases_discard = array();
   if(!empty($customer_details))
   {
       
@@ -57,29 +59,41 @@
           
           
           
-          if($v['preexisting_age']!='Not Covered')
-      {
-            if(!in_array($v['preexisting_age'],$preexisitng_disease_discard))
-            {
-              $preexist_filter [] = $v['preexisting_age'];
-            }
+			if($v['preexisting_age']!='Not Covered')
+      		{
+				if(!in_array($v['preexisting_age'],$preexisitng_disease_discard))
+          		{
+          			$preexist_filter [] = $v['preexisting_age'];
+         	 	}
 
-            $preexisitng_disease_discard [] = $v['preexisting_age'];
-      }
+          		$preexisitng_disease_discard [] = $v['preexisting_age'];
+      		}
         
-          if(!in_array($v['public_private_health'],$pph))
-          {
-            $pph[] = $v['public_private_health'];
-          }
-        $pph_disacrd[] = $v['public_private_health'];
-        }
+      		if(!in_array($v['public_private_health'],$pph))
+      		{
+      			$pph[] = $v['public_private_health'];
+      		}
+        		$pph_disacrd[] = $v['public_private_health'];
+        		
+        	
+    	}
                           
   } 
       
 ?>
     
 
-
+<?php $diseases = Util::featureList('Critical Illness');
+$disease_filter = array();
+		//var_dump($diseases);
+		foreach($diseases as $k=>$v){
+		
+			$disease_filter[$k] = $v['name'];
+	
+		}
+		$DISEASE_FILTER = array_splice($disease_filter,5);
+		//var_dump($disease_FILTER);
+?>		
 
 
 
@@ -209,7 +223,7 @@
                  <?php 
                  	
                  	
-                 	$checked_maternity='';
+                 	$checked_sumassured='';
                  	$checked_company_health='';
                  	if($this->input->cookie('user_filter')){
                  		
@@ -223,6 +237,7 @@
 						
 							$checked_company_health = "";
 						}
+						
                  }?>
                  
                  <?php $discard_duplicate = array();
@@ -242,11 +257,21 @@
                 <h6 class="fh3">Sum Assured</h6>
                 <p class="addOnFilter" >
                  <?php 	if(!empty($sum_ass)){
-                 		foreach($sum_ass as $s){?>
+                 		foreach($sum_ass as $s){
+                 		
+                 		if(isset($filters['sum_assured']) && in_array($s,$filters['sum_assured']))
+						{
+							$checked_sumassured = "checked='checked'";
+						}
+						else
+						{
+							$checked_sumassured= '';
+						} 
+						?>
                  <div class="checkbox">
             
             <label>
-            <input type="checkbox" id="sum_assured" name="sum_assured[]"   class="search_filter" value="<?php echo $s;?>">
+            <input type="checkbox" id="sum_assured" name="sum_assured[]"   class="search_filter" value="<?php echo $s;?>" <?php echo $checked_sumassured; ?>>
             <label class="" for=""><?php echo Util::moneyFormatIndia($s);?></label>
           </label>
           
@@ -255,9 +280,31 @@
                  
                  }?>
 		</p>
-		
-               
+		<p class="addOnFilter" style="margin:0px; padding:0px;">
+						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
+				</p> 
+         		<h6 class="fh3">Diseases Covered</h6>
+                <p class="addOnFilter" >
+                <?php if(!empty($DISEASE_FILTER)){
+                		
+                		foreach ($DISEASE_FILTER as $k=>$v){?>
+                		
+                <div class="checkbox">
+            
+            <label>
+            <input type="checkbox" id="disease_covered" name="disease_covered[]"   class="search_filter" value="<?php echo $k?>">
+            <label class="" for=""><?php echo $v;?></label>
+          </label>
+          
+          </div>
                 
+           <?php      }
+                	
+                	
+                	
+                }?>
+                
+                </p>
              <?php if(isset($preexist_filter))
                  	
              

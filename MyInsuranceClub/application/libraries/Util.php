@@ -1917,7 +1917,15 @@ echo '=================>';
 						unset($data[$k]);
 					}
 				}
-	
+				
+				if(isset($search_filter['precover']))
+				{
+					if(!(in_array($v['preexisting_age'],$search_filter['sector'])))
+					{
+						unset($data[$k]);
+					}
+				}
+				
 				if(isset($search_filter['company_name']))
 				{
 					if (!(in_array(trim($v['company_id']),$search_filter['company_name'])))
