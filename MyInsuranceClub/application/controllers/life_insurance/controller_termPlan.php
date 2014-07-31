@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class termPlan extends CI_Controller {
-
+class controller_termPlan extends Customer_Controller {
+	
 	/**
 	 * Index Page for this controller.
 	 *
@@ -21,27 +21,16 @@ class termPlan extends CI_Controller {
 	{
 		// Call the Controller constructor
 		parent::__construct();
-		//$this->load->library('email');
-		$this->load->library('session');
-		$this->load->library('table');
-		$this->load->library('user_agent');
-		$this->load->database();
-		$this->load->model('mic_dbtest');
-		$this->load->model('get_results_term_plan');
-		$this->load->model('visitor_information');
-		$this->load->helper('form');
-		$this->load->helper('url');
-		$this->load->library('form_validation');
-		$this->load->library('util');
-		$this->load->helper('html');
-		date_default_timezone_set('Asia/Kolkata');
+		$this->load->model('model_get_company_plans_count');
+		$this->load->model('model_get_results_term_plan');
 	}
 	
 	
 	public function index()
 	{
+		$product_name = 'level-term';
+		$this->load->model('model_city');
 		
-		$this->load->model('city');
 		
 		$data=array();
 		
@@ -113,37 +102,27 @@ class termPlan extends CI_Controller {
 											'39'=>'39 years',
 											'40'=>'40 years'
 											);
+		$data['company_plan_count'] = $this->model_get_company_plans_count->get_count($product_name);
+		$this->db->freeDBResource($this->db->conn_id);
 		$data['annual_income'] = array( );
 		
-		$data['city']=$this->city->get_city();
+		$data['city']=$this->model_city->get_city();
+		$this->db->freeDBResource($this->db->conn_id);
 		
-		$this->load->view('termPlan/home',$data);
-	
+		$this->template->set_template('frontend');
+		$this->template->write_view('content', 'termPlan/home', $data, TRUE);
+		$this->template->render();
+		
 	}
 	
-	public function get_termPlan_results()
+	public function get_termPlan_results($param = "no")
 	{
 		
-		$this->form_validation->set_rules('cust_name', 'Full Name', 'required|alpha');
-	
-		$this->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|phone_789|exact_length[10]');
-	
-		$this->form_validation->set_rules('cust_email', 'Email', 'required|valid_email');
-	
-		$this->form_validation->set_rules('cust_dob', 'Date of Birth', 'required|age_greater_than_18');
+		/* 
 		
 		$this->form_validation->set_rules('smoker', 'Smoker/Non-Smoker', 'required');
 		
-		$this->form_validation->set_rules('MIC_terms', 'checkbox', 'required');
-	
-		$this->form_validation->set_error_delimiters('<div class="error" style="color: red;">', '</div>');
-		
-		if($this->form_validation->run()==FALSE)
-		{
-			return $this->index();
-		}
-		else 
-		{
+		 */
 			
 			$data = array();
 			
@@ -169,6 +148,11 @@ class termPlan extends CI_Controller {
 				if($this->input->post('policy_term')!='')
 				{
 					$user_input['policy_term']=$this->input->post('policy_term');
+				}
+				
+				if($this->input->post('policy_term_name')!='')
+				{
+					$user_input['policy_term_name']=$this->input->post('policy_term_name');
 				}
 				
 				if($this->input->post('cust_name')!='')		/* customer personal details starts */
@@ -208,21 +192,17 @@ class termPlan extends CI_Controller {
 				
 				}
 				
-				if($this->input->post('cust_dob')!='')
+				if($this->input->post('desktop_cust_dob')!='')
 				{
 					/* birthdate */
 						
-					$user_input['cust_birthdate']=$this->input->post('cust_dob');
+					$user_input['cust_birthdate']=$this->input->post('desktop_cust_dob');
 						
 					/* age */
 						
-					$birthage=$this->input->post('cust_dob');
+					
 				
-					$birthDate=explode('-',$birthage);
-				
-					$age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md") ? ((date("Y") - $birthDate[2]) - 1) : (date("Y") - $birthDate[2]));
-				
-					$user_input['cust_age']=$age;
+					$user_input['cust_age']= Util::convertBirthdateToAge($this->input->post('desktop_cust_dob'));
 						
 				}
 				
@@ -246,9 +226,10 @@ class termPlan extends CI_Controller {
 					$user_input['cust_email']=$this->input->post('cust_email');
 				}
 				
-				if($this->input->post('cust_city_name')!='')
+				if($this->input->post('cust_city_name')!='')		
 				{
-					$user_input['cust_city_name']=$this->input->post('cust_city_name');
+					$user_input['cust_city']=$this->input->post('cust_city_name');
+					//echo $user_input['cust_city_name'];
 				}
 				
 				$this->session->set_userdata('user_input',$user_input);
@@ -258,18 +239,78 @@ class termPlan extends CI_Controller {
 				
 			$data['user_input'] = $user_input;
 			
+			$data['compareParam'] = $param;
 			
-			$this->mic_dbtest->customer_personal_search_details($user_input);
+			$this->model_customer_personal_and_search_details->customer_personal_search_details($user_input);
+			$this->db->freeDBResource($this->db->conn_id);
 			
-			$data['customer_details'] = $this->get_results_term_plan->get_results($user_input);
+			$cacheFileName = 'SR_'.$user_input['product_type'].$user_input['coverage_amount'].$user_input['cust_age'].$user_input['cust_gender'].$user_input['cust_city'].$user_input['smoker'] ;
+				
+			$cacheObject = Util::getCachedObject($cacheFileName);
+				
+			if($cacheObject != null)
+			{
+				// get result set from cache
+				$data['customer_details'] = $cacheObject;
+			}
+			else 
+			{
+				$data['customer_details'] = $this->model_get_results_term_plan->get_results($user_input);
+				
+				if(!empty($data['customer_details']))
+				{
+					Util::saveResultToCache($cacheFileName,$data['customer_details']);
+				}
+				$this->db->freeDBResource($this->db->conn_id);
+			}
+			
+			$cookie_filter = Util::getCookie('user_filter');
+			
+				
+			if($data['compareParam'] == "yes" && !empty($cookie_filter))
+			{
+				$data['cookie_customer_detail'] = Util::getFilteredDataForTermPlan($data['customer_details'],$cookie_filter);
+			
+			}
 			
 			/* Filter data received from Ajax Post */
 			 	
 			if($this->input->is_ajax_request())
 			{
+				$search_filter = array();
 				
+				Util::setCookies('user_filter',$_POST);
 				
-				$this->util->getUserSearchFiltersHtml($customer_details, $type = "termplan");
+				$search_filter=$_POST;
+				
+				$data['customer_details'] = Util::getFilteredDataForTermPlan($data['customer_details'],$search_filter);
+				
+				$company_discard = array();
+					
+				$companycnt = array();
+				
+				$getPremium = array();
+				foreach($data['customer_details'] as $k=>$v)
+				{
+				
+					if(!in_array($v['company_id'],$companycnt))
+					{
+						$companycnt[] = $v['company_id'];
+					}
+					$company_discard[] = $v['company_id'];
+				
+					$premium = round($user_input['coverage_amount_literal']/1000);
+					
+					$getPremium[] = round($premium * $v['rate_per_1000_SA']);
+				}
+				
+				$return['html'] = $this->load->view('termPlan/ajaxPostResultView',$data,TRUE);
+				$return['company'] = count($companycnt);
+				$return['plan'] = count($data['customer_details']);
+				$return['minPremium'] = min($getPremium);
+				$return['maxPremium'] = max($getPremium);
+				echo  json_encode($return);
+				//$this->util->getUserSearchFiltersHtml($customer_details, $type = "termplan");
 			}
 			
 			/**************************************/
@@ -277,10 +318,13 @@ class termPlan extends CI_Controller {
 			else 
 			{
 			
-				$this->load->view('termPlan/search_results',$data);
+				$this->template->set_template('frontendsearch');
+				$this->template->write_view('content', 'termPlan/search_results', $data, TRUE);
+				$this->template->render();
+				//$this->load->view('termPlan/search_results',$data);
 		
 			}	
-		}
+		/* } */
 	}
 	
 	

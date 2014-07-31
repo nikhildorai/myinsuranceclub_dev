@@ -1994,6 +1994,23 @@ echo '=================>';
 	}
 	
 	
+	public static function getFilteredDataForTermPlan($data,$search_filter = array())
+	{
+		if(!empty($data))
+		{
+			foreach($data as $k=>$v)
+			{
+				if(isset($search_filter['company_name']))
+				{
+					if (!(in_array(trim($v['company_id']),$search_filter['company_name'])))
+					{
+						unset($data[$k]);
+					}
+				}
+			}
+		}
+		return $data;
+	}
 	
 	public static function getConfigForFileUpload($type = 'company')
 	{
