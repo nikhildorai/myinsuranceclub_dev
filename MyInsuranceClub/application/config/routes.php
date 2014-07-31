@@ -77,6 +77,12 @@ $route['health-insurance/compare-results'] = "health_insurance/controller_basicM
 $route['health-insurance/search-results/(:any)'] = "health_insurance/controller_basicMediclaim/health_policy/$1";
 $route['health-insurance/(:any)'] = "health_insurance/controller_basicMediclaim/policyView/$1";
 
+//term plan routes
+$route['life-insurance/term-insurance'] = "life_insurance/controller_termPlan/index";
+$route['life-insurance/term-insurance/search-results'] = "life_insurance/controller_termPlan/get_termPlan_results";
+$route['life-insurance/term-insurance/search-results(:any)'] = "life_insurance/controller_termPlan/get_termPlan_results/$1";
+
+
 //	company 
 $route['life-insurance'] = "lifeInsurance/index/";
 $route['life-insurance/companies'] = "lifeInsurance/companies/";
