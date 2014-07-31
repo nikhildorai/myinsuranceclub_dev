@@ -378,6 +378,44 @@ $(".ui-autocomplete li").click(function() {
 });*/
 
 
+/* policy term dropdown  */
+
+$('#clickk_p').click(function(){
+	   //$("#c_ch_f").stop().slideDown();
+		 	$("#c_ch_p").show();
+		 	$('#c_for_p').jScrollPane({
+			    verticalDragMinHeight: 50,
+			    verticalDragMaxHeight: 50
+			});
+	   }); 
+	  
+
+	 var mouseOverActiveElementOccupation = false;
+	 $('#clickk_p').live('mouseenter', function(){
+		 mouseOverActiveElementOccupation = true; 
+	 }).live('mouseleave', function(){ 
+		 mouseOverActiveElementOccupation = false; 
+	 	$("#c_ch_p").fadeOut();
+	 });
+
+	 $("#c_for_p li").click(function() {
+		 var am_v = $(this).text(); 
+		 var am_vid = $(this).data('policy-term');
+		 $("#c_plan").text(am_v);
+		 $("#policy_term").val(am_vid);
+		 $("#policy_term_name").val(am_v);
+		 mouseOverActiveElementOccupation = false; 
+		 $("#c_ch_p").fadeOut();
+	 });
+
+
+	 
+
+
+/* policy term dd ends  */
+	 
+	 
+
 
 
 //	occupation drodown
