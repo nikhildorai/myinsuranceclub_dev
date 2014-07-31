@@ -39,7 +39,7 @@
                         <a href="#" class="dropdown-toggle menu-item" id="features-drop" data-toggle="dropdown" data-hover="dropdown">Life Insurance&nbsp;&nbsp; <span class="fa fa-sort-desc po"></span></a> 
                         <!-- Dropdown Menu - Mega Menu -->
                         <ul class="dropdown-menu mega-menu" role="menu" aria-labelledby="features-drop">
-                           <li class="col-md-4" > <a role="menuitem" href="<?php echo site_url('life-insurance/term-insurance').;?>" tabindex="-1" class="menu-item"><strong>Term Plans</strong></a> </li>
+                           <li class="col-md-4" > <a role="menuitem" href="<?php echo site_url('life-insurance/term-insurance');?>" tabindex="-1" class="menu-item"><strong>Term Plans</strong></a> </li>
                            <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Endowment Plans</strong></a> </li>
                            <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>Child Plans</strong></a> </li>
                            <li class="col-md-4" > <a role="menuitem" href="#" tabindex="-1" class="menu-item"><strong>ULIP</strong></a> </li>
