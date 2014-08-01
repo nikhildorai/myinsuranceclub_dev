@@ -338,6 +338,41 @@ $('html, body').animate({scrollTop: $(this).parent().parent().parent().offset().
 
 	/******************************************************/
 
+/********Sum Assured Slider For Term Plan****/
+
+$( "#slider-range7" ).slider({
+    range: true,
+    step:5,
+    min: 0,
+    max: 100,
+    values: [0 , 100],
+    slide: function( event, ui ) {
+      $( "#sum_assured_min" ).val(formatNumber(ui.values[ 0 ]));
+		$( "#sum_assured_max" ).val(formatNumber(ui.values[ 1 ]));
+		
+		
+    },
+    
+    /*stop: function( event, ui ) {
+			data = $('#search').serialize();
+	  		
+			 $.ajax({
+				 
+			type:"post", 
+			url: annual_premium_search_url,
+			data:data,
+			success:function(data)
+			{ 
+				$('#cmp_tbl').html(data);
+			}
+			});
+		
+		}*/
+  });
+  $( "#sum_assured_min" ).val("₹" + $("#slider-range7" ).slider( "values", 0 ) + " Lac");
+	$( "#sum_assured_max" ).val("₹" + $("#slider-range7" ).slider( "values", 1 ) + " Crore");
+
+	/********************************************/
 
 	/***************** Search Filter Checboxes ************/
 
