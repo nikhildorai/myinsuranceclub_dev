@@ -87,7 +87,7 @@ class controller_basicMediclaim extends Customer_Controller {
 		}
 	
 		
-		$userInputValidation = Util::getUserInputValidationForMediclaim();
+		$userInputValidation = Util::getUserInputValidation();
 		
 		if ($userInputValidation == FALSE && !($this->input->is_ajax_request()) && empty($post))
 		{
