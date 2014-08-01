@@ -231,7 +231,7 @@ class controller_termPlan extends Customer_Controller {
 			$this->model_customer_personal_and_search_details->customer_personal_search_details($user_input);
 			$this->db->freeDBResource($this->db->conn_id);
 			
-			$cacheFileName = 'SR_'.$user_input['product_type'].$user_input['coverage_amount_term'].$user_input['cust_age'].$user_input['cust_gender'].$user_input['cust_city'].$user_input['smoker'] ;
+			$cacheFileName = 'sr_'.$user_input['product_type'].$user_input['coverage_amount_term'].$user_input['cust_age'].$user_input['cust_gender'].$user_input['cust_city'].$user_input['smoker'] ;
 				
 			$cacheObject = Util::getCachedObject($cacheFileName);
 				
