@@ -3,9 +3,9 @@
 class Util {
 	
 	/**
-	 * @abstract Validating UserInput In Mediclaim Forms
+	 * @abstract Validating user input for all forms
 	 */
-	public static function getUserInputValidationForMediclaim()
+	public static function getUserInputValidation($product = '')
 	{
 		$CI = &get_instance();
 	
@@ -17,15 +17,23 @@ class Util {
 		{
 			$CI->form_validation->set_rules('cust_email', 'Email', 'required|valid_email');
 		}
-		if(isset($_POST['cust_dob']))
+		if(isset($_POST['desktop_cust_dob']))
 		{
-			$CI->form_validation->set_rules('cust_dob', 'Date of Birth', 'required|age_greater_than_18');
+			$CI->form_validation->set_rules('desktop_cust_dob', 'Date of Birth', 'required|age_greater_than_18');
 		}
 		if(isset($_POST['cust_mobile']))
 		{
 			$CI->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|phone_789|exact_length[10]');
 		}
+		if(isset($_POST['agree']))
+		{
+			$CI->form_validation->set_rules('agree', 'Terms of Use', 'required');
+		}
 	
+		if($product == 'term')
+		{
+			$CI->form_validation->set_rules('smoker', 'Smoker/Non-Smoker', 'required');
+		}
 	
 		$CI->form_validation->set_error_delimiters('<div class="error" style="color: red;">', '</div>');
 	
@@ -2007,7 +2015,40 @@ echo '=================>';
 						unset($data[$k]);
 					}
 				}
+			
+				if(isset($search_filter['min_premium_amt']))
+				{
+					$min_amt_arr = explode('₹',$search_filter['min_premium_amt']);
+						
+					$min_premium = (int) str_replace(',','',$min_amt_arr[1]);
+						
+					if(!($v['annual_premium'] >= $min_premium))
+					{
+						unset($data[$k]);
+					}
+				}
+				
+				if(isset($search_filter['max_premium_amt']))
+				{
+					$max_amt_arr = explode('₹',$search_filter['max_premium_amt']);
+						
+					$max_premium = (int) str_replace(',','',$max_amt_arr[1]);
+						
+					if(!($v['annual_premium'] <= $max_premium))
+					{
+						unset($data[$k]);
+					}
+				}
+				
+				if(isset($search_filter['policy_term']))
+				{
+					if(!in_array($v['term'],$search_filter['policy_term']))
+					{
+						unset($data[$k]);
+					}
+				}
 			}
+		
 		}
 		return $data;
 	}
