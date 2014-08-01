@@ -10208,3 +10208,73 @@ button.toast-close-button {
     right: 25px;
     top: 10px;
 }
+
+
+/*  MYTABLE -ELIGIBILITY CONDITIONS */
+
+
+.eligibility {
+	width: 100%;
+	padding: 0px 15px;
+	margin: 0;
+}
+
+
+
+.eligibility th {
+	font: bold 11px "Open Sans",Arial,serif;
+	color: #4f6b72;
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	text-align: center;
+	padding: 6px 6px 6px 12px;
+	background: #CAE8EA url(images/bg_header.jpg) no-repeat;
+}
+
+.eligibility th.nobg {
+	border-top: 0;
+	border-left: 0;
+	border-right: 1px solid #C1DAD7;
+	background: none;
+}
+
+.eligibility td {
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	background: #fff;
+	padding: 6px 6px 6px 12px;
+	color: #4f6b72; text-align:center;
+}
+
+
+.eligibility td.alt {
+	background: #F5FAFA;
+	color: #797268;
+}
+
+.eligibility th.spec {
+	border-left: 1px solid #C1DAD7; text-align:left;
+	border-top: 0;
+	background: #fff url(../images/bullet1.gif) no-repeat;
+	font: bold 10px "Open Sans",Arial,serif;
+}
+
+.eligibility th.specalt {
+	border-left: 1px solid #C1DAD7; text-align:left;
+	border-top: 0;
+	background: #f5fafa url(../images/bullet2.gif) no-repeat;
+	font: bold 10px "Open Sans",Arial,serif;
+	color: #797268;
+}
+
+
+
+.product-collateral {
+    border: 1px solid #e4e5e7;  float:left; width:100%; padding-bottom:30px;
+    margin-bottom: 0px;
+}
+
+/* ======================================================================================= */

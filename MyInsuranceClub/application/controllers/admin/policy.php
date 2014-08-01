@@ -55,7 +55,7 @@ class Policy extends Admin_Controller {
 	{
 		$modelType = 'create';
 		//	check if policy id exists
-		$policyModel = $variantModel = $policyFeaturesModel = array();
+		$policyModel = $variantModel = $policyFeaturesModel = $oldPeerComparision = $newPeerComparision = array();
 		$this->data['message'] = '';
 		$company_id = '';
 		$sessionMsg = $this->session->flashdata('message');
@@ -90,7 +90,8 @@ class Policy extends Admin_Controller {
 				$where[0]['value'] = (int)$policy_id;
 				$where[0]['compare'] = 'equal';
 	
-				$policyFeaturesModel = $this->util->getTableData($modelName='Policy_features_model', $type="single", $where, $fields = array());	
+				$policyFeaturesModel = $this->util->getTableData($modelName='Policy_features_model', $type="single", $where, $fields = array());
+				$oldPeerComparision = explode(',', $policyModel['peer_comparision_variants']);	
 			}
 		}
 		
@@ -172,6 +173,9 @@ class Policy extends Admin_Controller {
 			if (isset($_POST['policyModel']['key_features']) && !empty($_POST['policyModel']['key_features']))
 				$_POST['policyModel']['key_features'] = serialize($_POST['policyModel']['key_features']);
 
+			$_POST['policyModel']['peer_comparision_variants'] = (isset($_POST['policyModel']['peer_comparision_variants']) && !empty($_POST['policyModel']['peer_comparision_variants'])) ? implode(',', $_POST['policyModel']['peer_comparision_variants']) : '';
+			$newPeerComparision = explode(',', $_POST['policyModel']['peer_comparision_variants']);
+			
 			//	set default values for policy
 			$arrParams = $this->input->post('policyModel');
 			$policy_id = (isset($arrParams['policy_id']) && !empty($arrParams['policy_id'])) ? $arrParams['policy_id'] : '';
@@ -210,6 +214,10 @@ class Policy extends Admin_Controller {
 				$validate = true;//$this->validatePost($arrParams);	
 				if ($validate == true)
 				{
+					//	update the peer comparision count for each variant
+					Util::updatePeerConnectionCountValue($newPeerComparision, $oldPeerComparision);
+					
+					
 					//	save record for policy 
 					$recordId = $this->policy_master_model->saveRecord($arrParams, $modelType);	
 					if ($recordId != false)
@@ -318,6 +326,9 @@ class Policy extends Admin_Controller {
 			}
 			$policyModel = $_POST['policyModel'];
 		}		
+		
+		$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$policyModel['product_id'], 'sub_product_id'=>$policyModel['sub_product_id']));
+			
 		$this->data['policyModel'] = $policyModel;
 		$this->data['modelType'] = $modelType;
 		$this->data['variantModel'] = $variantModel;
@@ -326,6 +337,7 @@ class Policy extends Admin_Controller {
 		
 		$this->data['selectedTags'] = isset($policyModel['tag']) ? $policyModel['tag'] : '';
 		$this->data['tag_for'] = 'policy';
+		$this->data['allVariants'] = $allVariants;
 		$this->data['status'] = isset($policyModel['status']) ? $policyModel['status'] : '';
 		
 		$this->template->write_view('content', 'admin/policy/create', $this->data, TRUE);
@@ -882,6 +894,20 @@ class Policy extends Admin_Controller {
 			$this->data['msgType'] = 'error';
 		}
 		redirect('admin/policy/create/'.$policy_id);
+	}
+	
+	public function getPeerComparisionTable()
+	{
+		if (!empty($_POST))
+		{
+			$product_id = (isset($_POST['product_id']) && !empty($_POST['product_id'])) ? implode(',', $_POST['product_id']) : '' ;
+			$sub_product_id = (isset($_POST['sub_product_id']) && !empty($_POST['sub_product_id'])) ? implode(',', $_POST['sub_product_id']) : '' ;
+			$policy_id = $_POST['policy_id'];
+			$peerValue = $_POST['peerValue'];
+			$modelName = $_POST['modelName'];
+			$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$product_id, 'sub_product_id'=>$sub_product_id));
+			echo Util::peerComparisionTableViewBackend($allVariants, $policy_id, $peerValue, $modelName);
+		}
 	}
 }
 

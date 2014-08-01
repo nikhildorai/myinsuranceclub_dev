@@ -442,7 +442,6 @@ $(".form-horizontal :input").prop("disabled", true);
 					</div>
 			    </div>
 			</div>  
-			*/ ?>
 				
 	        <div class="row">
 		        <div class="col-md-12">
@@ -451,7 +450,7 @@ $(".form-horizontal :input").prop("disabled", true);
 			                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Peer Comparision</strong></div>
 			                <div class="panel-body">
 			                
-			                <?php echo widget::run('peerComparisionBack', array('policy_id'=>$policyModel['policy_id'], 'pear_comparision_policies'=>$model['pear_comparision_policies'], 'allVariants'=>$allVariants)); ?>
+			                <?php echo widget::run('peerComparisionBack', array('policy_id'=>$policyModel['policy_id'], 'peer_comparision_variants'=>$model['peer_comparision_variants'], 'allVariants'=>$allVariants)); ?>
 			                
 			                </div>
 			            </section>
@@ -459,6 +458,7 @@ $(".form-horizontal :input").prop("disabled", true);
 			    </div>
 			</div>  
 			
+			*/ ?>
 			
 	        <div class="row">
 		        <div class="col-md-12">

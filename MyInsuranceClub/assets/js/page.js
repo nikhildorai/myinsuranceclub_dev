@@ -227,18 +227,22 @@ $('div.chartdiv4').each(function(i) {
 
 
 var $ad_show_claim = $('#ad_show_claim');
-var ad_show_claim_top = $ad_show_claim.offset().top - 150;
+var ad_show_claim_top = $ad_show_claim.offset().top;
+
 var ad_show_claim_flag = false;
 
 $(window).scroll(function (event) {
+	ad_show_claim_top = $ad_show_claim.offset().top - 150;
     if(ad_show_claim_flag) return;
-
     // what the y position of the scroll is
     var y = $(window).scrollTop();
 
     // whether that's below the form
     if (y >= ad_show_claim_top) {
-		
+
+
+        console.log(y,ad_show_claim_top);
+        
 		  if ( $('#ad_show_claim').hasClass( "one_time" ) ) {
 			  $('#ad_show_claim').removeClass('one_time');
 		
@@ -266,7 +270,8 @@ $(window).scroll(function (event) {
                 min: 0,
                 title: {
                     text: 'Claims Ratio'
-                }
+                },
+                max: 100
             },
             legend: {
                 enabled: false
@@ -275,33 +280,8 @@ $(window).scroll(function (event) {
                 pointFormat: 'Claims Ratio in 2014: <b>{point.y:.1f} %</b>',
             },
             series: [{
-                name: 'Population',
-                data: [
-                   ['AEGON Religare ', 80],
-['IndiaFirst ', 70],
-['Aviva ', 60],	
-['ING Vysya ',70],
-['Bajaj Allianz ', 40],	
-['Kotak ', 30],
-['Bharti AXA ', 80],	
-[' Corporation of India (LIC)', 90],
-['Birla Sun ', 40],	
-['Max ', 60],
-['Canara HSBC ', 80],
-['Met', 90],
-['DHFL Pramerica ', 80],	
-['Reliance ', 90.5],
-['Edelweiss Tokio ', 80.9],
-['Sahara ', 60],
-['Future Generali ', 55],
-['SBI ', 33],
-['HDFC ', 77],
-['Shriram ', 66],
-['ICICI Prudential ', 90],	
-['Star Union Daiichi ', 45.9],
-['IDBI Federal ', 80],	
-['Tata AIA ', 70]
-                ],
+                name: 'Claim Ratio',
+                data: companyClaimRatio,
                 dataLabels: {
                     enabled: true,
                     rotation: -90,
@@ -310,7 +290,7 @@ $(window).scroll(function (event) {
                     x: 4,
                     y: 10,
                     style: {
-                        fontSize: '12px',
+                        fontSize: '10px',
                         fontFamily: 'Verdana, sans-serif',
                         textShadow: '0 0 3px black'
                     }
@@ -345,6 +325,7 @@ var thisdiv_top = $thisdiv.offset().top - 150;
 var thisdiv_flag = false;
 
 $(window).scroll(function (event) {
+	 thisdiv_top = $thisdiv.offset().top - 150;
     if(thisdiv_flag) return;
 
     // what the y position of the scroll is

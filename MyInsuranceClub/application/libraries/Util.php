@@ -2755,7 +2755,7 @@ echo '=================>';
 	
 	public static function getPolicyVariantsFeaturesRidersDetails($policySlug, $variantType = '', $companyType = '')
 	{
-		$data['companyDetails'] = $data['policyDetails'] = $data['variantDetails'] = $arrParams = array();
+		$data['companyDetails'] = $data['policyDetails'] = $data['variantDetails'] = $data['claimRatio'] = $data['claimRatioJson'] = $arrParams = array();
 		if (!empty($policySlug))
 		{
 			$arrParams['policy_slug'] = $policySlug;
@@ -2789,9 +2789,18 @@ echo '=================>';
 					$data['company'] = reset($data['company']);
 					$data['companyDetails'] = reset($data['companyDetails']);
 					$data['policyDetails'] = reset($data['policyDetails']);
-					$data['claimRatio'] = Util::getCompanyClaimRatio(array('year_to'=>"2013",'company_id'=>'', 'company_type_id'=>''));
-					//$data['claimRatio'] = Util::getCompanyClaimRatio(array('company_id'=>'','year_to'=>date('Y'), 'company_type_id'=>$data['company']['company_type_id']));
-					
+					$claimParams = array('year_to'=>date('Y'),'company_id'=>'', 'company_type_id'=>$data['company']['company_type_id']);
+					//$claimRatio = Util::getCompanyClaimRatio(array('year_to'=>"2013",'company_id'=>'', 'company_type_id'=>''));
+					$claimRatio = Util::getCompanyClaimRatio($claimParams);			
+					if (!empty($claimRatio))
+					{
+						foreach ($claimRatio as $k1=>$v1)
+						{
+							$num = (is_numeric($v1['claim_ratio'])) ? (int) $v1['claim_ratio'] : (is_float($var)) ? (float)$v1['claim_ratio'] : $v1['claim_ratio'] ;
+							$data['claimRatio'][] = array($v1['company_display_name'],$num); 
+						}
+					}
+					$data['claimRatioJson'] = json_encode($data['claimRatio']);
 					//	seo data
 			        $data['title'] = $data['policyDetails']['policy']['seo_title'];
 			        $data['keywords'] = $data['policyDetails']['policy']['seo_keywords'];
@@ -2892,6 +2901,46 @@ echo '=================>';
 		$data = array();
 		$data = Util::callStoreProcedure('getCompanyClaimRatio', $arrParams);
 		return $data;
+	}
+	
+	public static function peerComparisionTableViewBackend($allVariants, $policy_id, $peerValue, $modelName)
+	{
+		$html = 	'<table cellspacing="0" class="eligibility">
+						<tr>
+							<th scope="col">Company Name</th>
+							<th scope="col">Policy Name</th>
+							<th scope="col">Variant Name</th>
+							<th scope="col">Comparision Count</th>
+							<th class="nobg" abbr="Configurations" scope="col" style=" border-right:0px; !important">&nbsp;</th>
+						</tr>';
+				$peerValue = explode(',', $peerValue);			
+				if (!empty($allVariants))
+				{
+					foreach ($allVariants as $k1=>$v1)
+					{	
+						if ($v1['policy_id'] != $policy_id)
+						{
+							$checked = '';
+							if (in_array($v1['variant_id'], $peerValue))
+								$checked = 'checked';
+		$html .= 		'<tr>
+							<td class="spec" scope="row" width="334" valign="top" style="border-top: 1px solid #c1dad7; border-left: 1px solid #c1dad7">
+								'.$v1['company_display_name'].'
+							</td>
+							<td class="spec" scope="row" width="334" valign="top" style="border-top: 1px solid #c1dad7">';
+		$html .=				(!empty($v1['policy_display_name'])) ? $v1['policy_display_name'] : $v1['policy_name'];
+		$html .=			'</td>
+							<td class="spec" scope="row" width="234" valign="top" style="border-top: 1px solid #c1dad7">'.$v1['variant_name'].'</td>
+							<td class="spec" scope="row" width="200" valign="top" style="border-top: 1px solid #c1dad7">'.$v1['peer_comparision_count'].'</td>
+							<td class="spec" scope="row" width="24" valign="top" style="border-top: 1px solid #c1dad7;">
+								<label class="ui-checkbox"><input name="'.$modelName.'[peer_comparision_variants][]" type="checkbox" value="'.$v1['variant_id'].'" class="peerComparisionChk" '.$checked.'><span></span></label>
+							</td>
+						</tr>';				
+						}
+					}
+				}             
+		$html .=	'</table>';
+		return $html;
 	}
 }
 

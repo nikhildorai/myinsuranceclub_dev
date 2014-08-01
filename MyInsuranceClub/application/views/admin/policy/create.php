@@ -2,6 +2,8 @@
 
 
 <script type="text/javascript">
+
+var pear_comparision_policies = "<?php echo (isset($policyModel['peer_comparision_variants']) && !empty($policyModel['peer_comparision_variants'])) ?  $policyModel['peer_comparision_variants'] : ''; ?>"
 <!--
 $(document).ready(function(){
 <?php if (isset($policyModel['status']) && !empty($policyModel['status']) && in_array($policyModel['status'], array( 'inactive', 'delete'))) {?>
@@ -89,6 +91,7 @@ $('.remove').prop('disabled', true);
 			    	}
 			});	
 		}
+		getPeerComparisionTable();
 	});
 var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionCount'];?>;
 	$(document).delegate('.showMoreLess','click',function(e){
@@ -836,7 +839,21 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 								</div>
 						    </div>
 						</div>  
-											    
+									
+				
+				        <div class="row">
+					        <div class="col-md-12">
+					        	<div class="panel-body">    
+						            <section class="panel panel-default">
+						                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Peer Comparision</strong></div>
+						                <div class="panel-body">
+						                	<?php echo widget::run('peerComparisionBack', array('policy_id'=>$policyModel['policy_id'], 'peer_comparision_variants'=>$policyModel['peer_comparision_variants'], 'allVariants'=>$allVariants, 'modelName'=>'policyModel')); ?>
+						                </div>
+						            </section>
+								</div>
+						    </div>
+						</div>  
+								    
 					    
 			        	<div class="row">
 			        	

@@ -73,7 +73,7 @@ class Policy_features_mediclaim extends Admin_Controller {
 					$modelType = 'update';
 					$model = $exist;
 					$feature_id = $exist['features_id'];
-					$oldPeerComparision = explode(',', $model['pear_comparision_policies']);
+					$oldPeerComparision = explode(',', $model['peer_comparision_variants']);
 					//	check if rider exists for current varient
 					$where = array();
 					$where[0]['field'] = 'variant_id';
@@ -102,8 +102,8 @@ class Policy_features_mediclaim extends Admin_Controller {
 				{
 					
 					//	set default post values
-					$_POST['model']['pear_comparision_policies'] = (isset($_POST['model']['pear_comparision_policies']) && !empty($_POST['model']['pear_comparision_policies'])) ? implode(',', $_POST['model']['pear_comparision_policies']) : '';
-					$newPeerComparision = explode(',', $_POST['model']['pear_comparision_policies']);
+					$_POST['model']['peer_comparision_variants'] = (isset($_POST['model']['peer_comparision_variants']) && !empty($_POST['model']['peer_comparision_variants'])) ? implode(',', $_POST['model']['peer_comparision_variants']) : '';
+					$newPeerComparision = explode(',', $_POST['model']['peer_comparision_variants']);
 					
 					$arrParams = $this->input->post('model');
 					//	set default values
@@ -125,7 +125,7 @@ class Policy_features_mediclaim extends Admin_Controller {
 						array('field' => 'model[minimum_premium]', 'label' => 'minimum premium', 'rules' => 'required'),
 						array('field' => 'model[maximum_premium]', 'label' => 'maximum premium', 'rules' => 'required'),
 						array('field' => 'model[payment_modes]', 'label' => 'payment modes', 'rules' => 'required'),
-						array('field' => 'model[pear_comparision_policies]', 'label' => 'Peer Comparison', 'rules' => 'required'),
+						array('field' => 'model[peer_comparision_variants]', 'label' => 'Peer Comparison', 'rules' => 'required'),
 					//	array('field' => 'model[]', 'label' => '', 'rules' => 'required'),
 				*/		);
 //var_dump($_POST);die;					
