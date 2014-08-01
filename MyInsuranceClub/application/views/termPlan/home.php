@@ -10,15 +10,15 @@
 	<?php echo form_open('life-insurance/term-insurance/search-results',array('name'=>'health_form','id'=>'health_form','class'=>'health-form'));?>
       <div class="col-md-12 center ">
         <div class="col-md-1"></div>
-        <h1 class="col-md-11" style="text-align:center; margin-top:30px; width:100%;">Compare & Buy Health Insurance Plans</h1>
+        <h1 class="col-md-11" style="text-align:center; margin-top:30px; width:100%;">Compare & Buy Term Insurance Plans</h1>
         <div class="col-md-12">
           <div class="col-md-1"></div>															
           <p class="col-md-11" style="text-align:left; padding-left:32px;">Choose from <?php echo $company_plan_count[1]['companyCount'];?> plans from <?php echo $company_plan_count[0]['companyCount'];?> companies</p>
         </div>
       </div>
       <div class="col-md-12 center m_h" style=" position:relative;">
-        <h3>I want a <span id="clickk" style="position:relative; "><span class="dotted rs" id="rs"><?php if(isset($this->session->userdata['user_input']['coverage_amount'])){
- 																																	echo $this->session->userdata['user_input']['coverage_amount'];}else{?>10 Lakhs<?php }?></span>
+        <h3>I want a <span id="clickk" style="position:relative; "><span class="dotted rs" id="rs"><?php if(isset($this->session->userdata['user_input']['coverage_amount_term'])){
+ 																																	echo $this->session->userdata['user_input']['coverage_amount_term'];}else{?>10 Lakhs<?php }?></span>
           <div data-bind="" style="display: none; left:0px; width:205px;" class="choice l amt" id="c_ch">
             <div class="choice-leftcol" data-bind="">
               <ul data-bind="jScrollPane" id="c_amt" class="years active scroll-pane">
@@ -114,12 +114,20 @@
                     																						echo $this->session->userdata['user_input']['cust_gender'];
                     																					}else 
                     																					{?>Male<?php }?>">
-              <input type="hidden" id="policy_term" name="policy_term" value="">
-              <input type="hidden" id="policy_term_name" name="policy_term_name" value="">
+              <input type="hidden" id="policy_term" name="policy_term" value="<?php if(isset($this->session->userdata['user_input']['policy_term']))
+                    																					{
+                    																						echo $this->session->userdata['user_input']['policy_term'];
+                    																					}else 
+                    																					{?>10<?php }?>">
+              <input type="hidden" id="policy_term_name" name="policy_term_name" value="<?php if(isset($this->session->userdata['user_input']['policy_term_name']))
+                    																					{
+                    																						echo $this->session->userdata['user_input']['policy_term_name'];
+                    																					}else 
+                    																					{?>10 years<?php }?>">
               <input type="hidden" id="cust_city_name" name="cust_city_name" value="<?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?>">
-              <input type="hidden" id="coverage_amount" name="coverage_amount" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount']))
+              <input type="hidden" id="coverage_amount_term" name="coverage_amount_term" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount_term']))
                      																				{
- 																										echo $this->session->userdata['user_input']['coverage_amount'];
+ 																										echo $this->session->userdata['user_input']['coverage_amount_term'];
                      																				}else
 																										{?>10 Lakhs<?php }?>">
              
@@ -182,13 +190,35 @@
             </div>
           </div>
           </div>
+          
+          <?php 
+          		$smoker = '';
+          		$non_smoker ='';
+          		
+          		if(isset($this->session->userdata['user_input']['smoker']))
+				{
+          			if($this->session->userdata['user_input']['smoker']=='1')
+          			{
+						$smoker ='checked="checked"';
+          				$non_smoker = '';
+          			}
+          			
+          			else
+          			{
+          				$smoker = '';
+          				$non_smoker = 'checked="checked"';
+          			}
+				}
+          		
+          
+          ?>
           <div class="clearfix1">
           <div class="form-group col-md-3">
           	<div class="section">
               			<label class="input form-control" for="signup-first-name">
               			<div style="margin-top:-5px">
               			Tobacco
-                    	<input type="radio" id="smoker" name="smoker" value="1">yes&nbsp;|&nbsp;
+                    	<input type="radio" id="smoker" name="smoker" value="1" <?php echo $smoker; ?>>yes&nbsp;|&nbsp;
                     	<input type="radio" id="non_smoker" name="smoker" value="0">no
                     	</div>
                     	
@@ -236,405 +266,7 @@
         
       </div>
       </div>
-      <div class="cus_cont">
-      <?php if(isset($this->session->userdata['user_input']['plan_type']) && in_array($this->session->userdata['user_input']['plan_type'],array('2A','2A1C','2A2C','2A3C','2A4C'))){?>
-        <?php 	$display_spouse = "style='width:100%; float:left;'";
-        		
-              } 
-              else
-			  {
-			  	$display_spouse = "style='display:none; width:100%; float:left;'";
-			  }       
-        ?>
-        <div id="adlt_spc" <?php echo $display_spouse; ?> class=" ">
-          <div class="">
-            <div class="col-md-12" style="padding-left:0px;">
-              <p>Adult 2 (Spouse):</p>
-            </div>
-            <div class="form-group car-ins col-md-3">
-              <input type="text" class="mob_cal m_cust" name="m_spouce_dob1" id="m_spouce_dob1" autocomplete="off" placeholder="Date of Birth">
-              <div class="section">
-                <label class="field prepend-icon">
-                <label class="sr-only" for="signup-first-name">Date Of Birth</label>
-                <div class="desk_cal">
-                  <label class="input" style="position:relative"> <i class="icon-append fa fa-calendar " id="trigger1"></i>
-                    <input type="text" name="desktop_spouce_dob" id="spouce_dob" class="form-control cal"  placeholder="Date of Birth" value="<?php if(isset($this->session->userdata['user_input']['spouse_dob']))
-                    																						{
-                    																							echo $this->session->userdata['user_input']['spouse_dob'];
-                    																						}else 
-                    																						{			 
-                    																							echo set_value('desktop_spouse_dob');
-                    																						}?>" required>
-                  </label>
-                </div>
-                <div class="mob_cal">
-                  <label class="input form-control" style="position:relative"> <i class="icon-append fa fa-calendar "></i>
-                    <input type="date" name="mobile_spouce_dob" id="m_spouce_dob" class="native_date_picker" value="<?php if(isset($this->session->userdata['user_input']['spouse_dob']))
-                    																						{
-                    																							echo $this->session->userdata['user_input']['spouse_dob'];
-                    																						}else 
-                    																						{			 
-                    																							echo set_value('mobile_spouse_dob');
-                    																						}?>" required>
-                  </label>
-                </div>
-                </label>
-              </div>
-            </div>
-            <div class="">
-              <div class="desk_gen">
-                <div class="form-group car-ins col-md-3">
-                  <div class="cus_border form-control sel">
-                    <label class="gen_text" for="signup-first-name">Gender</label>
-                    <label title1="Male" class="selection-confirm">
-                    <label class="input gen_r rm">
-                    <input type="radio" name="spouce_gender" id="spouce_gender1" class="css-checkbox">
-                    <label for="radio4" class="css-label a radGroup2 sel_m"></label>
-                    <i class="icon-append nob fa fa-male"></i>
-                    </label>
-                    </label>
-                    <label title1="Female" class="selection-confirm">
-                    <label class="input gen_r">
-                    <input type="radio" name="spouce_gender" id="spouce_gender2" class="css-checkbox">
-                    <label for="radio4" class="css-label a radGroup2 ss sel_f"></label>
-                    <i class="icon-append fa fa-female"></i>
-                    </label>
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="mob_gen" style="display:none;">
-                <div class="form-group car-ins col-md-2">
-                  <div class="cus_border form-control1 ">
-                    <div id="myToggle" class="slider-toggle-container" style="float: left" data-initialvalue="1" data-height="34" data-width="175" data-ballwidth="87.5" data-ballwheight="34" data-tabindex="undefined" data-speed="550">
-                      <label for="leftInput"></label>
-                      <input id="leftInput" type="radio" name="spouce_gender" value="1">
-                      <label for="rightInput"></label>
-                      <input id="rightInput" type="radio" name="spouce_gender" value="0">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="cus_cont">
-        <div class=" " style="width: 100%; float: left;">
-        <?php if(isset($this->session->userdata['user_input']['plan_type']) && in_array($this->session->userdata['user_input']['plan_type'],array('2A1C','2A2C','2A3C','2A4C','1A1C','1A2C','1A3C','1A4C'))){?>
-        <?php 	$display_child1 = "style=''";
-        		
-              } 
-              else
-			  {
-			  	$display_child1 = "style='display:none;'";
-			  }       
-        ?>
-          <div class="" id="one_c" <?php echo $display_child1;?>>
-            <div style="padding-left:0px;" class="col-md-12">
-              <p>Child 1:</p>
-            </div>
-            <div class="form-group car-ins col-md-6">
-              <input type="text" class="mob_cal m_cust" name="m_child1_dob1" id="m_child1_dob1" autocomplete="off" placeholder="Date of Birth"    >
-              <div class="section">
-                <label class="field prepend-icon">
-                <label class="sr-only" for="signup-first-name">Date Of Birth</label>
-                <div class="desk_cal">
-                  <label class="input" style="position:relative"> <i class="icon-append fa fa-calendar " id="trigger2"></i>
-                    <input type="text" name="desktop_child1_dob" id="child1_dob" class="form-control cal"  placeholder="Date of Birth" value="<?php if(isset($this->session->userdata['user_input']['child1_dob']))
-                    																						{
-                    																							echo $this->session->userdata['user_input']['child1_dob'];
-                    																						}else 
-                    																						{			 
-                    																							echo set_value('desktop_child1_dob');
-                    																						}?>">
-                  </label>
-                </div>
-                <div class="mob_cal">
-                  <label class="input form-control" style="position:relative"> <i class="icon-append fa fa-calendar "></i>
-                    <input type="date" name="mobile_child1_dob" id="m_child1_dob" class="native_date_picker" placeholder="Date of Birth" value="<?php if(isset($this->session->userdata['user_input']['child1_dob']))
-                    																						{
-                    																							echo $this->session->userdata['user_input']['child1_dob'];
-                    																						}else 
-                    																						{			 
-                    																							echo set_value('mobile_child1_dob');
-                    																						}?>">
-                  </label>
-                </div>
-                </label>
-              </div>
-            </div>
-            <div class="desk_gen">
-              <div class="form-group car-ins col-md-6">
-                <div class="cus_border form-control ">
-                  <label class="gen_text" for="signup-first-name">Gender</label>
-                  <label title1="Male" class="selection-confirm">
-                  <label class="input gen_r rm">
-                  <input type="radio" name="child1_gender" id="child1_gender" class="css-checkbox ">
-                  <label for="radio4" class="css-label a radGroup2"></label>
-                  <i class="icon-append nob fa fa-male"></i>
-                  </label>
-                  </label>
-                  <label title1="Female" class="selection-confirm">
-                  <label class="input gen_r">
-                  <input type="radio" name="child1_gender" id="child1_gender" class="css-checkbox">
-                  <label for="radio4" class="css-label a radGroup2 ss"></label>
-                  <i class="icon-append fa fa-female"></i>
-                  </label>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="mob_gen" style="display:none;">
-              <div class="form-group car-ins col-md-2">
-                <div class="cus_border form-control1 ">
-                  <div id="myToggle1" class="slider-toggle-container" style="float: left" data-initialvalue="1" data-height="34" data-width="175" data-ballwidth="87.5" data-ballwheight="34" data-tabindex="undefined" data-speed="550">
-                    <label for="leftInput"></label>
-                    <input id="leftInput" type="radio" name="child1_gender" value="1">
-                    <label for="rightInput"></label>
-                    <input id="rightInput" type="radio" name="child1_gender" value="0">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <?php if(isset($this->session->userdata['user_input']['plan_type']) && in_array($this->session->userdata['user_input']['plan_type'],array('2A2C','2A3C','2A4C','1A2C','1A3C','1A4C'))){
-        	$display_child2 = "style=''";
-        		
-              } 
-              else
-			  {
-			  	$display_child2 = "style='display:none;'";
-			  }       
-        ?>
-          <div class="" id="two_c" <?php echo $display_child2;?>>
-            <div style="padding-left:0px;" class="col-md-12">
-              <p>Child 2:</p>
-            </div>
-            <div class="form-group car-ins col-md-6">
-              <input type="text" class="mob_cal m_cust" name="m_child2_dob1" id="m_child2_dob1" autocomplete="off" placeholder="Date of Birth"    >
-              <div class="section">
-                <label class="field prepend-icon">
-                <label class="sr-only" for="signup-first-name">Date Of Birth</label>
-                <div class="desk_cal">
-                  <label class="input" style="position:relative"> <i class="icon-append fa fa-calendar " id="trigger3"></i>
-                    <input type="text" name="desktop_child2_dob" id="child2_dob" class="form-control cal"  placeholder="Date of Birth" value="<?php if(isset($this->session->userdata['user_input']['child2_dob']))
-                    																						{
-                    																							echo $this->session->userdata['user_input']['child2_dob'];
-                    																						}else 
-                    																						{			 
-                    																							echo set_value('desktop_child2_dob');
-                    																						}?>">
-                  </label>
-                </div>
-                <div class="mob_cal">
-                  <label class="input form-control" style="position:relative"> <i class="icon-append fa fa-calendar "></i>
-                    <input type="date" name="mobile_child2_dob" id="m_child2_dob" class="native_date_picker" placeholder="Date of Birth" value="<?php if(isset($this->session->userdata['user_input']['child2_dob']))
-                    																						{
-                    																							echo $this->session->userdata['user_input']['child2_dob'];
-                    																						}else 
-                    																						{			 
-                    																							echo set_value('mobile_child2_dob');
-                    																						}?>">
-                  </label>
-                </div>
-                </label>
-              </div>
-            </div>
-            <div class="">
-              <div class="desk_gen">
-                <div class="form-group car-ins col-md-6">
-                  <div class="cus_border form-control ">
-                    <label class="gen_text" for="signup-first-name">Gender</label>
-                    <label title1="Male" class="selection-confirm">
-                    <label class="input gen_r rm">
-                    <input type="radio" name="child2_gender" id="child2_gender" class="css-checkbox ">
-                    <label for="radio4" class="css-label a radGroup2"></label>
-                    <i class="icon-append nob fa fa-male"></i>
-                    </label>
-                    </label>
-                    <label title1="Female" class="selection-confirm">
-                    <label class="input gen_r">
-                    <input type="radio" name="child2_gender" id="child2_gender" class="css-checkbox">
-                    <label for="radio4" class="css-label a radGroup2 ss"></label>
-                    <i class="icon-append fa fa-female"></i>
-                    </label>
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="mob_gen" style="display:none;">
-                <div class="form-group car-ins col-md-2">
-                  <div class="cus_border form-control1 ">
-                    <div id="myToggle2" class="slider-toggle-container" style="float: left" data-initialvalue="1" data-height="34" data-width="175" data-ballwidth="87.5" data-ballwheight="34" data-tabindex="undefined" data-speed="550">
-                      <label for="leftInput"></label>
-                      <input id="leftInput" type="radio" name="child2_gender" value="1">
-                      <label for="rightInput"></label>
-                      <input id="rightInput" type="radio" name="child2_gender" value="0">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <?php if(isset($this->session->userdata['user_input']['plan_type']) && in_array($this->session->userdata['user_input']['plan_type'],array('2A3C','2A4C','1A3C','1A4C'))){
-        	$display_child3 = "style=''";
-        		
-              } 
-              else
-			  {
-			  	$display_child3 = "style='display:none;'";
-			  }       
-        ?>
-          <div class="" id="three_c" <?php echo $display_child3;?>>
-            <div style="padding-left:0px;" class="col-md-12">
-              <p>Child 3:</p>
-            </div>
-            <div class="form-group car-ins col-md-6">
-              <input type="text" class="mob_cal m_cust" name="m_child3_dob1" id="m_child3_dob1" autocomplete="off" placeholder="Date of Birth"    >
-              <div class="section">
-                <label class="field prepend-icon">
-                <label class="sr-only" for="signup-first-name">Date Of Birth</label>
-                <div class="desk_cal">
-                  <label class="input" style="position:relative"> <i class="icon-append fa fa-calendar " id="trigger4"></i>
-                    <input type="text" name="desktop_child3_dob" id="child3_dob" class="form-control cal"   placeholder="Date of Birth" value="<?php if(isset($this->session->userdata['user_input']['child3_dob']))
-                    																						{
-                    																							echo $this->session->userdata['user_input']['child3_dob'];
-                    																						}else 
-                    																						{			 
-                    																							echo set_value('desktop_child3_dob');
-                    																						}?>" required>
-                  </label>
-                </div>
-                <div class="mob_cal">
-                  <label class="input form-control" style="position:relative"> <i class="icon-append fa fa-calendar "></i>
-                    <input type="date" name="mobile_child3_dob" id="m_child3_dob" class="native_date_picker" placeholder="Date of Birth" value="<?php if(isset($this->session->userdata['user_input']['child3_dob']))
-                    																						{
-                    																							echo $this->session->userdata['user_input']['child3_dob'];
-                    																						}else 
-                    																						{			 
-                    																							echo set_value('mobile_child3_dob');
-                    																						}?>" required>
-                  </label>
-                </div>
-                </label>
-              </div>
-            </div>
-            <div class="">
-              <div class="desk_gen">
-                <div class="form-group car-ins col-md-6">
-                  <div class="cus_border form-control ">
-                    <label class="gen_text" for="signup-first-name">Gender</label>
-                    <label title1="Male" class="selection-confirm">
-                    <label class="input gen_r rm">
-                    <input type="radio" name="child3_gender" id="child3_gender" class="css-checkbox ">
-                    <label for="radio4" class="css-label a radGroup2"></label>
-                    <i class="icon-append nob fa fa-male"></i>
-                    </label>
-                    </label>
-                    <label title1="Female" class="selection-confirm">
-                    <label class="input gen_r">
-                    <input type="radio" name="child3_gender" id="child3_gender" class="css-checkbox">
-                    <label for="radio4" class="css-label a radGroup2 ss"></label>
-                    <i class="icon-append fa fa-female"></i>
-                    </label>
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="mob_gen" style="display:none;">
-                <div class="form-group car-ins col-md-6">
-                  <div class="cus_border form-control1 ">
-                    <div id="myToggle3" class="slider-toggle-container" style="float: left" data-initialvalue="1" data-height="34" data-width="175" data-ballwidth="87.5" data-ballwheight="34" data-tabindex="undefined" data-speed="550">
-                      <label for="leftInput"></label>
-                      <input id="leftInput" type="radio" name="child3_gender" value="1">
-                      <label for="rightInput"></label>
-                      <input id="rightInput" type="radio" name="child3_gender" value="0">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <?php if(isset($this->session->userdata['user_input']['plan_type']) && in_array($this->session->userdata['user_input']['plan_type'],array('2A4C','1A4C'))){
-        	$display_child4 = "style=''";
-        		
-              } 
-              else
-			  {
-			  	$display_child4 = "style='display:none;'";
-			  }       
-        ?>
-          <div class=" " id="four_c" <?php echo $display_child4;?>>
-            <div style="padding-left:0px;" class="col-md-12">
-              <p>Child 4:</p>
-            </div>
-            <div class="form-group car-ins col-md-6">
-              <input type="text" class="mob_cal m_cust" name="m_child4_dob1" id="m_child4_dob1" autocomplete="off" placeholder="Date of Birth">
-              <div class="section">
-                <label class="field prepend-icon">
-                <label class="sr-only" for="signup-first-name">Date Of Birth</label>
-                <div class="desk_cal">
-                  <label class="input" style="position:relative"> <i class="icon-append fa fa-calendar " id="trigger5"></i>
-                    <input type="text" name="desktop_child4_dob" id="child4_dob" class="form-control cal"  placeholder="Date of Birth" value="<?php if(isset($this->session->userdata['user_input']['child4_dob']))
-                    																						{
-                    																							echo $this->session->userdata['user_input']['child4_dob'];
-                    																						}else 
-                    																						{			 
-                    																							echo set_value('desktop_child4_dob');
-                    																						}?>" required>
-                  </label>
-                </div>
-                <div class="mob_cal">
-                  <label class="input form-control" style="position:relative"> <i class="icon-append fa fa-calendar "></i>
-                    <input type="date" name="mobile_child4_dob" id="m_child4_dob" class="native_date_picker" placeholder="Date of Birth" value="<?php if(isset($this->session->userdata['user_input']['child4_dob']))
-                    																						{
-                    																							echo $this->session->userdata['user_input']['child4_dob'];
-                    																						}else 
-                    																						{			 
-                    																							echo set_value('mobile_child4_dob');
-                    																						}?>" required>
-                  </label>
-                </div>
-                </label>
-              </div>
-            </div>
-            <div class="">
-              <div class="desk_gen">
-                <div class="form-group car-ins col-md-6">
-                  <div class="cus_border form-control ">
-                    <label class="gen_text" for="signup-first-name">Gender</label>
-                    <label title1="Male" class="selection-confirm">
-                    <label class="input gen_r rm">
-                    <input type="radio" name="child4_gender" id="child4_gender" class="css-checkbox ">
-                    <label for="radio4" class="css-label a radGroup2"></label>
-                    <i class="icon-append nob fa fa-male"></i>
-                    </label>
-                    </label>
-                    <label title1="Female" class="selection-confirm">
-                    <label class="input gen_r">
-                    <input type="radio" name="child4_gender" id="child4_gender" class="css-checkbox">
-                    <label for="radio4" class="css-label a radGroup2 ss"></label>
-                    <i class="icon-append fa fa-female"></i>
-                    </label>
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="mob_gen" style="display:none;">
-                <div class="form-group car-ins col-md-2">
-                  <div class="cus_border form-control1 ">
-                    <div id="myToggle4" class="slider-toggle-container" style="float: left" data-initialvalue="1" data-height="34" data-width="175" data-ballwidth="87.5" data-ballwheight="34" data-tabindex="undefined" data-speed="550">
-                      <label for="leftInput"></label>
-                      <input id="leftInput" type="radio" name="child4_gender" value="1">
-                      <label for="rightInput"></label>
-                      <input id="rightInput" type="radio" name="child4_gender" value="0">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      
         </div>
       </div>
       <div class="cus_cont">

@@ -1,51 +1,12 @@
 <?php 
 	
-	$CI =& get_instance();
+	//$CI =& get_instance();
 	$temp = $customer_details;
-	$tem_pre_arr = array();
-	$tot_premium = array();
-	foreach($temp as $temp_p)
-	{
-		$calpremium = '';
-			
-		
-			
-		$sum_assured_session = $CI->session->userdata['user_input']['coverage_amount_literal'];
-			
-		$calpremium = round($sum_assured_session/1000);
-		
-		if(!($temp_p['rate_per_1000_SA']=='0' || $temp_p['rate_per_1000_SA']=='0.0' || $temp_p['rate_per_1000_SA']=='0.00'))
-		{
-			$tem_pre_arr []= round($calpremium * $temp_p['rate_per_1000_SA']);
-		}
-		else
-		{
-			$tem_pre_arr[] = $calpremium;
-			
-		}
-	}
-	$temp_premiums = $tem_pre_arr;
 	
-	foreach($customer_details as $k=>$v)
-	{
-		$total_premium = '';
-		
-		$sum_assured_session = $CI->session->userdata['user_input']['coverage_amount_literal'];
-			
-		$total_premium = round($sum_assured_session/1000);
-		
-		if(!($v['rate_per_1000_SA']=='0' || $v['rate_per_1000_SA']=='0.0' || $v['rate_per_1000_SA']=='0.00'))
-		{
-			$tot_premium[] = round($total_premium * $v['rate_per_1000_SA']);
-		}
-		else
-		{
-			$tot_premium[]= $total_premium;
-
-		}
-	}
-	//var_dump($tot_premium);
-	$allPremiums = $tot_premium;
+	$temp_premiums = Util::getMinAndMaxPremium($temp);
+	
+	$allPremiums = Util::getMinAndMaxPremium($customer_details);
+	
 	
 	//	if user is visiting from compare result show all the values from cookie
 
@@ -54,32 +15,17 @@
 		$customer_details = $cookie_customer_detail;
 	}
 	
-	$first_time_premium = array();
+	
 	
 	foreach($customer_details as $k=>$v)
 	{
-		$first_pre = '';
+		
 		
 		$companyCount[$v['company_id']] = $v['company_id'];
 		
-		$sum_assured_session = $CI->session->userdata['user_input']['coverage_amount_literal'];
-			
-		$first_pre = round($sum_assured_session/1000);
-		
-		if(!($v['rate_per_1000_SA']=='0' || $v['rate_per_1000_SA']=='0.0' || $v['rate_per_1000_SA']=='0.00'))
-		{
-			$first_time_premium[] = round($first_pre * $v['rate_per_1000_SA']);
-		}
-		else
-		{
-			$first_time_premium[] = $first_pre;
-		}
 	}
 	
-	//var_dump($first_time_premium);
-	
-	
-	$premiums = $first_time_premium;
+	$premiums = Util::getMinAndMaxPremium($customer_details);
 	
 	$planCount = count($customer_details);
 	
@@ -98,10 +44,10 @@
    <div class="col-md-3  border m_a">
        <div class="top_p">You searched for:</div>
   
-  <div class="top_p"><strong>Coverage Amount</strong> = &#8377; <?php if(isset($this->session->userdata['user_input']['coverage_amount'])){echo $this->session->userdata['user_input']['coverage_amount'];}?></div>
+  <div class="top_p"><strong>Coverage Amount</strong> = &#8377;<?php if(isset($this->session->userdata['user_input']['coverage_amount_term'])){echo $this->session->userdata['user_input']['coverage_amount_term'];}?></div>
+  <div class="top_p"><strong>Policy Term</strong> = <?php if(isset($this->session->userdata['user_input']['policy_term_name'])){echo $this->session->userdata['user_input']['policy_term_name'];}?></div>
   <div class="top_p"><strong>Gender</strong> = <?php if(isset($this->session->userdata['user_input']['cust_gender'])){echo $this->session->userdata['user_input']['cust_gender'];}?></div>
-    <div class="top_p"><strong>Age</strong> = <?php if(isset($this->session->userdata['user_input']['cust_age'])){echo $this->session->userdata['user_input']['cust_age'];}?> years</div>
-  <div class="top_p"><strong>City</strong> = <?php if(isset($this->session->userdata['user_input']['cust_city'])){echo $this->session->userdata['user_input']['cust_city'];}?></div>
+  <div class="top_p"><strong>Age</strong> = <?php if(isset($this->session->userdata['user_input']['cust_age'])){echo $this->session->userdata['user_input']['cust_age'];}?> years</div>
   <div class="top_m"><i class="fa fa-angle-left"></i> <a href="<?php echo site_url('life-insurance/term-insurance');?>">&nbsp;Modify Your Search</a></div>
    </div>
   <?php   
@@ -117,25 +63,8 @@
         {
             
           $aNew[$v['company_id']]['company'] = $v;
-          //$aNew[$v['company_id']]['premium'][] = $v['annual_premium'];
+          $aNew[$v['company_id']]['premium'][] = $v['annual_premium'];
           
-          
-          
-      /*     if($v['preexisting_diseases']!='Not Covered')
-      {
-            if(!in_array($v['preexisting_diseases'],$preexisitng_disease_discard))
-            {
-              $preexist_filter [] = $v['preexisting_diseases'];
-            }
-
-            $preexisitng_disease_discard [] = $v['preexisting_diseases'];
-      }
-         */
-          if(!in_array($v['public_private_health'],$pph))
-          {
-            $pph[] = $v['public_private_health'];
-          }
-        $pph_disacrd[] = $v['public_private_health'];
         }
                           
   } 
@@ -200,7 +129,7 @@
    </div>
 
 
-  <div id="loader" style="display: none; <?php //echo ($compareParam == "yes") ? 'none' : 'block'?>"><img src="<?php echo base_url();?>/assets/images/loader.gif" border="0"></div>
+  <div id="loader" style="display:<?php echo ($compareParam == "yes") ? 'none' : 'block'?>"><img src="<?php echo base_url();?>/assets/images/loader.gif" border="0"></div>
    <div class="" style="margin-top:20px; display:none;" id="prdt_dis">
             <div class="col-md-9 col-md-push-3 cus_res_hlth" style="padding-right:0px;">
             
@@ -266,7 +195,7 @@
 				<span class="fRight"><span data-pr="42306" class="INR">&#8377;</span><?php echo number_format(max($temp_premiums));?></span>
 			</p>
 	
-			<input type="hidden" name="price" value="6437-32293">
+			
 	
 				
 		</div>
@@ -276,45 +205,46 @@
                  	$checked_maternity='';
                  	$checked_company_health='';
                  	if($this->input->cookie('user_filter')){
-                 		
-						$filters = unserialize($this->input->cookie('user_filter'));
-						
-                 		if(isset($filters['room_rent']))
-
-                 		{
-                 			$checked_roomrent = "checked='checked'";
-                 		}
-                 		
-                 		else 
-						{
-							$checked_roomrent = "";
-						}
-						
-						if(isset($filters['maternity']))
-						
-						{
-							$checked_maternity = "checked='checked'";
-						}
-						 
-						else
-						{
-							$checked_maternity = "";
-							
-						}
-						
-						if(isset($filters['health_comp']))
-						{
-							$checked_company_health = "checked='checked'";
-						}
-						else{
-						
-							$checked_company_health = "";
-						}
+					$filters = unserialize($this->input->cookie('user_filter'));
                  } */?>
                  
                 <p class="addOnFilter" style="margin:0px; padding:0px;">
 						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
 				</p> 
+				
+				<h6 class="fh3"> Sum Assured</h6>
+				
+				<div style="float: left; width: 100%; position: relative;">
+  					<input type="text" id="sum_assured_min" readonly="" class="s_l search_filter" name="min_SA_amt" value="">
+   					<input type="text" id="sum_assured_max" readonly="" class="s_r search_filter" name="max_SA_amt" value="">
+				</div>
+				
+				<div id="slider-range7"></div>
+				
+				
+	          
+				<div class="price rangeSlider">			
+			
+			<p class="displayStaticRange clearFix" style="padding-bottom:0px; padding-top:7px; margin-bottom:0px; margin-top: 2px;">
+				<span class="fLeft"><span data-pr="6437" class="INR">&#8377;</span>10 Lac</span>
+				
+				<span class="fRight"><span data-pr="42306" class="INR">&#8377;</span>2 Crore</span>
+			</p>
+	
+			
+	
+				</div>
+		
+				
+				
+				
+				
+				
+				
+				 <p class="addOnFilter" style="margin:0px; padding:0px;">
+						<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>
+				</p> 
+				
                 <h6 class="fh3">Policy Term</h6>
                 <p class="addOnFilter" >
                 
@@ -325,8 +255,8 @@
                 ?>
                  <div class="checkbox">
             <label>
-            <input type="checkbox" id="room_rent" name="room_rent" value="<?php echo $k;?>"  class="search_filter" <?php //echo $checked_roomrent;?>>
-            <label class="" for="room_rent"><?php echo $v; ?></label>
+            <input type="checkbox" id="policy_term_<?php echo $k;?>" name="policy_term[]" value="<?php echo $k;?>"  class="search_filter" <?php //echo $checked_roomrent;?>>
+            <label class="" for="policy_term_<?php echo $k;?>"><?php echo $v; ?></label>
           </label></div>
 				
 				<?php }?>
@@ -342,39 +272,39 @@
                  <div class="checkbox">
             <label>
             
-            <input type="checkbox" id="maternity" name="maternity"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
+            <input type="checkbox" id="Yearly" name="Yearly"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
             <label class="" for="maternity">Yearly</label>
           </label></div>
 					 
 				<div class="checkbox">
             <label>
             
-            <input type="checkbox" id="maternity" name="maternity"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
-            <label class="" for="maternity">Half Yearly</label>
+            <input type="checkbox" id="Half" name="Half"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
+            <label class="" for="Half">Half Yearly</label>
           </label></div>
           <div class="checkbox">
             <label>
             
-            <input type="checkbox" id="maternity" name="maternity"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
-            <label class="" for="maternity">Quarterly</label>
+            <input type="checkbox" id="Quarterly" name="Quarterly"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
+            <label class="" for="Quarterly">Quarterly</label>
           </label></div>
           <div class="checkbox">
             <label>
             
-            <input type="checkbox" id="maternity" name="maternity"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
-            <label class="" for="maternity">Monthly</label>
+            <input type="checkbox" id="Monthly" name="Monthly"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
+            <label class="" for="Monthly">Monthly</label>
           </label></div>
           <div class="checkbox">
             <label>
             
-            <input type="checkbox" id="maternity" name="maternity"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
-            <label class="" for="maternity">Single</label>
+            <input type="checkbox" id="Single" name="Single"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
+            <label class="" for="Single">Single</label>
           </label></div>
           <div class="checkbox">
             <label>
             
-            <input type="checkbox" id="maternity" name="maternity"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
-            <label class="" for="maternity">Limited Pay</label>
+            <input type="checkbox" id="Limited" name="Limited"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
+            <label class="" for="Limited">Limited Pay</label>
           </label></div>	 
 				</p>
               </div>  
@@ -438,7 +368,7 @@
 							$checked_company="";
 						}
 						
-						/* $premium = $company['premium'];
+						$premium = $company['premium'];
 	                   	sort($premium);
 	                   	if (reset($premium) != end($premium))
 	                   	{
@@ -447,7 +377,7 @@
 	                   	else
 	                   	{
 	                   		$display_premium = '&#8377;'.number_format(reset($premium));
-	                   	} */
+	                   	}
 	              ?>
 	              
                     <div style="width: 100%; float: left;">
@@ -456,7 +386,7 @@
             					<input type="checkbox" value="<?php echo $company['company']['company_id'];?>" class="search_filter" id="company_name[<?php echo $company['company']['company_id'];?>]" name="company_name[]" <?php echo $checked_company;?>>
             						<label for="company_name[<?php echo $company['company']['company_id'];?>]" class=""><?php echo $company['company']['company_shortname'];?></label>
           					</label>
-          				</div> <span style="float:right;"><?php //echo $display_premium;?></span>
+          				</div> <span style="float:right;"><?php echo $display_premium;?></span>
           			</div>
           			
               <?php }
@@ -679,12 +609,12 @@ plan for myself. Check it out. You might find it useful.</p>
 <script type="text/javascript">
 var company_count = "<?php echo count($companyCount);?>";
 var plan_count = "<?php echo  $planCount;?>";
-var min_premium = "<?php echo  min($premiums);?>";
-var max_premium = "<?php echo  max($premiums);?>";
-var all_min_premium ="<?php echo  (int)min($allPremiums)?>";
-var all_max_premium ="<?php echo  (int)max($allPremiums);?>";
+var min_premium = "<?php echo  $premiums['min_premium'];?>";
+var max_premium = "<?php echo  $premiums['max_premium'];?>";
+var all_min_premium = "<?php echo  (int)$allPremiums['min_premium'];?>";
+var all_max_premium = "<?php echo  (int)$allPremiums['max_premium'];?>";
 var annual_premium_search_url = "<?php echo base_url().'life-insurance/term-insurance/search-results'?>";
-//var increment_buyNow_url = "<?php //echo base_url().'health_insurance/controller_basicMediclaim/increment_count'?>";
+var increment_buyNow_url = "<?php echo base_url().'life_insurance/controller_termPlan/increment_count'?>";
 var searchScroll = "<?php echo ($compareParam == "yes") ? 'no' : 'yes'?>";
 </script>
 <script>

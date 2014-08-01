@@ -13,7 +13,7 @@ class model_get_results_term_plan EXTENDS MIC_Model{
 	{	
 		$term_plan_sp = "CALL sp_getTermPlanSearchResults(?,?,?,?,?)";
 		
-		$user_form_data =	array(	$user_input['coverage_amount'],
+		$user_form_data =	array(	$user_input['coverage_amount_literal'],
 									$user_input['policy_term'],
 									$user_input['cust_gender'],
 									$user_input['cust_age'],

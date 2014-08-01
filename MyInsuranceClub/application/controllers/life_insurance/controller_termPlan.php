@@ -118,12 +118,23 @@ class controller_termPlan extends Customer_Controller {
 	public function get_termPlan_results($param = "no")
 	{
 		
-		/* 
+		$post='';
 		
-		$this->form_validation->set_rules('smoker', 'Smoker/Non-Smoker', 'required');
+		if($this->input->post()=='')
+		{
+			$post = $this->session->userdata('user_input');
+		}
 		
-		 */
+		
+		$userInputValidation = Util::getUserInputValidation('term');
+		
+		if($userInputValidation == FALSE && !($this->input->is_ajax_request()) && empty($post))
+		{
+			$this->index();
+		}
 			
+		else 
+		{
 			$data = array();
 			
 			$user_input = array();
@@ -135,9 +146,9 @@ class controller_termPlan extends Customer_Controller {
 				
 				$user_input['product_type']=$this->input->post('product_type');
 				
-				if($this->input->post('coverage_amount')!='')
+				if($this->input->post('coverage_amount_term')!='')
 				{
-					$user_input['coverage_amount']=$this->input->post('coverage_amount');
+					$user_input['coverage_amount_term']=$this->input->post('coverage_amount_term');
 				}
 				
 				if($this->input->post('coverage_amount_literal')!='')
@@ -160,36 +171,14 @@ class controller_termPlan extends Customer_Controller {
 					
 					$user_input['full_name'] = $this->input->post('cust_name');
 						
-					$custname=explode(' ',$this->input->post('cust_name'));
+					$custname= Util::explodeFullName($user_input['full_name']); 
+					
+					$user_input['first_name']=$custname['first_name'];
 						
-					
-					if(sizeof($custname)==1)
-					{
-						$user_input['first_name']=$custname[0];
-							
-						$user_input['middle_name']="";
-							
-						$user_input['last_name']="";
-					}
-					
-					elseif(sizeof($custname)==2)
-					{
-						$user_input['first_name']=$custname[0];
-							
-						$user_input['middle_name']="";
-							
-						$user_input['last_name']=$custname[1];
-					}
-					
-					elseif(sizeof($custname)==3)
-					{
-						$user_input['first_name']=$custname[0];
-							
-						$user_input['middle_name']=$custname[1];
-							
-						$user_input['last_name']=$custname[2];
-					}
-				
+					$user_input['middle_name']=$custname['middle_name'];
+						
+					$user_input['last_name']=$custname['last_name'];
+						
 				}
 				
 				if($this->input->post('desktop_cust_dob')!='')
@@ -200,8 +189,6 @@ class controller_termPlan extends Customer_Controller {
 						
 					/* age */
 						
-					
-				
 					$user_input['cust_age']= Util::convertBirthdateToAge($this->input->post('desktop_cust_dob'));
 						
 				}
@@ -229,7 +216,7 @@ class controller_termPlan extends Customer_Controller {
 				if($this->input->post('cust_city_name')!='')		
 				{
 					$user_input['cust_city']=$this->input->post('cust_city_name');
-					//echo $user_input['cust_city_name'];
+					
 				}
 				
 				$this->session->set_userdata('user_input',$user_input);
@@ -244,7 +231,7 @@ class controller_termPlan extends Customer_Controller {
 			$this->model_customer_personal_and_search_details->customer_personal_search_details($user_input);
 			$this->db->freeDBResource($this->db->conn_id);
 			
-			$cacheFileName = 'SR_'.$user_input['product_type'].$user_input['coverage_amount'].$user_input['cust_age'].$user_input['cust_gender'].$user_input['cust_city'].$user_input['smoker'] ;
+			$cacheFileName = 'SR_'.$user_input['product_type'].$user_input['coverage_amount_term'].$user_input['cust_age'].$user_input['cust_gender'].$user_input['cust_city'].$user_input['smoker'] ;
 				
 			$cacheObject = Util::getCachedObject($cacheFileName);
 				
@@ -261,6 +248,7 @@ class controller_termPlan extends Customer_Controller {
 				{
 					Util::saveResultToCache($cacheFileName,$data['customer_details']);
 				}
+				
 				$this->db->freeDBResource($this->db->conn_id);
 			}
 			
@@ -273,7 +261,7 @@ class controller_termPlan extends Customer_Controller {
 			
 			}
 			
-			/* Filter data received from Ajax Post */
+			//Filter data received from Ajax Post 
 			 	
 			if($this->input->is_ajax_request())
 			{
@@ -298,19 +286,21 @@ class controller_termPlan extends Customer_Controller {
 						$companycnt[] = $v['company_id'];
 					}
 					$company_discard[] = $v['company_id'];
-				
-					$premium = round($user_input['coverage_amount_literal']/1000);
 					
-					$getPremium[] = round($premium * $v['rate_per_1000_SA']);
 				}
+				$getPremium = Util::getMinAndMaxPremium($data['customer_details']);
 				
 				$return['html'] = $this->load->view('termPlan/ajaxPostResultView',$data,TRUE);
+				
 				$return['company'] = count($companycnt);
+				
 				$return['plan'] = count($data['customer_details']);
-				$return['minPremium'] = min($getPremium);
-				$return['maxPremium'] = max($getPremium);
+				
+				$return['minPremium'] = $getPremium['min_premium'];
+				$return['maxPremium'] = $getPremium['max_premium'];
+				
 				echo  json_encode($return);
-				//$this->util->getUserSearchFiltersHtml($customer_details, $type = "termplan");
+				
 			}
 			
 			/**************************************/
@@ -324,7 +314,21 @@ class controller_termPlan extends Customer_Controller {
 				//$this->load->view('termPlan/search_results',$data);
 		
 			}	
-		/* } */
+		} 
+	}
+	
+	public function increment_count()
+	{
+		$this->load->model('model_buynow_count');
+		
+		$increase_count_arr = '';
+		
+		if(!empty($_POST))
+		{
+			$increase_count_arr = $_POST['policy_id'];
+			
+			$this->model_buynow_count->increase_count($increase_count_arr);
+		}
 	}
 	
 	

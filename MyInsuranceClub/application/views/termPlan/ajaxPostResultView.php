@@ -24,30 +24,10 @@ elseif(! empty ( $customer_details )) {
 	<?php 
 	foreach ( $customer_details as $detail ) {
 		
-		
-		
-		$calpremium = '';
-			
-		//$CI =& get_instance();
 			
 		$sum_assured_session = $con->session->userdata['user_input']['coverage_amount_literal'];
-			
-		$calpremium = round($sum_assured_session/1000);
-			
-		if(!($detail['rate_per_1000_SA']=='0' || $detail['rate_per_1000_SA']=='0.0' || $detail['rate_per_1000_SA']=='0.00'))
-		{
-			$annual_premium = $calpremium * $detail['rate_per_1000_SA'];
-		}
-		else
-		{
-			$annual_premium = $calpremium;
-		}
-			
-		$service_tax = round($annual_premium * 0.1236);
 		
-		
-		
-		
+		$service_tax = round($detail['annual_premium'] * 0.1236);
 		
 		
 		
@@ -58,7 +38,7 @@ elseif(! empty ( $customer_details )) {
 			$variant = '';
 		}
 		
-		$compare_data = $detail ['variant_id'] . '-' . $annual_premium . '-' . $detail ['age'];
+		$compare_data = $detail ['variant_id'] . '-' . $detail['annual_premium'] . '-' . $detail ['age'];
 				
 		$sum_assured = "<span>&#8377;" . Util::moneyFormatIndia($sum_assured_session) . "</span>";
 		
@@ -91,9 +71,9 @@ elseif(! empty ( $customer_details )) {
 					class="img_bx_i">
 				<div class="check_bx">
 					<div class="checkbox">
-						<label> <input type="checkbox" name="compare[]" id="c_name_<?php echo $detail ['variant_id'].$annual_premium;?>"
+						<label> <input type="checkbox" name="compare[]" id="c_name_<?php echo $detail ['variant_id'].$detail['annual_premium'];?>"
 							class="cmpplans" value="<?php echo $compare_data?>" <?php //echo $plan_checked; ?>> <label
-							class="chk" for="c_name_<?php echo $detail ['variant_id'].$annual_premium;?>"></label>
+							class="chk" for="c_name_<?php echo $detail ['variant_id'].$detail['annual_premium'];?>"></label>
 						</label>
 					</div>
 				</div>
@@ -109,7 +89,7 @@ elseif(! empty ( $customer_details )) {
 
 		<div class="col-md-7 m_anc">
 			<div class="col-md-6 no_pad_l">
-				<h3 class="anc">&#8377;<?php echo number_format($annual_premium);?></h3>
+				<h3 class="anc">&#8377;<?php echo number_format($detail['annual_premium']);?></h3>
 				<p class="sub_tit">for cover of <?php echo $sum_assured ?></p>
 			</div>
 			<div class="col-md-2" style="padding:0px">

@@ -129,7 +129,7 @@ class model_customer_personal_and_search_details EXTENDS MIC_Model{
 													$user_input['product_name'],
 													$user_input['product_type'],
 													'',
-													$user_input['coverage_amount'],
+													$user_input['coverage_amount_term'],
 													$user_input['policy_term']
 													);
 		}

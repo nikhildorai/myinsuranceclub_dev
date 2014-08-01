@@ -149,6 +149,7 @@ $("#c_amt li").click(function() {
 	$("#rs").text(am_v);
 	var am_vid = $(this).data('coverage-literalid');
 	$("#coverage_amount").val(am_v);
+	$("#coverage_amount_term").val(am_v);
 	$("#coverage_amount_literal").val(am_vid);
  mouseOverActiveElement = false; 
   if (!mouseOverActiveElement) {
