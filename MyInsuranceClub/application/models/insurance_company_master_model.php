@@ -231,13 +231,6 @@ class Insurance_company_master_model EXTENDS Admin_Model{
 				$data['policies'] = $policies;
 			}
 		
-		foreach ($policies as $k1=>$v1)
-		{
-//var_dump($k1, $v1);die;			
-		}
-//var_dump($data);die;
-//echo '<pre>';print_r($policies);die;			
-			
 			//	seo data
 	        $data['title'] = $data['companyDetails']['seo_title'];
 	        $data['keywords'] = $data['companyDetails']['seo_keywords'];

@@ -15,7 +15,7 @@ class DisqusLib {
 	
 	public function getDBConfig()
 	{
-		$DB =& get_instance();
+		$db =& get_instance();
 		$this->disDBConfig['hostname'] = $this->db->hostname;
 		$this->disDBConfig['username'] = $this->db->username;
 		$this->disDBConfig['password'] = $this->db->password;
@@ -67,7 +67,7 @@ class DisqusLib {
 		$limit = '100'; // max is 100 for this endpoint. 25 is default
 
 		$endpoint = 'https://disqus.com/api/3.0/threads/listPosts.json?api_key='.$apikey.'&forum='.$shortname.'&limit='.$limit.'&cursor='.$cursor.'&thread='.$thread;
-var_dump($endpoint);
+//var_dump($endpoint);
 	//	$j=0;
 	//	listcomments($endpoint,$cursor,$j);
 		$url = "https://disqus.com/api/3.0/forums/listPosts.json?forum=mictest";
@@ -80,7 +80,7 @@ var_dump($endpoint);
 
 		// Decode JSON data
 		$results = json_decode($data);
-var_dump($results);die;		
+//var_dump($results);die;		
 		if ($results === NULL) die('Error parsing json');
 
 		// Comment response

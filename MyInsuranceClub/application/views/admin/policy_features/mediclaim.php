@@ -427,7 +427,7 @@ $(".form-horizontal :input").prop("disabled", true);
 			    </div>
 			</div>  
 			
-			
+		<?php /*?>	
 	        <div class="row">
 		        <div class="col-md-12">
 		        	<div class="panel-body">    
@@ -442,7 +442,7 @@ $(".form-horizontal :input").prop("disabled", true);
 					</div>
 			    </div>
 			</div>  
-			
+			*/ ?>
 				
 	        <div class="row">
 		        <div class="col-md-12">

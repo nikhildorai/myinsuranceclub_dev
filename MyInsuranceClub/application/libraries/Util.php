@@ -2112,6 +2112,10 @@ echo '=================>';
 				$query = "CALL sp_getAllDetailsOfSingleHealthPolicy(?)";
 			else if ($type == 'getAllPolicyVariantsDetails')
 				$query = "CALL sp_getAllPolicyVariantsDetails(?,?)";
+			else if ($type == 'getPolicyVariantsFeaturesRidersDetails')
+				$query = "CALL sp_getPolicyVariantsFeaturesRidersDetails(?,?,?)";
+			else if ($type == 'getCompanyClaimRatio')
+				$query = "CALL sp_getCompanyClaimRatio(?,?,?)";
 				
 			$queryData = $arrParams;
 			$resultData = $db->db->query($query,$queryData);
@@ -2135,180 +2139,270 @@ echo '=================>';
 					$return['backendFeatureAction'] = 'car_insurance';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'child':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'child';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'endowment':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'endowment';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'health-insurance':
-					$return['backendController'] = 'policy_variants_master';
-					$return['backendFeatureAction'] = 'health_insurance';
-					$return['feature_table'] = '';
-					$return['premium_table'] = '';
+					$return['backendController'] = 'policy_features_mediclaim';
+					$return['backendFeatureAction'] = 'mediclaim';
+					$return['feature_table'] = 'policy_features_mediclaim';
+					$return['premium_table'] = 'annual_premium_health';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = 'policy_rider_mediclaim';
 					break;
 				case 'health-insurance-li-companies':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'health_insurance-li-companies';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'home-insurance':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'home_insurance';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'money-back':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'money_back';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'pension':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'pension';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'term-insurance':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'term_insurance';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'travel-insurance':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'travel_insurance';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'two-wheelar-insurance':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'two_wheelar_insurance';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'ulip':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'ulip';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'whole-life':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'whole_life';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'critical-illness':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'critical_illness';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'decreasing-term':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'decreasing_term';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'deferred-annutiy':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'deferred_annutiy';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'domestic-travel':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'domestic_travel';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'hospital-cash':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'hospital_cash';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'immediate-annuity':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'immediate_annuity';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'increasing-term':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'increasing_term';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'international-travel':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'international_travel';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'level-term':
 					$return['backendController'] = 'policy_features_level_term';
 					$return['backendFeatureAction'] = 'level_term';
 					$return['feature_table'] = 'policy_features_level_term';
 					$return['premium_table'] = 'annual_premium_term_plan';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = 'policy_rider_mediclaim';
 					break;
 				case 'mediclaim':
 					$return['backendController'] = 'policy_features_mediclaim';
 					$return['backendFeatureAction'] = 'mediclaim';
-					$return['feature_table'] = '';
-					$return['premium_table'] = '';
+					$return['feature_table'] = 'policy_features_mediclaim';
+					$return['premium_table'] = 'annual_premium_health';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = 'policy_rider_mediclaim';
 					break;
 				case 'opd':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'opd';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'personal-accident':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'personal_accident';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'special-plans':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'special_plans';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'super-top-up':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'super_top-up';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'top-up':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'top_up';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				case 'trop':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'trop';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 				default :
 					$return['backendController'] = '';
 					$return['backendFeatureAction'] = '';
 					$return['feature_table'] = '';
 					$return['premium_table'] = '';
+					$return['frontEndController'] = '';
+					$return['frontEndView'] = '';
+					$return['riderTable'] = '';
 					break;
 			}
 		}
@@ -2658,6 +2752,147 @@ echo '=================>';
 		$image->save($destination);
 	}
 	
+	
+	public static function getPolicyVariantsFeaturesRidersDetails($policySlug, $variantType = '', $companyType = '')
+	{
+		$data['companyDetails'] = $data['policyDetails'] = $data['variantDetails'] = $arrParams = array();
+		if (!empty($policySlug))
+		{
+			$arrParams['policy_slug'] = $policySlug;
+			$allVariantTypes = Util::getControllerForPolicyVariantFeatures($variantType);
+			$arrParams['feature_table'] = $allVariantTypes['feature_table'];
+			$arrParams['rider_table'] = $allVariantTypes['riderTable'];
+		//	$arrParams['company_type_slug'] = $companyType;
+		//	$arrParams['premium_table'] = $allVariantTypes['premium_table'];
+			$cacheFileName = 'policy_'.$policySlug.'_'.$variantType;
+			$cacheResult = Util::getCachedObject($cacheFileName);			
+			//	check if cache file exist
+			if(!empty($cacheResult))
+			{
+				// get result set from cache
+				$data = $cacheResult;
+			}
+			else
+			{
+				//get resultset from DB and save in cache
+				$db = &get_instance();
+				$tableNames = Util::getFieldNamesOfAllTables();
+				$tableNames['variantFeatureFields'] 	= $db->db->list_fields($allVariantTypes['feature_table']);
+				$tableNames['riderFields'] 	= $db->db->list_fields($allVariantTypes['riderTable']);
+
+				$db->db->freeDBResource($db->db->conn_id);
+				$details = Util::callStoreProcedure($type = 'getPolicyVariantsFeaturesRidersDetails', $arrParams);
+				if (!empty($details))
+				{
+					$data = Util::rearrangeDataOfPolicyVariantsFeaturesRidersDetails($details, $tableNames);
+					
+					$data['company'] = reset($data['company']);
+					$data['companyDetails'] = reset($data['companyDetails']);
+					$data['policyDetails'] = reset($data['policyDetails']);
+					$data['claimRatio'] = Util::getCompanyClaimRatio(array('year_to'=>"2013",'company_id'=>'', 'company_type_id'=>''));
+					//$data['claimRatio'] = Util::getCompanyClaimRatio(array('company_id'=>'','year_to'=>date('Y'), 'company_type_id'=>$data['company']['company_type_id']));
+					
+					//	seo data
+			        $data['title'] = $data['policyDetails']['policy']['seo_title'];
+			        $data['keywords'] = $data['policyDetails']['policy']['seo_keywords'];
+			        $data['description'] = $data['policyDetails']['policy']['seo_description'];
+				}
+//				Util::saveResultToCache($cacheFileName,$data);
+			}
+		}
+		return $data;
+	}
+	
+	public static function getFieldNamesOfAllTables()
+	{
+		$db = &get_instance();
+		$dbPrefix = Util::getdbPrefix();
+		$tables = $db->db->list_tables();
+		foreach ($tables as $k1=>$v1)
+		{
+			$tableNames[$v1] = $db->db->list_fields($v1);
+		}
+		$tableNames[$dbPrefix.'insurance_company_master'][] 	= 'company_slug';
+		$tableNames[$dbPrefix.'policy_master'][] 				= 'policy_slug';
+		$tableNames[$dbPrefix.'policy_master'][] 				= 'policy_tax_benefits';
+		$tableNames[$dbPrefix.'policy_variants_master'][] 		= 'variant_slug';
+		$tableNames[$dbPrefix.'company_private_public_health'][] = 'company_pph_slug';
+		$tableNames[$dbPrefix.'product'][] 						= 'product_slug';
+		$tableNames[$dbPrefix.'sub_product'][] 					= 'sub_product_slug';
+		$tableNames[$dbPrefix.'policy_rider_level_term'][] 		= 'rider_slug';
+		$tableNames[$dbPrefix.'policy_rider_mediclaim'][] 		= 'rider_slug';
+		$tableNames[$dbPrefix.'policy_rider_personal_accident'][] = 'rider_slug';
+	//	$tableNames[$dbPrefix.''][] 				= '_slug';
+		return $tableNames;
+	}
+	
+	
+	public static function rearrangeDataOfPolicyVariantsFeaturesRidersDetails($details = array(), $tableNames = array())
+	{
+		$data = array();
+		$dbPrefix = Util::getdbPrefix();
+		if (!empty($details))
+		{
+			foreach ($details as $k1=>$v1)
+			{
+				foreach ($v1 as $k2=>$v2)
+				{
+//echo '<pre>';print_r($v1);print_r($tableNames);die;					
+					//	company details
+					if (in_array($k2, $tableNames[$dbPrefix.'insurance_company_master']))
+						$data['company'][$v1['company_id']][$k2] = $v2;
+						
+					//	company features details
+					if (in_array($k2, $tableNames[$dbPrefix.'insurance_company_master_detail']))
+						$data['companyDetails'][$v1['company_id']][$k2] = $v2;
+						
+					//	policy details
+					if (in_array($k2, $tableNames[$dbPrefix.'policy_master']))
+						$data['policyDetails'][$v1['policy_id']]['policy'][$k2] = $v2;
+						
+					//	product details
+					if (in_array($k2, $tableNames[$dbPrefix.'product']))	
+					{
+						$data['policyDetails'][$v1['policy_id']]['policy']['product'][$k2] = $v2;
+						$data['company'][$v1['company_id']]['product'][$k2] = $v2;
+					}	
+					
+					//	subproduct details
+					if (in_array($k2, $tableNames[$dbPrefix.'sub_product']))	
+					{
+						$data['policyDetails'][$v1['policy_id']]['policy']['sub_product'][$k2] = $v2;
+						$data['company'][$v1['company_id']]['sub_product'][$k2] = $v2;
+					}	
+					
+					// 	policy features details details
+					if (in_array($k2, $tableNames[$dbPrefix.'policy_features']))	
+						$data['policyDetails'][$v1['policy_id']]['features'][$k2] = $v2;
+						
+					// 	variant details
+					if (in_array($k2, $tableNames[$dbPrefix.'policy_variants_master']))
+						$data['variantDetails'][$v1['variant_id']]['variant'][$k2] = $v2;
+						
+					// 	variant features details
+					if (in_array($k2, $tableNames['variantFeatureFields']))	
+						$data['variantDetails'][$v1['variant_id']]['features'][$k2] = $v2;
+						
+					//	rider details
+					if (in_array($k2, $tableNames['riderFields']))
+						$data['variantDetails'][$v1['variant_id']]['rider'][$v1['rider_id']][$k2] = $v2;
+					
+					$data['variantNames'][$v1['variant_id']] = $v1['variant_name']; 
+				}		
+			}
+		}
+		return $data;
+	}
+	
+	public static function getCompanyClaimRatio($arrParams = array())
+	{
+		$data = array();
+		$data = Util::callStoreProcedure('getCompanyClaimRatio', $arrParams);
+		return $data;
+	}
 }
 
 // END Util class

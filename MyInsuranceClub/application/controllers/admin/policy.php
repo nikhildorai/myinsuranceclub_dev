@@ -106,19 +106,15 @@ class Policy extends Admin_Controller {
 		
 		//	initailze all policy feature ckeditor
 		
-		$descCount = $this->config->config['policy']['descriptionCount'];
-		for($i = 1; $i<=$descCount; $i++)
-		{
-			$ck = 'ckeditor'.$i;
-			$des = 'description'.$i;
-			$this->data[$ck] = array(
+		//Ckeditor's configuration
+		$this->data['ckeditor'] = array(
 			//ID of the textarea that will be replaced
-			'id' 	=> 	$des,
+		//	'class' => 	'ckeditor',
+			'id'=>'ckeditor1',
 			'path'	=>	'JS/ckeditor',
 			//Optionnal values
 			'config' => Util::getCKEditorConfig(),
-			);
-		}	
+		);
 				
 		//	check if post data is available
 		if ($this->input->post('policyModel') && $isActive == true)
@@ -129,7 +125,7 @@ class Policy extends Admin_Controller {
 				$tag = $this->util->addUpdateTags($_POST['tag']);
 				$_POST['policyModel']['tag'] = $tag;
 			}		
-			
+//var_dump($_POST);die;			
 			//	check if file is uploaded
 			if (!empty($_FILES))
 			{

@@ -794,10 +794,11 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 									                </div>
 								                    <label for="" class="col-sm-2">Description <?php echo $i;?></label>
 								                    <div class="col-sm-10">
-								                        <textarea class="form-control" name="policyFeaturesModel[description<?php echo $i; ?>]" id="description<?php echo $i; ?>" ><?php echo array_key_exists( 'description'.$i,$policyFeaturesModel) ? $policyFeaturesModel['description'.$i] : '';?></textarea>
-								                        <?php 
-								                        $ck = 'ckeditor'.$i;
-								                        echo display_ckeditor($this->data['ckeditor'.$i]); ?>
+								                        <textarea class="form-control ckeditor" name="policyFeaturesModel[description<?php echo $i; ?>]"  ><?php echo array_key_exists( 'description'.$i,$policyFeaturesModel) ? $policyFeaturesModel['description'.$i] : '';?></textarea>
+								            			<?php echo display_ckeditor($ckeditor); ?>            
+											<?php 
+								                        //$ck = 'ckeditor'.$i;
+								                        //echo display_ckeditor($this->data['ckeditor'.$i]); ?>
 								                    </div>
 									                <div class="form-group">
 									                </div>
@@ -820,7 +821,22 @@ var maxPolicyFeatures = <?php echo $this->config->config['policy']['descriptionC
 					            </section>
 					        </div>
 					    </div> 
-					    
+
+				        <div class="row">
+					        <div class="col-md-12">
+					        	<div class="panel-body">    
+						            <section class="panel panel-default">
+						                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Additional Details</strong></div>
+						                <div class="panel-body">
+						                
+						                	<?php echo widget::run('additionalDetailsBack', array('model'=>$policyModel, 'ckeditor'=>$ckeditor, 'modelName'=>'policyModel')); ?>
+							                
+						                </div>
+						            </section>
+								</div>
+						    </div>
+						</div>  
+											    
 					    
 			        	<div class="row">
 			        	

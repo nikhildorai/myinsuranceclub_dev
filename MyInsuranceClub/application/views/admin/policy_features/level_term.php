@@ -204,7 +204,7 @@ $(".form-horizontal :input").prop("disabled", true);
 					                    <label for="" class="col-sm-3">Tax Benefit</label>
 					                    <div class="col-sm-9">
 					                    	<span class="icon glyphicon glyphicon-star"></span>
-					                        <textarea class="form-control" rows="5" name="model[tax_benefit]"><?php echo array_key_exists( 'tax_benefit',$model) ? $model['tax_benefit'] : '';?></textarea>
+					                        <textarea class="form-control" rows="5" name="model[tax_benefits]"><?php echo array_key_exists( 'tax_benefits',$model) ? $model['tax_benefits'] : '';?></textarea>
 					                   	</div>
 					                </div>
 					                
@@ -215,6 +215,7 @@ $(".form-horizontal :input").prop("disabled", true);
 			</div>  
 			
 			
+		<?php /*?>	
 	        <div class="row">
 		        <div class="col-md-12">
 		        	<div class="panel-body">    
@@ -229,6 +230,7 @@ $(".form-horizontal :input").prop("disabled", true);
 					</div>
 			    </div>
 			</div>  
+			*/ ?>
 			
 				
 	        <div class="row">
