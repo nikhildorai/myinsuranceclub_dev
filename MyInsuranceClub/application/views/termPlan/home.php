@@ -17,13 +17,13 @@
         </div>
       </div>
       <div class="col-md-12 center m_h" style=" position:relative;">
-        <h3>I want a <span id="clickk" style="position:relative; "><span class="dotted rs" id="rs"><?php if(isset($this->session->userdata['user_input']['coverage_amount_term'])){
- 																																	echo $this->session->userdata['user_input']['coverage_amount_term'];}else{?>10 Lakhs<?php }?></span>
-          <div data-bind="" style="display: none; left:0px; width:205px;" class="choice l amt" id="c_ch">
+        <h3>I want a <span id="clickk_termplans" style="position:relative; "><span class="dotted rs" id="rs_termplans"><?php if(isset($this->session->userdata['user_input']['coverage_amount_term'])){
+ 																																	echo $this->session->userdata['user_input']['coverage_amount_term'];}else{?>25 Lakhs<?php }?></span>
+          <div data-bind="" style="display: none; left:0px; width:205px;" class="choice l amt" id="c_ch_termplans">
             <div class="choice-leftcol" data-bind="">
-              <ul data-bind="jScrollPane" id="c_amt" class="years active scroll-pane">
+              <ul data-bind="jScrollPane" id="c_termplans" class="years active scroll-pane">
                 <?php foreach($cvg_amt as $k=>$v){?>
-                <li data-coverage-literalid="<?php echo $k; ?>"><a href="javascript:void(0);"><?php echo $v;?></a></li>
+                <li data-coverage-termid="<?php echo $k; ?>"><a href="javascript:void(0);"><?php echo $v;?></a></li>
               			<?php } ?>
               </ul>
               <div class="stepwrap years-stepwrap">
@@ -51,7 +51,7 @@
           </span></h3>
       </div>
       <div class="col-md-12 center no-margin m_h">
-        <h3 style=""><span style="">I am </span> <span id="clickk_g" style="position:relative;"><span class="dotted ge" id="ge"><?php if(isset($this->session->userdata['user_input']['cust_gender'])){ echo $this->session->userdata['user_input']['cust_gender'];}else{?>Female<?php }?></span>
+        <h3 style=""><span style="">I am </span> <span id="clickk_g" style="position:relative;"><span class="dotted ge" id="ge"><?php if(isset($this->session->userdata['user_input']['cust_gender'])){ echo $this->session->userdata['user_input']['cust_gender'];}else{?>Male<?php }?></span>
           <div data-bind="" style="display: none;" class="choice  g" id="c_ch_g">
             <div class="choice-leftcol" data-bind="">
               <ul class="years active" id="c_for_g"  style="padding:0px 0 30px;">
@@ -65,13 +65,13 @@
               </div>
             </div>
           </div>
-          </span><span style=""> & I stay in</span> <span id="clickk_l" style="position:relative; "><span class="dotted loc" id="loc"><?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?></span>
+          </span><span style=""> & I stay in</span> <span id="clickk_l" style="position:relative; "><span class="dotted loc" id="loc"><?php if(isset($this->session->userdata['user_input']['cust_city'])){ echo $this->session->userdata['user_input']['cust_city'];}else{?>Mumbai<?php }?></span>
           <div data-bind="" style="display: none; left:0px;  max-width: 350px; width: 400px;" class="choice l cit" id="c_ch_l">
             <div class="choice-leftcol" data-bind="">
               <select name="cust_city" placeholder="Type your city" id="combobox" style="height:auto;">
                 <option value="" >  </option>
                 <?php if(isset($this->session->userdata['user_input']['cust_city_name']) && isset($this->session->userdata['user_input']['cust_city'])){?>
-                <option value="<?php echo $this->session->userdata['user_input']['cust_city'];?>" selected="selected"><?php echo $this->session->userdata['user_input']['cust_city_name']?></option>
+                <option value="<?php echo $this->session->userdata['user_input']['cust_city'];?>" selected="selected"><?php echo $this->session->userdata['user_input']['cust_city']?></option>
                 <?php } else{?>
                 <option value="590" selected="selected">Mumbai</option>
                 <?php }?>
@@ -129,13 +129,13 @@
                      																				{
  																										echo $this->session->userdata['user_input']['coverage_amount_term'];
                      																				}else
-																										{?>10 Lakhs<?php }?>">
+																										{?>25 Lakhs<?php }?>">
              
-             <input type="hidden" id="coverage_amount_literal" name="coverage_amount_literal" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount_literal']))
+             <input type="hidden" id="coverage_amount_literal_term" name="coverage_amount_literal_term" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount_literal_term']))
                      																				{
- 																										echo $this->session->userdata['user_input']['coverage_amount_literal'];
+ 																										echo $this->session->userdata['user_input']['coverage_amount_literal_term'];
                      																				}else
-																										{?>1000000<?php }?>">
+																										{?>2500000<?php }?>">
              
              
              
@@ -195,19 +195,15 @@
           		$smoker = '';
           		$non_smoker ='';
           		
-          		if(isset($this->session->userdata['user_input']['smoker']))
+          		if(isset($this->session->userdata['user_input']['smoker']) && $this->session->userdata['user_input']['smoker']=='1')
 				{
-          			if($this->session->userdata['user_input']['smoker']=='1')
-          			{
-						$smoker ='checked="checked"';
-          				$non_smoker = '';
-          			}
           			
-          			else
-          			{
-          				$smoker = '';
-          				$non_smoker = 'checked="checked"';
-          			}
+						$smoker ='checked="checked"';
+          			
+				}
+				elseif(!isset($this->session->userdata['user_input']['smoker']))
+				{
+					$non_smoker = 'checked="checked"';
 				}
           		
           
@@ -219,7 +215,7 @@
               			<div style="margin-top:-5px">
               			Tobacco
                     	<input type="radio" id="smoker" name="smoker" value="1" <?php echo $smoker; ?>>yes&nbsp;|&nbsp;
-                    	<input type="radio" id="non_smoker" name="smoker" value="0">no
+                    	<input type="radio" id="non_smoker" name="smoker" value="0" <?php echo $smoker; ?>>no
                     	</div>
                     	
                     	</label>

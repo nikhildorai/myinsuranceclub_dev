@@ -151,9 +151,9 @@ class controller_termPlan extends Customer_Controller {
 					$user_input['coverage_amount_term']=$this->input->post('coverage_amount_term');
 				}
 				
-				if($this->input->post('coverage_amount_literal')!='')
+				if($this->input->post('coverage_amount_literal_term')!='')
 				{
-					$user_input['coverage_amount_literal']=$this->input->post('coverage_amount_literal');
+					$user_input['coverage_amount_literal_term']=$this->input->post('coverage_amount_literal_term');
 				}
 				
 				if($this->input->post('policy_term')!='')

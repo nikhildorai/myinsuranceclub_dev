@@ -1,6 +1,7 @@
 <?php 
 	
 	//$CI =& get_instance();
+	var_dump($user_input);
 	$temp = $customer_details;
 	
 	$temp_premiums = Util::getMinAndMaxPremium($temp);

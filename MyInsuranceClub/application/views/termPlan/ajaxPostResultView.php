@@ -25,7 +25,7 @@ elseif(! empty ( $customer_details )) {
 	foreach ( $customer_details as $detail ) {
 		
 			
-		$sum_assured_session = $con->session->userdata['user_input']['coverage_amount_literal'];
+		$sum_assured_session = $con->session->userdata['user_input']['coverage_amount_literal_term'];
 		
 		$service_tax = round($detail['annual_premium'] * 0.1236);
 		
