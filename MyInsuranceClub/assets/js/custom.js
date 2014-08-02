@@ -113,6 +113,7 @@ $(document).click(function(event) {
 	     
   // $("#c_ch").stop().slideDown();
     $("#c_ch").show();
+    $("#c_ch_termplans").show();
   $('.scroll-pane').jScrollPane();
    /* $('.scroll-pane').jScrollPane(
                                 {autoReinitialise: true}
@@ -160,6 +161,34 @@ $("#c_amt li").click(function() {
 });
 
 
+
+//coverage amount DD for Term Plans
+
+$('#clickk_termplans').click(function() {
+	  
+	    $("#c_ch_termplans").show();
+	    $('.scroll-pane').jScrollPane();
+	   
+	  }); 
+
+ 
+
+$('#clickk_termplans').live('mouseenter', function(){
+    mouseOverActiveElement = true; 
+	
+}).live('mouseleave', function(){ 
+   mouseOverActiveElement = false; 
+	
+});
+
+$("html").click(function(){ 
+
+    if (!mouseOverActiveElement) {
+        console.log('clicked outside active element');
+		   $("#c_ch_termplans").slideUp("slow");
+		    mouseOverActiveElement = true; 
+    }
+});
 
 //SECOND
 
