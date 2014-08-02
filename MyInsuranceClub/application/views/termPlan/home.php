@@ -215,7 +215,7 @@
               			<div style="margin-top:-5px">
               			Tobacco
                     	<input type="radio" id="smoker" name="smoker" value="1" <?php echo $smoker; ?>>yes&nbsp;|&nbsp;
-                    	<input type="radio" id="non_smoker" name="smoker" value="0" <?php echo $non-smoker; ?>>no
+                    	<input type="radio" id="non_smoker" name="smoker" value="0" <?php echo $non_smoker; ?>>no
                     	</div>
                     	
                     	</label>
