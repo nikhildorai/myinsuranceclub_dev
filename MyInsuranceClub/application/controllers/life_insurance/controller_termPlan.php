@@ -215,8 +215,14 @@ class controller_termPlan extends Customer_Controller {
 				
 				if($this->input->post('cust_city_name')!='')		
 				{
-					$user_input['cust_city']=$this->input->post('cust_city_name');
+					$user_input['cust_city_name']=$this->input->post('cust_city_name');
 					
+				}
+				
+				if($this->input->post('cust_city')!='')
+				{
+					$user_input['cust_city']=$this->input->post('cust_city');
+						
 				}
 				
 				$this->session->set_userdata('user_input',$user_input);
