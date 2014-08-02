@@ -54,7 +54,9 @@ $db['default']['username'] = 'root';
 $db['default']['password'] = 'root';
 $db['default']['database'] = 'myinsuranceclubDB';
 
+
 /* 
+=======
 //internal server
 $db['default']['hostname'] = '192.168.2.201';
 $db['default']['username'] = 'developer';

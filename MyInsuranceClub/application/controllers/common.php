@@ -30,6 +30,49 @@ class Common extends Common_Controller {
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * update rating for any table
+	 */
+	public function rating()
+	{
+		$data = array();
+		$tableName = $updateFieldName = $whereFieldName = $whereFieldValue = $count = '';
+		if (!empty($_POST))
+		{
+			$arrParams['ratingType'] = $ratingTYpe = $_POST['ratingType'];
+			$arrParams['currentRatingValue'] = (float)$_POST['hoverRating']; 
+			$arrParams['record'] = $_POST['record'];
+			$dbPrefix = Util::getdbPrefix();
+			switch ($ratingTYpe)
+			{
+				case 'policy':
+					$tableName = $dbPrefix.'policy_master';
+					$whereFieldName = 'slug';
+					$whereFieldValue = $arrParams['record'];
+				break;
+				default :
+					$data = array();
+				break;
+			}
+			$recordData = Util::callStoreProcedure('sp_getSingleRecordFromTable', array('table_name'=>$tableName, 'where_field_name'=>$whereFieldName, 'where_field_value'=>$whereFieldValue));
+			if (!empty($recordData))
+			{
+				$recordData = reset($recordData);
+				$oldRating = $recordData['rating_value'];
+				$oldRatingTotalValue = $recordData['rating_total_value'];
+				$oldRatingClickCount = $recordData['rating_click_count'];
+				
+				$newRatingTotalValue = $oldRatingTotalValue + $arrParams['currentRatingValue'];
+				$newRatingClickCount = $oldRatingClickCount +1;
+				$newRating = number_format($newRatingTotalValue/$newRatingClickCount,2);
+				Util::callStoreProcedure('sp_updateRatingValuesForRecords', array('table_name'=>$tableName, 'where_field_name'=>$whereFieldName, 'where_field_value'=>$whereFieldValue,'rating_click_count'=>$newRatingClickCount, 'rating_total_value'=>$newRatingTotalValue, 'rating_value'=>$newRating));
+				$data = array('rating_click_count'=>$newRatingClickCount, 'rating_total_value'=>$newRatingTotalValue, 'rating_value'=>$newRating);
+			}		
+		}
+		echo json_encode($data);
+	}
 }
 
 /* End of file common.php */

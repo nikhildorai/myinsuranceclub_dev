@@ -138,7 +138,7 @@ $('#clickk').live('mouseenter', function(){
 $("html").click(function(){ 
 
     if (!mouseOverActiveElement) {
-        console.log('clicked outside active element');
+        //console.log('clicked outside active element');
 		   $("#c_ch").slideUp("slow");
 		    mouseOverActiveElement = true; 
     }
@@ -208,7 +208,7 @@ $('#clickk_f').live('mouseenter', function(){
 });
 $("html").click(function(){ 
     if (!mouseOverActiveElement1) {
-        console.log('clicked outside active element');
+        //console.log('clicked outside active element');
 		   $("#c_ch_f").slideUp("slow");
 		     mouseOverActiveElement1 = true; 
     }
@@ -294,7 +294,7 @@ $('#clickk_g').live('mouseenter', function(){
 });
 $("html").click(function(){ 
     if (!mouseOverActiveElement2) {
-        console.log('clicked outside active element');
+      //  console.log('clicked outside active element');
 		   $("#c_ch_g").slideUp("slow");
 		    mouseOverActiveElement2 = true; 
     }

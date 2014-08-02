@@ -7,6 +7,12 @@
       <meta name=viewport content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
       <meta name="description" content="<?php echo (isset($description) && !empty($description)) ? $description : 'Compare and get free quotes for the best life insurance, health insurance, travel insurance, car and auto insurance plans, policies and schemes in India offered by different insurance companies only at MyInsuranceClub.com' ?>">
       <meta name="keywords" content="<?php echo (isset($keywords) && !empty($keywords)) ? $keywords : 'compare insurance, best life insurance, best health insurance, cheap car insurance, auto insurance quote, cheap travel insurance, affordable insurance, best insurance policy, insurance companies in India' ?>">
+      <?php 
+      if (!empty($socialSeoData))
+      {
+      	echo $socialSeoData;
+      }
+      ?>
       <link rel="shortcut icon" href="<?php echo base_url();?>/assets/img/icons/favicon.png">
       <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
       <!-- Bootstrap CSS -->

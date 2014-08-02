@@ -2157,6 +2157,16 @@ echo '=================>';
 				$query = "CALL sp_getPolicyVariantsFeaturesRidersDetails(?,?,?)";
 			else if ($type == 'getCompanyClaimRatio')
 				$query = "CALL sp_getCompanyClaimRatio(?,?,?)";
+			else if ($type == 'sp_incrementPageViewCount')
+				$query = "CALL sp_incrementPageViewCount(?,?,?,?,?)";
+			else if ($type == 'sp_getSingleRecordFromTable')
+				$query = "CALL sp_getSingleRecordFromTable(?,?,?)";
+			else if ($type == 'sp_updateRatingValuesForRecords')
+				$query = "CALL sp_updateRatingValuesForRecords(?,?,?,?,?,?)";
+			else if ($type == 'sp_insetIntoMIC_disqus_threads')
+				$query = "CALL sp_insetIntoMIC_disqus_threads(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			else if ($type == 'sp_insetIntoMIC_disqus_comments')
+				$query = "CALL sp_insetIntoMIC_disqus_comments(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				
 			$queryData = $arrParams;
 			$resultData = $db->db->query($query,$queryData);
@@ -2799,6 +2809,7 @@ echo '=================>';
 		$data['companyDetails'] = $data['policyDetails'] = $data['variantDetails'] = $data['claimRatio'] = $data['claimRatioJson'] = $arrParams = array();
 		if (!empty($policySlug))
 		{
+			$url = base_url().'health-insurance/'.$policySlug;	
 			$arrParams['policy_slug'] = $policySlug;
 			$allVariantTypes = Util::getControllerForPolicyVariantFeatures($variantType);
 			$arrParams['feature_table'] = $allVariantTypes['feature_table'];
@@ -2830,6 +2841,10 @@ echo '=================>';
 					$data['company'] = reset($data['company']);
 					$data['companyDetails'] = reset($data['companyDetails']);
 					$data['policyDetails'] = reset($data['policyDetails']);
+					
+					//	update page view count
+					$updateCount = Util::incrementPageViewCount('policy_master', 'page_view_count','policy_id',$data['policyDetails']['policy']['policy_id']);
+					
 					$claimParams = array('year_to'=>date('Y'),'company_id'=>'', 'company_type_id'=>$data['company']['company_type_id']);
 					//$claimRatio = Util::getCompanyClaimRatio(array('year_to'=>"2013",'company_id'=>'', 'company_type_id'=>''));
 					$claimRatio = Util::getCompanyClaimRatio($claimParams);			
@@ -2846,6 +2861,8 @@ echo '=================>';
 			        $data['title'] = $data['policyDetails']['policy']['seo_title'];
 			        $data['keywords'] = $data['policyDetails']['policy']['seo_keywords'];
 			        $data['description'] = $data['policyDetails']['policy']['seo_description'];
+			        $data['socialSeoData'] = Util::getSocialMediaSeoData($data['policyDetails']['policy'], $url);
+			        $data['url'] = $url;
 				}
 //				Util::saveResultToCache($cacheFileName,$data);
 			}
@@ -2982,6 +2999,61 @@ echo '=================>';
 				}             
 		$html .=	'</table>';
 		return $html;
+	}
+	
+	public static function incrementPageViewCount($tableName = '', $updateFieldName = 'page_view_count', $whereFieldName = '',$whereFieldValue = '', $count = '')
+	{
+		if (!empty($tableName))
+		{
+			$arrParams = array();
+			
+			$dbPrefix = Util::getDbPrefix();
+			$pos = strpos($tableName, $dbPrefix);
+			if ($pos === false)
+				$tableName = $dbPrefix.$tableName; 
+				
+			$arrParams['tableName'] = $tableName;
+			$arrParams['updateFieldName'] = $updateFieldName;
+			$arrParams['whereFieldName'] = $whereFieldName;
+			$arrParams['whereFieldValue'] = $whereFieldValue;
+			$arrParams['countValue'] = $count;
+
+			return Util::callStoreProcedure('sp_incrementPageViewCount', $arrParams);
+		}
+	}
+	
+	public static function getSocialMediaSeoData($record = array(), $url = '')
+	{
+		$data = '';
+		if (!empty($record))
+		{
+			$ci =& get_instance();
+			$micLogo = $ci->config->config['url_path']['company']['companyLogoUrlLarge'];
+			if (empty($url))
+				$url = $ci->util->getUrl();
+			//	twitter
+			$data .=	'<meta name="twitter:card" content="policy">
+				        <meta name="twitter:site" content="@myinsuranceclub">
+				        <meta name="twitter:creator" content="@myinsuranceclub">
+				        <meta name="twitter:title" content="'.$record['seo_title'].'">
+				        <meta name="twitter:description" content="'.$record['seo_description'].'">
+				        <meta name="twitter:image" content="'.$micLogo.'">
+				        <meta name="twitter:data1" content="Rating">
+				        <meta name="twitter:label1" content="'.$record['rating_value'].'">
+				        <meta name="twitter:data2" content="Views">
+				        <meta name="twitter:label2" content="'.($record['page_view_count'] + 1).'">';
+			//	facebook
+			$data .=	'<meta property="og:title" content="'.$record['seo_title'].'"/>
+			            <meta property="og:type" content="myinsuranceclubcom:policy comparision"/>
+			            <meta property="og:url" content="'.$url.'"/>
+			            <meta property="fb:app_id" content="288523881080"/>
+			            <meta property="og:site_name" content="MyInsuranceClub"/>
+			            <meta property="og:description" content="'.$record['seo_description'].'"/>
+			            <meta property="og:image" content="'.$micLogo.'"/>
+			            <meta property="og:locale" content="en_US" />
+			            ';
+		}
+		return $data;
 	}
 }
 

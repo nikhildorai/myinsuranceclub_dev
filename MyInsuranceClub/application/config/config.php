@@ -387,6 +387,7 @@ $config['pagination']['full_tag_close'] 	=	'</div>';
 //	upload url path
 $config['url_path']['temp']			 				= $config['base_url'].'uploads/temp/';
 $config['url_path']['company']['all'] 				= $config['base_url'].'uploads/company/';
+$config['url_path']['company']['companyLogoUrlLarge']= $config['base_url'].'uploads/company/company_logo_1000x399.jpg';
 $config['url_path']['company']['companyPageLogo'] 	= $config['base_url'].'uploads/company/company_page_172x68/';
 $config['url_path']['company']['partnerLogo'] 		= $config['base_url'].'uploads/company/partner_logo_147x107/';
 $config['url_path']['company']['searchResultLogo'] 	= $config['base_url'].'uploads/company/search_result_80x50/';
@@ -404,6 +405,7 @@ $config['url_path']['policy']['policy_wordings_thumbnail'] 	= $config['base_url'
 //	upload folder paths
 $config['folder_path']['temp']			 				= realpath(APPPATH . '../uploads').'/temp/';
 $config['folder_path']['company']['all'] 				= realpath(APPPATH . '../uploads').'/company/';
+$config['folder_path']['company']['companyLogoUrlLarge']= realpath(APPPATH . '../uploads').'/company/company_logo_1000x399.png';
 $config['folder_path']['company']['companyPageLogo'] 	= realpath(APPPATH . '../uploads').'/company/company_page_172x68/';
 $config['folder_path']['company']['partnerLogo'] 		= realpath(APPPATH . '../uploads').'/company/partner_logo_147x107/';
 $config['folder_path']['company']['searchResultLogo'] 	= realpath(APPPATH . '../uploads').'/company/search_result_80x50/';

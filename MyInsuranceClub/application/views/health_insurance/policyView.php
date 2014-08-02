@@ -17,8 +17,8 @@
 				<div class="top_col border-box-1 radius2" style="min-height: 515px;">
 					<header class="share-header"> <aside class="shares social">
 					<div class="total-shares" data-index="0">
-						<em>22,247</em>
-						<div class="caption">Views</div>
+						<em><?php echo number_format($policyDetails['policy']['page_view_count']+1);?></em>
+						<div class="caption">View<?php echo ((int)$policyDetails['policy']['page_view_count']+1 > 1) ? 's' : '';?></div>
 					</div>
 					<div class="total-shares" data-index="0">
 						<em>424</em>
@@ -28,16 +28,18 @@
 						<div class="share-container">
 							<div class="share-count">2.5k</div>
 							<div class="primary-shares">
-								<a class="social-share facebook fa fa-facebook-square"> <span
-									class="expanded-text">Share on Facebook</span> </a> <a
-									class="social-share twitter fa fa-twitter"> <span
-									class="alt-text">Tweet</span> <span class="expanded-text">Share
-										on Twitter</span> </a>
+								<a class="social-share facebook fa fa-facebook-square" href="http://www.facebook.com/sharer/sharer.php?u=<?php echo $url;?>" target="_blank"> 
+									<span class="expanded-text">Share on Facebook</span> 
+								</a> 
+								<a class="social-share twitter fa fa-twitter" href="http://twitter.com/share?url=<?php $url?>" target="_blank"> 
+									<span class="alt-text">Tweet</span> 
+									<span class="expanded-text">Share on Twitter</span> 
+								</a>
 								<div class="share-toggle fa fa-plus"></div>
 							</div>
 							<div class="secondary-shares">
-								<a class="social-share google_plus fa fa-google-plus"></a> <a
-									class="social-share linked_in fa fa-linkedin-square"></a>
+								<a class="social-share google_plus fa fa-google-plus" href="https://plus.google.com/share?url=<?php echo $url;?>" target="_blank"></a> 
+								<a class="social-share linked_in fa fa-linkedin-square" href="http://www.linkedin.com/shareArticle?url=<?php echo $url;?>" target="_blank"></a>
 								<div class="secondary-share-toggle fa fa-minus"></div>
 							</div>
 						</div>
@@ -1399,25 +1401,17 @@
 							style="display: none;">-</div>
 
 					</div>
-					<div data-za-intent="raterestaurant.post" data-za-events="click"
-						class="rating-widget-stars left">
-						<div data-rating="0" data-originalclass="user_starssel_0"
-							class="rating-cls user_starssel_0">
-							<a data-hover-rating="1.0" data-num="2" class="level-1"
-								href="javascript:void(0);">&nbsp;</a> <a data-hover-rating="1.5"
-								data-num="3" class="level-2" href="javascript:void(0);">&nbsp;</a>
-							<a data-hover-rating="2.0" data-num="4" class="level-3"
-								href="javascript:void(0);">&nbsp;</a> <a data-hover-rating="2.5"
-								data-num="5" class="level-4" href="javascript:void(0);">&nbsp;</a>
-							<a data-hover-rating="3.0" data-num="6" class="level-5"
-								href="javascript:void(0);">&nbsp;</a> <a data-hover-rating="3.5"
-								data-num="7" class="level-6" href="javascript:void(0);">&nbsp;</a>
-							<a data-hover-rating="4.0" data-num="8" class="level-7 big"
-								href="javascript:void(0);">&nbsp;</a> <a d
-								data-hover-rating="4.5" data-num="9" class="level-8 big"
-								href="javascript:void(0);">&nbsp;</a> <a data-hover-rating="5.0"
-								data-num="10" class="level-9 big bigger"
-								href="javascript:void(0);">&nbsp;</a>
+					<div data-za-intent="raterestaurant.post" data-za-events="click" class="rating-widget-stars left" id="ratingDivParent">
+						<div data-rating="0" data-originalclass="user_starssel_0" class="rating-cls user_starssel_0">
+							<a id="rating-id-1" data-hover-rating="1.0" data-num="2" class="level-1 ratingSystem ratingHover" href="javascript:void(0);">&nbsp;</a> 
+							<a id="rating-id-2" data-hover-rating="1.5" data-num="3" class="level-2 ratingSystem ratingHover" href="javascript:void(0);">&nbsp;</a>
+							<a id="rating-id-3" data-hover-rating="2.0" data-num="4" class="level-3 ratingSystem ratingHover" href="javascript:void(0);">&nbsp;</a> 
+							<a id="rating-id-4" data-hover-rating="2.5" data-num="5" class="level-4 ratingSystem ratingHover" href="javascript:void(0);">&nbsp;</a>
+							<a id="rating-id-5" data-hover-rating="3.0" data-num="6" class="level-5 ratingSystem ratingHover" href="javascript:void(0);">&nbsp;</a> 
+							<a id="rating-id-6" data-hover-rating="3.5" data-num="7" class="level-6 ratingSystem ratingHover" href="javascript:void(0);">&nbsp;</a>
+							<a id="rating-id-7" data-hover-rating="4.0" data-num="8" class="level-7 ratingSystem ratingHover big" href="javascript:void(0);">&nbsp;</a> 
+							<a id="rating-id-8" data-hover-rating="4.5" data-num="9" class="level-8 ratingSystem ratingHover big" href="javascript:void(0);">&nbsp;</a> 
+							<a id="rating-id-9" data-hover-rating="5.0" data-num="10" class="level-9 ratingSystem ratingHover big bigger" href="javascript:void(0);">&nbsp;</a>
 						</div>
 					</div>
 				</div>
@@ -1425,9 +1419,9 @@
 
 				<div class="tot_votes">
 					<div class="avg_vote">
-						<span>4.0</span><span class="sm">/5</span>
+						<span id="ratingValueId"><?php echo (!empty($policyDetails['policy']['rating_value']) && $policyDetails['policy']['rating_value'] != 0) ? number_format($policyDetails['policy']['rating_value'], 1) : 0;?></span><span class="sm">/5</span>
 					</div>
-					<div class="tot_votes_m">based on 2476 Votes</div>
+					<div class="tot_votes_m">based on <?php echo number_format($policyDetails['policy']['rating_click_count'])?> Votes</div>
 				</div>
 			</div>
 
@@ -1447,10 +1441,10 @@
 			<div class="col-md-12">
 			
 			<?php 							
-				$arrParams['disqus_identifier'] = base_url().'admin/guides/create/1';  
-				$arrParams['disqus_url'] = base_url().'admin/guides/create/1';
-				$arrParams['disqus_title'] = "test guide";
-				$arrParams['disqus_category_id'] = '3125046';
+				$arrParams['disqus_identifier'] = $disqusUrl;  
+				$arrParams['disqus_url'] = $disqusUrl;
+				$arrParams['disqus_title'] = $policyDetails['policy']['policy_name'];
+		//		$arrParams['disqus_category_id'] = '3125046';
 		//	echo DisqusLib::displayDisqus($arrParams);
 										
 							/*		?>
@@ -1479,6 +1473,10 @@
 
 <?php 
 	}
+	else 
+	{
+		echo '<h1>No policy found</h1>';
+	}
 ?>
 	</div>
 </div>
@@ -1499,7 +1497,8 @@
 
 <script type="text/javascript">
 $('#tabs a').tabs();
-
+var record = "<?php echo $policyDetails['policy']['policy_slug'];?>";
+var ratingType = "policy";
 </script>
 
 

@@ -42,117 +42,54 @@ $(".secondary-share-toggle.fa.fa-minus").click(function() {
 });
 
 
+	$("#ratingDivParent").delegate(".ratingHover","hover", function(e){
+		if (e.type == 'mouseenter') 
+		{
+			var id = $(this).attr('id');
+			var ratingNum = $(this).data('num');
+			var hoverRating = $(this).data('hover-rating');
+			$(".rating-cls.user_starssel_0").addClass('user_stars2_2').removeClass('user_starssel_0');
+			for ( var j = ratingNum; j < 10; j++ ) {
+				$('#rating-id-'+j).addClass('level-0');
+			}
+			$(".rating-widget-num").show().text(hoverRating);
+	    } 
+		else 
+	    {
+			$(".rating-cls.user_stars2_2").addClass('user_starssel_0').removeClass('user_stars2_2');
+			for ( var j = 1; j < 10; j++ ) {
+				$('#rating-id-'+j).removeClass('level-0');
+			}
+			$(".rating-widget-num").hide().text('-');
+	    }
+	});
 
+	$("#ratingDivParent").delegate(".ratingSystem","click", function(e){
+		var id = $(this).attr('id');
+		var ratingNum = $(this).data('num');
+		var hoverRating = $(this).data('hover-rating');
+		var url = CI_ROOT+"common/rating";
+		var formData = {ratingNum:ratingNum, hoverRating:hoverRating, record:record, ratingType:ratingType };
 
-$(".level-1").hover(function(){
-        $(".rating-cls.user_starssel_0").addClass('user_stars2_2').removeClass('user_starssel_0');
-	 $(".level-2,.level-3,.level-4,.level-5,.level-6,.level-7,.level-8,.level-9").addClass('level-0');
-	 var rat = $(this).data("hover-rating");
-	 $(".rating-widget-num").show().text(rat);
-    }, function(){
-        
-		 $(".rating-cls.user_stars2_2").addClass('user_starssel_0').removeClass('user_stars2_2');
-		 $(".level-1,.level-2,.level-3,.level-4,.level-5,.level-6,.level-7,.level-8,.level-9").removeClass('level-0');
-		 $(".rating-widget-num").hide().text('-');
-    });
-	
-
-$(".level-2").hover(function(){
-        $(".rating-cls.user_starssel_0").addClass('user_stars2_2').removeClass('user_starssel_0');
-	 $(".level-3,.level-4,.level-5,.level-6,.level-7,.level-8,.level-9").addClass('level-0');
-	 var rat = $(this).data("hover-rating");
-	 $(".rating-widget-num").show().text(rat);
-    }, function(){
-        
-		 $(".rating-cls.user_stars2_2").addClass('user_starssel_0').removeClass('user_stars2_2');
-		 $(".level-1,.level-2,.level-3,.level-4,.level-5,.level-6,.level-7,.level-8,.level-9").removeClass('level-0');
-		 $(".rating-widget-num").hide().text('-');
-    });
-	
-	
-	$(".level-3").hover(function(){
-        $(".rating-cls.user_starssel_0").addClass('user_stars2_2').removeClass('user_starssel_0');
-	 $(".level-4,.level-5,.level-6,.level-7,.level-8,.level-9").addClass('level-0');
-	 var rat = $(this).data("hover-rating");
-	 $(".rating-widget-num").show().text(rat);
-    }, function(){
-        
-		 $(".rating-cls.user_stars2_2").addClass('user_starssel_0').removeClass('user_stars2_2');
-		 $(".level-1,.level-2,.level-3,.level-4,.level-5,.level-6,.level-7,.level-8,.level-9").removeClass('level-0');
-		 $(".rating-widget-num").hide().text('-');
-    });
-	
-	$(".level-4").hover(function(){
-        $(".rating-cls.user_starssel_0").addClass('user_stars2_2').removeClass('user_starssel_0');
-	 $(".level-5,.level-6,.level-7,.level-8,.level-9").addClass('level-0');
-	 var rat = $(this).data("hover-rating");
-	 $(".rating-widget-num").show().text(rat);
-    }, function(){
-        
-		 $(".rating-cls.user_stars2_2").addClass('user_starssel_0').removeClass('user_stars2_2');
-		 $(".level-1,.level-2,.level-3,.level-4,.level-5,.level-6,.level-7,.level-8,.level-9").removeClass('level-0');
-		 $(".rating-widget-num").hide().text('-');
-    });
-	
-	$(".level-5").hover(function(){
-        $(".rating-cls.user_starssel_0").addClass('user_stars2_2').removeClass('user_starssel_0');
-	 $(".level-6,.level-7,.level-8,.level-9").addClass('level-0');
-	 var rat = $(this).data("hover-rating");
-	 $(".rating-widget-num").show().text(rat);
-    }, function(){
-        
-		 $(".rating-cls.user_stars2_2").addClass('user_starssel_0').removeClass('user_stars2_2');
-		 $(".level-1,.level-2,.level-3,.level-4,.level-5,.level-6,.level-7,.level-8,.level-9").removeClass('level-0');
-		 $(".rating-widget-num").hide().text('-');
-    });
-	
-	$(".level-6").hover(function(){
-        $(".rating-cls.user_starssel_0").addClass('user_stars2_2').removeClass('user_starssel_0');
-	 $(".level-7,.level-8,.level-9").addClass('level-0');
-	 var rat = $(this).data("hover-rating");
-	 $(".rating-widget-num").show().text(rat);
-    }, function(){
-        
-		 $(".rating-cls.user_stars2_2").addClass('user_starssel_0').removeClass('user_stars2_2');
-		 $(".level-1,.level-2,.level-3,.level-4,.level-5,.level-6,.level-7,.level-8,.level-9").removeClass('level-0');
-		 $(".rating-widget-num").hide().text('-');
-    });
-	
-	$(".level-7").hover(function(){
-        $(".rating-cls.user_starssel_0").addClass('user_stars2_2').removeClass('user_starssel_0');
-	 $(".level-8,.level-9").addClass('level-0');
-	 var rat = $(this).data("hover-rating");
-	 $(".rating-widget-num").show().text(rat);
-    }, function(){
-        
-		 $(".rating-cls.user_stars2_2").addClass('user_starssel_0').removeClass('user_stars2_2');
-		 $(".level-1,.level-2,.level-3,.level-4,.level-5,.level-6,.level-7,.level-8,.level-9").removeClass('level-0');
-		 $(".rating-widget-num").hide().text('-');
-    });
-	
-	$(".level-8").hover(function(){
-        $(".rating-cls.user_starssel_0").addClass('user_stars2_2').removeClass('user_starssel_0');
-	 $(".level-9").addClass('level-0');
-	 var rat = $(this).data("hover-rating");
-	 $(".rating-widget-num").show().text(rat);
-    }, function(){
-        
-		 $(".rating-cls.user_stars2_2").addClass('user_starssel_0').removeClass('user_stars2_2');
-		 $(".level-1,.level-2,.level-3,.level-4,.level-5,.level-6,.level-7,.level-8,.level-9").removeClass('level-0');
-		 $(".rating-widget-num").hide().text('-');
-    });
-	
-	$(".level-9").hover(function(){
-        $(".rating-cls.user_starssel_0").addClass('user_stars2_2').removeClass('user_starssel_0');
-	 var rat = $(this).data("hover-rating");
-	 $(".rating-widget-num").show().text(rat);
-    }, function(){
-        
-		 $(".rating-cls.user_stars2_2").addClass('user_starssel_0').removeClass('user_stars2_2');
-		 $(".level-1,.level-2,.level-3,.level-4,.level-5,.level-6,.level-7,.level-8,.level-9").removeClass('level-0');
-		 $(".rating-widget-num").hide().text('-');
-    });
-
+		$(".rating-cls.user_starssel_0").addClass('user_stars2_2').removeClass('user_starssel_0');
+		for ( var j = ratingNum; j < 10; j++ ) {
+			$('#rating-id-'+j).addClass('level-0');
+		}
+		$(".rating-widget-num").show().text(hoverRating);
+		$('.ratingSystem').removeClass('ratingHover').removeClass('ratingSystem');
+		$.ajax({
+				url:url,
+				type: "post",
+				data: formData,
+				success:function(result)
+				{
+					result = $.parseJSON(result);
+					$('#ratingValueId').text(result.rating_value);
+					$('.tot_votes_m').html('based on '+result.rating_click_count);
+		    	}
+		});	
+		
+	});
 
 
 
@@ -239,9 +176,6 @@ $(window).scroll(function (event) {
 
     // whether that's below the form
     if (y >= ad_show_claim_top) {
-
-
-        console.log(y,ad_show_claim_top);
         
 		  if ( $('#ad_show_claim').hasClass( "one_time" ) ) {
 			  $('#ad_show_claim').removeClass('one_time');
