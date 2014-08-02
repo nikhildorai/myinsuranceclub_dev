@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/news.css">
-<style type="text/css">#blog-entry + .pagination { display: block; }</style>
-
+<style type="text/css">
+#blog-entry + .pagination {
+	display: block;
+}
+</style>
 
 <div id="highlighted" style="background:#f7f8fa; padding-bottom:50px; margin-bottom:0px;" >
   <div class="container">
@@ -238,39 +241,34 @@
         
         <!-- ENDAUTHOR WIDGET --> 
         
-        
-         <!-- START ARCHIVES WIDGET -->
+        <!-- START ARCHIVES WIDGET -->
         <aside id="tag_cloud-3" class="widget widget_tag_cloud">
           <h1 class="widget-title">Archives</h1>
           <div class="tagcloud">
             <ul id="authorlist" class="post-list">
-             <ul class="archives" id="archives">
-<li><a href="#">- July 2014 (13)</a></li>
-<li><a href="#">- June 2014 (43)</a></li>
-<li><a href="#">- May 2014 (11)</a></li>
-<li><a href="#">- August 2013 (19)</a></li>
-<li><a href="#">- July 2013 (17)</a></li>
-<li><a href="#">- June 2013 (15)</a></li>
-<li><a href="#">- February 2013 (23)</a></li>
-</ul>
+              <ul class="archives" id="archives">
+                <li><a href="#">- July 2014 (13)</a></li>
+                <li><a href="#">- June 2014 (43)</a></li>
+                <li><a href="#">- May 2014 (11)</a></li>
+                <li><a href="#">- August 2013 (19)</a></li>
+                <li><a href="#">- July 2013 (17)</a></li>
+                <li><a href="#">- June 2013 (15)</a></li>
+                <li><a href="#">- February 2013 (23)</a></li>
+              </ul>
             </ul>
           </div>
         </aside>
         
         <!-- END ARCHIVES WIDGET --> 
         
-        
-        
-          <!-- START AD WIDGET -->
+        <!-- START AD WIDGET -->
         <aside id="" class="widget widget_ad">
           <div class="tagcloud">
-            <div class="banner-widget1-1">
-            <a href="#" target="_blank"><img src="assets/images/ad/banner-large.png" alt="banner" style="opacity: 1; margin:0px 0px 10px 10px;"></a></div>
+            <div class="banner-widget1-1"> <a href="#" target="_blank"><img src="assets/images/ad/banner-large.png" alt="banner" style="opacity: 1; margin:0px 0px 10px 10px;"></a></div>
           </div>
         </aside>
         
         <!-- END AD WIDGET --> 
-        
         
       </div>
       <!-- .col-md-12 --> 

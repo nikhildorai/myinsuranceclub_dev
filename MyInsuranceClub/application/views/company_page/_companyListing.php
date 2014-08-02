@@ -1,4 +1,3 @@
-
 <?php 
 		if (!empty($companyDetails))
 		{
@@ -9,12 +8,10 @@
 				$imgUrl = $fileUrl.'logo_missing_147x107.jpg';
 				if (!empty($v1['logo_image_partner']) && file_exists($folderUrl.$v1['logo_image_partner']))
 					$imgUrl = $fileUrl.$v1['logo_image_partner'];	?>
-				
-		        <div class="col-md-3">
-		         <div class="view view-fifth">
-		                    <img src="<?php echo $imgUrl;?>" />
 
-		                    <?php 							if (!empty($v1['slug'])) 
+<div class="col-md-3">
+  <div class="view view-fifth"> <img src="<?php echo $imgUrl;?>" />
+    <?php 							if (!empty($v1['slug'])) 
 								{
 									if ($v1['company_type_slug'] == 'life-insurance')
 										$url = base_url().'life-insurance/companies/'.$v1['slug'].'/';
@@ -22,19 +19,14 @@
 										$url = base_url().'general-insurance-companies/'.$v1['slug'];
 								}
 
-	?>	
-		                  <a href="<?php echo (!empty($v1['slug'])) ? $url : 'javascript:void(0);';?>" > 
-
-		                   <div class="mask">
-		                        <h2><?php echo $v1['company_shortname']?></h2>
-
-		                        	<span class="info">Know more <br/>Company & Plan Details</span>
-
-		                    </div>
-
-		                    </a>
-		                </div>
-		        </div>
+	?>
+    <a href="<?php echo (!empty($v1['slug'])) ? $url : 'javascript:void(0);';?>" >
+    <div class="mask">
+      <h2><?php echo $v1['company_shortname']?></h2>
+      <span class="info">Know more <br/>
+      Company & Plan Details</span> </div>
+    </a> </div>
+</div>
 <?php 		}
 		}
-?>      
+?>

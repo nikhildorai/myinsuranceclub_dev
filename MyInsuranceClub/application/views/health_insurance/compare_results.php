@@ -7,57 +7,48 @@
 	$param = "yes";
 ?>
 <div id="page-wrap" class="container" style="margin-bottom: 100px;">
-	<div class="smart-grids">
-		<div class="smart-wrapper">
-			<div class="back_to">
-				<i class="fa fa-angle-left arrow_left"></i>
-				<a href="<?php echo base_url().'health-insurance/search-results/'.$param ?>">Back to Search Results</a>
-			</div>
-			<div class="difference">
-				<div class="checkbox">
-					<label class="highlightDiff"> 
-						<input id="Field4" name="agree" type="checkbox" class="field checkbox" value="agree"> 
-						<label for="Field4" class="">Highlight Differences</label> 
-					</label>
-				</div>
-			</div>
-			<div class="smart-pricing">
-				<div class="pricing-tables elegant-style four-colm">
-<?php 
+  <div class="smart-grids">
+    <div class="smart-wrapper">
+      <div class="back_to"> <i class="fa fa-angle-left arrow_left"></i> <a href="<?php echo base_url().'health-insurance/search-results/'.$param ?>">Back to Search Results</a> </div>
+      <div class="difference">
+        <div class="checkbox">
+          <label class="highlightDiff">
+          <input id="Field4" name="agree" type="checkbox" class="field checkbox" value="agree">
+          <label for="Field4" class="">Highlight Differences</label>
+          </label>
+        </div>
+      </div>
+      <div class="smart-pricing">
+        <div class="pricing-tables elegant-style four-colm">
+          <?php 
 				if (!empty($result))
 				{	
 					$resultCount = count($result['company_shortname']);
 					?>
-					<table>
-						<thead>
-							<tr>
-								<th style="background: #fff; color: #000; padding: 0; border: none;" class="colm">
-									<div class="pricing-header ann">
-										<h2>
-											<span>Annual Premium</span>
-										</h2>
-									</div>
-								</th>
-<?php 
+          <table>
+            <thead>
+              <tr>
+                <th style="background: #fff; color: #000; padding: 0; border: none;" class="colm"> <div class="pricing-header ann">
+                    <h2> <span>Annual Premium</span> </h2>
+                  </div>
+                </th>
+                <?php 
 								for ($i = 0; $i < $resultCount; $i++)
-								{	?>			
-									<th style="background: none; padding: 0px; border: none;" class="colm">
-										<div class="pricing-header header-colored">
-											<h1 class="<?php echo $arrHeaderColorLite[$i];?>">
-												<?php echo $result['company_shortname'][$i];	?>
-												<p class="smart_p"><?php echo $result['policy_name'][$i];	?></p>
-											</h1>
-											<h2 class="<?php echo $arrHeaderColorDark[$i];?>">
-												<span>&#8377;<?php echo number_format($result['annual_premium'][$i]);	?></span>
-												<!--<p class="signup"><a href="#" class="btn_offer_block">Buy Now <i class="fa fa-angle-right"></i></a></p>-->
-											</h2>
-										</div>
-									</th>
-<?php 							}	?>	
-							</tr>
-						</thead>
-						<tbody>
-<?php 
+								{	?>
+                <th style="background: none; padding: 0px; border: none;" class="colm"> <div class="pricing-header header-colored">
+                    <h1 class="<?php echo $arrHeaderColorLite[$i];?>"> <?php echo $result['company_shortname'][$i];	?>
+                      <p class="smart_p"><?php echo $result['policy_name'][$i];	?></p>
+                    </h1>
+                    <h2 class="<?php echo $arrHeaderColorDark[$i];?>"> <span>&#8377;<?php echo number_format($result['annual_premium'][$i]);	?></span> 
+                      <!--<p class="signup"><a href="#" class="btn_offer_block">Buy Now <i class="fa fa-angle-right"></i></a></p>--> 
+                    </h2>
+                  </div>
+                </th>
+                <?php 							}	?>
+              </tr>
+            </thead>
+            <tbody>
+              <?php 
 						$return = '';
 						$featureList = Util::featureList('Mediclaim');
 						$featureKeys = array_keys($featureList);
@@ -129,31 +120,29 @@
 							}
 						}
 						echo $return;
-?>						
-								<tr>
-									<td class="colm" style="background: #fff; border: none; padding: 5px;"></td>
-<?php 
+?>
+              <tr>
+                <td class="colm" style="background: #fff; border: none; padding: 5px;"></td>
+                <?php 
 								for ($i = 0; $i < $resultCount; $i++)
-								{	?>				
-									<td class="colm" style="padding: 20px;">
-										<div class="pricing-footer" style="border: none; padding: 0px;">
-											<button type="button" class="pricing-button <?php echo $arrBuyBtnColor[$i];?> grad-button">Buy Now</button>
-										</div>
-									</td>
-<?php 							}	?>			
-								</tr>
-						</tbody>
-					</table>
-<?php 			}
+								{	?>
+                <td class="colm" style="padding: 20px;"><div class="pricing-footer" style="border: none; padding: 0px;">
+                    <button type="button" class="pricing-button <?php echo $arrBuyBtnColor[$i];?> grad-button">Buy Now</button>
+                  </div></td>
+                <?php 							}	?>
+              </tr>
+            </tbody>
+          </table>
+          <?php 			}
 				else 
 				{
 					echo 'No policy selected';
 				}
-?>				
-				</div>
-			</div>
-		</div>
-	</div>
+?>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <style>
 <!--
@@ -169,7 +158,7 @@ color: green;
 -->
 </style>
 <script
-	type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.qtip.js"></script>
+	type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.qtip.js"></script> 
 <script type="text/javascript">
 $(function() {
 	$('.highlightDiff').click(function(e){

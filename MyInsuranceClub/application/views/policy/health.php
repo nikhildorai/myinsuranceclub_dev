@@ -1,8 +1,6 @@
-
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/animate.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/pages.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/pdf.css">
-
 
 <div id="highlighted" style="background:#fff; padding-bottom:50px; margin-bottom:0px;" >
   <div class="container">
@@ -37,7 +35,6 @@
               <div class="col-5" style="margin-top:20px;">
                 <table class="table table-bordered table-striped" id="description_details" itemprop="breadcrumb">
                   <tbody>
-                    
                     <tr>
                       <td>Product Type</td>
                       <td class="value">Life Insurance</td>
@@ -46,7 +43,6 @@
                       <td>Sub Product Type:</td>
                       <td class="value">Term Insurance</td>
                     </tr>
-                    
                     <tr>
                       <td>UIN</td>
                       <td class="value">101N080V02</td>
@@ -101,67 +97,52 @@
         </div>
       </div>
     </div>
-    
-    
-    
-    
-    
-    
     <div class="row">
       <div class="col-sm-12">
         <h2 class="lined-heading"><span>Plan Variants in HDFC Click 2 Protect</span></h2>
       </div>
       <div class="col-sm-12">
         <ul id="filters">
-<li><a href="#"  rel="category tag" class="active">Aviva iLife Term Plan</a></li>
-              <li>/</li>
-<li><a href="#" data-filter="*">IndiaFirst Anytime Plan</a></li>
-              <li>/</li>
-<li><a href="#" data-filter="*">Aegon Religare i-Term plan</a></li>
-              <li>/</li>
-<li><a href="#" data-filter="*">HDFC Life Click2Protect</a></li>
-              <li>/</li>
-<li><a href="#" data-filter="*">Kotak eTerm Plan</a></li>
-              <li>/</li>
-<li><a href="#" data-filter="*">Future Generali Smart Life</a></li>
-              
-
-              
-            </ul>
+          <li><a href="#"  rel="category tag" class="active">Aviva iLife Term Plan</a></li>
+          <li>/</li>
+          <li><a href="#" data-filter="*">IndiaFirst Anytime Plan</a></li>
+          <li>/</li>
+          <li><a href="#" data-filter="*">Aegon Religare i-Term plan</a></li>
+          <li>/</li>
+          <li><a href="#" data-filter="*">HDFC Life Click2Protect</a></li>
+          <li>/</li>
+          <li><a href="#" data-filter="*">Kotak eTerm Plan</a></li>
+          <li>/</li>
+          <li><a href="#" data-filter="*">Future Generali Smart Life</a></li>
+        </ul>
       </div>
     </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="row">
       <div class="col-sm-12">
         <h2 class="lined-heading"><span>Sample Premium for HDFC Life Click 2 Protect Policy</span></h2>
       </div>
       <div class="col-sm-12">
         <div id="pricing-table" >
-          
           <div class="sam_h">
-  <div class="c_am"><i class="fa fa-life-ring"></i>
-    <div class="c_text"><div class="c_text_m">Cover Amount </div>= 50 Lakhs</div>
-  </div>
-  <div class="c_am"><i class="fa fa-calendar"></i>
-    <div class="c_text1"><div class="c_text_m">Policy Term </div>= 25 Years</div>
-  </div>
-  <div class="c_am"><i class="fa fa-male"></i>
-    <div class="c_text2"><div class="c_text_m">Gender </div>= Male</div>
-  </div>
-  <div class="c_am"><i class="fa fa-smile-o"></i>
-    <div class="c_text3">Healthy, Non-Smoker</div>
-  </div>
-</div>
-          
-          
+            <div class="c_am"><i class="fa fa-life-ring"></i>
+              <div class="c_text">
+                <div class="c_text_m">Cover Amount </div>
+                = 50 Lakhs</div>
+            </div>
+            <div class="c_am"><i class="fa fa-calendar"></i>
+              <div class="c_text1">
+                <div class="c_text_m">Policy Term </div>
+                = 25 Years</div>
+            </div>
+            <div class="c_am"><i class="fa fa-male"></i>
+              <div class="c_text2">
+                <div class="c_text_m">Gender </div>
+                = Male</div>
+            </div>
+            <div class="c_am"><i class="fa fa-smile-o"></i>
+              <div class="c_text3">Healthy, Non-Smoker</div>
+            </div>
+          </div>
           <div  class="sam_c">
             <div class="plan  col-sm-3" id="most-popular1">
               <h3>Age = 25 Years<span style="
@@ -170,7 +151,6 @@
 ">&#8377;8,400</span></h3>
               <ul>
               </ul>
-             
             </div>
             <div class="plan  col-sm-3">
               <h3>Age = 35 Years<span>&#8377;5,400</span></h3>
@@ -278,38 +258,31 @@
       </div>
       <table cellspacing="0"  class="eligibility">
         <tr>
-          <th class="spec"  scope="row" width="234" valign="top" style="border-top: 1px solid #c1dad7">Accidental Death Benefit
-            </th>
+          <th class="spec"  scope="row" width="234" valign="top" style="border-top: 1px solid #c1dad7">Accidental Death Benefit </th>
           <td width="504" valign="top" style="border-top: 1px solid #c1dad7">-</td>
         </tr>
         <tr>
-          <th class="specalt"  scope="row" width="234" valign="top">Accidental Dismemberment Benefit
-            </th>
+          <th class="specalt"  scope="row" width="234" valign="top">Accidental Dismemberment Benefit </th>
           <td width="504" valign="top">-</td>
         </tr>
         <tr>
-          <th class="spec"  scope="row" width="234" valign="top">Waiver of Premium
-            </th>
+          <th class="spec"  scope="row" width="234" valign="top">Waiver of Premium </th>
           <td width="504" valign="top">-</td>
         </tr>
         <tr>
-          <th class="specalt"  scope="row" width="234" valign="top">Critical illness
-            </th>
+          <th class="specalt"  scope="row" width="234" valign="top">Critical illness </th>
           <td width="504" valign="top">-</td>
         </tr>
         <tr>
-          <th class="spec"  scope="row" width="234" valign="top">Family Income Benefit
-            </th>
+          <th class="spec"  scope="row" width="234" valign="top">Family Income Benefit </th>
           <td width="504" valign="top">-</td>
         </tr>
         <tr>
-          <th class="specalt"  scope="row" width="234" valign="top">Accelerated Sum Assured
-            </th>
+          <th class="specalt"  scope="row" width="234" valign="top">Accelerated Sum Assured </th>
           <td width="504" valign="top">-</td>
         </tr>
         <tr>
-          <th class="spec"  scope="row" width="234" valign="top">Hospital Cash Benefit
-            </th>
+          <th class="spec"  scope="row" width="234" valign="top">Hospital Cash Benefit </th>
           <td width="504" valign="top">-</td>
         </tr>
       </table>
@@ -323,15 +296,10 @@
           <div class="htabs col-lg-3 col-md-3 col-sm-12 col-xs-12" id="tabs"> <a href="#tab-a" class="selected">Claims Ratio </a> <a href="#tab-b" class="">Surrender Policy</a> <a href="#tab-c" class="">Revive Policy</a> <a href="#tab-d" class="">Loan</a> <a href="#tab-e" class="">About Company</a> </div>
           <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
             <div class="tab-content box-description" id="tab-a" style="display: block;">
-             
-             <div class="form-add">
-                  <h2>Claims Settlement Ratio in 2013-14</h2>
-                  
-                  
-                  <div id="claims_ratio1" style="min-width:50%; height: 400px; margin: 0 auto"></div>
-                </div>
-             
-              
+              <div class="form-add">
+                <h2>Claims Settlement Ratio in 2013-14</h2>
+                <div id="claims_ratio1" style="min-width:50%; height: 400px; margin: 0 auto"></div>
+              </div>
             </div>
             <div class="tab-content box-additional" id="tab-b" style="display: none;">
               <h2>Surrender Policy</h2>
@@ -353,10 +321,10 @@
             <div class="tab-content" id="tab-e" style="display: none;">
               <div id="customer-reviews" class="box-collateral box-reviews">
                 <h2>About Company</h2>
-              <div class="std"> Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.
-                Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim. </div>
-              <br class="clear clr">
+                <div class="std"> Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.
+                  Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                  Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim. </div>
+                <br class="clear clr">
               </div>
             </div>
           </div>
@@ -375,39 +343,36 @@
   <option value="1">1 Crore</option>
   
 </select></div>-->
-
-
-<div class=""><div class="wrapper-demo">
-					<div id="dd" class="wrapper-dropdown-1" tabindex="1">
-						<span>50 Lakhs</span>
-					    <ul class="dropdown" tabindex="1">
-                        <li><a href="#">50 Lakhs</a></li>
-					        <li><a href="#">1 Crore</a></li>
-					    </ul>
-					</div>
-				​</div>
           
-                
-                </div>
+          <div class="">
+            <div class="wrapper-demo">
+              <div id="dd" class="wrapper-dropdown-1" tabindex="1"> <span>50 Lakhs</span>
+                <ul class="dropdown" tabindex="1">
+                  <li><a href="#">50 Lakhs</a></li>
+                  <li><a href="#">1 Crore</a></li>
+                </ul>
+              </div>
+              ​</div>
+          </div>
         </div>
         <div class="wid_25">
           <div class="h_w">Term</div>
-          <div class=""><div class="wrapper-demo">
-					<div id="dd1" class="wrapper-dropdown-1" tabindex="1">
-						<span>25 Years</span>
-					    <ul class="dropdown" tabindex="1">
-                        <li><a href="#">25 Years</a></li>
-					        <li><a href="#">30 Years</a></li>
-					    </ul>
-					</div>
-				​</div>
-                <!--<select id="c_term" class="form-control">
+          <div class="">
+            <div class="wrapper-demo">
+              <div id="dd1" class="wrapper-dropdown-1" tabindex="1"> <span>25 Years</span>
+                <ul class="dropdown" tabindex="1">
+                  <li><a href="#">25 Years</a></li>
+                  <li><a href="#">30 Years</a></li>
+                </ul>
+              </div>
+              ​</div>
+            <!--<select id="c_term" class="form-control">
   <option value="25">25 Years</option>
   <option value="35">35 Years</option>
   
-</select>-->
-                
-                </div>
+</select>--> 
+            
+          </div>
         </div>
         <div class="wid_25">
           <div class="h_w">Age</div>
@@ -422,104 +387,88 @@
           <div class="c_w">Healthy, Non smoker</div>
         </div>
       </div>
-      <div class="col-sm-12 clearfix">
-<!--      <div class="com"  ><a class="btn_offer_block com_premium" id="com_premium_shw" href="javascript:void(0)">Compare <i class="fa fa-angle-right"></i></a></div></div>
--->      <div class="col-sm-12 clearfix count_shw" id="">
-
-
-      
-      <div class="col-md-12">
-      
-      
-      <div class="col-md-4 no_pad_lr">
-      <div class=" chartdiv clearfix" >
-      <div align="center"><img src="assets/images/company/hdfc.jpg" border="0"></div>
-      <div id="container" class="" style=" max-width:100%; height: 300px; margin: 0 auto"></div>
-      </div>
-      </div>
-      
-      <div class=" col-md-2 no_pad_lr chartdiv1">
-            <div align="center"><img src="assets/images/company/bharti-axa-general-insurance-company-small.jpg" border="0"></div>
-
-      <div id="container1"  class="chartdiv" style=" max-width: 100%;  height: 300px; margin: 0 auto"></div>
-      </div>
-      
-      
-      <div class="col-md-2 no_pad_lr chartdiv2">
-                  <div align="center"><img src="assets/images/company/l-t-general-insurance-company-small.jpg" border="0"></div>
-
-      <div id="container2"  class="chartdiv" style=" max-width: 100%; height: 300px; margin: 0 auto"></div>
-      </div>
-      
-      <div class="col-md-2 no_pad_lr chartdiv3">
-      <div align="center"><img src="assets/images/company/bajaj-allianz-general-insurance-company-small.jpg" border="0"></div>
-      <div id="container3"  class="chartdiv"  style=" max-width: 100%; height: 300px; margin: 0 auto"></div>
-      </div>
-      
-      <div class="col-md-2 no_pad_lr chartdiv4">
-      <div align="center"><img src="assets/images/company/tata-aig-general-insurance-company-small.jpg" border="0"></div>
-      <div id="container4"  class="chartdiv" style=" max-width: 100%; height: 300px; margin: 0 auto"></div>
-      </div>
-      </div>
-      
-      <div class="cal"><a class="btn_offer_block" href="javascript:void(0)">Calculate Your Premium <i class="fa fa-angle-right"></i></a></div>
-      
-      </div>
-      
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <h2 class="lined-heading" style="margin-top:90px;"><span>How much term insurance cover should I take?</span></h2>
-      </div>
-      <div class="block grey-lighter clearfix">
-        <div class="wrap">
-          <h2>Your Details</h2>
-          <div class="calculator-loan">
-            <div class="fifty form">
-              <div class="accrue-field-amount">
-                <p>
-                  <label>Annual Income:</label>
-                  <input type="text" value="1200" class="amount" id="la_value"  >
-                </p>
-              </div>
-              <div class="accrue-field-rate">
-                <p>
-                  <label>Age:</label>
-                  <input type="text" value="30" class="rate" id="nm_value">
-                </p>
-              </div>
-              <div class="accrue-field-term">
-                <p>
-                  <label>Amount of Cover from Existing Policies:</label>
-                  <input type="text" value="2000" class="term" id="roi_value">
-                </p>
+      <div class="col-sm-12 clearfix"> 
+        <!--      <div class="com"  ><a class="btn_offer_block com_premium" id="com_premium_shw" href="javascript:void(0)">Compare <i class="fa fa-angle-right"></i></a></div></div>
+-->
+        <div class="col-sm-12 clearfix count_shw" id="">
+          <div class="col-md-12">
+            <div class="col-md-4 no_pad_lr">
+              <div class=" chartdiv clearfix" >
+                <div align="center"><img src="assets/images/company/hdfc.jpg" border="0"></div>
+                <div id="container" class="" style=" max-width:100%; height: 300px; margin: 0 auto"></div>
               </div>
             </div>
-            <div class="fifty">
-              <p>
-                <label>Recommended Plan Parameters:</label>
-              </p>
-              <div class="results">
-                <p><strong>Cover Amount:</strong><br>
-                  <span class="r_c" id="emi">2,31,508</span></p>
-                <p><strong>Policy Term:</strong><br>
-                  <span class="r_c" id="months">30 Years</span></p>
-              </div>
+            <div class=" col-md-2 no_pad_lr chartdiv1">
+              <div align="center"><img src="assets/images/company/bharti-axa-general-insurance-company-small.jpg" border="0"></div>
+              <div id="container1"  class="chartdiv" style=" max-width: 100%;  height: 300px; margin: 0 auto"></div>
             </div>
-                 
-
+            <div class="col-md-2 no_pad_lr chartdiv2">
+              <div align="center"><img src="assets/images/company/l-t-general-insurance-company-small.jpg" border="0"></div>
+              <div id="container2"  class="chartdiv" style=" max-width: 100%; height: 300px; margin: 0 auto"></div>
+            </div>
+            <div class="col-md-2 no_pad_lr chartdiv3">
+              <div align="center"><img src="assets/images/company/bajaj-allianz-general-insurance-company-small.jpg" border="0"></div>
+              <div id="container3"  class="chartdiv"  style=" max-width: 100%; height: 300px; margin: 0 auto"></div>
+            </div>
+            <div class="col-md-2 no_pad_lr chartdiv4">
+              <div align="center"><img src="assets/images/company/tata-aig-general-insurance-company-small.jpg" border="0"></div>
+              <div id="container4"  class="chartdiv" style=" max-width: 100%; height: 300px; margin: 0 auto"></div>
+            </div>
           </div>
-           <div class="cal"><a class="btn_offer_block" href="javascript:void(0)">Compare plans for this cover <i class="fa fa-angle-right"></i></a></div>
-          <div class="clear"></div>
+          <div class="cal"><a class="btn_offer_block" href="javascript:void(0)">Calculate Your Premium <i class="fa fa-angle-right"></i></a></div>
         </div>
       </div>
-    </div>
-    <div class="row"  >
-      <div class="col-sm-12">
-        <h2 class="lined-heading"><span>HDFC Life Click 2 Protect Brochure</span></h2>
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="lined-heading" style="margin-top:90px;"><span>How much term insurance cover should I take?</span></h2>
+        </div>
+        <div class="block grey-lighter clearfix">
+          <div class="wrap">
+            <h2>Your Details</h2>
+            <div class="calculator-loan">
+              <div class="fifty form">
+                <div class="accrue-field-amount">
+                  <p>
+                    <label>Annual Income:</label>
+                    <input type="text" value="1200" class="amount" id="la_value"  >
+                  </p>
+                </div>
+                <div class="accrue-field-rate">
+                  <p>
+                    <label>Age:</label>
+                    <input type="text" value="30" class="rate" id="nm_value">
+                  </p>
+                </div>
+                <div class="accrue-field-term">
+                  <p>
+                    <label>Amount of Cover from Existing Policies:</label>
+                    <input type="text" value="2000" class="term" id="roi_value">
+                  </p>
+                </div>
+              </div>
+              <div class="fifty">
+                <p>
+                  <label>Recommended Plan Parameters:</label>
+                </p>
+                <div class="results">
+                  <p><strong>Cover Amount:</strong><br>
+                    <span class="r_c" id="emi">2,31,508</span></p>
+                  <p><strong>Policy Term:</strong><br>
+                    <span class="r_c" id="months">30 Years</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="cal"><a class="btn_offer_block" href="javascript:void(0)">Compare plans for this cover <i class="fa fa-angle-right"></i></a></div>
+            <div class="clear"></div>
+          </div>
+        </div>
       </div>
-      
-      <!--<div class="col-sm-12" style=" float: none;
+      <div class="row"  >
+        <div class="col-sm-12">
+          <h2 class="lined-heading"><span>HDFC Life Click 2 Protect Brochure</span></h2>
+        </div>
+        
+        <!--<div class="col-sm-12" style=" float: none;
     margin: 0 auto;
     width: 600px;">
       <div class="col-sm-3 text-center"><img src="assets/images/brch_1.jpg" border="0"></div>
@@ -527,235 +476,140 @@
       <div class="col-sm-3 text-center"><img src="assets/images/brch_3.jpg" border="0"></div>
       <div class="col-sm-3 text-center"><img src="assets/images/brch_4.jpg" border="0"></div>
       </div>-->
-      
-      
-      
-      
-      
-      <div class="col-sm-12" >
-      
-      <div class="sixteen columns"  >
-			
-							
-			<div class="portfolio clearfix">
-							
-			
-				
-				<ul class="list">
-				
-					
-					<li class="" data-content="#colio_c1">
-						<div class="thumb">
-							<div class="view">
-								<a class="button colio-link" href="#">View</a>
-							</div>
-							<img src="assets/images/brch_1.jpg" alt="Pic"/>
-						</div>
-						
-					</li>
-					
-				
-					
-					<li class="" data-content="#colio_c2">
-						<div class="thumb">
-							<div class="view">
-								<a class="button colio-link" href="#">View</a>
-							</div>
-							<img src="assets/images/brch_2.jpg" alt="Pic"/>
-						</div>
-					
-					</li>
-                    
-                    <li class="" data-content="#colio_c3">
-						<div class="thumb">
-							<div class="view">
-								<a class="button colio-link" href="#">View</a>
-							</div>
-							<img src="assets/images/brch_3.jpg" alt="Pic"/>
-						</div>
-					
-					</li>
-                    
-                    <li class="" data-content="#colio_c4">
-						<div class="thumb">
-							<div class="view">
-								<a class="button colio-link" href="#">View</a>
-							</div>
-							<img src="assets/images/brch_4.jpg" alt="Pic"/>
-						</div>
-					
-					</li>
-					
-					
-					
-				</ul><!-- list -->
-
-			</div><!-- portfolio -->
-			
-			
-			<!-- colio-content # colio_c1 -->
-		
-			<div id="colio_c1" class="colio-content">
-									
-				<div class="main">
-                    <div align="center">
-			
-            	<span class='zoom' >
-		<img src='assets/images/pdf/hdfclife_click_2_protect_plan_brochure-1.jpg' width="600" height="680"  alt=''/>
-	</span>
+        
+        <div class="col-sm-12" >
+          <div class="sixteen columns"  >
+            <div class="portfolio clearfix">
+              <ul class="list">
+                <li class="" data-content="#colio_c1">
+                  <div class="thumb">
+                    <div class="view"> <a class="button colio-link" href="#">View</a> </div>
+                    <img src="assets/images/brch_1.jpg" alt="Pic"/> </div>
+                </li>
+                <li class="" data-content="#colio_c2">
+                  <div class="thumb">
+                    <div class="view"> <a class="button colio-link" href="#">View</a> </div>
+                    <img src="assets/images/brch_2.jpg" alt="Pic"/> </div>
+                </li>
+                <li class="" data-content="#colio_c3">
+                  <div class="thumb">
+                    <div class="view"> <a class="button colio-link" href="#">View</a> </div>
+                    <img src="assets/images/brch_3.jpg" alt="Pic"/> </div>
+                </li>
+                <li class="" data-content="#colio_c4">
+                  <div class="thumb">
+                    <div class="view"> <a class="button colio-link" href="#">View</a> </div>
+                    <img src="assets/images/brch_4.jpg" alt="Pic"/> </div>
+                </li>
+              </ul>
+              <!-- list --> 
+              
             </div>
-					
-			
-					
-
-				</div>
-			</div>
+            <!-- portfolio --> 
             
+            <!-- colio-content # colio_c1 -->
+            
+            <div id="colio_c1" class="colio-content">
+              <div class="main">
+                <div align="center"> <span class='zoom' > <img src='assets/images/pdf/hdfclife_click_2_protect_plan_brochure-1.jpg' width="600" height="680"  alt=''/> </span> </div>
+              </div>
+            </div>
             <div id="colio_c2" class="colio-content">
-				<div class="main">
-                    <div align="center"><span class='zoom' ><img src="assets/images/pdf/hdfclife_click_2_protect_plan_brochure-2.jpg" width="600" height="680" border="0"></span></div>
-				</div>
-			</div>
-            
-               <div id="colio_c3" class="colio-content">
-				<div class="main">
-                    <div align="center"><span class='zoom' ><img src="assets/images/pdf/hdfclife_click_2_protect_plan_brochure-3.jpg" width="600" height="680" border="0"></span></div>
-				</div>
-			</div>
-            
-               <div id="colio_c4" class="colio-content">
-				<div class="main">
-                    <div align="center"><span class='zoom' ><img src="assets/images/pdf/hdfclife_click_2_protect_plan_brochure-4.jpg" width="600" height="680" border="0"></span></div>
-                    
-                   
-				</div>
-			</div>
-				
-		
-	
-</div>
-      
+              <div class="main">
+                <div align="center"><span class='zoom' ><img src="assets/images/pdf/hdfclife_click_2_protect_plan_brochure-2.jpg" width="600" height="680" border="0"></span></div>
+              </div>
+            </div>
+            <div id="colio_c3" class="colio-content">
+              <div class="main">
+                <div align="center"><span class='zoom' ><img src="assets/images/pdf/hdfclife_click_2_protect_plan_brochure-3.jpg" width="600" height="680" border="0"></span></div>
+              </div>
+            </div>
+            <div id="colio_c4" class="colio-content">
+              <div class="main">
+                <div align="center"><span class='zoom' ><img src="assets/images/pdf/hdfclife_click_2_protect_plan_brochure-4.jpg" width="600" height="680" border="0"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      
-      
-      
-      
-      
-      
-      
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <h2 class="lined-heading"><span>Lets see how you comapre</span></h2>
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="lined-heading"><span>Lets see how you comapre</span></h2>
+        </div>
+        <section class="">
+          <div class="" id="t0">
+            <div class="row-fluid">
+              <div class="col-md-6">
+                <div style="width: 100%; float: left" class="advpolls">
+                  <form method="post" class="advpolls-form">
+                    <h3 class="advpolls-title"> MIC Poll 1 </h3>
+                    <div class="advpolls-body">
+                      <div class="advpolls-question"> How much life insurance cover do yo have? </div>
+                      <div class="advpolls-answers">
+                        <ul>
+                          <li>
+                            <label>
+                              <input type="checkbox" value="1" name="answers[]">
+                              < 10 times your annual income. </label>
+                          </li>
+                          <li>
+                            <label>
+                              <input type="checkbox" value="2" name="answers[]">
+                              > 10 times your annual income. </label>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="advpolls-buttons">
+                      <input type="submit" value="Submit" class="btn btn-primary advpolls-vote">
+                      <a class="advpolls-showresult" href="javascript:void(0);"> View Results </a> </div>
+                    <input type="hidden" value="1" name="id">
+                    <input type="hidden" value="1" name="maxChoices">
+                  </form>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div style="width: 100%; float: left" class="advpolls">
+                  <form method="post" class="advpolls-form">
+                    <h3 class="advpolls-title"> MIC Poll 2 </h3>
+                    <div class="advpolls-body">
+                      <div class="advpolls-question"> Is internet your primary source of research for insurance? </div>
+                      <div class="advpolls-answers">
+                        <ul>
+                          <li>
+                            <label>
+                              <input type="checkbox" value="1" name="answers[]">
+                              Yes </label>
+                          </li>
+                          <li>
+                            <label>
+                              <input type="checkbox" value="2" name="answers[]">
+                              No </label>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="advpolls-buttons">
+                      <input type="submit" value="Submit" class="btn btn-primary advpolls-vote">
+                      <a class="advpolls-showresult" href="javascript:void(0);"> View Results </a> </div>
+                    <input type="hidden" value="1" name="id">
+                    <input type="hidden" value="1" name="maxChoices">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-      
-      <section class="">
-				<div class="" id="t0">
-<div class="row-fluid">
-	<div class="col-md-6">
-		
-
-<div style="width: 100%; float: left" class="advpolls">
-	<form method="post" class="advpolls-form">
-					<h3 class="advpolls-title">
-				MIC Poll 1			</h3>
-		
-		<div class="advpolls-body">
-			<div class="advpolls-question">
-				How much life insurance cover do yo have?			</div>
-			<div class="advpolls-answers">
-				<ul>
-											<li>
-							<label>
-								<input type="checkbox" value="1" name="answers[]">
-								< 10 times your annual income.							</label>
-						</li>
-											<li>
-							<label>
-								<input type="checkbox" value="2" name="answers[]">
-								> 10 times your annual income.							</label>
-						</li>
-										
-									</ul>
-			</div>
-		</div>
-		<div class="advpolls-buttons">
-			<input type="submit" value="Submit" class="btn btn-primary advpolls-vote">
-
-							<a class="advpolls-showresult" href="javascript:void(0);">
-					View Results
-				</a>
-					</div>
-
-		<input type="hidden" value="1" name="id">
-		<input type="hidden" value="1" name="maxChoices">
-	</form>
-</div>	</div>
-
-
-
-
-
-
-
-<div class="col-md-6">
-		
-
-<div style="width: 100%; float: left" class="advpolls">
-	<form method="post" class="advpolls-form">
-					<h3 class="advpolls-title">
-				MIC Poll 2	</h3>
-		
-		<div class="advpolls-body">
-			<div class="advpolls-question">
-				Is internet your primary source of research for insurance?			</div>
-			<div class="advpolls-answers">
-				<ul>
-											<li>
-							<label>
-								<input type="checkbox" value="1" name="answers[]">
-								Yes							</label>
-						</li>
-											<li>
-							<label>
-								<input type="checkbox" value="2" name="answers[]">
-								No							</label>
-						</li>
-										
-									</ul>
-			</div>
-		</div>
-		<div class="advpolls-buttons">
-			<input type="submit" value="Submit" class="btn btn-primary advpolls-vote">
-
-							<a class="advpolls-showresult" href="javascript:void(0);">
-					View Results
-				</a>
-					</div>
-
-		<input type="hidden" value="1" name="id">
-		<input type="hidden" value="1" name="maxChoices">
-	</form>
-</div>	</div>
-	
-	
-</div>
-
-						</div>
-					</section>
-      
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <h2 class="lined-heading"><span>Videos</span></h2>
-      </div>
-      <div class="col-md-12">
-
-        <div class="col-md-3"><img src="assets/images/video.jpg" border="0"></div>
-        <div class="col-md-3"><img src="assets/images/video.jpg" border="0"></div>
-        <div class="col-md-3"><img src="assets/images/video.jpg" border="0"></div>
-        <div class="col-md-3"><img src="assets/images/video.jpg" border="0"></div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="lined-heading"><span>Videos</span></h2>
+        </div>
+        <div class="col-md-12">
+          <div class="col-md-3"><img src="assets/images/video.jpg" border="0"></div>
+          <div class="col-md-3"><img src="assets/images/video.jpg" border="0"></div>
+          <div class="col-md-3"><img src="assets/images/video.jpg" border="0"></div>
+          <div class="col-md-3"><img src="assets/images/video.jpg" border="0"></div>
         </div>
       </div>
     </div>
@@ -763,52 +617,29 @@
       <div class="col-sm-12">
         <h2 class="lined-heading"><span>Is the information on this page useful to you?</span></h2>
       </div>
-      
       <div class="block light-blue clearfix">
-      <div class="grid_4 your-rating ratings-wrapper  clearfix">
-      <div class="rating-top">
-                <div class="grey-text ttupper bold left">Your Rating</div>
-                <div data-original-rating-num="-" class="rating-widget-num right " style="display: none;">-</div>
-                
-            </div>
-        <div data-za-intent="raterestaurant.post" data-za-events="click" class="rating-widget-stars left">
-          <div data-rating="0" data-originalclass="user_starssel_0" class="rating-cls user_starssel_0">
-          <a  data-hover-rating="1.0" data-num="2" class="level-1" href="javascript:void(0);">&nbsp;</a>
-          <a data-hover-rating="1.5" data-num="3" class="level-2" href="javascript:void(0);">&nbsp;</a>
-          <a  data-hover-rating="2.0" data-num="4" class="level-3" href="javascript:void(0);">&nbsp;</a>
-          <a  data-hover-rating="2.5" data-num="5" class="level-4" href="javascript:void(0);">&nbsp;</a>
-          <a  data-hover-rating="3.0" data-num="6" class="level-5" href="javascript:void(0);">&nbsp;</a>
-          <a  data-hover-rating="3.5" data-num="7" class="level-6" href="javascript:void(0);">&nbsp;</a>
-          <a  data-hover-rating="4.0" data-num="8" class="level-7 big" href="javascript:void(0);">&nbsp;</a>
-          <a d data-hover-rating="4.5" data-num="9" class="level-8 big" href="javascript:void(0);">&nbsp;</a>
-          <a  data-hover-rating="5.0" data-num="10" class="level-9 big bigger" href="javascript:void(0);">&nbsp;</a> 
+        <div class="grid_4 your-rating ratings-wrapper  clearfix">
+          <div class="rating-top">
+            <div class="grey-text ttupper bold left">Your Rating</div>
+            <div data-original-rating-num="-" class="rating-widget-num right " style="display: none;">-</div>
+          </div>
+          <div data-za-intent="raterestaurant.post" data-za-events="click" class="rating-widget-stars left">
+            <div data-rating="0" data-originalclass="user_starssel_0" class="rating-cls user_starssel_0"> <a  data-hover-rating="1.0" data-num="2" class="level-1" href="javascript:void(0);">&nbsp;</a> <a data-hover-rating="1.5" data-num="3" class="level-2" href="javascript:void(0);">&nbsp;</a> <a  data-hover-rating="2.0" data-num="4" class="level-3" href="javascript:void(0);">&nbsp;</a> <a  data-hover-rating="2.5" data-num="5" class="level-4" href="javascript:void(0);">&nbsp;</a> <a  data-hover-rating="3.0" data-num="6" class="level-5" href="javascript:void(0);">&nbsp;</a> <a  data-hover-rating="3.5" data-num="7" class="level-6" href="javascript:void(0);">&nbsp;</a> <a  data-hover-rating="4.0" data-num="8" class="level-7 big" href="javascript:void(0);">&nbsp;</a> <a d data-hover-rating="4.5" data-num="9" class="level-8 big" href="javascript:void(0);">&nbsp;</a> <a  data-hover-rating="5.0" data-num="10" class="level-9 big bigger" href="javascript:void(0);">&nbsp;</a> </div>
           </div>
         </div>
+        <div class="tot_votes">
+          <div class="avg_vote"><span>4.0</span><span class="sm">/5</span></div>
+          <div class="tot_votes_m">based on 2476 Votes</div>
+        </div>
       </div>
-      
-      
-      <div class="tot_votes">
-       <div class="avg_vote"><span>4.0</span><span class="sm">/5</span></div>
-       <div class="tot_votes_m">based on 2476 Votes</div>
-      </div>
-      </div>
-      
-      
     </div>
-    
-    
-    
-    
-    
-    
     <div class="row">
-    
-    <div class="col-sm-12">
+      <div class="col-sm-12">
         <h2 class="lined-heading"><span>Leave a Comment</span></h2>
       </div>
-    <div class="col-md-12">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
+      <div class="col-md-12">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'mictestram'; // required: replace example with your forum shortname
 
@@ -819,20 +650,13 @@
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    
+        <noscript>
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a> </div>
     </div>
-    </div>
-    
-    
   </div>
 </div>
-
-
-
-
-
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script> 
 <script src="assets/js/jquery.min.js"></script> 
 
@@ -847,27 +671,18 @@
 <script src="assets/js/jquery.slicknav.js"></script> 
 <!-- the jScrollPane script --> 
 <script src="assets/js/jquery-ui.min.js"></script> 
-
-
 <script src="assets/js/page.js"></script> 
 <script src="assets/js/site.js"></script> 
-<script src="assets/js/highcharts.js"></script>
-<script src="assets/js/highcharts-more.js"></script>
-<script src="assets/js/exporting.js"></script>
+<script src="assets/js/highcharts.js"></script> 
+<script src="assets/js/highcharts-more.js"></script> 
+<script src="assets/js/exporting.js"></script> 
 <script type="text/javascript">
 $('#tabs a').tabs();
-</script>
-
-
-
-  <script type="text/javascript" src="assets/js/jquery.scrollUp.min.js"></script>
-  <script type="text/javascript" src="assets/js/jquery.colio.min.js"></script>
-  
-  
-
-  <script src='assets/js/jquery.zoom.js'></script>
-  
-  <script type="text/javascript">
+</script> 
+<script type="text/javascript" src="assets/js/jquery.scrollUp.min.js"></script> 
+<script type="text/javascript" src="assets/js/jquery.colio.min.js"></script> 
+<script src='assets/js/jquery.zoom.js'></script> 
+<script type="text/javascript">
     $(document).ready(function(){
       //$('#zoom_image').finezoom();
       // "scrollTop" plugin
@@ -891,10 +706,7 @@ $('#tabs a').tabs();
       
       
     });
-  </script>
-    
-
-
+  </script> 
 <script type="text/javascript">
       
       function DropDown(el) {

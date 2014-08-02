@@ -18,7 +18,6 @@
     <div class="full-width">
       <div class="container" data-toggle="clingify">
         <div class="mdslo">India's 1st IRDA Approved Comparison Site</div>
-        
       </div>
     </div>
   </div>

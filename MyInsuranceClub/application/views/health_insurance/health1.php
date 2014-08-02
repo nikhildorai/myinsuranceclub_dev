@@ -1,30 +1,30 @@
-
-
 <?php $this->load->view('partial_view/header_new'); ?>
 
 <span id="o_touch"></span>
 <div class="min_height" style="height:auto; width:100%; ">
-<div id="highlighted" >
-  <div class="container">
-     <?php echo validation_errors();?>
-	<?php echo form_open('health-insurance/search-results',array('name'=>'health_form','id'=>'health_form','class'=>'health-form'));?>
+  <div id="highlighted" >
+    <div class="container"> <?php echo validation_errors();?> <?php echo form_open('health-insurance/search-results',array('name'=>'health_form','id'=>'health_form','class'=>'health-form'));?>
       <div class="col-md-12 center ">
         <div class="col-md-1"></div>
         <h1 class="col-md-11" style="text-align:center; margin-top:30px; width:100%;">Compare & Buy Health Insurance Plans</h1>
         <div class="col-md-12">
-          <div class="col-md-1"></div>															
+          <div class="col-md-1"></div>
           <p class="col-md-11" style="text-align:left; padding-left:32px;">Choose from <?php echo $company_plan_count[1]['companyCount'];?> plans from <?php echo $company_plan_count[0]['companyCount'];?> companies</p>
         </div>
       </div>
       <div class="col-md-12 center m_h" style=" position:relative;">
-        <h3>I want a <span id="clickk" style="position:relative; "><span class="dotted rs" id="rs"><?php if(isset($this->session->userdata['user_input']['coverage_amount'])){
- 																																	echo $this->session->userdata['user_input']['coverage_amount'];}else{?>3 Lakhs<?php }?></span>
+        <h3>I want a <span id="clickk" style="position:relative; "><span class="dotted rs" id="rs">
+          <?php if(isset($this->session->userdata['user_input']['coverage_amount'])){
+ 																																	echo $this->session->userdata['user_input']['coverage_amount'];}else{?>
+          3 Lakhs
+          <?php }?>
+          </span>
           <div data-bind="" style="display: none; left:0px; width:205px;" class="choice l amt" id="c_ch">
             <div class="choice-leftcol" data-bind="">
               <ul data-bind="jScrollPane" id="c_amt" class="years active scroll-pane">
                 <?php foreach($cvg_amt as $k=>$v){?>
                 <li data-coverage-literalid="<?php echo $k; ?>"><a href="javascript:void(0);"><?php echo $v;?></a></li>
-              			<?php } ?>
+                <?php } ?>
               </ul>
               <div class="stepwrap years-stepwrap">
                 <div class="step show"> <em>1</em>
@@ -33,7 +33,11 @@
               </div>
             </div>
           </div>
-          </span> cover for <span id="clickk_f" style="position:relative;"><span class="dotted c_for" id="c_for"><?php if(isset($this->session->userdata['user_input']['plan_type_name'])){ echo $this->session->userdata['user_input']['plan_type_name'];}else{?>Myself<?php }?></span>
+          </span> cover for <span id="clickk_f" style="position:relative;"><span class="dotted c_for" id="c_for">
+          <?php if(isset($this->session->userdata['user_input']['plan_type_name'])){ echo $this->session->userdata['user_input']['plan_type_name'];}else{?>
+          Myself
+          <?php }?>
+          </span>
           <div data-bind="" style="display: none;" class="choice l self" id="c_ch_f">
             <div class="choice-leftcol" data-bind="">
               <ul class="years active scroll-pane" id="c_for_f" data-bind="jScrollPane">
@@ -51,7 +55,11 @@
           </span></h3>
       </div>
       <div class="col-md-12 center no-margin m_h">
-        <h3 style=""><span style="">I am </span> <span id="clickk_g" style="position:relative;"><span class="dotted ge" id="ge"><?php if(isset($this->session->userdata['user_input']['cust_gender'])){ echo $this->session->userdata['user_input']['cust_gender'];}else{?>Male<?php }?></span>
+        <h3 style=""><span style="">I am </span> <span id="clickk_g" style="position:relative;"><span class="dotted ge" id="ge">
+          <?php if(isset($this->session->userdata['user_input']['cust_gender'])){ echo $this->session->userdata['user_input']['cust_gender'];}else{?>
+          Male
+          <?php }?>
+          </span>
           <div data-bind="" style="display: none;" class="choice  g" id="c_ch_g">
             <div class="choice-leftcol" data-bind="">
               <ul class="years active" id="c_for_g"  style="padding:0px 0 30px;">
@@ -65,21 +73,23 @@
               </div>
             </div>
           </div>
-          </span><span style=""> & I stay in</span> <span id="clickk_l" style="position:relative; "><span class="dotted loc" id="loc"><?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?></span>
+          </span><span style=""> & I stay in</span> <span id="clickk_l" style="position:relative; "><span class="dotted loc" id="loc">
+          <?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>
+          Mumbai
+          <?php }?>
+          </span>
           <div data-bind="" style="display: none; left:0px;  max-width: 350px; width: 400px;" class="choice l cit" id="c_ch_l">
             <div class="choice-leftcol" data-bind="">
               <select name="cust_city" placeholder="Type your city" id="combobox" style="height:auto;">
-                <option value="" >  </option>
+                <option value="" > </option>
                 <?php if(isset($this->session->userdata['user_input']['cust_city_name']) && isset($this->session->userdata['user_input']['cust_city'])){?>
                 <option value="<?php echo $this->session->userdata['user_input']['cust_city'];?>" selected="selected"><?php echo $this->session->userdata['user_input']['cust_city_name']?></option>
                 <?php } else{?>
                 <option value="590" selected="selected">Mumbai</option>
                 <?php }?>
-               <?php foreach ($city as $c_name){?>
-               			
-               <option value="<?php echo $c_name['city_id']; ?>" ><?php echo $c_name['mic_city_name']; ?></option>
-               		
-               <?php }?>
+                <?php foreach ($city as $c_name){?>
+                <option value="<?php echo $c_name['city_id']; ?>" ><?php echo $c_name['mic_city_name']; ?></option>
+                <?php }?>
               </select>
               <div class="stepwrap years-stepwrap">
                 <div class="step show"> <em>4</em>
@@ -95,128 +105,120 @@
           <p>About Policy holder:</p>
         </div>
         <div class="">
-         <div class="clearfix1">
-          <div class="form-group col-md-3" style="padding-left:0px;">
-            <div class="section">
-              <label class="field prepend-icon ">
-              <label class="sr-only" for="signup-first-name">Full Name</label>
-             
-             
-             <input type="text" autocomplete="off" maxlength="50" style="text-transform:capitalize;" class="form-control gui-input" id="cust_name" name="cust_name" onkeyup="javascript:validateName(cust_name);" placeholder="Full name" value="<?php if(isset($this->session->userdata['user_input']['full_name']))
+          <div class="clearfix1">
+            <div class="form-group col-md-3" style="padding-left:0px;">
+              <div class="section">
+                <label class="field prepend-icon ">
+                <label class="sr-only" for="signup-first-name">Full Name</label>
+                <input type="text" autocomplete="off" maxlength="50" style="text-transform:capitalize;" class="form-control gui-input" id="cust_name" name="cust_name" onkeyup="javascript:validateName(cust_name);" placeholder="Full name" value="<?php if(isset($this->session->userdata['user_input']['full_name']))
                     																					{
                     																						echo $this->session->userdata['user_input']['full_name'];
                     																					}else 
                     																					{			 
                     																						echo set_value('cust_name');
                     																					}?>" required>
-              <input type="hidden" id="cust_gender" name="cust_gender" value="<?php if(isset($this->session->userdata['user_input']['cust_gender']))
+                <input type="hidden" id="cust_gender" name="cust_gender" value="<?php if(isset($this->session->userdata['user_input']['cust_gender']))
                     																					{
                     																						echo $this->session->userdata['user_input']['cust_gender'];
                     																					}else 
                     																					{?>Male<?php }?>">
-              <input type="hidden" id="policy_term" name="policy_term" value="">
-              <input type="hidden" id="cust_city_name" name="cust_city_name" value="<?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?>">
-              <input type="hidden" id="coverage_amount" name="coverage_amount" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount']))
+                <input type="hidden" id="policy_term" name="policy_term" value="">
+                <input type="hidden" id="cust_city_name" name="cust_city_name" value="<?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?>">
+                <input type="hidden" id="coverage_amount" name="coverage_amount" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount']))
                      																				{
  																										echo $this->session->userdata['user_input']['coverage_amount'];
                      																				}else
 																										{?>3 Lakhs<?php }?>">
-             
-             <input type="hidden" id="coverage_amount_literal" name="coverage_amount_literal" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount_literal']))
+                <input type="hidden" id="coverage_amount_literal" name="coverage_amount_literal" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount_literal']))
                      																				{
  																										echo $this->session->userdata['user_input']['coverage_amount_literal'];
                      																				}else
 																										{?>300000<?php }?>">
-             
-             
-             
-             
-              <input type="hidden" id="plan_type" name="plan_type" value="<?php if(isset($this->session->userdata['user_input']['plan_type']))
+                <input type="hidden" id="plan_type" name="plan_type" value="<?php if(isset($this->session->userdata['user_input']['plan_type']))
                     																					{
                     																						echo $this->session->userdata['user_input']['plan_type'];
                     																					}else 
                     																					{?>1A<?php }?>">
-              <input type="hidden" id="plan_type_name" name="plan_type_name" value="<?php if(isset($this->session->userdata['user_input']['plan_type_name']))
+                <input type="hidden" id="plan_type_name" name="plan_type_name" value="<?php if(isset($this->session->userdata['user_input']['plan_type_name']))
                     																					{
                     																						echo $this->session->userdata['user_input']['plan_type_name'];
                     																					}else 
                     																					{?>Myself<?php }?>">
-              <input type="hidden" id="product_name" name="product_name" value="Health Insurance">
-              <input type="hidden" id="product_type" name="product_type" value="Mediclaim">
-              
-              </label>
+                <input type="hidden" id="product_name" name="product_name" value="Health Insurance">
+                <input type="hidden" id="product_type" name="product_type" value="Mediclaim">
+                </label>
+              </div>
             </div>
-          </div>
-          <div class="form-group car-ins col-md-3">
-            <input type="text" class="mob_cal m_cust" name="m_cust_dob1" id="m_cust_dob1" autocomplete="off" placeholder="Date of Birth"    >
-            <div class="section">
-              <label class="field prepend-icon">
-              <label class="sr-only" for="signup-first-name">Date Of Birth</label>
-              
-              <!--                   <div id="cal_d"></div>
+            <div class="form-group car-ins col-md-3">
+              <input type="text" class="mob_cal m_cust" name="m_cust_dob1" id="m_cust_dob1" autocomplete="off" placeholder="Date of Birth"    >
+              <div class="section">
+                <label class="field prepend-icon">
+                <label class="sr-only" for="signup-first-name">Date Of Birth</label>
+                
+                <!--                   <div id="cal_d"></div>
 -->
-              <div class="desk_cal">
-                <label class="input" style="position:relative"> <i class="icon-append fa fa-calendar " id="trigger"></i>
-                  <input type="text" name="desktop_cust_dob" id="cust_dob" autocomplete="off" class="form-control cal"   placeholder="Date of Birth" value="<?php if(isset($this->session->userdata['user_input']['cust_birthdate']))
+                <div class="desk_cal">
+                  <label class="input" style="position:relative"> <i class="icon-append fa fa-calendar " id="trigger"></i>
+                    <input type="text" name="desktop_cust_dob" id="cust_dob" autocomplete="off" class="form-control cal"   placeholder="Date of Birth" value="<?php if(isset($this->session->userdata['user_input']['cust_birthdate']))
                     																											{
                     																												echo $this->session->userdata['user_input']['cust_birthdate'];
                     																											}else 
                     																											{			 
                     																												echo set_value('desktop_cust_dob');
                     																											}?>" required>
-                </label>
-              </div>
-              <div class="mob_cal">
-                <label class="input form-control" style="position:relative; margin:0px;"> <i class="icon-append fa fa-calendar "></i>
-                  <input type="date" name="mobile_cust_dob" id="m_cust_dob" autocomplete="off" class="native_date_picker" value="<?php if(isset($this->session->userdata['user_input']['cust_birthdate']))
+                  </label>
+                </div>
+                <div class="mob_cal">
+                  <label class="input form-control" style="position:relative; margin:0px;"> <i class="icon-append fa fa-calendar "></i>
+                    <input type="date" name="mobile_cust_dob" id="m_cust_dob" autocomplete="off" class="native_date_picker" value="<?php if(isset($this->session->userdata['user_input']['cust_birthdate']))
                     																											{
                     																												echo $this->session->userdata['user_input']['cust_birthdate'];
                     																											}else 
                     																											{			 
                     																												echo set_value('mobile_cust_dob');
                     																											}?>" required/>
+                  </label>
+                </div>
                 </label>
               </div>
-              </label>
             </div>
           </div>
-          </div>
           <div class="clearfix1">
-          <div class="form-group col-md-2 m_s">
-            <div class="section">
-              <label class="field prepend-icon">
-              <label class="sr-only" for="signup-first-name">Mobile</label>
-              <input type="text" autocomplete="off" class="form-control" id="cust_mobile" name="cust_mobile" maxlength="10" placeholder="Mobile" value="<?php if(isset($this->session->userdata['user_input']['cust_mobile']))
+            <div class="form-group col-md-2 m_s">
+              <div class="section">
+                <label class="field prepend-icon">
+                <label class="sr-only" for="signup-first-name">Mobile</label>
+                <input type="text" autocomplete="off" class="form-control" id="cust_mobile" name="cust_mobile" maxlength="10" placeholder="Mobile" value="<?php if(isset($this->session->userdata['user_input']['cust_mobile']))
                     																						{
                     																							echo $this->session->userdata['user_input']['cust_mobile'];
                     																						}else 
                     																						{			 
                     																							echo set_value('cust_mobile');
                     																						}?>" required>
-              </label>
+                </label>
+              </div>
             </div>
-          </div>
-          <div class="form-group col-md-4 pad_right_no">
-            <div class="section">
-              <label class="field prepend-icon">
-              <label class="sr-only" for="signup-first-name">Email</label>
-              <input type="text" autocomplete="off" class="form-control gui-input" id="cust_email" name="cust_email"  placeholder="Email" value="<?php if(isset($this->session->userdata['user_input']['cust_email']))
+            <div class="form-group col-md-4 pad_right_no">
+              <div class="section">
+                <label class="field prepend-icon">
+                <label class="sr-only" for="signup-first-name">Email</label>
+                <input type="text" autocomplete="off" class="form-control gui-input" id="cust_email" name="cust_email"  placeholder="Email" value="<?php if(isset($this->session->userdata['user_input']['cust_email']))
                     																						{
                     																							echo $this->session->userdata['user_input']['cust_email'];
                     																						}else 
                     																						{			 
                     																							echo set_value('cust_email');
                     																						}?>" required>
-              <!--                     <b class="tooltip tip-left-top" ><em>Male</em></b>  
+                <!--                     <b class="tooltip tip-left-top" ><em>Male</em></b>  
 -->
-              </label>
+                </label>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
       <div class="cus_cont">
-      <?php if(isset($this->session->userdata['user_input']['plan_type']) && in_array($this->session->userdata['user_input']['plan_type'],array('2A','2A1C','2A2C','2A3C','2A4C'))){?>
+        <?php if(isset($this->session->userdata['user_input']['plan_type']) && in_array($this->session->userdata['user_input']['plan_type'],array('2A','2A1C','2A2C','2A3C','2A4C'))){?>
         <?php 	$display_spouse = "style='width:100%; float:left;'";
         		
               } 
@@ -300,8 +302,8 @@
       </div>
       <div class="cus_cont">
         <div class=" " style="width: 100%; float: left;">
-        <?php if(isset($this->session->userdata['user_input']['plan_type']) && in_array($this->session->userdata['user_input']['plan_type'],array('2A1C','2A2C','2A3C','2A4C','1A1C','1A2C','1A3C','1A4C'))){?>
-        <?php 	$display_child1 = "style=''";
+          <?php if(isset($this->session->userdata['user_input']['plan_type']) && in_array($this->session->userdata['user_input']['plan_type'],array('2A1C','2A2C','2A3C','2A4C','1A1C','1A2C','1A3C','1A4C'))){?>
+          <?php 	$display_child1 = "style=''";
         		
               } 
               else
@@ -623,20 +625,16 @@
             <input id="Field4" 	type="checkbox"	 name="agree"  class="field checkbox"  value="agree" checked="checked" />
             <label class="" for="Field4">I authorize MyInsuranceClub &amp; its partners to Call/SMS for my application &amp; agree to the <a href="" class="link">Terms of Use</a>.</label>
           </div>
-          <div class="form-group col-md-2 pad_right_no" style="float:right">
-          	<!-- <input name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="Show My Options &gt;">
+          <div class="form-group col-md-2 pad_right_no" style="float:right"> 
+            <!-- <input name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="Show My Options &gt;">
              -->
             <button name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="submit">Show plans<i class="fa fa-chevron-right ar "></i> </button>
             <div class="load_spin"><img src="<?php echo base_url();?>/assets/images/ajax-loader.gif"></div>
           </div>
         </div>
-      
       </div>
-   <?php echo form_close();?>
-
-
-   <div class="cus_cont" style=" ">
-   
+      <?php echo form_close();?>
+      <div class="cus_cont" style=" ">
         <div style="margin-top: 40px; float: left; width:100%;" class="">
           <div class="pos1" >
             <div class="col-md-2 c_o">
@@ -654,8 +652,8 @@
           </div>
         </div>
       </div>
+    </div>
   </div>
-</div>
 </div>
 </div>
 <div class="b-top"></div>
@@ -709,13 +707,10 @@
           </div>
         </article>
       </div>
-      
-      
-      
     </div>
     <article class="node-2 node node-page view-mode-full clearfix">
       <div class="col-md-12">
-         <ul class="bxslider">
+        <ul class="bxslider">
           <li>
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
@@ -737,8 +732,7 @@
               </div>
             </div>
           </li>
-          
-           <li>
+          <li>
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
@@ -748,7 +742,7 @@
               </div>
             </div>
           </li>
-           <li>
+          <li>
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
@@ -884,4 +878,3 @@
 //});
 </script>
 <?php $this->load->view('partial_view/footer_new'); ?>
-
