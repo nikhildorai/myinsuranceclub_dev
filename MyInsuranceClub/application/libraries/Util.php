@@ -374,7 +374,7 @@ class Util {
     public static function getFamilyComposition($sub_product='')
     {
     	$family_composition = array();
-    	if($sub_product == 'mediclaim')
+    	if($sub_product == 'mediclaim' || $sub_product == 'critical-illness')
     	{
     		$family_composition = 	array(	'1A'=>'Myself',
     				'2A'=>'Self + Spouse',
