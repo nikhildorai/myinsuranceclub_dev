@@ -36,10 +36,6 @@ class News extends MIC_Controller {
 		$this->template->render();
 	}
 	
-	/*
-	 * controller for mic/life-insurance/companies/
-	 * controller for mic/life-insurance/companies/any_company_name
-	 */
 
 	
 }
