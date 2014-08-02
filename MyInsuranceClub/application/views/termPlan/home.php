@@ -192,7 +192,7 @@
           </div>
           
           <?php 
-          		$smoker = '';
+				$smoker = '';
           		$non_smoker ='';
           		
           		if(isset($this->session->userdata['user_input']['smoker']) && $this->session->userdata['user_input']['smoker']=='1')
@@ -215,7 +215,7 @@
               			<div style="margin-top:-5px">
               			Tobacco
                     	<input type="radio" id="smoker" name="smoker" value="1" <?php echo $smoker; ?>>yes&nbsp;|&nbsp;
-                    	<input type="radio" id="non_smoker" name="smoker" value="0" <?php echo $smoker; ?>>no
+                    	<input type="radio" id="non_smoker" name="smoker" value="0" <?php echo $non-smoker; ?>>no
                     	</div>
                     	
                     	</label>
