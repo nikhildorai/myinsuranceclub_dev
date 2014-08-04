@@ -1,5 +1,5 @@
 <?php
-class CSwfUpload extends Widget
+class SwfUpload extends Widget
 {
 	public $postParams=array();
 	public $config=array();
@@ -71,12 +71,12 @@ class CSwfUpload extends Widget
 			// unlimited number of files
 		   	'file_upload_limit'=>100,
 			// refer to handlers.js from here below
-		   	'file_queue_error_handler'=>'js:fileQueueError',
-		   	'file_dialog_complete_handler'=>'js:fileDialogComplete',
-		   	'upload_progress_handler'=>'js:uploadProgress',
-		  	'upload_error_handler'=>'js:uploadError',
-		   	'upload_success_handler'=>'js:uploadSuccess',
-		   	'upload_complete_handler'=>'js:uploadComplete',
+		   	'file_queue_error_handler'=>'fileQueueError',
+		   	'file_dialog_complete_handler'=>'fileDialogComplete',
+		   	'upload_progress_handler'=>'uploadProgress',
+		  	'upload_error_handler'=>'uploadError',
+		   	'upload_success_handler'=>'uploadSuccess',
+		   	'upload_complete_handler'=>'uploadComplete',
 			// what is our upload target layer?
 		   	'custom_settings'=>array('progressTarget'=>'divFileProgressContainer','cancelButtonId'=>'btnCancel'),
 			// where are we going to place the button?
@@ -87,11 +87,12 @@ class CSwfUpload extends Widget
 		   	'button_text_style'=>'.button {font-size: 11pt; text-align: center;}',
 		   	'button_text_top_padding'=>0,
 		   	'button_text_left_padding'=>0,
-		   	'button_window_mode'=>'js:SWFUpload.WINDOW_MODE.TRANSPARENT',
-		   	'button_cursor'=>'js:SWFUpload.CURSOR.HAND',
+		   	'button_window_mode'=>'SWFUpload.WINDOW_MODE.TRANSPARENT',
+		   	'button_cursor'=>'SWFUpload.CURSOR.HAND',
 			'post_params'=> $postParams, 
 			'flash_url'=> $baseUrl. '/swfupload.swf',
 			'button_image_url'=> $baseUrl .'/images/SmallSpyGlassWithTransperancy_17x18.png',
+			'DEBUG'=>true,
 		);	//'jsHandlerUrl'=>$baseUrl.'/handlers.js' //Relative path
 		$newConfig = (!empty($ext) && isset($ext['config'])) ? $ext['config'] : array();	
 		$config = array_merge($config, $newConfig);		

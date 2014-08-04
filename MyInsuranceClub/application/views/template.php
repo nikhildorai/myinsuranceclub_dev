@@ -31,6 +31,9 @@ $server = base_url();//$this->util->getUrl('currentPageUrl');
             <!-- endbuild -->
             <link rel="stylesheet" href="<?php echo $server;?>dist/styles/main.css">
 
+	   <script type="text/javascript">
+	      CI_ROOT = "<?php echo base_url() ?>";
+	   </script>
     </head>
 	<?php if (! $this->flexi_auth->is_logged_in()) { ?>
     	<body id="app" class="ng-scope body-special 123" data-off-canvas-nav="" data-custom-background="" data-ng-app="app">

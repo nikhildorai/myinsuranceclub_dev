@@ -126,33 +126,66 @@ class Policy extends Admin_Controller {
 				$tag = $this->util->addUpdateTags($_POST['tag']);
 				$_POST['policyModel']['tag'] = $tag;
 			}		
-//var_dump($_POST);die;			
+//var_dump($_POST, $_FILES);die;			
 			//	check if file is uploaded
 			if (!empty($_FILES))
 			{
 				$i = 1;
 				foreach($_FILES['policyModel']['name'] as $k1=>$v1)
-				{					
-					$ext = end(explode('.', $v1));
-					if (empty($ext))
-						$ext = 'doc';
-					$name = $this->util->getSlug($_POST['policyModel']['policy_name']);
-					if ($k1 == 'brochure')
-						$name .= '-brochure';
-					else if ($k1 == 'policy_wordings')
-						$name .= '-policy-wordings';
-					else if ($k1 == 'policy_logo')
-						$name .= '-policy-logo-172x68';
-					else 
-						$name .= '-doc-'.date('dmy').time();
-					$name .= '.'.$ext;
-					$arrFileNames[$k1] = $name;
-					if (empty($v1))
+				{
+					if (is_array($v1))
 					{
-						$_POST['policyModel'][$k1] = isset($policyModel[$k1]) ? $policyModel[$k1] : '';
+						$j = 1;
+						$files = isset($policyModel[$k1]) ? explode(',', $policyModel[$k1]) : array();
+						foreach ($v1 as $k2=>$v2)
+						{
+							if (!empty($v2))
+							{
+								$name = $this->util->getSlug($_POST['policyModel']['policy_name']);
+								$ext = end(explode('.', $v2));
+								
+								if ($k1 == 'brochure_images')
+									$name .= '-brochure-images-'.$j;
+								else if ($k1 == 'policy_wordings_images')
+									$name .= '-policy-wordings-images-'.$j;
+								else 
+									$name .= '-doc-'.date('dmy').time().'-'.$j;
+										
+								$name .= '.'.$ext;
+								$arrFileNames[$k1][$k2] = $name;
+								if (empty($v2))
+									$_POST['policyModel'][$k1][$k2] = isset($files[$k2]) ? $files[$k2] : '';
+								else
+									$_POST['policyModel'][$k1][$k2] = $name;
+									
+								$j++;
+							}
+						}		
+						$_POST['policyModel'][$k1] = implode(',', $_POST['policyModel'][$k1]);
 					}
-					else
-						$_POST['policyModel'][$k1] = $name;
+					else 
+					{
+						$name = $this->util->getSlug($_POST['policyModel']['policy_name']);
+						$ext = end(explode('.', $v1));
+						if (empty($ext))
+							$ext = 'doc';
+						if ($k1 == 'brochure')
+							$name .= '-brochure';
+						else if ($k1 == 'policy_wordings')
+							$name .= '-policy-wordings';
+						else if ($k1 == 'policy_logo')
+							$name .= '-policy-logo-172x68';
+						else 
+							$name .= '-doc-'.date('dmy').time();
+						$name .= '.'.$ext;
+						$arrFileNames[$k1] = $name;
+						if (empty($v1))
+						{
+							$_POST['policyModel'][$k1] = isset($policyModel[$k1]) ? $policyModel[$k1] : '';
+						}
+						else
+							$_POST['policyModel'][$k1] = $name;
+					}
 					$i++;
 				}
 			}
@@ -162,6 +195,8 @@ class Policy extends Admin_Controller {
 				$_POST['policyModel']['brochure'] = $policyModel['brochure'];
 				$_POST['policyModel']['policy_wordings'] = $policyModel['policy_wordings'];
 				$_POST['policyModel']['policy_logo'] = $policyModel['policy_logo'];
+				$_POST['policyModel']['policy_wordings_images'] = $policyModel['policy_wordings_images'];
+				$_POST['policyModel']['brochure_images'] = $policyModel['brochure_images'];
 			}	
 			
 			if (isset($_POST['policyModel']['product_id']) && !empty($_POST['policyModel']['product_id']))
@@ -239,6 +274,7 @@ class Policy extends Admin_Controller {
 					        $config['upload_path'] = $this->config->config['folder_path']['policy']['all'];
 					        $config['file_name'] = $arrFileNames;
 					        $config['extra_config'] = Util::getConfigForFileUpload('policy');
+
 							$this->load->library('upload', $config);
 							$this->upload->initialize($config); 	
 							if($this->upload->do_multi_upload("policyModel"))
@@ -249,6 +285,7 @@ class Policy extends Admin_Controller {
 							{
 				                $this->data['file_upload_error'][] = $this->upload->display_errors();
 							}
+							
 				            $this->data['file_upload'] = $this->upload->get_multi_upload_data();
 				             
 				            if (empty($this->data['file_upload_error']))
@@ -326,8 +363,9 @@ class Policy extends Admin_Controller {
 			}
 			$policyModel = $_POST['policyModel'];
 		}		
-		
-		$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$policyModel['product_id'], 'sub_product_id'=>$policyModel['sub_product_id']));
+		$product_id = (isset($policyModel['product_id']) && !empty($policyModel['product_id'])) ? $policyModel['product_id'] : '';
+		$sub_product_id = (isset($policyModel['sub_product_id']) && !empty($policyModel['sub_product_id'])) ? $policyModel['sub_product_id'] : '';
+		$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$product_id, 'sub_product_id'=>$sub_product_id));
 			
 		$this->data['policyModel'] = $policyModel;
 		$this->data['modelType'] = $modelType;
@@ -908,6 +946,16 @@ class Policy extends Admin_Controller {
 			$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$product_id, 'sub_product_id'=>$sub_product_id));
 			echo Util::peerComparisionTableViewBackend($allVariants, $policy_id, $peerValue, $modelName);
 		}
+	}
+	
+	public function policyWording()
+	{
+		if (isset($_POST) && !empty($_POST))
+		{
+			var_dump($_POST, $_FILES);die;	
+		}	
+		$this->template->write_view('content', 'admin/policy/policyWording', $this->data, TRUE);
+		$this->template->render();
 	}
 }
 

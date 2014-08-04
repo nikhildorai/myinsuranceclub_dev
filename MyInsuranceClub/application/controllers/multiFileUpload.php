@@ -9,6 +9,8 @@ class MultiFileUpload extends CI_Controller {
 	{
 		try
  		{			
+ 			
+var_dump($_FILES);die; 			
      		// get the file
      		$picture_file = CUploadedFile::getInstanceByName('Filedata');
      		

@@ -16,7 +16,7 @@ class PeerComparisionBack extends Widget{
         
 ?>    	
 		<script type="text/javascript">
-			var policy_id = <?php echo $policy_id;?>;
+			var policy_id = "<?php echo $policy_id;?>";
 			var peerValue = "<?php echo $peerValue;?>";
 			var modelName = "<?php echo $modelName;?>";
 			

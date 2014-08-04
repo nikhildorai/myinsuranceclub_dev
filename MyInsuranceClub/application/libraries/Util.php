@@ -2104,10 +2104,38 @@ echo '=================>';
 												'max_height'	=>	'68',
 												'upload_path'	=>	$ci->config->config['folder_path']['policy']['policy_logo'],
 											);
+			$config['policy_wordings_images']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+												'max_size'		=>	'5120',
+												'max_width'		=>	'2000',
+												'max_height'	=>	'2000',
+												'upload_path'	=>	$ci->config->config['folder_path']['policy']['policy_wordings_images'],
+											);
+			$config['brochure_images']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+												'max_size'		=>	'5120',
+												'max_width'		=>	'2000',
+												'max_height'	=>	'2000',
+												'upload_path'	=>	$ci->config->config['folder_path']['policy']['brochure_images'],
+											);
+		}
+		else if ($type == 'temp')
+		{
+			$config['temp']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+												'max_size'		=>	'5000',
+												'max_width'		=>	'5000',
+												'max_height'	=>	'6800',
+												'upload_path'	=>	$ci->config->config['folder_path']['temp'],
+												'upload_url'	=>	$ci->config->config['url_path']['temp'],
+											);
 		}
 		else 
 		{
-			
+			$config['temp']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+												'max_size'		=>	'5000',
+												'max_width'		=>	'5000',
+												'max_height'	=>	'6800',
+												'upload_path'	=>	$ci->config->config['folder_path']['temp'],
+												'upload_url'	=>	$ci->config->config['url_path']['temp'],
+											);
 		}
 		return $config;
 	}
@@ -3054,6 +3082,15 @@ echo '=================>';
 			            ';
 		}
 		return $data;
+	}
+	
+	public static function getFileExtension($str)
+	{
+		$i = strrpos($str,".");
+		if (!$i) { return ""; }
+		$l = strlen($str) - $i;
+		$ext = substr($str,$i+1,$l);
+		return $ext;
 	}
 }
 

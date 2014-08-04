@@ -494,9 +494,9 @@ class controller_basicMediclaim extends Customer_Controller {
 			//	all details with variant, variant features and riders
 			$companyType = 'general-insurance-companies';
 			$variantType = 'health-insurance';
-			$data['disqusUrl'] = base_url().'health-insurance/'.$policySlug;	
 			$data = Util::getPolicyVariantsFeaturesRidersDetails($policySlug, $variantType, $companyType);	
 //echo '<pre>';print_r($data);die;			
+			$data['disqusUrl'] = base_url().'health-insurance/'.$policySlug;	
 			$this->template->set_template('frontend');
 			$this->template->write_view('content', 'health_insurance/policyView', $data, TRUE);
 			$this->template->render();

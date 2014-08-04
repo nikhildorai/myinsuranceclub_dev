@@ -73,6 +73,64 @@ class Common extends Common_Controller {
 		}
 		echo json_encode($data);
 	}
+	
+	public function ajaxImageUpload()
+	{
+		define ("MAX_SIZE","9000"); 
+		$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
+		$ci =& get_instance();
+//var_dump($_FILES, $_POST);
+		if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST")
+		{
+			$fileConfig = Util::getConfigForFileUpload('temp');
+			$uploaddir = $fileConfig['temp']['upload_path']; //a directory inside
+			$uploadUrl = $fileConfig['temp']['upload_url']; //a directory inside
+//var_dump($_FILES);			
+			foreach ($_FILES['photos']['name'] as $name => $value)
+			{
+				$filename = stripslashes($_FILES['photos']['name'][$name]);
+				$size=filesize($_FILES['photos']['tmp_name'][$name]);
+				//get the extension of the file in a lower case format
+				$ext = Util::getFileExtension($filename);
+				$ext = strtolower($ext);
+
+				if(in_array($ext,$valid_formats))
+				{
+					if ($size < (MAX_SIZE*1024))
+					{
+						$time = time();
+						$image_name = $time.$filename;
+						echo "<img src='".$uploadUrl.$image_name."' class='imgList1'>";
+						$newname = $uploaddir.$image_name;
+						 
+						if (move_uploaded_file($_FILES['photos']['tmp_name'][$name], $newname))
+						{
+							$time=time();
+							//mysql_query("INSERT INTO user_uploads(image_name,user_id_fk,created) VALUES('$image_name','$session_id','$time')");
+						}
+						else
+						{
+							echo '<span class="imgList">You have exceeded the size limit! so moving unsuccessful! </span>';
+						}
+
+					}
+		   else
+		   {
+		   	echo '<span class="imgList">You have exceeded the size limit!</span>';
+
+		   }
+		    
+				}
+				else
+				{
+					echo '<span class="imgList">Unknown extension!</span>';
+					 
+				}
+				 
+			}
+		}
+
+	}
 }
 
 /* End of file common.php */
