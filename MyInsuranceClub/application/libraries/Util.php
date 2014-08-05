@@ -1744,6 +1744,29 @@ echo '=================>';
 						
 			);
 		}
+		
+		elseif($featureType == 'termPlan')
+		{
+			$value = array(	'minimum_sum_assured'=>array('name'=>'Minimum Sum Assured','tooltip'=>''),
+					'maximum_sum_assured'=>array('name'=>'Maximum Sum Assured','tooltip'=>''),
+					'minimum_policy_terms'=>array('name'=>'Minimum Policy Term','tooltip'=>''),
+					'maximum_policy_terms'=>array('name'=>'Maximum Policy Term','tooltip'=>''),
+					'minimum_age_at_maturity'=>array('name'=>'Minimum Age At Maturity','tooltip'=>''),
+					'maximum_age_at_maturity'=>array('name'=>'Maximum Age At Maturity','tooltip'=>''),
+					'minimum_premium'=>array('name'=>'Minimum Premium','tooltip'=>''),
+					'maximum_premium'=>array('name'=>'Maximum Premium','tooltip'=>''),
+					'payment_modes'=>array('name'=>'Payment Modes','tooltip'=>''),
+					'death_benefit'=>array('name'=>'Death Benefit','tooltip'=>''),
+					'maturity_benefit'=>array('name'=>'Maturity Benefit','tooltip'=>''),
+					'surrender_benefit'=>array('name'=>'Surrender Benefit','tooltip'=>''),
+					'surrender_policy'=>array('name'=>'Surrender Policy	','tooltip'=>''),
+					'revive_policy'=>array('name'=>'Revive Policy','tooltip'=>''),
+					'loan'=>array('name'=>'Loan','tooltip'=>''),
+					'tax_benefits'=>array('name'=>'Tax Benefits','tooltip'=>''),
+					'additional_benefit'=>array('name'=>'Additional Benefits','tooltip'=>''),
+					'purpose_of_insurance'=>array('name'=>'Purpose Of Insurance','tooltip'=>'')
+			);
+		}
 		return $value;
 	}
 	
@@ -2002,7 +2025,7 @@ echo '=================>';
 	}
 	
 	
-	public static function getFilteredDataForTermPlan($data,$search_filter = array())
+public static function getFilteredDataForTermPlan($data,$search_filter = array())
 	{
 		if(!empty($data))
 		{
@@ -2043,6 +2066,31 @@ echo '=================>';
 				if(isset($search_filter['policy_term']))
 				{
 					if(!in_array($v['term'],$search_filter['policy_term']))
+					{
+						unset($data[$k]);
+					}
+				}
+				
+				if (isset($search_filter['payment_freq'])) 
+				{
+					
+					$db_payment_freq = explode(', ',$v['payment_modes']);
+					
+					//var_dump($search_filter['payment_freq']);
+					
+					foreach($db_payment_freq as $k3=>$v3)
+					{
+						if (!in_array(trim($v3),$search_filter['payment_freq']))
+						{
+							
+							unset($data[$k]);
+						}
+					}	
+				}
+				
+				if(isset($search_filter['purpose']))
+				{
+					if(!in_array(trim($v['purpose_of_insurance']) ,$search_filter['purpose']))
 					{
 						unset($data[$k]);
 					}

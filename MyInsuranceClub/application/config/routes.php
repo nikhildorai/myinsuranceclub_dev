@@ -80,8 +80,8 @@ $route['health-insurance/(:any)'] = "health_insurance/controller_basicMediclaim/
 //term plan routes
 $route['life-insurance/term-insurance'] = "life_insurance/controller_termPlan/index";
 $route['life-insurance/term-insurance/search-results'] = "life_insurance/controller_termPlan/get_termPlan_results";
-$route['life-insurance/term-insurance/search-results(:any)'] = "life_insurance/controller_termPlan/get_termPlan_results/$1";
-
+$route['life-insurance/term-insurance/search-results/(:any)'] = "life_insurance/controller_termPlan/get_termPlan_results/$1";
+$route['life-insurance/term-insurance/compare-results'] = "life_insurance/controller_termPlan/compare_policies";
 
 //	company 
 $route['life-insurance'] = "lifeInsurance/index/";
