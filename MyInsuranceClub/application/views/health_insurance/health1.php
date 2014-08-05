@@ -90,7 +90,7 @@
                 <option value="590" selected="selected">Mumbai</option>
                 <?php }?>
                 <?php foreach ($city as $c_name){?>
-                <option value="<?php echo $c_name['city_id']; ?>" ><?php echo $c_name['mic_city_name']; ?></option>
+                <option value="<?php echo $c_name['city_id']; ?>" ><?php echo $c_name['display_name']; ?></option>
                 <?php }?>
               </select>
               <div class="stepwrap years-stepwrap">
