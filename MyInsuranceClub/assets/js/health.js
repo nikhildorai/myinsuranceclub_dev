@@ -533,9 +533,24 @@ $(document).ready(function() {
             }
         });
 
-        if ( valid ) {
-            return;
-        }
+		
+		// Found a match, nothing to do
+				if ( valid ) {
+					return;
+				}
+
+				// Remove invalid value
+		
+				
+				$("#no_city_fnd").text('No city found !');
+				this._delay(function() {
+           $("#no_city_fnd").text('');
+        }, 2500 );
+			},
+
+/*		
+		
+		
 
         this.input
             .val( "" )
@@ -546,7 +561,7 @@ $(document).ready(function() {
             this.input.tooltip( "close" ).attr( "title", "" );
         }, 2500 );
         this.input.data( "ui-autocomplete" ).term = "";
-    },
+    },*/
     _destroy: function() {
         this.wrapper.remove();
         this.element.show();

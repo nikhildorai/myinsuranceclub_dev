@@ -662,7 +662,7 @@ $(function() {
    
 }, 15000);
   
-  $('.fac_link').html('<div class="fb-share-button" data-href="http://www.myinsuranceclub.com/health-insurance/"></div>');
+  $('.fac_link').html('<div class="fb-share-button" data-type="button_count" data-href="http://www.myinsuranceclub.com/health-insurance/"></div>');
   
   
   $('.modal_close').click(function() {

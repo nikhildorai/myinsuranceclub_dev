@@ -110,6 +110,7 @@
                 <option value="<?php echo $c_name['city_id']; ?>" ><?php echo $display_city; ?></option>
                 <?php }?>
               </select>
+              <div style="width:300px; height:50px; margin-top:30px;" id="no_city_fnd"></div>
               <div class="stepwrap years-stepwrap">
                 <div class="step show"> <em>4</em>
                   <div class="label-mid">Select City of Residence</div>

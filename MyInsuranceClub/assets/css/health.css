@@ -533,8 +533,8 @@ margin-bottom: 2px;
 #share_link-ct .header {
 position: relative;
 _height: 58px;
-min-height: 58px;
-padding:15px 0 0px 0px;
+min-height: 58px; float:left;
+padding:15px 0 15px 0px;
 }
 
 
@@ -573,7 +573,7 @@ text-overflow: ellipsis;
 white-space: nowrap;
 }
 .full-name{ float:left;  margin-left:10px; margin-top:3px;}
-.soc_link{ min-height:40px; border-bottom:1px solid #dadada; padding-bottom:30px;}
-.fac_link{ width:auto; float:left; margin-left:200px; margin-top:2px;}
+.soc_link{ min-height:40px; border-bottom:1px solid #dadada; padding-bottom:0px; float:left; width:100%;}
+.fac_link{ width:auto; float:left; margin-left:160px; margin-top:6px;}
 .twi_link{ width:100px; float:right; margin-left:10px; margin-top:2px;}
 
