@@ -89,8 +89,25 @@
                 <?php } else{?>
                 <option value="590" selected="selected">Mumbai</option>
                 <?php }?>
-                <?php foreach ($city as $c_name){?>
-                <option value="<?php echo $c_name['city_id']; ?>" ><?php echo $c_name['display_name']; ?></option>
+                <?php foreach ($city as $c_name){
+                	
+                	if($c_name['alternate_city_name1'] != '' && $c_name['alternate_city_name2'] != '')
+                	{
+                		$display_city = '('.$c_name['alternate_city_name1'].'/'.$c_name['alternate_city_name2'].')'.$c_name['display_name'];
+                	}
+                	elseif($c_name['alternate_city_name1'] != '' && $c_name['alternate_city_name2'] == '')
+                	{
+                		$display_city = '('.$c_name['alternate_city_name1'].')'.$c_name['display_name'];
+                	}
+                	
+                	elseif($c_name['alternate_city_name1'] == '' && $c_name['alternate_city_name2'] == '')
+                	{
+                		$display_city = $c_name['display_name'];
+                	}
+                	
+                	
+             ?>
+                <option value="<?php echo $c_name['city_id']; ?>" ><?php echo $display_city; ?></option>
                 <?php }?>
               </select>
               <div class="stepwrap years-stepwrap">
