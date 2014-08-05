@@ -312,6 +312,7 @@ position: relative;}
 
 .top_ins{ background:#2bbd1c; width:100%; height:8px; float:left;}
 .header_art{ font-size:30px; color:#595a5a; font-weight:normal;}
+h1.header_all{ font-size:31px; font-weight:bold; color:#595a5a;}
 .sub_h{ font-size:18px; color:#000000; font-weight:normal;margin-top: 30px;}
 
 .art_cnt{ margin-bottom:30px; float:left; padding:5px;}

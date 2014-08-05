@@ -113,7 +113,7 @@ body, html {
 	height:100%
 }
 a, a:focus, a:hover {
-	color:#55a79a
+	color:#0171bb;
 }
 a:hover img {
 	opacity:.8;
@@ -133,7 +133,7 @@ a:focus {
 	color:rgba(27, 27, 27, .8)
 }
 h1 {
-	font-size:31.5px
+	font-size:31px; color:#595a5a;
 }
 h2 {
 	font-size:27.3px
@@ -978,3 +978,6 @@ div.close34 span{ font-size: 14px;
     font-weight: 300;
     position: relative;
     top: -6px;}
+	#highlighted .container .col-md-12.cus_res_pad{ padding-left:15px !important; padding-right:15px !important;}
+
+

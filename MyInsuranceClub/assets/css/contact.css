@@ -1,0 +1,203 @@
+.section-menu ul.nav-list {
+	padding:2em 0;
+	margin-left:0
+}
+.section-menu ul.nav-list li.nav-header {
+	padding-left:5px;
+	margin:0;
+	text-transform:uppercase;
+	text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);
+	color:#999;
+	font-weight:bold;
+	font-size:11px
+}
+.section-menu ul.nav-list li a {
+	color:#494949;
+	color:rgba(27, 27, 27, 0.7);
+	-webkit-border-radius:0;
+	-moz-border-radius:0;
+	border-radius:0;
+	font-weight:bold;
+	font-size:18px;
+	border:1px solid #e6e6e6;
+	border-top:none;
+	margin:0 -1px 0 3px;
+	-webkit-box-shadow:1px 1px 1px #fff;
+	box-shadow:1px 1px 1px #fff;
+	background:#fafafa;
+	text-shadow:none;
+	padding:18px 15px;
+	position:relative
+}
+.section-menu ul.nav-list li a.first {
+	border-top:1px solid #e6e6e6
+}
+.section-menu ul.nav-list li a:hover {
+	background:#f0f0f0
+}
+.section-menu ul.nav-list li a:hover i {
+	color:#55a79a
+}
+.section-menu ul.nav-list li a i {
+	font-size:22px;
+	position:absolute;
+	top:20px;
+	right:20px;
+	color:#e6e6e6;
+	-webkit-transform:rotate(90deg);
+	-ms-transform:rotate(90deg);
+	transform:rotate(90deg)
+}
+.section-menu ul.nav-list li a small {
+	display:block;
+	font-weight:normal;
+	color:rgba(27, 27, 27, 0.5)
+}
+.section-menu ul.nav-list li.active>a, .section-menu ul.nav-list li.active>a:hover {
+	border-left:4px solid #55a79a;
+	margin:0 -1px 0 0;
+	background:#fff;
+	color:#55a79a
+}
+.section-menu ul.nav-list li.active>a i, .section-menu ul.nav-list li.active>a:hover i {
+	color:#55a79a
+}
+.stats .stat {
+	font-size:24px;
+	text-align:center;
+	color:#fff;
+	margin-bottom:10px
+}
+.stats .stat .well {
+	background:#55a79a;
+	background-image:-webkit-radial-gradient(circle, #55a79a, #44857b);
+	background-image:radial-gradient(circle, #55a79a, #44857b);
+	background-repeat:no-repeat;
+	padding:20px;
+	-webkit-border-radius:6px;
+	-moz-border-radius:6px;
+	border-radius:6px;
+	position:relative;
+	margin:0 15px;
+	min-height:40px;
+	line-height:40px
+}
+.stats .stat .well:after, .stats .stat .well:before {
+	top:100%;
+	border:solid transparent;
+	content:" ";
+	height:0;
+	width:0;
+	position:absolute;
+	pointer-events:none
+}
+.stats .stat .well:after {
+	border-top-color:#55a79a;
+	border-width:5px;
+	left:50%;
+	margin-left:-5px
+}
+.stats .stat .well:before {
+	border-top-color:rgba(0, 0, 0, 0.01);
+	border-width:6px;
+	left:50%;
+	margin-left:-6px
+}
+.stats .stat small {
+	text-shadow:none;
+	font-size:12px;
+	display:block;
+	color:#494949;
+	color:rgba(27, 27, 27, 0.8);
+	margin:10px 0 0 0;
+	text-transform:uppercase
+}
+.team .media-heading {
+	margin-top:0;
+	color:#000
+}
+.team p {
+	color:rgba(27, 27, 27, 0.8)
+}
+.team .role, .team p.role {
+	color:rgba(27, 27, 27, 0.8);
+	font-size:16px
+}
+.team .media-object {
+	/*max-width:75px*/
+}
+blockquote {
+	border:none;
+	padding:0
+}
+blockquote p {
+	background:#e6e6e6;
+	padding:20px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	position:relative
+}
+blockquote p:after, blockquote p:before {
+	top:100%;
+	border:solid transparent;
+	content:" ";
+	height:0;
+	width:0;
+	position:absolute;
+	pointer-events:none
+}
+blockquote p:after {
+	border-top-color:#e6e6e6;
+	border-width:10px;
+	left:10%;
+	margin-left:-10px
+}
+blockquote p:before {
+	border-top-color:rgba(0, 0, 0, 0.01);
+	border-width:11px;
+	left:10%;
+	margin-left:-11px
+}
+blockquote small, blockquote footer {
+	display:block;
+	padding:12px 0 0 10px
+}
+blockquote small:before, blockquote footer:before {
+	content:''
+}
+blockquote small img, blockquote footer img {
+	padding-right:1em;
+	max-width:50px
+}
+.ri8_side p{ margin-bottom:20px;}
+.ri8_side i.fa-home {
+    font-size: 18px !important;
+}
+.ri8_side i{ color:#ff6633 !important;}
+.media, .media .media{ margin-top:25px;}
+@media (min-width:992px) {
+.sidebar {
+margin:0
+}
+.sidebar.sidebar-right .inner, .sidebar.sidebar-right .divider {
+border-left:1px solid #e6e6e6;
+padding-left:20px
+}
+.sidebar.sidebar-left .inner, .sidebar.sidebar-left .divider {
+border-right:1px solid #e6e6e6;
+padding-right:20px
+}
+.section-menu ul.nav-list {
+border-right:1px solid #e6e6e6
+}
+.section-menu ul.nav-list li a i {
+right:10px;
+-webkit-transform:rotate(0deg);
+-ms-transform:rotate(0deg);
+transform:rotate(0deg)
+}
+.section-menu ul.nav-list li.active>a, .section-menu ul.nav-list li.active>a:hover {
+border-right-color:#fff
+}
+}

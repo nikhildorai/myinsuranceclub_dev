@@ -885,6 +885,13 @@ text-align: center;
 padding-left: 0px !important;
 }
 }
+ @media screen and (max-width: 430px) {
+ .meta-comments {
+ margin-left:0px !important;
+}
+
+}
+
 @media screen and (max-width:331px) {
 .slicknav_btn {
 margin-top:5px !important;
