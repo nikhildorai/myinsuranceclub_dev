@@ -407,7 +407,7 @@ class controller_basicMediclaim extends Customer_Controller {
 			{
 				$response.='<div class="tt-suggestion clearfix" style="white-space: nowrap;"><p style="white-space: normal;">';
 				
-				$response .= "<span class='city_a'>".$v['hospital_name']."</span><span class='city_b'>".$v['hospital_city']."</span><span class='city_c'>".$v['hospital_pincode']."</span>";
+				$response .= "<span class='city_a' style='cursor:pointer;' title='".$v['hospital_address'].", ".$v['hospital_city']." - ".$v['hospital_pincode']."'>".$v['hospital_name']."</span><span class='city_b'>".$v['hospital_city']."</span><span class='city_c'>".$v['hospital_pincode']."</span>";
 				
 				$response .='</p></div>';
 			}
@@ -494,9 +494,8 @@ class controller_basicMediclaim extends Customer_Controller {
 			//	all details with variant, variant features and riders
 			$companyType = 'general-insurance-companies';
 			$variantType = 'health-insurance';
-			$data = Util::getPolicyVariantsFeaturesRidersDetails($policySlug, $variantType, $companyType);	
+			$data = Util::getPolicyVariantsFeaturesRidersDetails($policySlug, $variantType, $companyType);
 //echo '<pre>';print_r($data);die;			
-			$data['disqusUrl'] = base_url().'health-insurance/'.$policySlug;	
 			$this->template->set_template('frontend');
 			$this->template->write_view('content', 'health_insurance/policyView', $data, TRUE);
 			$this->template->render();
