@@ -409,6 +409,11 @@ margin:0px;
  .subfooter .list-inline > li {
  margin-left: 0;
 }
+.one_fourth.a{ width:18%;}
+.one_fourth.b{ width:27%;}
+.one_fourth.c{ width:27%;}
+.one_fourth.d{ width:21%;}
+.one_fourth, .one_half, .three_fourth{ margin-right:16px;}
 }
  @media screen and (max-width: 700px) {
 #highlighted .container .col-md-12, #highlighted .container .col-md-11 {

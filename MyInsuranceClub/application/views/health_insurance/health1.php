@@ -1,12 +1,14 @@
 <?php $this->load->view('partial_view/header_new'); ?>
 
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/introjs.css">
+
 <span id="o_touch"></span>
 <div class="min_height" style="height:auto; width:100%; ">
   <div id="highlighted" >
     <div class="container"> <?php echo validation_errors();?> <?php echo form_open('health-insurance/search-results',array('name'=>'health_form','id'=>'health_form','class'=>'health-form'));?>
       <div class="col-md-12 center ">
         <div class="col-md-1"></div>
-        <h1 class="col-md-11" style="text-align:center; margin-top:30px; width:100%;">Compare & Buy Health Insurance Plans</h1>
+        <h1 class="col-md-11" style="text-align:center; margin-top:30px; width:100%;" id="step1">Compare & Buy Health Insurance Plans</h1>
         <div class="col-md-12">
           <div class="col-md-1"></div>
           <p class="col-md-11" style="text-align:left; padding-left:32px;">Choose from <?php echo $company_plan_count[1]['companyCount'];?> plans from <?php echo $company_plan_count[0]['companyCount'];?> companies</p>
@@ -871,10 +873,45 @@
     <div class="col-md-12 text-rightp"><a href="javascript:void(0)">More Guides <span class="ic">+</span></a></div>
   </div>
 </div>
-<script type="text/javascript">
-//$(document).ready(function(){
-	
-	
-//});
-</script>
+<script type="text/javascript" src="<?php echo base_url();?>/assets/js/intro.js"></script>
+    <script type="text/javascript">
+	startIntro();
+      function startIntro(){
+        var intro = introJs();
+          intro.setOptions({
+            steps: [
+              
+              {
+                element: document.querySelector('#step1'),
+                intro: "Compare & Buy Health Insurance Plans"
+              },
+              {
+                element: document.querySelectorAll('#rs')[0],
+                intro: "Choose amount of cover",
+                position: 'right'
+              },
+              {
+                element: '#c_for',
+                intro: 'Choose for whom?',
+                position: 'left'
+              },
+              {
+                element: '#ge',
+                intro: "Select Gender.",
+                position: 'bottom'
+              },
+              {
+                element: '#loc',
+                intro: 'Select Location.'
+              },
+			   {
+                element: '#sub_form',
+                intro: 'OH ! Yes. I Got it.'
+              }
+            ]
+          });
+
+          intro.start();
+      }
+    </script>
 <?php $this->load->view('partial_view/footer_new'); ?>

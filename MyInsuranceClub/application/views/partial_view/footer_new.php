@@ -18,6 +18,7 @@
                <ul class="list-inline footer-menu main-menu" >
                   <li class='follow submenu pull-right' id="soi">
                      <span class='social_icon sc fb'></span> <span class='social_icon sc tw'></span> <span class='social_icon sc gp'></span><span class='social_icon sc yt'></span>
+                      <span class='social_icon sc ld'></span>
                      <div class='submenu-content'>
                         <div class='container'>
                            <div class='col-md-7 follow ' id="target">

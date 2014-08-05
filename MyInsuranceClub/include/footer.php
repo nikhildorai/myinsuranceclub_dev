@@ -98,6 +98,7 @@
   <li class="social_icon sc gp"></li>-->
             
             <li class='follow submenu pull-right' id="soi"><span class='social_icon sc fb'></span> <span class='social_icon sc tw'></span> <span class='social_icon sc gp'></span>
+           
                       <div class='submenu-content'>
                 <div class='container'>
                           <div class='col-md-7 follow ' id="target">

@@ -226,7 +226,7 @@ $(this).parent().parent().parent().parent().find('.accordion_a').slideToggle();
        $(this).parent().find('.down_cnt_up').hide();
 	 $(this).parent().parent().parent().addClass("border_hglt");
 	  $(this).parent().parent().parent().parent().find('.accordion_a').addClass("border_hglt");
-	 $('html, body').animate({scrollTop: $(this).parent().parent().parent().parent().offset().top}, 100);
+	 $('html, body').animate({scrollTop: $(this).parent().parent().parent().parent().offset().top}, 400);
  
     }
 	else{

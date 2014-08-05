@@ -139,7 +139,7 @@
 
   <div id="loader" style="display: <?php echo ($compareParam == "yes") ? 'none' : 'block'?>"><img src="<?php echo base_url();?>/assets/images/loader.gif" border="0"></div>
    <div class="" style="margin-top:20px; display:none;" id="prdt_dis">
-            <div class="col-md-9 col-md-push-3 cus_res_hlth" style="padding-right:0px;">
+            <div class="col-md-9 col-md-push-3 cus_res_hlth" style="padding-right:0px; padding-bottom:100px;">
             
             
                <div class="col-md-12" style="padding:0px;">
@@ -612,8 +612,8 @@ plan for myself. Check it out. You might find it useful.</p>
     <img class="u-photo avatar"  src="<?php echo base_url();?>assets/images/deepak_mic.jpg" >
     <span class="full-name">
       
-      <span class="p-name" >Deepak Yohanna,</span>
-      <span class="p-nickname" ><b>CEO, MyInsuranceClub</b></span>
+      <span class="p-name" >Thanks!</span>
+      <span class="p-nickname" ><b>Deepak Yohannan, CEO, MyInsuranceClub</b></span>
     </span>
     
 

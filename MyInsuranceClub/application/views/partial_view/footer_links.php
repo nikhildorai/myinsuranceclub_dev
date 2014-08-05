@@ -1,7 +1,7 @@
 <div id="bottom-bg">
   <div id="bottom" class="container">
     <div class="bottom-content-padding">
-              <div id="bottom_2" class="one_fourth">
+              <div id="bottom_2" class="one_fourth a">
         <div class="column-content-wrapper">
                   <div class="bottom-col-content widget_recent_entries custom-formatting">
             <h3 class="bottom-col-title">Company Information</h3>
@@ -20,7 +20,7 @@
           </div>
                 </div>
       </div>
-              <div id="bottom_2" class="one_fourth">
+              <div id="bottom_2" class="one_fourth b">
         <div class="column-content-wrapper">
                   <div class="bottom-col-content widget_recent_entries custom-formatting">
             <h3 class="bottom-col-title">Other Links</h3>
@@ -36,7 +36,7 @@
           </div>
                 </div>
       </div>
-              <div id="bottom_3" class="one_fourth">
+              <div id="bottom_3" class="one_fourth c">
         <div class="column-content-wrapper"> 
                   <!--<div class="bottom-col-content widget_text substitute_widget_class">
             <h3 class="bottom-col-title">Address</h3>
@@ -53,13 +53,13 @@
                   <div class="bottom-col-content widget_recent_entries custom-formatting">
             <h3 class="bottom-col-title">Quick Connect</h3>
             <ul>
-                      <li><a href="javascript:void(0);">Phone: +91 22 28463454</a></li>
-                      <li><a href="mailto:contact@myinsuranceclub.com">Email: contact@myinsuranceclub.com</a></li>
+                      <li><a href="javascript:void(0);" style="color:#ff6102; text-decoration:none;">Phone: +91 22 28463454</a></li>
+                      <li><a href="javascript:void(0);" style="color:#ff6102; text-decoration:none;">Email: contact@myinsuranceclub.com</a></li>
                     </ul>
           </div>
                 </div>
       </div>
-              <div id="bottom_4" class="one_fourth last_column">
+              <div id="bottom_4" class="one_fourth last_column d">
         <div class="column-content-wrapper">
                   <div class="bottom-col-content widget_text substitute_widget_class">
             <h3 class="bottom-col-title" style="background:none; margin-top:10px;"></h3>

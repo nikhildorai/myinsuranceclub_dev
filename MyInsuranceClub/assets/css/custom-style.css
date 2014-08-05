@@ -1345,6 +1345,10 @@ background-position: 0 -29px; cursor:pointer;
 background-position: 0 -89px; cursor:pointer;
 
 }
+.ld{
+background-position: 0 -120px; cursor:pointer;
+
+}
 
 .more-less-content{
     display: none;
@@ -1375,7 +1379,7 @@ background-position: 0 -89px; cursor:pointer;
    
 }
 .main-menu .submenu-content .container .follow {
-    line-height: 10px !important; float:right;
+    line-height: 10px !important; float:right; width:780px;
 }
 .pull-right {
     float: right;

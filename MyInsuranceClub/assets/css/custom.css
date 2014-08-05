@@ -1333,8 +1333,8 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ad1900', endCo
 }
 
 .ui-autocomplete  li:first-child {
- display:none;
-}
+/* display:none;
+*/}
 .slider-toggle-container {
 }
 .slider-toggle-label-text {
