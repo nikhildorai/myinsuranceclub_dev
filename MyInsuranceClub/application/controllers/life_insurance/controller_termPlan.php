@@ -28,6 +28,10 @@ class controller_termPlan extends Customer_Controller {
 	
 	public function index()
 	{
+		$this->input->set_cookie('user_filter','');
+		
+		$this->input->set_cookie('compared_term_plans','');
+		
 		$product_name = 'level-term';
 		$this->load->model('model_city');
 		
@@ -229,7 +233,9 @@ class controller_termPlan extends Customer_Controller {
 			}
 			
 			$user_input=$this->session->userdata('user_input',$user_input);
-				
+			
+			$this->input->set_cookie('mic_userdata',$this->session->userdata('session_id'),'864000');
+			
 			$data['user_input'] = $user_input;
 			
 			$data['compareParam'] = $param;
@@ -340,7 +346,7 @@ class controller_termPlan extends Customer_Controller {
 	
 	public function compare_policies()
 	{
-		/* $this->load->model('compare_health_policies');
+		$this->load->model('model_compare_term_policies');
 	
 		$data=array();
 	
@@ -348,7 +354,11 @@ class controller_termPlan extends Customer_Controller {
 	
 		$annual_premium=array();
 	
-		$age=array();
+		$age='';
+		
+		$coverage_amount = '';
+		
+		$term = '';
 	
 		if($this->input->post('compare')!=null)
 		{
@@ -362,32 +372,35 @@ class controller_termPlan extends Customer_Controller {
 				$annual_premium[]=$compare[1];
 	
 				$age=$compare[2];
+				
+				$term = $compare[3] ;
+				
+				$coverage_amount = $compare[4];
+				
+				
 			}
 				
 		}
-		$data['comparison_results']=$this->compare_health_policies->get_comparison($variant,$annual_premium,$age);
+		
+		Util::setCookies('compared_term_plans',$variant);
+		
+		$data['comparison_results']=$this->model_compare_term_policies->get_comparison($variant,$annual_premium,$age,$term,$coverage_amount);
 	
+		
 		foreach ($data['comparison_results'] as $k1=>$v1)
 		{
 				
 			foreach ($v1 as $k2=>$v2)
 			{
-				if ($k2 == 'company_shortname')
-				{
-					$key = 'Company';
-				}
-	
-				else
-				{
-					$key = ucfirst(str_replace(array('_','-',' '), ' ', $k2));
-				}
-	
-				$result[$key][] = $v2;
+				$result[$k2][] = $v2;
 			}
 		}
-		$data['result']=$result; */
+		$data['result']=$result;
 	
-		$this->load->view('termPlan/compare_results');
+		$this->template->set_template('frontendsearch');
+		$this->template->write_view('content', 'termPlan/compare_results', $data, TRUE);
+		$this->template->render();
+		//$this->load->view('termPlan/compare_results',$data);
 	}
 	
 }

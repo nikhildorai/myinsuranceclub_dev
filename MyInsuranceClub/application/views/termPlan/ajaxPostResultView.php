@@ -38,7 +38,7 @@ elseif(! empty ( $customer_details )) {
 			$variant = '';
 		}
 		
-		$compare_data = $detail ['variant_id'] . '-' . $detail['annual_premium'] . '-' . $detail ['age'];
+		$compare_data = $detail ['variant_id'] . '-' . $detail['annual_premium'] . '-' . $detail ['age']. '-' . $detail['term']. '-' . $sum_assured_session;
 				
 		$sum_assured = "<span>&#8377;" . Util::moneyFormatIndia($sum_assured_session) . "</span>";
 		
@@ -122,6 +122,44 @@ elseif(! empty ( $customer_details )) {
 				<div class="custom-table-1">
 					<table width="100%">
 					<tbody>
+					<tr class="odd">
+								<td>Payment Modes</td>
+								<td class="cus_width"><?php echo $detail['payment_modes'] ;?></td>
+					</tr>
+					<tr >
+								<td>Death Benefit</td>
+								<td class="cus_width"><?php echo $detail['death_benefit']; ?></td>
+					</tr>
+					<tr class="odd">
+								<td>Maturity Benefit</td>
+								<td class="cus_width"><?php echo $detail['maturity_benefit'] ;?></td>
+					</tr>
+					<tr>
+								<td>Tax Benefit</td>
+								<td class="cus_width"><?php echo $detail['tax_benefits'] ;?></td>
+					</tr>
+					<tr class="odd">
+								<td>Loan</td>
+								<td class="cus_width"><?php echo $detail['loan'] ;?></td>
+					</tr>
+					<tr>
+								<td>Policy Revival</td>
+								<td class="cus_width"><?php echo $detail['revive_policy'] ;?></td>
+					</tr>
+					
+					<?php if(trim($detail['additional_benefit']) != 'No Additional Benefits'){?>
+					
+					<tr class="odd">
+								<td>Additonal Benefits</td>
+								<td class="cus_width"><?php echo $detail['additional_benefit'] ;?></td>
+					</tr>
+					
+					<?php }?>
+					
+					<tr>
+								<td>Claims Ratio</td>
+								<td class="cus_width"><?php echo $detail['financial_year']. ' : ' . $detail['claim_ratio'].' %' ;?></td>
+					</tr>
 					</tbody>
 					</table>
 				</div>

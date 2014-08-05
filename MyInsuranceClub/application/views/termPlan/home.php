@@ -192,7 +192,7 @@
           </div>
           
           <?php 
-				$smoker = '';
+          		$smoker = '';
           		$non_smoker ='';
           		
           		if(isset($this->session->userdata['user_input']['smoker']) && $this->session->userdata['user_input']['smoker']=='1')

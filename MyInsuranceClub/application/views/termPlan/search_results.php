@@ -1,7 +1,6 @@
 <?php 
 	
-	//$CI =& get_instance();
-	//var_dump($user_input);
+	
 	$temp = $customer_details;
 	
 	$temp_premiums = Util::getMinAndMaxPremium($temp);
@@ -136,7 +135,7 @@
             
             
                <div class="col-md-12" style="padding:0px;">
-              <?php echo form_open('health-insurance/compare-results',array('id'=>'compare'));?>
+              <?php echo form_open('life-insurance/term-insurance/compare-results',array('id'=>'compare'));?>
                <div style=" height:auto; padding:10px 0px 30px 0px; background:#ededec;  border-radius: 4px; font-weight:bold;">
                 <div class="col-md-5 plan">
                 <div style="position: relative; float: left; margin-left: -2px; top: 2px; margin-right: 7px; color: rgb(95, 180, 29); font-size: 17px;"><i class="fa fa-level-up  fa-rotate-180"></i></div>  <div class="com_pl" style="float: left; font-weight: bold; color: rgb(44, 163, 239);"><a href="javascript:void(0);" class="cmp_p_s" id="comparePolicy" title="Compare upto 3 plans">Compare Plans</a></div>
@@ -273,38 +272,38 @@
                  <div class="checkbox">
             <label>
             
-            <input type="checkbox" id="Yearly" name="Yearly"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
+            <input type="checkbox" id="Yearly" name="payment_freq[]"  class="search_filter" value="Yearly" <?php //echo $checked_maternity;?>>
             <label class="" for="maternity">Yearly</label>
           </label></div>
 					 
 				<div class="checkbox">
             <label>
             
-            <input type="checkbox" id="Half" name="Half"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
+            <input type="checkbox" id="Half" name="payment_freq[]"  class="search_filter" value="Half Yearly" <?php //echo $checked_maternity;?>>
             <label class="" for="Half">Half Yearly</label>
           </label></div>
           <div class="checkbox">
             <label>
             
-            <input type="checkbox" id="Quarterly" name="Quarterly"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
+            <input type="checkbox" id="Quarterly" name="payment_freq[]"  class="search_filter" value="Quarterly" <?php //echo $checked_maternity;?>>
             <label class="" for="Quarterly">Quarterly</label>
           </label></div>
           <div class="checkbox">
             <label>
             
-            <input type="checkbox" id="Monthly" name="Monthly"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
+            <input type="checkbox" id="Monthly" name="payment_freq[]"  class="search_filter" value="Monthly" <?php //echo $checked_maternity;?>>
             <label class="" for="Monthly">Monthly</label>
           </label></div>
           <div class="checkbox">
             <label>
             
-            <input type="checkbox" id="Single" name="Single"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
+            <input type="checkbox" id="Single" name="payment_freq[]"  class="search_filter" value="Single" <?php //echo $checked_maternity;?>>
             <label class="" for="Single">Single</label>
           </label></div>
           <div class="checkbox">
             <label>
             
-            <input type="checkbox" id="Limited" name="Limited"  class="search_filter" value="1" <?php //echo $checked_maternity;?>>
+            <input type="checkbox" id="Limited" name="payment_freq[]"  class="search_filter" value="Limited Pay" <?php //echo $checked_maternity;?>>
             <label class="" for="Limited">Limited Pay</label>
           </label></div>	 
 				</p>
@@ -324,24 +323,32 @@
 					
 					<div class="checkbox">
             				<label>
-            					<input type="checkbox" id="precover[<?php //echo $sl; ?>]" name="precover[]" class="search_filter" value="<?php //echo $p;?>" <?php //echo $checked_precover;?>>
-           							 <label class="" for="precover[<?php //echo $sl; ?>]">Pure Protection (Income for Family)
+            					<input type="checkbox" id="precover_Life" name="purpose[]" class="search_filter" value="Life Cover<?php //echo $p;?>" <?php //echo $checked_precover;?>>
+           							 <label class="" for="precover_Life">Life Cover Only (Most Popular)
 									</label>
          					 </label>
           			</div>
           			
           			<div class="checkbox">
             				<label>
-            					<input type="checkbox" id="precover[<?php //echo $sl; ?>]" name="precover[]" class="search_filter" value="<?php //echo $p;?>" <?php //echo $checked_precover;?>>
-           							 <label class="" for="precover[<?php //echo $sl; ?>]">Loan Protection
+            					<input type="checkbox" id="precover_Life Cover + Monthly Income[<?php //echo $sl; ?>]" name="purpose[]" class="search_filter" value="Life Cover + Monthly Income<?php //echo $p;?>" <?php //echo $checked_precover;?>>
+           							 <label class="" for="precover_Life Cover + Monthly Income[<?php //echo $sl; ?>]">Life Cover + Monthly Income
 									</label>
          					 </label>
           			</div>
           			
           			<div class="checkbox">
             				<label>
-            					<input type="checkbox" id="precover[<?php //echo $sl; ?>]" name="precover[]" class="search_filter" value="<?php //echo $p;?>" <?php //echo $checked_precover;?>>
-           							 <label class="" for="precover[<?php //echo $sl; ?>]">Protection + Return of Premium
+            					<input type="checkbox" id="precover_Loan Protection" name="purpose[]" class="search_filter" value="Loan Protection<?php //echo $p;?>" <?php //echo $checked_precover;?>>
+           							 <label class="" for="precover_Loan Protection[<?php //echo $sl; ?>]">Loan Protection
+									</label>
+         					 </label>
+          			</div>
+          			
+          			<div class="checkbox">
+            				<label>
+            					<input type="checkbox" id="precover_Life Cover + Return of Premium[<?php //echo $sl; ?>]" name="purpose[]" class="search_filter" value="Life Cover + Return of Premium<?php //echo $p;?>" <?php //echo $checked_precover;?>>
+           							 <label class="" for="precover_Life Cover + Return of Premium[<?php //echo $sl; ?>]">Life Cover + Return of Premium
 									</label>
          					 </label>
           			</div>
