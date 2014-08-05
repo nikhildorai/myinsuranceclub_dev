@@ -93,11 +93,11 @@
                 	
                 	if($c_name['alternate_city_name1'] != '' && $c_name['alternate_city_name2'] != '')
                 	{
-                		$display_city = '('.$c_name['alternate_city_name1'].'/'.$c_name['alternate_city_name2'].')'.$c_name['display_name'];
+                		$display_city = '('.$c_name['alternate_city_name1'].'/'.$c_name['alternate_city_name2'].') '.$c_name['display_name'];
                 	}
                 	elseif($c_name['alternate_city_name1'] != '' && $c_name['alternate_city_name2'] == '')
                 	{
-                		$display_city = '('.$c_name['alternate_city_name1'].')'.$c_name['display_name'];
+                		$display_city = '('.$c_name['alternate_city_name1'].') '.$c_name['display_name'];
                 	}
                 	
                 	elseif($c_name['alternate_city_name1'] == '' && $c_name['alternate_city_name2'] == '')
