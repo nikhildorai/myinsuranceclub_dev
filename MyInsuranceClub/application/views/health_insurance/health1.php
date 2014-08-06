@@ -89,25 +89,9 @@
                 <?php } else{?>
                 <option value="590" selected="selected">Mumbai</option>
                 <?php }?>
-                <?php foreach ($city as $c_name){
-                	
-                	if($c_name['alternate_city_name1'] != '' && $c_name['alternate_city_name2'] != '')
-                	{
-                		$display_city = '('.$c_name['alternate_city_name1'].'/'.$c_name['alternate_city_name2'].') '.$c_name['display_name'];
-                	}
-                	elseif($c_name['alternate_city_name1'] != '' && $c_name['alternate_city_name2'] == '')
-                	{
-                		$display_city = '('.$c_name['alternate_city_name1'].') '.$c_name['display_name'];
-                	}
-                	
-                	elseif($c_name['alternate_city_name1'] == '' && $c_name['alternate_city_name2'] == '')
-                	{
-                		$display_city = $c_name['display_name'];
-                	}
-                	
-                	
-             ?>
-                <option value="<?php echo $c_name['city_id']; ?>" ><?php echo $display_city; ?></option>
+                <?php foreach ($city as $c_name){?>
+                
+                <option value="<?php echo $c_name['city_id']; ?>" data-city-name="<?php echo $c_name['mic_city_name']; ?>" data-altname1="<?php echo $c_name['alternate_city_name1']; ?>" data-alt_name2="<?php echo $c_name['alternate_city_name2'];?>"><?php echo $c_name['display_name']; ?></option>
                 <?php }?>
               </select>
               <div style="width:300px; height:50px; margin-top:30px;" id="no_city_fnd"></div>

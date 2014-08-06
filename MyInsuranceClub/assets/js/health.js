@@ -508,9 +508,14 @@ $(document).ready(function() {
         var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
         response( this.element.find( "option" ).map(function() {
             var text = $( this ).text();
-            if ( this.value && ( !request.term || matcher.test(text) ) )
+            var display_name = $(this).data('displayname1');
+            var altname2 = $(this).data('alt_name2');
+            var altname1 = $(this).data('altname1');
+            
+            var cityName = $(this).data('city-name');
+            if ( this.value && ( !request.term || matcher.test(text) || matcher.test(altname2) || matcher.test(cityName) || matcher.test(altname1)) )
                 return {
-                    label: text,
+                    label: display_name,
                     value: text,
                     option: this,
                     category: $(this).closest("optgroup").attr("label")
