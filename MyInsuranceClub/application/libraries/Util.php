@@ -2074,18 +2074,29 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 				if (isset($search_filter['payment_freq'])) 
 				{
 					
-					$db_payment_freq = explode(', ',$v['payment_modes']);
+					$db_payment_freq = explode(', ',strtolower($v['payment_modes']));
 					
-					//var_dump($search_filter['payment_freq']);
+					$inPaymentMode = array();
 					
-					foreach($db_payment_freq as $k3=>$v3)
+					foreach($search_filter['payment_freq'] as $k3=>$v3)
 					{
-						if (!in_array(trim($v3),$search_filter['payment_freq']))
-						{
+						if (!in_array(trim($v3),$db_payment_freq))
+						{	
+							$inPaymentMode[] = false;
 							
-							unset($data[$k]);
 						}
+							
+						elseif(in_array(trim($v3),$db_payment_freq))
+						{
+							$inPaymentMode[] = true;
+						}
+						
 					}	
+					
+					if(!in_array(true, $inPaymentMode))
+					{
+						unset($data[$k]);
+					}
 				}
 				
 				if(isset($search_filter['purpose']))
@@ -2095,6 +2106,28 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 						unset($data[$k]);
 					}
 				}
+				
+				if(isset($search_filter['min_claims']))
+				{
+					$min_claim = (float) str_replace(' %','',$search_filter['min_claims']);
+					
+					
+					if(!((float) $v['claim_ratio'] >= $min_claim))
+					{
+						unset($data[$k]);
+					}
+				}
+				
+				if(isset($search_filter['max_claims']))
+				{
+					$max_claim = (float) str_replace(' %','',$search_filter['max_claims']);
+						
+					if(!((float) $v['claim_ratio'] <= $max_claim))
+					{
+						unset($data[$k]);
+					}
+				}
+				
 			}
 		
 		}
