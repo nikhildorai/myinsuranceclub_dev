@@ -87,7 +87,7 @@
                 <?php if(isset($this->session->userdata['user_input']['cust_city_name']) && isset($this->session->userdata['user_input']['cust_city'])){?>
                 <option value="<?php echo $this->session->userdata['user_input']['cust_city'];?>" selected="selected"><?php echo $this->session->userdata['user_input']['cust_city_name']?></option>
                 <?php } else{?>
-                <option value="590" selected="selected">Mumbai</option>
+                <option value="590" selected="selected">Mumbai, Maharashtra</option>
                 <?php }?>
                 <?php foreach ($city as $c_name){?>
                 
@@ -127,7 +127,7 @@
                     																					}else 
                     																					{?>Male<?php }?>">
                 <input type="hidden" id="policy_term" name="policy_term" value="">
-                <input type="hidden" id="cust_city_name" name="cust_city_name" value="<?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?>">
+                <input type="hidden" id="cust_city_name" name="cust_city_name" value="<?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai, Maharashtra<?php }?>">
                 <input type="hidden" id="coverage_amount" name="coverage_amount" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount']))
                      																				{
  																										echo $this->session->userdata['user_input']['coverage_amount'];
