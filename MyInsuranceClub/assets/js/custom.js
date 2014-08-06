@@ -181,6 +181,22 @@ $('#clickk_termplans').live('mouseenter', function(){
 	
 });
 
+$("#c_termplans li").click(function() {
+	//alert('a');
+	   var am_v = $(this).text(); // gets text contents of clicked li
+		$("#rs_termplans").text(am_v);
+		var am_vid = $(this).data('coverage-termid');
+		//$("#coverage_amount").val(am_v);
+		$("#coverage_amount_term").val(am_v);
+		$("#coverage_amount_literal_term").val(am_vid);
+	 mouseOverActiveElement = false; 
+	  if (!mouseOverActiveElement) {
+			 
+			  // $("#c_ch").stop().slideUp();
+			    $("#c_ch_termplans").fadeOut();
+	    }
+	});
+
 $("html").click(function(){ 
 
     if (!mouseOverActiveElement) {
