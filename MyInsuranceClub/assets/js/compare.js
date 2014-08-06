@@ -272,37 +272,26 @@ $('html, body').animate({scrollTop: $(this).parent().parent().parent().offset().
 
 
 
-    $( "#slider-range" ).slider({
-      range: true,
-      step:5,
-      min: 0,
-      max: 100,
-      values: [ 0,100 ],
-      slide: function( event, ui ) {
-        $( "#amount" ).val(formatNumber(ui.values[ 0 ]) + " %");
-		$( "#amount1" ).val(formatNumber(ui.values[ 1 ] + " %"));
-		
-		
-      },
-      
-      stop: function( event, ui ) {
-			data = $('#search').serialize();
-	  		
-			 $.ajax({
-				 
-			type:"post", 
-			url: annual_premium_search_url,
-			data:data,
-			success:function(data)
-			{ 
-				$('#cmp_tbl').html(data);
-			}
-			});
-		
-		}
-    });
-    $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) + " %");
-	$( "#amount1" ).val($( "#slider-range" ).slider( "values", 1 ) + " %");
+	 $( "#slider-range" ).slider({
+	      range: true,
+	      step:5,
+	      min: 40,
+	      max: 100,
+	      values: [ 0,100 ],
+	      slide: function( event, ui ) {
+	        $( "#claims_ratio_min" ).val(formatNumber(ui.values[ 0 ]) + " %");
+			$( "#claims_ratio_max" ).val(formatNumber(ui.values[ 1 ] + " %"));
+			
+			
+	      },
+	      
+	      stop: function( event, ui )
+	      {
+	    	  send_ajax_post(annual_premium_search_url);
+		  }
+	    });
+	    $( "#claims_ratio_min" ).val($( "#slider-range" ).slider( "values", 0 ) + " %");
+		$( "#claims_ratio_max" ).val($( "#slider-range" ).slider( "values", 1 ) + " %");
 	   
 	   
 	
