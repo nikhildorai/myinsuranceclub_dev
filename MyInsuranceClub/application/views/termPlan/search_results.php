@@ -655,12 +655,12 @@ var searchScroll = "<?php echo ($compareParam == "yes") ? 'no' : 'yes'?>";
 <script>
 <?php if($compareParam !='yes') {?>
 $(function() {
-  $("#share_link,#backgroundPopup").delay(15000).fadeIn(500);
+  $("#share_link,#backgroundPopup").delay(30000).fadeIn(500);
   
   setTimeout(function(){
    $('#share_link').css({opacity: 1});
    
-}, 15000);
+}, 30000);
   
   $('.fac_link').html('<div class="fb-share-button" data-href="http://www.myinsuranceclub.com/health-insurance/"></div>');
   
