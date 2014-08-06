@@ -101,14 +101,21 @@ class News extends Admin_Controller {
 				$tag = $this->util->addUpdateTags($_POST['tag']);
 				$_POST['model']['tag'] = $tag;
 			}
+			
 			if (isset($_POST['model']['slug']) && !empty($_POST['model']['slug']))
-			{
 				$_POST['model']['slug'] = $this->util->getSlug($_POST['model']['slug']);
-			}		
+			else
+				$_POST['model']['slug'] = $this->util->getSlug($_POST['model']['title']);
+					
 			if (isset($_POST['model']['publish_date']) && !empty($_POST['model']['publish_date']))
 			{
 				$_POST['model']['publish_date'] = $this->util->getDate($_POST['model']['publish_date'], 3);
-			}	
+			}
+			if (!isset($_POST['model']['seo_description'])|| empty($_POST['model']['seo_description']))
+			{
+				$_POST['model']['seo_description'] = substr(strip_tags($_POST['model']['description']), 1, 150);
+			}
+//var_dump($_POST);die;			
 			//	set default values for policy
 			$arrParams = $this->input->post('model');
 			$_POST['modelType'] = $modelType;
@@ -119,13 +126,13 @@ class News extends Admin_Controller {
 				array('field' => 'model[publish_date]', 'label' => 'publish date', 'rules' => 'required'),
 				array('field' => 'model[author]', 'label' => 'author', 'rules' => 'required'),
 				array('field' => 'model[seo_description]', 'label' => 'seo description', 'rules' => 'required'),
-				array('field' => 'model[seo_keywords]', 'label' => 'seo keywords', 'rules' => 'required'),
+			//	array('field' => 'model[seo_keywords]', 'label' => 'seo keywords', 'rules' => 'required'),
 				array('field' => 'model[seo_title]', 'label' => 'key features', 'rules' => 'required'),
 				array('field' => 'model[slug]', 'label' => 'url', 'rules' => 'required|callback_validatePost[slug]'),
 				array('field' => 'model[tag]', 'label' => 'tag', 'rules' => 'required'),
 				);	
 			$this->form_validation->set_rules($validation_rules);
-			
+		
 			// Run the validation.
 			if ($this->form_validation->run())
 			{
@@ -208,7 +215,7 @@ class News extends Admin_Controller {
 			}	
 			//	search for existing records
 			$record = $this->news_model->getAll($arrParams);
-		
+
 			if ($record->num_rows == 0)
 			{
 				return TRUE;

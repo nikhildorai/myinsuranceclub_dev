@@ -44,7 +44,7 @@ class Common extends Common_Controller {
 			$arrParams['ratingType'] = $ratingTYpe = $_POST['ratingType'];
 			$arrParams['currentRatingValue'] = (float)$_POST['hoverRating']; 
 			$arrParams['record'] = $_POST['record'];
-			$dbPrefix = Util::getdbPrefix();
+			$dbPrefix = Util::getdbPrefix();	
 			switch ($ratingTYpe)
 			{
 				case 'policy':
@@ -52,11 +52,18 @@ class Common extends Common_Controller {
 					$whereFieldName = 'slug';
 					$whereFieldValue = $arrParams['record'];
 				break;
+				case 'news':
+					$tableName = $dbPrefix.'news';
+					$whereFieldName = 'slug';
+					$whereFieldValue = $arrParams['record'];
+				break;
 				default :
 					$data = array();
 				break;
 			}
-			$recordData = Util::callStoreProcedure('sp_getSingleRecordFromTable', array('table_name'=>$tableName, 'where_field_name'=>$whereFieldName, 'where_field_value'=>$whereFieldValue));
+			$where = array('table_name'=>$tableName, 'where_field_name'=>$whereFieldName, 'where_field_value'=>$whereFieldValue);
+			$recordData = Util::callStoreProcedure('sp_getSingleRecordFromTable', $where);
+		
 			if (!empty($recordData))
 			{
 				$recordData = reset($recordData);
@@ -66,7 +73,7 @@ class Common extends Common_Controller {
 				
 				$newRatingTotalValue = $oldRatingTotalValue + $arrParams['currentRatingValue'];
 				$newRatingClickCount = $oldRatingClickCount +1;
-				$newRating = number_format($newRatingTotalValue/$newRatingClickCount,2);
+				$newRating = number_format($newRatingTotalValue/$newRatingClickCount,1);
 				Util::callStoreProcedure('sp_updateRatingValuesForRecords', array('table_name'=>$tableName, 'where_field_name'=>$whereFieldName, 'where_field_value'=>$whereFieldValue,'rating_click_count'=>$newRatingClickCount, 'rating_total_value'=>$newRatingTotalValue, 'rating_value'=>$newRating));
 				$data = array('rating_click_count'=>$newRatingClickCount, 'rating_total_value'=>$newRatingTotalValue, 'rating_value'=>$newRating);
 			}		

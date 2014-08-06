@@ -1,5 +1,5 @@
 <script src="<?php echo $includes_dir;?>js/dynamicPolicyRows.js"></script>
-		<script src="<?php echo  base_url()?>assets/js/multiFileUpload/script.js"></script>
+<script src="<?php echo  base_url()?>assets/js/multiFileUpload/script.js"></script>
 
 <script type="text/javascript">
 

@@ -21,19 +21,59 @@ class News extends MIC_Controller {
 	{
 		// Call the Controller constructor
 		parent::__construct();
-		
+		$this->load->model('news_model');
+        $this->load->plugin('widget_pi');
 	}
 	
 	
 	/*
-	 * controller for mic/life-insurance/
+	 * controller for mic/news/
 	 */
 	public function index()
-	{	
-		$data = array();
+	{
+		$this->load->library('pagination');
+		$data = $data['details'] = $arrParams = $records = array();
+		$where 	= News_model::getWhere();	
+		$total = Util::getTotalRowTable('total','news', $where);
+		
+		$limit = 10;
+		$limit = isset($_GET['per_page']) ? $_GET['per_page'] : 0 ; 
+		
+		$arrParams['news_slug'] = '';
+		$arrParams['perPage'] = 2;//$this->config->config['pagination']['per_page'];
+		$arrParams['limits'] = $limit;
+		$data = News_model::getNewsDetails($arrParams);	
+		//	pagination
+		$config = $this->util->get_pagination_params();
+		$config['total_rows'] 	= $total; 
+		$this->pagination->initialize($config); 	
 		$this->template->set_template('frontend');
-		$this->template->write_view('content', 'news/news', $data, TRUE);
+		$this->template->write_view('content', 'news/index', $data, TRUE);
 		$this->template->render();
+	}
+	
+	
+	/*
+	 * controller for mic/news/single-new-articles
+	 */
+	public function newsDetails($slug)
+	{	
+        $this->load->library('disqusLib');
+		$data = array();
+		if (empty($slug))
+			redirect('news/index');
+		else 
+		{
+			$arrParams['news_slug'] = $slug;
+			$arrParams['perPage'] = '';//$this->config->config['pagination']['per_page'];
+			$arrParams['limits'] = '';
+			$data = News_model::getNewsDetails($arrParams);
+			$data['disqusUrl'] = base_url().'news/'.$slug;	
+//	echo '<pre>';print_r($data);	die;	
+			$this->template->set_template('frontend');
+			$this->template->write_view('content', 'news/news_detail', $data, TRUE);
+			$this->template->render();
+		}
 	}
 	
 

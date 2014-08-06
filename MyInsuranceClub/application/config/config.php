@@ -402,6 +402,12 @@ $config['url_path']['policy']['policy_wordings'] 				= $config['base_url'].'uplo
 $config['url_path']['policy']['policy_wordings_images'] 		= $config['base_url'].'uploads/policy/policy_wordings/images/';
 $config['url_path']['policy']['policy_wordings_thumbnails'] 	= $config['base_url'].'uploads/policy/policy_wordings/thumbnails/';
 
+//	news
+$config['url_path']['news']['original_image']				= $config['base_url'].'uploads/news/original_image';
+$config['url_path']['news']['main_image']					= $config['base_url'].'uploads/news/main_image_680x309';
+$config['url_path']['news']['listing_image']				= $config['base_url'].'uploads/news/listing_image_300x220';
+$config['url_path']['news']['thumbnail']					= $config['base_url'].'uploads/news/thumbnail_75x75';
+
 //	upload folder paths
 $config['folder_path']['temp']			 				= realpath(APPPATH . '../uploads').'/temp/';
 $config['folder_path']['company']['all'] 				= realpath(APPPATH . '../uploads').'/company/';
@@ -419,6 +425,13 @@ $config['folder_path']['policy']['brochure_thumbnails'] 	= realpath(APPPATH . '.
 $config['folder_path']['policy']['policy_wordings'] 			= realpath(APPPATH . '../uploads').'/policy/policy_wordings/';
 $config['folder_path']['policy']['policy_wordings_images'] 		= realpath(APPPATH . '../uploads').'/policy/policy_wordings/images/';
 $config['folder_path']['policy']['policy_wordings_thumbnails'] 	= realpath(APPPATH . '../uploads').'/policy/policy_wordings/thumbnails/';
+
+//	news
+$config['folder_path']['news']['original_image']			= realpath(APPPATH . '../uploads').'/news/original_image';
+$config['folder_path']['news']['main_image']				= realpath(APPPATH . '../uploads').'/news/main_image_680x309';
+$config['folder_path']['news']['listing_image']				= realpath(APPPATH . '../uploads').'/news/listing_image_300x220';
+$config['folder_path']['news']['thumbnail']					= realpath(APPPATH . '../uploads').'/thumbnail_75x75';
+
 
 $config['policy']['descriptionCount'] = 1;
 $config['policy']['keyFeatures'] = 4;

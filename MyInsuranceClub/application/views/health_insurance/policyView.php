@@ -117,6 +117,7 @@
 								<div class="std"><?php echo $policyDetails['policy']['quick_overview']?></div>
 							</div>
 						</div>
+					<?php if (!empty($policyDetails['policy']['tweet_property'])){?>						
 						<div class="tw_sh">
 							<div style="width: 50px;; float: left;">
 								<a class="feature-icon-hover " href="javascript:void(0)"
@@ -136,6 +137,7 @@
 								</div>
 							</div>
 						</div>
+					<?php }?>						
 					</div>
 				</div>
 			</div>
@@ -1445,7 +1447,7 @@
 				$arrParams['disqus_url'] = $disqusUrl;
 				$arrParams['disqus_title'] = $policyDetails['policy']['policy_name'];
 		//		$arrParams['disqus_category_id'] = '3125046';
-		//	echo DisqusLib::displayDisqus($arrParams);
+			echo DisqusLib::displayDisqus($arrParams);
 										
 							/*		?>
 				<div id="disqus_thread"></div>
@@ -1485,6 +1487,7 @@
 </script>
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/page.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/rating.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/site.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/highcharts.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/highcharts-more.js"></script>

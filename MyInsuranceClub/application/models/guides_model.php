@@ -49,7 +49,7 @@ class Guides_model EXTENDS Admin_Model{
 	
 	public function getAll($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE '.Guides_model::getWhere();
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE '.Guides_model::getWhere($arrParams);
 		$sql .= ' ORDER BY title ASC, guide_id ASC ';	
 		$result = $this->db->query($sql);
 		return $result;

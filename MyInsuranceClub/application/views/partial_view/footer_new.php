@@ -48,7 +48,13 @@
 <script type="text/javascript">
    $(document).ready(function(){
     $('#menu').slicknav();
+
+	$('#goto_page_btn').click(function(){
+		var hrefVal = $('#goto_page_dd').find(':selected').data('href');
+		window.location.href = hrefVal;
+	});
    });
 </script>
+
 </body>
 </html>
