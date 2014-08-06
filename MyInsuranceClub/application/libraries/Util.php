@@ -1543,6 +1543,7 @@ public static function getCachedObject($cacheKey='')
 				case 6	: 	$format 	= 'l, M-d-Y, h:i:s A';	break;
 				case 7	: 	$format 	= '\G\M\T P';			break;
 				case 8 : 	$format 	= 'd/m/Y';				break;
+				case 9 : 	$format 	= 'M d, Y';				break;
 				default : 	$format 	= 'd-m-Y';				break;
 			}
 			$return = date($format, $value);
@@ -2276,6 +2277,14 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 				$query = "CALL sp_insetIntoMIC_disqus_threads(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			else if ($type == 'sp_insetIntoMIC_disqus_comments')
 				$query = "CALL sp_insetIntoMIC_disqus_comments(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			else if ($type == 'sp_getNewsDetails')
+				$query = "CALL sp_getNewsDetails(?,?,?)";
+			else if ($type == 'sp_getTopNewsArticlesGuide')
+				$query = "CALL sp_getTopNewsArticlesGuide(?)";
+			else if ($type == 'sp_getRelatedNewsArticlesGuides')
+				$query = "CALL sp_getRelatedNewsArticlesGuides(?,?)";
+			else if ($type == 'sp_getTagsWithNewsCount')
+				$query = "CALL sp_getTagsWithNewsCount(?)";
 				
 			$queryData = $arrParams;
 			$resultData = $db->db->query($query,$queryData);
@@ -2945,7 +2954,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 				$details = Util::callStoreProcedure($type = 'getPolicyVariantsFeaturesRidersDetails', $arrParams);
 				if (!empty($details))
 				{
-					$data = Util::rearrangeDataOfPolicyVariantsFeaturesRidersDetails($details, $tableNames);
+					$data = Util::rearrangeDataAsPerColumnName('policyDetailsPage',$details, $tableNames);
 					
 					$data['company'] = reset($data['company']);
 					$data['companyDetails'] = reset($data['companyDetails']);
@@ -2998,65 +3007,86 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		$tableNames[$dbPrefix.'policy_rider_level_term'][] 		= 'rider_slug';
 		$tableNames[$dbPrefix.'policy_rider_mediclaim'][] 		= 'rider_slug';
 		$tableNames[$dbPrefix.'policy_rider_personal_accident'][] = 'rider_slug';
+		$tableNames[$dbPrefix.'news'][]							= 'news_slug';
+		$tableNames[$dbPrefix.'articles'][]						= 'article_slug';
+		$tableNames[$dbPrefix.'guides'][]						= 'guide_slug';
+		$tableNames[$dbPrefix.'master_tags'][] 					= 'tag_slug';
 	//	$tableNames[$dbPrefix.''][] 				= '_slug';
 		return $tableNames;
 	}
 	
 	
-	public static function rearrangeDataOfPolicyVariantsFeaturesRidersDetails($details = array(), $tableNames = array())
+	public static function rearrangeDataAsPerColumnName($type= '', $details = array(), $tableNames = array())
 	{
 		$data = array();
 		$dbPrefix = Util::getdbPrefix();
-		if (!empty($details))
+		if (!empty($details) && !empty($type))
 		{
+			if (empty($tableNames))
+				$tableNames = Util::getFieldNamesOfAllTables();
+				
 			foreach ($details as $k1=>$v1)
-			{
+			{	
 				foreach ($v1 as $k2=>$v2)
-				{
-//echo '<pre>';print_r($v1);print_r($tableNames);die;					
-					//	company details
-					if (in_array($k2, $tableNames[$dbPrefix.'insurance_company_master']))
-						$data['company'][$v1['company_id']][$k2] = $v2;
-						
-					//	company features details
-					if (in_array($k2, $tableNames[$dbPrefix.'insurance_company_master_detail']))
-						$data['companyDetails'][$v1['company_id']][$k2] = $v2;
-						
-					//	policy details
-					if (in_array($k2, $tableNames[$dbPrefix.'policy_master']))
-						$data['policyDetails'][$v1['policy_id']]['policy'][$k2] = $v2;
-						
-					//	product details
-					if (in_array($k2, $tableNames[$dbPrefix.'product']))	
+				{			
+					if ($type == 'policyDetailsPage')
 					{
-						$data['policyDetails'][$v1['policy_id']]['policy']['product'][$k2] = $v2;
-						$data['company'][$v1['company_id']]['product'][$k2] = $v2;
-					}	
-					
-					//	subproduct details
-					if (in_array($k2, $tableNames[$dbPrefix.'sub_product']))	
+							//	company details
+						if (in_array($k2, $tableNames[$dbPrefix.'insurance_company_master']))
+							$data['company'][$v1['company_id']][$k2] = $v2;
+							
+						//	company features details
+						if (in_array($k2, $tableNames[$dbPrefix.'insurance_company_master_detail']))
+							$data['companyDetails'][$v1['company_id']][$k2] = $v2;
+							
+						//	policy details
+						if (in_array($k2, $tableNames[$dbPrefix.'policy_master']))
+							$data['policyDetails'][$v1['policy_id']]['policy'][$k2] = $v2;
+							
+						//	product details
+						if (in_array($k2, $tableNames[$dbPrefix.'product']))	
+						{
+							$data['policyDetails'][$v1['policy_id']]['policy']['product'][$k2] = $v2;
+							$data['company'][$v1['company_id']]['product'][$k2] = $v2;
+						}	
+						
+						//	subproduct details
+						if (in_array($k2, $tableNames[$dbPrefix.'sub_product']))	
+						{
+							$data['policyDetails'][$v1['policy_id']]['policy']['sub_product'][$k2] = $v2;
+							$data['company'][$v1['company_id']]['sub_product'][$k2] = $v2;
+						}	
+						
+						// 	policy features details details
+						if (in_array($k2, $tableNames[$dbPrefix.'policy_features']))	
+							$data['policyDetails'][$v1['policy_id']]['features'][$k2] = $v2;
+							
+						// 	variant details
+						if (in_array($k2, $tableNames[$dbPrefix.'policy_variants_master']))
+							$data['variantDetails'][$v1['variant_id']]['variant'][$k2] = $v2;
+							
+						// 	variant features details
+						if (isset($tableNames['variantFeatureFields']) && in_array($k2, $tableNames['variantFeatureFields']))	
+							$data['variantDetails'][$v1['variant_id']]['features'][$k2] = $v2;
+							
+						//	rider details
+						if (isset($tableNames['riderFields']) && in_array($k2, $tableNames['riderFields']))
+							$data['variantDetails'][$v1['variant_id']]['rider'][$v1['rider_id']][$k2] = $v2;
+						
+						if (isset($v1['variant_id']))
+							$data['variantNames'][$v1['variant_id']] = $v1['variant_name']; 
+					}
+					else if ($type == 'newsListing')
 					{
-						$data['policyDetails'][$v1['policy_id']]['policy']['sub_product'][$k2] = $v2;
-						$data['company'][$v1['company_id']]['sub_product'][$k2] = $v2;
-					}	
-					
-					// 	policy features details details
-					if (in_array($k2, $tableNames[$dbPrefix.'policy_features']))	
-						$data['policyDetails'][$v1['policy_id']]['features'][$k2] = $v2;
+						if (in_array($k2, $tableNames[$dbPrefix.'news']))	
+							$data['newsDetails'][$v1['news_id']]['news'][$k2] = $v2;
+							
+				//		if (in_array($k2, $tableNames[$dbPrefix.'master_tags']))	
+				//			$data['newsDetails'][$v1['news_id']]['tag'][$v1['tag_id']][$k2] = $v2;
 						
-					// 	variant details
-					if (in_array($k2, $tableNames[$dbPrefix.'policy_variants_master']))
-						$data['variantDetails'][$v1['variant_id']]['variant'][$k2] = $v2;
-						
-					// 	variant features details
-					if (in_array($k2, $tableNames['variantFeatureFields']))	
-						$data['variantDetails'][$v1['variant_id']]['features'][$k2] = $v2;
-						
-					//	rider details
-					if (in_array($k2, $tableNames['riderFields']))
-						$data['variantDetails'][$v1['variant_id']]['rider'][$v1['rider_id']][$k2] = $v2;
-					
-					$data['variantNames'][$v1['variant_id']] = $v1['variant_name']; 
+						if (in_array($k2, $tableNames[$dbPrefix.'user_accounts']) || in_array($k2, $tableNames[$dbPrefix.'demo_user_profiles']))	
+							$data['newsDetails'][$v1['news_id']]['author'][$k2] = $v2;
+					}
 				}		
 			}
 		}
@@ -3172,6 +3202,20 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		$l = strlen($str) - $i;
 		$ext = substr($str,$i+1,$l);
 		return $ext;
+	}
+
+	public static function getSubStringFromString($str, $limit = 120)
+	{
+		$return = '';
+		if (!empty($str))
+		{
+			$return = substr(strip_tags($str), 0, $limit);
+			if (strlen($str) > $limit)
+				$return .= '...';
+			else 
+				$return = $return;
+		}
+		return $return;
 	}
 }
 

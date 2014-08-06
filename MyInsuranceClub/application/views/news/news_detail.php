@@ -6,21 +6,44 @@
      <!-- <div class="col-md-12">
         <div class="ad_top">Advertisement Banner</div>
       </div>-->
-   
+<?php 
+if (empty($newsDetails))
+{
+	echo 'No news found.';
+}
+else 
+{
+	$news = $newsDetails['news'];
+	$author = $newsDetails['author'];
+	//$tag = $newsDetails['tag'];	
+	$url = base_url().'news/'.$news['news_slug'];
+
+	$folderUrl = $this->config->config['folder_path']['news']['main_image'];
+	$fileUrl = $this->config->config['url_path']['news']['main_image'];
+	$imgUrl = "";
+	
+	if (isset($news['main_image']) && !empty($news['main_image']))
+	{
+		if (file_exists($folderUrl.$news['main_image']))
+		{
+			$imgUrl = $fileUrl.$news['main_image'];
+		}
+	}
+	?>
       <div id="primary" class="content-area col-md-8 ">
         <article id="" class="clearfix" >
           <div id="" class="site-content" role="main">
             <header class="entry-header clearfix">
-              <h1 class="entry-title" itemprop="name">3 Money Myths to Avoid at All Costs</h1>
+              <h1 class="entry-title" itemprop="name"><?php echo $news['title'];?></h1>
               <div class="entry-meta clearfix">
               
-               <span class="meta-date updated"><i class="fa fa-clock-o"></i>July 16, 2014 </span><!-- .meta-date --> 
+               <span class="meta-date updated"><i class="fa fa-clock-o"></i><?php echo $this->util->getDate($news['publish_date'],9)?> </span><!-- .meta-date --> 
                
                 
-                <span class="meta-views" title="Views"> <i class="fa fa-eye"></i>153&nbsp;views </span><!-- /meta-views --> 
+                <span class="meta-views" title="Views"> <i class="fa fa-eye"></i><?php echo $news['page_view_count'] + 1;?>&nbsp;views </span><!-- /meta-views --> 
               
                 
-                <span class="meta-author"> <i class="fa fa-user" title="Author"></i> <span class="author vcard"><a class="url fn n" href="#" title="" rel="author"> Sameera Bootwala </a></span> </span><!-- .meta-author --> 
+                <span class="meta-author"> <i class="fa fa-user" title="Author"></i> <span class="author vcard"><a class="url fn n" href="<?php echo base_url().'author/'.$author['uacc_username'];?>" title="" rel="author"> <?php echo $author['upro_first_name']; echo isset($author['upro_last_name']) ? ' '.$author['upro_last_name'] : '';?> </a></span> </span><!-- .meta-author --> 
                 <div style="width:auto; margin-top:4px; float:left;"><div class="fb-like" data-href="http://www.myinsuranceclub.com/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div></div>
                 
                 
@@ -68,38 +91,51 @@
             <!-- .entry-header --> 
             
             <!-- Post Thumbnail -->
-            <div class="entry-thumb"> <img src="assets/images/news/1_b.jpg" alt=""> </div>
+       <?php if (!empty($imgUrl)){?>     
+            <div class="entry-thumb"> <img src="<?php echo $imgUrl;?>" alt=""> </div>
+      <?php }?>      
             <!-- .entry-thumb -->
             
             <div class="entry-content clearfix" itemprop="articleBody">
-              <p>Portrait of pretty tutor and diligent pupil looking at each other while discussing book.</p>
-              <p>Myths are very troublesome because they're hard to dispel. What's worse – if a myth crosses over from the realm of obscurity and becomes mainstream "belief," that's when the trouble starts.</p>
-
-
-<p>The sad thing is that a lot of people end up getting hurt by accepting myths as truth – especially when it comes to financial myths that many wrongly assume are right.
-
-So before you mistakenly set yourself on a course for financial disaster, read about the 3 money myths you should avoid at all costs! </p>
- <p>Myths are very troublesome because they're hard to dispel. What's worse – if a myth crosses over from the realm of obscurity and becomes mainstream "belief," that's when the trouble starts.</p>
-
-
-<p>The sad thing is that a lot of people end up getting hurt by accepting myths as truth – especially when it comes to financial myths that many wrongly assume are right.
-
-So before you mistakenly set yourself on a course for financial disaster, read about the 3 money myths you should avoid at all costs! </p>
-
-
-<div class="tw_sh">
-              <div style="width:50px;; float:left;"> <a title="Tweet This" href="javascript:void(0)" class="feature-icon-hover "> <span class="v-center"> <span class="icon i-recommend-bw icon-color-productview fa fa-thumbs-up"></span> </span> </a> </div>
-              <div style="width:auto;max-width:92%; float:left; position:relative;">
-                <div class="twt"> <span>The sad thing is that a lot of people end up getting hurt by accepting myths as truth – especially when it comes to financial myths that many wrongly assume are right.</span><span class="tw_th">Tweet This</span> </div>
-                <div class="twt_img"><img border="0" src="assets/images/twt_share.png"></div>
-              </div>
-            </div>
- <p>Myths are very troublesome because they're hard to dispel. What's worse – if a myth crosses over from the realm of obscurity and becomes mainstream "belief," that's when the trouble starts.</p>
-
-
-<p>The sad thing is that a lot of people end up getting hurt by accepting myths as truth – especially when it comes to financial myths that many wrongly assume are right.
-
-So before you mistakenly set yourself on a course for financial disaster, read about the 3 money myths you should avoid at all costs! </p>
+<?php
+				$description = array(); 
+				if (!empty($news['description']))
+					$description = explode('###', $news['description']);
+				if (!empty($description))
+				{
+					echo reset($description);
+				}
+				if (!empty($news['tweet_property']))
+?>
+						<div class="tw_sh">
+							<div style="width: 50px;; float: left;">
+								<a title="Tweet This" href="javascript:void(0)"
+									class="feature-icon-hover "> <span class="v-center"> <span
+										class="icon i-recommend-bw icon-color-productview fa fa-thumbs-up"></span>
+								</span> </a>
+							</div>
+							<div style="width: auto; max-width: 92%; float: left; position: relative;">
+								<div class="twt">
+									<span><?php echo $news['tweet_property'];?></span>
+									<span class="tw_th">Tweet This</span>
+								</div>
+								<div class="twt_img">
+									<img border="0" src="<?php echo base_url();?>assets/images/twt_share.png">
+								</div>
+							</div>
+						</div>
+					<?php 
+					if (count($description) > 1)
+					{
+						$i = 1;						
+						foreach ($description as $k1=>$v1)
+						{
+							if (!empty($v1) && $i != 1)
+								echo $v1;
+							$i++;
+						}
+					}
+					?>						
             </div>
             <!-- .entry-content -->
             
@@ -130,9 +166,9 @@ So before you mistakenly set yourself on a course for financial disaster, read a
               
               <div class="author-description clearfix">
                 <div class="ct-athr-left">
-                  <p>Hi, my name is  <strong>Deepika Padukone</strong>. Mark territory stick butt in face, or climb leg use lap as chair missing until dinner time for chew foot.<br/>
+                  <p>Hi, my name is  <strong><?php echo $author['upro_first_name']; echo isset($author['upro_last_name']) ? ' '.$author['upro_last_name'] : '';?></strong>. Mark territory stick butt in face, or climb leg use lap as chair missing until dinner time for chew foot.<br/>
                     <br/>
-                     <a class="author-site sm-italic-gray" href="#">View my other posts</a> 
+                     <a class="author-site sm-italic-gray" href="<?php echo base_url().'author/'.$author['uacc_username'];?>">View my other posts</a> 
                     </p>
                     
                 </div>
@@ -160,7 +196,8 @@ So before you mistakenly set yourself on a course for financial disaster, read a
                 <div data-original-rating-num="-" class="rating-widget-num right " style="display: none;">-</div>
                 
             </div>
-        <div  data-za-events="click" class="rating-widget-stars left">
+<?php /*?>            
+        <div  data-za-events="click" class="rating-widget-stars left" id="ratingDivParent">
           <div data-rating="0" data-originalclass="user_stars2_2" class="rating-cls user_stars2_2">
           <a  data-hover-rating="1.0" data-num="2" class="level-1" href="javascript:void(0);">&nbsp;</a>
           <a  data-hover-rating="2.0" data-num="4" class="level-3" href="javascript:void(0);">&nbsp;</a>
@@ -169,13 +206,28 @@ So before you mistakenly set yourself on a course for financial disaster, read a
           <a  data-hover-rating="5.0" data-num="10" class="level-9 level-0" href="javascript:void(0);">&nbsp;</a> 
           </div>
         </div>
+*/ ?>        
+
+		<div data-za-events="click" class="rating-widget-stars left" id="ratingDivParent">
+			<div data-rating="0" data-originalclass="user_starssel_0" class="rating-cls user_starssel_0">
+				<a id="rating-id-1" data-hover-rating="1.0" data-num="2" class="level-1 ratingSystem ratingHover" href="javascript:void(0);">&nbsp;</a> 
+				<a id="rating-id-3" data-hover-rating="2.0" data-num="4" class="level-3 ratingSystem ratingHover" href="javascript:void(0);">&nbsp;</a> 
+				<a id="rating-id-5" data-hover-rating="3.0" data-num="6" class="level-5 ratingSystem ratingHover" href="javascript:void(0);">&nbsp;</a> 
+				<a id="rating-id-7" data-hover-rating="4.0" data-num="8" class="level-7 ratingSystem ratingHover big" href="javascript:void(0);">&nbsp;</a> 
+				<a id="rating-id-9" data-hover-rating="5.0" data-num="10" class="level-9 ratingSystem ratingHover big bigger" href="javascript:void(0);">&nbsp;</a>
+			</div>
+		</div>        
+        
+        
+        
       </div>
-      
-      <div class="tot_votes">
-       <div class="avg_vote"><span>4.0</span><span class="sm">/5</span></div>
-       <div class="tot_votes_m">based on 2476 Votes</div>
-      </div>
-            
+
+				<div class="tot_votes">
+					<div class="avg_vote">
+						<span id="ratingValueId"><?php echo (!empty($news['rating_value']) && $news['rating_value'] != 0) ? number_format($news['rating_value'], 1) : 0;?></span><span class="sm">/5</span>
+					</div>
+					<div class="tot_votes_m">based on <?php echo number_format($news['rating_click_count'], 1)?> Votes</div>
+				</div> 
             </div>
             
             <span></span>
@@ -251,151 +303,102 @@ So before you mistakenly set yourself on a course for financial disaster, read a
           
           
           
-          
-          
-           <div class="entry-comments clearfix"  style="margin-top:20px;">
-           <nav class="navigation post-navigation" role="navigation" style=" border:none; padding-top:0px;">
-              <div class="nav-links clearfix"> <span class="meta-nav-prev">Related Posts </span>
-              
-              
-              
-               </div>
-               
-                <ul id="authorlist" class="post-list">
-               <li><a href="#">- 1-2-3 of your Kids Pocket Money</a></li>
-<li><a href="#">- Are you covered enough to fight Medical Inflation?</a></li>
-<li><a href="#">- Individual Death Claims Report for 2012-13</a></li>
-<li><a href="#">- e-Insurance Account - eIA</a></li>
-<li><a href="#">- Insurance Repository in India </a></li>
-</ul>
-              <!-- .nav-links --> 
-            </nav>
-           </div>
-          
-          
-          
-          
-          
-          
-          <div class="entry-comments clearfix"  style="margin-top:20px;">
-            <div id="" class="comments-area">
-              <div id="" class="comment-respond">
-             <div class="col-md-12">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'mictestram'; // required: replace example with your forum shortname
+			<?php 
+			if (!empty($relatedPost))
+			{	?>
+					<div class="entry-comments clearfix" style="margin-top: 20px;">
+						<nav class="navigation post-navigation" role="navigation"
+							style=" border:none; padding-top:0px;">
+						<div class="nav-links clearfix">
+							<span class="meta-nav-prev">Related Posts </span>
+						</div>
+						<ul id="authorlist" class="post-list">
+		<?php 			
+						$i = 1;
+						foreach ($relatedPost as $k1=>$v1)
+						{	
+							if ($i < 6)
+							{	?>
+							<li><a href="<?php echo base_url().'news/'.$v1['slug'];?>">- <?php echo $v1['title'];?></a></li>
+<?php 						}
+							$i++;
+						}	?>
+						</ul>
+						<!-- .nav-links --> </nav>
+					</div>
+<?php 		}	?>
 
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    
-    </div>
-              </div>
-              <!-- #respond --> 
-              
-            </div>
-            <!-- #comments --> 
-          </div>
-          
-          
-          
-          
-          
-          
-          
-        </article>
+
+
+
+
+				<div class="entry-comments clearfix"
+					style="margin-top: 20px;">
+					<div id="" class="comments-area">
+						<div id="" class="comment-respond">
+							<div class="col-md-12">
+							<?php
+							$arrParams['disqus_identifier'] = $disqusUrl;
+							$arrParams['disqus_url'] = $disqusUrl;
+							$arrParams['disqus_title'] = $news['title'];
+							//		$arrParams['disqus_category_id'] = '3125046';
+							echo DisqusLib::displayDisqus($arrParams);
+?>
+							</div>
+						</div>
+						<!-- #respond -->
+
+					</div>
+					<!-- #comments -->
+				</div>
+
+
+
+
+
+
+
+			</article>
         <!-- article --> 
       </div>
       <!-- .col-md-12 -->
-      
-      <div id="secondary" class="col-md-4  home-sidebar widget-area"> 
-        
-        <!-- START POPULAR POSTS WIDGET -->
-        <aside id="ct-popularpost-widget-5" class="widget ct-popularpost-widget">
-          <h1 class="widget-title" style="color:#FFFFFF;"><span>Most read news posts</span></h1>
-          <ul class="popular-posts-widget popular-widget-102120577">
-            <li class="clearfix">
-              <div class="widget-post-small-thumb"> <a href="#" title=""> <img width="75" height="75" src="assets/images/news/1_s.jpg" class="radius-3px ct-transition wp-post-image" alt="" title=""> </a> </div>
-              <!-- widget-post-small-thumb -->
-              
-              <h2 class="entry-title"><a href="#" rel="bookmark">3 Money Myths to Avoid ...</a></h2>
-              <span class="entry-date sm-italic-gray"> July 16, 2014 </span><!-- .entry-date -->
-              
-              <div class="entry-content"> Myths are very troublesome because they're hard to dispel. What's worse – if a myth crosses over from ... </div>
-              <!-- .entry-content --> 
-            </li>
-            <li class="clearfix">
-              <div class="widget-post-small-thumb"> <a href="#" title=""> <img width="75" height="75" src="assets/images/news/2_s.jpg" class="radius-3px ct-transition wp-post-image" alt="" title=""> </a> </div>
-              <!-- widget-post-small-thumb -->
-              
-              <h2 class="entry-title"><a href="#" rel="bookmark">3 Money Myths to Avoid ...</a></h2>
-              <span class="entry-date sm-italic-gray"> July 16, 2014 </span><!-- .entry-date -->
-              
-              <div class="entry-content"> Myths are very troublesome because they're hard to dispel. What's worse – if a myth crosses over from ... </div>
-              <!-- .entry-content --> 
-            </li>
-            <li class="clearfix">
-              <div class="widget-post-small-thumb"> <a href="#" title=""> <img width="75" height="75" src="assets/images/news/3_s.jpg" class="radius-3px ct-transition wp-post-image" alt="" title=""> </a> </div>
-              <!-- widget-post-small-thumb -->
-              
-              <h2 class="entry-title"><a href="#" rel="bookmark">3 Money Myths to Avoid ...</a></h2>
-              <span class="entry-date sm-italic-gray"> July 16, 2014 </span><!-- .entry-date -->
-              
-              <div class="entry-content"> Myths are very troublesome because they're hard to dispel. What's worse – if a myth crosses over from ... </div>
-              <!-- .entry-content --> 
-            </li>
-          </ul>
-        </aside>
-        <!-- END POPULAR POSTS WIDGET --> 
-        
-            <!-- START CATEGORY WIDGET -->
-          <aside id="tag_cloud-3" class="widget widget_tag_cloud">
-          <h1 class="widget-title"><span>Explore news by Category</span></h1>
-          <div class="tagcloud">
-           <select class="input-block form-control" id="category-dropdown" style="margin-bottom:0px;">
-  <option selected="" value="">Select a Category</option>
-      
-      <option value="">e-Insurance (2)</option>
-<option value="">Finance (3)</option>
-<option value="">Health Insurance (4)</option>
-<option value="">LIC (1)</option>
-<option value="">Life Insurance (3)</option>
-<option value="">Term Insurance (1)</option>
-      
-       </select>
-          </div>
-        </aside>
-              <!-- END CATEGORY WIDGET -->
-        
-        <!-- START AUTHOR WIDGET -->
-       
-        
-        <!-- ENDAUTHOR WIDGET --> 
-        
-        <!-- START ARCHIVES WIDGET -->
-       
-        
-        <!-- END ARCHIVES WIDGET --> 
-        
-        
-          <!-- START AD WIDGET -->
-        <aside class="widget widget_ad" id="" style="">
-                     <div id="over">
-    <span class="Centerer"></span>
-    <img class="Centered" src="assets/images/ad/banner-large.png" />
-</div>
-                  </aside>
-            <!-- END AD WIDGET --> 
-        
-        
-               <!-- START POLL WIDGET -->
-      <!--  <aside id="" class="widget widget_ad">
+<?php 
+}	?>
+			<div id="secondary" class="col-md-4  home-sidebar widget-area">
+
+			<?php 
+				//	most read news post
+				echo widget::run('mostReadPost', array('top'=>$top, 'type'=>'news'));
+			?>
+
+			<?php 
+				//	START CATEGORY WIDGET
+				echo widget::run('categoryDropDown', array('allTags'=>$allTags, 'type'=>'news'));
+			?>
+
+				<!-- START AUTHOR WIDGET -->
+
+
+				<!-- ENDAUTHOR WIDGET -->
+
+				<!-- START ARCHIVES WIDGET -->
+
+
+				<!-- END ARCHIVES WIDGET -->
+
+
+				<!-- START AD WIDGET -->
+				<aside class="widget widget_ad" id="" style="">
+				<div id="over">
+					<span class="Centerer"></span> <img class="Centered"
+						src="assets/images/ad/banner-large.png" />
+				</div>
+				</aside>
+				<!-- END AD WIDGET -->
+
+
+				<!-- START POLL WIDGET -->
+				<!--  <aside id="" class="widget widget_ad">
                 <h1 class="widget-title" style="color:#FFFFFF;">MyinsuranceClub Poll</h1>
 
           <div class="tagcloud">
@@ -404,12 +407,22 @@ So before you mistakenly set yourself on a course for financial disaster, read a
 <a id="BrolmoPoll_11934" href="http://www.brolmo.com/" target="_blank" title="Free poll by Brolmo.com">Free poll by Brolmo.com</a>
         </div>
         </aside>-->
-         <!-- END POLL WIDGET --> 
-    
-        
-      </div>
-      <!-- .col-md-12 --> 
+				<!-- END POLL WIDGET -->
+
+
+			</div>
+			<!-- .col-md-12 --> 
     </div>
     <!-- .row --> 
   </div>
 </div>
+
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/rating.js"></script>
+<script type="text/javascript">
+
+var record = "<?php echo $news['news_slug'];?>";
+var ratingType = "news";
+$(document).ready(function(){
+
+});
+</script>

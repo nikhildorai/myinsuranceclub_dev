@@ -48,7 +48,7 @@ class News_model EXTENDS Admin_Model{
 	
 	public function getAll($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE '.News_model::getWhere();
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE '.News_model::getWhere($arrParams);
 		$sql .= ' ORDER BY title ASC, news_id ASC ';	
 		$result = $this->db->query($sql);
 		return $result;
@@ -76,5 +76,96 @@ class News_model EXTENDS Admin_Model{
 	public function excuteQuery($sql)
 	{		
 		return $this->db->query($sql);
+	}
+	
+	public static function getNewsDetails($arrParams = array())
+	{
+		$data = $details = $relatedPost = array();
+		$cacheFileName = 'news';
+		$db =& get_instance();
+		if (!empty($arrParams))
+		{
+			foreach ($arrParams as $k1=>$v1)
+			{
+				if (!empty($v1))
+					$cacheFileName .= '_'.$v1;
+			}
+		}
+		$cacheResult = Util::getCachedObject($cacheFileName);			
+		//	check if cache file exist
+		if(!empty($cacheResult))
+		{
+			// get result set from cache
+			$details = $cacheResult;
+		}
+		else
+		{			
+			//get resultset from DB and save in cache
+			$db->db->freeDBResource($db->db->conn_id);
+			$details = Util::callStoreProcedure("sp_getNewsDetails", $arrParams);		
+			//	get top 3 records
+			$tableName = Util::getdbPrefix().'news';
+			$where = array('table_name'=>$tableName);
+			$top = Util::callStoreProcedure("sp_getTopNewsArticlesGuide", $where); 	
+			if (!empty($details))
+			{				
+				$db->db->freeDBResource($db->db->conn_id);
+				$data = Util::rearrangeDataAsPerColumnName('newsListing', $details);				
+			}
+			$data['top'] = $top;
+			
+			//	get all the tags with post count
+			$allTags = Util::callStoreProcedure("sp_getTagsWithNewsCount", $where);
+			if (!empty($allTags))
+				$data['allTags'] = $allTags;
+			else 
+				$data['allTags'] = array();
+				
+			if (isset($arrParams['news_slug']) && !empty($arrParams['news_slug']))
+			{
+				$data['newsDetails'] = reset($data['newsDetails']);	
+				
+				//	update page view count
+				$updateCount = Util::incrementPageViewCount('news', 'page_view_count','news_id',$data['newsDetails']['news']['news_id']);
+							
+				//	seo data
+				$url = base_url().'news/'.$arrParams['news_slug'];
+		        $data['title'] = $data['newsDetails']['news']['seo_title'];
+		        $data['keywords'] = $data['newsDetails']['news']['seo_keywords'];
+		        $data['description'] = $data['newsDetails']['news']['seo_description'];
+		        $data['socialSeoData'] = Util::getSocialMediaSeoData($data['newsDetails']['news'], $url);
+		        $data['url'] = $url;
+		        
+		        
+				//	get related post by tags
+				$tags = $data['newsDetails']['news']['tag'];
+				if(!empty($tags))
+				{
+					$tags = explode(',', $tags);
+					foreach ($tags as $k2=>$v2)
+					{
+						if (!empty($v2))
+						{
+							if (count($relatedPost)<7)
+							{
+								$where['tag'] = $v2;
+								$rel= Util::callStoreProcedure('sp_getRelatedNewsArticlesGuides', $where);							
+								if (!empty($rel))
+								{
+									foreach ($rel as $k3=>$v3)
+									{
+										if ($v3['news_id'] != $data['newsDetails']['news']['news_id'])
+											$relatedPost[$v3['news_id']] = $v3; 
+									}
+								}
+							}
+						}
+					}
+				}
+				$data['relatedPost'] = $relatedPost;
+			}
+			//Util::saveResultToCache($cacheFileName,$data);
+		}
+		return $data;
 	}
 }

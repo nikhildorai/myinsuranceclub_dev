@@ -51,7 +51,7 @@ class Articles_model EXTENDS Admin_Model{
 	
 	public function getAll($arrParams = array())
 	{	
-		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE '.Articles_model::getWhere();
+		$sql = 'SELECT * FROM '.$this->getTableName().' WHERE '.Articles_model::getWhere($arrParams);
 		$sql .= ' ORDER BY title ASC, article_id ASC ';	
 		$result = $this->db->query($sql);
 		return $result;

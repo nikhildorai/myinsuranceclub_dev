@@ -92,6 +92,7 @@ $route['general-insurance-companies/(:any)'] = "generalInsurance/companies/$1";
 
 //news
 $route['news'] = "news/index/";
+$route['news/(:any)'] = "news/newsDetails/$1";
 
 #########################	frontend routes ends	##############################
 
