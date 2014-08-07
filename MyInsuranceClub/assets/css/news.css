@@ -877,8 +877,8 @@ padding-right: 1px;
 }
 .navigation.post-navigation {
 	border-top: 1px solid #e5e6e7;
-	padding: 20px;
-	margin: 0 -45px -30px -45px;
+	padding: 0px;
+	margin: 0px;
 }
 .navigation.post-navigation span {
 	width: 45%;
@@ -1311,7 +1311,7 @@ padding-right: 1px;
 	float:left;
 	width:120px;
 	position:relative;
-	top:-10px;
+	top:-8px;
 	left:10px;
 }
 .tot_votes_m {
@@ -1382,6 +1382,7 @@ text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #fff, 0 0 4px #fff, 0 0 7px #ff
 .twt_img{ position: absolute;
     right: 80px;
     top: -40px;}
+	.no_pad_lr{ padding-left:0px;}
 @media (max-width:1200px) {
  #blog-entry .entry-thumb {
 width:216px;

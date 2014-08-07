@@ -251,7 +251,7 @@ else
             
             
             
-            <div class="col-md-5 no_pad_lr" style="padding:0px; float:right;">
+            <div class="col-md-6 no_pad_lr" style="padding:0px; float:right;">
             <h3 style="padding-left:15px;">Social Connects</h3>
             <div style="float:right; width:100%;">
             <div class="fb_cnt col-md-3">
@@ -352,7 +352,7 @@ else
 					style="margin-top: 20px;">
 					<div id="" class="comments-area">
 						<div id="" class="comment-respond">
-							<div class="col-md-12">
+							<div class="col-md-12" style="padding:0px;">
 							<?php
 							$arrParams['disqus_identifier'] = $disqusUrl;
 							$arrParams['disqus_url'] = $disqusUrl;
