@@ -1,4 +1,4 @@
-
+<!--
                   <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -18,7 +18,7 @@
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 </li>
-<li class="pls"><!-- Place this tag where you want the widget to render. -->
+<li class="pls">
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
 <g:plusone size="medium" href="http://www.myinsuranceclub.com/"></g:plusone>
@@ -33,4 +33,4 @@
 <script type="IN/FollowCompany" data-id="453103" data-counter="right"></script></li>
 
 
-</ul>
+</ul>-->

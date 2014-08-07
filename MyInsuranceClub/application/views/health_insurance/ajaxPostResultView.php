@@ -102,7 +102,7 @@ elseif(! empty ( $customer_details )) {
                  </div>
                  </div>
 			<div class="col-md-4 post_msg" id="buy_now_message_<?php echo $detail['variant_id'];?>" style="display:none">
-			Call 100100100 to buy this policy
+			Sure! We will call you back.
 			</div>
 			<div class="col-md-4 pad_r_10" id="buy_now_btn_<?php echo $detail['variant_id'];?>">
 				<a class="btn_offer_block" href="#" onclick="return buy_now_msg(<?php echo $detail['variant_id']?>,<?php echo $detail['policy_id'];?>);">Buy Now <i

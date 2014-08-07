@@ -639,7 +639,7 @@
       </div>
       <?php echo form_close();?>
       <div class="cus_cont" style=" ">
-        <div style="margin-top: 40px; float: left; width:100%;" class="">
+        <div style="margin-top: 20px; float: left; width:100%;" class="">
           <div class="pos1" >
             <div class="col-md-2 c_o">
               <p><img src="<?php echo base_url();?>/assets/images/star.png" border="0" class="mar-r8">Cashless claims </p>

@@ -33,6 +33,7 @@
       <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/responsive.css">
       <script src="<?php echo base_url();?>/assets/js/jquery.min.js"></script>
       <script src="<?php echo base_url();?>/assets/js/jquery.bxslider.min.js" type="text/javascript"></script>
+      <!-- <script src="assets/js/social.js" type="text/javascript"></script>-->
       <!-- HTML5 shiv & respond.js for IE6-8 support of HTML5 elements & media queries -->
       <!--[if lt IE 9]>
       <script src="plugins/html5shiv/dist/html5shiv.js"></script>

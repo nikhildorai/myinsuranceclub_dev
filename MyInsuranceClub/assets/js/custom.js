@@ -47,23 +47,10 @@ $('.bxslider').bxSlider({
 	
 
 
- $('#soi').mouseover(function(){
-	 
-	 var base_url = CI_ROOT+"/include/social.php";
-         $('#soi').addClass('active');   
-	  if ( $("#tes" ).hasClass( "tes" ) ) {
-		  
-		   $("#target").load(base_url); 
-		  
-		  } 
-		        });
+
 				
 				
-					$('#footer').mouseleave(function(){
-				 
-				 $('#soi').removeClass('active');  
-	     $("#tes").remove();
-        });
+			
 
  
   
@@ -123,6 +110,9 @@ $(document).click(function(event) {
 	   
 
   }); 
+  
+  
+     
 
 $('#clickk').live('mouseenter', function(){
     mouseOverActiveElement = true; 
@@ -230,6 +220,34 @@ $("html").click(function(){
     }
 });
 
+
+ $('#cust_name34').click(function() {
+	   mouseOverActiveElement1 = true; 
+	   
+	    if ( $( this ).hasClass( "one_time_show" ) ) {
+			
+		
+		}
+		
+		
+		else {
+			
+			
+				$(this).addClass("one_time_show");
+				    
+	     
+  // $("#c_ch").stop().slideDown();
+    $("#c_ch_f").show();
+   // $("#c_ch_termplans").show();
+  $('.scroll-pane').jScrollPane();
+   /* $('.scroll-pane').jScrollPane(
+                                {autoReinitialise: true}
+                         );*/
+			
+		}
+	   
+
+  });
 
 $("#c_for_f li").click(function() {
    var am_v = $(this).text(); 
@@ -902,14 +920,14 @@ jQuery(document).ready(function () {
 });
 
 $(function () {
-	var winHeight = $(window).height(); 
+	/*var winHeight = $(window).height(); 
 	var winWidth = $(window).width(); 
 	if(winWidth >500)
 	{
 		var min_h = winHeight -100;
 		$(".min_height").css({"min-height": min_h});
 		
-	}
+	}*/
 	
 	
    

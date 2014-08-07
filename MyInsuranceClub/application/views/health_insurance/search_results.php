@@ -581,18 +581,10 @@
           <li>- It helps us reach out to more personal audience</li>
           
         </ul>
-                <p class="brdr_link">I used MyInsuranceClub to select a health insurance 
-plan for myself. Check it out. You might find it useful.</p>
+                <p class="brdr_link">I used MyInsuranceClub to select health insurance for myself. You might find it useful too. http://www.myinsuranceclub.com/health-insurance/</p>
 
 <div class="soc_link">
-    <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=163640157049519&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+   
 
 <div class="fac_link">
     
@@ -600,7 +592,7 @@ plan for myself. Check it out. You might find it useful.</p>
     
    <div class="twi_link">
    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.myinsuranceclub.com/health-insurance/" data-size="medium" data-dnt="true">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
    </div> 
     </div>
     

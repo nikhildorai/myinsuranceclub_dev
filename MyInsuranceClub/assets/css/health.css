@@ -512,7 +512,7 @@ box-shadow:         inset 0px 0px 4px 1px rgba(3, 146, 204, 0.52);
 #share_link .txt-fld input { width: 244px; padding: 8px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; font-size: 1.2em; color: #222; background: #F7F7F7; font-family: "Helvetica Neue"; outline: none; border-top: 1px solid #CCC; border-left: 1px solid #CCC; border-right: 1px solid #E7E6E6; border-bottom: 1px solid #E7E6E6; }
 #share_link .txt-fld input.good_input { background: #DEF5E1 url(../img/good.png) 236px center no-repeat; }
 #share_link .txt-fld input.error_input { background: #FDE0E0; }
-.modal_close { position: absolute; top: 12px; right: 12px; display: block; width: 14px; height: 14px; background: url(../images/modal_close.png); z-index: 2; }
+.modal_close { position: absolute; top: 12px; right: 12px; display: block; width: 18px; height: 18px; background: url(../images/close_window.png); z-index: 2; }
 
 #share_link .box {
 padding: 18px;color: #201f1f;
@@ -574,6 +574,6 @@ white-space: nowrap;
 }
 .full-name{ float:left;  margin-left:10px; margin-top:3px;}
 .soc_link{ min-height:40px; border-bottom:1px solid #dadada; padding-bottom:0px; float:left; width:100%;}
-.fac_link{ width:auto; float:left; margin-left:160px; margin-top:6px;}
-.twi_link{ width:100px; float:right; margin-left:10px; margin-top:2px;}
+.fac_link{ width:auto; float:left; margin-left:150px; margin-top:5px;}
+.twi_link{ width:100px; float:right; margin-left:10px; margin-top:5px;}
 
