@@ -95,14 +95,27 @@
 							<div class="entry-meta" style="float: left; width: 100%; padding-top: 0px;">
 								<div class="entry-author clearfix" style="background: none; border: none;">
 									<div class="meta-avatar clearfix">
-										<img alt="" src="http://1.gravatar.com/avatar/73f701bd6506d9a9b2b617d1c531a440?s=32&d=wavatar&r=G" class="avatar avatar-32 photo" height="32" width="32">
+									
+			                    <?php 
+										$folderUrl = $this->config->config['folder_path']['users']['75x75'];
+										$fileUrl = $this->config->config['url_path']['users']['75x75'];
+										$imgUrl = '';
+										if (isset($author['user_image']) && !empty($author['user_image']))
+										{
+											if (file_exists($folderUrl.$author['user_image']))
+											{
+												$imgUrl = $fileUrl.$author['user_image'];
+											}
+										}
+										?>
+										<img alt="" src="<?php echo $imgUrl;?>" class="avatar avatar-32 photo" height="32" width="32">
 									</div>
 									<!-- .author-avatar -->
 									<span class="ct-athr"> Author:&nbsp; 
 										<span class="meta-author"> 
 											<i class="fa fa-user" title="Author"></i> 
 											<span class="author vcard">
-												<a class="url fn n" href="<?php echo base_url().'author/'.$author['uacc_username'];?>" title="" rel="author"><?php echo $author['upro_first_name']; echo isset($author['upro_last_name']) ? ' '.$author['upro_last_name'] : '';?></a> 
+												<a class="url fn n" href="<?php echo base_url().'news/author/'.$author['uacc_username'];?>" title="" rel="author"><?php echo $author['upro_first_name']; echo isset($author['upro_last_name']) ? ' '.$author['upro_last_name'] : '';?></a> 
 											</span> 
 										</span> <!-- .meta-author -->
 									</span>

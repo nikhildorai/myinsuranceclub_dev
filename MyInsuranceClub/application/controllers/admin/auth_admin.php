@@ -148,7 +148,10 @@ class Auth_admin extends CI_Controller {
 		// Set any returned status/error messages.
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];		
 
-		$this->load->view('demo/admin_functions/user_acccounts_view', $this->data);		
+		$this->data['message'] = $this->session->flashdata('message');
+		$this->template->write_view('content', 'admin/admin_functions/user_acccounts_view', $this->data, TRUE);
+		$this->template->render();
+		//$this->load->view('demo/admin_functions/user_acccounts_view', $this->data);		
     }
 	
  	/**
@@ -161,7 +164,7 @@ class Auth_admin extends CI_Controller {
 		if (! $this->flexi_auth->is_privileged('Update Users'))
 		{
 			$this->session->set_flashdata('message', '<p class="error_msg">You do not have privileges to update user accounts.</p>');
-			redirect('auth_admin');		
+			redirect('admin/auth_admin');		
 		}
 
 		// If 'Update User Account' form has been submitted, update the users account details.
@@ -181,7 +184,10 @@ class Auth_admin extends CI_Controller {
 		// Set any returned status/error messages.
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];		
 
-		$this->load->view('demo/admin_functions/user_account_update_view', $this->data);
+		$this->data['message'] = $this->session->flashdata('message');
+		$this->template->write_view('content', 'admin/admin_functions/user_account_update_view', $this->data, TRUE);
+		$this->template->render();
+		//$this->load->view('demo/admin_functions/user_account_update_view', $this->data);
 	}
 
 	###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++###	

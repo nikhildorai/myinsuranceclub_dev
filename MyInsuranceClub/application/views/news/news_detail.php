@@ -44,13 +44,15 @@ else
               
                 
                 <span class="meta-author"> <i class="fa fa-user" title="Author"></i> <span class="author vcard"><a class="url fn n" href="<?php echo base_url().'author/'.$author['uacc_username'];?>" title="" rel="author"> <?php echo $author['upro_first_name']; echo isset($author['upro_last_name']) ? ' '.$author['upro_last_name'] : '';?> </a></span> </span><!-- .meta-author --> 
-                <div style="width:auto; margin-top:4px; float:left;"><div class="fb-like" data-href="http://www.myinsuranceclub.com/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div></div>
-                
-                
-                <div style="width:83px; margin-top:4px; margin-left:10px; float:left;"> <a href="http://www.myinsuranceclub.com/" class="twitter-share-button" data-via="twitterapi" data-lang="en">Tweet</a></div>
-                
-                <div style="width:auto; margin-top:4px; margin-left:0px; float:left;">
-<script type="IN/Share" data-url="http://www.myinsuranceclub.com" data-counter="right"></script></div>
+               <div style="float:right;">
+	                <div style="width:auto; margin-top:4px; float:left;"><div class="fb-like" data-href="http://www.myinsuranceclub.com/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div></div>
+	                
+	                
+	                <div style="width:83px; margin-top:4px; margin-left:10px; float:left;"> <a href="http://www.myinsuranceclub.com/" class="twitter-share-button" data-via="twitterapi" data-lang="en">Tweet</a></div>
+	                
+	                <div style="width:auto; margin-top:4px; margin-left:0px; float:left;">
+	<script type="IN/Share" data-url="http://www.myinsuranceclub.com" data-counter="right"></script></div>
+				</div>
                 
               </div>
               <!-- .entry-meta --> 
@@ -104,8 +106,9 @@ else
 				if (!empty($description))
 				{
 					echo reset($description);
-				}
+				}				
 				if (!empty($news['tweet_property']))
+				{
 ?>
 						<div class="tw_sh">
 							<div style="width: 50px;; float: left;">
@@ -125,6 +128,7 @@ else
 							</div>
 						</div>
 					<?php 
+					}
 					if (count($description) > 1)
 					{
 						$i = 1;						
@@ -161,14 +165,26 @@ else
             
             <div id="author-block" class="clearfix"> 
               
-              <div class="author-avatar clearfix"> <img alt="" src="http://viralfave.com/wp-content/uploads/deepika-padukone-wiki-2.jpg" class="avatar avatar-75 photo" height="75" width="75"> </div>
+                    <?php 
+							$folderUrl = $this->config->config['folder_path']['users']['75x75'];
+							$fileUrl = $this->config->config['url_path']['users']['75x75'];
+							$imgUrl = '';
+							if (isset($author['user_image']) && !empty($author['user_image']))
+							{
+								if (file_exists($folderUrl.$author['user_image']))
+								{
+									$imgUrl = $fileUrl.$author['user_image'];
+								}
+							}
+							?>
+              <div class="author-avatar clearfix"> <img alt="" src="<?php echo $imgUrl;?>" class="avatar avatar-75 photo" height="75" width="75"> </div>
               <!-- #author-avatar -->
               
               <div class="author-description clearfix">
                 <div class="ct-athr-left">
-                  <p>Hi, my name is  <strong><?php echo $author['upro_first_name']; echo isset($author['upro_last_name']) ? ' '.$author['upro_last_name'] : '';?></strong>. Mark territory stick butt in face, or climb leg use lap as chair missing until dinner time for chew foot.<br/>
+                  <p>Hi, my name is  <strong><?php echo $author['upro_first_name']; echo isset($author['upro_last_name']) ? ' '.$author['upro_last_name'] : '';?></strong>. <?php echo $author['upro_about'];?>.<br/>
                     <br/>
-                     <a class="author-site sm-italic-gray" href="<?php echo base_url().'author/'.$author['uacc_username'];?>">View my other posts</a> 
+                     <a class="author-site sm-italic-gray" href="<?php echo base_url().'news/author/'.$author['uacc_username'];?>">View my other posts</a> 
                     </p>
                     
                 </div>

@@ -1,3 +1,157 @@
+<div class="page">
+<?php //var_dump($this->util->getLoggedInUserDetails());?>
+<?php 	if (! empty($message))
+		{
+			if (isset($msgType) && !empty($msgType))
+			{
+				if ($msgType=='error') 
+					echo '<div class="callout callout-danger">';
+				else if ($msgType=='success') 
+					echo '<div class="callout callout-success">';
+				else
+					echo '<div class="callout callout-info">';
+			}
+			else
+				echo '<div class="callout callout-success">';
+							echo $message;
+					echo '</div>';
+		} ?>
+
+    <section class="panel panel-primary">
+        <div class="panel-heading">
+        	<strong>
+        		<span class="glyphicon glyphicon-th"></span> Manage User Accounts 
+        	</strong>
+        	<!-- <a href="<?php echo $base_url;?>admin/company/create" class="btn btn-w-md btn-gap-v btn-success btn-sm" style="float: right; margin-top: -5px;">Create New Company</a>-->
+        </div>
+        <div class="panel-body">
+        
+        
+        
+    <!-- Accordion -->
+        <section class="panel" data-ng-controller="AccordionDemoCtrl"  style="border-bottom-width: 0px;">
+            <accordion close-others="oneAtATime" class="ui-accordion">
+            <?php 
+            $open = false;
+            if (isset($_GET['search']))
+            	$open = true;
+            ?>
+                <accordion-group heading="Search Filter" is-open="<?php echo $open;?>">
+					
+				<?php echo form_open('admin/admin/auth_admin/manage_user_accounts');	?>
+			        <div class="form-group">
+	                    <label for="" class="col-sm-2">Search Users</label>
+	                    <div class="col-sm-10">
+	                    	<input type="text" id="search" name="search_query" value="<?php echo set_value('search_users',$search_query);?>" class="form-control" placeholder="Search users by email, first name and last name." />
+                    	</div>
+	                </div>
+	                
+	                
+	                <div class="space"></div>
+			        <div class="form-group">
+	                    <label for="" class="col-sm-2"></label>
+	                    <div class="col-sm-10">
+							<input type="submit" name="search_users" id="submit" value="Search" class="btn btn-w-md btn-gap-v btn-primary" />
+							<a href="<?php echo $base_url; ?>admin/admin/auth_admin/manage_user_accounts"  class="btn btn-w-md btn-gap-v btn-default">Reset</a>
+                    	</div>
+	                </div>
+				<?php echo form_close();?>
+                </accordion-group>
+            </accordion>
+
+        </section>
+        
+        
+        
+            <section class="table-flip-scroll">
+                <table class="table table-bordered table-striped cf">
+                    <thead class="cf">
+                        <tr>
+                            <th class="numeric">Id</th>
+                            <th class="numeric">Email</th>
+                            <th class="numeric">First Name</th>
+                            <th class="numeric">Last Name</th>
+                            <th class="numeric">User Group</th>
+                            <th class="numeric">Action</th>
+                     <?php /*?>       <th class="numeric">Account Suspended</th>
+                            <th class="numeric">Delete</th>
+                     <?php */ ?>        
+                        </tr>
+                    </thead>
+					<?php echo form_open('admin/admin/auth_admin/manage_user_accounts');	?>
+                    <tbody>
+                    <?php 
+                    if (!empty($users))
+                    {
+                    	foreach ($users as $k1=>$user)
+                    	{	
+//var_dump($user);                   
+                    		if ($user['uacc_suspend'] == 1){?>
+                    		<tr  class="danger">
+                    		<?php }else{	?>
+                    		<tr>
+                    	<?php }	?>	
+								<td><?php echo $user['uacc_id'];?></td>
+								<td><?php echo $user['uacc_email'];?></td>
+								<td><?php echo $user['upro_first_name'];?></td>
+								<td><?php echo $user['upro_last_name'];?></td>
+								<td><?php echo $user['ugrp_name'];?></td>
+								<td style="width:18%;">
+									<a href="<?php echo $base_url.'admin/auth_admin/update_user_account/'.$user[$this->flexi_auth->db_column('user_acc', 'id')];?>">
+										Update
+									</a>
+								<?php /*?>	 | <a href="<?php echo $base_url.'admin/auth_admin/update_user_privileges/'.$user['uacc_id'];?>">Manage Privilege</a> <?php */?>
+								</td>
+<?php /* ?>								
+								<td>
+									<input type="hidden" name="current_status[<?php echo $user['uacc_id'];?>]" value="<?php echo $user['uacc_suspend'];?>"/>
+									<!-- A hidden 'suspend_status[]' input is included to detect unchecked checkboxes on submit -->
+									<input type="hidden" name="suspend_status[<?php echo $user['uacc_id'];?>]" value="0"/>
+								
+								<?php if ($this->flexi_auth->is_privileged('Update Users')) { ?>
+									<input type="checkbox" name="suspend_status[<?php echo $user['uacc_id'];?>]" value="1" <?php echo ($user['uacc_suspend'] == 1) ? 'checked="checked"' : "";?>/>
+								<?php } else { ?>
+									<input type="checkbox" disabled="disabled"/>
+									<small>Not Privileged</small>
+									<input type="hidden" name="suspend_status[<?php echo $user['uacc_id'];?>]" value="0"/>
+								<?php } ?>
+								</td>
+								<td>
+								<?php if ($this->flexi_auth->is_privileged('Delete Users')) { ?>
+									<input type="checkbox" name="delete_user[<?php echo $user['uacc_id'];?>]" value="1"/>
+								<?php } else { ?>
+									<input type="checkbox" disabled="disabled"/>
+									<small>Not Privileged</small>
+									<input type="hidden" name="delete_user[<?php echo $user['uacc_id'];?>]" value="0"/>
+								<?php } ?>
+								</td>
+<?php */ ?>								
+							</tr>
+        <?php          	
+                    	}
+                    }
+                    ?>
+                    </tbody>
+<?php /*?>                    
+					<tfoot>
+						<tr>
+							<td colspan="8">
+								<?php $disable = (! $this->flexi_auth->is_privileged('Update Users') && ! $this->flexi_auth->is_privileged('Delete Users')) ? 'disabled="disabled"' : NULL;?>
+								<input type="submit" name="update_users" id="submitUpdate" value="Update / Delete Users" class="btn btn-w-md btn-gap-v btn-primary" <?php echo $disable; ?> />
+							</td>
+						</tr>
+					</tfoot>
+<?php */?>					
+				<?php echo form_close();?>
+                </table>
+            </section>
+        </div>
+    </section>
+
+</div>
+
+
+<?php /*?>
 <!doctype html>
 <!--[if lt IE 7 ]><html lang="en" class="no-js ie6"><![endif]-->
 <!--[if IE 7 ]><html lang="en" class="no-js ie7"><![endif]-->
@@ -53,7 +207,7 @@
 							title="This example searches for users by email, first name and last name."
 						/>
 						<input type="submit" name="search_users" value="Search" class="link_button"/>
-						<a href="<?php echo $base_url; ?>auth_admin/manage_user_accounts" class="link_button grey">Reset</a>
+						<a href="<?php echo $base_url; ?>admin/auth_admin/manage_user_accounts" class="link_button grey">Reset</a>
 						
 					</fieldset>
 				<?php echo form_close();?>
@@ -88,7 +242,7 @@
 							<?php foreach ($users as $user) { ?>
 							<tr>
 								<td>
-									<a href="<?php echo $base_url.'auth_admin/update_user_account/'.$user[$this->flexi_auth->db_column('user_acc', 'id')];?>">
+									<a href="<?php echo $base_url.'admin/auth_admin/update_user_account/'.$user[$this->flexi_auth->db_column('user_acc', 'id')];?>">
 										<?php echo $user[$this->flexi_auth->db_column('user_acc', 'email')];?>
 									</a>
 								</td>
@@ -102,7 +256,7 @@
 									<?php echo $user[$this->flexi_auth->db_column('user_group', 'name')];?>
 								</td>
 								<td class="align_ctr">
-									<a href="<?php echo $base_url.'auth_admin/update_user_privileges/'.$user[$this->flexi_auth->db_column('user_acc', 'id')];?>">Manage</a>
+									<a href="<?php echo $base_url.'admin/auth_admin/update_user_privileges/'.$user[$this->flexi_auth->db_column('user_acc', 'id')];?>">Manage</a>
 								</td>
 								<td class="align_ctr">
 									<input type="hidden" name="current_status[<?php echo $user[$this->flexi_auth->db_column('user_acc', 'id')];?>]" value="<?php echo $user[$this->flexi_auth->db_column('user_acc', 'suspend')];?>"/>
@@ -169,3 +323,4 @@
 
 </body>
 </html>
+*/ ?>

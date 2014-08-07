@@ -409,6 +409,12 @@ $config['url_path']['news']['main_image']					= $config['base_url'].'uploads/new
 $config['url_path']['news']['listing_image']				= $config['base_url'].'uploads/news/listing_image_300x220/';
 $config['url_path']['news']['thumbnail']					= $config['base_url'].'uploads/news/thumbnail_75x75/';
 
+//	user image
+$config['url_path']['users']['user_image']				= $config['base_url'].'uploads/users/user_image/';
+$config['url_path']['users']['original']				= $config['base_url'].'uploads/users/original/';
+$config['url_path']['users']['32x32']					= $config['base_url'].'uploads/users/32x32/';
+$config['url_path']['users']['75x75']					= $config['base_url'].'uploads/users/75x75/';
+
 //	upload folder paths
 $config['folder_path']['temp']			 				= realpath(APPPATH . '../uploads').'/temp/';
 $config['folder_path']['company']['all'] 				= realpath(APPPATH . '../uploads').'/company/';
@@ -433,6 +439,12 @@ $config['folder_path']['news']['original_image']			= realpath(APPPATH . '../uplo
 $config['folder_path']['news']['main_image']				= realpath(APPPATH . '../uploads').'/news/main_image_680x309/';
 $config['folder_path']['news']['listing_image']				= realpath(APPPATH . '../uploads').'/news/listing_image_300x220/';
 $config['folder_path']['news']['thumbnail']					= realpath(APPPATH . '../uploads').'/news/thumbnail_75x75/';
+
+//	user image
+$config['folder_path']['users']['user_image']				= realpath(APPPATH . '../uploads').'/users/user_image/';
+$config['folder_path']['users']['original']					= realpath(APPPATH . '../uploads').'/users/original/';
+$config['folder_path']['users']['32x32']					= realpath(APPPATH . '../uploads').'/users/32x32/';
+$config['folder_path']['users']['75x75']					= realpath(APPPATH . '../uploads').'/users/75x75/';
 
 
 $config['policy']['descriptionCount'] = 1;

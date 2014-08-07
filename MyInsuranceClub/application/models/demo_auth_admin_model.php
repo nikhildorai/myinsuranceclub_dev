@@ -49,7 +49,7 @@ class Demo_auth_admin_model extends Admin_Model {
 		if (array_key_exists('search', $uri))
 		{
 			// Set pagination url to include search query.
-			$pagination_url = 'auth_admin/manage_user_accounts/search/'.$uri['search'].'/';
+			$pagination_url = 'admin/auth_admin/manage_user_accounts/search/'.$uri['search'].'/';
 			$config['uri_segment'] = 6; // Changing to 6 will select the 6th segment, example 'controller/function/search/query/page/10'.
 
 			// Convert uri '-' back to ' ' spacing.
@@ -66,7 +66,7 @@ class Demo_auth_admin_model extends Admin_Model {
 		else
 		{
 			// Set some defaults.
-			$pagination_url = 'auth_admin/manage_user_accounts/';
+			$pagination_url = 'admin/auth_admin/manage_user_accounts/';
 			$search_query = FALSE;
 			$config['uri_segment'] = 4; // Changing to 4 will select the 4th segment, example 'controller/function/page/10'.
 			
@@ -139,7 +139,7 @@ class Demo_auth_admin_model extends Admin_Model {
 		$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 		
 		// Redirect user.
-		redirect('auth_admin/manage_user_accounts');			
+		redirect('admin/auth_admin/manage_user_accounts');			
 	}
 
  	/**
@@ -150,6 +150,7 @@ class Demo_auth_admin_model extends Admin_Model {
 	function update_user_account($user_id)
 	{
 		$this->load->library('form_validation');
+		$this->load->library('simpleImage');
 
 		// Set validation rules.
 		$validation_rules = array(
@@ -163,6 +164,40 @@ class Demo_auth_admin_model extends Admin_Model {
 		);
 
 		$this->form_validation->set_rules($validation_rules);
+
+		// Get users current data.
+		$sql_where = array($this->flexi_auth->db_column('user_acc', 'id') => $user_id);
+		$currentUser = $this->flexi_auth->get_users_row_array(FALSE, $sql_where);
+		
+		//	check if file is uploaded
+		if (!empty($_FILES))
+		{
+			$i = 1;
+			foreach($_FILES['model']['name'] as $k1=>$v1)
+			{			
+				$time = time();
+				$ext = end(explode('.', $v1));
+				if (empty($ext))
+					$ext = 'jpg';
+				$name = $this->util->getSlug($_POST['update_username']);
+				//$arrFileNames = array();
+				//	set name & upload path for each file 
+				if ($k1 == 'user_image')
+				{
+					$arrFileNames['user_image'] = $arrFileNames['original'] = $arrFileNames['75x75'] = $arrFileNames['32x32'] = $name.'-'.$time.'.'.$ext;
+				}
+				
+				if (empty($v1))
+					$_POST[$k1] = (isset($currentUser[$k1]) && !empty($currentUser[$k1])) ? $currentUser[$k1] : '';
+				else
+					$_POST[$k1] = $arrFileNames['user_image'];
+			}
+		}
+		else 
+		{
+			//	set previous file name in post
+			$_POST['user_image'] 		= $currentUser['user_image'];
+		}
 		
 		if ($this->form_validation->run())
 		{
@@ -177,6 +212,8 @@ class Demo_auth_admin_model extends Admin_Model {
 				'upro_last_name' => $this->input->post('update_last_name'),
 				'upro_phone' => $this->input->post('update_phone_number'),
 				'upro_newsletter' => $this->input->post('update_newsletter'),
+				'upro_about' => $this->input->post('update_about'),
+				'user_image' => $this->input->post('user_image'),
 				$this->flexi_auth->db_column('user_acc', 'email') => $this->input->post('update_email_address'),
 				$this->flexi_auth->db_column('user_acc', 'username') => $this->input->post('update_username'),
 				$this->flexi_auth->db_column('user_acc', 'group_id') => $this->input->post('update_group')
@@ -184,12 +221,65 @@ class Demo_auth_admin_model extends Admin_Model {
 
 			// If we were only updating profile data (i.e. no email, username or group included), we could use the 'update_custom_user_data()' function instead.
 			$this->flexi_auth->update_user($user_id, $profile_data);
-				
+			
+			// 	save records for files
+			if (!empty($_FILES))
+			{
+				$this->data['file_upload_error'] = array();
+		        $config['upload_path'] = $this->config->config['folder_path']['users']['original'];
+		        $config['file_name'] = $arrFileNames;
+		        $config['extra_config'] = Util::getConfigForFileUpload('users');
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config); 					
+				if($this->upload->do_multi_upload("model"))
+				{
+	              	$this->data['file_upload'] = $this->upload->get_multi_upload_data();
+              		//	if image is uploaded successfully resize images
+	              	if (!empty($this->data['file_upload']))
+	              	{
+	              		foreach ($this->data['file_upload'] as $k1=>$v1)
+	              		{
+							$photoName = $v1['orig_name'];
+							$path = $v1['file_path'];
+							//$path = $this->config->config['folder_path']['news']['all'];
+							$temp = $this->config->config['folder_path']['temp'];
+							
+							SimpleImage::saveImages($path, $photoName, $type="users");
+	              		}
+	              	}
+				}
+				else 
+				{
+	                $this->data['file_upload_error'][] = $this->upload->display_errors();
+				}			
+	            $this->data['file_upload'] = $this->upload->get_multi_upload_data();
+	            
+
+	            if (empty($this->data['file_upload_error']))
+	            {
+					$saveData[] = true;
+	            }
+	            else if (!empty($this->data['file_upload_error']))
+	            {
+	            	foreach ($this->data['file_upload_error'] as $k1=>$v1)
+	            	{
+	            		$msg = str_replace('<p>', '', $v1);
+	            		$msg = str_replace('</p>', '', $msg);
+						$this->data['message'] .= '<p class="error_msg">'.$msg.'</p>';
+	            	}
+					$saveData[] = false;
+	            }
+	            else 
+	            {
+					$saveData[] = true;
+	            }
+			}	
+
 			// Save any public or admin status or error messages to CI's flash session data.
 			$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 			
 			// Redirect user.
-			redirect('auth_admin/manage_user_accounts');			
+			redirect('admin/auth_admin/manage_user_accounts');			
 		}
 		
 		return FALSE;
@@ -208,7 +298,7 @@ class Demo_auth_admin_model extends Admin_Model {
 		$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 		
 		// Redirect user.
-		redirect('auth_admin/manage_user_accounts');			
+		redirect('admin/auth_admin/manage_user_accounts');			
 	}
 
 	###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++###	
@@ -236,7 +326,7 @@ class Demo_auth_admin_model extends Admin_Model {
 		$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 		
 		// Redirect user.
-		redirect('auth_admin/manage_user_groups');			
+		redirect('admin/auth_admin/manage_user_groups');			
 	}
 	
   	/**
@@ -268,7 +358,7 @@ class Demo_auth_admin_model extends Admin_Model {
 			$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 			
 			// Redirect user.
-			redirect('auth_admin/manage_user_groups');			
+			redirect('admin/auth_admin/manage_user_groups');			
 		}
 	}
 	
@@ -303,7 +393,7 @@ class Demo_auth_admin_model extends Admin_Model {
 			$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 			
 			// Redirect user.
-			redirect('auth_admin/manage_user_groups');			
+			redirect('admin/auth_admin/manage_user_groups');			
 		}
 	}
 
@@ -332,7 +422,7 @@ class Demo_auth_admin_model extends Admin_Model {
 		$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 		
 		// Redirect user.
-		redirect('auth_admin/manage_privileges');			
+		redirect('admin/auth_admin/manage_privileges');			
 	}
 
   	/**
@@ -362,7 +452,7 @@ class Demo_auth_admin_model extends Admin_Model {
 			$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 			
 			// Redirect user.
-			redirect('auth_admin/manage_privileges');			
+			redirect('admin/auth_admin/manage_privileges');			
 		}
 	}
 	
@@ -395,7 +485,7 @@ class Demo_auth_admin_model extends Admin_Model {
 			$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 			
 			// Redirect user.
-			redirect('auth_admin/manage_privileges');			
+			redirect('admin/auth_admin/manage_privileges');			
 		}
 	}
 	
@@ -432,7 +522,7 @@ class Demo_auth_admin_model extends Admin_Model {
 		$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 		
 		// Redirect user.
-		redirect('auth_admin/manage_user_accounts');			
+		redirect('admin/auth_admin/manage_user_accounts');			
 	}
 
    	/**
@@ -468,7 +558,7 @@ class Demo_auth_admin_model extends Admin_Model {
 		$this->session->set_flashdata('message', $this->flexi_auth->get_messages());
 		
 		// Redirect user.
-		redirect('auth_admin/manage_user_groups');			
+		redirect('admin/auth_admin/manage_user_groups');			
     }
 }
 

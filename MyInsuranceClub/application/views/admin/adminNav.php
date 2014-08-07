@@ -283,6 +283,22 @@
                	</li>
             </ul>
         </li>
+        <li class="<?php echo in_array($controller, array('auth_admin')) ? 'open active' : '';?>">
+            <a href="javascript:void(0);">
+            	<i class="fa fa-bar-chart-o">
+            		<span class="icon-bg bg-primary-light"></span>
+            	</i>
+            	<span data-i18n="Manage Users"></span>
+            </a>
+            <ul style="display: <?php echo in_array($controller, array('auth_admin')) ? 'block' : 'none';?>;">
+                <li>
+                	<a href="<?php echo $base_url;?>admin/auth_admin/manage_user_accounts">
+                		<i class="fa fa-caret-right"></i>
+                		<span data-i18n="View User"></span>
+                	</a>
+               	</li>
+            </ul>
+        </li>
         
         
         <?php /*?>

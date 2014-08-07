@@ -2208,22 +2208,21 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 												'upload_path'	=>	$ci->config->config['folder_path']['news']['original_image'],
 											);
 		}
-		else if ($type == 'temp')
+		else if ($type == 'users')
 		{
-			$config['temp']	=	array(	'allowed_types'	=>	'gif|jpg|png',
-												'max_size'		=>	'5000',
-												'max_width'		=>	'5000',
-												'max_height'	=>	'6800',
-												'upload_path'	=>	$ci->config->config['folder_path']['temp'],
-												'upload_url'	=>	$ci->config->config['url_path']['temp'],
+			$config['user_image']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+												'max_size'		=>	'5120',
+												'max_width'		=>	'2000',
+												'max_height'	=>	'2000',
+												'upload_path'	=>	$ci->config->config['folder_path']['users']['original'],
 											);
 		}
 		else 
 		{
-			$config['temp']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+			$config['temp']	=	array(	'allowed_types'	=>	'*',
 												'max_size'		=>	'5000',
-												'max_width'		=>	'5000',
-												'max_height'	=>	'6800',
+												'max_width'		=>	'50000',
+												'max_height'	=>	'68000',
 												'upload_path'	=>	$ci->config->config['folder_path']['temp'],
 												'upload_url'	=>	$ci->config->config['url_path']['temp'],
 											);
@@ -3236,6 +3235,15 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 					'listing_image_300x220'=> array('width'=>'300','height'=>'220'),
 					'main_image_680x309'=> array('width'=>'680','height'=>'309'),
 					'thumbnail_75x75'=> array('width'=>'75','height'=>'75')
+			);
+			
+		}
+		else if($type=='users')
+		{
+			$arrImageSizes = array(
+					'75x75'=> array('width'=>'75','height'=>'75'),
+					'user_image'=> array('width'=>'75','height'=>'75'),
+					'75x75'=> array('width'=>'75','height'=>'75')
 			);
 			
 		}
