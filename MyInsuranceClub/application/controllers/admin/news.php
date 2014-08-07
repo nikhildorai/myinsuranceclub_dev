@@ -46,6 +46,7 @@ class News extends Admin_Controller {
 
     public function create($news_id = null)
 	{
+		$this->load->library('simpleImage');
 		$modelType = 'create';
 		//	check if policy id exists
 		$model = array();
@@ -101,6 +102,53 @@ class News extends Admin_Controller {
 				$tag = $this->util->addUpdateTags($_POST['tag']);
 				$_POST['model']['tag'] = $tag;
 			}
+		//	check if file is uploaded
+			if (!empty($_FILES))
+			{
+				$i = 1;
+				foreach($_FILES['model']['name'] as $k1=>$v1)
+				{
+					$time = time();
+					$ext = end(explode('.', $v1));
+					if (empty($ext))
+						$ext = 'jpg';
+					$name = $this->util->getSlug($_POST['model']['title']);
+					//$arrFileNames = array();
+					//	set name & upload path for each file 
+					if ($k1 == 'original_image')
+					{
+						$arrFileNames['original_image'] = $arrFileNames['main_image'] = $arrFileNames['listing_image'] = $arrFileNames['thumbnail'] = 	$name.'-'.$time.'.'.$ext;
+				//		$arrFileNames['main_image'] 		= 	$name.'-680x309'.'-'.$time.'.'.$ext;
+				//		$arrFileNames['listing_image'] 		= 	$name.'-300x220'.'-'.$time.'.'.$ext;
+				//		$arrFileNames['thumbnail'] 			= 	$name.'-75x75'.'-'.$time.'.'.$ext;
+					}
+			//		else
+			//		{
+			//			$arrFileNames[$k1] = '-'.$i.'.'.$ext;
+			//		}
+					foreach ($arrFileNames as $k2=>$v2)
+					{
+						if (empty($v1))
+							$_POST['model'][$k1] = (isset($model[$k1]) && !empty($model[$k1])) ? $model[$k1] : '';
+						else
+							$_POST['model'][$k2] = $v2;
+						$i++;
+					}
+				}
+			}
+			else 
+			{
+				//	set previous file name in post
+				$_POST['model']['original_image'] 	= $model['original_image'];
+				$_POST['model']['main_image'] 		= $model['main_image'];
+				$_POST['model']['listing_image'] 	= $model['listing_image'];
+				$_POST['model']['thumbnail'] 		= $model['thumbnail'];
+			}
+			
+//var_dump($_FILES, $_POST, $arrFileNames);	
+			
+			
+			
 			
 			if (isset($_POST['model']['slug']) && !empty($_POST['model']['slug']))
 				$_POST['model']['slug'] = $this->util->getSlug($_POST['model']['slug']);
@@ -114,8 +162,7 @@ class News extends Admin_Controller {
 			if (!isset($_POST['model']['seo_description'])|| empty($_POST['model']['seo_description']))
 			{
 				$_POST['model']['seo_description'] = substr(strip_tags($_POST['model']['description']), 1, 150);
-			}
-//var_dump($_POST);die;			
+			}		
 			//	set default values for policy
 			$arrParams = $this->input->post('model');
 			$_POST['modelType'] = $modelType;
@@ -148,7 +195,63 @@ class News extends Admin_Controller {
 				}
 				else 
 					$saveData[] = false;
+				
+					
+				if (!empty($news_id))	
+				{
+					// 	save records for files
+					if (!empty($_FILES))
+					{
+						$this->data['file_upload_error'] = array();
+				        $config['upload_path'] = $this->config->config['folder_path']['news']['original_image'];
+				        $config['file_name'] = $arrFileNames;
+				        $config['extra_config'] = Util::getConfigForFileUpload('news');
+						$this->load->library('upload', $config);
+						$this->upload->initialize($config); 	
 						
+						if($this->upload->do_multi_upload("model"))
+						{
+			              	$this->data['file_upload'] = $this->upload->get_multi_upload_data();
+		              		//	if image is uploaded successfully resize images
+			              	if (!empty($this->data['file_upload']))
+			              	{
+			              		foreach ($this->data['file_upload'] as $k1=>$v1)
+			              		{
+									$photoName = $v1['orig_name'];
+									$path = $v1['file_path'];
+									//$path = $this->config->config['folder_path']['news']['all'];
+									$temp = $this->config->config['folder_path']['temp'];
+									
+									SimpleImage::saveImages($path, $photoName, $type="news");
+			              		}
+			              	}
+						}
+						else 
+						{
+			                $this->data['file_upload_error'][] = $this->upload->display_errors();
+						}
+			            $this->data['file_upload'] = $this->upload->get_multi_upload_data();
+			            
+			            if (empty($this->data['file_upload_error']))
+			            {
+							$saveData[] = true;
+			            }
+			            else if (!empty($this->data['file_upload_error']))
+			            {
+			            	foreach ($this->data['file_upload_error'] as $k1=>$v1)
+			            	{
+			            		$msg = str_replace('<p>', '', $v1);
+			            		$msg = str_replace('</p>', '', $msg);
+								$this->data['message'] .= '<p class="error_msg">'.$msg.'</p>';
+			            	}
+							$saveData[] = false;
+			            }
+			            else 
+			            {
+							$saveData[] = true;
+			            }
+					}	
+				}	
 				//	if policy and varients records are stored then on show success and redirect to index 
 				if(!in_array(false, $saveData))
 				{
@@ -280,7 +383,7 @@ class News extends Admin_Controller {
 			}
 			else 
 			{
-				$companyModel = $exist;	
+				$model = $exist;	
 				$modelType = 'update';
 				$arrParams['status'] = $status;
 				$arrParams['news_id'] = $news_id;

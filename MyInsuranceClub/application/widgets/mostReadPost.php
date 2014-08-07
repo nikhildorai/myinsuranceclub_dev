@@ -39,14 +39,14 @@ class MostReadPost extends Widget{
 						}
 						
 						foreach ($top as $k1=>$v1)
-						{	
+						{								
 							$imgUrl = "";
 							$url = base_url().'news/'.$v1['slug'];
 							if (isset($v1['thumbnail']) && !empty($v1['thumbnail']))
 							{
-								if (file_exists($folderUrl.$news['thumbnail']))
+								if (file_exists($folderUrl.$v1['thumbnail']))
 								{
-									$imgUrl = $fileUrl.$news['thumbnail'];
+									$imgUrl = $fileUrl.$v1['thumbnail'];
 								}
 							}
 					?>

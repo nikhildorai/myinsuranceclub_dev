@@ -2199,6 +2199,15 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 												'upload_path'	=>	$ci->config->config['folder_path']['policy']['brochure_images'],
 											);
 		}
+		else if ($type == 'news')
+		{
+			$config['original_image']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+												'max_size'		=>	'5120',
+												'max_width'		=>	'2000',
+												'max_height'	=>	'2000',
+												'upload_path'	=>	$ci->config->config['folder_path']['news']['original_image'],
+											);
+		}
 		else if ($type == 'temp')
 		{
 			$config['temp']	=	array(	'allowed_types'	=>	'gif|jpg|png',
@@ -3217,6 +3226,28 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		}
 		return $return;
 	}
+	
+	
+	public static function getImagedimensions($type="")
+	{
+		if($type=='news')
+		{
+			$arrImageSizes = array(
+					'listing_image_300x220'=> array('width'=>'300','height'=>'220'),
+					'main_image_680x309'=> array('width'=>'680','height'=>'309'),
+					'thumbnail_75x75'=> array('width'=>'75','height'=>'75')
+			);
+			
+		}
+		else 
+		{
+			$arrImageSizes = array(
+					'temp'=> array('width'=>'100','height'=>'100')
+			);
+		}
+		return $arrImageSizes;
+	}
+	
 }
 
 // END Util class

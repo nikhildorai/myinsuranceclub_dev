@@ -16,11 +16,13 @@ $( "#publish_date" ).datepicker({
 	});
 });
 </script>
+<script src="<?php echo  base_url()?>assets/js/multiFileUpload/script.js"></script>
 
 <link rel="stylesheet" href="<?php echo base_url();?>css/jquery-ui-1.10.4.custom.css">
 <div class="page" data-ng-controller="signupCtrl">
 <?php 	$attributes = array('class'=>"form-horizontal form-validation");
-		echo form_open_multipart(current_url(), $attributes);	?>
+		echo form_open_multipart(current_url(), $attributes);	
+$news_id = (isset($model['news_id']) && !empty($model['news_id'])) ? $model['news_id'] : '';?>
 	<div class="panel panel-primary">
     	<div class="panel-heading">
         	<strong>
@@ -174,24 +176,26 @@ $( "#publish_date" ).datepicker({
 				                        
 				                    </div>
 				                </div>
-
+				                
+				                
+								<?php //echo widget::run('multiFileUpload', array('policy_id'=>$news_id, 'policyModel'=>$model, 'modelName'=>'model','fieldName'=>'original_image','uploadType'=>'news_original_image','multiUpload'=>"no")); ?>
 			                
 				                <div class="form-group">
 				                    <label for="" class="col-sm-3">Image</label>
 				                    <div class="col-sm-9">
-				                        <input type="file" id="logo1" name="model[image]"  title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'image',$model) ? $model['image'] : '';?>">
+				                        <input type="file" id="original_image" name="model[original_image]"  title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'original_image',$model) ? $model['original_image'] : '';?>">
 				                        <span class="help-block">Image size: 680px X 309px.</span>
 				                    
 				                    <?php 
 												$folderUrl = $this->config->config['folder_path']['news']['original_image'];
 												$fileUrl = $this->config->config['url_path']['news']['original_image'];
 												
-												if (isset($model['image']) && !empty($model['image']))
+												if (isset($model['original_image']) && !empty($model['original_image']))
 												{
-													if (file_exists($folderUrl.$model['image']))
+													if (file_exists($folderUrl.$model['original_image']))
 													{
 														echo 	'<div class="divider"></div>
-					                    						<img src="'.$fileUrl.$model['image'].'">';
+					                    						<img src="'.$fileUrl.$model['original_image'].'">';
 													}
 												}
 												?>

@@ -14,7 +14,7 @@ class MultiFileUpload extends Widget{
         $policy_id = isset($ext['policy_id']) ? $ext['policy_id'] : ''; 
         $fieldName = (isset($ext['fieldName']) && !empty($ext['fieldName'])) ?  $ext['fieldName'] : 'file';
         $uploadType = (isset($ext['uploadType']) && !empty($ext['uploadType'])) ?  $ext['uploadType'] : '';
-        $multiUpload = (isset($ext['multiUpload']) && !empty($ext['multiUpload'])) ?  $ext['multiUpload'] : true;
+        $multiUpload = (isset($ext['multiUpload']) && !empty($ext['multiUpload'])) ?  $ext['multiUpload'] : "yes";
         
 ?>
 	<?php 	
@@ -32,6 +32,11 @@ class MultiFileUpload extends Widget{
 			{
 				$folderUrl = $this->config->config['folder_path']['policy']['brochure_images'];
 				$fileUrl = $this->config->config['url_path']['policy']['brochure_images'];
+			}
+			else if ($uploadType == 'news_original_image')
+			{
+				$folderUrl = $this->config->config['folder_path']['news']['original_image'];
+				$fileUrl = $this->config->config['url_path']['news']['original_image'];
 			}
 			
 			foreach ($files as $k1=>$v1)
@@ -53,11 +58,12 @@ class MultiFileUpload extends Widget{
 		<input type="hidden" class="multiUploadClassInput" value="<?php echo $multiUpload;?>">
 		
 		<div class="filediv">
-			<input type="file" name="<?php echo $modelName.'['.$fieldName.']';?><?php echo ($multiUpload == true) ? '[]' : ''?>" title="Choose File" data-ui-file-upload class="btn-info fileUploadAjax" value="<?php echo array_key_exists( $fieldName,$model) ? $model[$fieldName] : '';?>">
+			<input type="file" name="<?php echo $modelName.'['.$fieldName.']';?><?php echo ($multiUpload == "yes") ? '[]' : ''?>" title="Choose File" data-ui-file-upload class="btn-info fileUploadAjax" value="<?php echo array_key_exists( $fieldName,$model) ? $model[$fieldName] : '';?>">
 		</div>
 		<br /> 
+		<?php if ($multiUpload == "yes"){?>
 		<a href="javascript:void(0);" class="add_more" class="add btn btn-info"><span class="glyphicon glyphicon-plus"></span> Add More Files</a>
-	
+	<?php }?>
 
 <?php                 
 	}

@@ -34,7 +34,7 @@
 								{
 									$imgUrl = $fileUrl.$news['listing_image'];
 								}
-							}
+							}						
 ?>
 						<article id="" class="masonry-box clearfix" role="article" style="">
 <?php 						if (!empty($imgUrl))
