@@ -58,7 +58,7 @@ class News extends MIC_Controller {
 	 */
 	public function newsDetails($slug)
 	{	
-        $this->load->library('disqusLib');
+        $this->load->library('disquslib');
 		$data = array();
 		if (empty($slug))
 			redirect('news/index');

@@ -164,8 +164,8 @@ $( "#publish_date" ).datepicker({
 				                <div class="form-group">
 									<?php 							
 										//echo $this->disqus->get_html();
-										echo DisqusLib::displayDisqus();
-										//echo DisqusLib::listcomments();
+										echo Disquslib::displayDisqus();
+										//echo Disquslib::listcomments();
 									?>
 				               	</div>
 						              

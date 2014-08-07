@@ -97,7 +97,7 @@ class DisqusResource {
         $url = 'https://'.DISQUS_API_HOST;
         $path = '/api/'.$version.'/'.implode('/', $this->tree).'/'.$name.'.'.$format;
 
-		$config = DisqusLib::getConfig();
+		$config = Disquslib::getConfig();
 		$kwargs['access_token'] = $config['access_token'];
         if (!empty($kwargs)) {
             if ($resource->method == 'POST') {

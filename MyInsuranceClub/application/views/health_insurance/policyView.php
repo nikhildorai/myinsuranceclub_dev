@@ -1447,7 +1447,7 @@
 				$arrParams['disqus_url'] = $disqusUrl;
 				$arrParams['disqus_title'] = $policyDetails['policy']['policy_name'];
 		//		$arrParams['disqus_category_id'] = '3125046';
-			echo DisqusLib::displayDisqus($arrParams);
+			echo Disquslib::displayDisqus($arrParams);
 										
 							/*		?>
 				<div id="disqus_thread"></div>

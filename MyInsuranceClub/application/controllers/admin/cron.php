@@ -10,7 +10,7 @@ class Cron extends CI_Controller {
 		$this->load->library('session');
         $this->load->library('curl');
         $this->load->library('util');
-        $this->load->library('DisqusLib');
+        $this->load->library('disquslib');
         $this->load->model('disqus_comments_model');
  		
 		// Note: This is only included to create base urls for purposes of this demo only and are not necessarily considered as 'Best practice'.
@@ -48,8 +48,8 @@ class Cron extends CI_Controller {
 	 */
 	public function getCommentsFromDisqus()
 	{
-		$config = DisqusLib::getConfig();
-		$dbConfig = DisqusLib::getDBConfig();		
+		$config = Disquslib::getConfig();
+		$dbConfig = Disquslib::getDBConfig();		
 		// Max. of 100
 		$fetch_limit = 100;
 		// asc or desc

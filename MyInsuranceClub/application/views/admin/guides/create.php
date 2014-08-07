@@ -167,7 +167,7 @@ $( "#publish_date" ).datepicker({
 									$arrParams['disqus_url'] = base_url().'admin/guides/create/'.$model['guide_id'];
 									$arrParams['disqus_title'] = $model['title'];
 									$arrParams['disqus_category_id'] = '3125046';
-										echo DisqusLib::displayDisqus($arrParams);
+										echo Disquslib::displayDisqus($arrParams);
 										*/
 									?>
 				               	</div>

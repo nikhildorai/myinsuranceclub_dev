@@ -177,7 +177,7 @@ class guides extends Admin_Controller {
 	public function getComments($guide_id = null)
 	{
 		echo 'comments';
-		DisqusLib::listcomments();
+		Disquslib::listcomments();
 		
 		die;
 	}

@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class DisqusLib {
+class Disquslib {
 	
 	public $disConfig;
 	public $disDBConfig;
@@ -25,7 +25,7 @@ class DisqusLib {
 	
 	public function displayDisqus($arrParams = array())
 	{
-		$config = DisqusLib::getConfig();	
+		$config = Disquslib::getConfig();	
         // Validate config items
         if (!in_array($config['disqus_developer'], array(0,1)) || strlen($config['disqus_shortname']) == 0) {
             return "Disqus config items not setup correctly, please check library config settings";
@@ -59,7 +59,7 @@ class DisqusLib {
 	
 	public function listcomments($endpoint = null,$cursor = 0,$j=0) 
 	{
-		$config = DisqusLib::getConfig();	
+		$config = Disquslib::getConfig();	
 		$apikey = $config['forum_api_key']; // get keys at http://disqus.com/api/ — can be public or secret for this endpoint
 		$shortname = $config['forum_shortname']; // defined in the var disqus_shortname = '...';
 		$thread = 'link:'.$config['disqus_url']; // IMPORTANT the URL that you're viewing isn't necessarily the one stored with the thread of comments

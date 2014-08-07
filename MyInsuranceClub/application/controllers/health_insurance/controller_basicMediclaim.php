@@ -488,7 +488,7 @@ class controller_basicMediclaim extends Customer_Controller {
 		if (!empty($policySlug))
 		{
         	$this->load->plugin('widget_pi');
-        	$this->load->library('disqusLib');
+        	$this->load->library('disquslib');
 			$data = array();
 			//	get policy
 			//	all details with variant, variant features and riders
