@@ -80,7 +80,7 @@ $autoload['helper'] = array('url', 'form', 'url_helper', 'util','cookie','html')
 |
 */
 
-$autoload['config'] = array('disqus');
+$autoload['config'] = array();
 
 
 /*

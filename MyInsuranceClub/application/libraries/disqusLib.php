@@ -8,7 +8,7 @@ class Disquslib {
 	public function getConfig()
 	{
 		$CI =& get_instance();
-		$this->disConfig = $CI->config->config['disqus'];
+		$this->disConfig = $CI->config->config['disquslib'];
 		$this->disConfig['disqus_url'] = current_url();
 		return $this->disConfig;
 	}
@@ -25,7 +25,7 @@ class Disquslib {
 	
 	public function displayDisqus($arrParams = array())
 	{
-		$config = Disquslib::getConfig();	
+		$config = Disquslib::getConfig();		
         // Validate config items
         if (!in_array($config['disqus_developer'], array(0,1)) || strlen($config['disqus_shortname']) == 0) {
             return "Disqus config items not setup correctly, please check library config settings";

@@ -439,19 +439,19 @@ $config['policy']['descriptionCount'] = 1;
 $config['policy']['keyFeatures'] = 4;
 
 
-//	disqus comments parameters
-$config['disqus']['disqus_shortname'] 		= 	'mictest';
-$config['disqus']['disqus_developer'] 		= 	1; //	make it 0 in live environment
-$config['disqus']['disqus_identifier'] 		= 	'';
-$config['disqus']['disqus_title'] 			= 	'';
-$config['disqus']['disqus_url'] 			= 	'';
-$config['disqus']['disqus_category_id'] 	= 	'';
-$config['disqus']['disqus_disable_mobile'] 	= 	"true";
-$config['disqus']['forum_id'] 				= 	'mictest';
-$config['disqus']['forum_api_key'] 			= 	'sNBISJjGv2Z89HegloEf53Hxm36B7hVcPYGD3rud4KQfKb8wp2Oz7cpdpVwHD8cq';
-$config['disqus']['forum_secret_key'] 		= 	'eUzcQTdvcBeWUD493CEZkPu3HkGzJUK88FigYG0H11GHOUsr1SpIUHJI05rN6ooG';
-$config['disqus']['user_api_key'] 			= 	'aa8d1d13e8a043579a08373ad004e825';
-$config['disqus']['access_token'] 			= 	'aa8d1d13e8a043579a08373ad004e825';
+//	disquslib comments parameters
+$config['disquslib']['disqus_shortname'] 		= 	'mictest';
+$config['disquslib']['disqus_developer'] 		= 	1; //	make it 0 in live environment
+$config['disquslib']['disqus_identifier'] 		= 	'';
+$config['disquslib']['disqus_title'] 			= 	'';
+$config['disquslib']['disqus_url'] 			= 	'';
+$config['disquslib']['disqus_category_id'] 	= 	'';
+$config['disquslib']['disqus_disable_mobile'] 	= 	"true";
+$config['disquslib']['forum_id'] 				= 	'mictest';
+$config['disquslib']['forum_api_key'] 			= 	'sNBISJjGv2Z89HegloEf53Hxm36B7hVcPYGD3rud4KQfKb8wp2Oz7cpdpVwHD8cq';
+$config['disquslib']['forum_secret_key'] 		= 	'eUzcQTdvcBeWUD493CEZkPu3HkGzJUK88FigYG0H11GHOUsr1SpIUHJI05rN6ooG';
+$config['disquslib']['user_api_key'] 			= 	'aa8d1d13e8a043579a08373ad004e825';
+$config['disquslib']['access_token'] 			= 	'aa8d1d13e8a043579a08373ad004e825';
 
 
 /*
