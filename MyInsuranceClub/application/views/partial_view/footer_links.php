@@ -53,8 +53,8 @@
                   <div class="bottom-col-content widget_recent_entries custom-formatting">
             <h3 class="bottom-col-title">Quick Connect</h3>
             <ul>
-                      <li><a href="javascript:void(0);" style="color:#ff6102; text-decoration:none;">Phone: +91 22 28463454</a></li>
-                      <li><a href="javascript:void(0);" style="color:#ff6102; text-decoration:none;">Email: contact@myinsuranceclub.com</a></li>
+                      <li><a style="color:#ff6102; cursor:auto; text-decoration:none;">Phone: +91 22 28463454</a></li>
+                      <li><a style="color:#ff6102;cursor:auto; text-decoration:none;">Email: contact@myinsuranceclub.com</a></li>
                     </ul>
           </div>
                 </div>

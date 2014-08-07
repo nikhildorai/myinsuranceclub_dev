@@ -7,13 +7,13 @@
                   <li>
                      <h3>Stay Connected!</h3>
                   </li>
-                  <li><a href="#">Latest Product Launches </a></li>
+                  <li>Latest Product Launches</li>
                   |
-                  <li><a href="#">Resolve Queries </a></li>
+                  <li>Resolve Queries</li>
                   |
-                  <li><a href="#">Industry News </a></li>
+                  <li>Industry News</li>
                   |
-                  <li><a href="#">Contests & Prizes</a></li>
+                  <li>Contests & Prizes</li>
                </ul>
                <ul class="list-inline footer-menu main-menu" >
                   <li class='follow submenu pull-right' id="soi">

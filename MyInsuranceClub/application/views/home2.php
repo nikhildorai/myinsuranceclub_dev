@@ -303,40 +303,40 @@
          <div class="carousel">
             <ul class="list lazy-loading styled" data-ll-item-delay="0">
                <li class="lazy-loading-item" data-ll-effect="drop-right">
-                  <a href="#" class="clearfix" title="Future General" ><span style="background-image: url('assets/images/partner/1.jpg');"></span></a>
+                  <a class="clearfix" title="Future General" ><span style="background-image: url('assets/images/partner/1.jpg');"></span></a>
                </li>
                <li class="lazy-loading-item" data-ll-effect="drop-right">
-                  <a href="#" class="clearfix" title=""><span style="background-image: url('assets/images/partner/2.jpg');"></span></a>
+                  <a class="clearfix" title=""><span style="background-image: url('assets/images/partner/2.jpg');"></span></a>
                </li>
                <li class="lazy-loading-item" data-ll-effect="drop-right">
-                  <a href="#" class="clearfix" title=""><span style="background-image: url('assets/images/partner/3.jpg');"></span></a>
+                  <a class="clearfix" title=""><span style="background-image: url('assets/images/partner/3.jpg');"></span></a>
                </li>
                <li class="lazy-loading-item" data-ll-effect="drop-right">
-                  <a href="#" class="clearfix" title=""><span style="background-image: url('assets/images/partner/4.jpg');"></span></a>
+                  <a class="clearfix" title=""><span style="background-image: url('assets/images/partner/4.jpg');"></span></a>
                </li>
                <li class="lazy-loading-item" data-ll-effect="drop-right">
-                  <a href="#" class="clearfix" title=""><span style="background-image: url('assets/images/partner/5.jpg');"></span></a>
+                  <a class="clearfix" title=""><span style="background-image: url('assets/images/partner/5.jpg');"></span></a>
                </li>
                <li class="lazy-loading-item" data-ll-effect="drop-right">
-                  <a href="#" class="clearfix" title=""><span style="background-image: url('assets/images/partner/6.jpg');"></span></a>
+                  <a class="clearfix" title=""><span style="background-image: url('assets/images/partner/6.jpg');"></span></a>
                </li>
                <li class="lazy-loading-item" data-ll-effect="drop-right">
-                  <a href="#" class="clearfix" title=""><span style="background-image: url('assets/images/partner/1.jpg');"></span></a>
+                  <a class="clearfix" title=""><span style="background-image: url('assets/images/partner/1.jpg');"></span></a>
                </li>
                <li class="lazy-loading-item" data-ll-effect="drop-right">
-                  <a href="#" class="clearfix" title=""><span style="background-image: url('assets/images/partner/2.jpg');"></span></a>
+                  <a class="clearfix" title=""><span style="background-image: url('assets/images/partner/2.jpg');"></span></a>
                </li>
                <li class="lazy-loading-item" data-ll-effect="drop-right">
-                  <a href="#" class="clearfix" title=""><span style="background-image: url('assets/images/partner/3.jpg');"></span></a>
+                  <a class="clearfix" title=""><span style="background-image: url('assets/images/partner/3.jpg');"></span></a>
                </li>
                <li class="lazy-loading-item" data-ll-effect="drop-right">
-                  <a href="#" class="clearfix" title=""><span style="background-image: url('assets/images/partner/4.jpg');"></span></a>
+                  <a class="clearfix" title=""><span style="background-image: url('assets/images/partner/4.jpg');"></span></a>
                </li>
                <li class="lazy-loading-item" data-ll-effect="drop-right">
-                  <a href="#" class="clearfix" title=""><span style="background-image: url('assets/images/partner/5.jpg');"></span></a>
+                  <a class="clearfix" title=""><span style="background-image: url('assets/images/partner/5.jpg');"></span></a>
                </li>
                <li class="lazy-loading-item" data-ll-effect="drop-right">
-                  <a href="#" class="clearfix" title=""><span style="background-image: url('assets/images/partner/6.jpg');"></span></a>
+                  <a class="clearfix" title=""><span style="background-image: url('assets/images/partner/6.jpg');"></span></a>
                </li>
             </ul>
          </div>
