@@ -308,7 +308,7 @@ embed, iframe, object, video {
 				Pagination
    ------------------------------------------------------	
 */
-.pagination, .page-links {
+/*.pagination, .page-links {
 	position:relative;
 	font-size:12px;
 	line-height:13px;
@@ -348,7 +348,78 @@ embed, iframe, object, video {
 .page-links-title {
 	background-color: #fff !important;
 	color:#424242 !important;
+}*/
+.pagination  {
+    float: left;
 }
+.pagination:before, .pagination:after {
+    content: " ";
+    display: table;
+}
+
+.pagination:after {
+    clear: both;
+}
+.pagination .btn-group, .pagination .input-group {
+    float: left;
+}
+.pagination > .btn, .pagination > .btn-group, .pagination > .input-group {
+    margin-left: 0px;
+}
+
+.pagination .input-group {
+    border-collapse: separate;
+    display: table;
+    position: relative;
+}
+.pagination .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+.pagination .btn-group > .btn:first-child {
+    margin-left: 0;
+}
+.pagination .btn-group > .btn,.pagination .btn-group-vertical > .btn {
+    float: left; margin-left:2px;
+    position: relative;
+}
+.pagination .btn-primary {
+    background-color: #ff5a00;
+    border-color: #ff5a00;
+    color: white;
+}
+
+.pagination .btn-info {
+    background-color: #BADEDA;
+    border-color: #29adb7;
+    color: #000;
+}
+
+.pagination .input-group-btn {
+    font-size: 0;
+    position: relative;
+    white-space: nowrap;
+}
+.pagination .input-group-addon,.pagination .input-group-btn {
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 1%;
+}
+.pagination .input-group-addon,.pagination .input-group-btn,.pagination .input-group .form-control {
+    display: table-cell;
+}
+.pagination .ui-select > select {
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px 0;
+    padding:6px 15px 6px 10px !important;
+    position: relative;
+    text-indent: 0.01px;
+    text-overflow: "";
+    width: 200px;
+}
+
 /* Post */
 .post-like a, .entry-meta .share-icon i {
 	color: #919293;
@@ -408,12 +479,7 @@ h1.widget-title {
 	text-align: left;
 }
 /* Pagination */
-.pagination span, .pagination a, .page-links-title, .page-links > span, .page-links a {
-	border: 1px solid #ff5a00;
-}
-.pagination a:hover, .page-links a:hover, .pagination .current, .page-links > span {
-	background-color: #ff5a00;
-}
+
 .pbd-alp-button, .pbd-no-posts {
 	background-color: #ff5a00;
 }
@@ -1067,7 +1133,7 @@ padding-right: 1px;
 	text-align: right;
 }
 #author-block .author-site {
-	display: block;
+	display: block; font-size:12px;
 }
 #author-block .ct-athr-left p:last-of-type {
 	margin-bottom: 0;
