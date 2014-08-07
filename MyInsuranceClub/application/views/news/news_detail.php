@@ -251,7 +251,7 @@ else
             
             
             
-            <div class="col-md-6 no_pad_lr" style="padding:0px; float:right;">
+            <div class="col-md-6 soc_n no_pad_lr" style="padding:0px; float:right;">
             <h3 style="padding-left:15px;">Social Connects</h3>
             <div style="float:right; width:100%;">
             <div class="fb_cnt col-md-3">
