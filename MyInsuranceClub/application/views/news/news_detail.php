@@ -92,7 +92,7 @@ else
             
             <!-- Post Thumbnail -->
        <?php if (!empty($imgUrl)){?>     
-            <div class="entry-thumb"> <img src="<?php echo $imgUrl;?>" alt=""> </div>
+            <div class="entry-thumb"> <img src="<?php echo $imgUrl;?>" alt="<?php echo $news['title'];?>" title="<?php echo $news['title'];?>"> </div>
       <?php }?>      
             <!-- .entry-thumb -->
             

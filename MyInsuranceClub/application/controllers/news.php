@@ -33,7 +33,7 @@ class News extends MIC_Controller {
 	{
 		$this->load->library('pagination');
 		$data = $data['details'] = $arrParams = $records = array();
-		$where 	= News_model::getWhere();	
+		$where 	= 'status ="active"';//News_model::getWhere();	
 		$total = Util::getTotalRowTable('total','news', $where);
 		
 		$limit = 10;
@@ -45,7 +45,7 @@ class News extends MIC_Controller {
 		$data = News_model::getNewsDetails($arrParams);	
 		//	pagination
 		$config = $this->util->get_pagination_params();
-		$config['total_rows'] 	= $total; 
+		$config['total_rows'] 	=  $data['total'] = $total; 
 		$this->pagination->initialize($config); 	
 		$this->template->set_template('frontend');
 		$this->template->write_view('content', 'news/index', $data, TRUE);
@@ -69,7 +69,6 @@ class News extends MIC_Controller {
 			$arrParams['limits'] = '';
 			$data = News_model::getNewsDetails($arrParams);
 			$data['disqusUrl'] = base_url().'news/'.$slug;	
-//	echo '<pre>';print_r($data);	die;	
 			$this->template->set_template('frontend');
 			$this->template->write_view('content', 'news/news_detail', $data, TRUE);
 			$this->template->render();

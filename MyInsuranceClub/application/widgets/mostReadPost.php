@@ -59,12 +59,12 @@ class MostReadPost extends Widget{
 								</div> <!-- widget-post-small-thumb -->
 						<?php 	}	?>
 								<h2 class="entry-title">
-									<a href="<?php echo $url;?>" rel="bookmark"><?php echo Util::getSubStringFromString($v1['title'], 22);?></a>
+									<a href="<?php echo $url;?>" rel="bookmark" title="<?php echo $v1['title'];?>" ><?php echo Util::getSubStringFromString($v1['title'], 55);?></a>
 								</h2> 
 								<span class="entry-date sm-italic-gray"> <?php echo $this->util->getDate($v1['publish_date'], 9)?> </span>
 								<!-- .entry-date -->
 		
-								<div class="entry-content"><?php echo Util::getSubStringFromString($v1['description'], 103);?></div> <!-- .entry-content -->
+								<div class="entry-content"><?php echo Util::getSubStringFromString($v1['description'], 120);?></div> <!-- .entry-content -->
 							</li>
 <?php 						}
 						}

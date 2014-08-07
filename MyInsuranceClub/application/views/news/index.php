@@ -79,10 +79,10 @@
 <?php 						}	?>							
 							<!-- .entry-thumb --> <header class="entry-header">
 							<h1 class="entry-title" style="text-transform: none;">
-								<a href="<?php echo $url;?>" rel="bookmark"><?php echo $news['title'];?></a>
+								<a href="<?php echo $url;?>" rel="bookmark" title="<?php echo $news['title'];?>"><?php echo Util::getSubStringFromString($news['title'], 56);?></a>
 							</h1>
 							<div class="entry-content">
-								<?php echo $this->util->getDescription($news['description']);?>...&nbsp;
+								<?php echo Util::getSubStringFromString($news['description'], 102);?>&nbsp;
 								<a class="read-more left" href="" title=""></a>
 							</div>
 							
@@ -126,7 +126,7 @@
 				<!-- #blog-entry --> 
 				<nav class="pagination clearfix" role="navigation"> 
 					<?php //echo $this->frontpagination->create_links();?>
-					<?php echo $this->pagination->create_links();?>
+					<?php echo $this->pagination->create_links();		?>
 				<?php /*?>
 				<span>Page 1 of 2</span> <span class="current">1</span>
 				<a href="#" class="inactive">2</a>
