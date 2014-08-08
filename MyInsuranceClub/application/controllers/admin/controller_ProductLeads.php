@@ -4,7 +4,7 @@ class controller_ProductLeads extends Admin_Controller {
     {
     	parent::__construct();
     	
-    	$this->load->model('model_getProductLeads');
+    	$this->load->model('model_getproductLeads');
     }
     
     public function index()
@@ -12,7 +12,7 @@ class controller_ProductLeads extends Admin_Controller {
     	$data = array();
     	$product_name = 'healthLeads';
     	
-    	$data['product_leads'] = $this->model_getProductLeads->getProductLeads($product_name);
+    	$data['product_leads'] = $this->model_getproductLeads->getProductLeads($product_name);
     	
     	
     	$this->template->write_view('content', 'admin/productLeads/healthLeads', $data, TRUE);

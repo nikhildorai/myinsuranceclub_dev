@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class model_getProductLeads EXTENDS Admin_Model{
+class model_getproductleads EXTENDS Admin_Model{
 
 	function __construct()
 	{
