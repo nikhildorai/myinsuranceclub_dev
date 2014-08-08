@@ -849,7 +849,7 @@
 <div class="container   margin-bottom-large">
   <div  class="col-md-6 mar-25">
     <div class="top_ins"></div>
-    <h3 class="header_art">Insurance Articles</h3>
+    <h3 class="header_art">Articles on Health Insurance</h3>
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
@@ -875,7 +875,7 @@
   </div>
   <div  class="col-md-6 mar-25">
     <div class="top_ins"></div>
-    <h3 class="header_art">Insurance News</h3>
+    <h3 class="header_art">Guides on Health Insurance</h3>
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
