@@ -59,6 +59,10 @@ $route['admin/dashboard'] = "admin/auth_public/dashboard";
 $route['admin/company'] = "admin/company/index";
 $route['admin/company/(:any)'] = "admin/company/$1";
 
+//admin product leads
+$route['admin/health-leads'] = "admin/controller_ProductLeads/index";
+
+
 #########################	Admin routes ends	##############################
 
 
