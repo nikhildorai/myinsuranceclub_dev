@@ -126,7 +126,7 @@
 	color: #ff5a00;
 	font-size: 15px;
 	vertical-align: text-top;
-	margin-right: 7px;
+	margin-right: 7px; margin-top:1px;
 }
 #blog-entry .entry-meta .entry-share-icons i, .single article .entry-meta .entry-share-icons i, .page article.type-page .entry-meta .entry-share-icons i {
 	color: #575d62;
