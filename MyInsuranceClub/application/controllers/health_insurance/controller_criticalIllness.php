@@ -177,7 +177,7 @@ class controller_criticalIllness extends Customer_Controller {
 		
 							/***** Insert Customer Data DB *****/
 		
-		if($data['compareParam'] != 'yes')
+		if($data['compareParam'] != "yes")
 		{
 			$this->model_customer_personal_and_search_details->customer_personal_search_details($user_input);
 		
