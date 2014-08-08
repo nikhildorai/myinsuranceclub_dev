@@ -160,8 +160,13 @@ class controller_criticalIllness extends Customer_Controller {
 				$user_input['child4_gender']=$this->input->post('child4_gender');
 			}
 			
+							/***** Setting Session *****/
+			
 			$this->session->set_userdata('user_input',$user_input);
+			
+							/***************************/
 		}
+		
 		
 		$user_input=$this->session->userdata('user_input',$user_input);
 		
@@ -169,15 +174,31 @@ class controller_criticalIllness extends Customer_Controller {
 		
 		$data['compareParam'] = $param;
 		
+		
+							/***** Insert Customer Data DB *****/
+		
+		if($data['compareParam'] != 'yes')
+		{
+			$this->model_customer_personal_and_search_details->customer_personal_search_details($user_input);
+		
+			$this->db->freeDBResource($this->db->conn_id);
+		}
+		
+							/***************************/
+		
+		
+							/***** Setting Cookie *****/
+		
 		$this->input->set_cookie('mic_userdata',$this->session->userdata('session_id'),'864000');
 		
-		$this->model_customer_personal_and_search_details->customer_personal_search_details($user_input);
-		$this->db->freeDBResource($this->db->conn_id);
+							/***************************/
+
+		
+							/***** Caching Code *******/
 		
 		$cacheFileName = 'sr_'.$user_input['product_type'].$user_input['plan_type'].$user_input['cust_age'];
 		
 		$cacheObject = Util::getCachedObject($cacheFileName);
-		
 		
 		if($cacheObject != null)
 		{
@@ -195,6 +216,10 @@ class controller_criticalIllness extends Customer_Controller {
 				}
 		}
 		
+							/*************************/
+		
+		
+		
 		$cookie_filter = Util::getCookie('user_filter');
 		
 		if($data['compareParam'] == "yes" && !empty($cookie_filter))
@@ -204,6 +229,7 @@ class controller_criticalIllness extends Customer_Controller {
 		}
 		
 		/* Filter Data Received From Ajax Post */
+		
 		if($this->input->is_ajax_request())
 		{
 			$search_filter = array();
