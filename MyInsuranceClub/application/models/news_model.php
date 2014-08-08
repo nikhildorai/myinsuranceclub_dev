@@ -168,7 +168,7 @@ class News_model EXTENDS Admin_Model{
 			}
 			
 			//	for news by author  
-			if (!empty($arrParams['author']))
+			if (!empty($arrParams['author']) && !empty($data['newsDetails']))
 			{
 				$temp = reset($data['newsDetails']);
 				$data['author'] = $temp['author'];
@@ -192,7 +192,7 @@ class News_model EXTENDS Admin_Model{
 				$config = $db->util->get_pagination_params();
 				$arrSeo['currentPage'] = $config['currentPage'];
 				$seoType = 'newsListing';
-				if (!empty($arrParams['author']))
+				if (!empty($arrParams['author']) && !empty($data['author']))
 				{
 					$arrSeo['author_name'] = isset($data['author']['upro_last_name']) ? $data['author']['upro_first_name'].' '.$data['author']['upro_last_name'] : $data['author']['upro_first_name'];
 					$seoType = 'newsByAuthor';

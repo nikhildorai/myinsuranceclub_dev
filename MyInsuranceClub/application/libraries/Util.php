@@ -1502,7 +1502,8 @@ public static function getCachedObject($cacheKey='')
 						$arrParams['slug'] = $this->getSlug($v1);
 						$arrParams['tag_for'] = $post['tag_for'];
 						$arrParams['comments'] = $post['comments'];
-						$arrParams['display_name'] = $post['display_name'];
+						if (isset($post['display_name']) && !empty($post['display_name']))
+							$arrParams['display_name'] = $post['display_name'];
 						$arrParams['tag_id'] = $v2['tag_id'];
 						$recordId = Master_tags_model::saveRecord($arrParams, $modelType='update');					
 						if ($recordId != false)

@@ -161,7 +161,6 @@ class News extends Admin_Controller {
 			//	set validation rules
 			$validation_rules = array(
 				array('field' => 'model[title]', 'label' => 'title', 'rules' => 'required'),
-				array('field' => 'model[display_name]', 'label' => 'display name', 'rules' => 'required'),
 				array('field' => 'model[description]', 'label' => 'description', 'rules' => 'required'),
 				array('field' => 'model[publish_date]', 'label' => 'publish date', 'rules' => 'required'),
 				array('field' => 'model[author]', 'label' => 'author', 'rules' => 'required'),
