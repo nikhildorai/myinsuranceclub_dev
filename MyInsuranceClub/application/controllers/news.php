@@ -40,13 +40,18 @@ class News extends MIC_Controller {
 		$limit = isset($_GET['per_page']) ? $_GET['per_page'] : 0 ; 
 		
 		$arrParams['news_slug'] = '';
-		$arrParams['perPage'] = 2;//$this->config->config['pagination']['per_page'];
+		$arrParams['perPage'] = $this->config->config['pagination']['per_page'];
 		$arrParams['limits'] = $limit;
-		$data = News_model::getNewsDetails($arrParams);	
+		$arrParams['author'] = '';
+		$arrParams['tag'] = '';
+		$data = News_model::getNewsDetails($arrParams);			
 		//	pagination
 		$config = $this->util->get_pagination_params();
-		$config['total_rows'] 	=  $data['total'] = $total; 
-		$this->pagination->initialize($config); 	
+		
+		if (!empty($data['newsDetails']))
+			$config['total_rows'] = $data['total'] = $total;
+		$data['currentPage'] = $config['currentPage'];
+		$this->pagination->initialize($config); 		
 		$this->template->set_template('frontend');
 		$this->template->write_view('content', 'news/index', $data, TRUE);
 		$this->template->render();
@@ -67,6 +72,8 @@ class News extends MIC_Controller {
 			$arrParams['news_slug'] = $slug;
 			$arrParams['perPage'] = '';//$this->config->config['pagination']['per_page'];
 			$arrParams['limits'] = '';
+			$arrParams['author'] = '';
+			$arrParams['tag'] = '';
 			$data = News_model::getNewsDetails($arrParams);
 			$data['disqusUrl'] = base_url().'news/'.$slug;	
 			$this->template->set_template('frontend');
@@ -75,7 +82,61 @@ class News extends MIC_Controller {
 		}
 	}
 	
+	public function newsByCategory($newsType, $categoryType)
+	{
+		if (!empty($newsType) && !empty($categoryType))
+		{
+			
+			$this->load->library('pagination');
+			$data = $data['details'] = $data['author'] = $data['tagDetails'] = $arrParams = $records = array();
+			$limit = 10;
+			$limit = isset($_GET['per_page']) ? $_GET['per_page'] : 0 ; 
+			
+			if ($newsType == 'author')
+			{	
+				$arrParams['news_slug'] = '';
+				$arrParams['perPage'] = $this->config->config['pagination']['per_page'];
+				$arrParams['limits'] = $limit;
+				$arrParams['author'] = $categoryType;
+				$arrParams['tag'] = '';
+				$data = News_model::getNewsDetails($arrParams);	
+				
+				$where 	= 'status ="active"';//News_model::getWhere();
+				if (!empty($data['author']))
+					$where .= ' AND author = '.$data['author']['uacc_id']; 
+			}
+			else if ($newsType == 'category')
+			{
+				$arrParams['news_slug'] = '';
+				$arrParams['perPage'] = $this->config->config['pagination']['per_page'];
+				$arrParams['limits'] = $limit;
+				$arrParams['author'] = '';
+				$arrParams['tag'] = $categoryType;
+				$data = News_model::getNewsDetails($arrParams);	
 
+				//	get tag records from allTags		
+				
+				$where 	= 'status ="active"';//News_model::getWhere();
+				if (!empty($data['tagDetails']))
+					$where .= ' AND FIND_IN_SET('.$data['tagDetails']['tag_id'].',tag)';
+			}
+			$total = Util::getTotalRowTable('total','news', $where);
+			//	pagination
+			$config = $this->util->get_pagination_params();
+			if (!empty($data['newsDetails']))
+				$config['total_rows'] = $data['total'] = $total; 
+			$data['currentPage'] = $config['currentPage'];
+			$this->pagination->initialize($config); 
+			
+			$data['newsType'] = $newsType;
+			$data['categoryType'] = $categoryType;
+			$this->template->set_template('frontend');
+			$this->template->write_view('content', 'news/news_by_category', $data, TRUE);
+			$this->template->render();
+		}
+		else 
+			redirect('news/index');	
+	}
 	
 }
 

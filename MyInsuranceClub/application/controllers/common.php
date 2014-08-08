@@ -57,6 +57,16 @@ class Common extends Common_Controller {
 					$whereFieldName = 'slug';
 					$whereFieldValue = $arrParams['record'];
 				break;
+				case 'guides':
+					$tableName = $dbPrefix.'guides';
+					$whereFieldName = 'slug';
+					$whereFieldValue = $arrParams['record'];
+				break;
+				case 'articles':
+					$tableName = $dbPrefix.'articles';
+					$whereFieldName = 'slug';
+					$whereFieldValue = $arrParams['record'];
+				break;
 				default :
 					$data = array();
 				break;

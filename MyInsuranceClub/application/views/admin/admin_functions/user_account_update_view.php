@@ -42,7 +42,7 @@
 				        	
 						        <div class="col-md-6">
 						            <section class="panel panel-default">
-						                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Company Details</strong></div>
+						                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> User Details</strong></div>
 						                <div class="panel-body">
 						                
 							                <div class="form-group">
@@ -70,7 +70,9 @@
 							                <div class="form-group">
 							                    <label for="" class="col-sm-3">About</label>
 							                    <div class="col-sm-9">
-							                        <textarea required class="form-control descriptionClass" name="update_about" id="update_about" ><?php echo set_value('update_about',$user['upro_about']);?></textarea>
+							                        <textarea required class="form-control charecterCount" maxlength="183" name="update_about" id="update_about" ><?php echo set_value('update_about',$user['upro_about']);?></textarea>
+							                        <span class="help-block" style="margin-bottom: -5px;">Max 183 chars</span>
+			                        				<span class="help-block currentLength"><?php echo array_key_exists( 'upro_about',$user) ? 'Current length: '.strlen($user['upro_about']).' chars' : '0'.' chars';?></span>
 							                    </div>
 								                <div class="form-group">
 								                </div>

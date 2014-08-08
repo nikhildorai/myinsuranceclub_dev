@@ -114,7 +114,7 @@ var_dump($posts);
 						$sublink = implode('/', $diff);
 				
 						$arrThread = array();
-						$arrThread['tid'] = $post->id;
+						$arrThread['thread_id'] = $post->id;
 var_dump($post->id);						
 						$arrThread['identifiers'] = @$post->identifiers[0];
 						$arrThread['forum'] = $forum;
@@ -136,8 +136,8 @@ var_dump($post->id);
 						$arrThread['action_name'] = isset($diff[2]) ? $diff[2] : '';
 						$arrThread['link_slug'] = isset($diff[3]) ? $diff[3] : '';
 						$arrThread['link_params'] = isset($diff[4]) ? $diff[4] : '';	
-var_dump($arrThread);									
-						Util::callStoreProcedure('sp_insetIntoMIC_disqus_threads', $arrThread);
+//var_dump($arrThread);									
+				//		Util::callStoreProcedure('sp_insetIntoMIC_disqus_threads', $arrThread);
 							
 				/*		$threads->bindValue(':id', $post->id);
 						$threads->bindValue(':identifiers', @$post->identifiers[0]);
@@ -168,7 +168,7 @@ print_r($threads);			die;
 					}
 				} while ($cursor->more);
 				// End forum threads
-
+die;
 				//
 				// Now fetch the actual comments ..
 				//
@@ -184,7 +184,7 @@ print_r($threads);			die;
 			//	$arrInsertAuthorCols = array('name', 'url', 'email', 'id', 'isAnonymous', 'username','profileUrl','joinedAt');
 				do {
 					$posts = $disqus->posts->list($params);
-var_dump($posts);					
+//var_dump($posts);					
 					$cursor = $posts['cursor'];
 					$params['cursor'] = $cursor->next;
 					foreach ($posts['response'] as $post) {

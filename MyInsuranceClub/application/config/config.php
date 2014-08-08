@@ -370,6 +370,7 @@ $config['js_path'] 		= 	$config['base_url'].'application/views/js/';
 
 //	pagination setting
 $config['pagination']['per_page'] 			=	10;
+$config['pagination']['currentPage'] 		=	'';
 $config['pagination']['num_links'] 			=	1;
 $config['pagination']['first_link'] 		= 	'First';
 $config['pagination']['last_link'] 			= 	'Last';

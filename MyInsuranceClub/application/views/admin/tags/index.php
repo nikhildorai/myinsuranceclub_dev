@@ -73,6 +73,7 @@
                         <tr>
 							<th>Id</th>
 							<th>Name</th>
+							<th>Display Name</th>
 							<th>Tags For</th>
 							<th>Comments</th>
 							<th>Status</th>
@@ -116,6 +117,7 @@
 			                 <?php 	}?>
 										<td><?php echo $row['tag_id'];?></td>
 										<td><?php echo $row['name'];?></td>
+										<td><?php echo $row['display_name'];?></td>
 										<td><?php echo ucfirst($row['tag_for']);?></td>
 										<td><?php echo $row['comments'];?></td>
 										<td><?php echo $this->util->getStatusIcon($row['status']);?></td>

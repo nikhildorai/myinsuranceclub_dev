@@ -164,13 +164,23 @@ class Util {
 		$pageUrl = $this->getUrl().'?';
 		if (isset($_SERVER['QUERY_STRING']) &&!empty($_SERVER['QUERY_STRING']))
 		{
-			$qString = explode('&', $_SERVER['QUERY_STRING']);			
+			$qString = explode('&', $_SERVER['QUERY_STRING']);	
 			foreach ($qString as $k1=>$v1)
-			{
-				if (reset(explode('=', $v1)) != 'per_page' && !empty($v1))
+			{			
+				if ( !empty($v1) && reset(explode('=', $v1)) != 'per_page')
 					$pageUrl .= '&'.$v1;
+				if ( !empty($v1) && reset(explode('=', $v1)) == 'per_page')
+				{
+					$a = explode('=', $v1);
+					if (isset($a[1]) && !empty($a[1])) 
+					{
+						$config['currentPage'] = ((int)substr($_GET['per_page'], 0, -1) + 1);
+					}
+					
+				}
 			}
 		}
+	
 		$config['base_url'] 	= $pageUrl;
 		return $config;
 	}
@@ -336,7 +346,7 @@ class Util {
 	public function getSlug($title) {
 	   	$title = strip_tags($title);
 	   	
-	    $search_arr 	= array('%', ',', '?', '.', '!',
+	    $search_arr 	= array('%', ',', ':','?', '.', '!',
 	    						'"', '\'', '/', '\\', '#',
 	    						'©', 'Ã', '¨', 'â', 'ƒ', 'â'
 	    						,'+','^','$','%','&','(',')','=',
@@ -1489,7 +1499,14 @@ public static function getCachedObject($cacheKey='')
 				{
 					foreach ($record as $k2=>$v2)
 					{
-						$tagIds[] = $v2['tag_id'];
+						$arrParams['slug'] = $this->getSlug($v1);
+						$arrParams['tag_for'] = $post['tag_for'];
+						$arrParams['comments'] = $post['comments'];
+						$arrParams['display_name'] = $post['display_name'];
+						$arrParams['tag_id'] = $v2['tag_id'];
+						$recordId = Master_tags_model::saveRecord($arrParams, $modelType='update');					
+						if ($recordId != false)
+							$tagIds[] = $recordId;
 					}
 				}
 				else 
@@ -1497,13 +1514,14 @@ public static function getCachedObject($cacheKey='')
 					$arrParams['slug'] = $this->getSlug($v1);
 					$arrParams['tag_for'] = $post['tag_for'];
 					$arrParams['comments'] = $post['comments'];
+						$arrParams['display_name'] = $post['display_name'];
 					$recordId = Master_tags_model::saveRecord($arrParams, $modelType='create');					
 					if ($recordId != false)
 						$tagIds[] = $recordId;
 				}		
 			}
 			$tagIds = implode(',', $tagIds);
-		}
+		}		
 		return $tagIds;
 	}
 	
@@ -2212,8 +2230,8 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		{
 			$config['user_image']	=	array(	'allowed_types'	=>	'gif|jpg|png',
 												'max_size'		=>	'5120',
-												'max_width'		=>	'2000',
-												'max_height'	=>	'2000',
+												'max_width'		=>	'5000',
+												'max_height'	=>	'5000',
 												'upload_path'	=>	$ci->config->config['folder_path']['users']['original'],
 											);
 		}
@@ -2286,7 +2304,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 			else if ($type == 'sp_insetIntoMIC_disqus_comments')
 				$query = "CALL sp_insetIntoMIC_disqus_comments(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			else if ($type == 'sp_getNewsDetails')
-				$query = "CALL sp_getNewsDetails(?,?,?)";
+				$query = "CALL sp_getNewsDetails(?,?,?,?,?)";
 			else if ($type == 'sp_getTopNewsArticlesGuide')
 				$query = "CALL sp_getTopNewsArticlesGuide(?)";
 			else if ($type == 'sp_getRelatedNewsArticlesGuides')
@@ -2845,7 +2863,9 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		
 		if ($type == 'total')
 		{
+			$db->db->freeDBResource($db->db->conn_id);
 			$db->db->from($tableName);
+			$db->db->freeDBResource($db->db->conn_id);
 			$record = $db->db->count_all_results();
 		}
 		else
@@ -2858,6 +2878,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 			if (!empty($orderBy))
 				$db->db->order_by($orderBy);
 				
+			$db->db->freeDBResource($db->db->conn_id);	
 	        $qry= $db->db->get($tableName);
 	        $record = $qry;
 		}
@@ -2984,10 +3005,11 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 					}
 					$data['claimRatioJson'] = json_encode($data['claimRatio']);
 					//	seo data
-			        $data['title'] = $data['policyDetails']['policy']['seo_title'];
-			        $data['keywords'] = $data['policyDetails']['policy']['seo_keywords'];
-			        $data['description'] = $data['policyDetails']['policy']['seo_description'];
 			        $data['socialSeoData'] = Util::getSocialMediaSeoData($data['policyDetails']['policy'], $url);
+			        $data['seoData']['title'] = $data['policyDetails']['policy']['seo_title'];
+			        $data['seoData']['keywords'] = $data['policyDetails']['policy']['seo_keywords'];
+			        $data['seoData']['description'] = $data['policyDetails']['policy']['seo_description'];
+			        $data['seoData']['url'] = $url;
 			        $data['url'] = $url;
 				}
 //				Util::saveResultToCache($cacheFileName,$data);
@@ -3254,6 +3276,48 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 			);
 		}
 		return $arrImageSizes;
+	}
+	
+	public static function getDefaultSeoData($type = "", $arrSeo = array())
+	{
+		$data['title'] = $data['description'] = $data['keywords'] = '';
+		$page = (isset($arrSeo['currentPage']) && !empty($arrSeo['currentPage'])) ? ' - Page '.$arrSeo['currentPage'].' ' : '';
+		if ($type== 'newsListing')
+		{
+			$data['title'] = 'Indian Insurance Industry News &amp; Views'.$page;
+			$data['title'] .=  '- MyInsuranceClub Newsdesk';
+			$data['description'] = 'Latest Indian Insurance Industry News and Views - both life insurance and general insurance businesses. Updated daily and brought to you by MyInsuranceClub.com Newsdesk.';
+			$data['keywords'] = 'insurance, india, indian, news, insurance news, myinsuranceclub.com, newsdesk';
+		}
+		else if ($type== 'newsByAuthor')
+		{
+			$authorName = (isset($arrSeo['author_name']) && !empty($arrSeo['author_name'])) ? ' by '.$arrSeo['author_name'].' ' : '';
+			$keywords = (isset($arrSeo['author_name']) && !empty($arrSeo['author_name'])) ? $arrSeo['author_name'].', ' : '';
+			$data['title'] = 'Insurance News';	
+			$data['title'] .= $authorName;
+			$data['title'] .= $page;
+			$data['title'] .=  '- MyInsuranceClub Newsdesk';
+			$data['description'] = 'Latest Insurance News'.$authorName.'. Updated daily and brought to you by MyInsuranceClub.com Newsdesk.';
+			$data['keywords'] = 'insurance, india, indian, news, '.$keywords.'insurance news, myinsuranceclub.com, newsdesk';
+		}
+		else if ($type== 'newsByTag')
+		{
+			$keywords = (isset($arrSeo['tag_name']) && !empty($arrSeo['tag_name'])) ? $arrSeo['tag_name'].', ' : '';
+			$tagName = (isset($arrSeo['tag_name']) && !empty($arrSeo['tag_name'])) ? ' on '.$arrSeo['tag_name'].' ' : '';
+			$data['title'] = 'Insurance News';
+			$data['title'] .= $tagName;
+			$data['title'] .= $page;
+			$data['title'] .=  '- MyInsuranceClub Newsdesk';
+			$data['description'] = 'Latest Insurance News'.$tagName.'. Updated daily and brought to you by MyInsuranceClub.com Newsdesk.';
+			$data['keywords'] = 'insurance, india, indian, '.$keywords.'news, insurance news, myinsuranceclub.com, newsdesk';
+		}
+		else
+		{
+			$data['title'] = 'Compare Insurance Policies and Plans in India | MyInsuranceClub.com';
+			$data['description'] = 'Compare and get free quotes for the best life insurance, health insurance, travel insurance, car and auto insurance plans, policies and schemes in India offered by different insurance companies only at MyInsuranceClub.com';
+			$data['keywords'] = 'Compare insurance, best life insurance, best health insurance, cheap car insurance, auto insurance quote, cheap travel insurance, affordable insurance, best insurance policy, insurance companies in India';
+		}
+		return $data;
 	}
 	
 }
