@@ -61,7 +61,8 @@ $route['admin/company/(:any)'] = "admin/company/$1";
 
 //admin product leads
 $route['admin/health-leads'] = "admin/controller_ProductLeads/index";
-
+$route['admin/critical-illness-leads'] = "admin/controller_ProductLeads/critical_illness";
+$route['admin/term-insurance-leads'] = "admin/controller_ProductLeads/term_plans";
 
 #########################	Admin routes ends	##############################
 

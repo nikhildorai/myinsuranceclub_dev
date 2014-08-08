@@ -313,7 +313,18 @@
                 		<span data-i18n="Health"></span>
                 	</a>
                	</li>
-        	
+        		<li>
+                	<a href="<?php echo $base_url;?>admin/critical-illness-leads">
+                		<i class="fa fa-caret-right"></i>
+                		<span data-i18n="Critical Illness"></span>
+                	</a>
+               	</li>
+        		<li>
+                	<a href="<?php echo $base_url;?>admin/term-insurance-leads">
+                		<i class="fa fa-caret-right"></i>
+                		<span data-i18n="Term Insurance"></span>
+                	</a>
+               	</li>
         	</ul>
         </li>
         
