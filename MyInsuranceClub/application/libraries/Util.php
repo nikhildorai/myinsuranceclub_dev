@@ -56,14 +56,14 @@ class Util {
 		{
 			$explodedCustName = explode(' ',$custName);
 				
-			if(sizeof($custName) == 1)
+			if(sizeof($explodedCustName) == 1)
 			{
 				$custName_arr['first_name'] = $explodedCustName[0];
 				$custName_arr['middle_name'] = "";
 				$custName_arr['last_name'] = "";
 			}
 				
-			elseif(sizeof($custName)==2)
+			elseif(sizeof($explodedCustName)==2)
 			{
 				$custName_arr['first_name']=$explodedCustName[0];
 					
@@ -71,7 +71,7 @@ class Util {
 					
 				$custName_arr['last_name']=$explodedCustName[1];
 			}
-			elseif(sizeof($custName)==3)
+			elseif(sizeof($explodedCustName)==3)
 			{
 				$custName_arr['first_name']=$explodedCustName[0];
 					
