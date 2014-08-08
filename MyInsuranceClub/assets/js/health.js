@@ -597,7 +597,7 @@ $(document).ready(function() {
 	  
 	  	var am_v=ui.item.text;
 	  	var city = am_v.split(', ');
-   $("#loc").text(city);
+   $("#loc").text(city[0]);
    $("#cust_city_name").val(am_v);
    
       }
