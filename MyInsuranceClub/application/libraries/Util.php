@@ -2160,25 +2160,25 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		$ci = &get_instance();
 		if ($type == 'company')
 		{
-			$config['logo_image_1']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+			$config['logo_image_1']	=	array(	'allowed_types'	=>	'gif|jpg|png|jpeg',
 												'max_size'		=>	'200',
 												'max_width'		=>	'172',
 												'max_height'	=>	'68',
 												'upload_path'	=>	$ci->config->config['folder_path']['company']['companyPageLogo'],
 											);
-			$config['logo_image_2']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+			$config['logo_image_2']	=	array(	'allowed_types'	=>	'gif|jpg|png|jpeg',
 												'max_size'		=>	'200',
 												'max_width'		=>	'80',
 												'max_height'	=>	'50',
 												'upload_path'	=>	$ci->config->config['folder_path']['company']['searchResultLogo'],
 											);
-			$config['logo_image_partner']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+			$config['logo_image_partner']	=	array(	'allowed_types'	=>	'gif|jpg|png|jpeg',
 												'max_size'		=>	'200',
 												'max_width'		=>	'147',
 												'max_height'	=>	'107',
 												'upload_path'	=>	$ci->config->config['folder_path']['company']['partnerLogo'],
 											);
-			$config['logo_image_leadership']=	array(	'allowed_types'	=>	'gif|jpg|png',
+			$config['logo_image_leadership']=	array(	'allowed_types'	=>	'gif|jpg|png|jpeg',
 												'max_size'		=>	'200',
 												'max_width'		=>	'160',
 												'max_height'	=>	'160',
@@ -2199,19 +2199,19 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 												'max_height'	=>	'2000',
 												'upload_path'	=>	$ci->config->config['folder_path']['policy']['policy_wordings'],
 											);
-			$config['policy_logo']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+			$config['policy_logo']	=	array(	'allowed_types'	=>	'gif|jpg|png|jpeg',
 												'max_size'		=>	'200',
 												'max_width'		=>	'172',
 												'max_height'	=>	'68',
 												'upload_path'	=>	$ci->config->config['folder_path']['policy']['policy_logo'],
 											);
-			$config['policy_wordings_images']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+			$config['policy_wordings_images']	=	array(	'allowed_types'	=>	'gif|jpg|png|jpeg',
 												'max_size'		=>	'5120',
 												'max_width'		=>	'2000',
 												'max_height'	=>	'2000',
 												'upload_path'	=>	$ci->config->config['folder_path']['policy']['policy_wordings_images'],
 											);
-			$config['brochure_images']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+			$config['brochure_images']	=	array(	'allowed_types'	=>	'gif|jpg|png|jpeg',
 												'max_size'		=>	'5120',
 												'max_width'		=>	'2000',
 												'max_height'	=>	'2000',
@@ -2220,7 +2220,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		}
 		else if ($type == 'news')
 		{
-			$config['original_image']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+			$config['original_image']	=	array(	'allowed_types'	=>	'gif|jpg|png|jpeg',
 												'max_size'		=>	'5120',
 												'max_width'		=>	'2000',
 												'max_height'	=>	'2000',
@@ -2229,7 +2229,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		}
 		else if ($type == 'users')
 		{
-			$config['user_image']	=	array(	'allowed_types'	=>	'gif|jpg|png',
+			$config['user_image']	=	array(	'allowed_types'	=>	'gif|jpg|png|jpeg',
 												'max_size'		=>	'5120',
 												'max_width'		=>	'5000',
 												'max_height'	=>	'5000',
@@ -2301,9 +2301,9 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 			else if ($type == 'sp_updateRatingValuesForRecords')
 				$query = "CALL sp_updateRatingValuesForRecords(?,?,?,?,?,?)";
 			else if ($type == 'sp_insetIntoMIC_disqus_threads')
-				$query = "CALL sp_insetIntoMIC_disqus_threads(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				$query = "CALL sp_insetIntoMIC_disqus_threads(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			else if ($type == 'sp_insetIntoMIC_disqus_comments')
-				$query = "CALL sp_insetIntoMIC_disqus_comments(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				$query = "CALL sp_insetIntoMIC_disqus_comments(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			else if ($type == 'sp_getNewsDetails')
 				$query = "CALL sp_getNewsDetails(?,?,?,?,?)";
 			else if ($type == 'sp_getTopNewsArticlesGuide')
@@ -3298,7 +3298,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 			$data['title'] .= $authorName;
 			$data['title'] .= $page;
 			$data['title'] .=  '- MyInsuranceClub Newsdesk';
-			$data['description'] = 'Latest Insurance News'.$authorName.'. Updated daily and brought to you by MyInsuranceClub.com Newsdesk.';
+			$data['description'] = 'Latest Insurance News'.$authorName.$page.'. Updated daily and brought to you by MyInsuranceClub.com Newsdesk.';
 			$data['keywords'] = 'insurance, india, indian, news, '.$keywords.'insurance news, myinsuranceclub.com, newsdesk';
 		}
 		else if ($type== 'newsByTag')
@@ -3309,7 +3309,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 			$data['title'] .= $tagName;
 			$data['title'] .= $page;
 			$data['title'] .=  '- MyInsuranceClub Newsdesk';
-			$data['description'] = 'Latest Insurance News'.$tagName.'. Updated daily and brought to you by MyInsuranceClub.com Newsdesk.';
+			$data['description'] = 'Latest Insurance News'.$tagName.$page.'. Updated daily and brought to you by MyInsuranceClub.com Newsdesk.';
 			$data['keywords'] = 'insurance, india, indian, '.$keywords.'news, insurance news, myinsuranceclub.com, newsdesk';
 		}
 		else

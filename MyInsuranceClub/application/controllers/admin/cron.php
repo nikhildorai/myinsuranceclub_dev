@@ -73,9 +73,9 @@ class Cron extends CI_Controller {
 		// not available in the API's comment response (when using you own identifiers).  These processes
 		// are not tied together (or dependant upon each other), so it is in theory possible to have
 		// comments backed up without any parent thread.
-//		$threads = $dbh->prepare("insert into disqus_threads (id, identifiers, forum, created,feed,category,clean_title,slug,isClosed,posts,userSubscription,link,likes,title,isDeleted,sublink,controller,module,action_name,link_slug,link_params) values (:id, :identifiers, :forum, :created,:feed,:category,:clean_title,:slug,:isClosed,:posts,:userSubscription,:link,:likes,:title,:isDeleted,:sublink,:controller,:module,:action_name,:link_slug,:link_params)");
-//		$comments = $dbh->prepare("insert into disqus_comments (forum, isApproved,author_name,author_url,avatar_url,author_email,author_id,author_our_id,isAnonymous,raw_message,message,thread_id,comment_id,parent_comment_id, created,isSpam,isDeleted, isEdited, likes,username, profileUrl,joinedAt,media,isFlagged,dislikes,isHighlighted,points,numReports, lat, lng,ipAddress)
- // 									values (:forum,:isApproved,:author_name,:author_url,:avatar_url,:author_email,:author_id,:author_our_id,:isAnonymous,:raw_message,:message,:thread_id,:comment_id,:parent_comment_id,:created,:isSpam,:isDeleted,:isEdited,:likes,:username,:profileUrl,:joinedAt,:media,:isFlagged,:dislikes,:isHighlighted,:points,:numReports,:lat,:lng,:ipAddress)");
+		$threads = $dbh->prepare("insert into disqus_threads (id, identifiers, forum, created,created_date, feed,category,clean_title,slug,isClosed,posts,userSubscription,link,likes,title,isDeleted,sublink,controller,module,action_name,link_slug,link_params) values (:id, :identifiers, :forum, :created,:created_date, :feed,:category,:clean_title,:slug,:isClosed,:posts,:userSubscription,:link,:likes,:title,:isDeleted,:sublink,:controller,:module,:action_name,:link_slug,:link_params)");
+		$comments = $dbh->prepare("insert into disqus_comments (forum, isApproved,author_name,author_url,avatar_url,author_email,author_id,author_our_id,isAnonymous,raw_message,message,thread_id,comment_id,parent_comment_id, created,isSpam,isDeleted, isEdited, likes,username, profileUrl,joinedAt,media,isFlagged,dislikes,isHighlighted,points,numReports, lat, lng,ipAddress)
+  									values (:forum,:isApproved,:author_name,:author_url,:avatar_url,:author_email,:author_id,:author_our_id,:isAnonymous,:raw_message,:message,:thread_id,:comment_id,:parent_comment_id,:created,:isSpam,:isDeleted,:isEdited,:likes,:username,:profileUrl,:joinedAt,:media,:isFlagged,:dislikes,:isHighlighted,:points,:numReports,:lat,:lng,:ipAddress)");
 		
 		
 
@@ -93,14 +93,14 @@ class Cron extends CI_Controller {
 				$dbPrefix = Util::getdbPrefix();
 				// Get the latest comment date downloaded so we request only comments made since then
 				$res = $dbh->query("select max(created) as max from MIC_disqus_threads where forum = '$forum'")->fetch();
-//var_dump($res);				
+var_dump($res);				
 				if (!empty($res['max'])) {
 					$params['since'] = $res['max'];
 				}
 
 				do {
 					$posts = $disqus->threads->list($params);
-var_dump($posts);
+var_dump($posts);					
 					// Create cursor to paginate through resultset
 					$cursor = $posts['cursor'];
 
@@ -112,13 +112,13 @@ var_dump($posts);
 						$base_url = array_filter(explode('/', base_url()));
 						$diff = array_values(array_diff($link, $base_url));
 						$sublink = implode('/', $diff);
-				
+				/*
 						$arrThread = array();
-						$arrThread['thread_id'] = $post->id;
-var_dump($post->id);						
+						$arrThread['id'] = $post->id;
 						$arrThread['identifiers'] = @$post->identifiers[0];
 						$arrThread['forum'] = $forum;
-						$arrThread['created'] = Util::getDate($post->createdAt, 3);
+						$arrThread['created'] = strtotime($post->createdAt);
+						$arrThread['created_date'] = Util::getDate($post->createdAt, 3);
 						$arrThread['feed'] = $post->feed;
 						$arrThread['category'] = $post->category;
 						$arrThread['clean_title'] = $post->clean_title;
@@ -137,12 +137,13 @@ var_dump($post->id);
 						$arrThread['link_slug'] = isset($diff[3]) ? $diff[3] : '';
 						$arrThread['link_params'] = isset($diff[4]) ? $diff[4] : '';	
 //var_dump($arrThread);									
-				//		Util::callStoreProcedure('sp_insetIntoMIC_disqus_threads', $arrThread);
-							
-				/*		$threads->bindValue(':id', $post->id);
+						Util::callStoreProcedure('sp_insetIntoMIC_disqus_threads', $arrThread);
+						*/
+						$threads->bindValue(':id', $post->id);
 						$threads->bindValue(':identifiers', @$post->identifiers[0]);
 						$threads->bindValue(':forum', $forum);
-						$threads->bindValue(':created', Util::getDate($post->createdAt, 3));
+						$threads->bindValue(':created', $post->createdAt);
+						$threads->bindValue(':created_date', Util::getDate($post->createdAt, 3));
 						$threads->bindValue(':feed', $post->feed);
 						$threads->bindValue(':category', $post->category);
 						$threads->bindValue(':clean_title', $post->clean_title);
@@ -160,15 +161,16 @@ var_dump($post->id);
 						$threads->bindValue(':action_name', isset($diff[2]) ? $diff[2] : '');
 						$threads->bindValue(':link_slug', isset($diff[3]) ? $diff[3] : '');
 						$threads->bindValue(':link_params', isset($diff[4]) ? $diff[4] : '');						
-print_r($threads);			die;			
+		
 						if($threads->execute())
-							echo 'save';
+							echo '<br>thread save';
 						else 
-							echo 'no save';*/
+							echo '<br>thread no save';
+							
 					}
 				} while ($cursor->more);
 				// End forum threads
-die;
+
 				//
 				// Now fetch the actual comments ..
 				//
@@ -180,11 +182,9 @@ die;
 				if (!empty($res['max'])) {
 					$params['since'] = $res['max'];
 				}
-			//	$arrInsertCols = array('forum','isApproved', 'raw_message','ip_address','thread', 'id','parent','isSpam','isDeleted','isEdited','likes', 'createdAt','isFlagged','dislikes','isHighlighted','points', 'numReports','message');
-			//	$arrInsertAuthorCols = array('name', 'url', 'email', 'id', 'isAnonymous', 'username','profileUrl','joinedAt');
 				do {
 					$posts = $disqus->posts->list($params);
-//var_dump($posts);					
+var_dump($posts);die;					
 					$cursor = $posts['cursor'];
 					$params['cursor'] = $cursor->next;
 					foreach ($posts['response'] as $post) {
@@ -214,7 +214,8 @@ die;
 						$arrComments['thread_id'] = $post->thread;
 						$arrComments['comment_id'] = $post->id;
 						$arrComments['parent_comment_id'] = $post->parent;
-						$arrComments['created'] = Util::getDate($post->createdAt, 3);
+						$arrComments['created'] = strtotime($post->createdAt);
+						$arrComments['created_date'] = Util::getDate($post->createdAt, 3);
 						
 						$arrComments['isSpam'] = $post->isSpam;
 						$arrComments['isDeleted'] = $post->isDeleted;
@@ -222,7 +223,8 @@ die;
 						$arrComments['likes'] = $post->likes;
 						$arrComments['username'] = $post->author->username;
 						$arrComments['profileUrl'] = $post->author->profileUrl;
-						$arrComments['joinedAt'] = Util::getDate($post->author->joinedAt, 3);
+						$arrComments['joinedAt'] = $post->author->joinedAt;
+						$arrComments['joined_date'] = Util::getDate($post->author->joinedAt, 3);
 						$arrComments['media'] = $media;
 						
 						$arrComments['isFlagged'] = $post->isFlagged;
@@ -235,7 +237,7 @@ die;
 						$arrComments['lat'] = $post->approxLoc->lat;
 						$arrComments['lng'] = $post->approxLoc->lng;	
 						
-					//	Util::callStoreProcedure('sp_insetIntoMIC_disqus_comments', $arrComments);
+						Util::callStoreProcedure('sp_insetIntoMIC_disqus_comments', $arrComments);
 						
 						/*
 						$comments->bindValue(':forum', $forum);
@@ -253,6 +255,7 @@ die;
 						$comments->bindValue(':thread_id', $post->thread);
 						$comments->bindValue(':comment_id', $post->id);
 						$comments->bindValue(':parent_comment_id', $post->parent);
+						$comments->bindValue(':created', strtotime($post->createdAt."+0000")); //Since Disqus returns GMT add +0000 to the time string.
 						$comments->bindValue(':created', Util::getDate($post->createdAt, 3));
 						
 						$comments->bindValue(':isSpam', $post->isSpam);
@@ -273,11 +276,11 @@ die;
 						$comments->bindValue(':ipAddress', $post->ipAddress);
 						$comments->bindValue(':lat', $post->approxLoc->lat);
 						$comments->bindValue(':lng', $post->approxLoc->lng);	
-print_r($comments);						
+//print_r($comments);						
 						if($comments->execute())
-							echo 'save';
+							echo '<br>comment save';
 						else 
-							echo 'no save';
+							echo '<br>comment no save';
 							*/
 					}
 				} while ($cursor->more);
