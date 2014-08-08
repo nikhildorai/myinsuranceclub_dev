@@ -11,9 +11,9 @@
 */
 
 $hook['pre_controller'] = array(
-		'class'    => 'User_info',
+		'class'    => 'Pre_hook_controller',
 		'function' => 'index',
-		'filename' => 'user_info.php',
+		'filename' => 'pre_hook_controller.php',
 		'filepath' => 'controllers',
 		'params'   => ''
 );
