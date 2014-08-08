@@ -94,7 +94,7 @@ else
             
             <!-- Post Thumbnail -->
        <?php if (!empty($imgUrl)){?>     
-            <div class="entry-thumb"> <img src="<?php echo $imgUrl;?>" alt="<?php echo $news['title'];?>" title="<?php echo $news['title'];?>"> </div>
+            <div class="entry-thumb"> <img src="<?php echo $imgUrl;?>" alt="<?php echo $news['title'];?>" title="<?php echo $news['title'];?>" style="width:100%;height:100%;"> </div>
       <?php }?>      
             <!-- .entry-thumb -->
             
@@ -242,7 +242,7 @@ else
 					<div class="avg_vote">
 						<span id="ratingValueId"><?php echo (!empty($news['rating_value']) && $news['rating_value'] != 0) ? number_format($news['rating_value'], 1) : 0;?></span><span class="sm">/5</span>
 					</div>
-					<div class="tot_votes_m">based on <?php echo number_format($news['rating_click_count'], 1)?> Votes</div>
+					<div class="tot_votes_m">based on <?php echo $news['rating_click_count'];?> Votes</div>
 				</div> 
             </div>
             
@@ -357,7 +357,7 @@ else
 							$arrParams['disqus_identifier'] = $disqusUrl;
 							$arrParams['disqus_url'] = $disqusUrl;
 							$arrParams['disqus_title'] = $news['title'];
-							//		$arrParams['disqus_category_id'] = '3125046';
+					//		$arrParams['disqus_category_id'] = '3125046';
 							echo Disquslib::displayDisqus($arrParams);
 ?>
 							</div>

@@ -81,6 +81,7 @@ class News_model EXTENDS Admin_Model{
 	public static function getNewsDetails($arrParams = array())
 	{
 		$data = $details = $relatedPost = array();
+		$data['seoData'] = '';
 		$cacheFileName = 'news';
 		$db =& get_instance();
 		if (!empty($arrParams))
@@ -130,9 +131,10 @@ class News_model EXTENDS Admin_Model{
 							
 				//	seo data
 				$url = base_url().'news/'.$arrParams['news_slug'];
-		        $data['title'] = $data['newsDetails']['news']['seo_title'];
-		        $data['keywords'] = $data['newsDetails']['news']['seo_keywords'];
-		        $data['description'] = $data['newsDetails']['news']['seo_description'];
+		        $data['seoData']['title'] = $data['newsDetails']['news']['seo_title'];
+		        $data['seoData']['keywords'] = $data['newsDetails']['news']['seo_keywords'];
+		        $data['seoData']['description'] = $data['newsDetails']['news']['seo_description'];
+		        $data['seoData']['url'] = $url;
 		        $data['socialSeoData'] = Util::getSocialMediaSeoData($data['newsDetails']['news'], $url);
 		        $data['url'] = $url;
 		        
@@ -163,6 +165,44 @@ class News_model EXTENDS Admin_Model{
 					}
 				}
 				$data['relatedPost'] = $relatedPost;
+			}
+			
+			//	for news by author  
+			if (!empty($arrParams['author']) && !empty($data['newsDetails']))
+			{
+				$temp = reset($data['newsDetails']);
+				$data['author'] = $temp['author'];
+			}
+			
+			//	for news by category/tag
+			if (!empty($arrParams['tag']))
+			{
+				if (!empty($data['allTags']))
+				{
+					foreach ($data['allTags'] as $k1=>$v1)
+					{
+						if ($v1['slug'] == $arrParams['tag'])
+							$data['tagDetails'] = $v1;
+					}
+				}
+			}
+			
+			if (empty($data['seoData']))
+			{
+				$config = $db->util->get_pagination_params();
+				$arrSeo['currentPage'] = $config['currentPage'];
+				$seoType = 'newsListing';
+				if (!empty($arrParams['author']) && !empty($data['author']))
+				{
+					$arrSeo['author_name'] = isset($data['author']['upro_last_name']) ? $data['author']['upro_first_name'].' '.$data['author']['upro_last_name'] : $data['author']['upro_first_name'];
+					$seoType = 'newsByAuthor';
+				}
+				else if (!empty($arrParams['tag']))
+				{
+					$arrSeo['tag_name'] = isset($data['tagDetails']['name']) ? $data['tagDetails']['name'] : '';
+					$seoType = 'newsByTag';
+				}
+				$data['seoData'] = Util::getDefaultSeoData($seoType, $arrSeo);
 			}
 			//Util::saveResultToCache($cacheFileName,$data);
 		}

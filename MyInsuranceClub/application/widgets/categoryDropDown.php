@@ -29,7 +29,7 @@ class CategoryDropDown extends Widget{
 							<option selected="" value="">Select a Category</option>
 	<?php 				foreach ($allTags as $k1=>$v1)
 						{	?>
-							<option value="<?php echo $v1['tag_slug'];?>" data-href="<?php echo base_url().$type.'/category/'.$v1['tag_slug'];?>"><?php echo ucwords($v1['name']).' ('.$v1['count'].')';?></option>
+							<option value="<?php echo $v1['tag_slug'];?>" data-href="<?php echo base_url().$type.'/category/'.$v1['tag_slug'];?>"><?php echo !empty($v1['display_name']) ? ucwords($v1['display_name']) : ucwords($v1['name']); echo ' ('.$v1['count'].')';?></option>
 	<?php 				}	?>
 						</select>
 					</div>

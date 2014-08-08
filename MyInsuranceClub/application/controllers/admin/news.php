@@ -118,9 +118,6 @@ class News extends Admin_Controller {
 					if ($k1 == 'original_image')
 					{
 						$arrFileNames['original_image'] = $arrFileNames['main_image'] = $arrFileNames['listing_image'] = $arrFileNames['thumbnail'] = 	$name.'-'.$time.'.'.$ext;
-				//		$arrFileNames['main_image'] 		= 	$name.'-680x309'.'-'.$time.'.'.$ext;
-				//		$arrFileNames['listing_image'] 		= 	$name.'-300x220'.'-'.$time.'.'.$ext;
-				//		$arrFileNames['thumbnail'] 			= 	$name.'-75x75'.'-'.$time.'.'.$ext;
 					}
 			//		else
 			//		{
@@ -144,12 +141,7 @@ class News extends Admin_Controller {
 				$_POST['model']['listing_image'] 	= $model['listing_image'];
 				$_POST['model']['thumbnail'] 		= $model['thumbnail'];
 			}
-			
-//var_dump($_FILES, $_POST, $arrFileNames);	
-			
-			
-			
-			
+						
 			if (isset($_POST['model']['slug']) && !empty($_POST['model']['slug']))
 				$_POST['model']['slug'] = $this->util->getSlug($_POST['model']['slug']);
 			else

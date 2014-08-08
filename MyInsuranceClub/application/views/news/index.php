@@ -9,7 +9,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 cus_res_pad">
-				<h1 class="header_all" style="border-bottom: 2px solid #dadada; padding-bottom: 10px; margin-bottom: 20px;">Insurance News</h1>
+				<h1 class="header_all" style="border-bottom: 2px solid #dadada; padding-bottom: 10px; margin-bottom: 20px;">Insurance News 
+					<?php echo (isset($currentPage) && !empty($currentPage)) ? '- Page '.$currentPage : '' ;?>
+				</h1>
 			</div>
 			<section id="primary" class="col-md-8  one-col-sb" role="main">
 				<div id="blog-entry" class="clearfix" style="position: relative; height: auto;">

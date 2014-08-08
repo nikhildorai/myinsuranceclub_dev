@@ -163,10 +163,12 @@ class Company extends Admin_Controller {
 		//	check if post data is available
 		if ($this->input->post('companyModel') && $isActive == true)
 		{
+			$_POST['companyModel']['company_display_name'] = (isset($_POST['companyModel']['company_display_name']) && !empty($_POST['companyModel']['company_display_name'])) ? $_POST['companyModel']['company_display_name'] :  $_POST['companyModel']['company_name'];
 			//	save tags
 			if (isset($_POST['tag']) && !empty($_POST['tag']))
 			{
 				$_POST['tag']['comments'] = $_POST['companyModel']['company_name'];
+				$_POST['tag']['display_name'] = $_POST['companyModel']['company_shortname'];
 				$tag = $this->util->addUpdateTags($_POST['tag']);
 				$_POST['companyModel']['tag'] = $tag;
 			}
@@ -226,7 +228,6 @@ class Company extends Admin_Controller {
 			else 
 				$_POST['companyModel']['slug'] = (isset($_POST['companyModel']['slug']) && !empty($_POST['companyModel']['slug'])) ? $this->util->getSlug($_POST['companyModel']['slug']) :  '';
 			
-			$_POST['companyModel']['company_display_name'] = (isset($_POST['companyModel']['company_display_name']) && !empty($_POST['companyModel']['company_display_name'])) ? $_POST['companyModel']['company_display_name'] :  $_POST['companyModel']['company_name'];
 			$arrParams = $this->input->post('companyModel');
 			$companyTypeId = (isset($arrParams['company_type_id']) && !empty($arrParams['company_type_id'])) ? $arrParams['company_type_id'] : '';
 			$company_id = (isset($arrParams['company_id']) && !empty($arrParams['company_id'])) ? $arrParams['company_id'] : '';	

@@ -370,6 +370,7 @@ $config['js_path'] 		= 	$config['base_url'].'application/views/js/';
 
 //	pagination setting
 $config['pagination']['per_page'] 			=	10;
+$config['pagination']['currentPage'] 		=	'';
 $config['pagination']['num_links'] 			=	1;
 $config['pagination']['first_link'] 		= 	'First';
 $config['pagination']['last_link'] 			= 	'Last';
@@ -460,10 +461,10 @@ $config['disquslib']['disqus_url'] 			= 	'';
 $config['disquslib']['disqus_category_id'] 	= 	'';
 $config['disquslib']['disqus_disable_mobile'] 	= 	"true";
 $config['disquslib']['forum_id'] 				= 	'mictest';
-$config['disquslib']['forum_api_key'] 			= 	'sNBISJjGv2Z89HegloEf53Hxm36B7hVcPYGD3rud4KQfKb8wp2Oz7cpdpVwHD8cq';
-$config['disquslib']['forum_secret_key'] 		= 	'eUzcQTdvcBeWUD493CEZkPu3HkGzJUK88FigYG0H11GHOUsr1SpIUHJI05rN6ooG';
-$config['disquslib']['user_api_key'] 			= 	'aa8d1d13e8a043579a08373ad004e825';
-$config['disquslib']['access_token'] 			= 	'aa8d1d13e8a043579a08373ad004e825';
+$config['disquslib']['forum_api_key'] 			= 	'o1cY06myeoZqQiUoQnhpUiSWkkh0oFInLDRPgtjffNZ9T9sx0MH2wXSPBEphPYl2';
+$config['disquslib']['forum_secret_key'] 		= 	'3WkS3xWCdjSU3XmE0CEnStD01NQClutdLdYM5IA3sh0ah14VZnyraoLFCr4HHtfr';
+$config['disquslib']['user_api_key'] 			= 	'7ae528ff353c4c53a93f3b3217122c51';
+$config['disquslib']['access_token'] 			= 	'7ae528ff353c4c53a93f3b3217122c51';
 
 
 /*

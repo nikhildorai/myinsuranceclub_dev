@@ -57,6 +57,13 @@ $(".form-horizontal :input").prop("disabled", true);
 				                </div>
 			                
 				                <div class="form-group">
+				                    <label for="" class="col-sm-2">Display Name</label>
+				                    <div class="col-sm-10">
+				                        <input type="text" class="form-control" required placeholder="Add tag display name" id="display_name" name="model[display_name]" value="<?php echo array_key_exists( 'display_name',$model) ? $model['display_name'] : '';?>"  >
+				                    </div>
+				                </div>
+			                
+				                <div class="form-group">
 				                    <label for="" class="col-sm-2">Tag For</label>
 				                    <div class="col-sm-10">
 										<span class="ui-select "> 

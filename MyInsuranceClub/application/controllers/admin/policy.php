@@ -120,9 +120,12 @@ class Policy extends Admin_Controller {
 		//	check if post data is available
 		if ($this->input->post('policyModel') && $isActive == true)
 		{		
+			$_POST['policyModel']['policy_display_name'] = (isset($_POST['policyModel']['policy_display_name']) && !empty($_POST['policyModel']['policy_display_name'])) ? $_POST['policyModel']['policy_display_name'] :  $_POST['policyModel']['policy_name'];
 			//	save tags
 			if (isset($_POST['tag']) && !empty($_POST['tag']))
 			{
+				$_POST['tag']['display_name'] = $_POST['policyModel']['policy_display_name'];
+				$_POST['tag']['comments'] = $_POST['policyModel']['policy_name'];
 				$tag = $this->util->addUpdateTags($_POST['tag']);
 				$_POST['policyModel']['tag'] = $tag;
 			}		
@@ -216,7 +219,6 @@ class Policy extends Admin_Controller {
 			$policy_id = (isset($arrParams['policy_id']) && !empty($arrParams['policy_id'])) ? $arrParams['policy_id'] : '';
 			$company_id = (isset($arrParams['company_id']) && !empty($arrParams['company_id'])) ? $arrParams['company_id'] : '';	
 			$_POST['policyModel']['slug'] = (isset($_POST['policyModel']['slug']) && !empty($_POST['policyModel']['slug'])) ? $this->util->getSlug($_POST['policyModel']['slug']) :  '';
-			$_POST['policyModel']['policy_display_name'] = (isset($_POST['policyModel']['policy_display_name']) && !empty($_POST['policyModel']['policy_display_name'])) ? $_POST['policyModel']['policy_display_name'] :  $_POST['policyModel']['policy_name'];
 			$_POST['modelType'] = $modelType;
 			//	set validation rules
 			$validation_rules = array(

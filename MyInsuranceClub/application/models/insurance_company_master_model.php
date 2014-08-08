@@ -232,9 +232,9 @@ class Insurance_company_master_model EXTENDS Admin_Model{
 			}
 		
 			//	seo data
-	        $data['title'] = $data['companyDetails']['seo_title'];
-	        $data['keywords'] = $data['companyDetails']['seo_keywords'];
-	        $data['description'] = $data['companyDetails']['seo_description'];
+	        $data['seoData']['title'] = $data['companyDetails']['seo_title'];
+	        $data['seoData']['keywords'] = $data['companyDetails']['seo_keywords'];
+	        $data['seoData']['description'] = $data['companyDetails']['seo_description'];
 		}
 		return $data;
 	}
