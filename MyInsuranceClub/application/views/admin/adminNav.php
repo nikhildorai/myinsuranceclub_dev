@@ -299,7 +299,23 @@
                	</li>
             </ul>
         </li>
-        
+         <li>
+        <a href="javascript:void(0);">
+            	<i class="fa fa-bar-chart-o">
+            		<span class="icon-bg bg-info"></span>
+            	</i>
+            	<span data-i18n="Leads"></span>
+            </a>
+        	<ul>
+        		<li>
+                	<a href="<?php echo $base_url;?>admin/health-leads">
+                		<i class="fa fa-caret-right"></i>
+                		<span data-i18n="Health"></span>
+                	</a>
+               	</li>
+        	
+        	</ul>
+        </li>
         
         <?php /*?>
         <li><a href="#/dashboard"> <i class="fa fa-dashboard"><span class="icon-bg bg-danger"></span></i><span data-i18n="Dashboard"></span> </a></li>
