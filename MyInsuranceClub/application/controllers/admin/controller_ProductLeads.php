@@ -10,7 +10,7 @@ class controller_ProductLeads extends Admin_Controller {
     public function index()
     {
     	$data = array();
-    	$product_name = 'healthLeads';
+    	$product_name = 'Mediclaim';
     	
     	$data['product_leads'] = $this->model_getproductLeads->getProductLeads($product_name);
     	
@@ -19,4 +19,27 @@ class controller_ProductLeads extends Admin_Controller {
     	$this->template->render();
     }
 
+	public function critical_illness()
+	{
+		$data = array();
+		$product_name = 'Critical Illness';
+		 
+		$data['product_leads'] = $this->model_getproductLeads->getProductLeads($product_name);
+		 
+		 
+		$this->template->write_view('content', 'admin/productLeads/criticalillnessLeads', $data, TRUE);
+		$this->template->render();
+	}
+	
+	public function term_plans()
+	{
+		$data = array();
+		$product_name = 'Term Plan';
+			
+		$data['product_leads'] = $this->model_getproductLeads->getProductLeads($product_name);
+			
+			
+		$this->template->write_view('content', 'admin/productLeads/termplanLeads', $data, TRUE);
+		$this->template->render();
+	}
 }

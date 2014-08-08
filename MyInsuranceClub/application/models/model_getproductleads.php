@@ -12,9 +12,9 @@ class model_getproductleads EXTENDS Admin_Model{
 	
 	public function getProductLeads($productName = '')
 	{
-		$callProductLeadsSP = "CALL sp_getProductLeads()";
+		$callProductLeadsSP = "CALL sp_getProductLeads(?)";
 		
-		$getLeads = $this->db->query($callProductLeadsSP);
+		$getLeads = $this->db->query($callProductLeadsSP,array($productName));
 		
 		return $getLeads->result_array();
 	}
