@@ -65,19 +65,33 @@
               </div>
             </div>
           </div>
-          </span><span style=""> & I stay in</span> <span id="clickk_l" style="position:relative; "><span class="dotted loc" id="loc"><?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?></span>
+          </span><span style=""> & I stay in</span> <span id="clickk_l" style="position:relative; ">
+          <span class="dotted loc" id="loc">
+          <?php 
+	          	$explodeCity = array();
+	          if(isset($this->session->userdata['user_input']['cust_city_name']))
+	          { 
+	          	$explodeCity = explode(', ',$this->session->userdata['user_input']['cust_city_name']);
+	          	
+	          	
+	          	echo $explodeCity[0];
+	          
+	          }else{?>
+	          Jalgaon
+          <?php }?>
+          </span>
           <div data-bind="" style="display: none; left:0px;  max-width: 350px; width: 400px;" class="choice l cit" id="c_ch_l">
             <div class="choice-leftcol" data-bind="">
               <select name="cust_city" placeholder="Type your city" id="combobox" style="height:auto;">
                 <option value="" >  </option>
                 <?php if(isset($this->session->userdata['user_input']['cust_city_name']) && isset($this->session->userdata['user_input']['cust_city'])){?>
-                <option value="<?php echo $this->session->userdata['user_input']['cust_city'];?>" selected="selected"><?php echo $this->session->userdata['user_input']['cust_city']?></option>
+                <option value="<?php echo $this->session->userdata['user_input']['cust_city'];?>" selected="selected"><?php echo $this->session->userdata['user_input']['cust_city_name']?></option>
                 <?php } else{?>
-                <option value="590" selected="selected">Mumbai</option>
+                <option value="583" selected="selected">Jalgaon, Maharashtera	</option>
                 <?php }?>
                <?php foreach ($city as $c_name){?>
                			
-               <option value="<?php echo $c_name['city_id']; ?>" ><?php echo $c_name['mic_city_name']; ?></option>
+                <option value="<?php echo $c_name['city_id']; ?>" data-city-name="<?php echo $c_name['mic_city_name']; ?>" data-altname1="<?php echo $c_name['alternate_city_name1']; ?>" data-alt_name2="<?php echo $c_name['alternate_city_name2'];?>"><?php echo $c_name['display_name']; ?></option>
                		
                <?php }?>
               </select>
@@ -124,7 +138,7 @@
                     																						echo $this->session->userdata['user_input']['policy_term_name'];
                     																					}else 
                     																					{?>10 years<?php }?>">
-              <input type="hidden" id="cust_city_name" name="cust_city_name" value="<?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?>">
+              <input type="hidden" id="cust_city_name" name="cust_city_name" value="<?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Jalgaon<?php }?>">
               <input type="hidden" id="coverage_amount_term" name="coverage_amount_term" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount_term']))
                      																				{
  																										echo $this->session->userdata['user_input']['coverage_amount_term'];
