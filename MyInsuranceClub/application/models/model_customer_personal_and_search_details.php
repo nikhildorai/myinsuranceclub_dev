@@ -55,7 +55,6 @@ class model_customer_personal_and_search_details EXTENDS MIC_Model{
 											$user_input['last_name'],
 											$user_input['cust_email'],
 											$user_input['cust_mobile'],
-											'',
 											$birthdate_format,
 											$user_input['cust_age'],
 											$user_input['cust_gender'],
@@ -65,18 +64,10 @@ class model_customer_personal_and_search_details EXTENDS MIC_Model{
 											$user_input['product_name'],
 											$user_input['coverage_amount'],
 											$plantype,
-											1
+											1,
+											''
 										);
 		
-			/* $customer_search_info_array = array(	$session_id,
-													$UniqueUserID,
-													$user_input['cust_email'],
-													$user_input['product_name'],
-													$user_input['product_type'],
-													$plantype,
-													$user_input['coverage_amount'],
-													1
-												); */
 		}
 		
 		elseif(trim($user_input['product_type']) == 'Critical Illness')
@@ -88,7 +79,6 @@ class model_customer_personal_and_search_details EXTENDS MIC_Model{
 											$user_input['last_name'],
 											$user_input['cust_email'],
 											$user_input['cust_mobile'],
-											'',
 											$birthdate_format,
 											$user_input['cust_age'],
 											'',
@@ -98,18 +88,10 @@ class model_customer_personal_and_search_details EXTENDS MIC_Model{
 											$user_input['product_name'],
 											'',
 											$plantype,
-											1
+											1,
+											''
 										);
 		
-		/* 	$customer_search_info_array = array(	$session_id,
-													$UniqueUserID,
-													$user_input['cust_email'],
-													$user_input['product_name'],
-													$user_input['product_type'],
-													$plantype,
-													'',
-													1
-												); */
 		}
 		
 		elseif(trim($user_input['product_type']) == 'Personal Accident')
@@ -128,47 +110,50 @@ class model_customer_personal_and_search_details EXTENDS MIC_Model{
 											''
 										);
 		
-			$customer_search_info_array = array(	$session_id,
+		/* 	$customer_search_info_array = array(	$session_id,
 													'',
 													$user_input['product_name'],
 													$user_input['product_type'],
 													$plantype,
 													'',
 													1
-												);
+												); */
 		}
 		elseif(trim($user_input['product_type']) == 'Term Plan')
 		{
 			$customer_info_array = array(	$session_id,
+											$UniqueUserID,
 											$user_input['first_name'],
 											$user_input['middle_name'],
 											$user_input['last_name'],
 											$user_input['cust_email'],
 											$user_input['cust_mobile'],
-											$user_input['smoker'],
 											$birthdate_format,
 											$user_input['cust_age'],
 											$user_input['cust_gender'],
-											$custCity,
-											$custState
+											$user_input['cust_city'],
+											'',
+											$user_input['product_type'],
+											$user_input['product_name'],
+											$user_input['coverage_amount_term'],
+											'',
+											$user_input['policy_term'],
+											$user_input['smoker']
 											);
 		
-			$customer_search_info_array = array(	$session_id,
+			/* $customer_search_info_array = array(	$session_id,
 													$user_input['cust_email'],
 													$user_input['product_name'],
 													$user_input['product_type'],
 													'',
 													$user_input['coverage_amount_term'],
 													$user_input['policy_term']
-													);
+													); */
 		}
 		$cust_personal_data="CALL sp_insertCustomerPersonalDetails(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		
 		$this->db->query($cust_personal_data,$customer_info_array);
 		
-		//$cust_search_data="CALL sp_insertCustomerSearchDetails(?,?,?,?,?,?,?)";
-		
-		//$this->db->query($cust_search_data,$customer_search_info_array);
 	}
 	
 	
