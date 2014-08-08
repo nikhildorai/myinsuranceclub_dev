@@ -5,7 +5,7 @@
 
 <div class="min_height" style="height:auto; width:100%; ">
   <div id="highlighted" >
-    <div class="container"> <?php echo validation_errors();?> <?php echo form_open('health-insurance/search-results',array('name'=>'health_form','id'=>'health_form','class'=>'health-form'));?>
+    <div class="container"> <?php echo validation_errors();?> <?php echo form_open('critical-illness/search-results',array('name'=>'health_form','id'=>'health_form','class'=>'health-form'));?>
       <div class="col-md-12 center ">
         <div class="col-md-1"></div>
         <h1 class="col-md-11" style="text-align:center; margin-top:30px; width:100%;" id="step1">Compare & Buy Critical Illness Insurance Plans</h1>
@@ -59,7 +59,6 @@
                     																					}else 
                     																					{?>Male<?php }?>">
                 <input type="hidden" id="policy_term" name="policy_term" value="">
-                <input type="hidden" id="cust_city_name" name="cust_city_name" value="<?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai<?php }?>">
                 <input type="hidden" id="coverage_amount" name="coverage_amount" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount']))
                      																				{
  																										echo $this->session->userdata['user_input']['coverage_amount'];
@@ -81,7 +80,7 @@
                     																					}else 
                     																					{?>Myself<?php }?>">
                 <input type="hidden" id="product_name" name="product_name" value="Health Insurance">
-                <input type="hidden" id="product_type" name="product_type" value="Mediclaim">
+                <input type="hidden" id="product_type" name="product_type" value="Critical Illness">
                 </label>
               </div>
             </div>

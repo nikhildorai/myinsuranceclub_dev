@@ -68,7 +68,7 @@ class model_customer_personal_and_search_details EXTENDS MIC_Model{
 											1
 										);
 		
-			$customer_search_info_array = array(	$session_id,
+			/* $customer_search_info_array = array(	$session_id,
 													$UniqueUserID,
 													$user_input['cust_email'],
 													$user_input['product_name'],
@@ -76,33 +76,40 @@ class model_customer_personal_and_search_details EXTENDS MIC_Model{
 													$plantype,
 													$user_input['coverage_amount'],
 													1
-												);
+												); */
 		}
 		
 		elseif(trim($user_input['product_type']) == 'Critical Illness')
 		{
 			$customer_info_array = array(	$session_id,
-											'',
-											'',
-											'',
-											'',
-											'',
+											$UniqueUserID,
+											$user_input['first_name'],
+											$user_input['middle_name'],
+											$user_input['last_name'],
+											$user_input['cust_email'],
+											$user_input['cust_mobile'],
 											'',
 											$birthdate_format,
 											$user_input['cust_age'],
 											'',
 											'',
-											''
+											'',
+											$user_input['product_type'],
+											$user_input['product_name'],
+											'',
+											$plantype,
+											1
 										);
 		
-			$customer_search_info_array = array(	$session_id,
-													'',
+		/* 	$customer_search_info_array = array(	$session_id,
+													$UniqueUserID,
+													$user_input['cust_email'],
 													$user_input['product_name'],
 													$user_input['product_type'],
 													$plantype,
 													'',
 													1
-												);
+												); */
 		}
 		
 		elseif(trim($user_input['product_type']) == 'Personal Accident')

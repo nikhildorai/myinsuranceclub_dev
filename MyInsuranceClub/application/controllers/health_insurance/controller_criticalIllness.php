@@ -58,6 +58,21 @@ class controller_criticalIllness extends Customer_Controller {
 		
 		if($this->input->post('submit')!='')
 		{
+			if($this->input->post('cust_name') != '')
+			{
+				$explodedName = array();
+					
+				$user_input['full_name'] = $this->input->post('cust_name');
+					
+				$explodedName = Util::explodeFullName($this->input->post('cust_name'));
+					
+				$user_input['first_name'] = $explodedName['first_name'];
+				
+				$user_input['middle_name'] = $explodedName['middle_name'];
+					
+				$user_input['last_name'] = $explodedName['last_name'];
+			}
+			
 			if($this->input->post('product_name')!='')
 			{
 				$user_input['product_name'] = $this->input->post('product_name');
@@ -78,17 +93,22 @@ class controller_criticalIllness extends Customer_Controller {
 				$user_input['plan_type_name'] = $this->input->post('plan_type_name');//$this->input->post('plan_type');
 			}
 			
-			if($this->input->post('cust_dob')!='')
+			if($this->input->post('desktop_cust_dob')!='')
 			{
-				$user_input['cust_birthdate'] = $this->input->post('cust_dob');
-				
-				$birthage=$this->input->post('cust_dob');
-				
-				//$birthDate=explode('-',$birthage);
-				
+				$user_input['cust_birthdate'] = $this->input->post('desktop_cust_dob');
 				
 				$user_input['cust_age']= Util::convertBirthdateToAge($user_input['cust_birthdate']);
 				
+			}
+			
+			if($this->input->post('cust_mobile')!='')
+			{
+				$user_input['cust_mobile']=$this->input->post('cust_mobile');
+			}
+			
+			if($this->input->post('cust_email')!='')
+			{
+				$user_input['cust_email']=$this->input->post('cust_email');
 			}
 			
 			if($this->input->post('spouse_dob')!='')
