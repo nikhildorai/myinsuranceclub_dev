@@ -30,7 +30,7 @@ class News extends Admin_Controller {
 		$this->data['search_query'] = $arrParams;
 		$where 	= News_model::getWhere($arrParams);
 			
-		$orderBy = 'title ASC, news_id ASC'; 
+		$orderBy = 'publish_date DESC,news_id DESC, title ASC '; 
 		$this->data['records'] = Util::getTotalRowTable('all','news', $where, $limit, $orderBy);
 		
 		
