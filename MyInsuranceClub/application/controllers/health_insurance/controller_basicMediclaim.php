@@ -291,6 +291,13 @@ class controller_basicMediclaim extends Customer_Controller {
 			
 			$data['compareParam'] = $param;
 			
+			if($data['compareParam'] != 'yes')
+			{
+				$this->model_customer_personal_and_search_details->customer_personal_search_details($user_input);
+					
+				$this->db->freeDBResource($this->db->conn_id);
+			}
+			
 			$cacheFileName = 'sr_'.$user_input['product_type'].$user_input['plan_type'].$user_input['coverage_amount'].$user_input['cust_age'].$user_input['cust_gender'].$user_input['cust_city'] ;
 			
 			$cacheObject = Util::getCachedObject($cacheFileName);
@@ -304,9 +311,6 @@ class controller_basicMediclaim extends Customer_Controller {
 			else
 			{
 				//get result set from DB and save in cache
-				$this->model_customer_personal_and_search_details->customer_personal_search_details($user_input);
-					
-				$this->db->freeDBResource($this->db->conn_id);
 				
 				$data['customer_details']=$this->model_get_results_mediclaim->get_policy_results($user_input);
 				
