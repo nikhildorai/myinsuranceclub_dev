@@ -9,19 +9,52 @@ class model_visitor_information EXTENDS MIC_Model{
 		
 	}
 	
-	
+	/**
+	 * @abstract Checks if the current session already
+	 * exists in the database. If not then the new sessions
+	 * data is entered into the database.
+	 * 
+	 * @param unknown $user_info
+	 */
 	public function get_user_info($user_info)
 	{	
-			$user_data="CALL sp_inputUserInfo(?,?,?,?,?,?)";
+			$CI = &get_instance();
 			
-			$this->db->query($user_data,array(	$user_info['session_id'],
-												$user_info['referrer'],
-												$user_info['device'],
-												$user_info['os'],
-												$user_info['browser'],
-												$user_info['timestamp']
-												)
-							);
+			$getExistingSessionsSP = "CALL sp_getExistingSessionsID()";
+			
+			$getExistingSessionIds = $this->db->query($getExistingSessionsSP);
+			
+			
+			$result  = $getExistingSessionIds->result_array();
+			
+			$this->db->freeDBResource($this->db->conn_id);
+
+			$session = array();
+			
+			if (!empty($result)) 
+			{
+				foreach ($result as $k1=>$v1)
+				{
+					$session[] = $v1['sessions_id'];
+				}
+			}
+			$session = array_unique(array_filter($session));
+			
+			if(!in_array($user_info['session_id'],$session))
+			{
+				
+				$user_data="CALL sp_inputUserInfo(?,?,?,?,?)";
+			
+				$this->db->query($user_data,array(	$user_info['session_id'],
+						$user_info['referrer'],
+						$user_info['device'],
+						$user_info['os'],
+						$user_info['browser']
+				)
+				);
+			}
+			
+			
 	}
 
 }

@@ -25,7 +25,7 @@ class Pre_Hook_Controller extends Customer_Controller {
 		$this->load->library('user_agent');
 		$this->load->database();
 		$this->load->model('model_get_wls_detail');
-		$this->load->model('visitor_information');
+		$this->load->model('model_visitor_information');
 		
 		$currentModule = $this->util->getUrl('module')
 		;
@@ -49,6 +49,9 @@ class Pre_Hook_Controller extends Customer_Controller {
 		try{
 			//print_r($_SERVER['HTTP_HOST']);
 		$WLSDetails = $this->model_get_wls_detail->get_wls($_SERVER['HTTP_HOST']);
+		
+		$this->db->freeDBResource($this->db->conn_id);
+		
 		if ($WLSDetails != null)
 		{
 			$_REQUEST["WLSDetails"] = $WLSDetails;
@@ -66,7 +69,9 @@ class Pre_Hook_Controller extends Customer_Controller {
 		
 		// Fetching user info from the request and storing it in the database.
 		$user_info['session_id'] = $this->session->userdata('session_id');
+		
 		$user_info['timestamp'] = date('H:i:s',$this->session->userdata('last_activity'));
+		
 		if($this->agent->is_browser())
 		{
 			$user_info['browser']=$this->agent->browser();
@@ -85,11 +90,15 @@ class Pre_Hook_Controller extends Customer_Controller {
 		else {
 			$user_info['referrer']='';
 		}
-		//$this->visitor_information->get_user_info($user_info);
+		$this->model_visitor_information->get_user_info($user_info);
+		
+		$this->db->freeDBResource($this->db->conn_id);
+		
 		
 		}
 		catch (Exception $ex)
 		{
+			return $ex;
 			// error has to be reported and the app should redirect the user to some default url.
 		}
 	}
