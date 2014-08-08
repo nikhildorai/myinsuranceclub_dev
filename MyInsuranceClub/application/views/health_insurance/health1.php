@@ -76,8 +76,17 @@
             </div>
           </div>
           </span><span style=""> & I stay in</span> <span id="clickk_l" style="position:relative; "><span class="dotted loc" id="loc">
-          <?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>
-          Mumbai
+          <?php 
+	          	$explodeCity = array();
+	          if(isset($this->session->userdata['user_input']['cust_city_name']))
+	          { 
+	          	$explodeCity = explode(', ',$this->session->userdata['user_input']['cust_city_name']);
+	          	
+	          	
+	          	echo $explodeCity[0];
+	          
+	          }else{?>
+	          Jalgaon
           <?php }?>
           </span>
           <div data-bind="" style="display: none; left:0px;  max-width: 350px; width: 400px;" class="choice l cit" id="c_ch_l">
@@ -87,14 +96,30 @@
                 <?php if(isset($this->session->userdata['user_input']['cust_city_name']) && isset($this->session->userdata['user_input']['cust_city'])){?>
                 <option value="<?php echo $this->session->userdata['user_input']['cust_city'];?>" selected="selected"><?php echo $this->session->userdata['user_input']['cust_city_name']?></option>
                 <?php } else{?>
-                <option value="590" selected="selected">Mumbai, Maharashtra</option>
+                <option value="583" selected="selected">Jalgaon, Maharashtra</option>
                 <?php }?>
-                <?php foreach ($city as $c_name){?>
-                
+                <?php foreach ($city as $c_name){
+                	
+                	/* if($c_name['alternate_city_name1'] != '' && $c_name['alternate_city_name2'] != '')
+                	{
+                		$display_city = '('.$c_name['alternate_city_name1'].'/'.$c_name['alternate_city_name2'].') '.$c_name['display_name'];
+                	}
+                	elseif($c_name['alternate_city_name1'] != '' && $c_name['alternate_city_name2'] == '')
+                	{
+                		$display_city = '('.$c_name['alternate_city_name1'].') '.$c_name['display_name'];
+                	}
+                	
+                	elseif($c_name['alternate_city_name1'] == '' && $c_name['alternate_city_name2'] == '')
+                	{
+                		$display_city = $c_name['display_name'];
+                	} */
+                	
+                	
+             ?>
                 <option value="<?php echo $c_name['city_id']; ?>" data-city-name="<?php echo $c_name['mic_city_name']; ?>" data-altname1="<?php echo $c_name['alternate_city_name1']; ?>" data-alt_name2="<?php echo $c_name['alternate_city_name2'];?>"><?php echo $c_name['display_name']; ?></option>
+                
                 <?php }?>
               </select>
-              <div style="width:300px; height:50px; margin-top:30px;" id="no_city_fnd"></div>
               <div class="stepwrap years-stepwrap">
                 <div class="step show"> <em>4</em>
                   <div class="label-mid">Select City of Residence</div>
@@ -127,7 +152,7 @@
                     																					}else 
                     																					{?>Male<?php }?>">
                 <input type="hidden" id="policy_term" name="policy_term" value="">
-                <input type="hidden" id="cust_city_name" name="cust_city_name" value="<?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Mumbai, Maharashtra<?php }?>">
+                <input type="hidden" id="cust_city_name" name="cust_city_name" value="<?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Jalgaon, Maharashtra<?php }?>">
                 <input type="hidden" id="coverage_amount" name="coverage_amount" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount']))
                      																				{
  																										echo $this->session->userdata['user_input']['coverage_amount'];
@@ -639,7 +664,7 @@
       </div>
       <?php echo form_close();?>
       <div class="cus_cont" style=" ">
-        <div style="margin-top: 20px; float: left; width:100%;" class="">
+        <div style="margin-top: 40px; float: left; width:100%;" class="">
           <div class="pos1" >
             <div class="col-md-2 c_o">
               <p><img src="<?php echo base_url();?>/assets/images/star.png" border="0" class="mar-r8">Cashless claims </p>
