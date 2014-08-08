@@ -305,7 +305,7 @@ class SimpleImage {
 		if(copy( $orig.$photoName	, 	$temp.$photoName )){
 			$nName='temp_'.$photoName;
 			//step 2: create copy of temp file
-			copy($temp.$photoName, $temp.$nName);
+			@copy($temp.$photoName, $temp.$nName);
 			$location = $temp;//$path.'thumbnails/';
 		//	copy($temp.$nName	,	$location.$photoName);
 			$obj = new SimpleImage();
@@ -322,14 +322,15 @@ class SimpleImage {
 				foreach($arr as $k=>$val)
 				{
 					$location = $newPath.'/'.$k.'/';			
-					copy($temp.$nName	,	$location.$photoName);
+					@copy($temp.$nName	,	$location.$photoName);
 					$obj = new SimpleImage();
 					$obj->load($temp.$photoName); //step 3: Load copied file with specified size
 					$obj->resize($location.$photoName, $val['width'], $val['height'], $location.$photoName); //step 4: Resize after resampling
 					unset($obj,$location);
 				}
 			}
-				
+			@unlink($temp.$photoName);
+			@unlink($temp.$nName);
 		}
 		
 	}
