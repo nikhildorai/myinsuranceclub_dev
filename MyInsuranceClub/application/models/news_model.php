@@ -103,7 +103,8 @@ class News_model EXTENDS Admin_Model{
 		{			
 			//get resultset from DB and save in cache
 			$db->db->freeDBResource($db->db->conn_id);
-			$details = Util::callStoreProcedure("sp_getNewsDetails", $arrParams);		
+			$details = Util::callStoreProcedure("sp_getNewsDetails", $arrParams);	
+
 			//	get top 3 records
 			$tableName = Util::getdbPrefix().'news';
 			$where = array('table_name'=>$tableName);
@@ -122,9 +123,10 @@ class News_model EXTENDS Admin_Model{
 			else 
 				$data['allTags'] = array();
 				
+
 			if (isset($arrParams['news_slug']) && !empty($arrParams['news_slug']))
 			{
-				$data['newsDetails'] = reset($data['newsDetails']);	
+				$data['newsDetails'] = reset($data['newsDetails']);					
 				
 				//	update page view count
 				$updateCount = Util::incrementPageViewCount('news', 'page_view_count','news_id',$data['newsDetails']['news']['news_id']);
@@ -137,8 +139,7 @@ class News_model EXTENDS Admin_Model{
 		        $data['seoData']['url'] = $url;
 		        $data['socialSeoData'] = Util::getSocialMediaSeoData($data['newsDetails']['news'], $url);
 		        $data['url'] = $url;
-		        
-		        
+		        	        
 				//	get related post by tags
 				$tags = $data['newsDetails']['news']['tag'];
 				if(!empty($tags))
@@ -165,6 +166,18 @@ class News_model EXTENDS Admin_Model{
 					}
 				}
 				$data['relatedPost'] = $relatedPost;
+			}
+			else 
+			{			
+				$arrTitle = array();
+				//	get comment count for each news
+				foreach ($data['newsDetails'] as $k4=>$v4)
+				{
+					$arrTitle[] = $v4['news']['slug'];				
+				}
+var_dump($arrTitle);				
+				$arrTitle = implode(',', $arrTitle);
+var_dump($arrTitle);die;				
 			}
 			
 			//	for news by author  

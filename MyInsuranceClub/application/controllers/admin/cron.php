@@ -45,9 +45,14 @@ class Cron extends CI_Controller {
 	 * @version   0.1.1
 	 * @license   GPL v3
 	 *
-	 */
+	 */	
+	
+
 	public function getCommentsFromDisqus()
 	{
+		Util::getFieldNamesOfAllTables();
+		//error_reporting(1);
+		set_time_limit(60*10); // 10 minutes
 		$config = Disquslib::getConfig();
 		$dbConfig = Disquslib::getDBConfig();		
 		// Max. of 100
@@ -73,10 +78,12 @@ class Cron extends CI_Controller {
 		// not available in the API's comment response (when using you own identifiers).  These processes
 		// are not tied together (or dependant upon each other), so it is in theory possible to have
 		// comments backed up without any parent thread.
-		$threads = $dbh->prepare("insert into disqus_threads (id, identifiers, forum, created,created_date, feed,category,clean_title,slug,isClosed,posts,userSubscription,link,likes,title,isDeleted,sublink,controller,module,action_name,link_slug,link_params) values (:id, :identifiers, :forum, :created,:created_date, :feed,:category,:clean_title,:slug,:isClosed,:posts,:userSubscription,:link,:likes,:title,:isDeleted,:sublink,:controller,:module,:action_name,:link_slug,:link_params)");
-		$comments = $dbh->prepare("insert into disqus_comments (forum, isApproved,author_name,author_url,avatar_url,author_email,author_id,author_our_id,isAnonymous,raw_message,message,thread_id,comment_id,parent_comment_id, created,isSpam,isDeleted, isEdited, likes,username, profileUrl,joinedAt,media,isFlagged,dislikes,isHighlighted,points,numReports, lat, lng,ipAddress)
-  									values (:forum,:isApproved,:author_name,:author_url,:avatar_url,:author_email,:author_id,:author_our_id,:isAnonymous,:raw_message,:message,:thread_id,:comment_id,:parent_comment_id,:created,:isSpam,:isDeleted,:isEdited,:likes,:username,:profileUrl,:joinedAt,:media,:isFlagged,:dislikes,:isHighlighted,:points,:numReports,:lat,:lng,:ipAddress)");
-		
+	//identifiers, forum, created_date, feed,category,clean_title,slug,isClosed,posts,userSubscription,link,likes,isDeleted,sublink,controller,module,action_name,link_slug,link_params) values (:id, :identifiers, :forum, :created,:created_date, :feed,:category,:clean_title,:slug,:isClosed,:posts,:userSubscription,:link,:likes,:title,:isDeleted,:sublink,:controller,:module,:action_name,:link_slug,:link_params)");
+	//$threads = $dbh->prepare("insert into MIC_disqus_thread (id, title, created) values (:id, :title, :created)");
+	//$comments = $dbh->prepare("insert into MIC_disqus_comment (id, thread_id, author_name, comment, created) values (:id, :thread_id, :author_name, :comment, :created)");
+	//forum, isApproved,author_url,avatar_url,author_email,author_id,author_our_id,isAnonymous,raw_message,parent_comment_id, isSpam,isDeleted, isEdited, likes,username, profileUrl,joinedAt,media,isFlagged,dislikes,isHighlighted,points,numReports, lat, lng,ipAddress
+	$threads = $dbh->prepare("insert into MIC_disqus_thread (id, title, created, identifiers, forum, created_date, feed, category, clean_title, slug, isClosed, posts, userSubscription, link, likes, isDeleted, sublink, module, controller, action_name, link_slug, link_params) values (:id, :title, :created, :identifiers, :forum, :created_date, :feed, :category, :clean_title, :slug, :isClosed, :posts, :userSubscription, :link, :likes, :isDeleted, :sublink, :module, :controller, :action_name, :link_slug, :link_params)");
+    $comments = $dbh->prepare("insert into MIC_disqus_comment (id, thread_id, author_name, comment, created, created_date, forum, isApproved, author_url, avatar_url, author_email, author_id, author_our_id, isAnonymous, raw_message, parent_comment_id, isSpam, isDeleted, isEdited, likes, username, profileUrl, joinedAt, media, isFlagged, dislikes, isHighlighted, points, numReports, lat, lng, ipAddress) values (:id, :thread_id, :author_name, :comment, :created, :created_date, :forum, :isApproved, :author_url, :avatar_url, :author_email, :author_id, :author_our_id, :isAnonymous, :raw_message, :parent_comment_id, :isSpam, :isDeleted, :isEdited, :likes, :username, :profileUrl, :joinedAt, :media, :isFlagged, :dislikes, :isHighlighted, :points, :numReports, :lat, :lng, :ipAddress)");
 		
 
 
@@ -91,199 +98,144 @@ class Cron extends CI_Controller {
 				// We will also send since and cursor, but these are added later as needed.
 				$params = array('forum' => $forum, 'order' =>  $fetch_order, 'limit' => $fetch_limit);
 				$dbPrefix = Util::getdbPrefix();
-				// Get the latest comment date downloaded so we request only comments made since then
-				$res = $dbh->query("select max(created) as max from MIC_disqus_threads where forum = '$forum'")->fetch();
-var_dump($res);				
-				if (!empty($res['max'])) {
-					$params['since'] = $res['max'];
-				}
-
-				do {
-					$posts = $disqus->threads->list($params);
-var_dump($posts);					
-					// Create cursor to paginate through resultset
-					$cursor = $posts['cursor'];
-
-					// Update our arguments with the cursor and the next position
-					$params['cursor'] = $cursor->next;
-					
-					foreach ($posts['response'] as $post) {
-						$link = array_filter(explode('/', $post->link));
-						$base_url = array_filter(explode('/', base_url()));
-						$diff = array_values(array_diff($link, $base_url));
-						$sublink = implode('/', $diff);
-				/*
-						$arrThread = array();
-						$arrThread['id'] = $post->id;
-						$arrThread['identifiers'] = @$post->identifiers[0];
-						$arrThread['forum'] = $forum;
-						$arrThread['created'] = strtotime($post->createdAt);
-						$arrThread['created_date'] = Util::getDate($post->createdAt, 3);
-						$arrThread['feed'] = $post->feed;
-						$arrThread['category'] = $post->category;
-						$arrThread['clean_title'] = $post->clean_title;
-						$arrThread['slug'] = $post->slug;
-						$arrThread['isClosed'] = $post->isClosed;
-						$arrThread['posts'] = $post->posts;
-						$arrThread['userSubscription'] = $post->userSubscription;
-						$arrThread['link'] = $post->link;
-						$arrThread['likes'] = $post->likes;
-						$arrThread['title'] = $post->title;
-						$arrThread['isDeleted'] = $post->isDeleted;	
-						$arrThread['sublink'] = $sublink;					
-						$arrThread['module'] = isset($diff[0]) ? $diff[0] : '';
-						$arrThread['controller'] = isset($diff[1]) ? $diff[1] : '';
-						$arrThread['action_name'] = isset($diff[2]) ? $diff[2] : '';
-						$arrThread['link_slug'] = isset($diff[3]) ? $diff[3] : '';
-						$arrThread['link_params'] = isset($diff[4]) ? $diff[4] : '';	
-//var_dump($arrThread);									
-						Util::callStoreProcedure('sp_insetIntoMIC_disqus_threads', $arrThread);
-						*/
-						$threads->bindValue(':id', $post->id);
-						$threads->bindValue(':identifiers', @$post->identifiers[0]);
-						$threads->bindValue(':forum', $forum);
-						$threads->bindValue(':created', $post->createdAt);
-						$threads->bindValue(':created_date', Util::getDate($post->createdAt, 3));
-						$threads->bindValue(':feed', $post->feed);
-						$threads->bindValue(':category', $post->category);
-						$threads->bindValue(':clean_title', $post->clean_title);
-						$threads->bindValue(':slug', $post->slug);
-						$threads->bindValue(':isClosed', $post->isClosed);
-						$threads->bindValue(':posts', $post->posts);
-						$threads->bindValue(':userSubscription', $post->userSubscription);
-						$threads->bindValue(':link', $post->link);
-						$threads->bindValue(':likes', $post->likes);
-						$threads->bindValue(':title', $post->title);
-						$threads->bindValue(':isDeleted', $post->isDeleted);	
-						$threads->bindValue(':sublink', $sublink);					
-						$threads->bindValue(':module', isset($diff[0]) ? $diff[0] : '');
-						$threads->bindValue(':controller', isset($diff[1]) ? $diff[1] : '');
-						$threads->bindValue(':action_name', isset($diff[2]) ? $diff[2] : '');
-						$threads->bindValue(':link_slug', isset($diff[3]) ? $diff[3] : '');
-						$threads->bindValue(':link_params', isset($diff[4]) ? $diff[4] : '');						
-		
-						if($threads->execute())
-							echo '<br>thread save';
-						else 
-							echo '<br>thread no save';
-							
-					}
-				} while ($cursor->more);
-				// End forum threads
-
-				//
-				// Now fetch the actual comments ..
-				//
-				// Reset the "changeable" paramaters being sent to Disqus.
-				unset($params['since']);
-				unset($params['cursor']);
-				unset($res);			
-				$res = $dbh->query("select max(created) as max from MIC_disqus_comments where forum = '$forum'")->fetch();
-				if (!empty($res['max'])) {
-					$params['since'] = $res['max'];
-				}
-				do {
-					$posts = $disqus->posts->list($params);
-var_dump($posts);die;					
-					$cursor = $posts['cursor'];
-					$params['cursor'] = $cursor->next;
-					foreach ($posts['response'] as $post) {
-						$media = '';
-						if (!empty($post->media))
-						{
-							foreach ($post->media as $k1=>$v1)
+				
+				
+								 //
+				    // Fetch comments ..
+				    //
+				    $res = $dbh->query("select max(created) as max from MIC_disqus_comment")->fetch();
+				    if (!empty($res['max'])) {
+				        $params['since'] = $res['max'];
+				    }
+				 
+				    do {
+				        $posts = $disqus->posts->list($params);
+				        $cursor = $posts['cursor'];
+				 
+				        $params['cursor'] = $cursor->next;
+				        foreach ($posts['response'] as $post) {
+				        	
+					        $media = '';
+							if (!empty($post->media))
 							{
-								$media[] = $v1->url;
+								foreach ($post->media as $k1=>$v1)
+								{
+									$media[] = $v1->url;
+								}
+								$media = serialize($media);
 							}
-							$media = serialize($media);
-						}
-						$arrComments = array();
-						
-						$arrComments['forum'] = $forum;
-						$arrComments['isApproved'] = $post->isApproved;
-						$arrComments['author_name'] = $post->author->name;
-						$arrComments['author_url'] = $post->author->url;
-						$arrComments['avatar_url'] = @$post->author->avatar->permalink;
-						$arrComments['author_email'] = isset($post->author->email) ? $post->author->email : '';
-						$arrComments['author_id'] = isset($post->author->id) ? $post->author->id : '';
-						$arrComments['author_our_id'] = isset($post->author->remote->identifier) ? $post->author->remote->identifier : ''; //@$post->author->remote->identifier;
-						
-						$arrComments['isAnonymous'] = $post->author->isAnonymous;
-						$arrComments['raw_message'] = $post->raw_message;
-						$arrComments['message'] = $post->message;	
-						$arrComments['thread_id'] = $post->thread;
-						$arrComments['comment_id'] = $post->id;
-						$arrComments['parent_comment_id'] = $post->parent;
-						$arrComments['created'] = strtotime($post->createdAt);
-						$arrComments['created_date'] = Util::getDate($post->createdAt, 3);
-						
-						$arrComments['isSpam'] = $post->isSpam;
-						$arrComments['isDeleted'] = $post->isDeleted;
-						$arrComments['isEdited'] = $post->isEdited;
-						$arrComments['likes'] = $post->likes;
-						$arrComments['username'] = $post->author->username;
-						$arrComments['profileUrl'] = $post->author->profileUrl;
-						$arrComments['joinedAt'] = $post->author->joinedAt;
-						$arrComments['joined_date'] = Util::getDate($post->author->joinedAt, 3);
-						$arrComments['media'] = $media;
-						
-						$arrComments['isFlagged'] = $post->isFlagged;
-						$arrComments['dislikes'] = $post->dislikes;
-						$arrComments['isHighlighted'] = $post->isHighlighted;
-						$arrComments['points'] = $post->points;
-						$arrComments['numReports'] = $post->numReports;	
-						
-						$arrComments['ipAddress'] = $post->ipAddress;
-						$arrComments['lat'] = $post->approxLoc->lat;
-						$arrComments['lng'] = $post->approxLoc->lng;	
-						
-						Util::callStoreProcedure('sp_insetIntoMIC_disqus_comments', $arrComments);
-						
-						/*
-						$comments->bindValue(':forum', $forum);
-						$comments->bindValue(':isApproved', $post->isApproved);
-						$comments->bindValue(':author_name', $post->author->name);
-						$comments->bindValue(':author_url', $post->author->url);
-						$comments->bindValue(':avatar_url', @$post->author->avatar->permalink);
-						$comments->bindValue(':author_email', isset($post->author->email) ? $post->author->email : '');
-						$comments->bindValue(':author_id', isset($post->author->id) ? $post->author->id : '');
-						$comments->bindValue(':author_our_id', isset($post->author->remote->identifier) ? $post->author->remote->identifier : ''); //@$post->author->remote->identifier);
-						
-						$comments->bindValue(':isAnonymous', $post->author->isAnonymous);
-						$comments->bindValue(':raw_message', $post->raw_message);
-						$comments->bindValue(':message', $post->message);	
-						$comments->bindValue(':thread_id', $post->thread);
-						$comments->bindValue(':comment_id', $post->id);
-						$comments->bindValue(':parent_comment_id', $post->parent);
-						$comments->bindValue(':created', strtotime($post->createdAt."+0000")); //Since Disqus returns GMT add +0000 to the time string.
-						$comments->bindValue(':created', Util::getDate($post->createdAt, 3));
-						
-						$comments->bindValue(':isSpam', $post->isSpam);
-						$comments->bindValue(':isDeleted', $post->isDeleted);
-						$comments->bindValue(':isEdited', $post->isEdited);
-						$comments->bindValue(':likes', $post->likes);
-						$comments->bindValue(':username', $post->author->username);
-						$comments->bindValue(':profileUrl', $post->author->profileUrl);
-						$comments->bindValue(':joinedAt', Util::getDate($post->author->joinedAt, 3));
-						$comments->bindValue(':media', $media);
-						
-						$comments->bindValue(':isFlagged', $post->isFlagged);
-						$comments->bindValue(':dislikes', $post->dislikes);
-						$comments->bindValue(':isHighlighted', $post->isHighlighted);
-						$comments->bindValue(':points', $post->points);
-						$comments->bindValue(':numReports', $post->numReports);	
-						
-						$comments->bindValue(':ipAddress', $post->ipAddress);
-						$comments->bindValue(':lat', $post->approxLoc->lat);
-						$comments->bindValue(':lng', $post->approxLoc->lng);	
-//print_r($comments);						
-						if($comments->execute())
-							echo '<br>comment save';
-						else 
-							echo '<br>comment no save';
-							*/
-					}
-				} while ($cursor->more);
+				            $author_email = isset($post->author->email) ? $post->author->email : '';
+				            $author_id = isset($post->author->id) ? $post->author->id : '';
+							$author_our_id = isset($post->author->remote->identifier) ? $post->author->remote->identifier : '';
+							
+							
+				            $comments->bindValue(':id', $post->id);
+				            $comments->bindValue(':author_name', $post->author->name);
+				            $comments->bindValue(':comment', $post->message);
+				            $comments->bindValue(':thread_id', $post->thread);
+				            $comments->bindValue(':created', strtotime($post->createdAt."+0000"));
+				            
+				            $comments->bindValue(':created_date', Util::getDate($post->createdAt, 3));  //Since Disqus returns GMT add +0000 to the time string.
+				            $comments->bindValue(':forum', $post->forum);
+				            $comments->bindValue(':isApproved', $post->isApproved);
+				            $comments->bindValue(':author_url', $post->author->url);
+				            $comments->bindValue(':avatar_url', @$post->author->avatar->permalink);
+							$comments->bindValue(':author_email', $author_email);
+				            $comments->bindValue(':author_id', $author_id);
+				            $comments->bindValue(':author_our_id', $author_our_id);
+				            $comments->bindValue(':isAnonymous', $post->author->isAnonymous);
+				            $comments->bindValue(':raw_message', $post->raw_message);
+				            $comments->bindValue(':parent_comment_id', $post->parent);
+				            
+				            $comments->bindValue(':isSpam', $post->isSpam);
+				            $comments->bindValue(':isDeleted', $post->isDeleted);
+				            $comments->bindValue(':isEdited', $post->isEdited);
+				            $comments->bindValue(':likes', $post->likes);
+				            $comments->bindValue(':username', $post->author->username);
+				            $comments->bindValue(':profileUrl', $post->author->profileUrl);
+				            $comments->bindValue(':joinedAt', $post->author->joinedAt);
+				            $comments->bindValue(':media', $media);
+				            $comments->bindValue(':isFlagged', $post->isFlagged);
+				            $comments->bindValue(':dislikes', $post->dislikes);
+				            
+				            $comments->bindValue(':isHighlighted', $post->isHighlighted);
+				            $comments->bindValue(':points', $post->points);
+				            $comments->bindValue(':numReports', $post->numReports);
+				            $comments->bindValue(':lat', $post->approxLoc->lat);
+				            $comments->bindValue(':lng', $post->approxLoc->lng);
+				            $comments->bindValue(':ipAddress', $post->ipAddress);
+				            
+				            $comments->execute();
+				        }
+				    } while ($cursor->more);
+				 
+				    unset($params['since']);
+				    unset($params['cursor']);
+				 
+				    //
+				    // Fetch threads
+				    //
+				    $unknownThreads = array();
+				    $unknownThreadsQuery = $dbh->prepare("select c.thread_id from MIC_disqus_comment c where (select count(*) from MIC_disqus_thread where id=c.thread_id)=0");
+				    $unknownThreadsQuery->execute();
+				    while( $row = $unknownThreadsQuery->fetchObject() ) {
+				        $unknownThreads[] = $row->thread_id;
+				    }
+				 
+				    if (!empty($unknownThreads)) {
+				        $params['thread'] = $unknownThreads;
+				 
+				        do {
+				            $posts = $disqus->threads->list($params);
+				 
+				            // Create cursor to paginate through resultset
+				            $cursor = $posts['cursor'];
+				 
+				            // Update our arguments with the cursor and the next position
+				            $params['cursor'] = $cursor->next;
+				 
+				            foreach ($posts['response'] as $post) {
+				            	
+				            	$link = array_filter(explode('/', $post->link));
+								$base_url = array_filter(explode('/', base_url()));
+								$diff = array_values(array_diff($link, $base_url));
+								$sublink = implode('/', $diff);
+								
+				                $threads->bindValue(':id', $post->id);
+				                $threads->bindValue(':title', $post->title);
+				                $threads->bindValue(':created', strtotime($post->createdAt."+0000")); //Since Disqus returns GMT add +0000 to the time string.
+				                $threads->bindValue(':identifiers', @$post->identifiers[0]);
+				                $threads->bindValue(':forum', $post->forum);
+				                
+				                $threads->bindValue(':created_date', Util::getDate($post->createdAt, 3));
+				                $threads->bindValue(':feed', $post->feed);
+				                $threads->bindValue(':category', $post->category);
+				                $threads->bindValue(':clean_title', $post->clean_title);
+				                $threads->bindValue(':slug', $post->slug);
+				                
+				                $threads->bindValue(':isClosed', $post->isClosed);
+				                $threads->bindValue(':posts', $post->posts);
+				                $threads->bindValue(':userSubscription', $post->userSubscription);
+				                $threads->bindValue(':link', $post->link);
+				                $threads->bindValue(':likes', $post->likes);
+				                
+				                $threads->bindValue(':isDeleted', $post->isDeleted);
+				                $threads->bindValue(':sublink', $sublink);
+				                $threads->bindValue(':module', isset($diff[0]) ? $diff[0] : '');
+				                $threads->bindValue(':controller', isset($diff[1]) ? $diff[1] : '');
+				                $threads->bindValue(':action_name', isset($diff[2]) ? $diff[2] : '');
+				                
+				                $threads->bindValue(':link_slug', isset($diff[3]) ? $diff[3] : '');
+				                $threads->bindValue(':link_params', isset($diff[4]) ? $diff[4] : '');
+				                
+				                $threads->execute();
+				            }
+				        } while ($cursor->more);
+				        // End forum threads
+				    }	
+				
+				
+				
 			}
 			return true;
 		} catch (DisqusAPIError $e) {
@@ -293,7 +245,6 @@ var_dump($posts);die;
 			exit();
 		}
 	}
-	
 }
 
 /* End of file auth_lite.php */

@@ -183,7 +183,7 @@ $news_id = (isset($model['news_id']) && !empty($model['news_id'])) ? $model['new
 				                <div class="form-group">
 				                    <label for="" class="col-sm-3">Image</label>
 				                    <div class="col-sm-9">
-				                        <input type="file" id="original_image" name="model[original_image]"  title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'original_image',$model) ? $model['original_image'] : '';?>">
+				                        <input type="file" id="original_image" name="model[original_image]"  accept="image/jpeg,image/gif,image/png,image/jpeg" title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'original_image',$model) ? $model['original_image'] : '';?>">
 				                        <span class="help-block">Image size: 680px X 309px.</span>
 				                    
 				                    <?php 

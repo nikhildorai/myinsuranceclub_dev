@@ -245,10 +245,16 @@ class News extends Admin_Controller {
 					}	
 				}	
 				//	if policy and varients records are stored then on show success and redirect to index 
-				if(!in_array(false, $saveData))
+				if(!in_array(false, $saveData) && empty($this->data['file_upload_error']))
 				{
 					$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
 					$this->data['msgType'] = 'success';
+					redirect('admin/news/index');
+				}
+				else if(in_array(false, $saveData) && !empty($this->data['file_upload_error']))
+				{
+					$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.'.$this->data['message'].'</p>');
+					$this->data['msgType'] = 'error';
 					redirect('admin/news/index');
 				}
 				else 

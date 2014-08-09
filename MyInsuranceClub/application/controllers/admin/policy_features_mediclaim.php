@@ -73,7 +73,7 @@ class Policy_features_mediclaim extends Admin_Controller {
 					$modelType = 'update';
 					$model = $exist;
 					$feature_id = $exist['features_id'];
-					$oldPeerComparision = explode(',', $model['peer_comparision_variants']);
+					$oldPeerComparision = (isset($model['peer_comparision_variants']) && !empty($model['peer_comparision_variants'])) ? explode(',', $model['peer_comparision_variants']) : array();
 					//	check if rider exists for current varient
 					$where = array();
 					$where[0]['field'] = 'variant_id';

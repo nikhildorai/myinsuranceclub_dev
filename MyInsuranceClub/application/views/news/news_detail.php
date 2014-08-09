@@ -43,7 +43,7 @@ else
                 <span class="meta-views" title="Views"> <i class="fa fa-eye"></i><?php echo $news['page_view_count'] + 1;?>&nbsp;views </span><!-- /meta-views --> 
               
                 
-                <span class="meta-author"> <i class="fa fa-user" title="Author"></i> <span class="author vcard"><a class="url fn n" href="<?php echo base_url().'author/'.$author['uacc_username'];?>" title="" rel="author"> <?php echo $author['upro_first_name']; echo isset($author['upro_last_name']) ? ' '.$author['upro_last_name'] : '';?> </a></span> </span><!-- .meta-author --> 
+                <span class="meta-author"> <i class="fa fa-user" title="Author"></i> <span class="author vcard"><a class="url fn n" href="<?php echo base_url().'news/author/'.$author['uacc_username'];?>" title="" rel="author"> <?php echo $author['upro_first_name']; echo isset($author['upro_last_name']) ? ' '.$author['upro_last_name'] : '';?> </a></span> </span><!-- .meta-author --> 
                <div style="float:right;">
 	                <div style="width:auto; margin-top:4px; float:left;"><div class="fb-like" data-href="http://www.myinsuranceclub.com/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div></div>
 	                
@@ -356,7 +356,7 @@ else
 							<?php
 							$arrParams['disqus_identifier'] = $disqusUrl;
 							$arrParams['disqus_url'] = $disqusUrl;
-							$arrParams['disqus_title'] = $news['title'];
+							$arrParams['disqus_title'] = $news['slug'];
 					//		$arrParams['disqus_category_id'] = '3125046';
 							echo Disquslib::displayDisqus($arrParams);
 ?>

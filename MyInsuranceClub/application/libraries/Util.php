@@ -3028,6 +3028,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		{
 			$tableNames[$v1] = $db->db->list_fields($v1);
 		}
+			
 		$tableNames[$dbPrefix.'insurance_company_master'][] 	= 'company_slug';
 		$tableNames[$dbPrefix.'policy_master'][] 				= 'policy_slug';
 		$tableNames[$dbPrefix.'policy_master'][] 				= 'policy_tax_benefits';
@@ -3039,6 +3040,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		$tableNames[$dbPrefix.'policy_rider_mediclaim'][] 		= 'rider_slug';
 		$tableNames[$dbPrefix.'policy_rider_personal_accident'][] = 'rider_slug';
 		$tableNames[$dbPrefix.'news'][]							= 'news_slug';
+		$tableNames[$dbPrefix.'news'][]							= 'comment_count';
 		$tableNames[$dbPrefix.'articles'][]						= 'article_slug';
 		$tableNames[$dbPrefix.'guides'][]						= 'guide_slug';
 		$tableNames[$dbPrefix.'master_tags'][] 					= 'tag_slug';
