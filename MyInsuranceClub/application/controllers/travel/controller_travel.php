@@ -50,8 +50,13 @@ class controller_travel extends Customer_Controller {
 
 		$data['occupation']=$occupation;
 		
-		$this->load->view('travel_insurance/home',$data);
-
+		//$this->load->view('travel_insurance/home',$data);
+		
+		
+		$this->template->set_template('frontend');
+		$this->template->write_view('content', 'travel_insurance/home', $data, TRUE);
+		$this->template->render();
+		
 		/* $user_info['session_id'] = $this->session->userdata('session_id');
 
 		$user_info['timestamp'] = date('H:i:s',$this->session->userdata('last_activity'));
