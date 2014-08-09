@@ -88,6 +88,9 @@ $route['life-insurance/term-insurance/search-results'] = "life_insurance/control
 $route['life-insurance/term-insurance/search-results/(:any)'] = "life_insurance/controller_termPlan/get_termPlan_results/$1";
 $route['life-insurance/term-insurance/compare-results'] = "life_insurance/controller_termPlan/compare_policies";
 
+//travel insurance
+$route['travel-insurance'] = "travel_insurance/controller_travel/index";
+
 //	company 
 $route['life-insurance'] = "lifeInsurance/index/";
 $route['life-insurance/companies'] = "lifeInsurance/companies/";

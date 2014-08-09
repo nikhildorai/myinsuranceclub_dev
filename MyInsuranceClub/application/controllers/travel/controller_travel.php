@@ -50,7 +50,7 @@ class controller_travel extends CI_Controller {
 
 		$data['occupation']=$occupation;
 		
-		$this->load->view('personal_accident/home',$data);
+		$this->load->view('travel_insurance/home',$data);
 
 		/* $user_info['session_id'] = $this->session->userdata('session_id');
 
