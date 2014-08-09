@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class controller_travel extends CI_Controller {
+class controller_travel extends Customer_Controller {
 
 	/**
 	 * Index Page for this controller.
