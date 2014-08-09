@@ -1,192 +1,425 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<title>Compare Insurance Policies and Plans in India | MyInsuranceClub.com</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="Description" content="Compare and get free quotes for the best life insurance, health insurance, travel insurance, car and auto insurance plans, policies and schemes in India offered by different insurance companies only at MyInsuranceClub.com" />
-<meta name="Keywords" content="compare insurance, best life insurance, best health insurance, cheap car insurance, auto insurance quote, cheap travel insurance, affordable insurance, best insurance policy, insurance companies in India" />
-
-<!-- Bootstrap CSS -->
-<link href="<?php echo base_url();?>/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap third-party plugins css -->
-<link href="<?php echo base_url();?>/assets/css/bootstrap/bootstrap-switch.min.css" media="screen" rel="stylesheet" />
-<!-- Font Awesome -->
-<link href="<?php echo base_url();?>/assets/css/font-awesome.min.css" rel="stylesheet">
-
-<!-- Plugins -->
-
-<!-- style -->
-<link href="<?php echo base_url();?>/assets/css/theme-style.min.css" rel="stylesheet">
-<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/responsive.css">
-<!-- custom override -->
-<link href="<?php echo base_url();?>/assets/css/custom-style.css" rel="stylesheet">
-<link href="<?php echo base_url();?>/assets/css/clingify.css" rel="stylesheet">
-<link href="<?php echo base_url();?>/assets/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/slick.css"/>
-<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/slicknav.css">
-
-<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/custom.css">
-
-<link type="text/css" href="<?php echo base_url();?>/assets/css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
-
-		<style type="text/css" id="page-css">
-			/* Styles specific to this particular page */
-			.scroll-pane
-			{
-				width: 100%;
-				height: 200px;
-				overflow: auto;
-			}
-			
-		</style>
-
-<!-- HTML5 shiv & respond.js for IE6-8 support of HTML5 elements & media queries -->
-<!--[if lt IE 9]>
-    <script src="plugins/html5shiv/dist/html5shiv.js"></script>
-    <![endif]-->
-
-<!-- Le fav and touch icons - @todo: fill with your icons or remove -->
-<link rel="shortcut icon" href="/assets/img/icons/favicon.png">
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
-
-<!--Retina.js plugin - @see: http://retinajs.com/-->
-<script src="<?php echo base_url();?>/assets/plugins/js/retina-1.1.0.min.js"></script>
-</head>
-
-<!-- ======== @Region: body ======== -->
-<body class="page page-index">
-
-<?php $this->load->view('partial_view/header_new');?>
-
-<span id="o_touch"></span>
-
-<div id="highlighted" style=" background:#f9f9f9; padding-bottom:50px; margin-bottom:0px;" >
-  <div class="container">
-    <!-- form name="" action="#" id="" enctype="multipart/form-data"  -->
-    <?php //echo validation_errors();?>
-	<?php echo form_open('health_insurance/personal_accident/get_personal_accident_results');?>
-  <div class="col-md-12 center mar-20"><h1>Compare & Buy Personal Accident Insurance Plans</h1>
-  <p>Choose from 56 plans from 18 companies</p>
+      <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/travel.css">
+<div class="min_height" style="height:auto; width:100%; ">
+  <div id="highlighted "  class="" >
+  <!--<div class="id-shell-background"><div class="background-container"><div style="background-image: url(https://ssl.gstatic.com/compare/rsrcs/static/insurance/20140730-112226-RC5//images/common/uktravelinsurance/edit_background.jpg);" class="edit-background"></div></div></div>-->
+    <div class="container">
+      <div class="col-md-12 center ">
+        <div class="col-md-1"></div>
+        <h1 class="travel_container" style="text-align:left; margin-top:30px;" id="step1">Compare & Buy Travel Insurance Plans</h1>
+        <div class="col-md-12">
+          <p class="travel_container" style="text-align:left; padding-top:10px; padding-bottom:25px;">Choose from 56 plans from 18 companies</p>
+<!--           <p class="col-md-11 start_icon"> <img src="assets/images/start2.png" ></p> 
+-->        </div>
+        
+        <div class="col-md-12">
+          <p class="travel_container sc_top" style="text-align:left; padding-top:50px; padding-bottom:10px; color:#ff6633;">Get Started...</p>
+        </div>
+        
+      </div>
+      <div class="col-md-12 center">
+        <div class="travel_container travel_mic">
+          <form  method="post"  class="travel_form">
+            <div class="t_section t_ca">
+              <div class="">
+                <div class="mic_type mic_section">
+                  <div class="form-lable">What type of cover do you want?</div>
+                  <div class="travel_hlp"><a class="t_h_btn aa  fa fa-info-circle" href="javascript:void(0)"></a></div>
+                  <div class="mic_t_input">
+                    <div class=" mic_t_b_panel">
+                      <div id="single_t" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r"  style="width: 33.33%;">
+                        <div class="mic_icon">
+                          <div class="mic_i_mar t_single_trip"></div>
+                          <div class="mic_i_btm">Single trip</div>
+                        </div>
+                      </div>
+                      <div id="mul_t" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r"  style="width: 33.33%;">
+                        <div class="mic_icon">
+                          <div class="mic_i_mar t_mul_trip"></div>
+                          <div class="mic_i_btm">Annual multi-trip</div>
+                        </div>
+                      </div>
+                      <div id="stu_t" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l"  style="width: 33.33%;">
+                        <div class="mic_icon">
+                          <div class="mic_i_mar t_student_trip"></div>
+                          <div class="mic_i_btm">Student travel</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="error-text" style="display: none;"></div>
+                </div>
+              </div>
+            </div>
+            <div style="display:none" class="travel_form_s">
+              <div class="t_section t_ca" >
+                <div class="t_mul_help_text" ></div>
+                <div class="mic_cntry">
+                  <div class="mic_sec_label" >
+                    <div>
+                      <div class="mic_type mic_section">
+                        <div class="form-lable">Where are you going?</div>
+                        <div class="travel_hlp"><a class="t_h_btn  fa fa-info-circle toll_a" href="javascript:void(0)"></a></div>
+                        <div class="mic_t_input">
+                          <div class=" mic_t_b_panel">
+                            <div  class="where_go_a mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r "  style="width: 25%;">
+                              <div class="mic_icon">
+                                <div class="mic_i_mar world_usa"></div>
+                                <div class="mic_i_btm">Worldwide<br/>
+                                  <span>Including USA/Canada</span></div>
+                              </div>
+                            </div>
+                            <div class="where_go_b mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r"  style="width: 25%;">
+                              <div class="mic_icon">
+                                <div class="mic_i_mar world_not_usa"></div>
+                                <div class="mic_i_btm">Worldwide<br/>
+                                  <span>Excluding USA/Canada</span></div>
+                              </div>
+                            </div>
+                            <div class="where_go_c mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r"  style="width: 25%;">
+                              <div class="mic_icon">
+                                <div class="mic_i_mar schengen"></div>
+                                <div class="mic_i_btm" style="padding-top: 15px;padding-bottom:1px;">Schengen Countries</div>
+                              </div>
+                            </div>
+                            <div class="where_go_d rest mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_clr_ol"  style="width: 25%;">
+                              <div class="mic_icon">
+                                <div class="mic_i_mar asia"></div>
+                                <div class="mic_i_btm"  style="padding-top: 15px; padding-bottom:1px;">Asia</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="error-text" style="display: none;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="t_section t_ca">
+                <div class="trip-start-date">
+                  <div class="mic_type mic_section">
+                    <div class="form-lable">When are you going?</div>
+                    <div class="travel_hlp"><a class="t_h_btn  fa fa-info-circle toll_b" href="javascript:void(0)"></a></div>
+                    <div class="mic_t_input">
+                      <div class=" mic_t_b_panel">
+                        <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r w_ga"  style="width: 25%;">
+                          <div class="mic_icon">
+                            <div class="mic_top_text w_today"></div>
+                            <div class="mic_i_btm ">Today</div>
+                          </div>
+                        </div>
+                        <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r w_gb"  style="width: 25%;">
+                          <div class="mic_icon">
+                            <div class="mic_top_text w_tommorow"></div>
+                            <div class="mic_i_btm ">Tomorrow</div>
+                          </div>
+                        </div>
+                        <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r w_gc"  style="width: 25%;">
+                          <div class="mic_icon">
+                            <div class="mic_top_text w_in_two_day">In 2 days</div>
+                            <div class="mic_i_btm ">In 2 days</div>
+                          </div>
+                        </div>
+                        <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_clr_ol w_gd"  style="width: 25%;">
+                          <div class="mic_icon">
+                            <div class="mic_i_mar calendar-start-button-icon"></div>
+                            <div class="mic_i_btm" style="margin-top:13px;">Other</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="error-text" style="display: none;"></div>
+                  </div>
+                </div>
+                <div class="trip-start-date-picker">
+                  <div class="date-picker mic_sec_label" style="display: none;">
+                    <div class="mic_t_input">
+                      <input type="text" class="id-date-picker-input date-picker-input " value="" placeholder="DD/MM/YYYY" aria-label="DD/MM/YYYY" maxlength="10">
+                    </div>
+                    <div class="start_datepicker" style="position:absolute; top:17px;"> </div>
+                  </div>
+                </div>
+                <div class="travel_end_date trip-end-date">
+                  <div class="mic_type mic_section" >
+                    <div class="form-lable">When will you be returning?</div>
+                    <div class="travel_hlp" style="display: block;"><a class="t_h_btn fa fa-info-circle toll_away" href="javascript:void(0)"></a></div>
+                    <div class="mic_t_input">
+                      <div class=" mic_t_b_panel">
+                        <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r n_a"  style="width: 25%;">
+                          <div class="mic_icon">
+                            <div class="mic_top_text"></div>
+                            <div class="mic_i_btm">7 nights</div>
+                          </div>
+                        </div>
+                        <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r n_b"  style="width: 25%;">
+                          <div class="mic_icon">
+                            <div class="mic_top_text"></div>
+                            <div class="mic_i_btm">10 nights</div>
+                          </div>
+                        </div>
+                        <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r n_c"  style="width: 25%;">
+                          <div class="mic_icon">
+                            <div class="mic_top_text"></div>
+                            <div class="mic_i_btm">14 nights</div>
+                          </div>
+                        </div>
+                        <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l n_d"  style="width: 25%;">
+                          <div class="mic_icon">
+                            <div class="mic_i_mar calendar-end-button-icon"></div>
+                            <div class="mic_i_btm" style="margin-top:13px;">Other</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="error-text" style="display: none;"></div>
+                  </div>
+                </div>
+                <div class="trip-end-date-picker" id="demoContainer">
+                  <div class="date-picker mic_sec_label" style="display: none;"  id="demo">
+                    <div class="mic_t_input">
+                      <div class="id-calendar-icon calendar-icon "></div>
+                      <input type="text" class="id-date-picker-input date-picker-input " value="" placeholder="DD/MM/YYYY" aria-label="DD/MM/YYYY" maxlength="10">
+                    </div>
+                    <div class="end_datepicker" style="position:absolute; top:17px;"> </div>
+                  </div>
+                </div>
+              </div>
+              <div class="t_section t_ca" style="padding-bottom:70px;">
+                <div class="mic_travel_insure">
+                  <div class="mic_type mic_section">
+                    <div class="form-lable">Whom do you want to cover?</div>
+                    <div class="travel_hlp"><a class="t_h_btn  fa fa-info-circle toll_d" href="javascript:void(0)"></a></div>
+                    <div class="mic_t_input">
+                      <div class="mic_t_b_panel">
+                        <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r insure_a"  style="width:33.33%;">
+                          <div class="mic_icon">
+                            <div class="mic_i_mar individual_icon"></div>
+                            <div class="mic_i_btm">Individual</div>
+                          </div>
+                        </div>
+                        <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r insure_b"  style="width: 33.33%;">
+                          <div class="mic_icon">
+                            <div class="mic_i_mar couple-icon"></div>
+                            <div class="mic_i_btm">Couple</div>
+                          </div>
+                        </div>
+                        <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r insure_c"  style="width: 33.33%;">
+                          <div class="mic_icon">
+                            <div class="mic_i_mar family-icon"></div>
+                            <div class="mic_i_btm">Family</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="error-text" style="display: none;"></div>
+                  </div>
+                </div>
+                <div class="mic_travel_family_section" >
+                  <div >
+                    <div >
+                      <div class="member-header"></div>
+                      <div>
+                        <div style="width:50%; float:left;">
+                          <div class="family_section_header ">Your date of birth</div>
+                          <div class="family_section ">
+                            <div class="individual_icon inline-block"></div>
+                            <div class="birth-date">
+                              <div class="mic_sec_label mic_sec_label_cntrl">
+                                <div class="mic_t_input"><span class=" mic_sec_day_cntrl">
+                                  <div class="mic_sec_label">
+                                    <div class="mic_t_input ">
+                                      <input type="text" class="mic_t_input mic_e_input t_dd id" style="margin-right:10px;" placeholder="DD" aria-label="DD" maxlength="2">
+                                      <input type="text" class="mic_t_input mic_e_input t_mm id" style="margin-right:10px; width:36px;"  placeholder="MM" aria-label="MM" maxlength="2">
+                                      <input type="text" class="mic_t_input t_yy mic_e_input" style="width:48px;" placeholder="YYYY" aria-label="YYYY" maxlength="4">
+                                    </div>
+                                    <div class="error-text" style="display: none;"></div>
+                                  </div>
+                                  </span> </div>
+                                <div class="travel_hlp"><a class="t_h_btn  fa fa-info-circle toll_e" href="javascript:void(0)"></a></div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--          <div class="error-text" style="display: none;"></div>
+--> </div>
+                        <div class="id-cus-gender" style="display:inline-block;width: 50%;">
+                          <div class="family_section_header ">Your Gender</div>
+                          <div style="width: 100%; margin-top:10px;" class="mic_t_input">
+                            <div class=" mic_t_b_panel">
+                              <div style="width:33.33%;" aria-pressed="true" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gen_but_m">
+                                <div class="mic_icon" style="padding: 5px 0px">
+                                  <div class="mic_i_mar male" style="float: left; margin-top: 2px;"></div>
+                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Male</div>
+                                </div>
+                              </div>
+                              <div style="width: 33.33%;"  class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r gen_but_f">
+                                <div class="mic_icon" style="padding: 5px 0px">
+                                  <div class="mic_i_mar female" style="float: left; margin-top: 3px;"></div>
+                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Female</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="TextBoxesGroup">
+                          <div  id="TextBoxDiv1">
+                            <div class="add_traveller" style="display:none;">
+                              <div style="width:50%; float:left;">
+                                <div class="family_section_header">Spouse's date of birth</div>
+                                <div class="family_section">
+                                  <div class="individual_icon inline-block"></div>
+                                  <div class="birth-date">
+                                    <div class="mic_sec_label mic_sec_label_cntrl">
+                                      <div class="mic_t_input"><span class="mic_sec_day_cntrl">
+                                        <div class="mic_sec_label">
+                                          <div class="mic_t_input ">
+                                            <input type="text" class="mic_t_input mic_e_input  id" style="margin-right:10px;" placeholder="DD" aria-label="DD" maxlength="2">
+                                            <input type="text" class="mic_t_input mic_e_input  id" style="margin-right:10px; width:36px;"  placeholder="MM" aria-label="MM" maxlength="2">
+                                            <input type="text" class="mic_t_input mic_e_input " style="width:48px;" placeholder="YYYY" aria-label="YYYY" maxlength="4">
+                                          </div>
+                                          <div class="error-text" style="display: none;"></div>
+                                        </div>
+                                        </span></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!--          <div class="id-member-error-text error-text" style="display: none;"></div>
+--> </div>
+                              <div class="id-cus-gender-spouce" style="display:inline-block;width: 50%;">
+                                <div class="family_section_header ">Spouse Gender</div>
+                                <div style="width: 100%; margin-top:10px;" class="mic_t_input">
+                                  <div class=" mic_t_b_panel">
+                                    <div style="width:33.33%;" aria-pressed="true" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gen_but_spouce_m">
+                                      <div class="mic_icon" style="padding: 5px 0px">
+                                        <div class="mic_i_mar male" style="float: left; margin-top: 2px;"></div>
+                                        <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Male</div>
+                                      </div>
+                                    </div>
+                                    <div style="width: 33.33%;"  class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r gen_but_spouce_f">
+                                      <div class="mic_icon" style="padding: 5px 0px">
+                                        <div class="mic_i_mar female" style="float: left; margin-top: 3px;"></div>
+                                        <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Female</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mic_sec_label add_more_member"  style="display:none;">
+                      <div class="add-member-button">
+                        <div id="addButton" class="mic_btn_in mic_btn_tl mic_btn_tl_one"  >
+                          <div class="btn_title">+ add traveller</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="t_section t_ca">
+                <div class="title">Policyholder details</div>
+                <div>
+                  <div class=" travel-name-control right-spacer">
+                    <div class="mic_sec_label" >
+                      <div class="mic_t_input ">
+                        <input type="text" class="mic_t_input mic_e_input " placeholder="Full name" aria-label="Full name" name="first-name">
+                      </div>
+                      <div class="error-text" style="display: none;"></div>
+                    </div>
+                  </div>
+                  <div class="travel-name-control" >
+                    <div class="mic_sec_label">
+                      <div class="mic_t_input ">
+                        <input type="text" class="mic_t_input mic_e_input " placeholder="Mobile" aria-label="Mobile" name="Mobile">
+                      </div>
+                      <div class="error-text" style="display: none;"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="travel-email-control">
+                  <div class="mic_sec_label">
+                    <div class="mic_t_input ">
+                      <input type="text" class="mic_t_input mic_e_input " placeholder="Your email" aria-label="Your email" name="email">
+                    </div>
+                    <div class="error-text" style="display: none;"></div>
+                  </div>
+                </div>
+                <div class="note_sec">
+                <div class="checkbox">
+            <label>
+            <input id="Field4" 		name="agree" checked 		type="checkbox" 		class="field checkbox" 		value="agree"/>
+            <label class="" for="Field4">I authorize MyInsuranceClub &amp; its partners to Call/SMS for my application &amp; agree to the <a href="" class="link">Terms of Use</a>.</label>
+          </div>
+                
+                </div>
+                <div class="button-panel"><span class="right-buttons"><span class="id-next-button">
+                  <div style="font-weight: bold;
+    padding: 10px 20px;" class="btn btn-primary my">
+                    <div class="">Show Plans <i class="fa fa-chevron-right ar "></i></div>
+                  </div>
+                  </span></span> </div>
+              </div>
+            </div>
+          </form>
+          <div class=" mic_tooltip_column">
+            <div style="top: 8px;" class="mic_tooltip_message card">
+              <div class="tooltip_travel_sec help-scroll" style="height: auto;">
+               <p><b>Single trip:</b> Refers to a single to and fro trip from India. It could include mulitple destinations after departure from India.</p><p><b>Annual multi-trip:</b> Refers to multiple trips to and fro from India within a single year.</p><p><b>Student travel:</b> Refers to a single trip to and fro from India for students going abroad for education.</p>
+              </div>
+              <div class="mic_tooltip_corner" style="top: 27.5px;">
+                <div class="mic_tooltip_corner_out"></div>
+                <div class="mic_tooltip_corner_in"></div>
+              </div>
+              <a href="javascript:void(0)" class="mic_tooltip_close fa fa-times-circle"></a> </div>
+          </div>
+          <!--<div class="t_ca ref_y" style="visibility: visible; display:none; margin-left:100px;"> <a class="close_you fa fa-times-circle" href="javascript:void(0)"></a>
+            <div class="ref_y_text"></div>
+            <div class="mic_tooltip-bottom" style="left: 15px;">
+              <div class="mic_tooltip-out"></div>
+              <div class="mic_tooltip-in"></div>
+            </div>
+          </div>-->
+        </div>
+      </div>
+      <div class="cus_cont" style="display:none;">
+        <div class="" style="width:100%; float:left">
+          <div class="checkbox">
+            <label>
+            <input id="Field4" 		name="agree" checked 		type="checkbox" 		class="field checkbox" 		value="agree"/>
+            <label class="" for="Field4">I authorize MyInsuranceClub &amp; its partners to Call/SMS for my application &amp; agree to the <a href="" class="link">Terms of Use</a>.</label>
+          </div>
+          <div class="form-group col-md-2 pad_right_no" style="float:right; ">
+            <button class="btn btn-primary my" type="submit" id="sub_form">Show plans<i class="fa fa-chevron-right ar "></i> </button>
+            <div class="load_spin"><img src="assets/images/ajax-loader.gif"></div>
+          </div>
+        </div>
+      </div>
+      <div class="cus_cont" >
+        <div style="margin-top: 40px; float: left; margin-bottom:80px; width:100%;" class="">
+          <div class="pos1" >
+            <div class="col-md-2 c_o">
+              <p><img src="assets/images/star.png" border="0" class="mar-r8">Global validity 24x7</p>
+            </div>
+            <div class="col-md-2 c_t">
+              <p><img src="assets/images/star.png" border="0" class="mar-r8">Medical expenses</p>
+            </div>
+            <div class="col-md-2 c_th">
+              <p><img src="assets/images/star.png" border="0" class="mar-r8">Checked-in baggage loss</p>
+            </div>
+            <div class="col-md-2 c_f" >
+              <p><img src="assets/images/star.png" border="0" class="mar-r8">Emergency cash</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-			<div class="col-md-12 center" style="position: relative;">
-				<h3>
-					I want a personal accident cover for
-					<span id="clickk_f">
-						<span class="dotted c_for" id="c_for">myself</span>
-
-						<div data-bind="" style="display: none;" class="choice f" id="c_ch_f">
-							<div class="choice-leftcol" data-bind="">
-								<ul class="years active" id="c_for_f" data-bind="jScrollPane">
-									<?php foreach($family_composition as $k=>$v)
-									{	?>
-										<li data-compo-id="<?php echo $k; ?>">
-											<a href="javascript:void(0);"><?php echo $v; ?> </a>
-										</li>
-							<?php 	} ?>
-								</ul>
-								<div class="stepwrap years-stepwrap">
-									<span class="step show"> <em>1</em> <span class="label-mid">Select
-											Members</span> </span>
-								</div>
-							</div>
-
-						</div> 
-					</span>.
-				</h3>
-			</div>
-			<div class="col-md-12 center no-margin">
-				<h3>
-					I work as 
-					<span id="clickk_g">
-						<span class="dotted ge" id="oc">Accountant</span>
-						<div data-bind="" style="display: none;" class="choice g" id="c_ch_g">
-							<div class="choice-leftcol" data-bind="">
-								<ul class="years active" id="c_for_occupation" data-bind="jScrollPane">
-						<?php 				
-								if (!empty($occupation))
-								{
-									foreach ($occupation as $k1=>$v1)
-									{	?>
-										<li data-occupation-id="<?php echo $v1['occupation_id']; ?>">
-											<a href="javascript:void(0);"><?php echo ucwords($v1['occupation_name']); ?> </a>
-										</li>
-					<?php 			}
-								}?>
-								</ul>
-								<div class="stepwrap years-stepwrap">
-									<span class="step show"> <em>2</em> <span class="label-mid">DOB</span>
-									</span>
-								</div>
-							</div>
-
-						</div> 
-					</span>.
-				</h3>
-			</div>
-
-	<!-- div class="col-md-12 mar-20 left80 "> 
-  <p>About Policy holder:</p>
-  </div>-->
-			<div class="col-md-12 center left80">
-				<div class="form-group col-md-3" style="padding-left: 5px;">
-					<input type="hidden" id="cust_occupation" name="cust_occupation" value="1"> 
-					<input type="hidden" id="plan_type" name="plan_type" value="1A"> 
-					<input type="hidden" id="plan_type_name" name="plan_type_name" value="Myself"> 
-					<input type="hidden" id="product_name" name="product_name" value="Health Insurance"> 
-					<input type="hidden" id="product_type" name="product_type" value="Personal Accident">
-				</div>
-			</div>
-
-			<div class="col-md-12  left80">
-   <br />
-    <div class="checkbox">
-                    <label>
-                      <input type="checkbox" name="MIC_terms" checked="checked" value="1">
-                     I authorize MyInsuranceClub & its partners to Call/SMS for my application & agree to the <a href="" class="link">Terms of Use</a>.
-                    </label>
-                  </div>
-                  
-                   <div class="form-group col-md-3"> 
-                  
-                  <input type="submit"  name='submit' class="btn btn-primary my" value="Show My Options >"/>
-                  
-                  </div>
-                  </div>
-                 <?php echo form_close(); ?>
-                  <div class="col-md-9  cen"  style="margin-top:20px;">
-                  <div style="" class="pos">
-                  <div class="col-md-3" >
-                <p ><img src="<?php echo base_url(); ?>/assets/images/star.png" border="0" class="mar-r8">Cashless claims  </p>
-
-                  </div>
-                  
-                  <div class="col-md-3">
-                <p><img src="<?php echo base_url(); ?>/assets/images/star.png" border="0" class="mar-r8">Lifetime renewal</p>
-
-                  </div>
-                  
-                  <div class="col-md-3">
-                <p><img src="<?php echo base_url(); ?>/assets/images/star.png" border="0" class="mar-r8">Tax benefits</p>
-
-                  </div>
-                  
-                    
-                  <div class="col-md-3">
-                <p><img src="<?php echo base_url(); ?>/assets/images/star.png" border="0" class="mar-r8">Free health checkups</p>
-
-                  </div>
-                  </div>
-                  </div>
-  
-  
-
-
 </div>
-</div>
+
+
+
 
 <div class="b-top"></div>
 <section id="feature-pannels" style="opacity: 1; bottom: 0px;" class="moving">
@@ -219,31 +452,39 @@
 <div class="b-top"></div>
 <section class="nav-tabs-simple"> 
   <!-- Nav tabs -->
-  <div class="container "> 
-    
-    <!-- Tab panes -->
-    <div class="tab-content">
+  <div class="container ">
+    <div class="tab-content  mar-70">
       <div class="tab-pane fade in active" id="htmlcss">
         <article class="row">
-          <div class="col-md-5 col-sm-5 fadeInLeft visible" > <img class="img-responsive" src="<?php echo base_url(); ?>/assets/images/why1.jpg" alt="starbuck"> </div>
-          <div class="col-md-7 col-sm-6 text-left fadeInRight visible" >
-            <h6>Benefits of Comparing Health Insurance with us?</h6>
-            <p>Health expenses are increasing considerably each day and so are the health risks. With a wide array of health insurance policies, the task of choosing the best health insurance policy for your needs can be quite tough and confusing.
-At MyInsuranceClub we provide you with comparative health insurance quotes to select the best health insurance policy in a quick and simplified manner. You can also compare features of different health insurance policies to check the <span class="highlight">best health insurance policy</span> for your requirements. 
-
-.</p>
-            <ul class="sub-list">
-            
-           <li><i class="icon icon-documents-bookmarks-16"></i>With our <span class="highlight">instant online calculator</span>, you can compare health  insurance premiums easily</li>
-	 <li><i class="icon icon-documents-bookmarks-16"></i>With the plan features, you do get the <span class="highlight">Best Health Insurance Comparison</span></li>
-	 <li><i class="icon icon-documents-bookmarks-16"></i>Yes, we are <span class="highlight">Completely Un-biased</span> in our comparison</li>
-	 <li><i class="icon icon-documents-bookmarks-16"></i>MyInsuranceClub does this for you at no cost - <span class="highlight">It's Free!</span> </li>   
-     
-            
+          <div class="col-md-5 col-sm-5 fadeInLeft visible"> <img class="img-responsive" src="assets/images/why1.jpg" alt=""></div>
+          <div class="col-md-7 col-sm-6 text-left fadeInRight visible">
+            <h6>Why Compare Travel Insurance with us?</h6>
+            <p>Emergency & un-planned expenses can burn a big hole in your pocket when you are travelling abroad. Not only do they take you by surprise, the charges of medical care in most countries are much higher than what you would have at hand while on a foreign trip. By paying a small amount for travel insurance, you can ensure that these surprises can be taken care of easily.<br/> At MyInsuranceClub, we will help you select the best travel insurance plan with optimum premiums so that you get the best protection while travelling. </p>
+            <ul class="sub-list noli" style="padding:0px;">
+<li><i class="fa fa-slack fa-2"></i>Instant premiums from a large number of insurance companies</li>
+<li><i class="fa fa-slack fa-2"></i>Compare premiums and features of various plans instantly</li>
+<li><i class="fa fa-slack fa-2"></i>Our comparison is completely un-biased</li>
+<li><i class="fa fa-slack fa-2"></i>MyInsuranceClub does this for you at no cost - It's Free!</li>
             </ul>
           </div>
         </article>
       </div>
+      
+      <!--<div class="tab-pane fade in active" id="htmlcss">
+        <article class="row">
+          <div class="col-md-5 col-sm-5 fadeInLeft visible" > <img class="img-responsive" src="assets/images/why.jpg" alt="starbuck"> </div>
+          <div class="col-md-7 col-sm-6 text-left fadeInRight visible" >
+            <h6>Why Compare Insurance with Us?</h6>
+            <p>We insure for peace of mind. Whether it is life insurance, health insurance, motor insurance, home insurance or any other insurance policy, we need to ensure that our assests are secure. While insurance is important, we realise that <span class="highlight">affordable insurance</span> is equally important.</p>
+            <ul class="sub-list noli" style="padding:0px;">
+              <li><i class="fa fa-check fa-2"></i>By comparing, you can get the <span class="highlight">best insurance policy</span> for your needs.</li>
+              <li><i class="fa fa-check fa-2"></i>Save money by buying feature rich insurance plans at <span class="highlight">lower premiums</span>.</li>
+              <li><i class="fa fa-check fa-2"></i>Oh yes, ours is a <span class="highlight">free service!</span> </li>
+            </ul>
+          </div>
+        </article>
+      </div>--> 
+      
     </div>
     <article class="node-2 node node-page view-mode-full clearfix">
       <div class="col-md-12">
@@ -252,9 +493,8 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="<?php echo base_url(); ?>/assets/images/left_t.jpg" border="0" class="top_i"> Thank you once again for your free and very valuable information on 
-                    insurance. Best wishes to your team and keep up the good work!</strong></p>
-                  <p class="col-md-10 aln_right">- Pravin Bhandare, Bangalore</p>
+                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;This was easy. Thanks! I purchased my travel insurance from your site while I was at the airport. It was quite easy and covenenient.&nbsp;&nbsp;</strong></p>
+                  <p class="col-md-12 aln_right">- Parvinder Singh, Chandigarh</p>
                 </div>
               </div>
             </div>
@@ -263,267 +503,234 @@ At MyInsuranceClub we provide you with comparative health insurance quotes to se
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="<?php echo base_url(); ?>/assets/images/left_t.jpg" border="0" class="top_i">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat!</strong></p>
-                  <p class="col-md-10 aln_right">- Anita Viswas, Mumbai</p>
+                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Your comparison was simple and exhaustive. I found it very easy to use. I found a plan which was pretty much what I wanted to buy.&nbsp;&nbsp;</strong></p>
+                  <p class="col-md-12 aln_right">- Yogesh Sharma, Kolkatta</p>
                 </div>
               </div>
             </div>
           </li>
+          
+           <li>
+            <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+              <div class="field-items">
+                <div class="field-item even">
+                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Done in 5 mins from my phone. Loved it! The premiums are indeed pretty low and the comparison helped in getting the right plan. Recommended.&nbsp;&nbsp;</strong></p>
+                  <p class="col-md-12 aln_right">- Sameer Malani, Mumbai</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+              <div class="field-items">
+                <div class="field-item even">
+                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;I would request everyone to get travel insurance when going abroad. It really helps when you are suddenly struck with an emergency.&nbsp;&nbsp;</strong></p>
+                  <p class="col-md-12 aln_right">- Raj Sekhar Reddy, Coimbatore</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          
         </ul>
       </div>
     </article>
   </div>
 </section>
-
-
-
 <div class="container">
-<div class="noscript accordion closed">
-<h5>What is Health Insurance?</h5>
-<div>Health Insurance, also known as Mediclaim in India,  is a form of insurance which covers the expenses incurred on medical treatment and hospitalisation. It covers the policyholder against any financial constraints arising from medical emergencies. In case of sudden hospitalisation, illness or accident, health insurance takes care of the expenses on medicines, oxygen, ambulance, blood, hospital room, various medical tests and almost all other costs involved. By paying a small premium every year, you can ensure that any big medical expenses, if incurred, will not burn a hole in your pocket. The plan can be taken for an individual or for your family as a Family Floater Health Insurance Plan.
-</div>
-</div>
-<div class="loading"></div>
-<div class="noscript accordion closed">
-<h5>Major Benefits in a Health Insurance Policy</h5>
+  <div class="noscript accordion closed">
+    <h5>What is Travel Insurance?</h5>
+    <div>How often do you travel? Do you travel across the globe? Are you a globetrotter? Do you keep one bag eternally packed with your basic necessities because you might have to travel at any time? Your business trips only come at the last minute without much warning? 
+    
+    
+    <p>Well, in this case have you ever had a problem like:</p>
+<ul style="list-style-type:none; padding-left:0px;" class="small_i"><li><i class="fa fa-slack fa-2"></i> Your baggage was misplaced?</li>
+<li><i class="fa fa-slack fa-2"></i> Your passport was stolen?</li>
+<li><i class="fa fa-slack fa-2"></i> You missed your connecting flight because the previous one was delayed?</li>
+<li><i class="fa fa-slack fa-2"></i> You had to be admitted into a hospital while holidaying in Dubai?</li>
+<li><i class="fa fa-slack fa-2"></i> Someone from your office met with a fatal accident during your business trip to London?</li>
+<li><i class="fa fa-slack fa-2"></i> Your trip had to be cancelled due to bad weather and you suffered a loss at the flight and hotel reservation?</li></ul>
 
+<p>Travel Insurance has the solution to the all above problems. Travel Insurance means insuring the risks of having a financial loss or a medical emergency while travelling. In case of a medical emergency, your travel insurance will pay for the medical expenses incurred while undergoing treatment abroad. You do not have to worry about the exorbitant medical bills which will taken care of by the insurance company. There are other benefits of cash allowance for delayed flights and loss of baggage, theft of your belongings etc. It pretty much covers all the standard risks involved while travellign abroad.</p>
+    
+    </div>
+  </div>
+  <div class="loading"></div>
+  <div class="accordion closed">
+    <h5>What are the different Types fo Travel Insurance?</h5>
+    <div class="" style="min-height:300px;  height:100%; width:100%;"> <span class="" style="float:left; width:100%; margin-top:0px;">
+    <div  class="col-md-4 ">
+        <h3>Single trip</h3>
+        <p>This is for ONE single trip to and from from India. The moment you return from your trip to India, the policy is valididity is over. An example of single trip could be a leaving India for a trip to Singapre, travelling to Thailand from Singapre and then returning from Singpapore or Thailand to India.</p>
+      </div>
 
-    <div class="" style="min-height:300px; float:left; width:100%;">
-    <span class="" style="min-height:200px; float:left; width:100%; margin-top:40px;">
+<div  class="col-md-4 ">
+        <h3>Annual multi-trip</h3>
+        <p>This is more for a frequent traveller who makes multiple trips throughout the year. It is ideal for businessmen who make more than one trip in a year to specific locations. You can make as mulitple trips to an fro from India within the period of ONE year.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Student travel</h3>
+        <p>This is for students who are going abroad for education. A lot of universties insist on student travel insurance as the cost of medical expenses while studying in a foreign university can be quite a large sum for a student. In fact, student travel insurance is strongly recommended even if the university you are going to does not insist on it. While on an extended stay, the chances of falling ill or of a medical emergency can be quite high. This also offer some other benefits like visit of emergency family visit, bail bonds on tution fees etc.</p>
+      </div>
+      </span></div>
+  </div>
+  <div class="loading"></div>
+  
+  <div class="accordion closed nn">
+    <h5>Major Benefits in a Travel Insurance Policy</h5>
+    <div class="" style="min-height:300px; float:left; width:100%;"> 
     
-     <div  class="col-md-4 "><h3>Cashless facility</h3>
-    <p>Each health insurance company ties up with a large number of hospitals to provide cashless health insurance facility. If you are admitted to any of the network hospitals, you would not have to pay the expenses from your pocket. In case the hospital is not part of the network, you will have to pay the hospital and the insurance company will reimburse the costs to you later. </p>
-    </div>
-     <div  class="col-md-4"><h3>Pre-hospitalisation expenses</h3>
-    <p>In case you have incurred treatment costs for the ailment for which you later get admitted to a hospital, the insurance company will bear those costs also. Usually the payout is for costs incurred between 30 to 60 days before hospitalisation.</p>
-    </div>
-    <div  class="col-md-4 "><h3>Hospitalisation Expenses </h3>
-    <p>Costs incurred if a policyholder is admitted to the hospital for more than 24 hours are covered by the health insurance plan. </p>
-    </div>
-        </span>
+    <span><div  class="col-md-12 " style="margin-bottom:20px;">These are some of the common benefits provided in an overseas travel insurance policy. This list is not exhaustive and the features may vary from plan to plan.</div></span>
     
-    
-     <span class="" style="min-height:130px; float:left; width:100%;">
-    <div  class="col-md-4 "><h3>Post-hospitalisation expenses </h3>
-    <p>Even after you are discharged from the hospital, you will incur costs during the recovery period. Most mediclaim policies will cover the expenses incurred 60 to 90 days after hospitalisation. </p>
-    </div>
-     <div  class="col-md-4"><h3>Day Care Procedure Expenses</h3>
-    <p>Due to advancement in technology some of the treatments no more require a 24 hours of hospitalisation. Your health insurance policy will cover the costs incurred for these treatments also. </p>
-    </div>
-     <div  class="col-md-4"><h3>Ambulance Charges</h3>
-    <p>In most cases the ambulance charges are taken up by the policy and the policy holder usually doesn't have to bear the burden of the same.</p>
-    </div>
+    <span class="" style="float:left; width:100%; margin-top:0px;">
+<div  class="col-md-4 ">
+        <h3>Medical Treatment</h3>
+        <p>Costs incurred in treatment of a medical condition, in-patient or out-patient and the costs of transportation to a medical facility are covered.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Dental Treatment</h3>
+        <p>The dental treatment costs involved in providing pain relief are covered in the plan.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Medical Evacuation</h3>
+        <p>In case of the insured person needs to be moved from one location to another to provide some specific kind of treatment, the costs involved would be covered.</p>
+      </div>
+</span>
+
+<span class="" style="float:left; width:100%; margin-top:0px;">
+<div  class="col-md-4 ">
+        <h3>Hospital Daily Allowance</h3>
+        <p>A cash allowance is paid for each day of hospitalisation. This is uaually for the miscellaneous expenses which are incurred.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Balance Treatment back in India</h3>
+        <p>In case the insured person comes back to India and needs to treatment for the same medical condition, the costs are borne by the policy for a specified period of say 30 days.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Total Loss of Checked-in Baggage</h3>
+        <p>In case your baggage is permanently lost by the airline, the costs involved in purchasing the new items would be covered by the policy.</p>
+      </div>
 </span>
 
 
-   <span class="" style="min-height:200px; float:left; width:100%;">
-   
-     <div  class="col-md-4"><h3>Cover for Pre-existing Diseases</h3>
-    <p>Health insurance policies have a facility of covering pre-existing diseases after 3 or 4 years of continuously renewing the policy, i.e. if someone has diabetes, then after completion of 3 or 4 years of continuous renewal with the same insurer (depending on the plan offered and his age), any hospitalisation due to diabetes will also be covered..</p>
-    </div>
+<span class="" style="float:left; width:100%; margin-top:0px;">
+<div  class="col-md-4 ">
+        <h3>Delay of Checked-in baggage</h3>
+        <p>In case your baggage is delayed, the costs involved in purchasing essential items and any medication involved would be covered by the policy.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Loss of Passport</h3>
+        <p>In case your passport in lost, the costs involved in procurring a fresh passport would be covered.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Financial Emergency Cash</h3>
+        <p>In case you lose your purse or the money you are carrying due to theft, a specified amount of cash would be made available to you.</p>
+      </div>
+</span>
+
+<span class="" style="float:left; width:100%; margin-top:0px;">
+<div  class="col-md-4 ">
+        <h3>Repatriation of mortal remains</h3>
+        <p>In case of death of the policyholder, the costs involved in transporting the mortail remains to India would be covered.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Personal Liability</h3>
+        <p>Any personal liablity incurred such a damage of property, body injury caused or third party death would be covered.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Personal Accident</h3>
+        <p>In case of an accident to the airline, a lumpsum amount would be paid out.</p>
+      </div>
+</span>
+
+
+<span class="" style="float:left; width:100%; margin-top:0px;">
+<div  class="col-md-4 ">
+        <h3>Trip Delay</h3>
+        <p>If the airline is delayed for more than 24 hours, an amount is paid out to the policyholder.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Trip Cancellation & Curtailment</h3>
+        <p>In case the trip is cancelled or curtailed for un-avoidaable reasons which are listed in the policy, the travel and accomodation expenses are covered.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Hijack Allowance</h3>
+        <p>A daily allowance is paid to the policyholder in case of an hijack for more than a specified period.</p>
+      </div>
+
+</span>
     
-     <div  class="col-md-4"><h3>Tax Benefits</h3>
-    <p>The premiums paid for a Health Insurance Policy are exempted for Under Section 80D of the Income Tax Act. Income tax benefit is provided to the customer for the premium amount till a maximum of Rs. 15,000 for regular and Rs. 20,000 for senior citizen respectively.</p>
+    
+        
     </div>
-     <div  class="col-md-4 "><h3>No-Claim Bonus</h3>
-    <p>If there has been no claim in the previous year, a benefit is passed on to the policyholder, either by reducing the premium or by increasing the sum assured by a certain percentage of the existing premium. </p>
-    </div>
-</span>
-
-<span class="" style="min-height:100px; float:left; width:100%;">
-   
-      <div  class="col-md-4 "><h3>Organ Donor Expenses</h3>
-    <p>The medical expenses incurred in harvesting the organ for a transplant is paid by the policy. </p>
-    </div>
-     <div  class="col-md-4"><h3>Health check up</h3>
-    <p>Some health insurance policies have a facility of free health check-up for the well being of the individual if there is no claim made for certain number of years.</p>
-    </div>
-</span>
-
-
-     </div>
- 
- 
- 
- 
- 
+  </div>
+  
+  
 </div>
-<div class="loading"></div>
-</div>
-
-
-
-
-
-
-
-
-
 <div class="container   margin-bottom-large">
   <div  class="col-md-6 mar-25">
     <div class="top_ins"></div>
-    <h3 class="header_art">Insurance Articles</h3>
-  
-  
-  
+    <h3 class="header_art">Articles on Travel Insurance</span></h3>
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>/assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
-        </p> 
+        <p><img style="border: 0px none;" alt="" src="assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
     </div>
-    
-    
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>/assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
-        </p> 
+        <p><img style="border: 0px none;" alt="" src="assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
     </div>
-    
-    
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>/assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
-        </p> 
+        <p><img style="border: 0px none;" alt="" src="assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
     </div>
     <div class="col-md-12 text-rightp"><a href="javascript:void(0)">More Articles <span class="ic">+</span></a></div>
-    
-    
   </div>
-  
-  
-  
-  
   <div  class="col-md-6 mar-25">
     <div class="top_ins"></div>
-    <h3 class="header_art">Insurance News</h3>
-    
+    <h3 class="header_art">Guides On Travel Insurance</h3>
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>/assets/images/news1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
-        </p> 
+        <p><img style="border: 0px none;" alt="" src="assets/images/news1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
     </div>
-    
-    
-     <div class="art_cnt widget ">
+    <div class="art_cnt widget ">
       <h4 class="sub_h">Which is the best child plan?</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>/assets/images/news2.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
-        </p> 
+        <p><img style="border: 0px none;" alt="" src="assets/images/news2.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
     </div>
-    
-    
-     <div class="art_cnt widget ">
+    <div class="art_cnt widget ">
       <h4 class="sub_h">Benefits of investing early</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="<?php echo base_url(); ?>/assets/images/news3.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent.
-        </p> 
+        <p><img style="border: 0px none;" alt="" src="assets/images/news3.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
     </div>
-        <div class="col-md-12 text-rightp"><a href="javascript:void(0)">More Guides <span class="ic">+</span></a></div>
-
-   
+    <div class="col-md-12 text-rightp"><a href="javascript:void(0)">More Guides <span class="ic">+</span></a></div>
   </div>
-  
-  
 </div>
 
-<?php echo $this->load->view('partial_view/footer_new');?>
-
-<!-- ======== @Region: #navigation ======== --> 
-
-<!--Scripts --> 
-
-<!--Legacy jQuery support for quicksand plugin--> 
-
-<!-- Bootstrap JS --> 
-
-<!--Bootstrap third-party plugins--> 
-
-<!--JS plugins--> 
-<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-
-<script src="<?php echo base_url();?>/assets/js/jquery.min.js"></script> 
-
-
-<!--Legacy jQuery support for quicksand plugin--> 
-<script src="<?php echo base_url();?>/assets/js/jquery-migrate-1.2.1.min.js"></script> 
-
-<!-- Bootstrap JS --> 
-<script src="<?php echo base_url();?>/assets/js/bootstrap.min.js"></script> 
-
-<!--Bootstrap third-party plugins--> 
-<script src="<?php echo base_url();?>/assets/js/bootstrap-hover-dropdown.min.js"></script> 
-<script src="<?php echo base_url();?>/assets/js/bootstrap-switch.min.js"></script> 
-
-<!--JS plugins--> 
-<script src="<?php echo base_url();?>/assets/js/jquery.clingify.min.js"></script> 
-<script src="<?php echo base_url();?>/assets/js/jquery.jpanelmenu.min.js"></script> 
-<script src="<?php echo base_url();?>/assets/js/jRespond.js"></script> 
-
-
-<!--Custom scripts mainly used to trigger libraries --> 
-<script src="<?php echo base_url();?>/assets/js/script.min.js"></script> 
-<script src="<?php echo base_url();?>/assets/js/jquery.bxslider.min.js" type="text/javascript"></script> 
-<script type='text/javascript' src='<?php echo base_url();?>/assets/js/jquery.carouFredSel.js'></script>
-  <script src="<?php echo base_url();?>/assets/js/jquery.ui.accordion.min.js"></script>
-
-<script src="<?php echo base_url();?>/assets/js/jquery.slicknav.js"></script>
-
-  <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/jquery.cluetip.css" type="text/css" />
-
- <script src="<?php echo base_url();?>/assets/js/jquery.cluetip.js"></script>
-  <!-- <script src="../lib/jquery.cluetip.compat.js"></script> -->
-  <script src="<?php echo base_url();?>/assets/js/demo.js"></script>  
-  
-  <script type="text/javascript" src="<?php echo base_url();?>/assets/js/jquery.mousewheel.js"></script>
-		<!-- the jScrollPane script -->
-		<script type="text/javascript" src="<?php echo base_url();?>/assets/js/jquery.jscrollpane.min.js"></script>
- <script src="<?php echo base_url();?>/assets/js/scrolltopcontrol.js"></script>
-		
-  <script src="<?php echo base_url();?>/assets/js/custom.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#menu').slicknav();
-});
-
-(function($) {
-	$(document).ready(function() {
-		$('.accordion').accordion({
-			collapsible: true,
-			heightStyle : 'content'
-			
-		});
-		$('.accordion.closed').accordion( "option", "active", false );
-	});
-})(jQuery);
-</script>
-
-<script type="text/javascript">
-         $(document).ready(function () {           
-             $('.bxslider').bxSlider({
-                 mode: 'fade',
-                 slideMargin: 3,
-                 auto:true
-             });   
-			 
-				          
-         });
-    </script>
- 
-</body>
-</html>
+      <script src="<?php echo base_url();?>/assets/js/travel.js"></script>
