@@ -1,4 +1,4 @@
-<?php $this->load->view('partial_view/header_new'); ?>
+<?php //$this->load->view('partial_view/header_new'); ?>
 
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/introjs.css">
 
@@ -941,4 +941,4 @@
           intro.start();
       }
     </script>
-<?php $this->load->view('partial_view/footer_new'); ?>
+<?php //$this->load->view('partial_view/footer_new'); ?>
