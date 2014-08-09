@@ -27,8 +27,8 @@ class controller_travel extends Customer_Controller {
 		$this->load->library('user_agent');
 		$this->load->database();
 		//$this->load->model('mic_dbtest');
-		$this->load->model('annual_premium_travel_model');
-		$this->load->model('city');
+		//$this->load->model('annual_premium_travel_model');
+		//$this->load->model('city');
 		$this->load->helper('form');
 		$this->load->helper('url');
 		$this->load->library('form_validation');
