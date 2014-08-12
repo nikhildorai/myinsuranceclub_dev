@@ -3044,6 +3044,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		$tableNames[$dbPrefix.'articles'][]						= 'article_slug';
 		$tableNames[$dbPrefix.'guides'][]						= 'guide_slug';
 		$tableNames[$dbPrefix.'master_tags'][] 					= 'tag_slug';
+//var_dump($tableNames['MIC_policy_features_mediclaim']);die;		
 	//	$tableNames[$dbPrefix.''][] 				= '_slug';
 		return $tableNames;
 	}
@@ -3323,6 +3324,38 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		return $data;
 	}
 	
+	public static function getNumbersFromString($str = '', $type = '')
+	{
+		$matches = array();
+		if (!empty($str))
+		{
+			if ($type == 'strWithSpaces')
+			{
+				preg_match_all('/\d{1,}/',$str,$matches);
+			}
+			else 
+			{
+				preg_match_all('/\d{1,}/',$str,$matches);
+			}
+		}
+		return $matches;
+	}
+	
+	public static function getCharactersFromString($str = '', $type = '')
+	{
+		$matches = array();
+		if (!empty($str))
+		{
+			$str = explode(' ', $str);
+var_dump($str);			
+			foreach ($str as $k1=>$v1)
+			{
+				if (!is_integer($v1))
+					$matches[] = $v1;
+			}
+		}	
+		return $matches;
+	}
 }
 
 // END Util class

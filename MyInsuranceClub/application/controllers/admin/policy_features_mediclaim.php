@@ -73,7 +73,7 @@ class Policy_features_mediclaim extends Admin_Controller {
 					$modelType = 'update';
 					$model = $exist;
 					$feature_id = $exist['features_id'];
-					$oldPeerComparision = (isset($model['peer_comparision_variants']) && !empty($model['peer_comparision_variants'])) ? explode(',', $model['peer_comparision_variants']) : array();
+					//$oldPeerComparision = (isset($model['peer_comparision_variants']) && !empty($model['peer_comparision_variants'])) ? explode(',', $model['peer_comparision_variants']) : array();
 					//	check if rider exists for current varient
 					$where = array();
 					$where[0]['field'] = 'variant_id';
@@ -101,15 +101,80 @@ class Policy_features_mediclaim extends Admin_Controller {
 				if($this->input->post('model') && $isActive == true)
 				{
 					
-					//	set default post values
-					$_POST['model']['peer_comparision_variants'] = (isset($_POST['model']['peer_comparision_variants']) && !empty($_POST['model']['peer_comparision_variants'])) ? implode(',', $_POST['model']['peer_comparision_variants']) : '';
-					$newPeerComparision = explode(',', $_POST['model']['peer_comparision_variants']);
+				//	set default post values
+				
+				//	$_POST['model']['peer_comparision_variants'] = (isset($_POST['model']['peer_comparision_variants']) && !empty($_POST['model']['peer_comparision_variants'])) ? implode(',', $_POST['model']['peer_comparision_variants']) : '';
+				//	$newPeerComparision = explode(',', $_POST['model']['peer_comparision_variants']);
 					
+					//	cashless treatment
+					if (!empty($_POST['model']['cashless_treatment']))
+					{
+						$cashless_treatment = (isset($_POST['model']['cashless_treatment'][0]) ? $_POST['model']['cashless_treatment'][0] : 'No').' hospitals across '.(isset($_POST['model']['cashless_treatment'][1]) ? $_POST['model']['cashless_treatment'][1].' cities' : ' country');
+						$_POST['model']['cashless_treatment'] = $cashless_treatment;
+					}
+					//	pre-existing dieseases
+					if (!empty($_POST['model']['preexisting_diseases']))
+					{
+						$_POST['model']['preexisting_diseases'] = (isset($_POST['model']['preexisting_diseases']) ? $_POST['model']['preexisting_diseases'] : '0');
+						$_POST['model']['preexisting_diseases'] .= ((int)$_POST['model']['preexisting_diseases'] > 1) ? ' years': ' year';
+					}			
+						
+					//	min & max coverage account
+					if (isset($_POST['model']['coverage_amount']) && !empty($_POST['model']['coverage_amount']))
+					{
+						$_POST['model']['minimum_coverage_amount'] = reset($_POST['model']['coverage_amount']['value']);
+						$_POST['model']['maximum_coverage_amount'] = end($_POST['model']['coverage_amount']['value']);
+						$_POST['model']['coverage_amount'] = serialize(array('value'=>implode(',', $_POST['model']['coverage_amount']['value']), 'comments'=>$_POST['model']['coverage_amount']['comment']));
+					}
+						
+					//	min & max coverage account
+					if (isset($_POST['model']['duration_of_coverage']) && !empty($_POST['model']['duration_of_coverage']))
+					{
+						$_POST['model']['minimum_policy_terms'] = reset($_POST['model']['duration_of_coverage']);
+						$_POST['model']['maximum_policy_terms'] = end($_POST['model']['duration_of_coverage']);
+						$_POST['model']['duration_of_coverage'] = implode(',', $_POST['model']['duration_of_coverage']);
+					}
+				
+//var_dump($_POST);die;		
+					//	minimum entry age
+					if (isset($_POST['model']['minimum_entry_age']) && !empty($_POST['model']['minimum_entry_age']))
+					{
+						$_POST['model']['minimum_entry_age'] = implode(' ', $_POST['model']['minimum_entry_age']);
+					}
+					//	minimum entry age
+					if (isset($_POST['model']['maximum_entry_age']) && !empty($_POST['model']['maximum_entry_age']))
+					{
+						$_POST['model']['maximum_entry_age'] = implode(' ', $_POST['model']['maximum_entry_age']);
+					}
+					//	entry age comments
+					if (isset($_POST['model']['entry_age_comments']) && !empty($_POST['model']['entry_age_comments']))
+					{
+						$_POST['model']['entry_age_comments'] = serialize($_POST['model']['entry_age_comments']);
+					}
+//var_dump($_POST['model']['entry_age_comments']);die;	
+					//	max renewal age
+					if (isset($_POST['model']['maximum_renewal_age']) && !empty($_POST['model']['maximum_renewal_age']))
+					{
+						$lifelong = (in_array('lifelong', $_POST['model']['maximum_renewal_age'])) ? true : false;
+						if ($lifelong == true)
+							$_POST['model']['maximum_renewal_age'] = 'lifelong';
+						else 
+						{
+							if(($key = array_search('lifelong', $_POST['model']['maximum_renewal_age'])) !== false) {
+								unset($_POST['model']['maximum_renewal_age'][$key]);
+							}
+							if(($key = array_search('years', $_POST['model']['maximum_renewal_age'])) !== false) {
+								unset($_POST['model']['maximum_renewal_age'][$key]);
+							}
+							$_POST['model']['maximum_renewal_age'] = implode(',', $_POST['model']['maximum_renewal_age']).' years';
+						}
+					}
+										
 					$arrParams = $this->input->post('model');
 					//	set default values
 					$arrParams['features_id'] = (isset($feature_id) && !empty($feature_id)) ? $feature_id : '';
 					$arrParams['variant_id'] = (isset($variant_id) && !empty($variant_id)) ? $variant_id : '';
-					
+			
 					
 					//	set validation rules
 					$validation_rules = array(
@@ -127,8 +192,7 @@ class Policy_features_mediclaim extends Admin_Controller {
 						array('field' => 'model[payment_modes]', 'label' => 'payment modes', 'rules' => 'required'),
 						array('field' => 'model[peer_comparision_variants]', 'label' => 'Peer Comparison', 'rules' => 'required'),
 					//	array('field' => 'model[]', 'label' => '', 'rules' => 'required'),
-				*/		);
-//var_dump($_POST);die;					
+				*/		);				
 					$riderPost = $this->input->post('riderModel');
 					$this->form_validation->set_rules($validation_rules);
 					if ($this->form_validation->run())

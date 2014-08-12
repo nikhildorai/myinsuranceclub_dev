@@ -85,8 +85,6 @@ class Cron extends CI_Controller {
 	$threads = $dbh->prepare("insert into MIC_disqus_thread (id, title, created, identifiers, forum, created_date, feed, category, clean_title, slug, isClosed, posts, userSubscription, link, likes, isDeleted, sublink, module, controller, action_name, link_slug, link_params) values (:id, :title, :created, :identifiers, :forum, :created_date, :feed, :category, :clean_title, :slug, :isClosed, :posts, :userSubscription, :link, :likes, :isDeleted, :sublink, :module, :controller, :action_name, :link_slug, :link_params)");
     $comments = $dbh->prepare("insert into MIC_disqus_comment (id, thread_id, author_name, comment, created, created_date, forum, isApproved, author_url, avatar_url, author_email, author_id, author_our_id, isAnonymous, raw_message, parent_comment_id, isSpam, isDeleted, isEdited, likes, username, profileUrl, joinedAt, media, isFlagged, dislikes, isHighlighted, points, numReports, lat, lng, ipAddress) values (:id, :thread_id, :author_name, :comment, :created, :created_date, :forum, :isApproved, :author_url, :avatar_url, :author_email, :author_id, :author_our_id, :isAnonymous, :raw_message, :parent_comment_id, :isSpam, :isDeleted, :isEdited, :likes, :username, :profileUrl, :joinedAt, :media, :isFlagged, :dislikes, :isHighlighted, :points, :numReports, :lat, :lng, :ipAddress)");
 		
-
-
 		try {
 			$disqus = new DisqusAPI($disqus_api_key, 'json', '3.0');
 

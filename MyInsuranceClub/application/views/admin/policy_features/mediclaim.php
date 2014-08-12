@@ -26,7 +26,7 @@ $(".form-horizontal :input").prop("disabled", true);
         		<span class="glyphicon glyphicon-th-list"></span> <?php echo $companyModel['company_shortname'].' - '.$policyModel['policy_display_name'].' - '.$variantModel['variant_name']?> 
         	</strong>
         	
-        	<a href="<?php echo $base_url;?>admin/articles/" class="btn btn-w-md btn-gap-v btn-default btn-sm" style="float: right; margin-top: -5px;">Back</a>
+        	<a href="<?php echo $base_url;?>admin/policy/" class="btn btn-w-md btn-gap-v btn-default btn-sm" style="float: right; margin-top: -5px;">Back</a>
         	
         </div>
         
@@ -80,40 +80,251 @@ $(".form-horizontal :input").prop("disabled", true);
 											<th scope="col">Minimum</th>
 											<th scope="col">Maximum</th>
 										</tr>
+										
+										<tr>
+											<th class="spec" scope="row">Coverage Amounts (in Rs.)</th>
+											<td width="252" valign="top" colspan="2">
+											<?php 
+												$coverage_amount = array_key_exists( 'coverage_amount',$model) ? unserialize($model['coverage_amount']) : array();	
+												if (empty($coverage_amount))
+													$coverage_amount1 = array('value'=>array(), 'comments'=>'');
+												else 
+												{
+													$coverage_amount1 = array(	'value'=>(isset($coverage_amount['value']) && !empty($coverage_amount['value'])) ? explode(',', $coverage_amount['value']) : array(), 
+																				'comments'=>(isset($coverage_amount['comments']) && !empty($coverage_amount['comments'])) ? reset($coverage_amount['comments']) : '');
+												}	
+												$coverage_amount = $coverage_amount1;
+											?>
+												<div class="row">
+													<div class="col-sm-3">
+														<div class="checkbox">
+						                                    <label>
+						                                        <input type="checkbox" name="model[coverage_amount][value][]" value="0.5 lakh" class="model_coverage_amount" <?php echo (in_array('0.5 lakh', $coverage_amount['value'])) ? 'checked' : ''?>> 0.5 Lakhs
+						                                    </label>
+							                            </div>
+							                        </div> 
+													<div class="col-sm-3">
+														<div class="checkbox">
+						                                    <label>
+						                                        <input type="checkbox" name="model[coverage_amount][value][]" value="0.75 lakh" class="model_coverage_amount"  <?php echo (in_array('0.75 lakh', $coverage_amount['value'])) ? 'checked' : ''?>> 0.75 Lakh
+						                                    </label>
+							                            </div>
+							                        </div> 
+											<?php 
+													for ($i = 1; $i <= 10; $i += 0.25) 
+													{	
+														$checked = (in_array($i.' lakhs', $coverage_amount['value'])) ? 'checked' : '';
+														?>
+													<div class="col-sm-3">
+														<div class="checkbox">
+						                                    <label>
+						                                        <input type="checkbox" name="model[coverage_amount][value][]" class="model_coverage_amount"  <?php echo $checked;?> value="<?php echo $i.' lakhs';?>"> <?php echo $i?> Lakhs
+						                                    </label>
+							                            </div>
+							                        </div> 
+											<?php 	}
+													for ($i = 15; $i <= 100; $i += 5) 
+													{	
+														$checked = (in_array($i.' lakhs', $coverage_amount['value'])) ? 'checked' : '';
+														if ($i == 100)
+															$checked = (in_array('1 crore', $coverage_amount['value'])) ? 'checked' : '';
+														?>
+													<div class="col-sm-3">
+														<div class="checkbox">
+						                                    <label>
+						                                        <input type="checkbox" name="model[coverage_amount][value][]" class="model_coverage_amount"  <?php echo $checked;?> value="<?php echo ($i != 100) ? $i.' lakhs':'1 crore'; ?>"> <?php echo ($i != 100) ? $i.' Lakhs':'1 Crore'; ?>
+						                                    </label>
+							                            </div>
+							                        </div> 
+											<?php 	}	?>
+												</div>
+												<div class="divider"></div>
+												<div class="row">
+								                    <label for="" class="col-sm-2">Comment</label>
+								                    <div class="col-sm-10">
+								                        <input type="text" class="form-control"  placeholder="Max 255 characters" name="model[coverage_amount][comment][]" maxlength="255" value="<?php echo (isset($coverage_amount['comments']) && !empty($coverage_amount['comments'])) ? $coverage_amount['comments'] : '';?>"  >
+								                    </div>
+												</div>
+											</td>
+										</tr>
+										
 										<tr>
 											<th class="spec" scope="row">Coverage Amount (in Rs.)</th>
 											<td width="252" valign="top">
-												<input type="text" class="form-control"  placeholder="Min Sum Assured" name="model[minimum_coverage_amount]" value="<?php echo array_key_exists( 'minimum_coverage_amount',$model) ? $model['minimum_coverage_amount'] : '';?>"  >
+												<input type="text" class="form-control"  placeholder="Min Sum Assured" id="model_minimum_coverage_amount" name="model[minimum_coverage_amount]" disabled value="<?php echo array_key_exists( 'minimum_coverage_amount',$model) ? $model['minimum_coverage_amount'] : '';?>"  >
 											</td>
 											<td width="241" valign="top">
-												<input type="text" class="form-control"  placeholder="Max Sum Assured" name="model[maximum_coverage_amount]" value="<?php echo array_key_exists( 'maximum_coverage_amount',$model) ? $model['maximum_coverage_amount'] : '';?>"  >
+												<input type="text" class="form-control"  placeholder="Max Sum Assured" id="model_maximum_coverage_amount" ame="model[maximum_coverage_amount]" disabled value="<?php echo array_key_exists( 'maximum_coverage_amount',$model) ? $model['maximum_coverage_amount'] : '';?>"  >
 											</td>
 										</tr>
+										
+										
+										
+										<tr>
+											<th class="spec" scope="row">Duration of Coverage (In Years)</th>
+											<td width="252" valign="top" colspan="2">
+											<?php 
+												$coverage_amount = array_key_exists( 'duration_of_coverage',$model) ? explode(',', $model['duration_of_coverage']) : array();
+											
+												for ($i = 1; $i <= 3; $i ++) 
+												{	
+													$checked = (in_array($i.' years', $coverage_amount)) ? 'checked' : '';
+													?>
+												<div class="col-sm-3">
+													<div class="checkbox">
+					                                    <label>
+					                                        <input type="checkbox" name="model[duration_of_coverage][]" class="model_duration_of_coverage"  <?php echo $checked;?> value="<?php echo $i.' years';?>"> <?php echo $i?> Years
+					                                    </label>
+						                            </div>
+						                        </div> 
+										<?php 	}	?>
+											</td>
+										</tr>
+										
+										
 										<tr>
 											<th class="specalt" scope="row">Policy Term (in years)</th>
 											<td width="252" valign="top">
-												<input type="text" class="form-control"  placeholder="Min Policy Term" name="model[minimum_policy_terms]" value="<?php echo array_key_exists( 'minimum_policy_terms',$model) ? $model['minimum_policy_terms'] : '';?>"  >
+												<input type="text" class="form-control" disabled placeholder="Min Policy Term" id="model_minimum_policy_terms" name="model[minimum_policy_terms]" value="<?php echo array_key_exists( 'minimum_policy_terms',$model) ? $model['minimum_policy_terms'] : '';?>"  >
 											</td>
 											<td width="241" valign="top">
-												<input type="text" class="form-control"  placeholder="Max Policy Term" name="model[maximum_policy_terms]" value="<?php echo array_key_exists( 'maximum_policy_terms',$model) ? $model['maximum_policy_terms'] : '';?>"  >
+												<input type="text" class="form-control" disabled placeholder="Max Policy Term" id="model_maximum_policy_terms" name="model[maximum_policy_terms]" value="<?php echo array_key_exists( 'maximum_policy_terms',$model) ? $model['maximum_policy_terms'] : '';?>"  >
 											</td>
 										</tr>
 										<tr>
 											<th class="spec" scope="row" width="234" valign="top">Entry Age (in years)</th>
 											<td width="252" valign="top">
-												<input type="text" class="form-control"  placeholder="Min Entry Age" name="model[minimum_entry_age]" value="<?php echo array_key_exists( 'minimum_entry_age',$model) ? $model['minimum_entry_age'] : '';?>"  >
+																
+								                <div class="row">
+								                <?php 
+													$str = array_key_exists( 'minimum_entry_age',$model) ? $model['minimum_entry_age'] : '';
+													$values = reset(Util::getNumbersFromString($str));
+													if (strpos($str, 'days'))
+														$yearVal = 'days';
+													else if ($str == 'no limit')
+														$yearVal = 'no limit';
+													else 
+														$yearVal = 'years';									
+								                ?>
+								                    <div class="col-sm-10" style="padding-right: 0px; padding-left: 0px; width: 307px;"> 
+									                    <?php 
+															$options = array('days'=>'Days', 'years'=>'Years','no limit'=>'No Limit');		
+															foreach ($options as $k1=>$v1)
+															{
+																$op = array(
+																    'class'       => 'showHideNextDivByRadio',
+																    'name'        => 'model[minimum_entry_age][]',
+																    'value'       => $k1,
+																    'checked'     => ($yearVal == $k1) ? TRUE : FALSE,
+																    'style'       => 'margin:10px',
+																    );
+																echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+															}
+														?>
+								                    </div> 
+								                    <div class="col-sm-2" style="padding-left: 0px; border-right-width: 0px; padding-right: 0px;display:<?php echo ($yearVal != 'no limit') ? 'block;' : 'none;';?>;">
+								                        <input type="text" class="form-control numberValidation" maxlength="2" placeholder="Min Age" name="model[minimum_entry_age][]" value="<?php echo (isset($values) && is_array($values))? reset($values) : '';?>"  >
+								                    </div>          
+								                </div>
+												<div class="divider"></div> 
+												<div class="row">  
+								                    <label for="" class="col-sm-3">Comment</label>
+								                    <div class="col-sm-9">
+								                    	<?php $entry_age = array_key_exists( 'entry_age_comments',$model) ? unserialize($model['entry_age_comments']) : array('min'=>'', 'max'=>'');?>
+								                        <input type="text" class="form-control"  placeholder="Max 127 characters" name="model[entry_age_comments][min]" maxlength="127" value="<?php echo $entry_age['min'];?>"  >
+								                    </div>
+												</div>
 											</td>
+											
 											<td width="241" valign="top">
-												<input type="text" class="form-control"  placeholder="Max Entry Age" name="model[maximum_entry_age]" value="<?php echo array_key_exists( 'maximum_entry_age',$model) ? $model['maximum_entry_age'] : '';?>"  >
+											
+								                <div class="row">
+								                <?php 
+													$str = array_key_exists( 'maximum_entry_age',$model) ? $model['maximum_entry_age'] : '';
+													$values = reset(Util::getNumbersFromString($str));
+													if (strpos($str, 'days'))
+														$yearVal = 'days';
+													else if ($str == 'no limit')
+														$yearVal = 'no limit';
+													else 
+														$yearVal = 'years';										
+								                ?>
+								                    <div class="col-sm-10" style="padding-right: 0px; padding-left: 0px; width: 307px;"> 
+									                    <?php 
+															$options = array('days'=>'Days', 'years'=>'Years','no limit'=>'No Limit');	
+															foreach ($options as $k1=>$v1)
+															{
+																$op = array(
+																    'class'       => 'showHideNextDivByRadio',
+																    'name'        => 'model[maximum_entry_age][]',
+																    'value'       => $k1,
+																    'checked'     => ($yearVal == $k1) ? TRUE : FALSE,
+																    'style'       => 'margin:10px',
+																    );
+																echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+															}
+														?>
+								                    </div>   
+								                    <div class="col-sm-2" style="padding-left: 0px; border-right-width: 0px; padding-right: 0px;display:<?php echo ($yearVal != 'no limit') ? 'block;' : 'none;';?>;">
+								                        <input type="text" class="form-control numberValidation" maxlength="2" placeholder="Max Age" name="model[maximum_entry_age][]" value="<?php echo (isset($values) && is_array($values))? reset($values) : '';?>"  >
+								                    </div>           
+								                </div>	
+												<div class="divider"></div>
+												<div class="row">
+								                    <label for="" class="col-sm-3">Comment</label>
+								                    <div class="col-sm-9">
+								                        <input type="text" class="form-control"  placeholder="Max 127 characters" name="model[entry_age_comments][max]" maxlength="127" value="<?php echo $entry_age['max'];?>"  >
+								                    </div>
+												</div>
 											</td>
 										</tr>
 										<tr>
 											<th class="specalt" scope="row" width="234" valign="top">Renewable till Age (in years)</th>
-											<td width="252" valign="top">
-												<input type="text" class="form-control"  placeholder="Min Age at Renewable" name="model[manimum_renewal_age]" value="<?php echo array_key_exists( 'manimum_renewal_age',$model) ? $model['manimum_renewal_age'] : '';?>"  >
-											</td>
-											<td width="241" valign="top">
-												<input type="text" class="form-control"  placeholder="Max Age at Renewable" name="model[maximum_renewal_age]" value="<?php echo array_key_exists( 'maximum_renewal_age',$model) ? $model['maximum_renewal_age'] : '';?>"  >
+											<td width="252" valign="top" colspan="2">
+								                <div class="row">
+								                <?php 		                
+													$str = array_key_exists( 'maximum_renewal_age',$model) ? $model['maximum_renewal_age'] : '';
+													$values = reset(Util::getNumbersFromString($str));
+													if ($str == 'lifelong')
+														$yearVal = 'lifelong';
+													else 
+														$yearVal = 'years';														
+								                ?>
+								                    <div class="col-sm-5"> 
+									                    <?php 
+															$selected = $yearVal;
+															$options = array('lifelong'=>'Lifelong', 'years'=>'No. of Years');		
+															foreach ($options as $k1=>$v1)
+															{
+																$op = array(
+																    'class'       => 'showHideNextDivByRadio',
+																    'name'        => 'model[maximum_renewal_age][]',
+																    'value'       => $k1,
+																    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																    'style'       => 'margin:10px',
+																    );
+																echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+															}
+														?>
+								                    </div> 
+								                    <div class="col-sm-7" style="display:<?php echo ($yearVal == 'years') ? 'block' : 'none';?>;" id="model_maximum_renewal_age_div">
+								                    
+										                <div class="col-sm-6">
+										                    <label for="" class="col-sm-3">Min</label>
+										                    <div class="col-sm-9">
+										                        <input type="text" class="form-control numberValidation"  placeholder="Min Age" name="model[minimum_renewal_age]" maxlength="2" value="<?php echo array_key_exists( 'minimum_renewal_age',$model) ? $model['minimum_renewal_age'] : ''?>"  >
+										                    </div>
+										                </div>
+										                <div class="col-sm-6">
+										                    <label for="" class="col-sm-3">Max</label>
+										                    <div class="col-sm-9">
+										                        <input type="text" class="form-control numberValidation"  placeholder="Max Age" name="model[maximum_renewal_age][]" maxlength="2" value="<?php echo (isset($values) && is_array($values))? reset($values) : '';?>"  >
+										                    </div>
+										                </div>
+								                    </div>             
+								                </div>	
+											
+											
 											</td>
 										</tr>
 										<tr>
@@ -270,7 +481,22 @@ $(".form-horizontal :input").prop("disabled", true);
 										<tbody>
 											<tr>
 												<th class="spec" scope="row" width="234" valign="top">Auto Recharge of Sum Insured</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[autorecharge_SI]" value="<?php echo array_key_exists( 'autorecharge_SI',$model) ? $model['autorecharge_SI'] : '';?>" ></td>
+												<td width="510" valign="top">
+								                    <?php 
+														$selected = array_key_exists( 'autorecharge_SI',$model) ? strtolower($model['autorecharge_SI']) : 'no';
+														$options = array('yes'=>'Yes', 'no'=>'No');		
+														foreach ($options as $k1=>$v1)
+														{
+															$op = array(
+															    'name'        => 'model[autorecharge_SI]',
+															    'value'       => $k1,
+															    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+															    'style'       => 'margin:10px',
+															    );
+															echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+														}
+													?>
+												</td>
 											</tr>
 											<tr>
 												<th class="specalt" scope="row" width="234" valign="top">Hospital Cash</th>
@@ -350,7 +576,26 @@ $(".form-horizontal :input").prop("disabled", true);
 											</tr>
 											<tr>
 												<th class="spec" scope="row" width="234" valign="top">Cashless</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[cashless_treatment]" value="<?php echo array_key_exists( 'cashless_treatment',$model) ? $model['cashless_treatment'] : '';?>" ></td>
+												<td width="510" valign="top">
+													<?php 
+														$str = array_key_exists( 'cashless_treatment',$model) ? $model['cashless_treatment'] : '';
+														$values = reset(Util::getNumbersFromString($str));
+													?>																	
+									                <div class="row">
+									                    <div class="col-sm-3">
+									                        <input type="number" class="form-control col-sm-3 numberValidation" placeholder="" name="model[cashless_treatment][]" value="<?php echo isset($values[0]) ? $values[0] : '';?>">
+									                    </div>
+									                    <div class="col-sm-3"> 
+									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">hospitls across </label>
+									                    </div>
+									                    <div class="col-sm-3">
+									                        <input type="number" class="form-control col-sm-3 numberValidation" placeholder="" name="model[cashless_treatment][]" value="<?php echo isset($values[1]) ? $values[1] : '';?>">
+									                    </div>       
+									                    <div class="col-sm-3"> 
+									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">cities </label>
+									                    </div>                 
+									                </div>		
+												</td>
 											</tr>
 											<tr>
 												<th class="specalt" scope="row" width="234" valign="top">Claim Loading</th>
@@ -377,7 +622,18 @@ $(".form-horizontal :input").prop("disabled", true);
 											<tr>
 												<th class="specalt" scope="row" width="234" valign="top">Pre-existing diseases</th>
 												<td width="510" valign="top">
-													<input type="text" class="form-control"  placeholder="" name="model[preexisting_diseases]" value="<?php echo array_key_exists( 'preexisting_diseases',$model) ? $model['preexisting_diseases'] : '';?>" >
+													<?php 
+														$str = array_key_exists( 'preexisting_diseases',$model) ? $model['preexisting_diseases'] : '';
+														$values = reset(Util::getNumbersFromString($str));
+													?>																	
+									                <div class="row">
+									                    <div class="col-sm-3">
+									                        <input type="number" class="form-control col-sm-3 numberValidation" placeholder="" name="model[preexisting_diseases]" value="<?php echo isset($values) ? reset($values) : '';?>">
+									                    </div>
+									                    <div class="col-sm-3"> 
+									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;"><?php echo ((int)reset($values) > 1) ? ' years': 'year';?> </label>
+									                    </div>              
+									                </div>	
 												</td>
 											</tr>
 											
@@ -532,5 +788,54 @@ $(".form-horizontal :input").prop("disabled", true);
 		var hrefVal = $('#deactiveCompany').data('hrefval');
 		window.location.href = hrefVal;
 	}
+
+$(document).ready(function(){
+	
+	$(".model_coverage_amount").click(function()
+	{
+		var searchIDs = $(".model_coverage_amount:checked").map(function(){
+	        return this.value;
+	    }).toArray();
+
+	    if(jQuery.isEmptyObject(searchIDs))
+    	{
+		    $('#model_minimum_coverage_amount').val('');
+		    $('#model_maximum_coverage_amount').val('');
+    	}
+	    else
+	    {
+		    $('#model_minimum_coverage_amount').val(searchIDs[0]);
+		    $('#model_maximum_coverage_amount').val(searchIDs.pop());
+	    }
+	});
+
+
+	
+	$(".model_duration_of_coverage").click(function()
+	{
+		var searchIDs = $(".model_duration_of_coverage:checked").map(function(){
+	        return this.value;
+	    }).toArray();
+
+	    if(jQuery.isEmptyObject(searchIDs))
+    	{
+		    $('#model_minimum_policy_terms').val('');
+		    $('#model_maximum_policy_terms').val('');
+    	}
+	    else
+	    {
+		    $('#model_minimum_policy_terms').val(searchIDs[0]);
+		    $('#model_maximum_policy_terms').val(searchIDs.pop());
+	    }
+	});
+
+	$('.showHideNextDivByRadio').click(function(){
+		var curVal = $(this).val(); 		
+		if(curVal == 'lifelong' || curVal == 'no limit' )
+			$(this).parent().parent().next().hide();
+		else
+			$(this).parent().parent().next().show();	
+	});
+});
 //-->
 </script>

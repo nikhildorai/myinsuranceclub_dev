@@ -175,9 +175,9 @@ class News_model EXTENDS Admin_Model{
 				{
 					$arrTitle[] = $v4['news']['slug'];				
 				}
-var_dump($arrTitle);				
+//var_dump($arrTitle);				
 				$arrTitle = implode(',', $arrTitle);
-var_dump($arrTitle);die;				
+//var_dump($arrTitle);die;				
 			}
 			
 			//	for news by author  
