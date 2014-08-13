@@ -24,12 +24,7 @@
                       <i class="fa fa-angle-right"></i>
                     </a>
                   </li>
-                  <li>
-                    <a href="<?php echo site_url('contact');?>">
-                      Contact Us
-                      <i class="fa fa-angle-right"></i>
-                    </a>
-                  </li>
+                  
                 </ul>
               </div>
             </div>

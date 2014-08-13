@@ -13,19 +13,19 @@
             <div class="col-md-3 sidebar">
               <div class="section-menu">
                 <ul class="nav nav-list">
-                  <li>
-                   <a class="first" href="<?php echo site_url('aboutus');?>">
+                 <!-- <li>
+                   <a class="first" href="">
                       About Us 
 
                       <i class="fa fa-angle-right"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="<?php echo site_url('team');?>">
+                    <a href=">">
                       The Team 
                       <i class="fa fa-angle-right"></i>
                     </a>
-                  </li>
+                  </li>-->
                   <li class="active">
                     <a href="<?php echo site_url('contact');?>">
                       Contact Us

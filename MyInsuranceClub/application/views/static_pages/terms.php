@@ -15,6 +15,7 @@
               <h2 class="title-divider">
                 <span>Terms and Conditions of Usage of MyInsuranceClub.com</span>
               </h2>
+              <div style="background:#f5f2f0;border: 1px solid #ccc; padding: 20px;">
              
              <p><b>MyInsuranceClub.com</b> is an <b>IRDA (Insurance Regulatory &amp; Development Authority of India) approved Insurance Web Aggregator</b>. The portal is the exclusive property of <b>iGear Financial Services Private Limited</b>. The use of this site is governed by the following Terms and Conditions.<br><br> Visitors not agreeing to the same may choose not to avail the services being offered by MyInsuranceClub and should exit the site without sharing their contact details.</p>
 
@@ -38,10 +39,9 @@
 			<p style="font-size:14px" class="txt"><b>By accessing this website or any of its pages, visitors are agreeing to the above mentioned Terms and Conditions.</b></p>
 
              
-              
+              </div>
          
               </div>
-              <!--Customer testimonial-->
               
             </div>
           </div>
