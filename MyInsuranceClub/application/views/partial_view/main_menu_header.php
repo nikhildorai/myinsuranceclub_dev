@@ -31,8 +31,8 @@
                      <li>
                         <a href="index.php" class="home_fix"><i class="fa fa-home"></i><span class="hidden">Home</span></a>
                      </li>
-                     <li><a href="#" class=" menu-item" >Car Insurance </a></li>
-                     <li><a href="#" class=" menu-item" >Two Wheeler Insurance </a></li>
+                     <li><a href="<?php echo site_url('car-insurance');?>" class=" menu-item" >Car Insurance </a></li>
+                     <li><a href="<?php echo site_url('two-wheeler-insurance');?>" class=" menu-item" >Two Wheeler Insurance </a></li>
                      <li><a href="<?php echo site_url('health-insurance')."/";?>" class=" menu-item" >Health Insurance </a></li>
                      <li><a href="<?php echo site_url('travel-insurance');?>" class=" menu-item" >Travel Insurance</a></li>
                      <li>

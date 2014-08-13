@@ -91,6 +91,12 @@ $route['life-insurance/term-insurance/compare-results'] = "life_insurance/contro
 //travel insurance
 $route['travel-insurance'] = "travel/controller_travel/index";
 
+//car insurance
+$route['car-insurance'] = "car/controller_car/index";
+
+//two_wheeler insurance
+$route['two-wheeler-insurance'] = "two_wheeler/controller_two_wheeler/index";
+
 //	company 
 $route['life-insurance'] = "lifeInsurance/index/";
 $route['life-insurance/companies'] = "lifeInsurance/companies/";
@@ -102,6 +108,16 @@ $route['general-insurance-companies/(:any)'] = "generalInsurance/companies/$1";
 $route['news'] = "news/index/";
 $route['news/(:any)/(:any)'] = "news/newsByCategory/$1/$2";
 $route['news/(:any)'] = "news/newsDetails/$1";
+
+
+//Static Pages
+$route['aboutus'] = "static_pages/controller_static_pages/index";
+$route['team'] = "static_pages/controller_static_pages/team";
+$route['contact'] = "static_pages/controller_static_pages/contact";
+$route['ask-expert'] = "static_pages/controller_static_pages/ask_expert";
+
+
+
 
 #########################	frontend routes ends	##############################
 

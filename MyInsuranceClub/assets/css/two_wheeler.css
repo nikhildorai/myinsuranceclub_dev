@@ -183,7 +183,7 @@
 
 
 .c_detail .form-lable {
-    font-size: 18px;
+    font-size: 18px; color:#F97E02;
     margin-bottom: 16px;
     width: auto;
 }
@@ -825,7 +825,7 @@ body .mic_btn_tl_one.mic_btn_tl_c_l, body .mic_btn_tl_one.mic_btn_tl_c_l.mic_btn
 .c_col_60.cal_w{ width:200px;}
 .drp_wid .bootstrap-select:not([class*="span"]):not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){ width:100%;}
 
- .prmBx.active .obj2{
+/* .prmBx.active .obj2{
 		position: relative;
 		top: 10px;
 		left: 0px;
@@ -842,7 +842,7 @@ body .mic_btn_tl_one.mic_btn_tl_c_l, body .mic_btn_tl_one.mic_btn_tl_c_l.mic_btn
 	{
 		0% {top:10px;}
 		100% {top:14px;}
-	}
+	}*/
 	.reg_car_hide{ position: absolute;right: 10px;top: 8px;}
 	.reg_car_hide .reg_small_p{ margin:0px;}
 

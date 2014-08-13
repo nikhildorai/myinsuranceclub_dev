@@ -240,6 +240,8 @@ $(this).hide();
 		//	$('.down_cnt').closest('.accordion_a').slideToggle();
 		//$('.accordion_a').hide();
 $(this).parent().parent().parent().find('.accordion_a').slideToggle();
+$(this).parent().parent().parent().find('.accordion_a').removeClass("border_hglt");
+ $(this).parent().parent().parent().find('.cus_tb').removeClass("border_hglt");
 $(this).parent().parent().parent().find('.down_cnt').removeClass("down_arw");
 $(this).parent().parent().parent().find('.down_cnt i').removeClass("fa-minus-square");
 $(this).parent().parent().parent().find('.down_cnt_up').hide();

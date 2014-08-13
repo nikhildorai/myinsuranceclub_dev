@@ -37,8 +37,9 @@ $(document).ready(function() {
 		
 		 $("#veh_year").change(function() {
         var veh_year = $("#veh_year").val();
+		$("#Policy_details").fadeIn();
 		
-		car_ani();
+		//car_ani();
       
     });
 	

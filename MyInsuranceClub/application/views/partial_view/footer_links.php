@@ -6,16 +6,16 @@
                   <div class="bottom-col-content widget_recent_entries custom-formatting">
             <h3 class="bottom-col-title">Company Information</h3>
             <ul>
-                      <li><a href="">About Us</a></li>
-                      <li><a href="">Team</a></li>
+                      <li><a href="<?php echo site_url('aboutus');?>">About Us</a></li>
+                      <li><a href="<?php echo site_url('team');?>">Team</a></li>
                     </ul>
           </div>
                   <div class="bottom-col-content widget_recent_entries custom-formatting">
             <h3 class="bottom-col-title" style="margin-bottom:11px;">Connect with Us</h3>
             <ul>
-                      <li><a href="">Contact Us</a></li>
-                      <li><a href="">Feedback</a></li>
-                      <li><a href="">Testimonials</a></li>
+                      <li><a href="<?php echo site_url('contact');?>">Contact Us</a></li>
+                      <li><a href="<?php echo site_url('contact');?>">Feedback</a></li>
+                      <li><a href="<?php echo site_url('aboutus');?>">Testimonials</a></li>
                     </ul>
           </div>
                 </div>
@@ -25,7 +25,7 @@
                   <div class="bottom-col-content widget_recent_entries custom-formatting">
             <h3 class="bottom-col-title">Other Links</h3>
             <ul>
-                      <li><a href="">Ask an Expert</a></li>
+                      <li><a href="<?php echo site_url('ask-expert');?>">Ask an Expert</a></li>
                       <li><a href="">Insurance Articles</a></li>
                       <li><a href="">Insurance Guides</a></li>
                       <li><a href="<?php echo base_url().'news/'?>">Insurance News</a></li>
