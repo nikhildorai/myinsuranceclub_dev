@@ -91,6 +91,7 @@ $route['life-insurance/term-insurance/compare-results'] = "life_insurance/contro
 //travel insurance
 $route['travel-insurance'] = "travel/controller_travel/index";
 $route['travel-insurance/search-results/(:any)'] = "travel/controller_travel/get_travel_insurance_search_results/$1";
+$route['travel-insurance/search-results'] = "travel/controller_travel/get_travel_insurance_search_results";
 
 //car insurance
 $route['car-insurance'] = "car/controller_car/index";
