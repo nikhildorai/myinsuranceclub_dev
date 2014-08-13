@@ -159,21 +159,7 @@ $(document).ready(function() {
 				$('.mouseout.modal').show();
         });*/
 			
- $('#soi').mouseover(function(){
-         $('#soi').addClass('active');   
-	  if ( $("#tes" ).hasClass( "tes" ) ) {
-		  
-		   $("#target").load("include/social.php"); 
-		  
-		  } 
-		        });
-				
-				
-					$('#footer').mouseleave(function(){
-				 
-				 $('#soi').removeClass('active');  
-	     $("#tes").remove();
-        });
+
 
 
 

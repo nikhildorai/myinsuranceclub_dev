@@ -24,10 +24,11 @@
                            <div class='col-md-7 follow ' id="target">
                            
                            
-<ul class="folowbt" style="float:right; padding:0px;">
+<!--<ul class="folowbt" style="float:right; padding:0px;">
 
 <li class="fbp">
 </li>
+
 <li class="twtr">
 
 <a href="https://twitter.com/myinsuranceclub" class="twitter-follow-button follow" data-show-count="true" data-size="medium">Follow @myinsuranceclub</a>	
@@ -36,23 +37,23 @@
 
 
 
-</ul>
+</ul>-->
 
-<!--<ul class="folowbt" style="float:right; padding:0px;">
+<ul class="folowbt" style="float:right; padding:0px;">
 
-<li class="fbp"><div class="fb-like" data-href="https://www.facebook.com/myinsuranceclub" data-width="200" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div></li>
+<li class="fbp"> <div id="fb-root"></div><div class="fb-like" data-href="https://www.facebook.com/myinsuranceclub" data-width="200" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div></li>
 
 <li class="twtr">
 
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.blackfishweb.com/es" data-text="Blackfish" data-count="horizontal" data-via="BlackfishWeb"></a>		
+<a href="https://twitter.com/myinsuranceclub" class="twitter-follow-button follow" data-show-count="true" data-size="medium">Follow @myinsuranceclub</a>		
 
 </li>
 <li class="pls">
-<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<!--<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>-->
 
 <g:plusone size="medium" href="http://www.myinsuranceclub.com/"></g:plusone>
 </li>
-<li style="margin-top:-2px;"><script src="https://apis.google.com/js/platform.js"></script>
+<li style="margin-top:-2px;"><!--<script src="https://apis.google.com/js/platform.js"></script>-->
 
 <div class="g-ytsubscribe" data-channel="myinsuranceclub" data-layout="default" data-count="default"></div></li>
 
@@ -60,7 +61,7 @@
 <script type="IN/FollowCompany" data-id="453103" data-counter="right"></script></li>
 
 
-</ul>-->
+</ul>
                            
                               <div id="tes" class="tes"></div>
                            </div>

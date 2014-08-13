@@ -1,6 +1,6 @@
 
     $(window).load(function () {
-        loadSocial();
+       // loadSocial();
 
         //extra - hook up button event - remove this
         $("#loadbutton").click(function () {
@@ -10,7 +10,6 @@
 		
 		 $('#soi').mouseover(function(){
 	 
-	// var base_url = CI_ROOT+"/include/social.php";
          $('#soi').addClass('active');   
 		//  $("#target").load(base_url); 
 		   simulateAjaxRequest34();
@@ -18,18 +17,45 @@
 		  
 		  /* $("#target").load(base_url); 
 		   simulateAjaxRequest34();*/
-		 //  loadSocial();
+		   loadSocial();
 		  
 		  } 
 		        });
 				
 				
 				
+				
 						$('#footer').mouseleave(function(){
 				 
 				 $('#soi').removeClass('active');  
-	     $("#tes").remove();
+	    $("#tes").remove();
         });
+		
+		
+		
+		
+		
+		
+/*		
+ $('#soi').mouseover(function(){
+	 
+	 var base_url = CI_ROOT+"/include/social.php";
+         $('#soi').addClass('active');   
+	  if ( $("#tes" ).hasClass( "tes" ) ) {
+		  
+		   $("#target").load(base_url); 
+		  
+		  } 
+		        });
+				
+				
+					$('#footer').mouseleave(function(){
+				 
+				 $('#soi').removeClass('active');  
+	     $("#tes").remove();
+        });*/
+		
+		
 		
     });
 
@@ -88,11 +114,11 @@ function loadSocial() {
         //Here we would load content from somewhere and insert that into the page.
         //In this case I will just add another couple of buttons to the loadbutton html
 	//	alert('s');
-        var html1 = '<div class="fb-like" data-href="http://www.blackfishweb.com/es" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>';
-        $(".fbp").html(html1);
+      //  var html1 = '<div class="fb-like" data-href="https://www.facebook.com/myinsuranceclub" data-width="200" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>';
+     //   $(".fbp").html(html1);
 
         //Then we call loadSocial to reinit the scripts
-        loadSocial();
+     //   loadSocial();
     }
 
   
