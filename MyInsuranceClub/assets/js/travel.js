@@ -288,6 +288,7 @@ $(document).ready(function() {
 		 $('.n_a .mic_top_text').html(seven_day(7));
 		  $('.n_b .mic_top_text').html(seven_day(10));
 		   $('.n_c .mic_top_text').html(seven_day(14));
+		   
         });
 		
 		$(document).delegate('.w_gb','click',function() {
@@ -429,13 +430,17 @@ $(document).delegate('.id-delete-per','click',function() {
 		 $(this).addClass('mic_btn_tl_chkd');
 		 
 		 $('.gen_but_spouce_f').addClass('mic_btn_tl_chkd');
-		 $('.gen_but_f,.gen_but_spouce_m').removeClass('mic_btn_tl_chkd');   
+		 $('.gen_but_f,.gen_but_spouce_m').removeClass('mic_btn_tl_chkd');
+		 $('#cust_gender').val('Male');
+		 $('#spouse_gender').val('Female');
         });
 	
 	$('.gen_but_f').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');
 		  $('.gen_but_spouce_m').addClass('mic_btn_tl_chkd');
-		 $('.gen_but_m,.gen_but_spouce_f').removeClass('mic_btn_tl_chkd');   
+		 $('.gen_but_m,.gen_but_spouce_f').removeClass('mic_btn_tl_chkd');
+		 $('#cust_gender').val('Female');
+		 $('#spouse_gender').val('Male');
         });
 		
 		
@@ -555,6 +560,7 @@ function MDFormat(MMDD) {
             var month1 = $(this).datepicker('getDate').getMonth() + 1;             
             var year1 = $(this).datepicker('getDate').getFullYear();
             var fullDate = year1 + "-" + month1 + "-" + day1;
+            var fullDateDiffFormat = day1 + '/' + month1 + '/' + year1;
 			//var cur_today_date_a = d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
 			//var cur_today_date = day1 - cur_today_date_a;
 			
@@ -562,8 +568,8 @@ function MDFormat(MMDD) {
 			var date = $(this).datepicker('getDate');
         var today = new Date();
         var dayDiff = Math.ceil((date - today) / (1000 * 60 * 60 * 24));
-  
-  
+       
+        $('#trip_start').val(fullDateDiffFormat);
 			if(dayDiff == 0)
 			{
 				
@@ -635,8 +641,8 @@ function MDFormat(MMDD) {
 			var date = $(this).datepicker('getDate');
         var today = new Date();
         var dayDiff = Math.ceil((date - today) / (1000 * 60 * 60 * 24));
-  
-  
+        var fulldate = date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear();
+        $('#trip_end').val(fulldate);
 		
 				$('.n_d .mic_i_btm').html(seven_day(dayDiff));
 		
@@ -687,5 +693,130 @@ function MDFormat(MMDD) {
 });	
  */
   
+
+/**************** Trip Type **************/	
+	
+	$('#single_t').click(function() {
+		
+		//var trip_type = $(this).text();
+		//alert("value recieved");
+		$("#trip_type").val("Single trip");
+		
+		
+	});
+	
+$('#mul_t').click(function() {
+		
+		//var trip_type = $(this).text();
+		
+		$("#trip_type").val("Annual multi-trip");
+
+	});
+$('#stu_t').click(function() {
+	
+	//var trip_type = $(this).text();
+	
+	$("#trip_type").val("Student trip");
+	
+});
+
+
+
+/************ Trip Location *****************/
+
+$('#including_usa_canada').click(function() {
+	
+	$("#trip_location").val("Worldwide Including Usa/Canada");
+	
+	
+});
+
+$('#excluding_usa_canada').click(function() {
+	
+	$("#trip_location").val("Worldwide Excluding Usa/Canada");
+	//alert("Excluding");
+	
+});
+
+
+$('#Schengen').click(function() {
+	
+	$("#trip_location").val("Schengen Countries");
+	//alert("Schengen");
+	
+});
+
+$('#Asia').click(function() {
+	
+	$("#trip_location").val("Asia");
+	//alert("Asia");
+	
+});
+
+$('#today').click(function() {
+	var g = new Date();
+	var curDate = g.getDate() + "/" +  (g.getMonth()+1)   + "/" +  d.getFullYear(); 	 
+	$("#trip_start").val(curDate);
+	
+});
+
+
+$('#tomorrow').click(function() {
+	var g = new Date();
+	var curDate = (g.getDate()+1) + "/" +  (g.getMonth()+1)   + "/" +  d.getFullYear(); 	 
+	$("#trip_start").val(curDate);
+});
+
+$('#in2days').click(function() {
+	var g = new Date();
+	var curDate = (g.getDate()+2) + "/" +  (g.getMonth()+1)   + "/" +  d.getFullYear();
+	var endDate = (g.getDate()+10) + "/" +  (g.getMonth()+1)   + "/" +  d.getFullYear();
+	$("#trip_start").val(curDate);
+	
+});
+
+$('#7_nights').click(function() {
+	var startDate = $("#trip_start").val();
+	var endDate =  new Date();
+	var end_of_trip = (endDate.getDate() + 7) +  "/" + (endDate.getMonth()+1) + "/" + endDate.getFullYear();
+	$("#trip_end").val(end_of_trip);
+	
+});
+
+$('#10_nights').click(function() {
+	var startDate = $("#trip_start").val();
+	var endDate =  new Date();
+	var end_of_trip = (endDate.getDate() + 10) +  "/" + (endDate.getMonth()+1) + "/" + endDate.getFullYear();
+	$("#trip_end").val(end_of_trip);
+	
+});
+
+$('#14_nights').click(function() {
+	var startDate = $("#trip_start").val();
+	var endDate =  new Date();
+	var end_of_trip = (endDate.getDate() + 14) +  "/" + (endDate.getMonth()+1) + "/" + endDate.getFullYear();
+	//alert(end_of_trip);
+	$("#trip_end").val(end_of_trip);
+	
+});
+
+$('#1A').click(function() {
+	
+	$("#family_composition").val('1A');
+	$("#family_composition_desp").val('Individual');
+	
+});
+
+$('#2A').click(function() {
+	
+	$("#family_composition").val('2A');
+	$("#family_composition_desp").val('Couple');
+});
+
+$('#family').click(function() {
+	
+	$("#family_composition").val('family');
+	$("#family_composition_desp").val('Family');
+});
 
 });

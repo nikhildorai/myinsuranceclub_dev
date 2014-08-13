@@ -68,7 +68,6 @@ class controller_basicMediclaim extends Customer_Controller {
 		
 		$this->db->freeDBResource($this->db->conn_id);
 		
-		
 		$this->template->set_template('frontend');
 		$this->template->write_view('content', 'health_insurance/health1', $data, TRUE);
 		$this->template->render();
