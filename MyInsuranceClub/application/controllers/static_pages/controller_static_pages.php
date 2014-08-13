@@ -65,5 +65,15 @@ class controller_static_pages extends MIC_Controller {
 		
 	}
 	
+	public function terms()
+	{
+		$data="";
+		$this->template->set_template('frontend');
+		$this->template->write_view('content', 'static_pages/terms', $data, TRUE);
+		$this->template->render();
+		
+		
+	}
+	
 
 }

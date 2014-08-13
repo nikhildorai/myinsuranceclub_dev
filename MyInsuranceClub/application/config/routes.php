@@ -115,6 +115,7 @@ $route['aboutus'] = "static_pages/controller_static_pages/index";
 $route['team'] = "static_pages/controller_static_pages/team";
 $route['contact'] = "static_pages/controller_static_pages/contact";
 $route['ask-expert'] = "static_pages/controller_static_pages/ask_expert";
+$route['terms-and-conditions'] = "static_pages/controller_static_pages/terms";
 
 
 

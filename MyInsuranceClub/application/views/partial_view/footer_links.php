@@ -31,7 +31,7 @@
                       <li><a href="<?php echo base_url().'news/'?>">Insurance News</a></li>
                       <li><a href="<?php echo base_url().'life-insurance/companies/';?>">Life Insurance Companies in India</a></li>
                       <li><a href="<?php echo base_url().'general-insurance-companies/';?>">General Insurance Companies in India</a></li>
-                      <li><a href="">Terms of Use</a></li>
+                      <li><a href="<?php echo site_url('terms-and-conditions');?>">Terms of Use</a></li>
                     </ul>
           </div>
                 </div>
