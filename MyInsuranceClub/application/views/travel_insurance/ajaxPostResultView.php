@@ -23,6 +23,9 @@ elseif(! empty ( $customer_details )) {
 	foreach ( $customer_details as $detail ) {
 		
 		$variant = '';
+		
+		$trip_duration = '';
+		
 		if ($detail ['variant_name'] != 'Base') {
 			$variant = ' ' . $detail ['variant_name'];
 		} else {
@@ -31,7 +34,22 @@ elseif(! empty ( $customer_details )) {
 		
 		$sum_assured ='';
 		
-		$compare_data = $detail ['variant_id'] . '-' . $detail ['annual_premium'];//'-' . $detail ['age']
+		if(isset($this->session->userdata['user_input']['cust_age']))
+		{
+			$age = $this->session->userdata['user_input']['cust_age'];
+		}
+		
+		if(isset($this->session->userdata['user_input']['trip_duration']))
+		{
+		
+			$trip_duration = $this->session->userdata['user_input']['trip_duration'];
+		}
+		else
+		{
+			$trip_duration = 180;
+		}
+		
+		$compare_data = $detail ['variant_id'] . '-' . $detail ['annual_premium']. '-' . $detail['location_id']. '-' . $age . '-'. $detail['no_of_members']. '-' . $trip_duration;
 		
 		$sum_assured = "<span>USD " . number_format($detail ['sum_assured']). "</span>";
 		
@@ -83,7 +101,7 @@ elseif(! empty ( $customer_details )) {
 			Sure! We will call you back.
 			</div>
 			<div class="col-md-4 pad_r_10" id="buy_now_btn_<?php echo $detail['variant_id'];?>">
-				<a class="btn_offer_block" href="#" onclick="return buy_now_msg(<?php echo $detail['variant_id']?>,<?php echo $detail['policy_id'];?>);">Buy Now <i
+				<a class="btn_offer_block" href="javascript:void(0);" onclick="return buy_now_msg(<?php echo $detail['variant_id']?>,<?php echo $detail['policy_id'];?>);">Buy Now <i
 					class="fa fa-angle-right"></i></a>
 				<div class="thumb">
 					<i class="fa fa-thumbs-up"></i>

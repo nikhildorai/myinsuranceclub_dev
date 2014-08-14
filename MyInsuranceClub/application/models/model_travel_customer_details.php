@@ -66,7 +66,7 @@ class model_travel_customer_details EXTENDS MIC_Model{
 		
 		$trip_End = '';
 		
-		if($user_input['trip_type'] == 'multi trip')
+		if($user_input['trip_type'] == 'Annual multi-trip')
 		{
 			$trip_duration = '365 days';
 			

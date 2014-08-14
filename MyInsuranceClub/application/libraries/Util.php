@@ -1787,6 +1787,31 @@ echo '=================>';
 					'purpose_of_insurance'=>array('name'=>'Purpose Of Insurance','tooltip'=>'')
 			);
 		}
+		elseif($featureType == 'travelInsurance')
+		{
+			$value = array('sum_assured'=>array('name'=>'Sum Assured','tooltip'=>''),
+					'trip_duration'=>array('name'=>'Trip Duration','tooltip'=>''),
+					'medical_expenses'=>array('name'=>'Medical Expenses','tooltip'=>''),
+					'dental'=>array('name'=>'Dental','tooltip'=>''),
+					'repatriation_of_mortal_remains'=>array('name'=>'Repatriation Of Moral Remains','tooltip'=>''),
+					'hospital_daily_cash'=>array('name'=>'Hospital Daily Cash','tooltip'=>''),
+					'total_loss_of_checked_baggage'=>array('name'=>'Total Loss Of Checked Baggage','tooltip'=>''),
+					'delay_of_checked_baggage'=>array('name'=>'Delay of Checked Baggage','tooltip'=>''),
+					'loss_of_passport'=>array('name'=>'Loss Of Passport','tooltip'=>''),
+					'personal_accident'=>array('name'=>'Personal Accident','tooltip'=>''),
+					'personal_liability'=>array('name'=>'Personal Liability','tooltip'=>''),
+					'financial_emergency'=>array('name'=>'Financial Emergency','tooltip'=>''),
+					'hijack_daily_allowance'=>array('name'=>'Hijack Daily Allowance','tooltip'=>''),
+					'trip_delay'=>array('name'=>'Trip Delay','tooltip'=>''),
+					'trip_cancellation'=>array('name'=>'Trip Cancellation','tooltip'=>''),
+					'trip_curtailment'=>array('name'=>'Trip Curtailment','tooltip'=>''),
+					'missed_connection'=>array('name'=>'MIssed Connection','tooltip'=>''),
+					'comments'=>array('name'=>'Comments','tooltip'=>''),
+					'gender'=>array('name'=>'Gender','tooltip'=>''),
+					'healthy'=>array('name'=>'Healthy','tooltip'=>''),
+					'smoker'=>array('name'=>'Smoker','tooltip'=>'')
+			);
+		}
 		return $value;
 	}
 	
@@ -2150,6 +2175,62 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 				
 			}
 		
+		}
+		return $data;
+	}
+	
+	/**
+	 *
+	 * @param result set data $data
+	 * @param filter data     $search_filter
+	 */
+	public static function getFilteredDataForTravel($data,$search_filter = array())
+	{
+		if(!empty($data))
+		{
+			foreach($data as $k=>$v)
+			{
+				if(isset($search_filter['coverage_amount']))
+				{
+	
+					if (!in_array($v['sum_assured'],$search_filter['coverage_amount']))
+					{
+						unset($data[$k]);
+					}
+				}
+	
+				if(isset($search_filter['company_name']))
+				{
+					if (!(in_array(trim($v['company_id']),$search_filter['company_name'])))
+					{
+						unset($data[$k]);
+					}
+				}
+					
+				if(isset($search_filter['min_premium_amt']))
+				{
+					$min_amt_arr = explode('₹',$search_filter['min_premium_amt']);
+	
+					$min_premium = (int) str_replace(',','',$min_amt_arr[1]);
+	
+					if(!($v['annual_premium'] >= $min_premium))
+					{
+						unset($data[$k]);
+					}
+				}
+	
+				if(isset($search_filter['max_premium_amt']))
+				{
+					$max_amt_arr = explode('₹',$search_filter['max_premium_amt']);
+	
+					$max_premium = (int) str_replace(',','',$max_amt_arr[1]);
+	
+					if(!($v['annual_premium'] <= $max_premium))
+					{
+						unset($data[$k]);
+					}
+				}
+			}
 		}
 		return $data;
 	}

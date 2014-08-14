@@ -29,7 +29,18 @@ class controller_travel extends Customer_Controller {
 
 	public function index()
 	{
+		
+		$this->input->set_cookie('user_filter','');
+		
+		$this->input->set_cookie('compared_plans','');
+		
+		$product_name = "single";
+		
 		$data=array();
+		
+		//$data['company_plan_count'] = $this->model_get_company_plans_count->get_count($product_name);
+		
+		$this->db->freeDBResource($this->db->conn_id);
 		
 		$this->template->set_template('frontend');
 		$this->template->write_view('content', 'travel_insurance/home', $data, TRUE);
@@ -111,6 +122,7 @@ class controller_travel extends Customer_Controller {
 				if($this->input->post('trip_location') != '')
 				{
 					$user_input['trip_location'] = $this->input->post('trip_location');
+					
 				}
 				
 				if($this->input->post('trip_start') != '')
@@ -165,12 +177,69 @@ class controller_travel extends Customer_Controller {
 					$user_input['spouse_gender'] = $this->input->post('spouse_gender');
 				}
 				
+			
+			/************************************************** Additional Traveller's Information **********************************************************/
+				
+				if($this->input->post('traveller_day') != '' && $this->input->post('traveller_month') != '' && $this->input->post('traveller_year') != '')
+				{
+					$traveller_day = $this->input->post('traveller_day');
+					
+					$traveller_month = $this->input->post('traveller_month');
+					
+					$traveller_year = $this->input->post('traveller_year');
+					
+					for($i=0; $i < count($traveller_day);$i++)
+					{
+						$traveller_cnt = 3;
+						
+						$user_input['traveller_'.($traveller_cnt + $i).'_dob']=$traveller_day[$i].'/'.$traveller_month[$i].'/'.$traveller_year[$i];
+						
+						$user_input['traveller_'.($traveller_cnt + $i).'_age'] = Util::convertBirthdateToAge($user_input['traveller_'.($traveller_cnt + $i).'_dob']);
+					}
+					
+				}
+				
+				if($this->input->post('traveller_3_gender') != '')
+				{
+					$user_input['traveller_3_gender'] = $this->input->post('traveller_3_gender');
+				}
+				
+				if($this->input->post('traveller_4_gender') != '')
+				{
+					$user_input['traveller_4_gender'] = $this->input->post('traveller_4_gender');
+				}
+				
+				if($this->input->post('traveller_5_gender') != '')
+				{
+					$user_input['traveller_5_gender'] = $this->input->post('traveller_5_gender');
+				}
+				
+				if($this->input->post('traveller_6_gender') != '')
+				{
+					$user_input['traveller_6_gender'] = $this->input->post('traveller_6_gender');
+				}
+				
+				if($this->input->post('traveller_7_gender') != '')
+				{
+					$user_input['traveller_7_gender'] = $this->input->post('traveller_7_gender');
+				}
+				
+			/*************************************************************************************************************************************************/
+				
+				/********************Setting Session******************/
+				
 				$this->session->set_userdata('user_input',$user_input); 
+				
+				/*****************************************************/
 			}	
 			
 			$user_input=$this->session->userdata('user_input',$user_input);
 			
+			/****************************** Setting Cookie ****************************************/
+			
 			$this->input->set_cookie('mic_userdata',$this->session->userdata('session_id'),'864000');
+			
+			/**************************************************************************************/
 			
 			$data['compareParam'] = $param;
 			
@@ -178,26 +247,27 @@ class controller_travel extends Customer_Controller {
 			
 			/********************************************** Code Handling Caching **********************************************************/
 			
-			$cacheFileName = 'sr'.$user_input['product_name'].$user_input['product_type'].
-									$user_input['cust_age'].$user_input['family_composition'].
-									$user_input['trip_duration'].$user_input['trip_location'].$user_input['trip_type'];
+			$cacheFileName = 'sr_'.$user_input['product_name'].$user_input['product_type'].$user_input['cust_age'].$user_input['family_composition'].$user_input['trip_type'].str_replace('/','',$user_input['trip_location']);
+			
+			$cacheFileName = str_replace(' ', '', $cacheFileName);
 			
 			$cacheObject = Util::getCachedObject($cacheFileName);
 			
+			
 			if($cacheObject != null)
 			{
+				
 				// RESULT FROM CACHE
 				$data['customer_details'] = $cacheObject;
-				//echo "from cache";
+				
 			}
 			else	
 			{
-				
 				// RESULT FETCHED FROM DB AND SAVED IN CACHE
 				$data['customer_details'] = $this->model_get_results_travel_insurance->get_search_results($user_input); 
-				//echo "from db";
+				
 				if(!empty($data['customer_details']))
-				{
+				{	
 					Util::saveResultToCache($cacheFileName,$data['customer_details']);
 				}
 			}
@@ -205,10 +275,21 @@ class controller_travel extends Customer_Controller {
 			/******************************************************************************************************************************/
 			
 			
-			//var_dump($data['customer_details']);//die;
-	
+			/************************************* Code Stops JS When Returning From Compare Page ****************************************/
 			
-			//Filter Data Received From Ajax Post 
+			$cookie_filter = Util::getCookie('user_filter');
+				
+			if($data['compareParam'] == "yes" && !empty($cookie_filter))
+			{
+				$data['cookie_customer_detail'] = Util::getFilteredData($data['customer_details'],$cookie_filter);
+			
+			}
+			
+			/*****************************************************************************************************************************/
+			
+			
+			/****************************************** Search Filters From Ajax Post ***************************************************/
+			
 			if($this->input->is_ajax_request())
 			{
 				$search_filter=$_POST;
@@ -218,7 +299,7 @@ class controller_travel extends Customer_Controller {
 				
 				$search_filter=$_POST;
 				
-				//$data['customer_details'] = Util::getFilteredData($data['customer_details'],$search_filter);
+				$data['customer_details'] = Util::getFilteredDataForTravel($data['customer_details'],$search_filter);
 				
 				$company_discard = array();
 					
@@ -236,21 +317,26 @@ class controller_travel extends Customer_Controller {
 					
 				$premiums_from_ajax = Util::getMinAndMaxPremium($data['customer_details']);
 				
-				$return['html'] = $this->load->view('health_insurance/ajaxPostResultView',$data,TRUE);
+				$return['html'] = $this->load->view('travel_insurance/ajaxPostResultView',$data,TRUE);
 				$return['company'] = count($companycnt);
 				$return['plan'] = count($data['customer_details']);
 				$return['minPremium'] = $premiums_from_ajax['min_premium'];
 				$return['maxPremium'] = $premiums_from_ajax['max_premium'];
 				echo  json_encode($return);
+			
+			/*****************************************************************************************************************************/
 			}
 			
 			else 
 			{
 
-				//$data['html'] = $this->load->view('travel_insurance/ajaxPostResultView',$data,TRUE);
+			/************************************************ Default View ***************************************************************/	
+				
 				$this->template->set_template('frontendsearch');
 				$this->template->write_view('content', 'travel_insurance/search_results', $data, TRUE);
 				$this->template->render();
+			
+			/*****************************************************************************************************************************/
 			}
 			
 		}
@@ -258,41 +344,83 @@ class controller_travel extends Customer_Controller {
 	
 	
 	
-	
+	/**
+	 * @abstract Policy Comparison Function
+	 */
 	public function compare_policies()
 	{
-		/* $data=$variant=$annual_premium=$age=array();
+		
+		$this->load->model('model_compare_travel_policies');
+		
+		$data = array();
+		
 		if($this->input->post('compare')!=null)
 		{	
+				
+			
+				
 			foreach($this->input->post('compare') as $k=>$v)
 			{
 				$compare=explode('-',$v);
+				
 				$variant[]=$compare[0];
+					
 				$annual_premium[]=$compare[1];
-			//	$age=$compare[2];
+				
+				$location_id = $compare[2];
+				
+				$age = $compare[3];
+				
+				$members = $compare[4];
+				
+				$duration = $compare[5];
 			}
+				
 			$variant = implode(',', $variant);
+				
 			$annual_premium = implode(',', $annual_premium);
 		}
-		$data['comparison_results']=$this->annual_premium_personal_accident_model->get_comparison($variant,$annual_premium,$age);
-	
+		
+		Util::setCookies('compared_plans',$variant);
+		
+		$data['comparison_results']=$this->model_compare_travel_policies->get_comparison($variant,$annual_premium,$location_id,$age,$members,$duration);
+		
+		
 		foreach ($data['comparison_results'] as $k1=>$v1)
 		{
 				
 			foreach ($v1 as $k2=>$v2)
 			{
-				if ($k2 == 'company_shortname')
-				{
-					$key = 'Company';
-				}
-				else
-				{
-					$key = ucfirst(str_replace(array('_','-',' '), ' ', $k2));
-				}
-				$result[$key][] = $v2;
+				$result[$k2][] = $v2;
 			}
 		}
 		$data['result']=$result;
-		$this->load->view('personal_accident/compare_results', $data); */
+		
+		$this->template->set_template('frontendsearch');
+		$this->template->write_view('content', 'travel_insurance/compare_results', $data, TRUE);
+		$this->template->render();
 	}
+	
+	
+	
+	/**
+	 * @abstract counts the Buy Now Button Clicks
+	 */
+	public function increment_count()
+	{
+		$this->load->model('model_buynow_count');
+		
+		$increase_count_arr = '';
+		
+		if(!empty($_POST))
+		{
+			$increase_count_arr = $_POST['policy_id'];
+				
+			$this->model_buynow_count->increase_count($increase_count_arr);
+		}
+	}	
+	
+	
 }
+
+/* End Of Travel Insurance Controller */

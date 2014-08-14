@@ -331,7 +331,12 @@
               	<input type="hidden" name="product_name" id="product_name" value="General Insurance" />
               	<input type="hidden" name="family_composition" id="family_composition" value="" />
               	<input type="hidden" name="family_composition_desp" id="family_composition_desp" value="" />
-              	</div>
+              	<input type="hidden" name="traveller_3_gender" id="traveller_3_gender" value="" />
+              	<input type="hidden" name="traveller_4_gender" id="traveller_4_gender" value="" />
+              	<input type="hidden" name="traveller_5_gender" id="traveller_5_gender" value="" />
+              	<input type="hidden" name="traveller_6_gender" id="traveller_6_gender" value="" />
+              	<input type="hidden" name="traveller_7_gender" id="traveller_7_gender" value="" />
+              	              	</div>
               <div class="t_section t_ca">
                 <div class="title">Policyholder details</div>
                 <div>

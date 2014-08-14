@@ -14,6 +14,8 @@ class model_get_results_travel_insurance EXTENDS MIC_Model{
 		
 		$location_id = '';
 		
+		$trip_duration = '';
+		
 		if(isset($user_input['trip_type']))
 		{
 			if($user_input['trip_type'] == 'Single trip')
@@ -30,7 +32,7 @@ class model_get_results_travel_insurance EXTENDS MIC_Model{
 			}
 		}
 		
-		if($user_input['trip_location'])
+		if(isset($user_input['trip_location']))
 		{
 			if($user_input['trip_location'] == 'Worldwide Including Usa/Canada')
 			{
@@ -52,15 +54,26 @@ class model_get_results_travel_insurance EXTENDS MIC_Model{
 				$location_id = '8';
 			}
 			
+		
 		}
-	
+		
+		
+		if(isset($user_input['trip_duration']))
+		{
+			$trip_duration = $user_input['trip_duration'];
+		}
+		else 
+		{
+			$trip_duration = '180';
+		}
+		
 		$TravelStoredProcedure = "CALL sp_getTravelInsuranceSearchResults(?,?,?,?,?)";
 		
 		$SearchResultsParameterArray = array(	
 												$user_input['cust_age'],
 												$user_input['family_composition'],
 												$location_id,
-												$user_input['trip_duration'],
+												$trip_duration,
 												$travelsubproduct_id
 												);
 	
