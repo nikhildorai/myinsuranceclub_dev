@@ -281,7 +281,7 @@ class controller_travel extends Customer_Controller {
 				
 			if($data['compareParam'] == "yes" && !empty($cookie_filter))
 			{
-				$data['cookie_customer_detail'] = Util::getFilteredData($data['customer_details'],$cookie_filter);
+				$data['cookie_customer_detail'] = Util::getFilteredDataForTravel($data['customer_details'],$cookie_filter);
 			
 			}
 			
