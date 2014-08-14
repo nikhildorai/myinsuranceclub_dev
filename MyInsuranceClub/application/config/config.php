@@ -448,7 +448,7 @@ $config['folder_path']['users']['32x32']					= realpath(APPPATH . '../uploads').
 $config['folder_path']['users']['75x75']					= realpath(APPPATH . '../uploads').'/users/75x75/';
 
 
-$config['policy']['descriptionCount'] = 1;
+$config['policy']['descriptionCount'] = 10;
 $config['policy']['keyFeatures'] = 4;
 
 

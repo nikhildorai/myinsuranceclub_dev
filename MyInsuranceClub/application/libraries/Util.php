@@ -2492,14 +2492,14 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 					$return['frontEndView'] = '';
 					$return['riderTable'] = '';
 					break;
-				case 'travel-insurance':
-					$return['backendController'] = 'policy_variants_master';
+				case 'travel-insurance': case 'single-trip': case 'annual-multitrip': case 'student':
+					$return['backendController'] = 'policy_features_travel';
 					$return['backendFeatureAction'] = 'travel_insurance';
-					$return['feature_table'] = '';
-					$return['premium_table'] = '';
+					$return['feature_table'] = 'policy_features_travel';
+					$return['premium_table'] = 'annual_premium_travel';
 					$return['frontEndController'] = '';
 					$return['frontEndView'] = '';
-					$return['riderTable'] = '';
+					$return['riderTable'] = 'policy_rider_travel';
 					break;
 				case 'two-wheelar-insurance':
 					$return['backendController'] = 'policy_variants_master';
@@ -3428,7 +3428,6 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		if (!empty($str))
 		{
 			$str = explode(' ', $str);
-var_dump($str);			
 			foreach ($str as $k1=>$v1)
 			{
 				if (!is_integer($v1))
@@ -3436,6 +3435,26 @@ var_dump($str);
 			}
 		}	
 		return $matches;
+	}
+	
+	public static function array_overlay($a1,$a2)
+	{
+		foreach($a1 as $k => $v) 
+		{
+			if(!array_key_exists($k,$a2)) continue;
+			if(is_array($v) && is_array($a2[$k]))
+			{
+				if (!empty($v))				
+					$a1[$k] = Util::array_overlay($v,$a2[$k]);
+				else 	
+					$a1[$k] = Util::array_overlay($a2[$k], $v);				
+			}
+			else
+			{
+				$a1[$k] = $a2[$k];
+			}
+		}
+		return $a1;
 	}
 }
 

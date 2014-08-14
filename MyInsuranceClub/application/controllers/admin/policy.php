@@ -776,8 +776,8 @@ class Policy extends Admin_Controller {
 	
 	public function getProductSubProductDropDown()
 	{		
-		$result = '';
-		if (isset($_POST['companyTypeId']) && !empty($_POST['companyTypeId']))
+		$result = '<option value="" selected data-slug="">Please Select</option>';
+		if (isset($_POST) && !empty($_POST))
 		{	
 			$compType = $_POST['companyTypeId'];
 			$changeType = $_POST['changeType'];
@@ -808,6 +808,7 @@ class Policy extends Admin_Controller {
 			}
 		
 			$healthOptions = $this->util->getCompanyTypeDropDownOptions($modelName, $optionKey, $optionValue, $defaultEmpty = "Please Select", $extraKeys = true, $where, $sqlFilter);
+		
 			if (!empty($healthOptions))
 			{
 				foreach ($healthOptions as $k1=>$v1)

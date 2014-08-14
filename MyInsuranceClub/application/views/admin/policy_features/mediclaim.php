@@ -71,274 +71,8 @@ $(".form-horizontal :input").prop("disabled", true);
 		        	<div class="panel-body">    
 			            <section class="panel panel-default">
 			                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Eligibility Conditions</strong></div>
-			                <div class="panel-body">
-			                
-								<table cellspacing="0" class="eligibility">
-									<tbody>
-										<tr>
-											<th class="nobg" abbr="Configurations" scope="col">&nbsp;</th>
-											<th scope="col">Minimum</th>
-											<th scope="col">Maximum</th>
-										</tr>
-										
-										<tr>
-											<th class="spec" scope="row">Coverage Amounts (in Rs.)</th>
-											<td width="252" valign="top" colspan="2">
-											<?php 
-												$coverage_amount = array_key_exists( 'coverage_amount',$model) ? unserialize($model['coverage_amount']) : array();	
-												if (empty($coverage_amount))
-													$coverage_amount1 = array('value'=>array(), 'comments'=>'');
-												else 
-												{
-													$coverage_amount1 = array(	'value'=>(isset($coverage_amount['value']) && !empty($coverage_amount['value'])) ? explode(',', $coverage_amount['value']) : array(), 
-																				'comments'=>(isset($coverage_amount['comments']) && !empty($coverage_amount['comments'])) ? reset($coverage_amount['comments']) : '');
-												}	
-												$coverage_amount = $coverage_amount1;
-											?>
-												<div class="row">
-													<div class="col-sm-3">
-														<div class="checkbox">
-						                                    <label>
-						                                        <input type="checkbox" name="model[coverage_amount][value][]" value="0.5 lakh" class="model_coverage_amount" <?php echo (in_array('0.5 lakh', $coverage_amount['value'])) ? 'checked' : ''?>> 0.5 Lakhs
-						                                    </label>
-							                            </div>
-							                        </div> 
-													<div class="col-sm-3">
-														<div class="checkbox">
-						                                    <label>
-						                                        <input type="checkbox" name="model[coverage_amount][value][]" value="0.75 lakh" class="model_coverage_amount"  <?php echo (in_array('0.75 lakh', $coverage_amount['value'])) ? 'checked' : ''?>> 0.75 Lakh
-						                                    </label>
-							                            </div>
-							                        </div> 
-											<?php 
-													for ($i = 1; $i <= 10; $i += 0.25) 
-													{	
-														$checked = (in_array($i.' lakhs', $coverage_amount['value'])) ? 'checked' : '';
-														?>
-													<div class="col-sm-3">
-														<div class="checkbox">
-						                                    <label>
-						                                        <input type="checkbox" name="model[coverage_amount][value][]" class="model_coverage_amount"  <?php echo $checked;?> value="<?php echo $i.' lakhs';?>"> <?php echo $i?> Lakhs
-						                                    </label>
-							                            </div>
-							                        </div> 
-											<?php 	}
-													for ($i = 15; $i <= 100; $i += 5) 
-													{	
-														$checked = (in_array($i.' lakhs', $coverage_amount['value'])) ? 'checked' : '';
-														if ($i == 100)
-															$checked = (in_array('1 crore', $coverage_amount['value'])) ? 'checked' : '';
-														?>
-													<div class="col-sm-3">
-														<div class="checkbox">
-						                                    <label>
-						                                        <input type="checkbox" name="model[coverage_amount][value][]" class="model_coverage_amount"  <?php echo $checked;?> value="<?php echo ($i != 100) ? $i.' lakhs':'1 crore'; ?>"> <?php echo ($i != 100) ? $i.' Lakhs':'1 Crore'; ?>
-						                                    </label>
-							                            </div>
-							                        </div> 
-											<?php 	}	?>
-												</div>
-												<div class="divider"></div>
-												<div class="row">
-								                    <label for="" class="col-sm-2">Comment</label>
-								                    <div class="col-sm-10">
-								                        <input type="text" class="form-control"  placeholder="Max 255 characters" name="model[coverage_amount][comment][]" maxlength="255" value="<?php echo (isset($coverage_amount['comments']) && !empty($coverage_amount['comments'])) ? $coverage_amount['comments'] : '';?>"  >
-								                    </div>
-												</div>
-											</td>
-										</tr>
-										
-										<tr>
-											<th class="spec" scope="row">Coverage Amount (in Rs.)</th>
-											<td width="252" valign="top">
-												<input type="text" class="form-control"  placeholder="Min Sum Assured" id="model_minimum_coverage_amount" name="model[minimum_coverage_amount]" disabled value="<?php echo array_key_exists( 'minimum_coverage_amount',$model) ? $model['minimum_coverage_amount'] : '';?>"  >
-											</td>
-											<td width="241" valign="top">
-												<input type="text" class="form-control"  placeholder="Max Sum Assured" id="model_maximum_coverage_amount" ame="model[maximum_coverage_amount]" disabled value="<?php echo array_key_exists( 'maximum_coverage_amount',$model) ? $model['maximum_coverage_amount'] : '';?>"  >
-											</td>
-										</tr>
-										
-										
-										
-										<tr>
-											<th class="spec" scope="row">Duration of Coverage (In Years)</th>
-											<td width="252" valign="top" colspan="2">
-											<?php 
-												$coverage_amount = array_key_exists( 'duration_of_coverage',$model) ? explode(',', $model['duration_of_coverage']) : array();
-											
-												for ($i = 1; $i <= 3; $i ++) 
-												{	
-													$checked = (in_array($i.' years', $coverage_amount)) ? 'checked' : '';
-													?>
-												<div class="col-sm-3">
-													<div class="checkbox">
-					                                    <label>
-					                                        <input type="checkbox" name="model[duration_of_coverage][]" class="model_duration_of_coverage"  <?php echo $checked;?> value="<?php echo $i.' years';?>"> <?php echo $i?> Years
-					                                    </label>
-						                            </div>
-						                        </div> 
-										<?php 	}	?>
-											</td>
-										</tr>
-										
-										
-										<tr>
-											<th class="specalt" scope="row">Policy Term (in years)</th>
-											<td width="252" valign="top">
-												<input type="text" class="form-control" disabled placeholder="Min Policy Term" id="model_minimum_policy_terms" name="model[minimum_policy_terms]" value="<?php echo array_key_exists( 'minimum_policy_terms',$model) ? $model['minimum_policy_terms'] : '';?>"  >
-											</td>
-											<td width="241" valign="top">
-												<input type="text" class="form-control" disabled placeholder="Max Policy Term" id="model_maximum_policy_terms" name="model[maximum_policy_terms]" value="<?php echo array_key_exists( 'maximum_policy_terms',$model) ? $model['maximum_policy_terms'] : '';?>"  >
-											</td>
-										</tr>
-										<tr>
-											<th class="spec" scope="row" width="234" valign="top">Entry Age (in years)</th>
-											<td width="252" valign="top">
-																
-								                <div class="row">
-								                <?php 
-													$str = array_key_exists( 'minimum_entry_age',$model) ? $model['minimum_entry_age'] : '';
-													$values = reset(Util::getNumbersFromString($str));
-													if (strpos($str, 'days'))
-														$yearVal = 'days';
-													else if ($str == 'no limit')
-														$yearVal = 'no limit';
-													else 
-														$yearVal = 'years';									
-								                ?>
-								                    <div class="col-sm-10" style="padding-right: 0px; padding-left: 0px; width: 307px;"> 
-									                    <?php 
-															$options = array('days'=>'Days', 'years'=>'Years','no limit'=>'No Limit');		
-															foreach ($options as $k1=>$v1)
-															{
-																$op = array(
-																    'class'       => 'showHideNextDivByRadio',
-																    'name'        => 'model[minimum_entry_age][]',
-																    'value'       => $k1,
-																    'checked'     => ($yearVal == $k1) ? TRUE : FALSE,
-																    'style'       => 'margin:10px',
-																    );
-																echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
-															}
-														?>
-								                    </div> 
-								                    <div class="col-sm-2" style="padding-left: 0px; border-right-width: 0px; padding-right: 0px;display:<?php echo ($yearVal != 'no limit') ? 'block;' : 'none;';?>;">
-								                        <input type="text" class="form-control numberValidation" maxlength="2" placeholder="Min Age" name="model[minimum_entry_age][]" value="<?php echo (isset($values) && is_array($values))? reset($values) : '';?>"  >
-								                    </div>          
-								                </div>
-												<div class="divider"></div> 
-												<div class="row">  
-								                    <label for="" class="col-sm-3">Comment</label>
-								                    <div class="col-sm-9">
-								                    	<?php $entry_age = array_key_exists( 'entry_age_comments',$model) ? unserialize($model['entry_age_comments']) : array('min'=>'', 'max'=>'');?>
-								                        <input type="text" class="form-control"  placeholder="Max 127 characters" name="model[entry_age_comments][min]" maxlength="127" value="<?php echo $entry_age['min'];?>"  >
-								                    </div>
-												</div>
-											</td>
-											
-											<td width="241" valign="top">
-											
-								                <div class="row">
-								                <?php 
-													$str = array_key_exists( 'maximum_entry_age',$model) ? $model['maximum_entry_age'] : '';
-													$values = reset(Util::getNumbersFromString($str));
-													if (strpos($str, 'days'))
-														$yearVal = 'days';
-													else if ($str == 'no limit')
-														$yearVal = 'no limit';
-													else 
-														$yearVal = 'years';										
-								                ?>
-								                    <div class="col-sm-10" style="padding-right: 0px; padding-left: 0px; width: 307px;"> 
-									                    <?php 
-															$options = array('days'=>'Days', 'years'=>'Years','no limit'=>'No Limit');	
-															foreach ($options as $k1=>$v1)
-															{
-																$op = array(
-																    'class'       => 'showHideNextDivByRadio',
-																    'name'        => 'model[maximum_entry_age][]',
-																    'value'       => $k1,
-																    'checked'     => ($yearVal == $k1) ? TRUE : FALSE,
-																    'style'       => 'margin:10px',
-																    );
-																echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
-															}
-														?>
-								                    </div>   
-								                    <div class="col-sm-2" style="padding-left: 0px; border-right-width: 0px; padding-right: 0px;display:<?php echo ($yearVal != 'no limit') ? 'block;' : 'none;';?>;">
-								                        <input type="text" class="form-control numberValidation" maxlength="2" placeholder="Max Age" name="model[maximum_entry_age][]" value="<?php echo (isset($values) && is_array($values))? reset($values) : '';?>"  >
-								                    </div>           
-								                </div>	
-												<div class="divider"></div>
-												<div class="row">
-								                    <label for="" class="col-sm-3">Comment</label>
-								                    <div class="col-sm-9">
-								                        <input type="text" class="form-control"  placeholder="Max 127 characters" name="model[entry_age_comments][max]" maxlength="127" value="<?php echo $entry_age['max'];?>"  >
-								                    </div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<th class="specalt" scope="row" width="234" valign="top">Renewable till Age (in years)</th>
-											<td width="252" valign="top" colspan="2">
-								                <div class="row">
-								                <?php 		                
-													$str = array_key_exists( 'maximum_renewal_age',$model) ? $model['maximum_renewal_age'] : '';
-													$values = reset(Util::getNumbersFromString($str));
-													if ($str == 'lifelong')
-														$yearVal = 'lifelong';
-													else 
-														$yearVal = 'years';														
-								                ?>
-								                    <div class="col-sm-5"> 
-									                    <?php 
-															$selected = $yearVal;
-															$options = array('lifelong'=>'Lifelong', 'years'=>'No. of Years');		
-															foreach ($options as $k1=>$v1)
-															{
-																$op = array(
-																    'class'       => 'showHideNextDivByRadio',
-																    'name'        => 'model[maximum_renewal_age][]',
-																    'value'       => $k1,
-																    'checked'     => ($selected == $k1) ? TRUE : FALSE,
-																    'style'       => 'margin:10px',
-																    );
-																echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
-															}
-														?>
-								                    </div> 
-								                    <div class="col-sm-7" style="display:<?php echo ($yearVal == 'years') ? 'block' : 'none';?>;" id="model_maximum_renewal_age_div">
-								                    
-										                <div class="col-sm-6">
-										                    <label for="" class="col-sm-3">Min</label>
-										                    <div class="col-sm-9">
-										                        <input type="text" class="form-control numberValidation"  placeholder="Min Age" name="model[minimum_renewal_age]" maxlength="2" value="<?php echo array_key_exists( 'minimum_renewal_age',$model) ? $model['minimum_renewal_age'] : ''?>"  >
-										                    </div>
-										                </div>
-										                <div class="col-sm-6">
-										                    <label for="" class="col-sm-3">Max</label>
-										                    <div class="col-sm-9">
-										                        <input type="text" class="form-control numberValidation"  placeholder="Max Age" name="model[maximum_renewal_age][]" maxlength="2" value="<?php echo (isset($values) && is_array($values))? reset($values) : '';?>"  >
-										                    </div>
-										                </div>
-								                    </div>             
-								                </div>	
-											
-											
-											</td>
-										</tr>
-										<tr>
-											<th class="spec" scope="row" width="234" valign="top">No Medical Test Age (in years)</th>
-											<td width="252" valign="top">
-												<input type="text" class="form-control"  placeholder="Min Medical Test Age" name="model[minimum_no_medical_test_age]" value="<?php echo array_key_exists( 'minimum_no_medical_test_age',$model) ? $model['minimum_no_medical_test_age'] : '';?>"  >
-											</td>
-											<td width="241" valign="top">
-												<input type="text" class="form-control"  placeholder="Max Medical Test Age" name="model[maximum_no_medical_test_age]" value="<?php echo array_key_exists( 'maximum_no_medical_test_age',$model) ? $model['maximum_no_medical_test_age'] : '';?>"  >
-											</td>
-										</tr>
-									</tbody>
-								</table>
-
+			                <div class="panel-body">			                
+			                	<?php echo widget::run('eligibilityConditionsBack', array('model'=>$model)); ?>
 			                </div>
 			            </section>
 					</div>
@@ -372,10 +106,51 @@ $(".form-horizontal :input").prop("disabled", true);
 									<table  cellspacing="0" class="eligibility">
 										<thead>
 											<tr>
-												<th colspan="2">Basic</th>
+												<th colspan="2">Basic Benefits</th>
 											</tr>
 										</thead>
 										<tbody>
+
+											<tr>
+												<th class="spec" scope="row" width="234" valign="top">Cashless treatment</th>
+												<td width="510" valign="top">
+													<?php 
+														$default = array('hospitals'=>'', 'cities'=>'');
+														$arrValues = array_key_exists( 'cashless_treatment',$model) ? unserialize($model['cashless_treatment']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+													?>																	
+									                <div class="row">
+									                    <div class="col-sm-3">
+									                        <input type="number" class="form-control col-sm-3 numberValidation" placeholder="" name="model[cashless_treatment][hospitals]" value="<?php echo $arrValues['hospitals'];?>">
+									                    </div>
+									                    <div class="col-sm-3"> 
+									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">hospitls across </label>
+									                    </div>
+									                    <div class="col-sm-3">
+									                        <input type="number" class="form-control col-sm-3 numberValidation" placeholder="" name="model[cashless_treatment][cities]" value="<?php echo $arrValues['cities'];?>">
+									                    </div>       
+									                    <div class="col-sm-3"> 
+									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">cities </label>
+									                    </div>                 
+									                </div>		
+												</td>
+											</tr>
+											
+											<tr>
+												<th class="specalt" scope="row" width="234" valign="top">Pre-existing diseases</th>
+												<td width="510" valign="top">																
+									                <div class="row">
+									                    <div class="col-sm-3">
+									                        <input type="text" class="form-control col-sm-3 numberValidation" placeholder="" name="model[preexisting_diseases]" value="<?php echo array_key_exists( 'preexisting_diseases',$model) ? $model['preexisting_diseases'] : '';?>">
+									                    </div>
+									                    <div class="col-sm-3"> 
+									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;"><?php echo ((int)reset($arrValues) > 1) ? ' years': 'year';?> </label>
+									                    </div>              
+									                </div>	
+												</td>
+											</tr>
+											
+
 											<tr>
 												<th class="spec" scope="row" width="234" valign="top"><strong>Hospitalisation expenses</strong></th>
 												<td>&nbsp;</td>
@@ -395,77 +170,680 @@ $(".form-horizontal :input").prop("disabled", true);
 											</tr>
 											<tr>
 												<th class="specalt" scope="row" width="234" valign="top"><strong>Pre-hospitalisation</strong></th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[pre_hosp]" value="<?php echo array_key_exists( 'pre_hosp',$model) ? $model['pre_hosp'] : '';?>" ></td>
+												<td width="510" valign="top">
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'days'=>'','amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'pre_hosp',$model) ? unserialize($model['pre_hosp']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'class'       => 'showHideNextDivByRadio',
+																	    'name'        => 'model[pre_hosp][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
+															<div class="row" >						
+												                <div class="col-sm-4">
+												                    <div class="col-sm-4"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
+												                    </div>  
+												                    <div class="col-sm-8">
+												                        <input type="text" class="form-control" maxlength="3" placeholder="" name="model[pre_hosp][percent]" value="<?php echo $arrValues['percent'];?>" >
+												                    </div>              
+												                </div>				
+												                <div class="col-sm-4">
+												                    <div class="col-sm-4"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Max Amount</label>
+												                    </div>  
+												                    <div class="col-sm-8">
+												                        <input type="text" class="form-control numberValidation" placeholder="" name="model[pre_hosp][amount]" value="<?php echo $arrValues['amount'];?>" >
+												                    </div>              
+												                </div>				
+												                <div class="col-sm-4">
+												                    <div class="col-sm-4"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Days</label>
+												                    </div>  
+												                    <div class="col-sm-8">
+												                        <input type="text" class="form-control numberValidation" maxlength="3" placeholder="" name="model[pre_hosp][days]" value="<?php echo $arrValues['days'];?>" >
+												                    </div>              
+												                </div>	
+												            </div>
+									                    </div>    
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[pre_hosp][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+									                </div> 
+												</td>
 											</tr>
+											
 											<tr>
 												<th class="spec" scope="row" width="234" valign="top"><strong>Post-hospitalisation</strong></th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[post_hosp]" value="<?php echo array_key_exists( 'post_hosp',$model) ? $model['post_hosp'] : '';?>" ></td>
+												<td width="510" valign="top">
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'days'=>'','amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'post_hosp',$model) ? unserialize($model['post_hosp']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'class'       => 'showHideNextDivByRadio',
+																	    'name'        => 'model[post_hosp][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
+															<div class="row" >						
+												                <div class="col-sm-4">
+												                    <div class="col-sm-4"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
+												                    </div>  
+												                    <div class="col-sm-8">
+												                        <input type="text" class="form-control" maxlength="3" placeholder="" name="model[post_hosp][percent]" value="<?php echo $arrValues['percent'];?>" >
+												                    </div>              
+												                </div>				
+												                <div class="col-sm-4">
+												                    <div class="col-sm-4"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Max Amount</label>
+												                    </div>  
+												                    <div class="col-sm-8">
+												                        <input type="text" class="form-control numberValidation" placeholder="" name="model[post_hosp][amount]" value="<?php echo $arrValues['amount'];?>" >
+												                    </div>              
+												                </div>				
+												                <div class="col-sm-4">
+												                    <div class="col-sm-4"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Days</label>
+												                    </div>  
+												                    <div class="col-sm-8">
+												                        <input type="text" class="form-control numberValidation" placeholder="" name="model[post_hosp][days]" value="<?php echo $arrValues['days'];?>" >
+												                    </div>              
+												                </div>	
+												            </div>
+									                    </div>    
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[post_hosp][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+									                </div> 
+												</td>
 											</tr>
 											<tr>
 												<th class="specalt" scope="row" width="234" valign="top"><strong>Day care expenses</strong></th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[day_care]" value="<?php echo array_key_exists( 'day_care',$model) ? $model['day_care'] : '';?>" ></td>
+												<td width="510" valign="top">
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'day_care'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'day_care',$model) ? unserialize($model['day_care']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('yes'=>'Covered', 'all'=>'All', 'specific'=>'Specific', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'class'       => 'showHideNextDivByRadio',
+																	    'name'        => 'model[day_care][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
+															<div class="row" >						
+												                <div class="col-sm-6">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control" maxlength="3" placeholder="" name="model[day_care][day_care]" value="<?php echo $arrValues['day_care'];?>" >
+												                    </div>              
+												                </div>	
+												            </div>
+									                    </div>    
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[day_care][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+									                </div>
+												</td>
 											</tr>
 											<tr>
-												<th class="spec" scope="row" width="234" valign="top"><strong>Domiciliary Hospitalisation</strong></th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[domiciliary_treatment_expenses]" value="<?php echo array_key_exists( 'domiciliary_treatment_expenses',$model) ? $model['domiciliary_treatment_expenses'] : '';?>" ></td>
+												<th class="spec" scope="row" width="234" valign="top">Maternity Benefits</th>
+												<td width="510" valign="top">
+											<?php 	$maternitySelected = array_key_exists( 'maternity',$model) ? $model['maternity'] : '';
+													$options = array('yes'=>'Yes', 'no'=>'No');		
+													foreach ($options as $k1=>$v1)
+													{
+														$op = array(
+														    'class'        => 'maternityBenefit',
+														    'name'        => 'model[maternity]',
+														    'value'       => $k1,
+														    'checked'     => ($maternitySelected == $k1) ? TRUE : FALSE,
+														    'style'       => 'margin:10px',
+														    );
+														echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+													}
+													?>
+												</td>
+											</tr>	
+											<tr>
+												<th class="spec" scope="row" width="234" valign="top">Health Check up</th>
+												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[check_up]" value="<?php echo array_key_exists( 'check_up',$model) ? $model['check_up'] : '';?>" ></td>
 											</tr>
+											<tr>
+												<th class="spec" scope="row" width="234" valign="top">Ayurvedic Treatment</th>
+												<td width="510" valign="top">
+												
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'ayurvedic',$model) ? unserialize($model['ayurvedic']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'class'       => 'showHideNextDivByRadio',
+																	    'name'        => 'model[ayurvedic][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
+															<div class="row" >						
+												                <div class="col-sm-6">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control" maxlength="3" placeholder="" name="model[ayurvedic][percent]" value="<?php echo $arrValues['percent'];?>" >
+												                    </div>              
+												                </div>	
+												                <div class="col-sm-6">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Amount</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[ayurvedic][amount]" value="<?php echo $arrValues['amount'];?>" >
+												                    </div>            
+												                </div>
+												            </div>
+									                    </div>    
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[ayurvedic][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+									                </div>	
+												
+												</td>
+												
+											</tr>
+											<tr>
+												<th class="specalt" scope="row" width="234" valign="top">Co-payment</th>
+												<td width="510" valign="top">
+												
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'co_pay',$model) ? unserialize($model['co_pay']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'class'       => 'showHideNextDivByRadio',
+																	    'name'        => 'model[co_pay][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
+															<div class="row" >						
+												                <div class="col-sm-6">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control" maxlength="3" placeholder="" name="model[co_pay][percent]" value="<?php echo $arrValues['percent'];?>" >
+												                    </div>              
+												                </div>	
+												                <div class="col-sm-6">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Amount</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[co_pay][amount]" value="<?php echo $arrValues['amount'];?>" >
+												                    </div>            
+												                </div>
+												            </div>
+									                    </div>    
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[co_pay][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+									                </div>	
+												</td>
+											</tr>
+											
 										</tbody>
 									</table>
 			
-			                <div class="form-group">
-			                </div>
+			                <div class="maternityBenefitClass">
 			                
-			                <div class="form-group">
-			                </div>
+				                <div class="form-group">
+				                </div>
+				                <div class="form-group">
+				                </div>
 									<table  cellspacing="0" class="eligibility">
 										<thead>
 											<tr>
 												<th colspan="2">Maternity Benefits</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody>								
 											<tr>
-												<th class="spec" scope="row" width="234" valign="top">Maternity Benefits</th>
+												<th class="spec" scope="row" width="234" valign="top">Waiting Period</th>
 												<td width="510" valign="top">
-								                    <?php 
-														$selected = array_key_exists( 'maternity',$model) ? $model['maternity'] : '';
-														$options = array('yes'=>'Yes', 'no'=>'No');		
-														foreach ($options as $k1=>$v1)
-														{
-															$op = array(
-															    'name'        => 'model[maternity]',
-															    'value'       => $k1,
-															    'checked'     => ($selected == $k1) ? TRUE : FALSE,
-															    'style'       => 'margin:10px',
-															    );
-															echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
-														}
-													?>
+													<?php 
+														$str = array_key_exists( 'maternity_waiting_period',$model) ? $model['maternity_waiting_period'] : '';
+													?>																	
+									                <div class="row">
+									                    <div class="col-sm-3"> 
+									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: right;">Covered after</label>
+									                    </div>  
+									                    <div class="col-sm-3">
+									                        <input type="text" class="form-control col-sm-3 numberValidation" placeholder="" name="model[maternity_waiting_period]" value="<?php echo $str;?>">
+									                    </div>  
+									                    <div class="col-sm-3"> 
+									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Years </label>
+									                    </div>            
+									                </div>	
+												</td>
+											</tr>
+											
+											<tr>
+												<th class="specalt" scope="row" width="234" valign="top">Normal Delivery</th>
+												<td width="510" valign="top">
+												<?php 
+													$default = array('percent'=>'', 'amount'=>'', 'comments'=>'');
+													$arrValues = array_key_exists( 'maternity_normal_delivery',$model) ? unserialize($model['maternity_normal_delivery']) : $default;
+													$arrValues = Util::array_overlay($default, $arrValues);
+												?>				
+													<div class="row" >						
+										                <div class="col-sm-6">
+										                    <div class="col-sm-6"> 
+										                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
+										                    </div>  
+										                    <div class="col-sm-6">
+										                        <input type="text" class="form-control numberValidation" maxlength="3" placeholder="" name="model[maternity_normal_delivery][percent]" value="<?php echo $arrValues['percent'];?>" >
+										                    </div>            
+										                </div>	
+										                <div class="col-sm-6">
+										                    <div class="col-sm-6"> 
+										                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Amount</label>
+										                    </div>  
+										                    <div class="col-sm-6">
+										                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[maternity_normal_delivery][amount]" value="<?php echo $arrValues['amount'];?>" >
+										                    </div>            
+										                </div>
+									                </div>
+									                <div class="divider"></div> 
+													<div class="row" >						
+										                <div class="col-sm-12">
+										                    <div class="col-sm-2"> 
+										                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+										                    </div>  
+										                    <div class="col-sm-10">
+										                        <input type="text" class="form-control"  placeholder="" name="model[maternity_normal_delivery][comments]" value="<?php echo $arrValues['comments'];?>" >
+										                    </div>            
+										                </div>	
+									                </div>
 												</td>
 											</tr>
 											<tr>
-												<th class="spec" scope="row" width="234" valign="top">Waiting Period</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[maternity_waiting_period]" value="<?php echo array_key_exists( 'maternity_waiting_period',$model) ? $model['maternity_waiting_period'] : '';?>" ></td>
-											</tr>
-											<tr>
-												<th class="specalt" scope="row" width="234" valign="top">Normal Delivery</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[maternity_normal_delivery]" value="<?php echo array_key_exists( 'maternity_normal_delivery',$model) ? $model['maternity_normal_delivery'] : '';?>" ></td>
-											</tr>
-											<tr>
 												<th class="spec" scope="row" width="234" valign="top">Caesarean Delivery</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[maternity_caesarean_delivery]" value="<?php echo array_key_exists( 'maternity_caesarean_delivery',$model) ? $model['maternity_caesarean_delivery'] : '';?>" ></td>
+												<td width="510" valign="top">
+												<?php 
+													$arrValues = array_key_exists( 'maternity_caesarean_delivery',$model) ? unserialize($model['maternity_caesarean_delivery']) : $default;
+													$arrValues = Util::array_overlay($default, $arrValues);
+												?>				
+													<div class="row" >						
+										                <div class="col-sm-6">
+										                    <div class="col-sm-6"> 
+										                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
+										                    </div>  
+										                    <div class="col-sm-6">
+										                        <input type="text" class="form-control numberValidation" maxlength="3" placeholder="" name="model[maternity_caesarean_delivery][percent]" value="<?php echo $arrValues['percent'];?>" >
+										                    </div>            
+										                </div>	
+										                <div class="col-sm-6">
+										                    <div class="col-sm-6"> 
+										                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Amount</label>
+										                    </div>  
+										                    <div class="col-sm-6">
+										                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[maternity_caesarean_delivery][amount]" value="<?php echo $arrValues['amount'];?>" >
+										                    </div>            
+										                </div>
+									                </div>
+									                <div class="divider"></div> 
+													<div class="row" >						
+										                <div class="col-sm-12">
+										                    <div class="col-sm-2"> 
+										                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+										                    </div>  
+										                    <div class="col-sm-10">
+										                        <input type="text" class="form-control"  placeholder="" name="model[maternity_caesarean_delivery][comments]" value="<?php echo $arrValues['comments'];?>" >
+										                    </div>            
+										                </div>	
+									                </div>
+												</td>
 											</tr>
 											<tr>
-												<th class="specalt" scope="row" width="234" valign="top">New-born baby cover</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[maternity_new_born_baby_cover]" value="<?php echo array_key_exists( 'maternity_new_born_baby_cover',$model) ? $model['maternity_new_born_baby_cover'] : '';?>" ></td>
+												<th class="specalt" scope="row" width="234" valign="top">New-born baby expenses cover</th>
+												<td width="510" valign="top">
+												
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'coverage_period'=>'', 'coverage_in'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'maternity_new_born_baby_cover',$model) ? unserialize($model['maternity_new_born_baby_cover']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered', 'optional'=>'Optional');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'class'       => 'showHideNextDivByRadio',
+																	    'name'        => 'model[maternity_new_born_baby_cover][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
+															<div class="row" >						
+												                <div class="col-sm-6">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control numberValidation" maxlength="3" placeholder="" name="model[maternity_new_born_baby_cover][percent]" value="<?php echo $arrValues['percent'];?>" >
+												                    </div>            
+												                </div>	
+												                <div class="col-sm-6">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Amount</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[maternity_new_born_baby_cover][amount]" value="<?php echo $arrValues['amount'];?>" >
+												                    </div>            
+												                </div>
+												            </div>
+											                <div class="divider"></div> 
+												            <div class="row" > 
+												                <div class="col-sm-6">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Coverage Period</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[maternity_new_born_baby_cover][coverage_period]" value="<?php echo $arrValues['coverage_period'];?>" >
+												                    </div>            
+												                </div>
+												                <div class="col-sm-6">
+												                    <div class="col-sm-4"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Coverage In</label>
+												                    </div>  
+												                    <div class="col-sm-8">
+												                    <?php 
+																		$options = array('days'=>'Days', 'years'=>'Years');
+																		$selected = $arrValues['coverage_in'];		
+																		foreach ($options as $k1=>$v1)
+																		{
+																			$op = array(
+																			    'name'        => 'model[maternity_new_born_baby_cover][coverage_in]',
+																			    'value'       => $k1,
+																			    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																			    'style'       => 'margin:10px',
+																			    );
+																			echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																		}
+																	?>
+												                    </div>            
+												                </div>
+											                </div>
+									                    </div>    
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[maternity_new_born_baby_cover][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+										                         
+									                </div>	
+												</td>
 											</tr>
 											<tr>
 												<th class="spec" scope="row" width="234" valign="top">Addition of New-born</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[maternity_addition_of_new_born]" value="<?php echo array_key_exists( 'maternity_addition_of_new_born',$model) ? $model['maternity_addition_of_new_born'] : '';?>" ></td>
+												<td width="510" valign="top">
+												
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'coverage_period_from'=>'', 'coverage_period_from_in'=>'', 'coverage_period_to'=>'', 'coverage_period_to_in'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'maternity_addition_of_new_born',$model) ? unserialize($model['maternity_addition_of_new_born']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'class'       => 'showHideNextDivByRadio',
+																	    'name'        => 'model[maternity_addition_of_new_born][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
+															<div class="row" >						
+												                <div class="col-sm-6">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control numberValidation" maxlength="3" placeholder="" name="model[maternity_addition_of_new_born][percent]" value="<?php echo $arrValues['percent'];?>" >
+												                    </div>            
+												                </div>	
+												                <div class="col-sm-6">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Amount</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[maternity_addition_of_new_born][amount]" value="<?php echo $arrValues['amount'];?>" >
+												                    </div>            
+												                </div>
+												            </div>
+											                <div class="divider"></div> 
+												            <div class="row" > 
+												            
+												                <div class="col-sm-6">
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Coverage From</label>
+												                    </div>  
+												                    <div class="col-sm-4">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[maternity_addition_of_new_born][coverage_period_from]" value="<?php echo $arrValues['coverage_period_from'];?>" >
+												                    </div>  
+												                    <div class="col-sm-5">
+												                    <?php 
+																		$options = array('days'=>'Days', 'years'=>'Years');
+																		$selected = $arrValues['coverage_period_from_in'];		
+																		foreach ($options as $k1=>$v1)
+																		{
+																			$op = array(
+																			    'name'        => 'model[maternity_addition_of_new_born][coverage_period_from_in]',
+																			    'value'       => $k1,
+																			    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																			    'style'       => 'margin:10px',
+																			    );
+																			echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																		}
+																	?>
+												                    </div>             
+												                </div>
+												                
+												            
+												                <div class="col-sm-6">
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Coverage To</label>
+												                    </div>  
+												                    <div class="col-sm-4">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[maternity_addition_of_new_born][coverage_period_to]" value="<?php echo $arrValues['coverage_period_to'];?>" >
+												                    </div>  
+												                    <div class="col-sm-5">
+												                    <?php 
+																		$options = array('days'=>'Days', 'years'=>'Years');
+																		$selected = $arrValues['coverage_period_to_in'];		
+																		foreach ($options as $k1=>$v1)
+																		{
+																			$op = array(
+																			    'name'        => 'model[maternity_addition_of_new_born][coverage_period_to_in]',
+																			    'value'       => $k1,
+																			    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																			    'style'       => 'margin:10px',
+																			    );
+																			echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																		}
+																	?>
+												                    </div>             
+												                </div>
+												                
+											                </div>
+									                    </div>    
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[maternity_addition_of_new_born][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+										                         
+									                </div>	
+												</td>
 											</tr>
 										</tbody>
 									</table>
-			
+								</div>	
+			<style>
+.maternityBenefitClass{
+display:<?php echo ($maternitySelected == 'yes') ? 'block' : 'none';?>;
+}
+</style>	
 			                <div class="form-group">
 			                </div>
 			                
@@ -500,35 +878,357 @@ $(".form-horizontal :input").prop("disabled", true);
 											</tr>
 											<tr>
 												<th class="specalt" scope="row" width="234" valign="top">Hospital Cash</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[hospital_cash]" value="<?php echo array_key_exists( 'hospital_cash',$model) ? $model['hospital_cash'] : '';?>" ></td>
+												<td width="510" valign="top">
+												
+												
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'day_from'=>'', 'day_from_in'=>'', 'day_to'=>'', 'day_to_in'=>'', 'continue_days'=>'', 'max_amount'=>'', 'deductable_days'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'hospital_cash',$model) ? unserialize($model['hospital_cash']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'class'       => 'showHideNextDivByRadio',
+																	    'name'        => 'model[hospital_cash][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
+															<div class="row" >						
+												                <div class="col-sm-6">
+												                    <div class="col-sm-4"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
+												                    </div>  
+												                    <div class="col-sm-5">
+												                        <input type="text" class="form-control" maxlength="3" placeholder="" name="model[hospital_cash][percent]" value="<?php echo $arrValues['percent'];?>" >
+												                    </div> 
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">per day</label>
+												                    </div>             
+												                </div>	
+												                <div class="col-sm-6">
+												                    <div class="col-sm-4"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Amount</label>
+												                    </div>  
+												                    <div class="col-sm-5">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[hospital_cash][amount]" value="<?php echo $arrValues['amount'];?>" >
+												                    </div> 
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">per day</label>
+												                    </div>            
+												                </div>
+												            </div>
+											                <div class="divider"></div> 
+												            <div class="row" > 
+												            
+												                <div class="col-sm-7">
+												                    <div class="col-sm-4"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Cash Allowance From</label>
+												                    </div>  
+												                    <div class="col-sm-3">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[hospital_cash][day_from]" value="<?php echo $arrValues['day_from'];?>" >
+												                    </div>  
+												                    <div class="col-sm-5">
+												                    <?php 
+																		$options = array('days'=>'Days', 'months'=>'Months');
+																		$selected = $arrValues['day_from_in'];		
+																		foreach ($options as $k1=>$v1)
+																		{
+																			$op = array(
+																			    'name'        => 'model[hospital_cash][day_from_in]',
+																			    'value'       => $k1,
+																			    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																			    'style'       => 'margin:10px',
+																			    );
+																			echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																		}
+																	?>
+												                    </div>             
+												                </div>
+												                
+												            
+												                <div class="col-sm-5">
+												                    <div class="col-sm-2"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;"> To</label>
+												                    </div>  
+												                    <div class="col-sm-4">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[hospital_cash][day_to]" value="<?php echo $arrValues['day_to'];?>" >
+												                    </div>  
+												                    <div class="col-sm-6">
+												                    <?php 
+																		$options = array('days'=>'Days', 'months'=>'Months');
+																		$selected = $arrValues['day_to_in'];		
+																		foreach ($options as $k1=>$v1)
+																		{
+																			$op = array(
+																			    'name'        => 'model[hospital_cash][day_to_in]',
+																			    'value'       => $k1,
+																			    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																			    'style'       => 'margin:10px',
+																			    );
+																			echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																		}
+																	?>
+												                    </div>             
+												                </div>
+												                
+											                </div>
+											                
+											                
+											                <div class="divider"></div> 
+												            <div class="row" > 
+												            
+												                <div class="col-sm-4">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Continue Hospitalization Days</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[hospital_cash][continue_days]" value="<?php echo $arrValues['continue_days'];?>" >
+												                    </div>             
+												                </div>
+												                
+												            
+												                <div class="col-sm-4">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Deductable Days</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[hospital_cash][deductable_days]" value="<?php echo $arrValues['deductable_days'];?>" >
+												                    </div>              
+												                </div>
+												                
+												            
+												                <div class="col-sm-4">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Max Amounts</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[hospital_cash][max_amount]" value="<?php echo $arrValues['max_amount'];?>" >
+												                    </div>              
+												                </div>
+												                
+											                </div>
+									                    </div>    
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[hospital_cash][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+									                </div>	
+												</td>
 											</tr>
 											<tr>
 												<th class="spec" scope="row" width="234" valign="top">Ambulance Charges</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[emergency_ambulance]" value="<?php echo array_key_exists( 'emergency_ambulance',$model) ? $model['emergency_ambulance'] : '';?>" ></td>
+												<td width="510" valign="top">
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'emergency_ambulance',$model) ? unserialize($model['emergency_ambulance']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'class'       => 'showHideNextDivByRadio',
+																	    'name'        => 'model[emergency_ambulance][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
+															<div class="row" >						
+												                <div class="col-sm-6">
+												                    <div class="col-sm-4"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
+												                    </div>  
+												                    <div class="col-sm-5">
+												                        <input type="text" class="form-control" maxlength="3" placeholder="" name="model[emergency_ambulance][percent]" value="<?php echo $arrValues['percent'];?>" >
+												                    </div> 
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Per Hospitalization</label>
+												                    </div>             
+												                </div>	
+												                <div class="col-sm-6">
+												                    <div class="col-sm-4"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Amount</label>
+												                    </div>  
+												                    <div class="col-sm-5">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[emergency_ambulance][amount]" value="<?php echo $arrValues['amount'];?>" >
+												                    </div> 
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Per Hospitalization</label>
+												                    </div>            
+												                </div>
+												            </div>
+									                    </div>    
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[emergency_ambulance][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+									                </div>	
+									             </td> 
 											</tr>
 											<tr>
 												<th class="specalt" scope="row" width="234" valign="top">Recovery Benefit</th>
 												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[recovery_benefit]" value="<?php echo array_key_exists( 'recovery_benefit',$model) ? $model['recovery_benefit'] : '';?>" ></td>
 											</tr>
 											<tr>
-												<th class="spec" scope="row" width="234" valign="top">Health Check up</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[check_up]" value="<?php echo array_key_exists( 'check_up',$model) ? $model['check_up'] : '';?>" ></td>
-											</tr>
-											<tr>
 												<th class="specalt" scope="row" width="234" valign="top">Organ Donor Cover</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[organ_donor_exp]" value="<?php echo array_key_exists( 'organ_donor_exp',$model) ? $model['organ_donor_exp'] : '';?>" ></td>
+												<td width="510" valign="top">
+												
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'organ_donor_exp',$model) ? unserialize($model['organ_donor_exp']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'class'       => 'showHideNextDivByRadio',
+																	    'name'        => 'model[organ_donor_exp][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
+															<div class="row" >						
+												                <div class="col-sm-6">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control" maxlength="3" placeholder="" name="model[organ_donor_exp][percent]" value="<?php echo $arrValues['percent'];?>" >
+												                    </div>              
+												                </div>	
+												                <div class="col-sm-6">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Amount</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[organ_donor_exp][amount]" value="<?php echo $arrValues['amount'];?>" >
+												                    </div>            
+												                </div>
+												            </div>
+									                    </div>    
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[organ_donor_exp][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+									                </div>	
+												
+												</td>
 											</tr>
-											<tr>
-												<th class="spec" scope="row" width="234" valign="top">Ayurvedic Treatment</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[ayurvedic]" value="<?php echo array_key_exists( 'ayurvedic',$model) ? $model['ayurvedic'] : '';?>" ></td>
-											</tr>
+											
 											<tr>
 												<th class="specalt" scope="row" width="234" valign="top">Second Opinion</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[second_opinion]" value="<?php echo array_key_exists( 'second_opinion',$model) ? $model['second_opinion'] : '';?>" ></td>
+												<td width="510" valign="top">
+								                    <?php 
+														$selected = array_key_exists( 'second_opinion',$model) ? strtolower($model['second_opinion']) : 'no';
+														$options = array('yes'=>'Yes', 'no'=>'No');		
+														foreach ($options as $k1=>$v1)
+														{
+															$op = array(
+															    'name'        => 'model[second_opinion]',
+															    'value'       => $k1,
+															    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+															    'style'       => 'margin:10px',
+															    );
+															echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+														}
+													?>
+												</td>
 											</tr>
 											<tr>
 												<th class="spec" scope="row" width="234" valign="top">E-opinion</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[e-opinion]" value="<?php echo array_key_exists( 'e-opinion',$model) ? $model['e-opinion'] : '';?>" ></td>
+												<td width="510" valign="top">
+												
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'e_opinion',$model) ? unserialize($model['e_opinion']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'name'        => 'model[e_opinion][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[e_opinion][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+									                </div>	
+												</td>
 											</tr>
 											<tr>
 												<th class="specalt" scope="row" width="234" valign="top">Physiotherapy Charges</th>
@@ -559,8 +1259,154 @@ $(".form-horizontal :input").prop("disabled", true);
 										</thead>
 										<tbody>
 											<tr>
+												<th class="spec" scope="row" width="234" valign="top"><strong>Domiciliary Hospitalisation</strong></th>
+												<td width="510" valign="top">
+												
+												
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'domiciliary_treatment_expenses',$model) ? unserialize($model['domiciliary_treatment_expenses']) : $default;														
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'class'       => 'showHideNextDivByRadio',
+																	    'name'        => 'model[domiciliary_treatment_expenses][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
+															<div class="row" >						
+												                <div class="col-sm-6">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control" maxlength="3" placeholder="" name="model[domiciliary_treatment_expenses][percent]" value="<?php echo $arrValues['percent'];?>" >
+												                    </div>              
+												                </div>	
+												                <div class="col-sm-6">
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Max Amount</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[domiciliary_treatment_expenses][amount]" value="<?php echo $arrValues['amount'];?>" >
+												                    </div>            
+												                </div>
+												            </div>
+									                    </div>    
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[domiciliary_treatment_expenses][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+									                </div>	
+												</td>
+											</tr>
+											<tr>
+												<th class="specalt" scope="row" width="234" valign="top"><strong>Free look period</strong></th>
+												<td width="510" valign="top">									
+									                <div class="row">
+									                    <div class="col-sm-3">
+									                    	<input type="text" class="form-control numberValidation"  placeholder="" name="model[free_look_period]" value="<?php echo array_key_exists( 'free_look_period',$model) ? $model['free_look_period'] : '';?>" >
+									                    </div>  
+									                    <div class="col-sm-9"> 
+									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Days from the Date of Receipt of the Policy Document</label>
+									                    </div>            
+									                </div>	
+												</td>
+											</tr>
+											<tr>
+												<th class="spec" scope="row" width="234" valign="top"><strong>Grace period</strong></th>
+												<td width="510" valign="top">						
+									                <div class="row">
+									                    <div class="col-sm-3">
+									                    	<input type="text" class="form-control numberValidation"  placeholder="" name="model[grace_period]" value="<?php echo array_key_exists( 'grace_period',$model) ? $model['grace_period'] : '';?>" >
+									                    </div>  
+									                    <div class="col-sm-9"> 
+									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Days from date of Renewal</label>
+									                    </div>            
+									                </div>	
+									            </td>
+											</tr>
+											<tr>
+												<th class="specalt" scope="row" width="234" valign="top">Hospital list</th>
+												<td width="510" valign="top">
+								                    <?php 
+														$selected = array_key_exists( 'hospital_list',$model) ? strtolower($model['hospital_list']) : 'no';
+														$options = array('yes'=>'Yes', 'no'=>'No');		
+														foreach ($options as $k1=>$v1)
+														{
+															$op = array(
+															    'name'        => 'model[hospital_list]',
+															    'value'       => $k1,
+															    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+															    'style'       => 'margin:10px',
+															    );
+															echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+														}
+													?>
+												</td>
+											</tr>
+											<tr>
 												<th class="spec" scope="row" width="234" valign="top">Family Discount</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[family_discount]" value="<?php echo array_key_exists( 'family_discount',$model) ? $model['family_discount'] : '';?>" ></td>
+												<td width="510" valign="top">
+												
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'family_discount',$model) ? unserialize($model['family_discount']) : $default;
+
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'name'        => 'model[family_discount][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[family_discount][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+									                </div>	
+												</td>
 											</tr>
 											<tr>
 												<th class="specalt" scope="row" width="234" valign="top">Cumulative Bonus</th>
@@ -568,38 +1414,84 @@ $(".form-horizontal :input").prop("disabled", true);
 											</tr>
 											<tr>
 												<th class="spec" scope="row" width="234" valign="top">Two Year Policy Option</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[two_year_policy_option]" value="<?php echo array_key_exists( 'two_year_policy_option',$model) ? $model['two_year_policy_option'] : '';?>" ></td>
-											</tr>
-											<tr>
-												<th class="specalt" scope="row" width="234" valign="top">Co-payment</th>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[co_pay]" value="<?php echo array_key_exists( 'co_pay',$model) ? $model['co_pay'] : '';?>" ></td>
-											</tr>
-											<tr>
-												<th class="spec" scope="row" width="234" valign="top">Cashless</th>
 												<td width="510" valign="top">
-													<?php 
-														$str = array_key_exists( 'cashless_treatment',$model) ? $model['cashless_treatment'] : '';
-														$values = reset(Util::getNumbersFromString($str));
-													?>																	
+												
 									                <div class="row">
-									                    <div class="col-sm-3">
-									                        <input type="number" class="form-control col-sm-3 numberValidation" placeholder="" name="model[cashless_treatment][]" value="<?php echo isset($values[0]) ? $values[0] : '';?>">
-									                    </div>
-									                    <div class="col-sm-3"> 
-									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">hospitls across </label>
-									                    </div>
-									                    <div class="col-sm-3">
-									                        <input type="number" class="form-control col-sm-3 numberValidation" placeholder="" name="model[cashless_treatment][]" value="<?php echo isset($values[1]) ? $values[1] : '';?>">
-									                    </div>       
-									                    <div class="col-sm-3"> 
-									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">cities </label>
-									                    </div>                 
-									                </div>		
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'two_year_policy_option',$model) ? unserialize($model['two_year_policy_option']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'class'       => 'showHideNextDivByRadio',
+																	    'name'        => 'model[two_year_policy_option][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
+															<div class="row" >						
+												                <div class="col-sm-12">
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
+												                    </div>  
+												                    <div class="col-sm-3">
+												                        <input type="text" class="form-control" maxlength="3" placeholder="" name="model[two_year_policy_option][percent]" value="<?php echo $arrValues['percent'];?>" >
+												                    </div> 
+												                    <div class="col-sm-6"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">% is offered on the Premium</label>
+												                    </div>               
+												                </div>
+												            </div>
+									                    </div>    
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[two_year_policy_option][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+									                </div>	
 												</td>
+												
 											</tr>
 											<tr>
 												<th class="specalt" scope="row" width="234" valign="top">Claim Loading</th>
 												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[claim_loading]" value="<?php echo array_key_exists( 'claim_loading',$model) ? $model['claim_loading'] : '';?>" ></td>
+											</tr>
+											<tr>
+												<th class="spec" scope="row" width="234" valign="top">Dependent Parents</th>
+												<td width="510" valign="top">
+								                    <?php 
+														$selected = array_key_exists( 'dependent_parents',$model) ? strtolower($model['dependent_parents']) : 'no';
+														$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
+														foreach ($options as $k1=>$v1)
+														{
+															$op = array(
+															    'name'        => 'model[dependent_parents]',
+															    'value'       => $k1,
+															    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+															    'style'       => 'margin:10px',
+															    );
+															echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+														}
+													?>
+												</td>
 											</tr>
 										</tbody>
 									</table>
@@ -610,7 +1502,7 @@ $(".form-horizontal :input").prop("disabled", true);
 					                <div class="form-group">
 					                </div>
 			                
-			                
+<?php /* ?>			                
 			                
 									<table  cellspacing="0" class="eligibility">
 										<thead>
@@ -619,24 +1511,6 @@ $(".form-horizontal :input").prop("disabled", true);
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<th class="specalt" scope="row" width="234" valign="top">Pre-existing diseases</th>
-												<td width="510" valign="top">
-													<?php 
-														$str = array_key_exists( 'preexisting_diseases',$model) ? $model['preexisting_diseases'] : '';
-														$values = reset(Util::getNumbersFromString($str));
-													?>																	
-									                <div class="row">
-									                    <div class="col-sm-3">
-									                        <input type="number" class="form-control col-sm-3 numberValidation" placeholder="" name="model[preexisting_diseases]" value="<?php echo isset($values) ? reset($values) : '';?>">
-									                    </div>
-									                    <div class="col-sm-3"> 
-									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;"><?php echo ((int)reset($values) > 1) ? ' years': 'year';?> </label>
-									                    </div>              
-									                </div>	
-												</td>
-											</tr>
-											
 											<tr>
 												<th class="specalt" scope="row" width="234" valign="top">For the first 30 days</th>
 												<td width="510" valign="top">
@@ -675,7 +1549,7 @@ $(".form-horizontal :input").prop("disabled", true);
 										</tbody>
 									</table>
 			
-			
+<?php */ ?>		
 			
 								</div>
 			            </section>
@@ -831,10 +1705,18 @@ $(document).ready(function(){
 
 	$('.showHideNextDivByRadio').click(function(){
 		var curVal = $(this).val(); 		
-		if(curVal == 'lifelong' || curVal == 'no limit' )
+		if(curVal == 'lifelong' || curVal == 'no limit' || curVal == 'no')
 			$(this).parent().parent().next().hide();
 		else
 			$(this).parent().parent().next().show();	
+	});
+
+	$('.maternityBenefit').click(function(){
+		var curVal = $(this).val(); 		
+		if(curVal == 'yes')
+			$('.maternityBenefitClass').show();
+		else
+			$('.maternityBenefitClass').hide();
 	});
 });
 //-->

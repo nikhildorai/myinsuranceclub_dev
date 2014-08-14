@@ -1,16 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Policy_features_mediclaim extends Admin_Controller {
+class Policy_features_travel extends Admin_Controller {
  
     function __construct() 
     {
         parent::__construct();
-		$this->load->model('policy_features_mediclaim_model');
-		$this->load->model('policy_rider_mediclaim_model');
+		$this->load->model('policy_features_travel_model');
+		$this->load->model('policy_rider_travel_model');
 		$this->load->model('policy_variants_master_model');
 	}
 	
-	public function mediclaim($variant_id = null)
+	public function travel_insurance($variant_id = null)
 	{
 		if (!empty($variant_id))
 		{
@@ -61,7 +61,7 @@ class Policy_features_mediclaim extends Admin_Controller {
 				$where[0]['field'] = 'variant_id';
 				$where[0]['value'] = (int)$variant_id;
 				$where[0]['compare'] = 'equal';
-				$exist = $this->util->getTableData($modelName='Policy_features_mediclaim_model', $type="single", $where, $fields = array());
+				$exist = $this->util->getTableData($modelName='Policy_features_travel_model', $type="single", $where, $fields = array());
 
 				if (empty($exist))
 				{
@@ -72,14 +72,14 @@ class Policy_features_mediclaim extends Admin_Controller {
 						$isActive = false;
 					$modelType = 'update';
 					$model = $exist;
-					$feature_id = $exist['features_id'];
+					$feature_id = (!empty($exist)) ? $exist['features_id'] : '';
 					//$oldPeerComparision = (isset($model['peer_comparision_variants']) && !empty($model['peer_comparision_variants'])) ? explode(',', $model['peer_comparision_variants']) : array();
 					//	check if rider exists for current varient
 					$where = array();
 					$where[0]['field'] = 'variant_id';
 					$where[0]['value'] = (int)$variant_id;
 					$where[0]['compare'] = 'equal';
-					$riders = $this->util->getTableData($modelName='Policy_rider_mediclaim_model', $type="all", $where, $fields = array());
+					$riders = $this->util->getTableData($modelName='Policy_rider_travel_model', $type="all", $where, $fields = array());
 					if (!empty($riders))
 						$riders = Util::rearrangeRiders($riders);
 				}		
@@ -105,14 +105,9 @@ class Policy_features_mediclaim extends Admin_Controller {
 				
 				//	$_POST['model']['peer_comparision_variants'] = (isset($_POST['model']['peer_comparision_variants']) && !empty($_POST['model']['peer_comparision_variants'])) ? implode(',', $_POST['model']['peer_comparision_variants']) : '';
 				//	$newPeerComparision = explode(',', $_POST['model']['peer_comparision_variants']);
-
-					$arrSerialize = array(	'coverage_amount','policy_terms','entry_age', 'renewal_age', 'no_medical_test_age', 'cashless_treatment','post_hosp',
-											'pre_hosp','day_care', 'ayurvedic', 'co_pay','maternity_normal_delivery', 'maternity_caesarean_delivery',
-											'maternity_new_born_baby_cover', 'maternity_addition_of_new_born', 'hospital_cash', 'emergency_ambulance', 
-											'organ_donor_exp',  'e_opinion','domiciliary_treatment_expenses', 'family_discount', 'two_year_policy_option',
-										);
 					
-//var_dump($_POST['model']['coverage_amount']);
+					$arrSerialize = array(	'coverage_amount', 'policy_terms','entry_age','no_medical_test_age','no_medical_sum_assured_limit','cashless_treatment',
+											'pre_existing_diseases','free_look_period');
 					foreach ($arrSerialize as $k1=>$v1)
 					{
 						if (isset($_POST['model'][$v1]) && !empty($_POST['model'][$v1]))
@@ -121,8 +116,7 @@ class Policy_features_mediclaim extends Admin_Controller {
 						}
 					}		
 					
-//var_dump($_POST['model']['coverage_amount']);die;	
-//var_dump($_POST['model']['domiciliary_treatment_expenses']);die;		
+//var_dump($_POST['model']);die;		
 					$arrParams = $this->input->post('model');
 					//	set default values
 					$arrParams['features_id'] = (isset($feature_id) && !empty($feature_id)) ? $feature_id : '';
@@ -131,7 +125,8 @@ class Policy_features_mediclaim extends Admin_Controller {
 					
 					//	set validation rules
 					$validation_rules = array(
-						array('field' => 'model[coverage_amount]', 'label' => 'coverage amount', 'rules' => 'required'),
+						array('field' => 'model[coverage_amount]', 'label' => 'minimum coverage amount', 'rules' => 'required'),
+			//			array('field' => 'model[maximum_coverage_amount]', 'label' => 'maximum coverage amount', 'rules' => 'required'),
 			/*			array('field' => 'model[minimum_policy_terms]', 'label' => 'minimum policy terms', 'rules' => 'required'),
 						array('field' => 'model[maximum_policy_terms]', 'label' => 'maximum policy terms', 'rules' => 'required'),
 						array('field' => 'model[premium_payment_terms]', 'label' => 'premium payment terms', 'rules' => 'required'),
@@ -147,23 +142,24 @@ class Policy_features_mediclaim extends Admin_Controller {
 				*/		);				
 					$riderPost = $this->input->post('riderModel');
 					$this->form_validation->set_rules($validation_rules);
+					
 					if ($this->form_validation->run())
 					{
 						//	update the peer comparision count for each variant
-						Util::updatePeerConnectionCountValue($newPeerComparision, $oldPeerComparision);
+					//	Util::updatePeerConnectionCountValue($newPeerComparision, $oldPeerComparision);
 						
 						//	save record for feature 
-						$recordId = $this->policy_features_mediclaim_model->saveRecord($arrParams, $modelType);	
+						$recordId = $this->policy_features_travel_model->saveRecord($arrParams, $modelType);	
 						if ($recordId != false)
 							$saveData[] = true;
 						else 
 							$saveData[] = false;
-						
+					
 						//	save records for rider
 						if (!empty($riderPost))
 						{
 							// save records for varients
-							$saveRiders = Util::saveRiderData($variant_id, $riderPost, $riderModelName = 'Policy_rider_mediclaim_model');
+							$saveRiders = Util::saveRiderData($variant_id, $riderPost, $riderModelName = 'Policy_rider_travel_model');
 
 							if ($saveRiders['result'] == true)
 								$saveData[] = true;
@@ -189,9 +185,10 @@ class Policy_features_mediclaim extends Admin_Controller {
 						// 	Set validation errors.
 						$this->data['message'] = validation_errors('<p class="error_msg">', '</p>'); 
 						$this->data['msgType'] = 'error';
-					}		
-					$model = $_POST['model'];
-					$riders = $_POST['riderModel'];
+					}	
+
+					$model = (isset($_POST['model']) && !empty($_POST['model'])) ? $_POST['model'] : array();
+					$riders = (isset($_POST['riderModel']) && !empty($_POST['riderModel'])) ? $_POST['riderModel'] : array();
 				}	
 				$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$policyModel['product_id'], 'sub_product_id'=>$policyModel['sub_product_id']));
 			
@@ -203,7 +200,7 @@ class Policy_features_mediclaim extends Admin_Controller {
 				$this->data['allVariants'] = $allVariants;
 				$this->data['companyModel'] = $companyModel;
 
-				$this->template->write_view('content', 'admin/policy_features/mediclaim', $this->data, TRUE);
+				$this->template->write_view('content', 'admin/policy_features/travel', $this->data, TRUE);
 				$this->template->render();
 			}
 		}

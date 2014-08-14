@@ -53,6 +53,8 @@ $('.remove').prop('disabled', true);
 		{	
 			if(prodSlug == 'health-insurance')
 				$('#companyTypeSlug').text(prodSlug+'/');
+			else if(prodSlug == 'international-travel')
+				$('#companyTypeSlug').text(prodSlug+'/');
 			else
 				$('#companyTypeSlug').text(subProdSlug+'/');
 		}
@@ -169,35 +171,6 @@ $policy_id = (isset($policyModel['policy_id']) && !empty($policyModel['policy_id
 		        <div class="col-md-12">
 				    <section class="panel panel-body">
 							 
-					    
-
-			        	<div class="row">
-					        <div class="col-md-12">
-					            <section class="panel panel-default">
-					                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Policy Wording Images</strong></div>
-									<div class="panel-body">    
-						                <div class="col-sm-12">    
-											<?php echo widget::run('multiFileUpload', array('policy_id'=>$policy_id, 'policyModel'=>$policyModel, 'modelName'=>'policyModel','fieldName'=>'policy_wordings_images','uploadType'=>'policy_wordings_images')); ?>
-						             	</div>
-						            </div>
-					            </section>
-					        </div>
-					    </div> 
-					    
-
-			        	<div class="row">
-					        <div class="col-md-12">
-					            <section class="panel panel-default">
-					                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Brochure Images</strong></div>
-									<div class="panel-body">    
-						                <div class="col-sm-12">    
-											<?php echo widget::run('multiFileUpload', array('policy_id'=>$policy_id, 'policyModel'=>$policyModel, 'modelName'=>'policyModel','fieldName'=>'brochure_images','uploadType'=>'brochure_images')); ?>
-						             	</div>
-						            </div>
-					            </section>
-					        </div>
-					    </div> 
-					    
 					    
 					           
 			        	<div class="row">
@@ -712,7 +685,36 @@ $policy_id = (isset($policyModel['policy_id']) && !empty($policyModel['policy_id
 					        
 			        	
 					    </div>
+
 					    
+
+			        	<div class="row">
+					        <div class="col-md-12">
+					            <section class="panel panel-default">
+					                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Policy Wording Images</strong></div>
+									<div class="panel-body">    
+						                <div class="col-sm-12">    
+											<?php echo widget::run('multiFileUpload', array('policy_id'=>$policy_id, 'policyModel'=>$policyModel, 'modelName'=>'policyModel','fieldName'=>'policy_wordings_images','uploadType'=>'policy_wordings_images')); ?>
+						             	</div>
+						            </div>
+					            </section>
+					        </div>
+					    </div> 
+					    
+
+			        	<div class="row">
+					        <div class="col-md-12">
+					            <section class="panel panel-default">
+					                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Brochure Images</strong></div>
+									<div class="panel-body">    
+						                <div class="col-sm-12">    
+											<?php echo widget::run('multiFileUpload', array('policy_id'=>$policy_id, 'policyModel'=>$policyModel, 'modelName'=>'policyModel','fieldName'=>'brochure_images','uploadType'=>'brochure_images')); ?>
+						             	</div>
+						            </div>
+					            </section>
+					        </div>
+					    </div> 
+					    					    
 					    
 					    
 			        	<div class="row">

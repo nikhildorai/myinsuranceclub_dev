@@ -384,7 +384,7 @@
 										<thead>
 	
 											<tr>
-												<th colspan="2">Basic</th>
+												<th colspan="2">Basic Benefits</th>
 	
 											</tr>
 										</thead>
