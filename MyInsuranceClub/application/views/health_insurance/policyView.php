@@ -275,11 +275,6 @@
 				</h2>
 			</div>
 
-
-
-
-
-
 			<div id="tab-container" class="tab-container col-md-12">
 <?php 
 				if (isset($variantNames) && !empty($variantNames) && $variantCount > 1)
@@ -299,8 +294,9 @@
 					{	
 						$variant = $v1['variant'];
 						$rider = $v1['rider'];
-						$vFeatures = $v1['features'];
+						$vFeatures = $model = $v1['features'];
 						?>
+						
 						<div id="Medisure<?php echo $variant['variant_id']?>">
 	
 	
@@ -324,31 +320,78 @@
 											</tr>
 										</thead>
 										<tbody>
-					
+					<?php //var_dump($vFeatures);	?>
 											<tr>
 												<td>Coverage Amount (in Rs.)</td>
-												<td align="center"><?php echo array_key_exists( 'minimum_coverage_amount',$vFeatures) ? $vFeatures['minimum_coverage_amount'] : '';?></td>
-												<td align="center"><?php echo array_key_exists( 'maximum_coverage_amount',$vFeatures) ? $vFeatures['maximum_coverage_amount'] : '';?></td>
+												<?php 
+													$default = array('value'=>array(), 'comment'=>'');
+													$arrValues = array_key_exists( 'coverage_amount',$model) ? unserialize($model['coverage_amount']) : $default;
+													$arrValues = Util::array_overlay($default, $arrValues);		
+												?>
+												<td align="center"><?php echo reset($arrValues['value']);?></td>
+												<td align="center"><?php echo end($arrValues['value']);?></td>
 											</tr>
 											<tr>
 												<td>Policy Term (in years)</td>
-												<td align="center"><?php echo array_key_exists( 'minimum_policy_terms',$vFeatures) ? $vFeatures['minimum_policy_terms'] : '';?></td>
-												<td align="center"><?php echo array_key_exists( 'maximum_policy_terms',$vFeatures) ? $vFeatures['maximum_policy_terms'] : '';?></td>
+												<?php 
+								                	$default = array('min'=>'','max'=>'');
+													$arrValues = array_key_exists( 'policy_terms',$model) ? unserialize($model['policy_terms']) : $default;
+													$arrValues = Util::array_overlay($default, $arrValues);	
+												?>
+												<td align="center"><?php echo $arrValues['min'];?></td>
+												<td align="center"><?php echo $arrValues['max'];?></td>
 											</tr>
 											<tr>
+												<?php 			
+							                	$default = array(	'minimum'=>array(	'individual'=>array('value'=>'', 'type'=>'', 'comments'=>''),
+							                													'family_floater'=>array('value'=>'', 'type'=>'', 'comments'=>'')),
+													                'maximum'=>array(	'individual'=>array('value'=>'', 'type'=>'', 'comments'=>''),
+													                							'family_floater'=>array('value'=>'', 'type'=>'', 'comments'=>'')));
+							                	
+												$arrValues = array_key_exists( 'entry_age',$model) ? unserialize($model['entry_age']) : $default;
+												$arrValues = Util::array_overlay($default, $arrValues); ?>
 												<td>Entry Age (in years)</td>
-												<td align="center"><?php echo array_key_exists( 'minimum_entry_age',$vFeatures) ? $vFeatures['minimum_entry_age'] : '';?></td>
-												<td align="center"><?php echo array_key_exists( 'maximum_entry_age',$vFeatures) ? $vFeatures['maximum_entry_age'] : '';?></td>
+												<td align="center">
+												<?php 	
+													if (!empty($arrValues['minimum']['individual']['value']) && empty($arrValues['minimum']['family_floater']['value']))
+															$min =  $arrValues['minimum']['individual']['value'];
+														else if (!empty($arrValues['minimum']['individual']['value']) && !empty($arrValues['minimum']['family_floater']['value']))
+															$min = 'Individual : '.$arrValues['minimum']['individual']['value'].' '.(!empty($arrValues['minimum']['individual']['type']) ? $arrValues['minimum']['individual']['type'] : 'Years').'<br>Family Floater : '.$arrValues['minimum']['family_floater']['value'].' '.(!empty($arrValues['minimum']['family_floater']['type']) ? $arrValues['minimum']['family_floater']['type'] : 'Years');
+														echo $min;
+												?>
+												</td>
+												<td align="center">
+												<?php 	
+													if (!empty($arrValues['maximum']['individual']['value']) && empty($arrValues['maximum']['family_floater']['value']))
+															$min =  $arrValues['maximum']['individual']['value'];
+														else if (!empty($arrValues['maximum']['individual']['value']) && !empty($arrValues['maximum']['family_floater']['value']))
+															$min = 'Individual : '.$arrValues['maximum']['individual']['value'].' '.(!empty($arrValues['maximum']['individual']['type']) ? $arrValues['maximum']['individual']['type'] : 'Years').'<br>Family Floater : '.$arrValues['maximum']['family_floater']['value'].' '.(!empty($arrValues['maximum']['family_floater']['type']) ? $arrValues['maximum']['family_floater']['type'] : 'Years');
+														echo $min;
+												?>
+												</td>
 											</tr>
 											<tr>
 												<td>Renewable till Age (in years)</td>
-												<td align="center"><?php echo array_key_exists( 'manimum_renewal_age',$vFeatures) ? $vFeatures['manimum_renewal_age'] : '';?></td>
-												<td align="center"><?php echo array_key_exists( 'maximum_renewal_age',$vFeatures) ? $vFeatures['maximum_renewal_age'] : '';?></td>
+												<?php 		
+												$default = array('type'=>'', 'max'=>'', 'min'=>'');
+												$arrValues = array_key_exists( 'renewal_age',$model) ? unserialize($model['renewal_age']) : $default;
+												$arrValues = Util::array_overlay($default, $arrValues);
+												?>
+												<td align="center"><?php echo ($arrValues['type'] != 'lifelong') ? array_key_exists( 'min',$arrValues) ? $arrValues['min'] : '0' : '-';?></td>
+												<td align="center"><?php echo ($arrValues['type'] != 'lifelong') ? array_key_exists( 'max',$arrValues) ? $arrValues['max'] : '-' : 'Lifelong';?></td>
 											</tr>
 											<tr>
 												<td>No Medical Test Age (in years)</td>
-												<td align="center"><?php echo array_key_exists( 'minimum_no_medical_test_age',$vFeatures) ? $vFeatures['minimum_no_medical_test_age'] : '';?></td>
-												<td align="center"><?php echo array_key_exists( 'maximum_no_medical_test_age',$vFeatures) ? $vFeatures['maximum_no_medical_test_age'] : '';?></td>
+												<?php
+												$default = array('covered'=>'', 'min'=>'', 'max'=>'', 'comments'=>'');
+												$arrValues = array_key_exists( 'no_medical_test_age',$model) ? unserialize($model['no_medical_test_age']) : $default;
+												$arrValues = Util::array_overlay($default, $arrValues);
+												$selected = $arrValues['covered'];
+												?>
+												<td align="center">
+													-<?php //echo array_key_exists( 'minimum_no_medical_test_age',$vFeatures) ? $vFeatures['minimum_no_medical_test_age'] : '';?>
+												</td>
+												<td align="center"><?php echo ($arrValues['covered'] == 'yes') ? $arrValues['max'] : 'Not Covered';?></td>
 											</tr>
 										</tbody>
 									</table>
@@ -397,11 +440,49 @@
 											</tr>
 											<tr>
 												<td class="pad-70">Room Rent</td>
-												<td><?php echo (isset($vFeatures['room_rent']) && !empty($vFeatures['room_rent'])) ? $vFeatures['room_rent'] :'-';?></td>
+												<td>
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'room_rent',$model) ? unserialize($model['room_rent']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+														$display = array();
+														if ($selected == 'actual rent')
+															$display[] = 'Actual Rent';
+														else if ($selected == 'specific')
+														{
+															$display[] = (!empty($arrValues['percent'])) ? $arrValues['percent'].' % of Sum Insured per day' : '';
+															$display[] =  (!empty($arrValues['amount'])) ? 'Rs. '.$arrValues['amount'].' per day' : '';
+															$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														}
+														else 
+															$display[] = 'Not covered';
+														echo implode(', ', $display);	
+									                ?>
+									             </td>
 											</tr>
 											<tr>
 												<td class="pad-70">ICU Rent</td>
-												<td><?php echo array_key_exists( 'icu_rent',$vFeatures) ? $vFeatures['icu_rent'] : '';?></td>
+												<td>
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'icu_rent',$model) ? unserialize($model['icu_rent']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+														$display = array();
+														if ($selected == 'actual rent')
+															$display[] = 'Actual Rent';
+														else if ($selected == 'specific')
+														{
+															$display[] = (!empty($arrValues['percent'])) ? $arrValues['percent'].' % of Sum Insured per day' : '';
+															$display[] =  (!empty($arrValues['amount'])) ? 'Rs. '.$arrValues['amount'].' per day' : '';
+															$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														}
+														else 
+															$display[] = 'Not covered';
+														echo implode(', ', $display);	
+									                ?>
+									             </td>
 											</tr>
 											<tr>
 												<td class="pad-70">Fees of Surgeon, Anesthetist, Nurses and

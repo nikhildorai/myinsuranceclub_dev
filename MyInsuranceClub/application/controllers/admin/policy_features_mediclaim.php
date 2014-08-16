@@ -110,6 +110,7 @@ class Policy_features_mediclaim extends Admin_Controller {
 											'pre_hosp','day_care', 'ayurvedic', 'co_pay','maternity_normal_delivery', 'maternity_caesarean_delivery',
 											'maternity_new_born_baby_cover', 'maternity_addition_of_new_born', 'hospital_cash', 'emergency_ambulance', 
 											'organ_donor_exp',  'e_opinion','domiciliary_treatment_expenses', 'family_discount', 'two_year_policy_option',
+											'room_rent','icu_rent',
 										);
 					
 //var_dump($_POST['model']['coverage_amount']);
@@ -119,7 +120,7 @@ class Policy_features_mediclaim extends Admin_Controller {
 						{  
 							$_POST['model'][$v1] = serialize($_POST['model'][$v1]);
 						}
-					}		
+					}
 					
 //var_dump($_POST['model']['coverage_amount']);die;	
 //var_dump($_POST['model']['domiciliary_treatment_expenses']);die;		

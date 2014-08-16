@@ -140,6 +140,9 @@ $(".form-horizontal :input").prop("disabled", true);
 												<th class="specalt" scope="row" width="234" valign="top">Pre-existing diseases</th>
 												<td width="510" valign="top">																
 									                <div class="row">
+									                    <div class="col-sm-3"> 
+									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Covered after </label>
+									                    </div>   
 									                    <div class="col-sm-3">
 									                        <input type="text" class="form-control col-sm-3 numberValidation" placeholder="" name="model[preexisting_diseases]" value="<?php echo array_key_exists( 'preexisting_diseases',$model) ? $model['preexisting_diseases'] : '';?>">
 									                    </div>
@@ -157,11 +160,137 @@ $(".form-horizontal :input").prop("disabled", true);
 											</tr>
 											<tr>
 												<td class="pad-70">Room Rent</td>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[room_rent]" value="<?php echo array_key_exists( 'room_rent',$model) ? $model['room_rent'] : '';?>" ></td>
+												<td width="510" valign="top">
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'room_rent',$model) ? unserialize($model['room_rent']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('actual rent'=>'Actual Rent','specific'=>'Specific Rent', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'class'       => 'showHideNextDivByRadio',
+																	    'name'        => 'model[room_rent][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
+															<div class="row" >						
+												                <div class="col-sm-6">
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">% of SI</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control" maxlength="3" placeholder="" name="model[room_rent][percent]" value="<?php echo $arrValues['percent'];?>" >
+												                    </div>  
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Per day</label>
+												                    </div>              
+												                </div>	
+												                <div class="col-sm-6">
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Max Amount</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[room_rent][amount]" value="<?php echo $arrValues['amount'];?>" >
+												                    </div>   
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Per Day</label>
+												                    </div>           
+												                </div>
+												            </div>
+									                    </div>    
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[room_rent][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+									                </div>
+												</td>
 											</tr>
 											<tr>
 												<td class="pad-70">ICU Rent</td>
-												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[icu_rent]" value="<?php echo array_key_exists( 'icu_rent',$model) ? $model['icu_rent'] : '';?>" ></td>
+												<td width="510" valign="top">
+									                <div class="row">
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'icu_rent',$model) ? unserialize($model['icu_rent']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+									                ?>
+									                    <div class="col-sm-12"> 
+										                    <?php 
+																$options = array('actual rent'=>'Actual Rent','specific'=>'Specific Rent', 'no'=>'Not Covered');		
+																foreach ($options as $k1=>$v1)
+																{
+																	$op = array(
+																	    'class'       => 'showHideNextDivByRadio',
+																	    'name'        => 'model[icu_rent][covered]',
+																	    'value'       => $k1,
+																	    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+																	    'style'       => 'margin:10px',
+																	    );
+																	echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+																}
+															?>
+									                    </div> 
+									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
+															<div class="row" >						
+												                <div class="col-sm-6">
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">% of SI</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control" maxlength="3" placeholder="" name="model[icu_rent][percent]" value="<?php echo $arrValues['percent'];?>" >
+												                    </div>  
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Per day</label>
+												                    </div>              
+												                </div>	
+												                <div class="col-sm-6">
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Max Amount</label>
+												                    </div>  
+												                    <div class="col-sm-6">
+												                        <input type="text" class="form-control numberValidation"  placeholder="" name="model[icu_rent][amount]" value="<?php echo $arrValues['amount'];?>" >
+												                    </div>   
+												                    <div class="col-sm-3"> 
+												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Per Day</label>
+												                    </div>           
+												                </div>
+												            </div>
+									                    </div>    
+									                    <br clear="all">
+										                <div class="divider"></div> 
+														<div class="row" >						
+											                <div class="col-sm-12">
+											                    <div class="col-sm-2"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Comments</label>
+											                    </div>  
+											                    <div class="col-sm-10">
+											                   		<input type="text" class="form-control"  placeholder="" name="model[icu_rent][comments]" value="<?php echo $arrValues['comments'];?>" >
+											                    </div>            
+											                </div>	
+										                </div>
+									                </div>
+									             </td>
 											</tr>
 											<tr>
 												<td class="pad-70">Fees of Surgeon, Anesthetist, Nurses and
@@ -319,7 +448,7 @@ $(".form-horizontal :input").prop("disabled", true);
 									                ?>
 									                    <div class="col-sm-12"> 
 										                    <?php 
-																$options = array('yes'=>'Covered', 'all'=>'All', 'specific'=>'Specific', 'no'=>'Not Covered');		
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
 																foreach ($options as $k1=>$v1)
 																{
 																	$op = array(
@@ -333,19 +462,16 @@ $(".form-horizontal :input").prop("disabled", true);
 																}
 															?>
 									                    </div> 
-									                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">
-															<div class="row" >						
-												                <div class="col-sm-6">
-												                    <div class="col-sm-6"> 
-												                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Percent</label>
-												                    </div>  
-												                    <div class="col-sm-6">
-												                        <input type="text" class="form-control" maxlength="3" placeholder="" name="model[day_care][day_care]" value="<?php echo $arrValues['day_care'];?>" >
-												                    </div>              
-												                </div>	
-												            </div>
+									                    <div class="row" style="display:<?php echo ($selected != 'no') ? 'block' : 'none';?>;">		
+											                <div class="col-sm-12">
+											                    <div class="col-sm-4"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">No. of Listed Procedures</label>
+											                    </div>  
+											                    <div class="col-sm-8">
+											                   		<input type="text" class="form-control" maxlength="3" placeholder="" name="model[day_care][day_care]" value="<?php echo $arrValues['day_care'];?>" >
+											                    </div>            
+											                </div>	      
 									                    </div>    
-									                    <br clear="all">
 										                <div class="divider"></div> 
 														<div class="row" >						
 											                <div class="col-sm-12">
@@ -360,25 +486,6 @@ $(".form-horizontal :input").prop("disabled", true);
 									                </div>
 												</td>
 											</tr>
-											<tr>
-												<th class="spec" scope="row" width="234" valign="top">Maternity Benefits</th>
-												<td width="510" valign="top">
-											<?php 	$maternitySelected = array_key_exists( 'maternity',$model) ? $model['maternity'] : '';
-													$options = array('yes'=>'Yes', 'no'=>'No');		
-													foreach ($options as $k1=>$v1)
-													{
-														$op = array(
-														    'class'        => 'maternityBenefit',
-														    'name'        => 'model[maternity]',
-														    'value'       => $k1,
-														    'checked'     => ($maternitySelected == $k1) ? TRUE : FALSE,
-														    'style'       => 'margin:10px',
-														    );
-														echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
-													}
-													?>
-												</td>
-											</tr>	
 											<tr>
 												<th class="spec" scope="row" width="234" valign="top">Health Check up</th>
 												<td width="510" valign="top"><input type="text" class="form-control"  placeholder="" name="model[check_up]" value="<?php echo array_key_exists( 'check_up',$model) ? $model['check_up'] : '';?>" ></td>
@@ -513,8 +620,6 @@ $(".form-horizontal :input").prop("disabled", true);
 										</tbody>
 									</table>
 			
-			                <div class="maternityBenefitClass">
-			                
 				                <div class="form-group">
 				                </div>
 				                <div class="form-group">
@@ -525,8 +630,27 @@ $(".form-horizontal :input").prop("disabled", true);
 												<th colspan="2">Maternity Benefits</th>
 											</tr>
 										</thead>
-										<tbody>								
+										<tbody>		
 											<tr>
+												<th class="spec" scope="row" width="234" valign="top">Maternity Benefits</th>
+												<td width="510" valign="top">
+											<?php 	$maternitySelected = array_key_exists( 'maternity',$model) ? $model['maternity'] : '';
+													$options = array('yes'=>'Yes', 'no'=>'No');		
+													foreach ($options as $k1=>$v1)
+													{
+														$op = array(
+														    'class'        => 'maternityBenefit',
+														    'name'        => 'model[maternity]',
+														    'value'       => $k1,
+														    'checked'     => ($maternitySelected == $k1) ? TRUE : FALSE,
+														    'style'       => 'margin:10px',
+														    );
+														echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+													}
+													?>
+												</td>
+											</tr>							
+											<tr class="maternityBenefitClass">
 												<th class="spec" scope="row" width="234" valign="top">Waiting Period</th>
 												<td width="510" valign="top">
 													<?php 
@@ -546,7 +670,7 @@ $(".form-horizontal :input").prop("disabled", true);
 												</td>
 											</tr>
 											
-											<tr>
+											<tr class="maternityBenefitClass">
 												<th class="specalt" scope="row" width="234" valign="top">Normal Delivery</th>
 												<td width="510" valign="top">
 												<?php 
@@ -585,7 +709,7 @@ $(".form-horizontal :input").prop("disabled", true);
 									                </div>
 												</td>
 											</tr>
-											<tr>
+											<tr class="maternityBenefitClass">
 												<th class="spec" scope="row" width="234" valign="top">Caesarean Delivery</th>
 												<td width="510" valign="top">
 												<?php 
@@ -623,7 +747,7 @@ $(".form-horizontal :input").prop("disabled", true);
 									                </div>
 												</td>
 											</tr>
-											<tr>
+											<tr class="maternityBenefitClass">
 												<th class="specalt" scope="row" width="234" valign="top">New-born baby expenses cover</th>
 												<td width="510" valign="top">
 												
@@ -718,7 +842,7 @@ $(".form-horizontal :input").prop("disabled", true);
 									                </div>	
 												</td>
 											</tr>
-											<tr>
+											<tr class="maternityBenefitClass">
 												<th class="spec" scope="row" width="234" valign="top">Addition of New-born</th>
 												<td width="510" valign="top">
 												
@@ -838,10 +962,9 @@ $(".form-horizontal :input").prop("disabled", true);
 											</tr>
 										</tbody>
 									</table>
-								</div>	
 			<style>
 .maternityBenefitClass{
-display:<?php echo ($maternitySelected == 'yes') ? 'block' : 'none';?>;
+display:<?php echo ($maternitySelected == 'yes') ? 'table-row' : 'none';?>;
 }
 </style>	
 			                <div class="form-group">
@@ -1705,7 +1828,7 @@ $(document).ready(function(){
 
 	$('.showHideNextDivByRadio').click(function(){
 		var curVal = $(this).val(); 		
-		if(curVal == 'lifelong' || curVal == 'no limit' || curVal == 'no')
+		if(curVal == 'lifelong' || curVal == 'no limit' || curVal == 'no' || curVal == 'actual rent')
 			$(this).parent().parent().next().hide();
 		else
 			$(this).parent().parent().next().show();	
