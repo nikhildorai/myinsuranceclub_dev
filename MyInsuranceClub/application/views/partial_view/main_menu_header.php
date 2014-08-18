@@ -29,7 +29,7 @@
                   <!--main navigation-->
                   <ul class="nav navbar-nav" id="menu">
                      <li>
-                        <a href="index.php" class="home_fix"><i class="fa fa-home"></i><span class="hidden">Home</span></a>
+                        <a href="<?php echo site_url();?>" class="home_fix"><i class="fa fa-home"></i><span class="hidden">Home</span></a>
                      </li>
                      <li><a href="<?php echo site_url('car-insurance');?>" class=" menu-item" >Car Insurance </a></li>
                      <li><a href="<?php echo site_url('two-wheeler-insurance');?>" class=" menu-item" >Two Wheeler Insurance </a></li>
