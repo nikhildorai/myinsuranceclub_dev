@@ -85,7 +85,7 @@ class model_get_results_travel_insurance EXTENDS MIC_Model{
 		$result = $getTravelSearchData->result_array();
 		/********************************* Saving Fetched Search Results ***********************************/
 		
-		if(!empty($result)
+		if(!empty($result))
 		{
 			//$result = $getTravelSearchData->result_array();
 			
