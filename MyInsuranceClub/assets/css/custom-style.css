@@ -642,7 +642,7 @@ h3.bottom-col-title, #bottom ul.small-thumb li, #bottom .widget_recent_entries l
 		.form-group{margin-left:0px; padding-left:0px;}
 		.form-group .form-control{ border:2px solid #bababa;}
 		.link{ color:#1969b4;}
-		.btn.btn-primary.my{ background:#088f16;}
+		.btn.btn-primary.my{ background:#088f16; border: 2px solid #066b0e;font-weight: bold; padding: 10px 20px;}
 		.left80{ margin-left:60px;} 
 		.cen{ text-align:center;}
 		.mar-r8{ margin-right:8px;}
@@ -1420,9 +1420,9 @@ background-position: 0 -120px; cursor:pointer;
 
 
 }
-.folowbt li{ float:left; margin-left:10px; list-style-type:none; padding:0;}
+.folowbt li{ float:left; margin-left:20px; list-style-type:none; padding:0;}
 .folowbt li.pls{ margin:0px 0px 0px 0px;}
-.folowbt li.fbp{ margin:0px 10px 0px 0px;}
+.folowbt li.fbp{ margin:0px 20px 0px 0px;}
 
 .cus_cont .checkbox {
     display: block;

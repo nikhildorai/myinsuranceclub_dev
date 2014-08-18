@@ -343,7 +343,7 @@
                   <div class=" travel-name-control right-spacer">
                     <div class="mic_sec_label" >
                       <div class="mic_t_input ">
-                        <input type="text" class="mic_t_input mic_e_input " placeholder="Full name" aria-label="Full name" name="cust_name" value="<?php echo set_value('cust_name');?>">
+                        <input type="text" class="form-control " placeholder="Full name" aria-label="Full name" name="cust_name" value="<?php echo set_value('cust_name');?>">
                       </div>
                      
                       <div></div>
@@ -352,7 +352,7 @@
                   <div class="travel-name-control" >
                     <div class="mic_sec_label">
                       <div class="mic_t_input ">
-                        <input type="text" class="mic_t_input mic_e_input " placeholder="Mobile" aria-label="Mobile" name="cust_mobile" maxlength="10">
+                        <input type="text" class="form-control " placeholder="Mobile" aria-label="Mobile" name="cust_mobile" maxlength="10">
                       </div>
                       <div class="error-text"></div>
                     </div>
@@ -361,7 +361,7 @@
                 <div class="travel-email-control">
                   <div class="mic_sec_label">
                     <div class="mic_t_input ">
-                      <input type="text" class="mic_t_input mic_e_input " placeholder="Your email" aria-label="Your email" name="cust_email">
+                      <input type="text" class="form-control" placeholder="Your email" aria-label="Your email" name="cust_email">
                     </div>
                     <div class="error-text"></div>
                   </div>

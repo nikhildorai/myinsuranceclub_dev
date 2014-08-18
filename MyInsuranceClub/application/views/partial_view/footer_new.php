@@ -43,17 +43,17 @@
 
 <li class="fbp"> <div id="fb-root"></div><div class="fb-like" data-href="https://www.facebook.com/myinsuranceclub" data-width="200" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div></li>
 
-<li class="twtr">
+<li class="twtr" style="margin-left:0px;">
 
 <a href="https://twitter.com/myinsuranceclub" class="twitter-follow-button follow" data-show-count="true" data-size="medium">Follow @myinsuranceclub</a>		
 
 </li>
-<li class="pls">
+<li class="pls" style="">
 <!--<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>-->
 
 <g:plusone size="medium" href="http://www.myinsuranceclub.com/"></g:plusone>
 </li>
-<li style="margin-top:-2px;"><!--<script src="https://apis.google.com/js/platform.js"></script>-->
+<li style="margin-top:-2px; margin-left:0px;"><!--<script src="https://apis.google.com/js/platform.js"></script>-->
 
 <div class="g-ytsubscribe" data-channel="myinsuranceclub" data-layout="default" data-count="default"></div></li>
 

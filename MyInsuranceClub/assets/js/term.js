@@ -15,11 +15,11 @@ $(document).ready(function() {
 		 if (ScrollTop > 100)
 		 
 		 {
-		 var t_p = $('.t_h_btn.aa').offset().top - 317;
+		 var t_p = $('.t_h_btn.aa').offset().top - 265;
 		 }
 		 
 		 else{
-			var t_p = $('.t_h_btn.aa').offset().top - 352; 
+			var t_p = $('.t_h_btn.aa').offset().top - 300; 
 		 }
 		 
 		 $('.mic_tooltip_message').css({top:t_p});
@@ -34,7 +34,7 @@ $(document).ready(function() {
 		
 		
 		
-		$('.dur_t,#duration_a,#duration_b,#duration_c,#duration_d').click(function(){
+		$('.dur_t,#duration_a,#duration_b,#duration_c,#duration_d,#duration_e').click(function(){
 		 
 		 $('.mic_tooltip_message').fadeIn();
 		 
@@ -46,11 +46,11 @@ $(document).ready(function() {
 		 if (ScrollTop > 100)
 		 
 		 {
-		 var t_p = $('.dur_t').offset().top - 317;
+		 var t_p = $('.dur_t').offset().top - 265;
 		 }
 		 
 		 else{
-			var t_p = $('.dur_t').offset().top - 352; 
+			var t_p = $('.dur_t').offset().top - 300; 
 		 }
 		 
 		 
@@ -74,11 +74,11 @@ $(document).ready(function() {
 		 if (ScrollTop > 100)
 		 
 		 {
-		 var t_p = $('.ann_t').offset().top - 317;
+		 var t_p = $('.ann_t').offset().top - 265;
 		 }
 		 
 		 else{
-			var t_p = $('.ann_t').offset().top - 352; 
+			var t_p = $('.ann_t').offset().top - 300; 
 		 }
 		 
 		 
@@ -178,40 +178,44 @@ $(document).ready(function() {
 		
 		$('#duration_a').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('#duration_b,#duration_c,#duration_d').removeClass('mic_btn_tl_chkd'); 
+		 $('#duration_b,#duration_c,#duration_d,#duration_e').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-duration-custom,#cus_sel_duration').hide();
+		  $('#about_policy_holder').show();
     
         });
 		
 		$('#duration_b').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('#duration_a,#duration_c,#duration_d').removeClass('mic_btn_tl_chkd'); 
+		 $('#duration_a,#duration_c,#duration_d,#duration_e').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-duration-custom,#cus_sel_duration').hide();
+		  $('#about_policy_holder').show();
     
         });
 		
 		$('#duration_c').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('#duration_a,#duration_b,#duration_d').removeClass('mic_btn_tl_chkd'); 
+		 $('#duration_a,#duration_b,#duration_d,#duration_e').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-duration-custom,#cus_sel_duration').hide();
+		  $('#about_policy_holder').show();
     
         });
 		
-		/*$('#duration_d').click(function(){
+		$('#duration_d').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('#duration_a,#duration_b,#duration_c').removeClass('mic_btn_tl_chkd'); 
-    
-        $('#cus_sel_duration').show();
-        });*/
+		 $('#duration_a,#duration_b,#duration_c,#duration_e').removeClass('mic_btn_tl_chkd'); 
+     $('.id-duration-custom,#cus_sel_duration').hide();
+	 $('#about_policy_holder').show();
+        });
 		
 			$(document).delegate('.duration_menu li','click',function() {
 				
-				$('#duration_d').addClass('mic_btn_tl_chkd');  
-		 $('#duration_a,#duration_b,#duration_c').removeClass('mic_btn_tl_chkd'); 
+				$('#duration_e').addClass('mic_btn_tl_chkd');  
+		 $('#duration_a,#duration_b,#duration_c,#duration_d').removeClass('mic_btn_tl_chkd'); 
    var am_v = $(this).text(); // gets text contents of clicked li
    $('.id-duration-custom').show();
 	$("#duration_other_select span").text(am_v);
 	$('#cus_sel_duration').fadeOut();
+	$('#about_policy_holder').show();
 	
 
 });
@@ -220,7 +224,7 @@ $(document).ready(function() {
 	$(document).delegate('.close_duration_select','click',function() {
 		
 	  $('.id-duration-custom').hide();
-	  $('#duration_d').removeClass('mic_btn_tl_chkd'); 
+	  $('#duration_e').removeClass('mic_btn_tl_chkd'); 
     
         });
 		
@@ -283,6 +287,7 @@ $(document).delegate('.close_annual_select','click',function() {
 		 $(this).addClass('mic_btn_tl_chkd');  
 		 $('.city_b,.city_c,.city_d,.city_e').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-city-custom,#cus_sel_city').hide();
+		  $('#Policy_holder_details').show();
     
         });
 		
@@ -290,6 +295,7 @@ $(document).delegate('.close_annual_select','click',function() {
 		 $(this).addClass('mic_btn_tl_chkd');  
 		 $('.city_a,.city_c,.city_d,.city_e').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-city-custom,#cus_sel_city').hide();
+		   $('#Policy_holder_details').show();
     
         });
 		
@@ -297,6 +303,7 @@ $(document).delegate('.close_annual_select','click',function() {
 		 $(this).addClass('mic_btn_tl_chkd');  
 		 $('.city_b,.city_a,.city_d,.city_e').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-city-custom,#cus_sel_city').hide();
+		   $('#Policy_holder_details').show();
     
         });
 		
@@ -305,6 +312,7 @@ $(document).delegate('.close_annual_select','click',function() {
 		 $(this).addClass('mic_btn_tl_chkd');  
 		 $('.city_b,.city_c,.city_a,.city_e').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-city-custom,#cus_sel_city').hide();
+		   $('#Policy_holder_details').show();
     
         });
 		
@@ -313,6 +321,7 @@ $(document).delegate('.close_annual_select','click',function() {
 		 $(this).addClass('mic_btn_tl_chkd');  
 		 $('.city_b,.city_c,.city_d,.city_a').removeClass('mic_btn_tl_chkd'); 
 		  $('#cus_sel_city').show();
+		   $('#Policy_holder_details').show();
     
         });
 			

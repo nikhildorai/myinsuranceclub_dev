@@ -751,10 +751,10 @@ label[title]:hover:before{
 }
 
 
-#sub_form{
+/*#sub_form{
     float: right; border:2px solid #066B0E; font-size: 18px;
     padding: 12px 25px; font-weight:bold;
-}
+}*/
 .ar{   font-size: 12px;
     font-weight: normal;
     padding-left: 10px; margin-right: -10px;}

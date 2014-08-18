@@ -132,36 +132,16 @@
                 </div>
                 
                  <div class="p_d_column">
-              
-                
-                   <label  for="Previous Insurer">Gender</label>
-               <div class="c_col_60" style="width:100%;  float:left; position:relative;">
-                <div style="width:100%; margin-top:0px; line-height:0px;" class="mic_t_input">
-                            <div class=" mic_t_b_panel">
-                              <div style="width:50%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gender_m">
-                                <div class="mic_icon" style="padding: 4px 0px;">
-                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Male</div>
-                                </div>
-                              </div>
-                              <div style="width: 50%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r gender_f">
-                                <div class="mic_icon" style="padding: 4px 0px;">
-                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Female</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                       
-                              
-
-                </div>
-               
+      
+                       <label  for="Previous Insurer">Mobile</label>
+                <input type="text" class="form-control" name="mobile" >
                 </div>
                 
                  <div class="p_d_column no_r">
+                      <label  for="Previous Insurer">Email</label>
+                <input type="text" class="form-control" name="email" >
                
           
-                       <label  for="Previous Insurer">Mobile</label>
-                <input type="text" class="form-control" name="mobile" >
                 </div>
                 
                 
@@ -433,13 +413,7 @@
                 
                 
              
-                
-                 <div class="p_d_column ">
-                   <label  for="Previous Insurer">Email</label>
-                <input type="text" class="form-control" name="email" >
-           
-                </div>
-                
+         
                 
                 
                  
