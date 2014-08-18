@@ -88,6 +88,23 @@ $route['life-insurance/term-insurance/search-results'] = "life_insurance/control
 $route['life-insurance/term-insurance/search-results/(:any)'] = "life_insurance/controller_termPlan/get_termPlan_results/$1";
 $route['life-insurance/term-insurance/compare-results'] = "life_insurance/controller_termPlan/compare_policies";
 
+//ulip plan routes
+$route['life-insurance/ulip'] = "life_insurance/controller_ulipPlan/index";
+
+//endowment plan routes
+$route['life-insurance/endowment-insurance'] = "life_insurance/controller_endowmentPlan/index";
+
+//money-back-policy plan routes
+$route['life-insurance/money-back-policy'] = "life_insurance/controller_money_back_policyPlan/index";
+
+//child-plans  routes
+$route['life-insurance/child-plans'] = "life_insurance/controller_childPlan/index";
+
+//endowment plan routes
+$route['life-insurance/pension-plan'] = "life_insurance/controller_pensionPlan/index";
+
+
+
 //travel insurance
 $route['travel-insurance'] = "travel/controller_travel/index";
 $route['travel-insurance/search-results/(:any)'] = "travel/controller_travel/get_travel_insurance_search_results/$1";

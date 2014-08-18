@@ -1,325 +1,808 @@
-
-
-<?php $this->load->view('partial_view/header_new'); ?>
-
+<link rel="stylesheet" href="<?php echo base_url();?>/assets/css/term.css">
 <span id="o_touch"></span>
-<div class="min_height" style="height:auto; width:100%; ">
-<div id="highlighted" >
-  <div class="container">
-     <?php echo validation_errors();?>
-	<?php echo form_open('life-insurance/term-insurance/search-results',array('name'=>'health_form','id'=>'health_form','class'=>'health-form'));?>
+<div class="min_height1" style="height:auto; width:100%; ">
+  <div id="highlighted "  class="" >
+    <div class="container">
       <div class="col-md-12 center ">
         <div class="col-md-1"></div>
-        <h1 class="col-md-11" style="text-align:center; margin-top:30px; width:100%;">Compare & Buy Term Insurance Plans</h1>
+        <h1 class="term_container" style="text-align:left; margin-top:30px;" id="step1">Compare & Buy Term Insurance Plans</h1>
         <div class="col-md-12">
-          <div class="col-md-1"></div>															
-          <p class="col-md-11" style="text-align:left; padding-left:32px;">Choose from <?php echo $company_plan_count[1]['companyCount'];?> plans from <?php echo $company_plan_count[0]['companyCount'];?> companies</p>
+          <p class="term_container" style="text-align:left; padding-top:10px; padding-bottom:25px;">Choose from 56 plans from 18 companies</p>
+       </div>
+        
+        <div class="col-md-12">
+          <p class="term_container sc_top" style="text-align:left; padding-top:50px; padding-bottom:10px; color:#ff6633;">Get Started...</p>
         </div>
+        
       </div>
-      <div class="col-md-12 center m_h" style=" position:relative;">
-        <h3>I want a <span id="clickk_termplans" style="position:relative; "><span class="dotted rs" id="rs_termplans"><?php if(isset($this->session->userdata['user_input']['coverage_amount_term'])){
- 																																	echo $this->session->userdata['user_input']['coverage_amount_term'];}else{?>25 Lakhs<?php }?></span>
-          <div data-bind="" style="display: none; left:0px; width:205px;" class="choice l amt" id="c_ch_termplans">
-            <div class="choice-leftcol" data-bind="">
-              <ul data-bind="jScrollPane" id="c_termplans" class="years active scroll-pane">
-                <?php foreach($cvg_amt as $k=>$v){?>
-                <li data-coverage-termid="<?php echo $k; ?>"><a href="javascript:void(0);"><?php echo $v;?></a></li>
-              			<?php } ?>
-              </ul>
-              <div class="stepwrap years-stepwrap">
-                <div class="step show"> <em>1</em>
-                  <div class="label-mid">Select Coverage Amount</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </span> cover for <span id="clickk_p" style="position:relative;"><span class="dotted c_for" id="c_plan"><?php if(isset($this->session->userdata['user_input']['policy_term_name'])){ echo $this->session->userdata['user_input']['policy_term_name'];}else{?>10 years<?php }?></span>
-          <div data-bind="" style="display: none;" class="choice l self" id="c_ch_p">
-            <div class="choice-leftcol" data-bind="">
-              <ul class="years active scroll-pane" id="c_for_p" data-bind="jScrollPane">
-                <?php foreach($term_in_years as $k=>$v){?>
-                <li data-policy-term="<?php echo $k; ?>"><a href="javascript:void(0);"><?php echo trim($v); ?></a></li>
-                <?php }?>
-              </ul>
-              <div class="stepwrap years-stepwrap">
-                <div class="step show"> <em>2</em>
-                  <div class="label-mid">Select Members</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </span></h3>
-      </div>
-      <div class="col-md-12 center no-margin m_h">
-        <h3 style=""><span style="">I am </span> <span id="clickk_g" style="position:relative;"><span class="dotted ge" id="ge"><?php if(isset($this->session->userdata['user_input']['cust_gender'])){ echo $this->session->userdata['user_input']['cust_gender'];}else{?>Male<?php }?></span>
-          <div data-bind="" style="display: none;" class="choice  g" id="c_ch_g">
-            <div class="choice-leftcol" data-bind="">
-              <ul class="years active" id="c_for_g"  style="padding:0px 0 30px;">
-                <li><a href="javascript:void(0);">Male</a></li>
-                <li><a href="javascript:void(0);">Female</a></li>
-              </ul>
-              <div class="stepwrap years-stepwrap">
-                <div class="step show"> <em>3</em>
-                  <div class="label-mid">Select Gender</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </span><span style=""> & I stay in</span> <span id="clickk_l" style="position:relative; ">
-          <span class="dotted loc" id="loc">
-          <?php 
-	          	$explodeCity = array();
-	          if(isset($this->session->userdata['user_input']['cust_city_name']))
-	          { 
-	          	$explodeCity = explode(', ',$this->session->userdata['user_input']['cust_city_name']);
-	          	
-	          	
-	          	echo $explodeCity[0];
-	          
-	          }else{?>
-	          Jalgaon
-          <?php }?>
-          </span>
-          <div data-bind="" style="display: none; left:0px;  max-width: 350px; width: 400px;" class="choice l cit" id="c_ch_l">
-            <div class="choice-leftcol" data-bind="">
-              <select name="cust_city" placeholder="Type your city" id="combobox" style="height:auto;">
-                <option value="" >  </option>
-                <?php if(isset($this->session->userdata['user_input']['cust_city_name']) && isset($this->session->userdata['user_input']['cust_city'])){?>
-                <option value="<?php echo $this->session->userdata['user_input']['cust_city'];?>" selected="selected"><?php echo $this->session->userdata['user_input']['cust_city_name']?></option>
-                <?php } else{?>
-                <option value="583" selected="selected">Jalgaon, Maharashtera	</option>
-                <?php }?>
-               <?php foreach ($city as $c_name){?>
-               			
-                <option value="<?php echo $c_name['city_id']; ?>" data-city-name="<?php echo $c_name['mic_city_name']; ?>" data-altname1="<?php echo $c_name['alternate_city_name1']; ?>" data-alt_name2="<?php echo $c_name['alternate_city_name2'];?>"><?php echo $c_name['display_name']; ?></option>
-               		
-               <?php }?>
-              </select>
-              <div class="stepwrap years-stepwrap">
-                <div class="step show"> <em>4</em>
-                  <div class="label-mid">Select City of Residence</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </span> </h3>
-      </div>
-      <div class="cus_cont">
-        <div class="col-md-12 mar-20 no_pad_l m_h" >
-          <p>About Policy holder:</p>
-        </div>
-        <div class="">
-         <div class="clearfix1">
-          <div class="form-group col-md-3" style="padding-left:0px;">
-            <div class="section">
-              <label class="field prepend-icon ">
-              <label class="sr-only" for="signup-first-name">Full Name</label>
-             
-             
-             <input type="text" autocomplete="off" maxlength="50" style="text-transform:capitalize;" class="form-control gui-input" id="cust_name" name="cust_name" onkeyup="javascript:validateName(cust_name);" placeholder="Full name" value="<?php if(isset($this->session->userdata['user_input']['full_name']))
-                    																					{
-                    																						echo $this->session->userdata['user_input']['full_name'];
-                    																					}else 
-                    																					{			 
-                    																						echo set_value('cust_name');
-                    																					}?>" required>
-              <input type="hidden" id="cust_gender" name="cust_gender" value="<?php if(isset($this->session->userdata['user_input']['cust_gender']))
-                    																					{
-                    																						echo $this->session->userdata['user_input']['cust_gender'];
-                    																					}else 
-                    																					{?>Male<?php }?>">
-              <input type="hidden" id="policy_term" name="policy_term" value="<?php if(isset($this->session->userdata['user_input']['policy_term']))
-                    																					{
-                    																						echo $this->session->userdata['user_input']['policy_term'];
-                    																					}else 
-                    																					{?>10<?php }?>">
-              <input type="hidden" id="policy_term_name" name="policy_term_name" value="<?php if(isset($this->session->userdata['user_input']['policy_term_name']))
-                    																					{
-                    																						echo $this->session->userdata['user_input']['policy_term_name'];
-                    																					}else 
-                    																					{?>10 years<?php }?>">
-              <input type="hidden" id="cust_city_name" name="cust_city_name" value="<?php if(isset($this->session->userdata['user_input']['cust_city_name'])){ echo $this->session->userdata['user_input']['cust_city_name'];}else{?>Jalgaon<?php }?>">
-              <input type="hidden" id="coverage_amount_term" name="coverage_amount_term" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount_term']))
-                     																				{
- 																										echo $this->session->userdata['user_input']['coverage_amount_term'];
-                     																				}else
-																										{?>25 Lakhs<?php }?>">
-             
-             <input type="hidden" id="coverage_amount_literal_term" name="coverage_amount_literal_term" value="<?php if(isset($this->session->userdata['user_input']['coverage_amount_literal_term']))
-                     																				{
- 																										echo $this->session->userdata['user_input']['coverage_amount_literal_term'];
-                     																				}else
-																										{?>2500000<?php }?>">
-             
-             
-             
-             
-              <input type="hidden" id="plan_type" name="plan_type" value="<?php if(isset($this->session->userdata['user_input']['plan_type']))
-                    																					{
-                    																						echo $this->session->userdata['user_input']['plan_type'];
-                    																					}else 
-                    																					{?>1A<?php }?>">
-              <input type="hidden" id="plan_type_name" name="plan_type_name" value="<?php if(isset($this->session->userdata['user_input']['plan_type_name']))
-                    																					{
-                    																						echo $this->session->userdata['user_input']['plan_type_name'];
-                    																					}else 
-                    																					{?>Myself<?php }?>">
-              <input type="hidden" id="product_name" name="product_name" value="Life Insurance">
-              <input type="hidden" id="product_type" name="product_type" value="Term Plan">
-              
-              </label>
-            </div>
-          </div>
-          <div class="form-group car-ins col-md-3">
-            <input type="text" class="mob_cal m_cust" name="m_cust_dob1" id="m_cust_dob1" autocomplete="off" placeholder="Date of Birth"    >
-            <div class="section">
-              <label class="field prepend-icon">
-              <label class="sr-only" for="signup-first-name">Date Of Birth</label>
-              
-              <!--                   <div id="cal_d"></div>
--->
-              <div class="desk_cal">
-                <label class="input" style="position:relative"> <i class="icon-append fa fa-calendar " id="trigger"></i>
-                  <input type="text" name="desktop_cust_dob" id="cust_dob" autocomplete="off" class="form-control cal"   placeholder="Date of Birth" value="<?php if(isset($this->session->userdata['user_input']['cust_birthdate']))
-                    																											{
-                    																												echo $this->session->userdata['user_input']['cust_birthdate'];
-                    																											}else 
-                    																											{			 
-                    																												echo set_value('desktop_cust_dob');
-                    																											}?>" required>
-                </label>
-              </div>
-              <div class="mob_cal">
-                <label class="input form-control" style="position:relative; margin:0px;"> <i class="icon-append fa fa-calendar "></i>
-                  <input type="date" name="mobile_cust_dob" id="m_cust_dob" autocomplete="off" class="native_date_picker" value="<?php if(isset($this->session->userdata['user_input']['cust_birthdate']))
-                    																											{
-                    																												echo $this->session->userdata['user_input']['cust_birthdate'];
-                    																											}else 
-                    																											{			 
-                    																												echo set_value('mobile_cust_dob');
-                    																											}?>" required/>
-                </label>
-              </div>
-              </label>
-            </div>
-          </div>
-          </div>
-          
-          <?php 
-          		$smoker = '';
-          		$non_smoker ='';
-          		
-          		if(isset($this->session->userdata['user_input']['smoker']) && $this->session->userdata['user_input']['smoker']=='1')
-				{
-          			
-						$smoker ='checked="checked"';
-          			
-				}
-				elseif(!isset($this->session->userdata['user_input']['smoker']))
-				{
-					$non_smoker = 'checked="checked"';
-				}
-          		
-          
-          ?>
-          <div class="clearfix1">
-          <div class="form-group col-md-3">
-          	<div class="section">
-              			<label class="input form-control" for="signup-first-name">
-              			<div style="margin-top:-5px">
-              			Tobacco
-                    	<input type="radio" id="smoker" name="smoker" value="1" <?php echo $smoker; ?>>yes&nbsp;|&nbsp;
-                    	<input type="radio" id="non_smoker" name="smoker" value="0" <?php echo $non_smoker; ?>>no
-                    	</div>
-                    	
-                    	</label>
-                  	</div>
+      <div class="col-md-12 center">
+        <div class="term_container term_mic">
+          <form  method="post"  class="term_form">
+            <div class="t_section t_ca">
+            
+            
+              <div class="">
+                <div class="mic_type mic_section">
+                <div class="form-lable">Policy Details</div>
+                 <div class="" style="margin-top:20px;">
+                  <div class="form-lable t">Amount you wish to be covered for?</div>
+                  <div class="term_hlp"><a class="t_h_btn aa fa fa-question-circle" href="javascript:void(0)"></a></div>
+                  <div class="mic_t_input">
+                    <div class=" mic_t_b_panel">
+                      <div id="cover_a" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r"  style="width:25%;">
+                        <div class="">
+                          <div class="mic_i_btm">1 Crore</div>
+                        </div>
+                      </div>
+                      <div id="cover_b" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r"  style="width:25%;">
+                        <div class="">
+                          <div class="mic_i_btm">50 Lakhs</div>
+                        </div>
+                      </div>
+                      <div id="cover_c" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l"  style="width:25%;">
+                        <div class="">
+                          <div class="mic_i_btm">25 Lakhs</div>
+                        </div>
+                      </div>
+                      
+                      <div id="cover_d" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l"  style="width:25%;">
+                        <div class="">
+                          <div class="mic_i_btm"><div class='cssmenu'>
+<ul>
+   <li class='active has-sub'><a href='javascript:'><span>Other</span></a>
+      <ul class="cover_menu">
+             <li class="has-sub cs">10 Lakhs</li>
+               <li class="has-sub cs">15 Lakhs</li>
+               <li class="has-sub cs">20 Lakhs</li> 
+               <li class="has-sub cs">25 Lakhs</li>
+               <li class="has-sub cs">30 Lakhs</li>
+               <li class="has-sub cs">35 Lakhs</li>
+               <li class="has-sub cs">50 Lakhs</li>
+               <li class="has-sub cs">75 Lakhs</li>
+               <li class="has-sub cs">1 Crore</li>
+               <li class="has-sub cs">1.5 Crore</li>
+               <li class="has-sub cs">2 Crore</li>
+               <li class="has-sub cs">2.5 Crore</li>
+               <li class="has-sub cs">3 Crore</li>
+               <li class="has-sub cs">4 Crore</li> 
+               <li class="has-sub cs">5 Crore</li>
+      </ul>
+   </li>
+</ul>
+</div></div>
+                        </div>
+                      </div>
+                      
+                    </div>
                   </div>
+                  <div class="error-text" style="display: none;"></div>
+                </div>
+              </div>
+              </div>
+              
+              
+              <div>
+              <!--<div class="select-cover-section" >
+  <div class="select-cover" style="display: none;" id="cus_sel_cover">
+    <div class="edit-select-control control-narrow">
+      <div>
+        <div class="inline-block select-input">
+          <div class="control-question">
+            <div class="mic_t_input">
+              <div class="mic-menu mic-menu-vertical" style="overflow-y: auto;" >
+               <ul class="cover_menu">
+               <li class="menu_it">10 Lakhs</li>
+               <li class="menu_it">15 Lakhs</li>
+               <li class="menu_it">20 Lakhs</li> 
+               <li class="menu_it">25 Lakhs</li>
+               <li class="menu_it">30 Lakhs</li>
+               <li class="menu_it">35 Lakhs</li>
+               <li class="menu_it">50 Lakhs</li>
+               <li class="menu_it">75 Lakhs</li>
+               <li class="menu_it">1 Crore</li>
+               <li class="menu_it">1.5 Crore</li>
+               <li class="menu_it">2 Crore</li>
+               <li class="menu_it">2.5 Crore</li>
+               <li class="menu_it">3 Crore</li>
+               <li class="menu_it">4 Crore</li> 
+               <li class="menu_it">5 Crore</li>
+               </ul>
+              </div>
             </div>
-          <div class="clearfix1">
-          <div class="form-group col-md-2 m_s">
-            <div class="section">
-              <label class="field prepend-icon">
-              <label class="sr-only" for="signup-first-name">Mobile</label>
-              <input type="text" autocomplete="off" class="form-control" id="cust_mobile" name="cust_mobile" maxlength="10" placeholder="Mobile" value="<?php if(isset($this->session->userdata['user_input']['cust_mobile']))
-                    																						{
-                    																							echo $this->session->userdata['user_input']['cust_mobile'];
-                    																						}else 
-                    																						{			 
-                    																							echo set_value('cust_mobile');
-                    																						}?>" required>
-              </label>
-            </div>
-          </div>
-         
-        </div>
-        
-        
-        <div class="clearfix1" style="width:100%; float:left"> <div class="form-group col-md-3 ">
-            <div class="section">
-              <label class="field prepend-icon">
-              <label class="sr-only" for="signup-first-name">Email</label>
-              <input type="text" autocomplete="off" class="form-control gui-input" id="cust_email" name="cust_email"  placeholder="Email" value="<?php if(isset($this->session->userdata['user_input']['cust_email']))
-                    																						{
-                    																							echo $this->session->userdata['user_input']['cust_email'];
-                    																						}else 
-                    																						{			 
-                    																							echo set_value('cust_email');
-                    																						}?>" required>
-              <!--                     <b class="tooltip tip-left-top" ><em>Male</em></b>  
--->
-              </label>
-            </div>
-          </div></div>
-        
-        
-        
-      </div>
-      </div>
-      
-        </div>
-      </div>
-      <div class="cus_cont">
-        <div class="" style="width:100%; float:left">
-          <div class="checkbox">
-            <label>
-            <input id="Field4" 	type="checkbox"	 name="agree"  class="field checkbox"  value="MIC_terms" checked="checked" />
-            <label class="" for="Field4">I authorize MyInsuranceClub &amp; its partners to Call/SMS for my application &amp; agree to the <a href="" class="link">Terms of Use</a>.</label>
-          </div>
-          <div class="form-group col-md-2 pad_right_no" style="float:right">
-          	<!-- <input name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="Show My Options &gt;">
-             -->
-            <button name="submit" class="btn btn-primary my" type="submit" id="sub_form" value="submit">Show plans<i class="fa fa-chevron-right ar "></i> </button>
-            <div class="load_spin"><img src="<?php echo base_url();?>/assets/images/ajax-loader.gif"></div>
+          
           </div>
         </div>
-      
+        <input  id="cover_s_auto" class="edit-control-input control-input edit-input label-input-label" placeholder="+ Select" aria-label="+ Select">
       </div>
-   <?php echo form_close();?>
-
-
-   <div class="cus_cont" style=" ">
-   
-        <div style="margin-top: 40px; float: left; width:100%;" class="">
-          <div class="pos1" >
-            <div class="col-md-2 c_o">
-              <p><img src="<?php echo base_url();?>/assets/images/star.png" border="0" class="mar-r8">Cashless claims </p>
-            </div>
-            <div class="col-md-2 c_t">
-              <p><img src="<?php echo base_url();?>/assets/images/star.png" border="0" class="mar-r8">Lifetime renewal</p>
-            </div>
-            <div class="col-md-2 c_th">
-              <p><img src="<?php echo base_url();?>/assets/images/star.png" border="0" class="mar-r8">Tax benefits</p>
-            </div>
-            <div class="col-md-2 c_f" >
-              <p><img src="<?php echo base_url();?>/assets/images/star.png" border="0" class="mar-r8">Free health checkups</p>
-            </div>
-          </div>
-        </div>
-      </div>
+    </div>
+  </div>
+</div>-->
+              
+              
+             <div class="id-cover-custom" style=" display:none;">
+  <div class="mic_c_custom">
+    <div class="mic_c_row ">
+    <div style="float: left; width: auto; line-height: 30px; margin-right: 10px;">You have selected </div>
+    <div class="mic_c_chip" id="cover_other_select"><span></span><a href="javascript:void(0)" class="fa fa-times close_cover_select"></a></div></div>
   </div>
 </div>
+           </div>   
+              
+              
+                 <div class="" style="margin-top:20px;">
+                <div class="mic_type mic_section">
+                  <div class="form-lable t">Duration of Policy?</div>
+                  <div class="term_hlp"><a class="t_h_btn dur_t  fa fa-question-circle" href="javascript:void(0)"></a></div>
+                  <div class="mic_t_input">
+                    <div class=" mic_t_b_panel">
+                      <div id="duration_a" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r"  style="width:25%;">
+                        <div class="">
+                          <div class="mic_i_btm">30 Years</div>
+                        </div>
+                      </div>
+                      <div id="duration_b" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r"  style="width:25%;">
+                        <div class="">
+                          <div class="mic_i_btm">25 Years</div>
+                        </div>
+                      </div>
+                      <div id="duration_c" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l"  style="width:25%;">
+                        <div class="">
+                          <div class="mic_i_btm">20 Years</div>
+                        </div>
+                      </div>
+                      
+                      <div id="duration_d" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l"  style="width:25%;">
+                        <div class="">
+                          <div class="mic_i_btm"><div class='cssmenu'>
+<ul>
+   <li class='active has-sub'><a href='javascript:'><span>Other</span></a>
+      <ul class="duration_menu">
+             <li class="has-sub cs">5 Years</li>
+		<li class="has-sub cs">10 Years</li>
+		<li class="has-sub cs">15 Years</li>
+		<li class="has-sub cs">20 Years</li>
+		<li class="has-sub cs">25 Years</li>
+		<li class="has-sub cs">30 Years</li>
+		<li class="has-sub cs">6 Years</li>
+		<li class="has-sub cs">7 Years</li>
+		<li class="has-sub cs">8 Years</li>
+		<li class="has-sub cs">9 Years</li>
+		<li class="has-sub cs">11 Years</li>
+		<li class="has-sub cs">12 Years</li>
+		<li class="has-sub cs">13 Years</li>
+		<li class="has-sub cs">14 Years</li>
+		<li class="has-sub cs">16 Years</li>
+		<li class="has-sub cs">17 Years</li>
+		<li class="has-sub cs">18 Years</li>
+		<li class="has-sub cs">19 Years</li>
+		<li class="has-sub cs">21 Years</li>
+		<li class="has-sub cs">22 Years</li>
+		<li class="has-sub cs">23 Years</li>
+		<li class="has-sub cs">24 Years</li>
+		<li class="has-sub cs">26 Years</li>
+		<li class="has-sub cs">27 Years</li>
+		<li class="has-sub cs">28 Years</li>
+		<li class="has-sub cs">29 Years</li>
+		<li class="has-sub cs">31 Years</li>
+		<li class="has-sub cs">32 Years</li>
+		<li class="has-sub cs">33 Years</li>
+		<li class="has-sub cs">34 Years</li>
+		<li class="has-sub cs">36 Years</li>
+		<li class="has-sub cs">37 Years</li>
+		<li class="has-sub cs">38 Years</li>
+		<li class="has-sub cs">39 Years</li>
+		<li class="has-sub cs">40 Years</li>
+      </ul>
+   </li>
+</ul>
+</div></div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <div class="error-text" style="display: none;"></div>
+                </div>
+              </div>
+              
+              <div>
+              <!--<div class="select-cover-section" >
+  <div class="select-cover" style="display: none;" id="cus_sel_duration">
+    <div class="edit-select-control control-narrow">
+      <div>
+        <div class="inline-block select-input">
+          <div class="control-question">
+            <div class="mic_t_input">
+              <div class="mic-menu mic-menu-vertical" style="overflow-y: auto;" >
+               <ul class="duration_menu">
+               		<li class="menu_it">5 Years</li>
+		<li class="menu_it">10 Years</li>
+		<li class="menu_it">15 Years</li>
+		<li class="menu_it">20 Years</li>
+		<li class="menu_it">25 Years</li>
+		<li class="menu_it">30 Years</li>
+		<li class="menu_it">6 Years</li>
+		<li class="menu_it">7 Years</li>
+		<li class="menu_it">8 Years</li>
+		<li class="menu_it">9 Years</li>
+		<li class="menu_it">11 Years</li>
+		<li class="menu_it">12 Years</li>
+		<li class="menu_it">13 Years</li>
+		<li class="menu_it">14 Years</li>
+		<li class="menu_it">16 Years</li>
+		<li class="menu_it">17 Years</li>
+		<li class="menu_it">18 Years</li>
+		<li class="menu_it">19 Years</li>
+		<li class="menu_it">21 Years</li>
+		<li class="menu_it">22 Years</li>
+		<li class="menu_it">23 Years</li>
+		<li class="menu_it">24 Years</li>
+		<li class="menu_it">26 Years</li>
+		<li class="menu_it">27 Years</li>
+		<li class="menu_it">28 Years</li>
+		<li class="menu_it">29 Years</li>
+		<li class="menu_it">31 Years</li>
+		<li class="menu_it">32 Years</li>
+		<li class="menu_it">33 Years</li>
+		<li class="menu_it">34 Years</li>
+		<li class="menu_it">36 Years</li>
+		<li class="menu_it">37 Years</li>
+		<li class="menu_it">38 Years</li>
+		<li class="menu_it">39 Years</li>
+		<li class="menu_it">40 Years</li>
+               </ul>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+        <input autocomplete="off"  class="edit-control-input control-input edit-input label-input-label" placeholder="+ Select" >
+      </div>
+    </div>
+  </div>
+</div>-->
+              
+              
+             <div class="id-duration-custom" style=" display:none;">
+  <div class="mic_c_custom">
+    <div class="mic_c_row ">
+     <div style="float: left; width: auto; line-height: 30px; margin-right: 10px;">You have selected </div>
+    <div class="mic_c_chip" id="duration_other_select"><span></span> <a href="javascript:void(0)" class="fa fa-times close_duration_select"></a></div></div>
+  </div>
 </div>
+           </div>
+              
+              
+              
+              
+              <div class="" style="margin-top:20px;">
+                <div class="mic_type mic_section">
+                  <div class="form-lable t">Annual Income?</div>
+                  <div class="term_hlp"><a class="t_h_btn ann_t  fa fa-question-circle" href="javascript:void(0)"></a></div>
+                  <div class="mic_t_input">
+                    <div class=" mic_t_b_panel">
+                      <div id="annual_a" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r"  style="width:25%;">
+                        <div class="">
+                          <div class="mic_i_btm">&gt; 10 Lakhs</div>
+                        </div>
+                      </div>
+                      <div id="annual_b" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r"  style="width:25%;">
+                        <div class="">
+                          <div class="mic_i_btm">3-4 Lakhs</div>
+                        </div>
+                      </div>
+                      <div id="annual_c" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l"  style="width:25%;">
+                        <div class="">
+                          <div class="mic_i_btm">&lt; 3 Lakhs</div>
+                        </div>
+                      </div>
+                      
+                      <div id="annual_d" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l"  style="width:25%;">
+                        <div class="">
+                          <div class="mic_i_btm"><div class='cssmenu'>
+<ul>
+   <li class='active has-sub'><a href='javascript:'><span>Other</span></a>
+      <ul class="annual_menu">
+         <li class="has-sub cs">&lt; 3 lakhs</li>
+		<li class="has-sub cs">3 to 4 lakhs</li>
+		<li class="has-sub cs">4 to 5 lakhs</li>
+		<li class="has-sub cs">5 to 6 lakhs</li>
+		<li class="has-sub cs">6 to 7 lakhs</li>
+		<li class="has-sub cs">7 to 8 lakhs</li>
+		<li class="has-sub cs">8 to 9 lakhs</li>
+		<li class="has-sub cs">9 to 10 lakhs</li>
+		<li class="has-sub cs">&gt; 10 lakhs</li>
+      </ul>
+   </li>
+</ul>
+</div></div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <div class="error-text" style="display: none;"></div>
+                </div>
+              </div>
+              
+              
+              <div>
+              <!--<div class="select-cover-section" >
+  <div class="select-cover" style="display: none;" id="cus_sel_annual">
+    <div class="edit-select-control control-narrow">
+      <div>
+        <div class="inline-block select-input">
+          <div class="control-question">
+            <div class="mic_t_input">
+              <div class="mic-menu mic-menu-vertical" style="overflow-y: auto;" >
+               <ul class="annual_menu">
+               				<li class="menu_it">&lt; 3 lakhs</li>
+		<li class="menu_it">3 to 4 lakhs</li>
+		<li class="menu_it">4 to 5 lakhs</li>
+		<li class="menu_it">5 to 6 lakhs</li>
+		<li class="menu_it">6 to 7 lakhs</li>
+		<li class="menu_it">7 to 8 lakhs</li>
+		<li class="menu_it">8 to 9 lakhs</li>
+		<li class="menu_it">9 to 10 lakhs</li>
+		<li class="menu_it">&gt; 10 lakhs</li>
+               </ul>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+        <input autocomplete="off"  class="edit-control-input control-input edit-input label-input-label" placeholder="+ Select" >
+      </div>
+    </div>
+  </div>
+</div>-->
+              
+              
+             <div class="id-annual-custom" style=" display:none;">
+  <div class="mic_c_custom">
+    <div class="mic_c_row ">
+     <div style="float: left; width: auto; line-height: 30px; margin-right: 10px;">You have selected </div>
+    <div class="mic_c_chip" id="annual_other_select"><span></span><a href="javascript:void(0)" class="fa fa-times close_a_select"></a></div></div>
+  </div>
+</div>
+           </div>
+              
+              
+              
+              
+            </div>
+            
+            
+            
+            
+            
+            
+            <div id="Policy_holder_details" style="margin-top: 25px; height: auto; display: none;" class="t_section t_ca clearfix">
+            <div class="mic_type">
+              <div class="form-lable">Policyholder Details</div>
+              
+                <div style="width:100%;" class="term_reg_open">
+              
+
+
+
+              
+                <div class="p_d_column">
+                <label  for="Previous Insurer">Full Name</label>
+                <input type="text" class="form-control" name="full_name" >
+                </div>
+                
+                 <div class="p_d_column no_r">
+                <label  for="Previous Insurer">Date of Birth</label>
+                
+                 <label style="position:relative; margin-bottom:0px;" class="input"> <i class="icon-append fa fa-calendar " id="dob_datepicker"></i>
+                 <input type="text" class="form-control dob_datepicker" name="dob" >
+                </label>
+                </div>
+                
+                 <div class="p_d_column">
+              
+                
+                   <label  for="Previous Insurer">Gender</label>
+               <div class="c_col_60" style="width:100%;  float:left; position:relative;">
+                <div style="width:100%; margin-top:0px; line-height:0px;" class="mic_t_input">
+                            <div class=" mic_t_b_panel">
+                              <div style="width:50%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gender_m">
+                                <div class="mic_icon" style="padding: 4px 0px;">
+                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Male</div>
+                                </div>
+                              </div>
+                              <div style="width: 50%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r gender_f">
+                                <div class="mic_icon" style="padding: 4px 0px;">
+                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Female</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                       
+                              
+
+                </div>
+               
+                </div>
+                
+                 <div class="p_d_column no_r">
+               
+                    <label  for="Previous Insurer">Do you consume tobacco?</label>
+                <div class="c_col_60" style="width:100%; float:left; position:relative;">
+                <div style="width:100%; margin-top:0px; line-height:0px;" class="mic_t_input">
+                            <div class=" mic_t_b_panel">
+                              <div style="width:50%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r tobaco_y">
+                                <div class="mic_icon" style="padding: 4px 0px;">
+                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Yes</div>
+                                </div>
+                              </div>
+                              <div style="width: 50%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r tobaco_n">
+                                <div class="mic_icon" style="padding: 4px 0px;">
+                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">No</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                       
+                              
+
+                </div>
+                </div>
+                
+                 <div class="p_d_column">
+                 
+                       <label  for="Previous Insurer">Mobile</label>
+                <input type="text" class="form-control" name="mobile" >
+            
+                </div>
+                
+                 <div class="p_d_column no_r">
+                   <label  for="Previous Insurer">Email</label>
+                <input type="text" class="form-control" name="email" >
+           
+                </div>
+                
+                
+                
+                 <div class="p_d_column" style="width:100%;">
+                <label  for="Previous Insurer">City of Residence</label>
+                
+                <div class="c_col_60" style="width:100%; float:left; position:relative;">
+                <div style="width:100%; margin-top:0px; line-height:0px;" class="mic_t_input">
+                            <div class=" mic_t_b_panel">
+                              <div style="width:20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r city_a">
+                                <div class="mic_icon" style="padding: 4px 0px;">
+                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Mumbai</div>
+                                </div>
+                              </div>
+                              <div style="width: 20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_b">
+                                <div class="mic_icon" style="padding: 4px 0px;">
+                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Delhi</div>
+                                </div>
+                              </div>
+                              <div style="width: 20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_c">
+                                <div class="mic_icon" style="padding: 4px 0px;">
+                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Bengaluru</div>
+                                </div>
+                              </div>
+                              <div style="width: 20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_d">
+                                <div class="mic_icon" style="padding: 4px 0px;">
+                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Kolkata</div>
+                                </div>
+                              </div>
+                              <div style="width: 20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_e">
+                                <div class="mic_icon" style="padding: 4px 0px;">
+                                  <div class="mic_i_btm" style="margin-top:5px;padding-bottom:5px;">Other</div>
+                                  
+                                  
+                                  
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+                       
+                              
+
+                </div>
+                
+                </div>
+                
+                <div>
+              <div class="select-cover-section" >
+  <div class="select-cover" style="display: none;" id="cus_sel_city">
+    <div class="edit-select-control control-narrow">
+      <div>
+        <div class="inline-block select-input">
+          <div class="control-question">
+            <div class="mic_t_input">
+              <div class="mic-menu mic-menu-vertical" style="overflow-y: auto; overflow-x:hidden; margin-top:-13px;" >
+               <ul class="city_menu">
+               		<li class="menu_it 67">Agartala</li>
+		<li class="menu_it 9">Agra</li>
+		<li class="menu_it 10">Ahmedabad</li>
+		<li class="menu_it 68">Ahmednagar</li>
+		<li class="menu_it 69">Aizawl</li>
+		<li class="menu_it 70">Ajmer</li>
+		<li class="menu_it 71">Akola</li>
+		<li class="menu_it 72">Aligarh</li>
+		<li class="menu_it 11">Allahabad</li>
+		<li class="menu_it 74">Ambala</li>
+		<li class="menu_it 75">Amethi</li>
+		<li class="menu_it 76">Amravati</li>
+		<li class="menu_it 12">Amritsar</li>
+		<li class="menu_it 77">Anand</li>
+		<li class="menu_it 78">Ankleshwar</li>
+		<li class="menu_it 13">Asansol</li>
+		<li class="menu_it 14">Aurangabad</li>
+		<li class="menu_it 80">Baharampur</li>
+		<li class="menu_it 82">Balrampur</li>
+		<li class="menu_it 83">Baramati</li>
+		<li class="menu_it 84">Bardhaman</li>
+		<li class="menu_it 85">Bareilly</li>
+		<li class="menu_it 86">Barnala  </li>
+		<li class="menu_it 87">Beawar</li>
+		<li class="menu_it 88">Belgaum</li>
+		<li class="menu_it 89">Bellary</li>
+		<li class="menu_it 15">Bengaluru</li>
+		<li class="menu_it 90">Berhampur</li>
+		<li class="menu_it 91">Bhagalpur </li>
+		<li class="menu_it 92">Bharuch</li>
+		<li class="menu_it 93">Bhavnagar</li>
+		<li class="menu_it 16">Bhilai</li>
+		<li class="menu_it 94">Bhilwara  </li>
+		<li class="menu_it 17">Bhopal</li>
+		<li class="menu_it 18">Bhubaneswar</li>
+		<li class="menu_it 96">Bhuj</li>
+		<li class="menu_it 97">Bhusawal</li>
+		<li class="menu_it 98">Bikaner</li>
+		<li class="menu_it 99">Bilaspur</li>
+		<li class="menu_it 101">Bongaigaon</li>
+		<li class="menu_it 102">Buxar</li>
+		<li class="menu_it 103">Calicut</li>
+		<li class="menu_it 19">Chandigarh</li>
+		<li class="menu_it 104">Chikmagalur</li>
+		<li class="menu_it 105">Cochin</li>
+		<li class="menu_it 20">Coimbatore</li>
+		<li class="menu_it 106">Coonoor</li>
+		<li class="menu_it 107">Cuttack</li>
+		<li class="menu_it 108">Daman</li>
+		<li class="menu_it 109">Darjeeling</li>
+		<li class="menu_it 110">Davanagere</li>
+		<li class="menu_it 111">Dehradun  </li>
+		<li class="menu_it 22">Dhanbad</li>
+		<li class="menu_it 112">Dharwad</li>
+		<li class="menu_it 113">Dimapur</li>
+		<li class="menu_it 206">Dispur</li>
+		<li class="menu_it 114">Diu</li>
+		<li class="menu_it 116">Durgapur</li>
+		<li class="menu_it 117">Dwarka</li>
+		<li class="menu_it 118">Ernakulam</li>
+		<li class="menu_it 119">Erode</li>
+		<li class="menu_it 23">Faridabad</li>
+		<li class="menu_it 120">Fatehpur Sikri</li>
+		<li class="menu_it 121">Firozabad</li>
+		<li class="menu_it 122">Gandhidham</li>
+		<li class="menu_it 123">Gandhinagar</li>
+		<li class="menu_it 124">Gangtok</li>
+		<li class="menu_it 125">Gaya</li>
+		<li class="menu_it 24">Ghaziabad</li>
+		<li class="menu_it 126">Goa</li>
+		<li class="menu_it 127">Gorakhpur</li>
+		<li class="menu_it 128">Gulbarga</li>
+		<li class="menu_it 129">Guntur</li>
+		<li class="menu_it 25">Gurgaon</li>
+		<li class="menu_it 130">Gurudaspur</li>
+		<li class="menu_it 26">Guwahati</li>
+		<li class="menu_it 27">Gwalior</li>
+		<li class="menu_it 131">Haldwani</li>
+		<li class="menu_it 132">Haridwar</li>
+		<li class="menu_it 134">Hoshiarpur</li>
+		<li class="menu_it 135">Howrah</li>
+		<li class="menu_it 136">Hubli</li>
+		<li class="menu_it 28">Hyderabad</li>
+		<li class="menu_it 137">Imphal</li>
+		<li class="menu_it 29">Indore</li>
+		<li class="menu_it 30">Jabalpur</li>
+		<li class="menu_it 31">Jaipur</li>
+		<li class="menu_it 32">Jalandhar</li>
+		<li class="menu_it 138">Jalgaon</li>
+		<li class="menu_it 139">Jammu</li>
+		<li class="menu_it 33">Jamnagar</li>
+		<li class="menu_it 34">Jamshedpur</li>
+		<li class="menu_it 140">Jhansi</li>
+		<li class="menu_it 35">Jodhpur</li>
+		<li class="menu_it 141">Jorhat</li>
+		<li class="menu_it 142">Kadapa</li>
+		<li class="menu_it 143">Kakinada</li>
+		<li class="menu_it 145">Kanchipuram</li>
+		<li class="menu_it 146">Kannur</li>
+		<li class="menu_it 36">Kanpur</li>
+		<li class="menu_it 147">Kapurthala</li>
+		<li class="menu_it 148">Karimnagar</li>
+		<li class="menu_it 204">Kathua</li>
+		<li class="menu_it 149">Kharagpur</li>
+		<li class="menu_it 37">Kochi</li>
+		<li class="menu_it 150">Kohima</li>
+		<li class="menu_it 38">Kolhapur</li>
+		<li class="menu_it 151">Kollam</li>
+		<li class="menu_it 152">Korba</li>
+		<li class="menu_it 39">Kota</li>
+		<li class="menu_it 153">Kottayam</li>
+		<li class="menu_it 40">Kozhikode</li>
+		<li class="menu_it 154">Latur</li>
+		<li class="menu_it 41">Lucknow</li>
+		<li class="menu_it 42">Ludhiana</li>
+		<li class="menu_it 155">Machilipatnam</li>
+		<li class="menu_it 43">Madurai</li>
+		<li class="menu_it 156">Malegaon</li>
+		<li class="menu_it 44">Mangalore</li>
+		<li class="menu_it 157">Margoa</li>
+		<li class="menu_it 158">Mathura</li>
+		<li class="menu_it 45">Meerut</li>
+		<li class="menu_it 159">Mehsana</li>
+		<li class="menu_it 160">Mohali</li>
+		<li class="menu_it 161">Moradabad</li>
+		<li class="menu_it 162">Mount Abu</li>
+		<li class="menu_it 203">Mukerian</li>
+		<li class="menu_it 163">Mussoorie</li>
+		<li class="menu_it 164">Muzaffarnagar</li>
+		<li class="menu_it 165">Muzaffarpur</li>
+		<li class="menu_it 46">Mysore</li>
+		<li class="menu_it 166">Nadiad</li>
+		<li class="menu_it 47">Nagpur</li>
+		<li class="menu_it 167">Nanded</li>
+		<li class="menu_it 48">Nashik</li>
+		<li class="menu_it 49">Navi Mumbai</li>
+		<li class="menu_it 168">Nellore</li>
+		<li class="menu_it 50">Noida</li>
+		<li class="menu_it 170">Ootacamund</li>
+		<li class="menu_it 171">Panaji</li>
+		<li class="menu_it 205">Patiala</li>
+		<li class="menu_it 51">Patna</li>
+		<li class="menu_it 52">Pondicherry</li>
+		<li class="menu_it 53">Pune</li>
+		<li class="menu_it 173">RaeBareli</li>
+		<li class="menu_it 174">Raichur</li>
+		<li class="menu_it 54">Raipur</li>
+		<li class="menu_it 175">Rajahmundry</li>
+		<li class="menu_it 55">Rajkot</li>
+		<li class="menu_it 56">Ranchi</li>
+		<li class="menu_it 176">Ratnagiri</li>
+		<li class="menu_it 177">Rishikesh</li>
+		<li class="menu_it 178">Roorkee</li>
+		<li class="menu_it 57">Rourkela</li>
+		<li class="menu_it 179">Saharanpur</li>
+		<li class="menu_it 180">Salem</li>
+		<li class="menu_it 181">Sambalpur</li>
+		<li class="menu_it 182">Sangli</li>
+		<li class="menu_it 183">Satara</li>
+		<li class="menu_it 184">Satna</li>
+		<li class="menu_it 185">Shillong</li>
+		<li class="menu_it 186">Shimla</li>
+		<li class="menu_it 187">Shimoga</li>
+		<li class="menu_it 188">Silchar</li>
+		<li class="menu_it 189">Siliguri</li>
+		<li class="menu_it 208">Silvassa</li>
+		<li class="menu_it 58">Solapur</li>
+		<li class="menu_it 190">Srinagar</li>
+		<li class="menu_it 59">Surat</li>
+		<li class="menu_it 60">Thane</li>
+		<li class="menu_it 191">Thanjavur</li>
+		<li class="menu_it 61">Thiruvananthapuram</li>
+		<li class="menu_it 62">Tiruchchirappalli</li>
+		<li class="menu_it 192">Tirunelveli</li>
+		<li class="menu_it 193">Tirupathi</li>
+		<li class="menu_it 194">Tiruppur</li>
+		<li class="menu_it 195">Udaipur</li>
+		<li class="menu_it 196">Udupi</li>
+		<li class="menu_it 197">Ujjain</li>
+		<li class="menu_it 63">Vadodara</li>
+		<li class="menu_it 198">Valsad</li>
+		<li class="menu_it 64">Varanasi</li>
+		<li class="menu_it 200">Vellore</li>
+		<li class="menu_it 65">Vijayawada</li>
+		<li class="menu_it 66">Visakhapatnam</li>
+		<li class="menu_it 201">Warangal</li>
+		<li class="menu_it 202">Yavatmal</li>
+               </ul>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+        <input  id="city_s_auto" class="edit-control-input control-input edit-input label-input-label" placeholder="+ Select" aria-label="+ Select">
+      </div>
+    </div>
+  </div>
+</div>
+              
+              
+             <div class="id-city-custom" style=" display:none;">
+  <div class="mic_c_custom">
+    <div class="mic_c_row ">
+    <div style="float: left; width: auto; line-height: 30px; margin-right: 10px;">You have selected </div>
+    <div class="mic_c_chip" id="city_other_select"><span></span><a href="javascript:void(0)" class="fa fa-times close_city_select"></a></div></div>
+  </div>
+</div>
+           </div>
+               
+                
+                 <div style="width:100%; margin-top:0px; float:left;">
+                <div class="note_sec">
+                <div class="checkbox">
+            <label>
+            <input type="checkbox" id="Field4" name="agree" checked="" class="field checkbox" value="agree">
+            <label class="" for="Field4">I authorize MyInsuranceClub &amp; its partners to Call/SMS for my application &amp; agree to the <a href="" class="link">Terms of Use</a>.</label>
+          </label></div>
+                
+                </div>
+                
+                <div class="button-panel"><span class="right-buttons"><span class="id-next-button">
+                  <div style="font-weight: bold;
+    padding: 10px 20px;" class="btn btn-primary my">
+                    <div class="">Show Plans <i class="fa fa-chevron-right ar "></i></div>
+                  </div>
+                  </span></span> </div>
+                
+                
+                </div>
+                
+                
+                
+                
+                
+                </div>
+            </div>
+          </div>
+            
+            
+            
+            
+            
+          </form>
+          <div class=" mic_tooltip_column">
+            <div style="top: 8px;" class="mic_tooltip_message card">
+              <div class="tooltip_term_sec help-scroll" style="height: auto;">
+               <p>Cover amount should be between Rs 1 Lakh and 5 Crores in multiples of Rs 1 Lakh.</p>
+              </div>
+              <div class="mic_tooltip_corner" style="top: 27.5px;">
+                <div class="mic_tooltip_corner_out"></div>
+                <div class="mic_tooltip_corner_in"></div>
+              </div>
+              <a href="javascript:void(0)" class="mic_tooltip_close fa fa-times-circle"></a> </div>
+          </div>
+          <!--<div class="t_ca ref_y" style="visibility: visible; display:none; margin-left:100px;"> <a class="close_you fa fa-times-circle" href="javascript:void(0)"></a>
+            <div class="ref_y_text"></div>
+            <div class="mic_tooltip-bottom" style="left: 15px;">
+              <div class="mic_tooltip-out"></div>
+              <div class="mic_tooltip-in"></div>
+            </div>
+          </div>-->
+        </div>
+      </div>
+      
+      <div class="cus_cont" >
+        <div style="margin-top: 40px; float: left; margin-bottom:80px; width:100%;" class="">
+          <div class="pos1" >
+            <div class="col-md-2 c_o">
+              <p><img src="<?php echo base_url();?>/assets/images/star.png" border="0" class="mar-r8">Global validity 24x7</p>
+            </div>
+            <div class="col-md-2 c_t">
+              <p><img src="<?php echo base_url();?>/assets/images/star.png" border="0" class="mar-r8">Medical expenses</p>
+            </div>
+            <div class="col-md-2 c_th">
+              <p><img src="<?php echo base_url();?>/assets/images/star.png" border="0" class="mar-r8">Checked-in baggage loss</p>
+            </div>
+            <div class="col-md-2 c_f" >
+              <p><img src="<?php echo base_url();?>/assets/images/star.png" border="0" class="mar-r8">Emergency cash</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="b-top"></div>
 <section id="feature-pannels" style="opacity: 1; bottom: 0px;" class="moving">
@@ -358,34 +841,43 @@
         <article class="row">
           <div class="col-md-5 col-sm-5 fadeInLeft visible"> <img class="img-responsive" src="<?php echo base_url();?>/assets/images/why1.jpg" alt=""></div>
           <div class="col-md-7 col-sm-6 text-left fadeInRight visible">
-            <h6>Benefits of Comparing Health Insurance with us?</h6>
-            <p>Health expenses are increasing considerably each day and so are the health risks. With a wide array of health insurance policies, the task of choosing the best health insurance policy for your needs can be quite tough and confusing.
-              At MyInsuranceClub we provide you with comparative health insurance quotes to select the best health insurance policy in a quick and simplified manner. You can also compare features of different health insurance policies to check the <span class="highlight">best health insurance policy</span> for your requirements. 
-              
-              .</p>
+            <h6>Why Compare Travel Insurance with us?</h6>
+            <p>Emergency & un-planned expenses can burn a big hole in your pocket when you are travelling abroad. Not only do they take you by surprise, the charges of medical care in most countries are much higher than what you would have at hand while on a foreign trip. By paying a small amount for travel insurance, you can ensure that these surprises can be taken care of easily.<br/> At MyInsuranceClub, we will help you select the best travel insurance plan with optimum premiums so that you get the best protection while travelling. </p>
             <ul class="sub-list noli" style="padding:0px;">
-              <li><i class="fa fa-slack fa-2"></i>With our <span class="highlight">instant online calculator</span>, you can compare health  insurance premiums easily</li>
-              <li><i class="fa fa-slack fa-2"></i>With the plan features, you do get the <span class="highlight">Best Health Insurance Comparison</span></li>
-              <li><i class="fa fa-slack fa-2"></i>Yes, we are <span class="highlight">Completely Un-biased</span> in our comparison</li>
-              <li><i class="fa fa-slack fa-2"></i>MyInsuranceClub does this for you at no cost - <span class="highlight">It's Free!</span> </li>
+<li><i class="fa fa-slack fa-2"></i>Instant premiums from a large number of insurance companies</li>
+<li><i class="fa fa-slack fa-2"></i>Compare premiums and features of various plans instantly</li>
+<li><i class="fa fa-slack fa-2"></i>Our comparison is completely un-biased</li>
+<li><i class="fa fa-slack fa-2"></i>MyInsuranceClub does this for you at no cost - It's Free!</li>
             </ul>
           </div>
         </article>
       </div>
       
-      
+      <!--<div class="tab-pane fade in active" id="htmlcss">
+        <article class="row">
+          <div class="col-md-5 col-sm-5 fadeInLeft visible" > <img class="img-responsive" src="<?php echo base_url();?>/assets/images/why.jpg" alt="starbuck"> </div>
+          <div class="col-md-7 col-sm-6 text-left fadeInRight visible" >
+            <h6>Why Compare Insurance with Us?</h6>
+            <p>We insure for peace of mind. Whether it is life insurance, health insurance, motor insurance, home insurance or any other insurance policy, we need to ensure that our assests are secure. While insurance is important, we realise that <span class="highlight">affordable insurance</span> is equally important.</p>
+            <ul class="sub-list noli" style="padding:0px;">
+              <li><i class="fa fa-check fa-2"></i>By comparing, you can get the <span class="highlight">best insurance policy</span> for your needs.</li>
+              <li><i class="fa fa-check fa-2"></i>Save money by buying feature rich insurance plans at <span class="highlight">lower premiums</span>.</li>
+              <li><i class="fa fa-check fa-2"></i>Oh yes, ours is a <span class="highlight">free service!</span> </li>
+            </ul>
+          </div>
+        </article>
+      </div>--> 
       
     </div>
     <article class="node-2 node node-page view-mode-full clearfix">
       <div class="col-md-12">
-         <ul class="bxslider">
+        <ul class="bxslider">
           <li>
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="<?php echo base_url();?>/assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Thank you once again for your free and very valuable information on 
-                    insurance. Best wishes to your team and keep up the good work!&nbsp;&nbsp;</strong></p>
-                  <p class="col-md-12 aln_right">- Pravin Bhandare, Bangalore</p>
+                  <p><strong><img src="<?php echo base_url();?>/assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;This was easy. Thanks! I purchased my travel insurance from your site while I was at the airport. It was quite easy and covenenient.&nbsp;&nbsp;</strong></p>
+                  <p class="col-md-12 aln_right">- Parvinder Singh, Chandigarh</p>
                 </div>
               </div>
             </div>
@@ -394,8 +886,8 @@
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="<?php echo base_url();?>/assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;I was looking for a term plan and it was tough choosing the right one as there were too many choices. I am glad that you helped patiently.&nbsp;&nbsp;</strong></p>
-                  <p class="col-md-12 aln_right">- Anita Viswas, Mumbai</p>
+                  <p><strong><img src="<?php echo base_url();?>/assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Your comparison was simple and exhaustive. I found it very easy to use. I found a plan which was pretty much what I wanted to buy.&nbsp;&nbsp;</strong></p>
+                  <p class="col-md-12 aln_right">- Yogesh Sharma, Kolkatta</p>
                 </div>
               </div>
             </div>
@@ -405,22 +897,24 @@
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="<?php echo base_url();?>/assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;This is cool. Usually go with the options provided by my car dealer for my car insurance. Spending a few minutes here save me money.&nbsp;&nbsp;</strong></p>
-                  <p class="col-md-12 aln_right">- Arun Kumar, Chennai</p>
+                  <p><strong><img src="<?php echo base_url();?>/assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Done in 5 mins from my phone. Loved it! The premiums are indeed pretty low and the comparison helped in getting the right plan. Recommended.&nbsp;&nbsp;</strong></p>
+                  <p class="col-md-12 aln_right">- Sameer Malani, Mumbai</p>
                 </div>
               </div>
             </div>
           </li>
-           <li>
+          
+          <li>
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="<?php echo base_url();?>/assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Fun, non-intrusive and informative. Your health insurance comparison is great. It would have been better if you can recommend plans also.&nbsp;&nbsp;</strong></p>
-                  <p class="col-md-12 aln_right">- Abhinav Kumar, New Delhi</p>
+                  <p><strong><img src="<?php echo base_url();?>/assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;I would request everyone to get travel insurance when going abroad. It really helps when you are suddenly struck with an emergency.&nbsp;&nbsp;</strong></p>
+                  <p class="col-md-12 aln_right">- Raj Sekhar Reddy, Coimbatore</p>
                 </div>
               </div>
             </div>
           </li>
+          
         </ul>
       </div>
     </article>
@@ -428,68 +922,149 @@
 </section>
 <div class="container">
   <div class="noscript accordion closed">
-    <h5>What is Health Insurance?</h5>
-    <div>Health Insurance, also known as Mediclaim in India,  is a form of insurance which covers the expenses incurred on medical treatment and hospitalisation. It covers the policyholder against any financial constraints arising from medical emergencies. In case of sudden hospitalisation, illness or accident, health insurance takes care of the expenses on medicines, oxygen, ambulance, blood, hospital room, various medical tests and almost all other costs involved. By paying a small premium every year, you can ensure that any big medical expenses, if incurred, will not burn a hole in your pocket. The plan can be taken for an individual or for your family as a Family Floater Health Insurance Plan. </div>
+    <h5>What is Travel Insurance?</h5>
+    <div>How often do you travel? Do you travel across the globe? Are you a globetrotter? Do you keep one bag eternally packed with your basic necessities because you might have to travel at any time? Your business trips only come at the last minute without much warning? 
+    
+    
+    <p>Well, in this case have you ever had a problem like:</p>
+<ul style="list-style-type:none; padding-left:0px;" class="small_i"><li><i class="fa fa-slack fa-2"></i> Your baggage was misplaced?</li>
+<li><i class="fa fa-slack fa-2"></i> Your passport was stolen?</li>
+<li><i class="fa fa-slack fa-2"></i> You missed your connecting flight because the previous one was delayed?</li>
+<li><i class="fa fa-slack fa-2"></i> You had to be admitted into a hospital while holidaying in Dubai?</li>
+<li><i class="fa fa-slack fa-2"></i> Someone from your office met with a fatal accident during your business trip to London?</li>
+<li><i class="fa fa-slack fa-2"></i> Your trip had to be cancelled due to bad weather and you suffered a loss at the flight and hotel reservation?</li></ul>
+
+<p>Travel Insurance has the solution to the all above problems. Travel Insurance means insuring the risks of having a financial loss or a medical emergency while travelling. In case of a medical emergency, your travel insurance will pay for the medical expenses incurred while undergoing treatment abroad. You do not have to worry about the exorbitant medical bills which will taken care of by the insurance company. There are other benefits of cash allowance for delayed flights and loss of baggage, theft of your belongings etc. It pretty much covers all the standard risks involved while travellign abroad.</p>
+    
+    </div>
   </div>
   <div class="loading"></div>
-  <div class="noscript accordion closed nn">
-    <h5>Major Benefits in a Health Insurance Policy</h5>
-    <div class="" style="min-height:300px; float:left; width:100%;"> <span class="" style="min-height:200px; float:left; width:100%; margin-top:0px;">
-      <div  class="col-md-4 ">
-        <h3>Cashless facility</h3>
-        <p>Each health insurance company ties up with a large number of hospitals to provide cashless health insurance facility. If you are admitted to any of the network hospitals, you would not have to pay the expenses from your pocket. In case the hospital is not part of the network, you will have to pay the hospital and the insurance company will reimburse the costs to you later. </p>
+  <div class="accordion closed">
+    <h5>What are the different Types fo Travel Insurance?</h5>
+    <div class="" style="min-height:300px;  height:100%; width:100%;"> <span class="" style="float:left; width:100%; margin-top:0px;">
+    <div  class="col-md-4 ">
+        <h3>Single trip</h3>
+        <p>This is for ONE single trip to and from from India. The moment you return from your trip to India, the policy is valididity is over. An example of single trip could be a leaving India for a trip to Singapre, travelling to Thailand from Singapre and then returning from Singpapore or Thailand to India.</p>
       </div>
-      <div  class="col-md-4">
-        <h3>Pre-hospitalisation expenses</h3>
-        <p>In case you have incurred treatment costs for the ailment for which you later get admitted to a hospital, the insurance company will bear those costs also. Usually the payout is for costs incurred between 30 to 60 days before hospitalisation.</p>
+
+<div  class="col-md-4 ">
+        <h3>Annual multi-trip</h3>
+        <p>This is more for a frequent traveller who makes multiple trips throughout the year. It is ideal for businessmen who make more than one trip in a year to specific locations. You can make as mulitple trips to an fro from India within the period of ONE year.</p>
       </div>
-      <div  class="col-md-4 ">
-        <h3>Hospitalisation Expenses </h3>
-        <p>Costs incurred if a policyholder is admitted to the hospital for more than 24 hours are covered by the health insurance plan. </p>
+
+<div  class="col-md-4 ">
+        <h3>Student travel</h3>
+        <p>This is for students who are going abroad for education. A lot of universties insist on student travel insurance as the cost of medical expenses while studying in a foreign university can be quite a large sum for a student. In fact, student travel insurance is strongly recommended even if the university you are going to does not insist on it. While on an extended stay, the chances of falling ill or of a medical emergency can be quite high. This also offer some other benefits like visit of emergency family visit, bail bonds on tution fees etc.</p>
       </div>
-      </span> <span class="" style="min-height:130px; float:left; width:100%;">
-      <div  class="col-md-4 ">
-        <h3>Post-hospitalisation expenses </h3>
-        <p>Even after you are discharged from the hospital, you will incur costs during the recovery period. Most mediclaim policies will cover the expenses incurred 60 to 90 days after hospitalisation. </p>
-      </div>
-      <div  class="col-md-4">
-        <h3>Day Care Procedure Expenses</h3>
-        <p>Due to advancement in technology some of the treatments no more require a 24 hours of hospitalisation. Your health insurance policy will cover the costs incurred for these treatments also. </p>
-      </div>
-      <div  class="col-md-4">
-        <h3>Ambulance Charges</h3>
-        <p>In most cases the ambulance charges are taken up by the policy and the policy holder usually doesn't have to bear the burden of the same.</p>
-      </div>
-      </span> <span class="" style="min-height:200px; float:left; width:100%;">
-      <div  class="col-md-4">
-        <h3>Cover for Pre-existing Diseases</h3>
-        <p>Health insurance policies have a facility of covering pre-existing diseases after 3 or 4 years of continuously renewing the policy, i.e. if someone has diabetes, then after completion of 3 or 4 years of continuous renewal with the same insurer (depending on the plan offered and his age), any hospitalisation due to diabetes will also be covered..</p>
-      </div>
-      <div  class="col-md-4">
-        <h3>Tax Benefits</h3>
-        <p>The premiums paid for a Health Insurance Policy are exempted for Under Section 80D of the Income Tax Act. Income tax benefit is provided to the customer for the premium amount till a maximum of Rs. 15,000 for regular and Rs. 20,000 for senior citizen respectively.</p>
-      </div>
-      <div  class="col-md-4 ">
-        <h3>No-Claim Bonus</h3>
-        <p>If there has been no claim in the previous year, a benefit is passed on to the policyholder, either by reducing the premium or by increasing the sum assured by a certain percentage of the existing premium. </p>
-      </div>
-      </span> <span class="" style="min-height:100px; float:left; width:100%;">
-      <div  class="col-md-4">
-        <h3>Health Check-Up</h3>
-        <p>Some health insurance policies have a facility of free health check-up for the well being of the individual if there is no claim made for certain number of years.</p>
-      </div>
-      <div  class="col-md-4 ">
-        <h3>Organ Donor Expenses</h3>
-        <p>The medical expenses incurred in harvesting the organ for a transplant is paid by the policy. </p>
-      </div>
-      </span> </div>
+      </span></div>
   </div>
   <div class="loading"></div>
+  
+  <div class="accordion closed nn">
+    <h5>Major Benefits in a Travel Insurance Policy</h5>
+    <div class="" style="min-height:300px; float:left; width:100%;"> 
+    
+    <span><div  class="col-md-12 " style="margin-bottom:20px;">These are some of the common benefits provided in an overseas travel insurance policy. This list is not exhaustive and the features may vary from plan to plan.</div></span>
+    
+    <span class="" style="float:left; width:100%; margin-top:0px;">
+<div  class="col-md-4 ">
+        <h3>Medical Treatment</h3>
+        <p>Costs incurred in treatment of a medical condition, in-patient or out-patient and the costs of transportation to a medical facility are covered.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Dental Treatment</h3>
+        <p>The dental treatment costs involved in providing pain relief are covered in the plan.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Medical Evacuation</h3>
+        <p>In case of the insured person needs to be moved from one location to another to provide some specific kind of treatment, the costs involved would be covered.</p>
+      </div>
+</span>
+
+<span class="" style="float:left; width:100%; margin-top:0px;">
+<div  class="col-md-4 ">
+        <h3>Hospital Daily Allowance</h3>
+        <p>A cash allowance is paid for each day of hospitalisation. This is uaually for the miscellaneous expenses which are incurred.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Balance Treatment back in India</h3>
+        <p>In case the insured person comes back to India and needs to treatment for the same medical condition, the costs are borne by the policy for a specified period of say 30 days.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Total Loss of Checked-in Baggage</h3>
+        <p>In case your baggage is permanently lost by the airline, the costs involved in purchasing the new items would be covered by the policy.</p>
+      </div>
+</span>
+
+
+<span class="" style="float:left; width:100%; margin-top:0px;">
+<div  class="col-md-4 ">
+        <h3>Delay of Checked-in baggage</h3>
+        <p>In case your baggage is delayed, the costs involved in purchasing essential items and any medication involved would be covered by the policy.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Loss of Passport</h3>
+        <p>In case your passport in lost, the costs involved in procurring a fresh passport would be covered.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Financial Emergency Cash</h3>
+        <p>In case you lose your purse or the money you are carrying due to theft, a specified amount of cash would be made available to you.</p>
+      </div>
+</span>
+
+<span class="" style="float:left; width:100%; margin-top:0px;">
+<div  class="col-md-4 ">
+        <h3>Repatriation of mortal remains</h3>
+        <p>In case of death of the policyholder, the costs involved in transporting the mortail remains to India would be covered.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Personal Liability</h3>
+        <p>Any personal liablity incurred such a damage of property, body injury caused or third party death would be covered.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Personal Accident</h3>
+        <p>In case of an accident to the airline, a lumpsum amount would be paid out.</p>
+      </div>
+</span>
+
+
+<span class="" style="float:left; width:100%; margin-top:0px;">
+<div  class="col-md-4 ">
+        <h3>Trip Delay</h3>
+        <p>If the airline is delayed for more than 24 hours, an amount is paid out to the policyholder.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Trip Cancellation & Curtailment</h3>
+        <p>In case the trip is cancelled or curtailed for un-avoidaable reasons which are listed in the policy, the travel and accomodation expenses are covered.</p>
+      </div>
+
+<div  class="col-md-4 ">
+        <h3>Hijack Allowance</h3>
+        <p>A daily allowance is paid to the policyholder in case of an hijack for more than a specified period.</p>
+      </div>
+
+</span>
+    
+    
+        
+    </div>
+  </div>
+  
+  
 </div>
 <div class="container   margin-bottom-large">
   <div  class="col-md-6 mar-25">
     <div class="top_ins"></div>
-    <h3 class="header_art">Insurance Articles</h3>
+    <h3 class="header_art">Articles on Travel Insurance</span></h3>
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
@@ -515,7 +1090,7 @@
   </div>
   <div  class="col-md-6 mar-25">
     <div class="top_ins"></div>
-    <h3 class="header_art">Insurance News</h3>
+    <h3 class="header_art">Guides On Travel Insurance</h3>
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
@@ -540,15 +1115,4 @@
     <div class="col-md-12 text-rightp"><a href="javascript:void(0)">More Guides <span class="ic">+</span></a></div>
   </div>
 </div>
-<script type="text/javascript">
-//$(document).ready(function(){
-/* $('#sub_form').on('click',function(){
-
-
-	$('#term-form').submit();
-}); */
-	
-//});
-</script>
-<?php $this->load->view('partial_view/footer_new'); ?>
-
+<script src="<?php echo base_url();?>/assets/js/term.js"></script>

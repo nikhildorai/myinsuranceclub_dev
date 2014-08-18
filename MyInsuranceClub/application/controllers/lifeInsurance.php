@@ -32,7 +32,7 @@ class LifeInsurance extends MIC_Controller {
 	{	
 		$data = array();
 		$this->template->set_template('frontend');
-		$this->template->write_view('content', 'company_page/lifeInsuranceHome', $data, TRUE);
+		$this->template->write_view('content', 'life_insurance/home', $data, TRUE);
 		$this->template->render();
 	}
 	
