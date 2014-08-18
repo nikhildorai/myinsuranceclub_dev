@@ -10,6 +10,8 @@ class model_get_results_travel_insurance EXTENDS MIC_Model{
 	
 	public function get_search_results($user_input)
 	{	
+		$sessionID = $this->session->userdata('session_id');
+		
 		$travelsubproduct_id = '';
 		
 		$location_id = '';
@@ -78,6 +80,25 @@ class model_get_results_travel_insurance EXTENDS MIC_Model{
 												);
 	
 		$getTravelSearchData = $this->db->query($TravelStoredProcedure,$SearchResultsParameterArray);
+		$this->db->freeDBResource($this->db->conn_id);
+		
+		/********************************* Saving Fetched Search Results ***********************************/
+		
+		if(!empty($getTravelSearchData->result_array()))
+		{
+			$result = $getTravelSearchData->result_array();
+			
+			$result_string = json_encode($result);
+			
+			$insertSearchResultSP = "CALL sp_insertCustomerSearchResults(?,?,?)";
+			
+			$insertResultsArray = array ($sessionID,$user_input['cust_email'],$result_string);
+
+			$this->db->query($insertSearchResultSP,$insertResultsArray);
+			$this->db->freeDBResource($this->db->conn_id);
+		}
+		
+		/**************************************************************************************************/
 		
 		return $getTravelSearchData->result_array();
 	
