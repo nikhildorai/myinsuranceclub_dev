@@ -90,6 +90,36 @@ $(document).ready(function() {
         });
 		
 		
+		
+		
+			$('.tobaco_t,.tobaco_y,.tobaco_n').click(function(){
+		 
+		 $('.mic_tooltip_message').fadeIn();
+		 
+		 
+		  var ScrollTop = $('html').scrollTop();
+
+//console.log(ScrollTop);
+		 
+		 if (ScrollTop > 100)
+		 
+		 {
+		 var t_p = $('.tobaco_t').offset().top - 265;
+		 }
+		 
+		 else{
+			var t_p = $('.tobaco_t').offset().top - 300; 
+		 }
+		 
+		 
+		 //alert(t_p);
+		 $('.mic_tooltip_message').css({top:t_p});
+		 
+		 $('.tooltip_term_sec').html("<p>Choose the tobaco for which you wish to insure yourself</p>");
+
+        });
+		
+		
 
 
  $('.mic_tooltip_close').click(function(){
@@ -285,7 +315,7 @@ $(document).delegate('.close_annual_select','click',function() {
 			
 			$('.city_a').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('.city_b,.city_c,.city_d,.city_e').removeClass('mic_btn_tl_chkd'); 
+		 $('.city_b,.city_c,.city_d,.city_e,.city_f').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-city-custom,#cus_sel_city').hide();
 		  $('#Policy_holder_details').show();
     
@@ -293,7 +323,7 @@ $(document).delegate('.close_annual_select','click',function() {
 		
 		$('.city_b').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('.city_a,.city_c,.city_d,.city_e').removeClass('mic_btn_tl_chkd'); 
+		 $('.city_a,.city_c,.city_d,.city_e,.city_f').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-city-custom,#cus_sel_city').hide();
 		   $('#Policy_holder_details').show();
     
@@ -301,7 +331,7 @@ $(document).delegate('.close_annual_select','click',function() {
 		
 		$('.city_c').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('.city_b,.city_a,.city_d,.city_e').removeClass('mic_btn_tl_chkd'); 
+		 $('.city_b,.city_a,.city_d,.city_e,.city_f').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-city-custom,#cus_sel_city').hide();
 		   $('#Policy_holder_details').show();
     
@@ -310,7 +340,7 @@ $(document).delegate('.close_annual_select','click',function() {
 		
 		$('.city_d').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('.city_b,.city_c,.city_a,.city_e').removeClass('mic_btn_tl_chkd'); 
+		 $('.city_b,.city_c,.city_a,.city_e,.city_f').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-city-custom,#cus_sel_city').hide();
 		   $('#Policy_holder_details').show();
     
@@ -319,7 +349,14 @@ $(document).delegate('.close_annual_select','click',function() {
 		
 		$('.city_e').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('.city_b,.city_c,.city_d,.city_a').removeClass('mic_btn_tl_chkd'); 
+		 $('.city_b,.city_c,.city_d,.city_a,.city_f').removeClass('mic_btn_tl_chkd'); 
+		   $('#Policy_holder_details').show();
+    
+        });
+		
+		$('.city_f').click(function(){
+		 $(this).addClass('mic_btn_tl_chkd');  
+		 $('.city_b,.city_c,.city_d,.city_a,.city_e').removeClass('mic_btn_tl_chkd'); 
 		  $('#cus_sel_city').show();
 		   $('#Policy_holder_details').show();
     
@@ -340,7 +377,7 @@ $(document).delegate('.close_annual_select','click',function() {
 $(document).delegate('.close_city_select','click',function() {
 		
 	  $('.id-city-custom').hide();
-	  $('.city_e').removeClass('mic_btn_tl_chkd'); 
+	  $('.city_f').removeClass('mic_btn_tl_chkd'); 
     
         });
 			

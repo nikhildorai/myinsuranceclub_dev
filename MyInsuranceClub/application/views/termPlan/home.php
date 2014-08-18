@@ -22,8 +22,9 @@
             
             
               <div class="">
+               <div class="form-lable f_big">Policy Details</div>
                 <div class="mic_type mic_section">
-                <div class="form-lable">Policy Details</div>
+               
                  <div class="" style="margin-top:20px;">
                   <div class="form-lable t">Amount you wish to be covered for?</div>
                   <div class="term_hlp"><a class="t_h_btn aa fa fa-question-circle" href="javascript:void(0)"></a></div>
@@ -351,9 +352,10 @@
                
                 </div>
                 
-                 <div class="p_d_column no_r" style="margin-top:0px;">
+                 <div class="p_d_column no_r" style="margin-top:0px; position:relative">
                
                     <label  for="">Do you consume tobacco?</label>
+                    <div class="term_hlp"><a href="javascript:void(0)" class="t_h_btn tobaco_t  fa fa-question-circle"></a></div>
                 <div class="c_col_60" style="width:100%; float:left; position:relative;">
                 <div style="width:100%; margin-top:0px; line-height:0px;" class="mic_t_input">
                             <div class=" mic_t_b_panel">
@@ -384,27 +386,32 @@
                 <div class="c_col_60" style="width:100%; float:left; position:relative;">
                 <div style="width:100%; margin-top:0px; line-height:0px;" class="mic_t_input">
                             <div class=" mic_t_b_panel">
-                              <div style="width:20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r city_a">
+                              <div style="width:16.67%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r city_a">
                                 <div class="mic_icon" style="padding: 4px 0px;">
                                   <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Mumbai</div>
                                 </div>
                               </div>
-                              <div style="width: 20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_b">
+                              <div style="width: 16.67%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_b">
                                 <div class="mic_icon" style="padding: 4px 0px;">
                                   <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Delhi</div>
                                 </div>
                               </div>
-                              <div style="width: 20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_c">
+                              <div style="width: 16.67%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_c">
                                 <div class="mic_icon" style="padding: 4px 0px;">
                                   <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Bengaluru</div>
                                 </div>
                               </div>
-                              <div style="width: 20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_d">
+                              <div style="width: 16.67%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_d">
                                 <div class="mic_icon" style="padding: 4px 0px;">
-                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Kolkata</div>
+                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Pune</div>
                                 </div>
                               </div>
-                              <div style="width: 20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_e">
+                                 <div style="width: 16.67%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_e">
+                                <div class="mic_icon" style="padding: 4px 0px;">
+                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Chennai</div>
+                                </div>
+                              </div>
+                              <div style="width: 17.4%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_f">
                                 <div class="mic_icon" style="padding: 4px 0px;">
                                   <div class="mic_i_btm" style="margin-top:5px;padding-bottom:5px;">Other</div>
                                   
@@ -430,7 +437,7 @@
         <div class="inline-block select-input">
           <div class="control-question">
             <div class="mic_t_input">
-              <div class="mic-menu mic-menu-vertical" style="overflow-y: auto; overflow-x:hidden; margin-top:-13px;" >
+              <div class="mic-menu mic-menu-vertical" style="overflow-y: auto; overflow-x:hidden; margin-top:-16px;" >
                <ul class="city_menu">
                		<li class="menu_it 67">Agartala</li>
 		<li class="menu_it 9">Agra</li>
@@ -717,11 +724,11 @@
             
           </form>
           <div class=" mic_tooltip_column">
-            <div style="top: 8px;" class="mic_tooltip_message card">
+            <div style="top: 53.6833px;" class="mic_tooltip_message card">
               <div class="tooltip_term_sec help-scroll" style="height: auto;">
                <p>Cover amount should be between Rs 1 Lakh and 5 Crores in multiples of Rs 1 Lakh.</p>
               </div>
-              <div class="mic_tooltip_corner" style="top: 27.5px;">
+              <div class="mic_tooltip_corner" style="top: 25px;">
                 <div class="mic_tooltip_corner_out"></div>
                 <div class="mic_tooltip_corner_in"></div>
               </div>
