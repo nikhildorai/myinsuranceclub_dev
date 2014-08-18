@@ -82,11 +82,12 @@ class model_get_results_travel_insurance EXTENDS MIC_Model{
 		$getTravelSearchData = $this->db->query($TravelStoredProcedure,$SearchResultsParameterArray);
 		$this->db->freeDBResource($this->db->conn_id);
 		
+		$result = $getTravelSearchData->result_array();
 		/********************************* Saving Fetched Search Results ***********************************/
 		
-		if(!empty($getTravelSearchData->result_array()))
+		if(!empty($result)
 		{
-			$result = $getTravelSearchData->result_array();
+			//$result = $getTravelSearchData->result_array();
 			
 			$result_string = json_encode($result);
 			
@@ -100,7 +101,7 @@ class model_get_results_travel_insurance EXTENDS MIC_Model{
 		
 		/**************************************************************************************************/
 		
-		return $getTravelSearchData->result_array();
+		return $result;
 	
 	}
 
