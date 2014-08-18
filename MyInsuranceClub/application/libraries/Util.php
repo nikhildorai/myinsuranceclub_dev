@@ -11,19 +11,19 @@ class Util {
 	
 		if(isset($_POST['cust_name']))
 		{
-			$CI->form_validation->set_rules('cust_name', 'Full Name', 'required|alpha');
+			$CI->form_validation->set_rules('cust_name', 'Full Name', 'required|alpha|xss_clean');
 		}
 		if(isset($_POST['cust_email']))
 		{
-			$CI->form_validation->set_rules('cust_email', 'Email', 'required|valid_email');
+			$CI->form_validation->set_rules('cust_email', 'Email', 'required|valid_email|xss_clean');
 		}
 		if(isset($_POST['desktop_cust_dob']))
 		{
-			$CI->form_validation->set_rules('desktop_cust_dob', 'Date of Birth', 'required|age_greater_than_18');
+			$CI->form_validation->set_rules('desktop_cust_dob', 'Date of Birth', 'required|age_greater_than_18|xss_clean');
 		}
 		if(isset($_POST['cust_mobile']))
 		{
-			$CI->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|phone_789|exact_length[10]');
+			$CI->form_validation->set_rules('cust_mobile', 'Phone Number', 'required|phone_789|exact_length[10]|xss_clean');
 		}
 		if(isset($_POST['agree']))
 		{
