@@ -15,11 +15,11 @@ $(document).ready(function() {
 		 if (ScrollTop > 100)
 		 
 		 {
-		 var t_p = $('.t_h_btn.aa').offset().top - 317;
+		 var t_p = $('.t_h_btn.aa').offset().top - 265;
 		 }
 		 
 		 else{
-			var t_p = $('.t_h_btn.aa').offset().top - 352; 
+			var t_p = $('.t_h_btn.aa').offset().top - 300; 
 		 }
 		 
 		 $('.mic_tooltip_message').css({top:t_p});
@@ -32,62 +32,6 @@ $(document).ready(function() {
 		
 		
 		
-		
-		
-		$('.dur_t,#duration_a,#duration_b,#duration_c,#duration_d').click(function(){
-		 
-		 $('.mic_tooltip_message').fadeIn();
-		 
-		 
-		  var ScrollTop = $('html').scrollTop();
-
-//console.log(ScrollTop);
-		 
-		 if (ScrollTop > 100)
-		 
-		 {
-		 var t_p = $('.dur_t').offset().top - 317;
-		 }
-		 
-		 else{
-			var t_p = $('.dur_t').offset().top - 352; 
-		 }
-		 
-		 
-		 //alert(t_p);
-		 $('.mic_tooltip_message').css({top:t_p});
-		 
-		 $('.tooltip_term_sec').html("<p>Select the term for which you wish to insure yourself</p>");
-
-        });
-		
-		
-			$('.ann_t,#annual_a,#annual_b,#annual_c,#annual_d').click(function(){
-		 
-		 $('.mic_tooltip_message').fadeIn();
-		 
-		 
-		  var ScrollTop = $('html').scrollTop();
-
-//console.log(ScrollTop);
-		 
-		 if (ScrollTop > 100)
-		 
-		 {
-		 var t_p = $('.ann_t').offset().top - 317;
-		 }
-		 
-		 else{
-			var t_p = $('.ann_t').offset().top - 352; 
-		 }
-		 
-		 
-		 //alert(t_p);
-		 $('.mic_tooltip_message').css({top:t_p});
-		 
-		 $('.tooltip_term_sec').html("<p>Select your annual income</p>");
-
-        });
 		
 		
 
@@ -120,14 +64,14 @@ $(document).ready(function() {
 		
 		/* term  */
 		
-			////////////////////// COVER //////////////////
+				////////////////////// COVER //////////////////
 		
 		 $('#cover_a').click(function(){
 		 
 		 $(this).addClass('mic_btn_tl_chkd');  
 		 $('#cover_b,#cover_c,#cover_d').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-cover-custom,#cus_sel_cover').hide();
-		   $('#Policy_holder_details').show();
+		   $('#about_policy_holder').show();
 		 
 		// $('html, body').animate({scrollTop:$(".sc_top").offset().top -20},100);
 	 
@@ -138,14 +82,14 @@ $(document).ready(function() {
 		 $(this).addClass('mic_btn_tl_chkd');  
 		 $('#cover_a,#cover_c,#cover_d').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-cover-custom,#cus_sel_cover').hide();
-		   $('#Policy_holder_details').show();
+		   $('#about_policy_holder').show();
         });
 		
 		$('#cover_c').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
 		 $('#cover_a,#cover_b,#cover_d').removeClass('mic_btn_tl_chkd'); 
 	  $('.id-cover-custom,#cus_sel_cover').hide();
-	   $('#Policy_holder_details').show();
+	   $('#about_policy_holder').show();
     
         });
 		
@@ -160,7 +104,7 @@ $(document).ready(function() {
 					 $('#cover_a,#cover_b,#cover_c').removeClass('mic_btn_tl_chkd'); 
    var am_v = $(this).text(); // gets text contents of clicked li
    $('.id-cover-custom').show();
-    $('#Policy_holder_details').show();
+    $('#about_policy_holder').show();
 	$("#cover_other_select span").text(am_v);
 	$('#cus_sel_cover').fadeOut();
 	
@@ -177,146 +121,57 @@ $(document).ready(function() {
 
 
 		
-	////////////////////// DURATION //////////////////	
-		
-		
-		$('#duration_a').click(function(){
-		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('#duration_b,#duration_c,#duration_d').removeClass('mic_btn_tl_chkd'); 
-		  $('.id-duration-custom,#cus_sel_duration').hide();
-    
-        });
-		
-		$('#duration_b').click(function(){
-		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('#duration_a,#duration_c,#duration_d').removeClass('mic_btn_tl_chkd'); 
-		  $('.id-duration-custom,#cus_sel_duration').hide();
-    
-        });
-		
-		$('#duration_c').click(function(){
-		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('#duration_a,#duration_b,#duration_d').removeClass('mic_btn_tl_chkd'); 
-		  $('.id-duration-custom,#cus_sel_duration').hide();
-    
-        });
-		
-		/*$('#duration_d').click(function(){
-		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('#duration_a,#duration_b,#duration_c').removeClass('mic_btn_tl_chkd'); 
-    
-        $('#cus_sel_duration').show();
-        });*/
-		
-			$(document).delegate('.duration_menu li','click',function() {
-				
-				$('#duration_d').addClass('mic_btn_tl_chkd');  
-		 $('#duration_a,#duration_b,#duration_c').removeClass('mic_btn_tl_chkd'); 
-   var am_v = $(this).text(); // gets text contents of clicked li
-   $('.id-duration-custom').show();
-	$("#duration_other_select span").text(am_v);
-	$('#cus_sel_duration').fadeOut();
 	
 
-});
-
-
-	$(document).delegate('.close_duration_select','click',function() {
-		
-	  $('.id-duration-custom').hide();
-	  $('#duration_d').removeClass('mic_btn_tl_chkd'); 
-    
-        });
-		
-			////////////////////// ANNUAL INCOME //////////////////	
-		
-		
-		$('#annual_a').click(function(){
-		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('#annual_b,#annual_c,#annual_d').removeClass('mic_btn_tl_chkd'); 
-		 $('#Policy_holder_details').show();
-		  $('.id-annual-custom,#cus_sel_annual').hide();
-    
-        });
-		
-		$('#annual_b').click(function(){
-		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('#annual_a,#annual_c,#annual_d').removeClass('mic_btn_tl_chkd'); 
-     $('#Policy_holder_details').show();
-	   $('.id-annual-custom,#cus_sel_annual').hide();
-        });
-		
-		$('#annual_c').click(function(){
-		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('#annual_a,#annual_b,#annual_d').removeClass('mic_btn_tl_chkd'); 
-     $('#Policy_holder_details').show();
-	   $('.id-annual-custom,#cus_sel_annual').hide();
-        });
-		
-		/*$('#annual_d').click(function(){
-		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('#annual_a,#annual_b,#annual_c').removeClass('mic_btn_tl_chkd'); 
-		  $('#Policy_holder_details').show();
-    
-        $('#cus_sel_annual').show();
-        });*/
-		
-			$(document).delegate('.annual_menu li','click',function() {
-						 $('#annual_d').addClass('mic_btn_tl_chkd');  
-		 $('#annual_a,#annual_b,#annual_c').removeClass('mic_btn_tl_chkd'); 
-   var am_v = $(this).text(); // gets text contents of clicked li
-   $('.id-annual-custom').show();
-	$("#annual_other_select span").text(am_v);
-	$('#cus_sel_annual').fadeOut();
-	
-
-});
-
-
-$(document).delegate('.close_annual_select','click',function() {
-		
-	  $('.id-annual-custom').hide();
-	  $('#annual_d').removeClass('mic_btn_tl_chkd'); 
-    
-        });
-
-			////////////////////// CITY //////////////////	
+////////////////////// CITY //////////////////	
 			
 			
 			$('.city_a').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('.city_b,.city_c,.city_d,.city_e').removeClass('mic_btn_tl_chkd'); 
+		 $('.city_b,.city_c,.city_d,.city_e,.city_f').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-city-custom,#cus_sel_city').hide();
+		   $('#Policy_holder_details').show();
     
         });
 		
 		$('.city_b').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('.city_a,.city_c,.city_d,.city_e').removeClass('mic_btn_tl_chkd'); 
+		 $('.city_a,.city_c,.city_d,.city_e,.city_f').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-city-custom,#cus_sel_city').hide();
+		    $('#Policy_holder_details').show();
     
         });
 		
 		$('.city_c').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('.city_b,.city_a,.city_d,.city_e').removeClass('mic_btn_tl_chkd'); 
+		 $('.city_b,.city_a,.city_d,.city_e,.city_f').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-city-custom,#cus_sel_city').hide();
+		    $('#Policy_holder_details').show();
     
         });
 		
 		
 		$('.city_d').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('.city_b,.city_c,.city_a,.city_e').removeClass('mic_btn_tl_chkd'); 
+		 $('.city_b,.city_c,.city_a,.city_e,.city_f').removeClass('mic_btn_tl_chkd'); 
 		  $('.id-city-custom,#cus_sel_city').hide();
+		    $('#Policy_holder_details').show();
     
         });
 		
 		
 		$('.city_e').click(function(){
 		 $(this).addClass('mic_btn_tl_chkd');  
-		 $('.city_b,.city_c,.city_d,.city_a').removeClass('mic_btn_tl_chkd'); 
+		 $('.city_b,.city_c,.city_d,.city_a,.city_f').removeClass('mic_btn_tl_chkd'); 
+		    $('#Policy_holder_details').show();
+    
+        });
+		
+		$('.city_f').click(function(){
+		 $(this).addClass('mic_btn_tl_chkd');  
+		 $('.city_b,.city_c,.city_d,.city_a,.city_e').removeClass('mic_btn_tl_chkd'); 
 		  $('#cus_sel_city').show();
+		    $('#Policy_holder_details').show();
     
         });
 			
@@ -335,7 +190,7 @@ $(document).delegate('.close_annual_select','click',function() {
 $(document).delegate('.close_city_select','click',function() {
 		
 	  $('.id-city-custom').hide();
-	  $('.city_e').removeClass('mic_btn_tl_chkd'); 
+	  $('.city_f').removeClass('mic_btn_tl_chkd'); 
     
         });
 			
@@ -375,7 +230,6 @@ $(document).mouseup(function (e)
 	
 	
 });
-		
 		
 	/////GENDER///////////
 	

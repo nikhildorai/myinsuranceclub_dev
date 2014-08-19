@@ -11,7 +11,7 @@
       </div>
         
         <div class="col-md-12">
-          <p class="term_container sc_top" style="text-align:left; padding-top:50px; padding-bottom:10px; color:#ff6633;">Get Started...</p>
+          <p class="term_container sc_top" style="text-align:left; padding-top:0px; padding-bottom:10px; color:#ff6633;">Get Started...</p>
         </div>
         
       </div>
@@ -21,10 +21,11 @@
             <div class="t_section t_ca">
             
             
-              <div class="">
+               <div class="">
+               <div class="form-lable f_big">Policy Details</div>
                 <div class="mic_type mic_section">
-                <div class="form-lable">Policy Details</div>
-                 <div class="" style="margin-top:20px;">
+               
+                 <div class="" style="margin-top:0px;">
                   <div class="form-lable t">Amount you wish to be covered for?</div>
                   <div class="term_hlp"><a class="t_h_btn aa fa fa-question-circle" href="javascript:void(0)"></a></div>
                   <div class="mic_t_input">
@@ -107,33 +108,29 @@
             
             
             
-            <div id="Policy_holder_details" style="margin-top: 25px; height: auto; display: none;" class="t_section t_ca clearfix">
+              
+            <div class="t_section t_ca clearfix" style="margin-top: 25px; height: auto; display:none" id="about_policy_holder">
             <div class="mic_type">
-              <div class="form-lable">Policyholder Details</div>
+              <div class="form-lable">About Policyholder</div>
               
-                <div style="width:100%;" class="term_reg_open">
               
-
-
-
               
-                <div class="p_d_column">
-                <label  for="Previous Insurer">Full Name</label>
-                <input type="text" class="form-control" name="full_name" >
-                </div>
-                
-                 <div class="p_d_column no_r">
-                <label  for="Previous Insurer">Date of Birth</label>
+              <div  style="margin-top:0px;" class="clearfix">
+              
+                     <div class="p_d_column ">
+                <label  for="">Date of Birth</label>
                 
                  <label style="position:relative; margin-bottom:0px;" class="input"> <i class="icon-append fa fa-calendar " id="dob_datepicker"></i>
-                 <input type="text" class="form-control dob_datepicker" name="dob" >
+                 <input type="text" class="form-control dob_datepicker" name="dob" placeholder="DD-MM-YYYY" >
                 </label>
                 </div>
                 
-                 <div class="p_d_column">
+                
+                
+                    <div class="p_d_column no_r" style="margin-top:0px;">
               
                 
-                   <label  for="Previous Insurer">Gender</label>
+                   <label  for="">Gender</label>
                <div class="c_col_60" style="width:100%;  float:left; position:relative;">
                 <div style="width:100%; margin-top:0px; line-height:0px;" class="mic_t_input">
                             <div class=" mic_t_b_panel">
@@ -155,52 +152,62 @@
                 </div>
                
                 </div>
+              </div>
+              
+              
+              
+              
+           
                 
-                 <div class="p_d_column no_r">
-               
-          
-                       <label  for="Previous Insurer">Mobile</label>
-                <input type="text" class="form-control" name="mobile" >
-                </div>
-                
-                
-                
-                
-                
-                
-                <div class="p_d_column" style="width:100%;">
-                <label  for="Previous Insurer">City of Residence</label>
+       
+              
+              
+              
+             <div class="p_d_column" style="width:100%; margin-bottom:10px;">
+                <label  for="">City of Residence</label>
                 
                 <div class="c_col_60" style="width:100%; float:left; position:relative;">
                 <div style="width:100%; margin-top:0px; line-height:0px;" class="mic_t_input">
                             <div class=" mic_t_b_panel">
-                              <div style="width:20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r city_a">
+                              <div style="width:16.67%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r city_a">
                                 <div class="mic_icon" style="padding: 4px 0px;">
                                   <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Mumbai</div>
                                 </div>
                               </div>
-                              <div style="width: 20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_b">
+                              <div style="width: 16.67%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_b">
                                 <div class="mic_icon" style="padding: 4px 0px;">
                                   <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Delhi</div>
                                 </div>
                               </div>
-                              <div style="width: 20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_c">
+                              <div style="width: 16.67%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_c">
                                 <div class="mic_icon" style="padding: 4px 0px;">
                                   <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Bengaluru</div>
                                 </div>
                               </div>
-                              <div style="width: 20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_d">
+                              <div style="width: 16.67%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_d">
                                 <div class="mic_icon" style="padding: 4px 0px;">
-                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Kolkata</div>
+                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Pune</div>
                                 </div>
                               </div>
-                              <div style="width: 20%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_e">
+                                 <div style="width: 16.67%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_e">
+                                <div class="mic_icon" style="padding: 4px 0px;">
+                                  <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Chennai</div>
+                                </div>
+                              </div>
+                              <div style="width: 17.4%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r city_f">
                                 <div class="mic_icon" style="padding: 4px 0px;">
                                   <div class="mic_i_btm" style="margin-top:5px;padding-bottom:5px;">Other</div>
+                                  
+                                  
+                                  
                                 </div>
                               </div>
+                              
                             </div>
                           </div>
+                       
+                              
+
                 </div>
                 
                 </div>
@@ -213,7 +220,7 @@
         <div class="inline-block select-input">
           <div class="control-question">
             <div class="mic_t_input">
-              <div class="mic-menu mic-menu-vertical" style="overflow-y: auto; overflow-x:hidden; margin-top:-13px;" >
+              <div class="mic-menu mic-menu-vertical" style="overflow-y: auto; overflow-x:hidden; margin-top:-16px;" >
                <ul class="city_menu">
                		<li class="menu_it 67">Agartala</li>
 		<li class="menu_it 9">Agra</li>
@@ -408,7 +415,7 @@
           
           </div>
         </div>
-        <input  id="city_s_auto" class="edit-control-input control-input edit-input label-input-label" placeholder="+ Select" aria-label="+ Select">
+        <input  id="city_s_auto" class="edit-control-input control-input edit-input label-input-label" placeholder="+ Select or Type" >
       </div>
     </div>
   </div>
@@ -417,31 +424,50 @@
               
              <div class="id-city-custom" style=" display:none;">
   <div class="mic_c_custom">
-    <div class="mic_c_row ">
+    <div class="mic_c_row " style="margin-top:0px;">
     <div style="float: left; width: auto; line-height: 30px; margin-right: 10px;">You have selected </div>
     <div class="mic_c_chip" id="city_other_select"><span></span><a href="javascript:void(0)" class="fa fa-times close_city_select"></a></div></div>
   </div>
 </div>
-           </div>
+           </div>  
+              
+              
+              
+              </div>
+              </div>
+            
+            
+           
+          <div id="Policy_holder_details" style="margin-top: 25px; height: auto; display: none;" class="t_section t_ca clearfix">
+            <div class="mic_type">
+              <div class="form-lable">Policyholder Details</div>
+              
+                <div style="width:100%;" class="term_reg_open">
+              
+
+
+
+              
+                <div class="p_d_column">
+                <label  for="">Full Name</label>
+                <input type="text" class="form-control" name="full_name" >
+                </div>
+                
+          
                 
                 
+                 <div class="p_d_column no_r">
+                <label  for="">Mobile</label>
+                <input type="text" class="form-control" name="mobile" >
+            
+                </div>
                 
-                
-                
-                
-                
-                
-             
-                
-                 <div class="p_d_column ">
-                   <label  for="Previous Insurer">Email</label>
+                 <div class="p_d_column" style="width:100%;">
+                   <label  for="">Email</label>
                 <input type="text" class="form-control" name="email" >
            
                 </div>
                 
-                
-                
-                 
                 
                 
                
@@ -478,9 +504,10 @@
             
             
             
+            
           </form>
           <div class=" mic_tooltip_column">
-            <div style="top: 8px;" class="mic_tooltip_message card">
+            <div style="top: 41.4833px;" class="mic_tooltip_message card">
               <div class="tooltip_term_sec help-scroll" style="height: auto;">
                <p>Cover amount should be between Rs 1 Lakh and 5 Crores in multiples of Rs 1 Lakh.</p>
               </div>
@@ -490,13 +517,7 @@
               </div>
               <a href="javascript:void(0)" class="mic_tooltip_close fa fa-times-circle"></a> </div>
           </div>
-          <!--<div class="t_ca ref_y" style="visibility: visible; display:none; margin-left:100px;"> <a class="close_you fa fa-times-circle" href="javascript:void(0)"></a>
-            <div class="ref_y_text"></div>
-            <div class="mic_tooltip-bottom" style="left: 15px;">
-              <div class="mic_tooltip-out"></div>
-              <div class="mic_tooltip-in"></div>
-            </div>
-          </div>-->
+         
         </div>
       </div>
       

@@ -25,7 +25,7 @@
                <div class="form-lable f_big">Policy Details</div>
                 <div class="mic_type mic_section">
                
-                 <div class="" style="margin-top:20px;">
+                 <div class="" style="margin-top:0px;">
                   <div class="form-lable t">Amount you wish to be covered for?</div>
                   <div class="term_hlp"><a class="t_h_btn aa fa fa-question-circle" href="javascript:void(0)"></a></div>
                   <div class="mic_t_input">
@@ -241,7 +241,7 @@
               
               
               
-              <div  style="margin-top:20px;" class="clearfix">
+              <div  style="margin-top:0px;" class="clearfix">
               
                      <div class="p_d_column ">
                 <label  for="">Date of Birth</label>
@@ -724,7 +724,7 @@
             
           </form>
           <div class=" mic_tooltip_column">
-            <div style="top: 53.6833px;" class="mic_tooltip_message card">
+            <div style="top: 43.6833px;" class="mic_tooltip_message card">
               <div class="tooltip_term_sec help-scroll" style="height: auto;">
                <p>Cover amount should be between Rs 1 Lakh and 5 Crores in multiples of Rs 1 Lakh.</p>
               </div>
