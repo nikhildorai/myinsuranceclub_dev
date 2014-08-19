@@ -235,6 +235,7 @@ $(document).ready(function() {
 		 $('#mul_t').click(function(){
 		 $('.travel_form_s').fadeIn();
 		 $('.travel_end_date.trip-end-date').fadeOut();
+		 $('#trip_end').val('');
 		 $(this).addClass('mic_btn_tl_chkd');  
 		 $('#single_t,#stu_t').removeClass('mic_btn_tl_chkd'); 
 	 
