@@ -401,13 +401,32 @@ $(document).ready(function() {
 	}   
 	
 	var cnt_num = counter+1;
- 
+	
+	var num_members = counter - 1;
 	var newTextBoxDiv = $(document.createElement('div'))
 	     .attr("id", 'TextBoxDiv' + counter);
 
-	newTextBoxDiv.after().html('<div> <div style="width:50%; float:left;"> <div class="family_section_header ">Traveller '+cnt_num+' date of birth</div> <div class="family_section "> <div class="individual_icon inline-block"></div> <div class="birth-date"> <div class="mic_sec_label mic_sec_label_cntrl"> <div class="mic_t_input"><span class=" mic_sec_day_cntrl"> <div class="mic_sec_label"> <div class="mic_t_input "> <input type="text" class="mic_t_input mic_e_input  id" style="margin-right:10px;" name="add_tra_dd[]" placeholder="DD" aria-label="DD" maxlength="2"> <input type="text" class="mic_t_input mic_e_input  id" style="margin-right:10px; width:36px;" placeholder="MM" name="add_tra_mm[]" aria-label="MM" maxlength="2"> <input type="text" class="mic_t_input mic_e_input " style="width:48px;" placeholder="YYYY" name="add_tra_yy[]" aria-label="YYYY" maxlength="4"> </div> <div class="id-error-text error-text" style="display: none;"></div> </div> </span></div> <div class=" error-text" style="display: none;"></div> </div> </div> </div> <div class="id-member-error-text error-text" style="display: none;"></div> </div> <div class="id-cus-gender" style="display:inline-block;width: 50%;"> <div class="family_section_header ">Traveller '+cnt_num+' Gender</div> <div style="width: 100%; margin-top:10px;" class="mic_t_input"> <div class=" mic_t_b_panel"> <div style="width:33.33%;" aria-pressed="true" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gen_but_addtra_m"> <div class="mic_icon" style="padding: 5px 0px"> <div class="mic_i_mar male" style="float: left; margin-top: 2px;"></div> <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Male</div> </div> </div> <div style="width: 33.33%;"  class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r gen_but_addtra_f"> <div class="mic_icon" style="padding: 5px 0px"> <div class="mic_i_mar female" style="float: left; margin-top: 3px;"></div> <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Female</div> </div> </div> </div> <a href="javascript:void(0)" class="id-delete-per fa fa-trash-o " ></a> </div> </div></div>');
+	newTextBoxDiv.after().html('<div> <div style="width:50%; float:left;"> <div class="family_section_header ">Traveller '+cnt_num+' date of birth</div> <div class="family_section "> <div class="individual_icon inline-block"></div> <div class="birth-date"> <div class="mic_sec_label mic_sec_label_cntrl"> <div class="mic_t_input"><span class=" mic_sec_day_cntrl"> <div class="mic_sec_label"> <div class="mic_t_input "> <input type="text" class="mic_t_input mic_e_input  id" style="margin-right:10px;" name="traveller_day[]" placeholder="DD" aria-label="DD" maxlength="2"> <input type="text" class="mic_t_input mic_e_input  id" style="margin-right:10px; width:36px;" placeholder="MM" name="traveller_month[]" aria-label="MM" maxlength="2"> <input type="text" class="mic_t_input mic_e_input " style="width:48px;" placeholder="YYYY" name="traveller_year[]" aria-label="YYYY" maxlength="4"> </div> <div class="id-error-text error-text" style="display: none;"></div> </div> </span></div> <div class=" error-text" style="display: none;"></div> </div> </div> </div> <div class="id-member-error-text error-text" style="display: none;"></div> </div> <div class="id-cus-gender" style="display:inline-block;width: 50%;"> <div class="family_section_header ">Traveller '+cnt_num+' Gender</div> <div style="width: 100%; margin-top:10px;" class="mic_t_input"> <div class=" mic_t_b_panel"> <div style="width:33.33%;" aria-pressed="true" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gen_but_addtra_m" id="traveller_'+ cnt_num +'_male"> <div class="mic_icon" style="padding: 5px 0px"> <div class="mic_i_mar male" style="float: left; margin-top: 2px;"></div> <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Male</div> </div> </div> <div style="width: 33.33%;"  class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r gen_but_addtra_f" id = "traveller_'+ cnt_num +'_female"> <div class="mic_icon" style="padding: 5px 0px"> <div class="mic_i_mar female" style="float: left; margin-top: 3px;"></div> <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Female</div> </div> </div> </div> <a href="javascript:void(0)" class="id-delete-per fa fa-trash-o " id="traveller_' + cnt_num +'_delete"></a> </div> </div></div>');
  
 	newTextBoxDiv.appendTo("#TextBoxesGroup");
+	
+	$('#family_composition').val("2A" + num_members + "C");
+	
+	$("#traveller_" + cnt_num + "_male").click(function(){
+		
+		$("#traveller_" + cnt_num + "_gender").val('Male');
+		
+	});
+	
+	$("#traveller_" + cnt_num + "_female").click(function(){
+		
+		$("#traveller_" + cnt_num + "_gender").val('Female');
+		
+	});
+	$(document).delegate("#traveller_"+ cnt_num + "_delete",'click',function() {
+	
+		$("#traveller_" + cnt_num + "_gender").val('');
+	});
 	counter++;
      });
  
@@ -420,7 +439,7 @@ $(document).delegate('.id-delete-per','click',function() {
 	counter--;
  
         $("#TextBoxDiv" + counter).remove();
- 
+  
      });
 		
 		
@@ -815,8 +834,22 @@ $('#2A').click(function() {
 
 $('#family').click(function() {
 	
-	$("#family_composition").val('family');
+	$("#family_composition").val('2A');
 	$("#family_composition_desp").val('Family');
 });
+
+
+
+/************* Form Validation For Travel Insurance ******************/
+
+
+
+
+
+
+
+
+
+
 
 });

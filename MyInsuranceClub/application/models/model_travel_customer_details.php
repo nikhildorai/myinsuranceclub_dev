@@ -86,13 +86,14 @@ class model_travel_customer_details EXTENDS MIC_Model{
 		{
 			if(isset($user_input['traveller_'.$i.'_dob']) && isset($user_input['traveller_'.$i.'_age']) && isset($user_input['traveller_'.$i.'_gender'])) 
 			{
+				
 				$AdditionalMembers['Member_'.$i]['dob'] = $user_input['traveller_'.$i.'_dob'];
 				$AdditionalMembers['Member_'.$i]['age']= $user_input['traveller_'.$i.'_age'];
 				$AdditionalMembers['Member_'.$i]['gender']= $user_input['traveller_'.$i.'_gender'];
 			}
 		}
 		
-		$combineAdditionalMembersInfo = '';
+		
 		
 		if (!empty($AdditionalMembers))
 		{

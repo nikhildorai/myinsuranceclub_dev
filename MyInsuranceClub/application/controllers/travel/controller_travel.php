@@ -220,7 +220,7 @@ class controller_travel extends Customer_Controller {
 					$user_input['traveller_5_gender'] = $this->input->post('traveller_5_gender');
 				}
 				
-				if($this->input->post('traveller_6_gender') != '')
+				if($this->input->post('traveller_6_gender') != '')	
 				{
 					$user_input['traveller_6_gender'] = $this->input->post('traveller_6_gender');
 				}
