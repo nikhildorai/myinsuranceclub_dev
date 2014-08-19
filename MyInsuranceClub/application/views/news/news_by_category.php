@@ -127,7 +127,7 @@
 							
 							<div class="entry-meta c_clr" style="float: left; width: 100%; margin-bottom: 0px;">
 								<span class="meta-date updated" style="float: left; border: none;"><i class="fa fa-clock-o"></i><?php echo $this->util->getDate($news['publish_date'], 9)?></span> 
-								<span class="meta-category" style="float: left; border: none; margin-left: 25px;"> <i class="fa fa-eye" title="views"></i> Views (<?php echo $news['page_view_count']?>) </span> 
+								<span class="meta-category" style="float: left; border: none; margin-left: 25px;"> <i class="fa fa-eye" title="views"></i> <?php echo $news['page_view_count']?> Views </span> 
 								<span class="meta-comments" style="float: left; border: none; margin-left: 25px;"> <i class="fa fa-comments"></i>with 0 comments </span>
 							</div>
 							

@@ -309,93 +309,8 @@
 									</h2>
 								</div>
 								
-								<div class="smart-grids col-md-12 clearfix">
-									<table class="bordered">
-										<thead>
-					
-											<tr>
-												<th></th>
-												<th>Minimum</th>
-												<th>Maximum</th>
-											</tr>
-										</thead>
-										<tbody>
-					<?php //var_dump($vFeatures);	?>
-											<tr>
-												<td>Coverage Amount (in Rs.)</td>
-												<?php 
-													$default = array('value'=>array(), 'comment'=>'');
-													$arrValues = array_key_exists( 'coverage_amount',$model) ? unserialize($model['coverage_amount']) : $default;
-													$arrValues = Util::array_overlay($default, $arrValues);		
-												?>
-												<td align="center"><?php echo reset($arrValues['value']);?></td>
-												<td align="center"><?php echo end($arrValues['value']);?></td>
-											</tr>
-											<tr>
-												<td>Policy Term (in years)</td>
-												<?php 
-								                	$default = array('min'=>'','max'=>'');
-													$arrValues = array_key_exists( 'policy_terms',$model) ? unserialize($model['policy_terms']) : $default;
-													$arrValues = Util::array_overlay($default, $arrValues);	
-												?>
-												<td align="center"><?php echo $arrValues['min'];?></td>
-												<td align="center"><?php echo $arrValues['max'];?></td>
-											</tr>
-											<tr>
-												<?php 			
-							                	$default = array(	'minimum'=>array(	'individual'=>array('value'=>'', 'type'=>'', 'comments'=>''),
-							                													'family_floater'=>array('value'=>'', 'type'=>'', 'comments'=>'')),
-													                'maximum'=>array(	'individual'=>array('value'=>'', 'type'=>'', 'comments'=>''),
-													                							'family_floater'=>array('value'=>'', 'type'=>'', 'comments'=>'')));
-							                	
-												$arrValues = array_key_exists( 'entry_age',$model) ? unserialize($model['entry_age']) : $default;
-												$arrValues = Util::array_overlay($default, $arrValues); ?>
-												<td>Entry Age (in years)</td>
-												<td align="center">
-												<?php 	
-													if (!empty($arrValues['minimum']['individual']['value']) && empty($arrValues['minimum']['family_floater']['value']))
-															$min =  $arrValues['minimum']['individual']['value'];
-														else if (!empty($arrValues['minimum']['individual']['value']) && !empty($arrValues['minimum']['family_floater']['value']))
-															$min = 'Individual : '.$arrValues['minimum']['individual']['value'].' '.(!empty($arrValues['minimum']['individual']['type']) ? $arrValues['minimum']['individual']['type'] : 'Years').'<br>Family Floater : '.$arrValues['minimum']['family_floater']['value'].' '.(!empty($arrValues['minimum']['family_floater']['type']) ? $arrValues['minimum']['family_floater']['type'] : 'Years');
-														echo $min;
-												?>
-												</td>
-												<td align="center">
-												<?php 	
-													if (!empty($arrValues['maximum']['individual']['value']) && empty($arrValues['maximum']['family_floater']['value']))
-															$min =  $arrValues['maximum']['individual']['value'];
-														else if (!empty($arrValues['maximum']['individual']['value']) && !empty($arrValues['maximum']['family_floater']['value']))
-															$min = 'Individual : '.$arrValues['maximum']['individual']['value'].' '.(!empty($arrValues['maximum']['individual']['type']) ? $arrValues['maximum']['individual']['type'] : 'Years').'<br>Family Floater : '.$arrValues['maximum']['family_floater']['value'].' '.(!empty($arrValues['maximum']['family_floater']['type']) ? $arrValues['maximum']['family_floater']['type'] : 'Years');
-														echo $min;
-												?>
-												</td>
-											</tr>
-											<tr>
-												<td>Renewable till Age (in years)</td>
-												<?php 		
-												$default = array('type'=>'', 'max'=>'', 'min'=>'');
-												$arrValues = array_key_exists( 'renewal_age',$model) ? unserialize($model['renewal_age']) : $default;
-												$arrValues = Util::array_overlay($default, $arrValues);
-												?>
-												<td align="center"><?php echo ($arrValues['type'] != 'lifelong') ? array_key_exists( 'min',$arrValues) ? $arrValues['min'] : '0' : '-';?></td>
-												<td align="center"><?php echo ($arrValues['type'] != 'lifelong') ? array_key_exists( 'max',$arrValues) ? $arrValues['max'] : '-' : 'Lifelong';?></td>
-											</tr>
-											<tr>
-												<td>No Medical Test Age (in years)</td>
-												<?php
-												$default = array('covered'=>'', 'min'=>'', 'max'=>'', 'comments'=>'');
-												$arrValues = array_key_exists( 'no_medical_test_age',$model) ? unserialize($model['no_medical_test_age']) : $default;
-												$arrValues = Util::array_overlay($default, $arrValues);
-												$selected = $arrValues['covered'];
-												?>
-												<td align="center">
-													-<?php //echo array_key_exists( 'minimum_no_medical_test_age',$vFeatures) ? $vFeatures['minimum_no_medical_test_age'] : '';?>
-												</td>
-												<td align="center"><?php echo ($arrValues['covered'] == 'yes') ? $arrValues['max'] : 'Not Covered';?></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
+								<?php echo widget::run('eligibilityConditionsFront', array('variant'=>$variant, 'model'=>$vFeatures));?>
+								
 							</div>
 							
 							
@@ -457,7 +372,9 @@
 														}
 														else 
 															$display[] = 'Not covered';
-														echo implode(', ', $display);	
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : 'Covered';
+														echo $display;	
 									                ?>
 									             </td>
 											</tr>
@@ -480,7 +397,9 @@
 														}
 														else 
 															$display[] = 'Not covered';
-														echo implode(', ', $display);	
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : 'Covered';
+														echo $display;	
 									                ?>
 									             </td>
 											</tr>
@@ -491,19 +410,96 @@
 											</tr>
 											<tr>
 												<td><strong>Pre-hospitalisation</strong></td>
-												<td><?php echo array_key_exists( 'pre_hosp',$vFeatures) ? $vFeatures['pre_hosp'] : '';?></td>
+												<td>
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'days'=>'','amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'pre_hosp',$model) ? unserialize($model['pre_hosp']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+														$display = array();
+														if ($selected == 'yes')
+														{
+															$display[] = (!empty($arrValues['percent'])) ? $arrValues['percent'].' % of admissible hospitalization expenses' : '';
+															$display[] =  (!empty($arrValues['amount'])) ? 'Maximum of Rs. '.$arrValues['amount'] : '';
+															$display[] =  (!empty($arrValues['days'])) ? 'Upto '.$arrValues['days'].' days' : '';
+															$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														}
+														else 
+															$display[] = 'Not covered';
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : 'Covered';
+														echo $display;	
+									                ?>
+									            </td>
 											</tr>
 											<tr>
 												<td><strong>Post-hospitalisation</strong></td>
-												<td><?php echo array_key_exists( 'post_hosp',$vFeatures) ? $vFeatures['post_hosp'] : '';?></td>
+												<td>
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'days'=>'','amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'post_hosp',$model) ? unserialize($model['post_hosp']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+														$display = array();
+														if ($selected == 'yes')
+														{
+															$display[] = (!empty($arrValues['percent'])) ? $arrValues['percent'].' % of admissible hospitalization expenses' : '';
+															$display[] =  (!empty($arrValues['amount'])) ? 'Maximum of Rs. '.$arrValues['amount'] : '';
+															$display[] =  (!empty($arrValues['days'])) ? 'Upto '.$arrValues['days'].' days' : '';
+															$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														}
+														else 
+															$display[] = 'Not covered';
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : 'Covered';
+														echo $display;	
+									                ?>
+									            </td>
 											</tr>
 											<tr>
 												<td><strong>Day care expenses</strong></td>
-												<td><?php echo array_key_exists( 'day_care',$vFeatures) ? $vFeatures['day_care'] : '';?></td>
+												<td>
+													<?php
+														$default = array('covered'=>'', 'day_care'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'day_care',$model) ? unserialize($model['day_care']) : $default;
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+														$display = array();
+														if ($selected == 'yes')
+														{
+															$display[] = (!empty($arrValues['day_care'])) ? 'No. of Listed Procedures '.$arrValues['day_care'] : '';
+															$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														}
+														else 
+															$display[] = 'Not covered';
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : 'Covered';
+														echo $display;	
+									                ?>
+									            </td>
 											</tr>
 											<tr>
 												<td><strong>Domiciliary Hospitalisation</strong></td>
-												<td><?php echo array_key_exists( 'domiciliary_treatment_expenses',$vFeatures) ? $vFeatures['domiciliary_treatment_expenses'] : '';?></td>
+												<td>
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'domiciliary_treatment_expenses',$model) ? unserialize($model['domiciliary_treatment_expenses']) : $default;														
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+														$display = array();
+														if ($selected == 'yes')
+														{
+															$display[] = (!empty($arrValues['percent'])) ? $arrValues['percent'].' % of SI' : '';
+															$display[] =  (!empty($arrValues['amount'])) ? 'Maximum of Rs. '.$arrValues['amount'] : '';
+															$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														}
+														else 
+															$display[] = 'Not covered';
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : 'Covered';
+														echo $display;	
+									                ?>
+									            </td>
 											</tr>
 	
 										</tbody>
@@ -535,23 +531,100 @@
 										<tbody>
 											<tr>
 												<td>Waiting Period</td>
-												<td><?php echo array_key_exists( 'maternity_waiting_period',$vFeatures) ? $vFeatures['maternity_waiting_period'] : '';?></td>
+												<td>
+													<?php
+													$display = array();
+													$display[] = (!empty($vFeatures['maternity_waiting_period'])) ? 'Covered after '.$vFeatures['maternity_waiting_period'].' years' : '';
+													$display = array_filter($display);
+													$display = (!empty($display)) ? implode(', ', array_filter($display)) : '-';
+													echo $display;	
+									                ?>
+									            </td>
 											</tr>
 											<tr>
 												<td>Normal Delivery</td>
-												<td><?php echo array_key_exists( 'maternity_normal_delivery',$vFeatures) ? $vFeatures['maternity_normal_delivery'] : '';?></td>
+												<td>
+													<?php
+														$default = array('percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'maternity_normal_delivery',$model) ? unserialize($model['maternity_normal_delivery']) : $default;														
+														$arrValues = Util::array_overlay($default, $arrValues);
+														
+														$display = array();
+														$display[] = (!empty($arrValues['percent'])) ? $arrValues['percent'].' % of SI' : '';
+														$display[] =  (!empty($arrValues['amount'])) ? 'Maximum of Rs. '.$arrValues['amount'] : '';
+														$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : 'Not Covered';
+														echo $display;	
+									                ?>
+									            </td>
 											</tr>
 											<tr>
 												<td>Caesarean Delivery</td>
-												<td><?php echo array_key_exists( 'maternity_caesarean_delivery',$vFeatures) ? $vFeatures['maternity_caesarean_delivery'] : '';?></td>
+												<td>
+													<?php
+														$default = array('percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'maternity_caesarean_delivery',$model) ? unserialize($model['maternity_caesarean_delivery']) : $default;														
+														$arrValues = Util::array_overlay($default, $arrValues);
+														
+														$display = array();
+														$display[] = (!empty($arrValues['percent'])) ? $arrValues['percent'].' % of SI' : '';
+														$display[] =  (!empty($arrValues['amount'])) ? 'Maximum of Rs. '.$arrValues['amount'] : '';
+														$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : 'Not Covered';
+														echo $display;	
+									                ?>
+									            </td>
 											</tr>
 											<tr>
 												<td>New-born baby cover</td>
-												<td><?php echo array_key_exists( 'maternity_new_born_baby_cover',$vFeatures) ? $vFeatures['maternity_new_born_baby_cover'] : '';?></td>
+												<td>
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'coverage_period'=>'', 'coverage_in'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'maternity_new_born_baby_cover',$model) ? unserialize($model['maternity_new_born_baby_cover']) : $default;														
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+														$display = array();
+														if ($selected != 'no')
+														{
+															$display[] = (!empty($arrValues['percent'])) ? $arrValues['percent'].' % of SI' : '';
+															$display[] =  (!empty($arrValues['amount'])) ? 'Maximum of Rs. '.$arrValues['amount'] : '';
+															$display[] =  (!empty($arrValues['coverage_period'])) ? 'Coverage period of '.$arrValues['coverage_period'].' '.$arrValues['coverage_in'] : '';
+															$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														}
+														else 
+															$display[] = 'Not covered';
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : 'Optional';
+														echo $display;	
+									                ?>
+									             </td>
 											</tr>
 											<tr>
 												<td>Addition of New-born</td>
-												<td><?php echo array_key_exists( 'maternity_addition_of_new_born',$vFeatures) ? $vFeatures['maternity_addition_of_new_born'] : '';?></td>
+												<td>
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'coverage_period_from'=>'', 'coverage_period_from_in'=>'', 'coverage_period_to'=>'', 'coverage_period_to_in'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'maternity_addition_of_new_born',$model) ? unserialize($model['maternity_addition_of_new_born']) : $default;														
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+														$display = array();
+														if ($selected != 'no')
+														{
+															$display[] = (!empty($arrValues['percent'])) ? $arrValues['percent'].' % of SI' : '';
+															$display[] =  (!empty($arrValues['amount'])) ? 'Maximum of Rs. '.$arrValues['amount'] : '';
+															$display[] =  (!empty($arrValues['coverage_period_from'])) ? 'Coverage period from '.$arrValues['coverage_period_from'].' '.$arrValues['coverage_period_from_in'] : '';
+															$display[] =  (!empty($arrValues['coverage_period_to'])) ? ' upto '.$arrValues['coverage_period_to'].' '.$arrValues['coverage_period_to_in'] : '';
+															$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														}
+														else 
+															$display[] = 'Not covered';
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : '-';
+														echo $display;	
+									                ?>
+									             </td>
 											</tr>
 										</tbody>
 									</table>
@@ -566,15 +639,68 @@
 										<tbody>
 											<tr>
 												<td>Auto Recharge of Sum Insured</td>
-												<td><?php echo array_key_exists( 'autorecharge_SI',$vFeatures) ? $vFeatures['autorecharge_SI'] : '';?></td>
+												<td>
+													<?php
+													$display = array();
+													$display[] = (!empty($vFeatures['autorecharge_SI'])) ? $vFeatures['autorecharge_SI'] : '';
+													$display = array_filter($display);
+													$display = (!empty($display)) ? implode(', ', array_filter($display)) : '-';
+													echo $display;	
+									                ?>
+									            </td>
 											</tr>
 											<tr>
 												<td>Hospital Cash</td>
-												<td><?php echo array_key_exists( 'hospital_cash',$vFeatures) ? $vFeatures['hospital_cash'] : '';?></td>
+												<td>
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'day_from'=>'', 'day_from_in'=>'', 'day_to'=>'', 'day_to_in'=>'', 'continue_days'=>'', 'max_amount'=>'', 'deductable_days'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'hospital_cash',$model) ? unserialize($model['hospital_cash']) : $default;														
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+														$display = array();
+														if ($selected == 'yes')
+														{
+															$d = (!empty($arrValues['percent'])) ? $arrValues['percent'].' % of SI per day,' : '';
+															$d .= (!empty($arrValues['amount'])) ? ' Upto Rs. '.$arrValues['amount'].' per day' : '';
+															$d .= ((!empty($arrValues['day_from'])) ? ' from '.$arrValues['day_from_in'].' '.$arrValues['day_from'] : '');
+															$d .= ((!empty($arrValues['day_to'])) ? ' to '.$arrValues['day_to_in'].' '.$arrValues['day_to'] : '');
+															$d .= (!empty($arrValues['continue_days'])) ? ' provided if hospitalisation exceeds '.$arrValues['continue_days'].' days continuously.' : '';
+															$d .= (!empty($arrValues['max_amount'])) ? ' Maximum Upto Rs. '.$arrValues['max_amount'] : '';
+															$d .= (!empty($arrValues['deductable_days'])) ? ' with '.$arrValues['deductable_days'].' day deductable' : '';
+															$display[] = $d;
+															$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														}
+														else 
+															$display[] = 'Not covered';
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : '-';
+														echo $display;	
+									                ?>
+												</td>
 											</tr>
 											<tr>
 												<td>Ambulance Charges</td>
-												<td><?php echo array_key_exists( 'emergency_ambulance',$vFeatures) ? $vFeatures['emergency_ambulance'] : '';?></td>
+												<td>
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'emergency_ambulance',$model) ? unserialize($model['emergency_ambulance']) : $default;														
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+														$display = array();
+														if ($selected != 'no')
+														{
+															$display[] = (!empty($arrValues['covered']) && $arrValues['covered'] == 'actual cost') ? 'Actual ambulance cost' : '';
+															$display[] = (!empty($arrValues['percent'])) ? $arrValues['percent'].'% Per Hospitalization' : '';
+															$display[] = (!empty($arrValues['amount'])) ? 'Upto Rs. '.$arrValues['amount'].' Per Hospitalization' : '';
+															$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														}
+														else 
+															$display[] = 'Not covered';
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : '-';
+														echo $display;	
+									                ?>
+												</td>
 											</tr>
 											<tr>
 												<td>Recovery Benefit</td>
@@ -586,11 +712,49 @@
 											</tr>
 											<tr>
 												<td>Organ Donor Cover</td>
-												<td><?php echo array_key_exists( 'organ_donor_exp',$vFeatures) ? $vFeatures['organ_donor_exp'] : '';?></td>
+												<td>
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'organ_donor_exp',$model) ? unserialize($model['organ_donor_exp']) : $default;													
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+														$display = array();
+														if ($selected != 'no')
+														{
+															$display[] = (!empty($arrValues['percent'])) ? $arrValues['percent'].'% of SI' : '';
+															$display[] = (!empty($arrValues['amount'])) ? 'Max upto Rs. '.$arrValues['amount'] : '';
+															$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														}
+														else 
+															$display[] = 'Not covered';
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : 'Covered';
+														echo $display;	
+									                ?>
+												</td>
 											</tr>
 											<tr>
 												<td>Ayurvedic Treatment</td>
-												<td><?php echo array_key_exists( 'ayurvedic',$vFeatures) ? $vFeatures['ayurvedic'] : '';?></td>
+												<td>
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'ayurvedic',$model) ? unserialize($model['ayurvedic']) : $default;												
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+														$display = array();
+														if ($selected != 'no')
+														{
+															$display[] = (!empty($arrValues['percent'])) ? $arrValues['percent'].'% of SI' : '';
+															$display[] = (!empty($arrValues['amount'])) ? 'Max upto Rs. '.$arrValues['amount'] : '';
+															$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														}
+														else 
+															$display[] = 'Not covered';
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : 'Covered';
+														echo $display;	
+									                ?>
+												</td>
 											</tr>
 											<tr>
 												<td>Second Opinion</td>
@@ -598,7 +762,19 @@
 											</tr>
 											<tr>
 												<td>E-opinion</td>
-												<td><?php echo array_key_exists( 'e-opinion',$vFeatures) ? $vFeatures['e-opinion'] : '';?></td>
+												<td>
+													<?php
+													$default = array('covered'=>'', 'comments'=>'');
+													$arrValues = array_key_exists( 'e_opinion',$model) ? unserialize($model['e_opinion']) : $default;
+													$arrValues = Util::array_overlay($default, $arrValues);
+													$display = array();
+													$display[] = (!empty($arrValues['covered']) && $arrValues['covered'] == 'yes') ? 'Covered' : 'Not Covered';
+													$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+													$display = array_filter($display);
+													$display = (!empty($display)) ? implode(', ', array_filter($display)) : '-';
+													echo $display;	
+									                ?>
+									            </td>
 											</tr>
 											<tr>
 												<td>Physiotherapy Charges</td>
@@ -629,7 +805,19 @@
 										<tbody>
 											<tr>
 												<td>Family Discount</td>
-												<td><?php echo array_key_exists( 'family_discount',$vFeatures) ? $vFeatures['family_discount'] : '';?></td>
+												<td>
+													<?php
+													$default = array('covered'=>'', 'comments'=>'');
+													$arrValues = array_key_exists( 'family_discount',$model) ? unserialize($model['family_discount']) : $default;
+													$arrValues = Util::array_overlay($default, $arrValues);
+													$display = array();
+													$display[] = (!empty($arrValues['covered']) && $arrValues['covered'] == 'yes') ? 'Covered' : 'Not Covered';
+													$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+													$display = array_filter($display);
+													$display = (!empty($display)) ? implode(', ', array_filter($display)) : '-';
+													echo $display;	
+									                ?>
+									            </td>
 											</tr>
 											<tr>
 												<td>Cumulative Bonus</td>
@@ -637,15 +825,57 @@
 											</tr>
 											<tr>
 												<td>Two Year Policy Option</td>
-												<td><?php echo array_key_exists( 'two_year_policy_option',$vFeatures) ? $vFeatures['two_year_policy_option'] : '';?></td>
+												<td>
+													<?php
+													$default = array('covered'=>'', 'comments'=>'');
+													$arrValues = array_key_exists( 'two_year_policy_option',$model) ? unserialize($model['two_year_policy_option']) : $default;
+													$arrValues = Util::array_overlay($default, $arrValues);
+													$display = array();
+													$display[] = (!empty($arrValues['covered']) && $arrValues['covered'] == 'yes') ? 'Covered' : 'Not Covered';
+													$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+													$display = array_filter($display);
+													$display = (!empty($display)) ? implode(', ', array_filter($display)) : '-';
+													echo $display;	
+									                ?>
+									            </td>
 											</tr>
 											<tr>
 												<td>Co-payment</td>
-												<td><?php echo array_key_exists( 'co_pay',$vFeatures) ? $vFeatures['co_pay'] : '';?></td>
+												<td>
+													<?php
+														$default = array('covered'=>'', 'percent'=>'', 'amount'=>'', 'comments'=>'');
+														$arrValues = array_key_exists( 'co_pay',$model) ? unserialize($model['co_pay']) : $default;												
+														$arrValues = Util::array_overlay($default, $arrValues);
+														$selected = $arrValues['covered'];
+														$display = array();
+														if ($selected != 'no')
+														{
+															$display[] = (!empty($arrValues['percent'])) ? $arrValues['percent'].'% of the admissible claim amoun' : '';
+															$display[] = (!empty($arrValues['amount'])) ? 'Max upto Rs. '.$arrValues['amount'] : '';
+															$display[] = (!empty($arrValues['comments'])) ? $arrValues['comments'] : '';
+														}
+														else 
+															$display[] = 'No';
+														$display = array_filter($display);
+														$display = (!empty($display)) ? implode(', ', array_filter($display)) : 'Yes';
+														echo $display;	
+									                ?>
+												</td>
 											</tr>
 											<tr>
 												<td>Cashless</td>
-												<td><?php echo array_key_exists( 'cashless_treatment',$vFeatures) ? $vFeatures['cashless_treatment'] : '';?></td>
+												<td>
+													<?php
+													$default = array('hospitals'=>'', 'cities'=>'');
+													$arrValues = array_key_exists( 'cashless_treatment',$model) ? unserialize($model['cashless_treatment']) : $default;
+													$arrValues = Util::array_overlay($default, $arrValues);
+													$display = array();
+													$display[] = ((!empty($arrValues['hospitals'])) ? $arrValues['hospitals'].' hospitals' : '').((!empty($arrValues['cities'])) ? ' across '.$arrValues['cities'].' cities' : ' across country');
+													$display = array_filter($display);
+													$display = (!empty($display)) ? implode(', ', array_filter($display)) : 'No';
+													echo $display;	
+									                ?>
+									            </td>
 											</tr>
 											<tr>
 												<td>Claim Loading</td>
@@ -655,7 +885,7 @@
 									</table>
 	
 	
-	
+<?php /* ?>	
 									<table class="bordered mar-40">
 									<thead>
 				
@@ -690,6 +920,7 @@
 											</tr>
 										</tbody>
 									</table>
+<?php */ ?>									
 								</div>
 							</div>
 	
@@ -738,149 +969,20 @@
 			<div class="tabs-group product-collateral">
 				<div class="row">
 					<?php echo widget::run('additionalDetailsFront', array('companyDetails'=>$companyDetails, 'policyDetails'=>$policyDetails,'claimRatioJson'=>$claimRatioJson))?>
-					
 				</div>
 			</div>
 		</div>
+		
 		<div class="row pad" id="thisdiv">
+		
 			<div class="col-sm-12">
 				<h2 class="lined-heading">
 					<span>Peer Comparison</span>
 				</h2>
 			</div>
-			<div class="col-sm-12">
-				<div class="wid_25">
-					<div class="h_w">Cover Amount</div>
-					<!--<div class="c_w"><select id="c_amt" class="form-control">
-  <option value="50">50 Lakhs</option>
-  <option value="1">1 Crore</option>
-  
-</select></div>-->
-
-
-					<div class="">
-						<div class="wrapper-demo">
-							<div id="dd" class="wrapper-dropdown-1" tabindex="1">
-								<span>50 Lakhs</span>
-								<ul class="dropdown" tabindex="1">
-									<li><a href="#">50 Lakhs</a></li>
-									<li><a href="#">1 Crore</a></li>
-								</ul>
-							</div>
-							​
-						</div>
-
-
-					</div>
-				</div>
-				<div class="wid_25">
-					<div class="h_w">Term</div>
-					<div class="">
-						<div class="wrapper-demo">
-							<div id="dd1" class="wrapper-dropdown-1" tabindex="1">
-								<span>25 Years</span>
-								<ul class="dropdown" tabindex="1">
-									<li><a href="#">25 Years</a></li>
-									<li><a href="#">30 Years</a></li>
-								</ul>
-							</div>
-							​
-						</div>
-						<!--<select id="c_term" class="form-control">
-  <option value="25">25 Years</option>
-  <option value="35">35 Years</option>
-  
-</select>-->
-
-					</div>
-				</div>
-				<div class="wid_25">
-					<div class="h_w">Age</div>
-					<div class="c_w">25 Years</div>
-				</div>
-				<div class="wid_25">
-					<div class="h_w">Gender</div>
-					<div class="c_w">Male</div>
-				</div>
-				<div class="wid_25">
-					<div class="h_w">Life Style</div>
-					<div class="c_w">Healthy, Non smoker</div>
-				</div>
-			</div>
-			<div class="col-sm-12 clearfix no_pad_lr">
-				<!--      <div class="com"  ><a class="btn_offer_block com_premium" id="com_premium_shw" href="javascript:void(0)">Compare <i class="fa fa-angle-right"></i></a></div></div>
--->
-				<div class="col-sm-12 clearfix count_shw no_pad_lr" id="">
-
-
-
-					<div class="col-md-12 no_pad_lr">
-
-
-						<div class="col-md-4 no_pad_lr">
-							<div class=" chartdiv clearfix">
-								<div align="center">
-									<img
-										src="<?php echo base_url();?>assets/images/company/hdfc.jpg"
-										border="0">
-								</div>
-								<div id="container" class=""
-									style="max-width: 100%; height: 300px; margin: 0 auto"></div>
-							</div>
-						</div>
-
-						<div class=" col-md-2 no_pad_lr chartdiv1">
-							<div align="center">
-								<img
-									src="<?php echo base_url();?>assets/images/company/bharti-axa-general-insurance-company-small.jpg"
-									border="0">
-							</div>
-
-							<div id="container1" class="chartdiv"
-								style="max-width: 100%; height: 300px; margin: 0 auto"></div>
-						</div>
-
-
-						<div class="col-md-2 no_pad_lr chartdiv2">
-							<div align="center">
-								<img
-									src="<?php echo base_url();?>assets/images/company/l-t-general-insurance-company-small.jpg"
-									border="0">
-							</div>
-
-							<div id="container2" class="chartdiv"
-								style="max-width: 100%; height: 300px; margin: 0 auto"></div>
-						</div>
-
-						<div class="col-md-2 no_pad_lr chartdiv3">
-							<div align="center">
-								<img
-									src="<?php echo base_url();?>assets/images/company/bajaj-allianz-general-insurance-company-small.jpg"
-									border="0">
-							</div>
-							<div id="container3" class="chartdiv"
-								style="max-width: 100%; height: 300px; margin: 0 auto"></div>
-						</div>
-
-						<div class="col-md-2 no_pad_lr chartdiv4">
-							<div align="center">
-								<img
-									src="<?php echo base_url();?>assets/images/company/tata-aig-general-insurance-company-small.jpg"
-									border="0">
-							</div>
-							<div id="container4" class="chartdiv"
-								style="max-width: 100%; height: 300px; margin: 0 auto"></div>
-						</div>
-					</div>
-
-					<div class="cal">
-						<a class="btn_offer_block" href="javascript:void(0)">Calculate
-							Your Premium <i class="fa fa-angle-right"></i> </a>
-					</div>
-
-				</div>
-
-			</div>
+			<?php echo widget::run('peerComparisionFront', array('companyDetails'=>$companyDetails, 'policyDetails'=>$policyDetails));?>
+			
+			
 			<div class="row">
 				<div class="col-sm-12">
 					<h2 class="lined-heading" style="margin-top: 90px;">

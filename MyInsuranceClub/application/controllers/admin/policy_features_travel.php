@@ -96,7 +96,7 @@ class Policy_features_travel extends Admin_Controller {
 				
 				
 				//	get all the varients from others policies for peer comparison
-				$allVarients = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$policyModel['product_id'], 'sub_product_id'=>$policyModel['sub_product_id']));
+				//$allVarients = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$policyModel['product_id'], 'sub_product_id'=>$policyModel['sub_product_id']));
 			
 				if($this->input->post('model') && $isActive == true)
 				{
@@ -190,14 +190,14 @@ class Policy_features_travel extends Admin_Controller {
 					$model = (isset($_POST['model']) && !empty($_POST['model'])) ? $_POST['model'] : array();
 					$riders = (isset($_POST['riderModel']) && !empty($_POST['riderModel'])) ? $_POST['riderModel'] : array();
 				}	
-				$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$policyModel['product_id'], 'sub_product_id'=>$policyModel['sub_product_id']));
+				//$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$policyModel['product_id'], 'sub_product_id'=>$policyModel['sub_product_id']));
 			
 				$this->data['model'] = $model;
 				$this->data['modelType'] = $modelType;
 				$this->data['riderModel'] = $riders;
 				$this->data['variantModel'] = $variantModel;
 				$this->data['policyModel'] = $policyModel;
-				$this->data['allVariants'] = $allVariants;
+				//$this->data['allVariants'] = $allVariants;
 				$this->data['companyModel'] = $companyModel;
 
 				$this->template->write_view('content', 'admin/policy_features/travel', $this->data, TRUE);

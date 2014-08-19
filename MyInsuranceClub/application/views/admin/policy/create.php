@@ -790,7 +790,7 @@ $policy_id = (isset($policyModel['policy_id']) && !empty($policyModel['policy_id
 						            <section class="panel panel-default">
 						                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Peer Comparision</strong></div>
 						                <div class="panel-body">
-						                	<?php echo widget::run('peerComparisionBack', array('policy_id'=>$policy_id, 'peer_comparision_variants'=>$peer_comparision_variants, 'allVariants'=>$allVariants, 'modelName'=>'policyModel')); ?>
+						                	<?php echo widget::run('peerComparisionBack', array('policy_id'=>$policy_id, 'peer_comparision_variants'=>$peer_comparision_variants, 'allVariants'=>$allVariants, 'modelName'=>'policyModel', 'policyModel'=>$policyModel)); ?>
 						                </div>
 						            </section>
 								</div>

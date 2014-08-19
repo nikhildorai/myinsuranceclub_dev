@@ -91,7 +91,23 @@ class Policy_variants_master_model EXTENDS Admin_Model{
 	
 	public static function getAllPolicyVariantsDetails($arrParams = array())
 	{
+		$return = array();
 		$result = Util::callStoreProcedure('getAllPolicyVariantsDetails', $arrParams);
-		return $result;
+		if (!empty($result))
+		{
+			foreach ($result as $k1=>$v1)
+			{
+				if (!empty($return[$v1['variant_id']]))
+				{
+					if ($return[$v1['variant_id']]['annual_premium'] > $v1['annual_premium'])
+						$return[$v1['variant_id']] = $v1;
+				}
+				else 
+				{
+					$return[$v1['variant_id']] = $v1;
+				}
+			}		
+		}
+		return $return;
 	}
 }

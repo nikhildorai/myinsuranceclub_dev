@@ -89,7 +89,7 @@ class Policy_features_level_term extends Admin_Controller {
 				
 				//	get all the varients from others policies for peer comparison
 				//$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>13, 'sub_product_id'=>2));
-				$allVarients = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$policyModel['product_id'], 'sub_product_id'=>$policyModel['sub_product_id']));
+				//$allVarients = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$policyModel['product_id'], 'sub_product_id'=>$policyModel['sub_product_id']));
 			
 				if($this->input->post('model') && $isActive == true)
 				{
@@ -167,14 +167,14 @@ class Policy_features_level_term extends Admin_Controller {
 					$model = $_POST['model'];
 					$riders = $_POST['riderModel'];
 				}	
-				$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$policyModel['product_id'], 'sub_product_id'=>$policyModel['sub_product_id']));
+				//$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$policyModel['product_id'], 'sub_product_id'=>$policyModel['sub_product_id']));
 			
 				$this->data['model'] = $model;
 				$this->data['modelType'] = $modelType;
 				$this->data['riderModel'] = $riders;
 				$this->data['variantModel'] = $variantModel;
 				$this->data['policyModel'] = $policyModel;
-				$this->data['allVariants'] = $allVariants;
+				//$this->data['allVariants'] = $allVariants;
 //var_dump($this->data);die;	
 
 				$this->template->write_view('content', 'admin/policy_features/level_term', $this->data, TRUE);

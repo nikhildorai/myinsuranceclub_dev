@@ -64,7 +64,7 @@ class SamplePremiumFront extends Widget{
 ?>				
 						<div class="plan  col-sm-3" id="most-popular1">
 							<h3>
-								Age = <?php echo $features['sample_premium_age_1'];?><span style="position: relative; top: 15px;">&#8377;<?php echo $features['sample_premium_amount_1'];?></span>
+								Age = <?php echo $features['sample_premium_age_1'];?><span style="position: relative; top: 15px;"><font style="font-family: DejaVu Sans">&#x20b9;</font><?php echo $features['sample_premium_amount_1'];?></span>
 							</h3>
 							<ul>
 							</ul>

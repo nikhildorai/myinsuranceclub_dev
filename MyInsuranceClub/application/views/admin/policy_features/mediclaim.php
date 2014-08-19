@@ -1170,7 +1170,7 @@ display:<?php echo ($maternitySelected == 'yes') ? 'table-row' : 'none';?>;
 									                ?>
 									                    <div class="col-sm-12"> 
 										                    <?php 
-																$options = array('yes'=>'Covered', 'no'=>'Not Covered');		
+																$options = array('yes'=>'Covered', 'no'=>'Not Covered', 'actual cost'=>'Actual cost');		
 																foreach ($options as $k1=>$v1)
 																{
 																	$op = array(

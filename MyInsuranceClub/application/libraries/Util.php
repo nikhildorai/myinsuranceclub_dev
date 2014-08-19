@@ -2378,7 +2378,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 			else if ($type == 'getAllDetailsOfSingleHealthPolicy')
 				$query = "CALL sp_getAllDetailsOfSingleHealthPolicy(?)";
 			else if ($type == 'getAllPolicyVariantsDetails')
-				$query = "CALL sp_getAllPolicyVariantsDetails(?,?)";
+				$query = "CALL sp_getAllPolicyVariantsDetails(?,?,?,?,?,?,?)";
 			else if ($type == 'getPolicyVariantsFeaturesRidersDetails')
 				$query = "CALL sp_getPolicyVariantsFeaturesRidersDetails(?,?,?)";
 			else if ($type == 'getCompanyClaimRatio')
@@ -3447,22 +3447,27 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 	
 	public static function array_overlay($a1,$a2)
 	{
-		foreach($a1 as $k => $v) 
+		if (is_array($a1) && is_array($a2))
 		{
-			if(!array_key_exists($k,$a2)) continue;
-			if(is_array($v) && is_array($a2[$k]))
+			foreach($a1 as $k => $v) 
 			{
-				if (!empty($v))				
-					$a1[$k] = Util::array_overlay($v,$a2[$k]);
-				else 	
-					$a1[$k] = Util::array_overlay($a2[$k], $v);				
+				if(!array_key_exists($k,$a2)) continue;
+				if(is_array($v) && is_array($a2[$k]))
+				{
+					if (!empty($v))				
+						$a1[$k] = Util::array_overlay($v,$a2[$k]);
+					else 	
+						$a1[$k] = Util::array_overlay($a2[$k], $v);				
+				}
+				else
+				{
+					$a1[$k] = $a2[$k];
+				}
 			}
-			else
-			{
-				$a1[$k] = $a2[$k];
-			}
+			return $a1;
 		}
-		return $a1;
+		else 
+			return $a1;
 	}
 }
 

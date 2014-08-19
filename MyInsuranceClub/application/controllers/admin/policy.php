@@ -129,7 +129,7 @@ class Policy extends Admin_Controller {
 				$tag = $this->util->addUpdateTags($_POST['tag']);
 				$_POST['policyModel']['tag'] = $tag;
 			}		
-//var_dump($_POST, $_FILES);die;			
+//var_dump($_FILES);die;			
 			//	check if file is uploaded
 			if (!empty($_FILES))
 			{
@@ -163,8 +163,8 @@ class Policy extends Admin_Controller {
 									
 								$j++;
 							}
-						}		
-						$_POST['policyModel'][$k1] = implode(',', $_POST['policyModel'][$k1]);
+						}						
+						$_POST['policyModel'][$k1] = (isset($_POST['policyModel'][$k1]) && !empty($_POST['policyModel'][$k1])) ? implode(',', $_POST['policyModel'][$k1]) : '';
 					}
 					else 
 					{
@@ -200,8 +200,7 @@ class Policy extends Admin_Controller {
 				$_POST['policyModel']['policy_logo'] = $policyModel['policy_logo'];
 				$_POST['policyModel']['policy_wordings_images'] = $policyModel['policy_wordings_images'];
 				$_POST['policyModel']['brochure_images'] = $policyModel['brochure_images'];
-			}	
-			
+			}
 			if (isset($_POST['policyModel']['product_id']) && !empty($_POST['policyModel']['product_id']))
 				$_POST['policyModel']['product_id'] = implode(',', $_POST['policyModel']['product_id']);
 				
@@ -210,10 +209,16 @@ class Policy extends Admin_Controller {
 				
 			if (isset($_POST['policyModel']['key_features']) && !empty($_POST['policyModel']['key_features']))
 				$_POST['policyModel']['key_features'] = serialize($_POST['policyModel']['key_features']);
-
+				
+			if (isset($_POST['policyModel']['peer_comparision_age']) && !empty($_POST['policyModel']['peer_comparision_age']))
+				$_POST['policyModel']['peer_comparision_age'] = implode(',', $_POST['policyModel']['peer_comparision_age']);
+				
+			if (isset($_POST['policyModel']['peer_comparision_coverage_amounts']) && !empty($_POST['policyModel']['peer_comparision_coverage_amounts']))
+				$_POST['policyModel']['peer_comparision_coverage_amounts'] = implode(',', $_POST['policyModel']['peer_comparision_coverage_amounts']);
+				
 			$_POST['policyModel']['peer_comparision_variants'] = (isset($_POST['policyModel']['peer_comparision_variants']) && !empty($_POST['policyModel']['peer_comparision_variants'])) ? implode(',', $_POST['policyModel']['peer_comparision_variants']) : '';
 			$newPeerComparision = explode(',', $_POST['policyModel']['peer_comparision_variants']);
-			
+	
 			//	set default values for policy
 			$arrParams = $this->input->post('policyModel');
 			$policy_id = (isset($arrParams['policy_id']) && !empty($arrParams['policy_id'])) ? $arrParams['policy_id'] : '';
@@ -240,7 +245,7 @@ class Policy extends Admin_Controller {
 			
 			//	set default values for policy features
 			$policyFeaturesPost = $this->input->post('policyFeaturesModel');	
-						
+//var_dump($_POST['policyModel'], $this->form_validation->run());die;								
 			// Run the validation.
 			if ($this->form_validation->run())
 			{
@@ -365,10 +370,15 @@ class Policy extends Admin_Controller {
 			}
 			$policyModel = $_POST['policyModel'];
 		}		
-		$product_id = (isset($policyModel['product_id']) && !empty($policyModel['product_id'])) ? $policyModel['product_id'] : '';
-		$sub_product_id = (isset($policyModel['sub_product_id']) && !empty($policyModel['sub_product_id'])) ? $policyModel['sub_product_id'] : '';
-		$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$product_id, 'sub_product_id'=>$sub_product_id));
-			
+		
+		$param['product_id'] = (isset($policyModel['product_id']) && !empty($policyModel['product_id'])) ? $policyModel['product_id'] : '';
+		$param['sub_product_id'] = (isset($policyModel['sub_product_id']) && !empty($policyModel['sub_product_id'])) ? $policyModel['sub_product_id'] : ''; 
+		$param['city'] = 590;
+		$param['gender'] = 'male';
+		$param['age'] = (isset($policyModel['peer_comparision_age']) && !empty($policyModel['peer_comparision_age'])) ? $policyModel['peer_comparision_age'] : '25';
+		$param['members'] = !empty($policyModel['peer_comparision_type']) ? ($policyModel['peer_comparision_type'] == 'individual') ? "1A" : '2A' : '1A';
+		$param['sum_assured'] = (isset($policyModel['peer_comparision_coverage_amounts']) && !empty($policyModel['peer_comparision_coverage_amounts'])) ? $policyModel['peer_comparision_coverage_amounts'] : '500000';
+		$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails($param);		
 		$this->data['policyModel'] = $policyModel;
 		$this->data['modelType'] = $modelType;
 		$this->data['variantModel'] = $variantModel;
@@ -941,25 +951,22 @@ class Policy extends Admin_Controller {
 	{
 		if (!empty($_POST))
 		{
-			$product_id = (isset($_POST['product_id']) && !empty($_POST['product_id'])) ? implode(',', $_POST['product_id']) : '' ;
-			$sub_product_id = (isset($_POST['sub_product_id']) && !empty($_POST['sub_product_id'])) ? implode(',', $_POST['sub_product_id']) : '' ;
 			$policy_id = $_POST['policy_id'];
 			$peerValue = $_POST['peerValue'];
 			$modelName = $_POST['modelName'];
-			$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$product_id, 'sub_product_id'=>$sub_product_id));
+			$param['product_id'] = (isset($_POST['product_id']) && !empty($_POST['product_id'])) ? implode(',', $_POST['product_id']) : '' ;
+			$param['sub_product_id'] = (isset($_POST['sub_product_id']) && !empty($_POST['sub_product_id'])) ? implode(',', $_POST['sub_product_id']) : '' ;
+			$param['city'] = 590;
+			$param['gender'] = 'male';
+			$param['age'] = (isset($_POST['model_peer_comparision_age']) && !empty($_POST['model_peer_comparision_age'])) ? implode(',', $_POST['model_peer_comparision_age']) : '25';
+			$param['members'] = !empty($_POST['peer_comparision_type']) ? ($_POST['peer_comparision_type'] == 'individual') ? "1A" : '2A' : '1A';
+			$param['sum_assured'] = (isset($_POST['model_coverage_amount']) && !empty($_POST['model_coverage_amount'])) ? implode(',', $_POST['model_coverage_amount']) : '500000';
+			$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails($param);
+			
 			echo Util::peerComparisionTableViewBackend($allVariants, $policy_id, $peerValue, $modelName);
 		}
 	}
 	
-	public function policyWording()
-	{
-		if (isset($_POST) && !empty($_POST))
-		{
-			var_dump($_POST, $_FILES);die;	
-		}	
-		$this->template->write_view('content', 'admin/policy/policyWording', $this->data, TRUE);
-		$this->template->render();
-	}
 }
 
 /* End of file auth_lite.php */
