@@ -104,6 +104,12 @@ class controller_travel extends Customer_Controller {
 				
 				if($this->input->post('cust_birth_day') != '' && $this->input->post('cust_birth_month') != '' && $this->input->post('cust_birth_year') != '')
 				{
+					$user_input['cust_birth_day'] = $this->input->post('cust_birth_day');
+					
+					$user_input['cust_birth_month'] = $this->input->post('cust_birth_month');
+					
+					$user_input['cust_birth_year'] = $this->input->post('cust_birth_year');
+					
 					$user_input['cust_birthdate'] = $this->input->post('cust_birth_day').'/'.$this->input->post('cust_birth_month').'/'.$this->input->post('cust_birth_year');
 				
 					$user_input['cust_age'] = Util::convertBirthdateToAge($user_input['cust_birthdate']);

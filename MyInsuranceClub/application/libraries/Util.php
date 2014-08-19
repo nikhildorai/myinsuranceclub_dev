@@ -2230,6 +2230,14 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 						unset($data[$k]);
 					}
 				}
+				
+				if(isset($search_filter['trip_duration']))
+				{
+					if(!(in_array($v['maximum_trip_duration'],$search_filter['trip_duration'])))
+					{
+						unset($data[$k]);
+					}
+				}
 			}
 		}
 		return $data;

@@ -20,10 +20,10 @@
         <div class="travel_container travel_mic">
           <!-- form  method="post"  class="travel_form"> -->
           <?php echo form_open('travel-insurance/search-results',array('id'=>'travel_form','class'=>'travel_form'));?>
-            <div class="t_section t_ca">
+            <div class="t_section t_ca" >
               <div class="">
                 <div class="mic_type mic_section">
-                  <div class="form-lable">What type of cover do you want?</div>
+                  <div class="form-lable" id="trip_location_error" tabindex="1">What type of cover do you want?</div>
                   <div class="travel_hlp"><a class="t_h_btn aa  fa fa-info-circle" href="javascript:void(0)"></a></div>
                   <div class="mic_t_input">
                     <div class=" mic_t_b_panel">
@@ -52,15 +52,16 @@
               </div>
             </div>
             <div style="display:none" class="travel_form_s">
-              <div class="t_section t_ca" >
+              <div class="t_section t_ca">
                 <div class="t_mul_help_text" ></div>
                 <div class="mic_cntry">
                   <div class="mic_sec_label" >
                     <div>
                       <div class="mic_type mic_section">
-                        <div class="form-lable">Where are you going?</div>
+                        <div class="form-lable" id="trip_start_error" tabindex="2">Where are you going?</div>
                         <div class="travel_hlp"><a class="t_h_btn  fa fa-info-circle toll_a" href="javascript:void(0)"></a></div>
-                        <div class="mic_t_input">
+                        <div class="mic_t_input" >
+                        <div id="error_border_2">
                           <div class=" mic_t_b_panel">
                             <div  class="where_go_a mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r "  id = "including_usa_canada" style="width: 25%;cursor: pointer;">
                               <div class="mic_icon">
@@ -89,8 +90,9 @@
                               </div>
                             </div>
                           </div>
+                          </div>
                         </div>
-                        <div class="error-text" style="display: none;"></div>
+                        <div class="error-text" style="display: none;" id="error_box_2"></div>
                       </div>
                     </div>
                   </div>
@@ -99,10 +101,11 @@
               <div class="t_section t_ca">
                 <div class="trip-start-date">
                   <div class="mic_type mic_section">
-                    <div class="form-lable">When are you going?</div>
+                    <div class="form-lable" id="trip_end_error" tabindex="3">When are you going?</div>
                     <div class="travel_hlp"><a class="t_h_btn  fa fa-info-circle toll_b" href="javascript:void(0)"></a></div>
                     <div class="mic_t_input">
-                      <div class=" mic_t_b_panel">
+                   
+                      <div class=" mic_t_b_panel" id = "error_border_3">
                         <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r w_ga"  id="today" style="width: 25%;cursor: pointer;">
                           <div class="mic_icon">
                             <div class="mic_top_text w_today"></div>
@@ -129,7 +132,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="error-text" style="display: none;"></div>
+                    <div class="error-text" style="display: none;" id="error_box_3"></div>
                   </div>
                 </div>
                 <div class="trip-start-date-picker">
@@ -142,10 +145,10 @@
                 </div>
                 <div class="travel_end_date trip-end-date">
                   <div class="mic_type mic_section" >
-                    <div class="form-lable">When will you be returning?</div>
+                    <div class="form-lable" id="family_composition_error" tabindex="5">When will you be returning?</div>
                     <div class="travel_hlp" style="display: block;"><a class="t_h_btn fa fa-info-circle toll_away" href="javascript:void(0)"></a></div>
                     <div class="mic_t_input">
-                      <div class=" mic_t_b_panel">
+                      <div class=" mic_t_b_panel" id="error_border_4">
                         <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r n_a"  id="7_nights" style="width: 25%;cursor: pointer;">
                           <div class="mic_icon">
                             <div class="mic_top_text"></div>
@@ -172,7 +175,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="error-text" style="display: none;"></div>
+                    <div class="error-text" style="display: none;" id="error_box_4"></div>
                   </div>
                 </div>
                 <div class="trip-end-date-picker" id="demoContainer">
@@ -188,10 +191,10 @@
               <div class="t_section t_ca" style="padding-bottom:70px;">
                 <div class="mic_travel_insure">
                   <div class="mic_type mic_section">
-                    <div class="form-lable">Whom do you want to cover?</div>
+                    <div class="form-lable" id="cust_gender_error" tabindex="6">Whom do you want to cover?</div>
                     <div class="travel_hlp"><a class="t_h_btn  fa fa-info-circle toll_d" href="javascript:void(0)"></a></div>
                     <div class="mic_t_input">
-                      <div class="mic_t_b_panel">
+                      <div class="mic_t_b_panel" id="error_border_5">
                         <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r insure_a"  id="1A" style="width:33.33%;cursor: pointer;">
                           <div class="mic_icon">
                             <div class="mic_i_mar individual_icon"></div>
@@ -204,7 +207,7 @@
                             <div class="mic_i_btm">Couple</div>
                           </div>
                         </div>
-                        <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r insure_c"  id="family"style="width: 33.33%;cursor: pointer;">
+                        <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r insure_c"  id="family" style="width: 33.33%;cursor: pointer;">
                           <div class="mic_icon">
                             <div class="mic_i_mar family-icon"></div>
                             <div class="mic_i_btm">Family</div>
@@ -212,7 +215,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="error-text" style="display: none;"></div>
+                    <div class="error-text" style="display: none;" id="error_box_5"></div>
                   </div>
                 </div>
                 <div class="mic_travel_family_section" >
@@ -229,9 +232,9 @@
                                 <div class="mic_t_input"><span class=" mic_sec_day_cntrl">
                                   <div class="mic_sec_label">
                                     <div class="mic_t_input ">
-                                      <input type="text" class="mic_t_input mic_e_input t_dd id" style="margin-right:10px;" placeholder="DD" aria-label="DD" maxlength="2" name="cust_birth_day">
-                                      <input type="text" class="mic_t_input mic_e_input t_mm id" style="margin-right:10px; width:36px;"  placeholder="MM" aria-label="MM" maxlength="2" name="cust_birth_month">
-                                      <input type="text" class="mic_t_input t_yy mic_e_input" style="width:48px;" placeholder="YYYY" aria-label="YYYY" maxlength="4" name="cust_birth_year">
+                                      <input type="text" class="mic_t_input mic_e_input t_dd id" autocomplete="off" style="margin-right:10px;" placeholder="DD" aria-label="DD" maxlength="2" name="cust_birth_day" value="<?php echo(isset($this->session->userdata['user_input']['cust_birth_day']) ? $this->session->userdata['user_input']['cust_birth_day'] : set_value('cust_birth_day')) ; ?>">
+                                      <input type="text" class="mic_t_input mic_e_input t_mm id" autocomplete="off" style="margin-right:10px; width:36px;"  placeholder="MM" aria-label="MM" maxlength="2" name="cust_birth_month" value="<?php echo(isset($this->session->userdata['user_input']['cust_birth_month']) ? $this->session->userdata['user_input']['cust_birth_month'] : set_value('cust_birth_month')) ; ?>">
+                                      <input type="text" class="mic_t_input t_yy mic_e_input" autocomplete="off" style="width:48px;" placeholder="YYYY" aria-label="YYYY" maxlength="4" name="cust_birth_year" value="<?php echo(isset($this->session->userdata['user_input']['cust_birth_year']) ? $this->session->userdata['user_input']['cust_birth_year'] : set_value('cust_birth_year')) ; ?>">
                                     </div>
                                     <div class="error-text" style="display: none;"></div>
                                   </div>
@@ -245,7 +248,7 @@
                         <div class="id-cus-gender" style="display:inline-block;width: 50%;">
                           <div class="family_section_header ">Your Gender</div>
                           <div style="width: 100%; margin-top:10px;" class="mic_t_input">
-                            <div class=" mic_t_b_panel">
+                            <div class=" mic_t_b_panel" id="error_border_6">
                               <div style="width:33.33%;" aria-pressed="true" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gen_but_m">
                                 <div class="mic_icon" style="padding: 5px 0px;cursor: pointer;">
                                   <div class="mic_i_mar male" style="float: left; margin-top: 2px;"></div>
@@ -260,6 +263,7 @@
                               </div>
                             </div>
                           </div>
+                          <div class="error-text" style="display: none;" id="error_box_6"></div>
                         </div>
                         <div id="TextBoxesGroup">
                           <div  id="TextBoxDiv1">
@@ -273,9 +277,9 @@
                                       <div class="mic_t_input"><span class="mic_sec_day_cntrl">
                                         <div class="mic_sec_label">
                                           <div class="mic_t_input ">
-                                            <input type="text" class="mic_t_input mic_e_input  id" style="margin-right:10px;" placeholder="DD" aria-label="DD" maxlength="2" name="spouse_birth_day">
-                                            <input type="text" class="mic_t_input mic_e_input  id" style="margin-right:10px; width:36px;"  placeholder="MM" aria-label="MM" maxlength="2" name="spouse_birth_month">
-                                            <input type="text" class="mic_t_input mic_e_input " style="width:48px;" placeholder="YYYY" aria-label="YYYY" maxlength="4" name="spouse_birth_year">
+                                            <input type="text" class="mic_t_input mic_e_input  id" autocomplete="off" style="margin-right:10px;" placeholder="DD" aria-label="DD" maxlength="2" name="spouse_birth_day" >
+                                            <input type="text" class="mic_t_input mic_e_input  id" autocomplete="off" style="margin-right:10px; width:36px;"  placeholder="MM" aria-label="MM" maxlength="2" name="spouse_birth_month">
+                                            <input type="text" class="mic_t_input mic_e_input "  autocomplete="off" style="width:48px;" placeholder="YYYY" aria-label="YYYY" maxlength="4" name="spouse_birth_year">
                                           </div>
                                           <div class="error-text" style="display: none;"></div>
                                         </div>
@@ -343,7 +347,7 @@
                   <div class=" travel-name-control right-spacer">
                     <div class="mic_sec_label" >
                       <div class="mic_t_input ">
-                        <input type="text" class="form-control " placeholder="Full name" aria-label="Full name" name="cust_name" value="<?php echo set_value('cust_name');?>">
+                        <input type="text" class="form-control" autocomplete="off" placeholder="Full name" onkeyup="javascript:validateName(cust_name);" maxlength="50" aria-label="Full name" name="cust_name" value="<?php echo ((isset($this->session->userdata['user_input']['full_name'])) ?  $this->session->userdata['user_input']['full_name'] : set_value('cust_name'));?>" required>
                       </div>
                      
                       <div></div>
@@ -352,7 +356,7 @@
                   <div class="travel-name-control" >
                     <div class="mic_sec_label">
                       <div class="mic_t_input ">
-                        <input type="text" class="form-control " placeholder="Mobile" aria-label="Mobile" name="cust_mobile" maxlength="10">
+                        <input type="text" class="form-control" autocomplete="off" placeholder="Mobile" aria-label="Mobile" name="cust_mobile" maxlength="10" value="<?php echo ((isset($this->session->userdata['user_input']['cust_mobile'])) ?  $this->session->userdata['user_input']['cust_mobile'] : set_value('cust_mobile'));?>" required>
                       </div>
                       <div class="error-text"></div>
                     </div>
@@ -361,7 +365,7 @@
                 <div class="travel-email-control">
                   <div class="mic_sec_label">
                     <div class="mic_t_input ">
-                      <input type="text" class="form-control" placeholder="Your email" aria-label="Your email" name="cust_email">
+                      <input type="text" class="form-control" autocomplete="off" placeholder="Your email" aria-label="Your email" name="cust_email" required value="<?php echo ((isset($this->session->userdata['user_input']['cust_email'])) ?  $this->session->userdata['user_input']['cust_email'] : set_value('cust_email'));?>">
                     </div>
                     <div class="error-text"></div>
                   </div>
@@ -372,7 +376,6 @@
             <input id="Field4" 		name="agree" checked 		type="checkbox" 		class="field checkbox" 		value="agree"/>
             <label class="" for="Field4">I authorize MyInsuranceClub &amp; its partners to Call/SMS for my application &amp; agree to the <a href="" class="link">Terms of Use</a>.</label>
           </div>
-                
                 </div>
                 <div class="button-panel"><span class="right-buttons"><span class="id-next-button">
                   <div style="font-weight: bold;padding: 10px 20px;">
@@ -476,7 +479,7 @@
     <div class="tab-content  mar-70">
       <div class="tab-pane fade in active" id="htmlcss">
         <article class="row">
-          <div class="col-md-5 col-sm-5 fadeInLeft visible"> <img class="img-responsive" src="assets/images/why1.jpg" alt=""></div>
+          <div class="col-md-5 col-sm-5 fadeInLeft visible"> <img class="img-responsive" src="<?php echo base_url();?>assets/images/why1.jpg" alt=""></div>
           <div class="col-md-7 col-sm-6 text-left fadeInRight visible">
             <h6>Why Compare Travel Insurance with us?</h6>
             <p>Emergency & un-planned expenses can burn a big hole in your pocket when you are travelling abroad. Not only do they take you by surprise, the charges of medical care in most countries are much higher than what you would have at hand while on a foreign trip. By paying a small amount for travel insurance, you can ensure that these surprises can be taken care of easily.<br/> At MyInsuranceClub, we will help you select the best travel insurance plan with optimum premiums so that you get the best protection while travelling. </p>
@@ -513,7 +516,7 @@
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;This was easy. Thanks! I purchased my travel insurance from your site while I was at the airport. It was quite easy and covenenient.&nbsp;&nbsp;</strong></p>
+                  <p><strong><img src="<?php echo base_url();?>assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;This was easy. Thanks! I purchased my travel insurance from your site while I was at the airport. It was quite easy and covenenient.&nbsp;&nbsp;</strong></p>
                   <p class="col-md-12 aln_right">- Parvinder Singh, Chandigarh</p>
                 </div>
               </div>
@@ -523,7 +526,7 @@
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Your comparison was simple and exhaustive. I found it very easy to use. I found a plan which was pretty much what I wanted to buy.&nbsp;&nbsp;</strong></p>
+                  <p><strong><img src="<?php echo base_url();?>assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Your comparison was simple and exhaustive. I found it very easy to use. I found a plan which was pretty much what I wanted to buy.&nbsp;&nbsp;</strong></p>
                   <p class="col-md-12 aln_right">- Yogesh Sharma, Kolkatta</p>
                 </div>
               </div>
@@ -534,7 +537,7 @@
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Done in 5 mins from my phone. Loved it! The premiums are indeed pretty low and the comparison helped in getting the right plan. Recommended.&nbsp;&nbsp;</strong></p>
+                  <p><strong><img src="<?php echo base_url();?>assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;Done in 5 mins from my phone. Loved it! The premiums are indeed pretty low and the comparison helped in getting the right plan. Recommended.&nbsp;&nbsp;</strong></p>
                   <p class="col-md-12 aln_right">- Sameer Malani, Mumbai</p>
                 </div>
               </div>
@@ -545,7 +548,7 @@
             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
               <div class="field-items">
                 <div class="field-item even">
-                  <p><strong><img src="assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;I would request everyone to get travel insurance when going abroad. It really helps when you are suddenly struck with an emergency.&nbsp;&nbsp;</strong></p>
+                  <p><strong><img src="<?php echo base_url();?>assets/images/left_t.jpg" border="0" class="top_i">&nbsp;&nbsp;I would request everyone to get travel insurance when going abroad. It really helps when you are suddenly struck with an emergency.&nbsp;&nbsp;</strong></p>
                   <p class="col-md-12 aln_right">- Raj Sekhar Reddy, Coimbatore</p>
                 </div>
               </div>
@@ -705,21 +708,21 @@
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url();?>assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
     </div>
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url();?>assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
     </div>
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url();?>assets/images/art1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
     </div>
@@ -731,21 +734,21 @@
     <div class="art_cnt widget ">
       <h4 class="sub_h">How to secure your future with pension</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="assets/images/news1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url();?>assets/images/news1.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
     </div>
     <div class="art_cnt widget ">
       <h4 class="sub_h">Which is the best child plan?</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="assets/images/news2.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url();?>assets/images/news2.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
     </div>
     <div class="art_cnt widget ">
       <h4 class="sub_h">Benefits of investing early</h4>
       <div class="textwidget">
-        <p><img style="border: 0px none;" alt="" src="assets/images/news3.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
+        <p><img style="border: 0px none;" alt="" src="<?php echo base_url();?>assets/images/news3.jpg" >At any moment, an unhappy customer can share their opinion with the masses through...How to speak with an Indian Accent. </p>
       </div>
       <div class="comnt"> <span class="text-left l">1,348 views</span> <span class="text-right r">0 comments</span> </div>
     </div>
@@ -759,8 +762,92 @@
 	$(document).ready(function() {
 	$('#sub_form').on('click',function(){
 
-	$('#travel_form').submit();
+	if($('#trip_location').val() == '')
+	{	
+		$('#error_border_2').css({"border":"1px solid red","line-height":"0px"});
+		$('#error_box_2').show();
+		$('#error_box_2').html('Please choose trip location');
+		$('#trip_location_error').focus();
+		return false;
+		
+	}
+	else if ($('#trip_location').val() != '')
+	{
+		$('#error_border_2').css({"border":"none"});
+		$('#error_box_2').hide();
+		$('#error_box_2').html('');
+	}
 
-		});
+	if($('#trip_start').val() == '')
+	{
+		$('#error_border_3').css({"border":"1px solid red","line-height":"0px"});
+		$('#error_box_3').show();
+		$('#error_box_3').html('Please choose trip start date');
+		$('#trip_start_error').focus();
+		return false;
+	}
+
+	else if ($('#trip_start').val() != '')
+	{
+		$('#error_border_3').css({"border":"none"});
+		$('#error_box_3').hide();
+		$('#error_box_3').html('');
+		
+	}
+
+	if($('#trip_end').val() == '' && $('#trip_type').val() != 'Annual multi-trip')
+	{
+		$('#error_border_4').css({"border":"1px solid red","line-height":"0px"});
+		$('#error_box_4').show();
+		$('#error_box_4').html('Please choose trip end date');
+		$('#trip_end_error').focus();
+		return false;
+	}
+
+	else if ($('#trip_end').val() != '')
+	{
+		$('#error_border_4').css({"border":"none"});
+		$('#error_box_4').hide();
+		$('#error_box_4').html('');
+		
+	}
+		
+	if($('#family_composition').val() == '')
+	{
+		$('#error_border_5').css({"border":"1px solid red","line-height":"0px"});
+		$('#error_box_5').show();
+		$('#error_box_5').html('Please choose number of people to cover');
+		$('#family_composition_error').focus();
+		
+		return false;
+	}
+	else if($('#family_composition').val() != '')
+	{
+		$('#error_border_5').css({"border":"none"});
+		$('#error_box_5').hide();
+		$('#error_box_5').html('');
+	}
+
+	if($('#cust_gender').val() == '')
+	{
+		$('#error_border_6').css({"border":"1px solid red"});
+		$('#error_box_6').show();
+		$('#error_box_6').html('Please choose your gender');
+		$('#cust_gender_error').focus();
+		
+		return false;
+	}
+	else if($('#cust_gender').val() != '')
+	{
+		$('#error_border_6').css({"border":"none"});
+		$('#error_box_6').hide();
+		$('#error_box_6').html('');
+	}
+	else
+	{
+		$('#travel_form').submit();
+	}
+
 	});
+});
 	</script>
