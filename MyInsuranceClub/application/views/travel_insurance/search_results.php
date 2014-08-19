@@ -207,10 +207,10 @@ if(!empty($customer_details))
 								</p> 
                  					
                  					<?php 
-                 							// TO BE DONE
+                 							
                  					if(isset($this->session->userdata['user_input']['trip_type']) && $this->session->userdata['user_input']['trip_type'] == 'Annual multi-trip'){?>
                  						<h6 class="fh3">Trip Duration</h6>
-                 							<div class="addOnFilter clearfix" >
+                 							<p class="addOnFilter clearfix" >
                  								<?php 
                  										sort($trip_duration_arr);
                  										foreach($trip_duration_arr as $trip){
@@ -226,14 +226,14 @@ if(!empty($customer_details))
 															
 															
 															?>
-                 							<div class="checkbox">
+                 									<div class="checkbox">
             											<label>
             												<input type="checkbox" id="trip_duration_<?php echo $trip;?>" name="trip_duration[]" value="<?php echo $trip;?>"  class="search_filter" <?php echo $check_duration; ?>>
             													<label class="" for="trip_duration_<?php echo $trip;?>"><?php echo $trip. ' days' ;?></label>
           												</label>
           											</div>
                  							
-                 							</div>
+                 							</p>
                  							<?php }?>
                  				<p class="addOnFilter" style="margin:0px; padding:0px;">
 										<h6 class="fh3 l" style="margin:0px; padding:0px; height:9px;">&nbsp; </h6>

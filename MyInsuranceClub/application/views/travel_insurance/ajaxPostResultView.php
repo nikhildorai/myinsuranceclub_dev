@@ -46,10 +46,10 @@ elseif(! empty ( $customer_details )) {
 		}
 		else
 		{
-			$trip_duration = 180;
+			$trip_duration = $detail['maximum_trip_duration'];
 		}
 		
-		$compare_data = $detail ['variant_id'] . '-' . $detail ['annual_premium']. '-' . $detail['location_id']. '-' . $age . '-'. $detail['no_of_members']. '-' . $trip_duration;
+		$compare_data = $detail ['variant_id'] . '-' . $detail ['annual_premium']. '-' . $detail['location_id']. '-' . $age . '-'. $detail['no_of_members']. '-' . $trip_duration.'-'.$detail['sub_product_id'];
 		
 		$sum_assured = "<span>USD " . number_format($detail ['sum_assured']). "</span>";
 		

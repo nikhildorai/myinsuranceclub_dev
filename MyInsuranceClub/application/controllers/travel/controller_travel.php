@@ -379,17 +379,30 @@ class controller_travel extends Customer_Controller {
 				
 				$members = $compare[4];
 				
-				$duration = $compare[5];
-			}
+				$duration [] = $compare[5];
 				
+				$sub_product = $compare[6];
+			}
+	
 			$variant = implode(',', $variant);
 				
 			$annual_premium = implode(',', $annual_premium);
+			
+
+			
+			if(count(array_unique($duration)) > 1)
+			{
+				$trip_duration_arr =implode(',',$duration);
+			}
+			else 
+			{
+				$trip_duration_arr = $duration[0];
+			}
 		}
 		
 		Util::setCookies('compared_plans',$variant);
 		
-		$data['comparison_results']=$this->model_compare_travel_policies->get_comparison($variant,$annual_premium,$location_id,$age,$members,$duration);
+		$data['comparison_results']=$this->model_compare_travel_policies->get_comparison($variant,$annual_premium,$location_id,$age,$members,$trip_duration_arr,$sub_product);
 		
 		
 		foreach ($data['comparison_results'] as $k1=>$v1)
@@ -400,6 +413,7 @@ class controller_travel extends Customer_Controller {
 				$result[$k2][] = $v2;
 			}
 		}
+		
 		$data['result']=$result;
 		
 		$this->template->set_template('frontendsearch');

@@ -9,13 +9,11 @@ class model_compare_travel_policies EXTENDS MIC_Model{
 		//$this->load->library('session');
 	}
 	
-	public function get_comparison($variant,$annual_premium,$location_id,$age,$members,$duration)
+	public function get_comparison($variant,$annual_premium,$location_id,$age,$members,$duration,$sub_product)
 	{
-		$callStoredProcedure = "CALL sp_getTravelInsuranceCompareResults(?,?,?,?,?,?)";
+		$callStoredProcedure = "CALL sp_getTravelInsuranceCompareResults(?,?,?,?,?,?,?)";
 		
-		
-			
-			$compareParameters = array($annual_premium,$variant,$members,$age,$location_id,$duration);
+			$compareParameters = array($annual_premium,$variant,$members,$age,$location_id,$duration,$sub_product);
 		
 	
 		$getComparisonData = $this->db->query($callStoredProcedure,$compareParameters);
