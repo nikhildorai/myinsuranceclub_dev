@@ -19,6 +19,8 @@ class model_travel_customer_details EXTENDS MIC_Model{
 		
 		$NumberOfMembers = '';
 		
+		$AdditionalMembers = array();
+		
 		if(isset($user_input['family_composition']))
 		{
 			if($user_input['family_composition'] == '1A')
@@ -80,8 +82,28 @@ class model_travel_customer_details EXTENDS MIC_Model{
 			$trip_End = $TripEndDate;
 		}
 		
+		for($i = 3;$i <= 7;$i++)
+		{
+			if(isset($user_input['traveller_'.$i.'_dob']) && isset($user_input['traveller_'.$i.'_age']) && isset($user_input['traveller_'.$i.'_gender'])) 
+			{
+				$AdditionalMembers['Member_'.$i]['dob'] = $user_input['traveller_'.$i.'_dob'];
+				$AdditionalMembers['Member_'.$i]['age']= $user_input['traveller_'.$i.'_age'];
+				$AdditionalMembers['Member_'.$i]['gender']= $user_input['traveller_'.$i.'_gender'];
+			}
+		}
 		
-		$StoredProcedure = "CALL sp_insertTravelCustomerDetails(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		$combineAdditionalMembersInfo = '';
+		
+		if (!empty($AdditionalMembers))
+		{
+			$combineAdditionalMembersInfo = json_encode($AdditionalMembers);
+		}
+		else 
+		{
+			$combineAdditionalMembersInfo = '';
+		}
+		
+		$StoredProcedure = "CALL sp_insertTravelCustomerDetails(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		$TravelCustomerDetailsArray = array($sessionsID,
 											$UniqueUserID,
@@ -97,6 +119,7 @@ class model_travel_customer_details EXTENDS MIC_Model{
 											$spouse_birthdate,
 											$spouse_age,
 											$spouse_gender,
+											$combineAdditionalMembersInfo,
 											$user_input['product_name'],
 											$user_input['product_type'],
 											$NumberOfMembers,
