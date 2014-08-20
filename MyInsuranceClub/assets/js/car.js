@@ -283,13 +283,15 @@ $(document).ready(function() {
 
 	
 	
-	
+		$( "#combobox34" ).combobox34();
 	
 	
 	});
 	
 	
-		$.widget( "custom.combobox", {
+
+	
+		$.widget( "custom.combobox34", {
     _create: function() {
         this.wrapper = $( "<span>" )
             .addClass( "ui-combobox" )
@@ -329,14 +331,23 @@ $(document).ready(function() {
             var self = this,
                 currentCategory = "";
             $.each(items, function(index, item) {
+				//alert(index);
+									if (index == 8) ul.append('<li class="heading"><span class="flR"></span></li>');
+							
+
                 if (item.category != currentCategory) {
                     if (item.category) {
-                        ul.append("<li class='ui-autocomplete-category'>" + item.category + "</li>");
+						if(index==1 || index ==2){
+							cus_class = "c_bg";
+						}
+                        ul.append("<li class='ui-autocomplete-category2 "+ cus_class +"'>" + item.category + "</li>");
                     }
                     currentCategory = item.category;
                 }
                 self._renderItemData(ul, item);
             });
+			
+			$( ul ).find( "li:odd" ).addClass( "odd" );
         };
     },
     _createShowAllButton: function() {

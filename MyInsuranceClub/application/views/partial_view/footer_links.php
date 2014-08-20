@@ -14,8 +14,8 @@
             <h3 class="bottom-col-title" style="margin-bottom:11px;">Connect with Us</h3>
             <ul>
                       <li><a href="<?php echo site_url('contact');?>">Contact Us</a></li>
-                      <li><a href="<?php echo site_url('contact');?>">Feedback</a></li>
-                      <li><a href="<?php echo site_url('aboutus');?>">Testimonials</a></li>
+                      <li><a href="<?php echo site_url('feedback');?>">Feedback</a></li>
+                     <!-- <li><a href="<?php //echo site_url('aboutus');?>">Testimonials</a></li>-->
                     </ul>
           </div>
                 </div>
@@ -53,8 +53,8 @@
                   <div class="bottom-col-content widget_recent_entries custom-formatting">
             <h3 class="bottom-col-title">Quick Connect</h3>
             <ul>
-                      <li><a style="color:#ff6102; cursor:auto; text-decoration:none;">Phone: +91 22 28463454</a></li>
-                      <li><a style="color:#ff6102;cursor:auto; text-decoration:none;">Email: contact@myinsuranceclub.com</a></li>
+                      <li><a style="color:#ff6102; cursor:auto; text-decoration:none;">Phone: <font color="#757575">+91 22 28463454</font></a></li>
+                      <li><a style="color:#ff6102;cursor:auto; text-decoration:none;">Email: <font color="#757575">contact@myinsuranceclub.com</font></a></li>
                     </ul>
           </div>
                 </div>
@@ -63,7 +63,7 @@
         <div class="column-content-wrapper">
                   <div class="bottom-col-content widget_text substitute_widget_class">
             <h3 class="bottom-col-title" style="background:none; margin-top:10px;"></h3>
-            <p class="border-box-f"><img src="<?php echo base_url();?>/assets/images/irda_logo.jpg" border="0"></p>
+            <p class="border-box-f"><img src="<?php echo base_url();?>/assets/images/irda_approved.jpg" border="0"></p>
             <div class="textwidget small"><strong>Important</strong>: Insurance is the subject matter of solicitation</div>
             <p class="small">© 2009-14 MyInsuranceClub.com</p>
           </div>

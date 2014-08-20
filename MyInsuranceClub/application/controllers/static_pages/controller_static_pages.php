@@ -75,5 +75,14 @@ class controller_static_pages extends MIC_Controller {
 		
 	}
 	
+		public function feedback()
+	{
+		$data="";
+		$this->template->set_template('frontend');
+		$this->template->write_view('content', 'static_pages/feedback', $data, TRUE);
+		$this->template->render();
+		
+		
+	}
 
 }

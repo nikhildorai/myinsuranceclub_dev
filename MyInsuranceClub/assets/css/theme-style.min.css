@@ -181,7 +181,7 @@ ul.inline>li:first-child {
 }
 .title-divider {
 	text-align:left;
-	margin-bottom:1em;
+	margin-bottom:50px;;
 	background:#fff url(../img/bg_divider.png) left center repeat-x;
 	padding:0
 }

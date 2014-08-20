@@ -10,33 +10,8 @@
         <div class="container">
           <div class="row">
             <!-- sidebar -->
-            <div class="col-md-3 sidebar">
-              <div class="section-menu">
-                <ul class="nav nav-list">
-                 <!-- <li>
-                   <a class="first" href="">
-                      About Us 
-
-                      <i class="fa fa-angle-right"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href=">">
-                      The Team 
-                      <i class="fa fa-angle-right"></i>
-                    </a>
-                  </li>-->
-                  <li class="active">
-                    <a href="<?php echo site_url('contact');?>">
-                      Contact Us
-                      <i class="fa fa-angle-right"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!--main content-->
-            <div class="col-md-9">
+            
+            <div class="col-md-12">
               <h2 class="title-divider">
                 <span>Contact <span class="de-em">Us</span></span>
                 
@@ -49,9 +24,14 @@
                       <label class="sr-only" for="contact-name">Name</label>
                       <input type="text" class="form-control" id="contact-name" placeholder="Name">
                     </div>
+                  
                     <div class="form-group">
                       <label class="sr-only" for="contact-email">Email</label>
-                      <input type="email" class="form-control" id="contact-email" placeholder="Email">
+                      <input type="email" class="form-control" id="contact-email" placeholder="Email (If you want us to reply)">
+                    </div>
+                       <div class="form-group">
+                      <label class="sr-only" for="contact-namobilee">Mobile</label>
+                      <input type="text" class="form-control" id="contact-mobile" placeholder="Mobile (If you want us to call you)">
                     </div>
                     <div class="form-group">
                       <label class="sr-only" for="contact-message">Message</label>
@@ -60,7 +40,7 @@
                     <input type="button" class="btn btn-primary my" value="Send Message" style="float:right;">
                   </form>
                 </div>
-                <div class="col-md-6 ri8_side">
+                <div class="col-md-6 ri8_side contact_ri8" style="padding-left:100px;">
                   <p>
                     <abbr title="Phone"><i class="fa fa-phone"></i></abbr>
                     +91 22 28463454

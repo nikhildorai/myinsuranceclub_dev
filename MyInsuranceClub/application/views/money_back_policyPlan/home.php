@@ -136,11 +136,13 @@
                             <div class=" mic_t_b_panel">
                               <div style="width:50%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gender_m">
                                 <div class="mic_icon" style="padding: 4px 0px;">
+                                <div class="mic_i_mar male_blue" style="margin-top: 2px; position:absolute; margin-left:10px;"></div>
                                   <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Male</div>
                                 </div>
                               </div>
                               <div style="width: 50%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r gender_f">
                                 <div class="mic_icon" style="padding: 4px 0px;">
+                                <div class="mic_i_mar female_blue" style="margin-top: 2px; position:absolute; margin-left:10px;"></div>
                                   <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Female</div>
                                 </div>
                               </div>
@@ -222,7 +224,17 @@
             <div class="mic_t_input">
               <div class="mic-menu mic-menu-vertical" style="overflow-y: auto; overflow-x:hidden; margin-top:-16px;" >
                <ul class="city_menu">
-               		<li class="menu_it 67">Agartala</li>
+               
+               <li  class="menu_it top_c" >Mumbai</li>
+ <li  class="menu_it top_c" >Delhi</li>
+ <li  class="menu_it top_c" >Kolkata</li>
+ <li  class="menu_it top_c" >Chennai</li>
+ <li  class="menu_it top_c" >Bengaluru</li>
+ <li  class="menu_it top_c" >Hyderabad</li>
+ <li  class="menu_it top_c" >Ahmedabad</li>
+ <li  class="menu_it top_c " >Pune</li>
+
+               		<li class="menu_it line">Agartala</li>
 		<li class="menu_it 9">Agra</li>
 		<li class="menu_it 10">Ahmedabad</li>
 		<li class="menu_it 68">Ahmednagar</li>

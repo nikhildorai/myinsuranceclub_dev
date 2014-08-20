@@ -133,41 +133,48 @@
 <ul>
    <li class='active has-sub'><a href='javascript:'><span>Other</span></a>
       <ul class="duration_menu">
-             <li class="has-sub cs">5 Years</li>
-		<li class="has-sub cs">10 Years</li>
-		<li class="has-sub cs">15 Years</li>
-		<li class="has-sub cs">20 Years</li>
-		<li class="has-sub cs">25 Years</li>
-		<li class="has-sub cs">30 Years</li>
-		<li class="has-sub cs">6 Years</li>
-		<li class="has-sub cs">7 Years</li>
-		<li class="has-sub cs">8 Years</li>
-		<li class="has-sub cs">9 Years</li>
-		<li class="has-sub cs">11 Years</li>
-		<li class="has-sub cs">12 Years</li>
-		<li class="has-sub cs">13 Years</li>
-		<li class="has-sub cs">14 Years</li>
-		<li class="has-sub cs">16 Years</li>
-		<li class="has-sub cs">17 Years</li>
-		<li class="has-sub cs">18 Years</li>
-		<li class="has-sub cs">19 Years</li>
-		<li class="has-sub cs">21 Years</li>
-		<li class="has-sub cs">22 Years</li>
-		<li class="has-sub cs">23 Years</li>
-		<li class="has-sub cs">24 Years</li>
-		<li class="has-sub cs">26 Years</li>
-		<li class="has-sub cs">27 Years</li>
-		<li class="has-sub cs">28 Years</li>
-		<li class="has-sub cs">29 Years</li>
-		<li class="has-sub cs">31 Years</li>
-		<li class="has-sub cs">32 Years</li>
-		<li class="has-sub cs">33 Years</li>
-		<li class="has-sub cs">34 Years</li>
-		<li class="has-sub cs">36 Years</li>
-		<li class="has-sub cs">37 Years</li>
-		<li class="has-sub cs">38 Years</li>
-		<li class="has-sub cs">39 Years</li>
-		<li class="has-sub cs">40 Years</li>
+             <li class="has-sub css">5 Years</li>
+		<li class="has-sub css">10 Years</li>
+		<li class="has-sub css">15 Years</li>
+		<li class="has-sub css">20 Years</li>
+		<li class="has-sub css">25 Years</li>
+		<li class="has-sub css">30 Years</li>
+        <li class="has-sub css bold line"  >5 Years</li>
+		<li class="has-sub css">6 Years</li>
+		<li class="has-sub css">7 Years</li>
+		<li class="has-sub css">8 Years</li>
+		<li class="has-sub css">9 Years</li>
+         <li class="has-sub css bold"  >10 Years</li>
+		<li class="has-sub css">11 Years</li>
+		<li class="has-sub css">12 Years</li>
+		<li class="has-sub css">13 Years</li>
+		<li class="has-sub css">14 Years</li>
+         <li class="has-sub css bold"  >15 Years</li>
+		<li class="has-sub css">16 Years</li>
+		<li class="has-sub css">17 Years</li>
+		<li class="has-sub css">18 Years</li>
+		<li class="has-sub css">19 Years</li>
+        <li class="has-sub css bold"  >20 Years</li>
+		<li class="has-sub css">21 Years</li>
+		<li class="has-sub css">22 Years</li>
+		<li class="has-sub css">23 Years</li>
+		<li class="has-sub css">24 Years</li>
+        <li class="has-sub css bold"  >25 Years</li>
+		<li class="has-sub css">26 Years</li>
+		<li class="has-sub css">27 Years</li>
+		<li class="has-sub css">28 Years</li>
+		<li class="has-sub css">29 Years</li>
+        <li class="has-sub css bold"  >30 Years</li>
+		<li class="has-sub css">31 Years</li>
+		<li class="has-sub css">32 Years</li>
+		<li class="has-sub css">33 Years</li>
+		<li class="has-sub css">34 Years</li>
+        <li class="has-sub css bold"  >35 Years</li>
+		<li class="has-sub css">36 Years</li>
+		<li class="has-sub css">37 Years</li>
+		<li class="has-sub css">38 Years</li>
+		<li class="has-sub css">39 Years</li>
+		<li class="has-sub css bold">40 Years</li>
       </ul>
    </li>
 </ul>
@@ -245,11 +252,13 @@
                             <div class=" mic_t_b_panel">
                               <div style="width:50%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gender_m">
                                 <div class="mic_icon" style="padding: 4px 0px;">
+                                <div class="mic_i_mar male_blue" style="margin-top: 2px; position:absolute; margin-left:10px;"></div>
                                   <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Male</div>
                                 </div>
                               </div>
                               <div style="width: 50%;" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r gender_f">
                                 <div class="mic_icon" style="padding: 4px 0px;">
+                                <div class="mic_i_mar female_blue" style="margin-top: 2px; position:absolute; margin-left:10px;"></div>
                                   <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Female</div>
                                 </div>
                               </div>
@@ -331,7 +340,17 @@
             <div class="mic_t_input">
               <div class="mic-menu mic-menu-vertical" style="overflow-y: auto; overflow-x:hidden; margin-top:-16px;" >
                <ul class="city_menu">
-               		<li class="menu_it 67">Agartala</li>
+               
+               <li  class="menu_it top_c" >Mumbai</li>
+ <li  class="menu_it top_c" >Delhi</li>
+ <li  class="menu_it top_c" >Kolkata</li>
+ <li  class="menu_it top_c" >Chennai</li>
+ <li  class="menu_it top_c" >Bengaluru</li>
+ <li  class="menu_it top_c" >Hyderabad</li>
+ <li  class="menu_it top_c" >Ahmedabad</li>
+ <li  class="menu_it top_c " >Pune</li>
+
+               		<li class="menu_it line">Agartala</li>
 		<li class="menu_it 9">Agra</li>
 		<li class="menu_it 10">Ahmedabad</li>
 		<li class="menu_it 68">Ahmednagar</li>

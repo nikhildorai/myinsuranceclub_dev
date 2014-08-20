@@ -74,15 +74,8 @@
       </div>
    </div>
 </footer>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>  
-<script src="<?php echo base_url();?>/assets/js/jquery-migrate-1.2.1.min.js"></script> 
-<script src="<?php echo base_url();?>/assets/js/bootstrap.min.js"></script> 
-<script src="<?php echo base_url();?>/assets/js/bootstrap-hover-dropdown.min.js"></script> 
-<script src="<?php echo base_url();?>/assets/js/jquery.clingify.min.js"></script> 
-<script src="<?php echo base_url();?>/assets/js/jquery.slicknav.js"></script> 
-<script src="<?php echo base_url();?>/assets/js/jquery.mousewheel.js"></script> 
-<script src="<?php echo base_url();?>/assets/js/jquery.jscrollpane.min.js"></script> 
-<script src="<?php echo base_url();?>/assets/js/jquery-ui.min.js"></script> 
+
+
 <script src="<?php echo base_url();?>/assets/js/jquery.validate.min.js"></script> 
 <script src="<?php echo base_url();?>/assets/js/custom.js"></script> 
 <script src="<?php echo base_url();?>/assets/js/health.js"></script> 

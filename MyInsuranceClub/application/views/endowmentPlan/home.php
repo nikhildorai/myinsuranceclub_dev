@@ -183,7 +183,17 @@
             <div class="mic_t_input">
               <div class="mic-menu mic-menu-vertical" style="overflow-y: auto; overflow-x:hidden; margin-top:-16px;" >
                <ul class="city_menu">
-               		<li class="menu_it 67">Agartala</li>
+               
+               <li  class="menu_it top_c" >Mumbai</li>
+ <li  class="menu_it top_c" >Delhi</li>
+ <li  class="menu_it top_c" >Kolkata</li>
+ <li  class="menu_it top_c" >Chennai</li>
+ <li  class="menu_it top_c" >Bengaluru</li>
+ <li  class="menu_it top_c" >Hyderabad</li>
+ <li  class="menu_it top_c" >Ahmedabad</li>
+ <li  class="menu_it top_c " >Pune</li>
+
+               		<li class="menu_it line">Agartala</li>
 		<li class="menu_it 9">Agra</li>
 		<li class="menu_it 10">Ahmedabad</li>
 		<li class="menu_it 68">Ahmednagar</li>

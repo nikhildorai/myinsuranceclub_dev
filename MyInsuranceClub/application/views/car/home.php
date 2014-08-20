@@ -14,7 +14,7 @@
         <!--           <p class="col-md-11 start_icon"> <img src="assets/images/start2.png" ></p> 
 --> </div>
       <div class="col-md-12">
-        <p class="car_container sc_top" style="text-align:left; padding-top:50px; padding-bottom:10px; color:#ff6633;">Get Started...</p>
+        <p class="car_container sc_top" style="text-align:left; padding-top:50px; padding-bottom:10px; color:#ff6633;">Want the best car insurance? Get Started...</p>
       </div>
     </div>
     <div class="col-md-12 center">
@@ -35,7 +35,7 @@
                 <!-- End of Ad Box 1 --></div>
               <div class="prmBx buy" style="margin:0px 0 0 5px;">
                 <div class="prmBxCnt">
-                  <div class="prmIco"><img class="obj2" width="" height="" src="assets/images/car/c5.jpg" style="margin-top:30px; max-width:80px;"></div>
+                  <div class="prmIco"><img class="obj2" width="" height="" src="assets/images/car/c4.png" style="margin-top:30px; max-width:80px;"></div>
                   <div class="prmTxt">
                     <h2>Buy insurance for new car</h2>
                     <br>
@@ -110,7 +110,7 @@
                   </select>
                   </select>
                 </div>
-                <div class="c_d_column">
+                <div class="c_d_column last" >
                   <select class="selectpicker show-tick" id="veh_year" disabled>
                     <option value="" selected="selected">Year of Manufacture</option>
                     <option value="2014">2014</option>
@@ -159,7 +159,7 @@
               
             
                 <div class="p_d_column" style="width:100%;">
-                <label  for="Previous Insurer" class="c_col_35">Previous Insurer</label>
+                <label  for="" class="c_col_35">Previous Insurer</label>
                 <div class="c_col_60">
                   <select class="selectpicker show-tick" id="veh_man">
                     <option value="" selected="selected">Select</option>
@@ -356,8 +356,8 @@
                   <select class="selectpicker show-tick" id="add_cover_paid">
                     <option value="" selected="selected">Select</option>
                     <option selected="selected" value="">Select</option>
-                    <option value="100000">Rs.1,00,000</option>
-                    <option value="200000">Rs.2,00,000</option>
+                    <option value="100000">Rs. 1,00,000</option>
+                    <option value="200000">Rs. 2,00,000</option>
                   </select>
                
                  <div class="car_hlp"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="right"  data-original-title="Auto Insurance is a mandatory product and since it is to be renewed every year, it is important that you get the best auto insurance rates." class="t_h_btn aa  fa fa-info-circle"></a></div>
@@ -371,8 +371,8 @@
                 <div class="c_col_60 " style="position:relative">
             <select class="selectpicker show-tick" id="accident_cover_paid">   
 		<option selected="selected" value="">Select</option>
-		<option value="100000">Rs.1,00,000</option>
-		<option value="200000">Rs.2,00,000</option>
+		<option value="100000">Rs. 1,00,000</option>
+		<option value="200000">Rs. 2,00,000</option>
 
 	</select>
                 
@@ -400,10 +400,10 @@
                 <div class="c_col_60 " style="position:relative">
               <select class="selectpicker show-tick" id="amount_voluntary_excess">  
 		<option selected="selected" value="">Select</option>
-		<option value="2500">Rs.2,500</option>
-		<option value="5000">Rs.5,000</option>
-		<option value="7500">Rs.7,500</option>
-		<option value="15000">Rs.15,000</option>
+		<option value="2500">Rs. 2,500</option>
+		<option value="5000">Rs. 5,000</option>
+		<option value="7500">Rs. 7,500</option>
+		<option value="15000">Rs. 15,000</option>
 
 	</select>
                  <div class="car_hlp"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="right"  data-original-title="Auto Insurance is a mandatory product and since it is to be renewed every year, it is important that you get the best auto insurance rates." class="t_h_btn aa  fa fa-info-circle"></a></div>
@@ -493,7 +493,7 @@
               
               <div style="width:100%; float:left;">
                 <div class="">
-                <label  for="Previous Insurer" class="c_col_35">Car Registration Number</label>
+                <label  for="" class="c_col_35">Car Registration Number</label>
                 <div class="c_col_60 " style="position:relative">
                 <input type="text" class="form-control " name="car_reg_no" placeholder="Eg. MH 02 AD 2386" >
                  <div class="car_hlp"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="right"  data-original-title="Auto Insurance is a mandatory product and since it is to be renewed every year, it is important that you get the best auto insurance rates." class="t_h_btn aa  fa fa-info-circle"></a></div>
@@ -515,11 +515,11 @@
                 <div style="width:100%; float:left; margin-top:20px;">
                 
                  <div class="">
-                <label class="c_col_35"  for="Previous Insurer">Date of First Purchase/Registration</label>
+                <label class="c_col_35"  for="">Date of First Purchase/Registration</label>
                
                <div class="c_col_60 cal_w" style="position:relative;">
                  
-                  <label style="position:relative" class="input"> <i id="for_datepicker" class="icon-append fa fa-calendar "></i>
+                  <label style="position:relative; margin-bottom:0px;" class="input"> <i id="for_datepicker" class="icon-append fa fa-calendar "></i>
                  <input type="text" class="form-control for_datepicker" name="car_date_purchase" >
                 </label>
                  <div class="car_hlp"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="right"  data-original-title="Auto Insurance is a mandatory product and since it is to be renewed every year, it is important that you get the best auto insurance rates." class="t_h_btn aa  fa fa-info-circle"></a></div>
@@ -530,7 +530,7 @@
                  <div style="width:100%; float:left; margin-top:20px;">
                 
                  <div class="">
-                <label class="c_col_35" for="Previous Insurer">Car is registered in the name of</label>
+                <label class="c_col_35" for="">Car is registered in the name of</label>
                 
                 <div class="c_col_60" style="position:relative;">
                 <div class="mic_t_input" style="width:200px; margin-top:0px;">
@@ -580,31 +580,31 @@
 
               
                 <div class="p_d_column">
-                <label  for="Previous Insurer">Full Name</label>
+                <label  for="">Full Name</label>
                 <input type="text" class="form-control" name="full_name" >
                 </div>
                 
                  <div class="p_d_column">
-                <label  for="Previous Insurer">Date of Birth</label>
+                <label  for="">Date of Birth</label>
                 
-                 <label style="position:relative" class="input"> <i id="dob_datepicker" class="icon-append fa fa-calendar "></i>
+                 <label style="position:relative; margin-bottom:0px;" class="input"> <i id="dob_datepicker" class="icon-append fa fa-calendar "></i>
                  <input type="text" class="form-control dob_datepicker" name="dob" >
                 </label>
                 </div>
                 
-                 <div class="p_d_column">
-                <label  for="Previous Insurer">Mobile</label>
+                 <div class="p_d_column last">
+                <label  for="">Mobile</label>
                 <input type="text" class="form-control" name="mobile" >
                 </div>
                 
                 <div style="width:100%; margin-top:20px; float:left;">
                  <div class="p_d_column">
-                <label  for="Previous Insurer">Email</label>
+                <label  for="">Email</label>
                 <input type="text" class="form-control" name="email" >
                 </div>
                 
                  <div class="p_d_column drp_wid" >
-                <label  for="Previous Insurer">Occupation</label>
+                <label  for="">Occupation</label>
                 
                 <select class="selectpicker show-tick" id="Occupation" name="Occupation">  
 		<option value="">Select</option>
@@ -618,21 +618,211 @@
 	</select>
                 </div>
                 
-                 <div class="p_d_column">
-                <label  for="Previous Insurer">City of Residence</label>
-                <select id="combobox" style="height:auto;" placeholder="Type or select from list">
+                 <div class="p_d_column last">
+                <label  for="">City of Residence</label>
+                <select id="combobox34" style="height:auto;" placeholder="Type or select from list">
                 <option value="" ></option>
-                <option value="1" >Mumbai</option>
-                <option value="2" >Ahmedabad</option>
-                <option value="3">Chandigarh</option>
-                <option value="4">Chennai</option>
-                <option value="5">Delhi</option>
-                <option value="1">Other</option>
+                              <option value="1">Mumbai</option>
+ <option value="2">Delhi</option>
+ <option value="3">Kolkata</option>
+ <option value="4">Chennai</option>
+ <option value="5">Bengaluru</option>
+ <option value="6">Hyderabad</option>
+ <option value="7">Ahmedabad</option>
+ <option value="8">Pune</option>
+
+               		<option value="ag">Agartala</option>
+		<option value=" 9">Agra</option>
+		<option value=" 10">Ahmedabad</option>
+		<option value=" 68">Ahmednagar</option>
+		<option value=" 69">Aizawl</option>
+		<option value=" 70">Ajmer</option>
+		<option value=" 71">Akola</option>
+		<option value=" 72">Aligarh</option>
+		<option value=" 11">Allahabad</option>
+		<option value=" 74">Ambala</option>
+		<option value=" 75">Amethi</option>
+		<option value=" 76">Amravati</option>
+		<option value=" 12">Amritsar</option>
+		<option value=" 77">Anand</option>
+		<option value=" 78">Ankleshwar</option>
+		<option value=" 13">Asansol</option>
+		<option value=" 14">Aurangabad</option>
+		<option value=" 80">Baharampur</option>
+		<option value=" 82">Balrampur</option>
+		<option value=" 83">Baramati</option>
+		<option value=" 84">Bardhaman</option>
+		<option value=" 85">Bareilly</option>
+		<option value=" 86">Barnala  </option>
+		<option value=" 87">Beawar</option>
+		<option value=" 88">Belgaum</option>
+		<option value=" 89">Bellary</option>
+		<option value=" 15">Bengaluru</option>
+		<option value=" 90">Berhampur</option>
+		<option value=" 91">Bhagalpur </option>
+		<option value=" 92">Bharuch</option>
+		<option value=" 93">Bhavnagar</option>
+		<option value=" 16">Bhilai</option>
+		<option value=" 94">Bhilwara  </option>
+		<option value=" 17">Bhopal</option>
+		<option value=" 18">Bhubaneswar</option>
+		<option value=" 96">Bhuj</option>
+		<option value=" 97">Bhusawal</option>
+		<option value=" 98">Bikaner</option>
+		<option value=" 99">Bilaspur</option>
+		<option value=" 101">Bongaigaon</option>
+		<option value=" 102">Buxar</option>
+		<option value=" 103">Calicut</option>
+		<option value=" 19">Chandigarh</option>
+		<option value=" 104">Chikmagalur</option>
+		<option value=" 105">Cochin</option>
+		<option value=" 20">Coimbatore</option>
+		<option value=" 106">Coonoor</option>
+		<option value=" 107">Cuttack</option>
+		<option value=" 108">Daman</option>
+		<option value=" 109">Darjeeling</option>
+		<option value=" 110">Davanagere</option>
+		<option value=" 111">Dehradun  </option>
+		<option value=" 22">Dhanbad</option>
+		<option value=" 112">Dharwad</option>
+		<option value=" 113">Dimapur</option>
+		<option value=" 206">Dispur</option>
+		<option value=" 114">Diu</option>
+		<option value=" 116">Durgapur</option>
+		<option value=" 117">Dwarka</option>
+		<option value=" 118">Ernakulam</option>
+		<option value=" 119">Erode</option>
+		<option value=" 23">Faridabad</option>
+		<option value=" 120">Fatehpur Sikri</option>
+		<option value=" 121">Firozabad</option>
+		<option value=" 122">Gandhidham</option>
+		<option value=" 123">Gandhinagar</option>
+		<option value=" 124">Gangtok</option>
+		<option value=" 125">Gaya</option>
+		<option value=" 24">Ghaziabad</option>
+		<option value=" 126">Goa</option>
+		<option value=" 127">Gorakhpur</option>
+		<option value=" 128">Gulbarga</option>
+		<option value=" 129">Guntur</option>
+		<option value=" 25">Gurgaon</option>
+		<option value=" 130">Gurudaspur</option>
+		<option value=" 26">Guwahati</option>
+		<option value=" 27">Gwalior</option>
+		<option value=" 131">Haldwani</option>
+		<option value=" 132">Haridwar</option>
+		<option value=" 134">Hoshiarpur</option>
+		<option value=" 135">Howrah</option>
+		<option value=" 136">Hubli</option>
+		<option value=" 28">Hyderabad</option>
+		<option value=" 137">Imphal</option>
+		<option value=" 29">Indore</option>
+		<option value=" 30">Jabalpur</option>
+		<option value=" 31">Jaipur</option>
+		<option value=" 32">Jalandhar</option>
+		<option value=" 138">Jalgaon</option>
+		<option value=" 139">Jammu</option>
+		<option value=" 33">Jamnagar</option>
+		<option value=" 34">Jamshedpur</option>
+		<option value=" 140">Jhansi</option>
+		<option value=" 35">Jodhpur</option>
+		<option value=" 141">Jorhat</option>
+		<option value=" 142">Kadapa</option>
+		<option value=" 143">Kakinada</option>
+		<option value=" 145">Kanchipuram</option>
+		<option value=" 146">Kannur</option>
+		<option value=" 36">Kanpur</option>
+		<option value=" 147">Kapurthala</option>
+		<option value=" 148">Karimnagar</option>
+		<option value=" 204">Kathua</option>
+		<option value=" 149">Kharagpur</option>
+		<option value=" 37">Kochi</option>
+		<option value=" 150">Kohima</option>
+		<option value=" 38">Kolhapur</option>
+		<option value=" 151">Kollam</option>
+		<option value=" 152">Korba</option>
+		<option value=" 39">Kota</option>
+		<option value=" 153">Kottayam</option>
+		<option value=" 40">Kozhikode</option>
+		<option value=" 154">Latur</option>
+		<option value=" 41">Lucknow</option>
+		<option value=" 42">Ludhiana</option>
+		<option value=" 155">Machilipatnam</option>
+		<option value=" 43">Madurai</option>
+		<option value=" 156">Malegaon</option>
+		<option value=" 44">Mangalore</option>
+		<option value=" 157">Margoa</option>
+		<option value=" 158">Mathura</option>
+		<option value=" 45">Meerut</option>
+		<option value=" 159">Mehsana</option>
+		<option value=" 160">Mohali</option>
+		<option value=" 161">Moradabad</option>
+		<option value=" 162">Mount Abu</option>
+		<option value=" 203">Mukerian</option>
+		<option value=" 163">Mussoorie</option>
+		<option value=" 164">Muzaffarnagar</option>
+		<option value=" 165">Muzaffarpur</option>
+		<option value=" 46">Mysore</option>
+		<option value=" 166">Nadiad</option>
+		<option value=" 47">Nagpur</option>
+		<option value=" 167">Nanded</option>
+		<option value=" 48">Nashik</option>
+		<option value=" 49">Navi Mumbai</option>
+		<option value=" 168">Nellore</option>
+		<option value=" 50">Noida</option>
+		<option value=" 170">Ootacamund</option>
+		<option value=" 171">Panaji</option>
+		<option value=" 205">Patiala</option>
+		<option value=" 51">Patna</option>
+		<option value=" 52">Pondicherry</option>
+		<option value=" 53">Pune</option>
+		<option value=" 173">RaeBareli</option>
+		<option value=" 174">Raichur</option>
+		<option value=" 54">Raipur</option>
+		<option value=" 175">Rajahmundry</option>
+		<option value=" 55">Rajkot</option>
+		<option value=" 56">Ranchi</option>
+		<option value=" 176">Ratnagiri</option>
+		<option value=" 177">Rishikesh</option>
+		<option value=" 178">Roorkee</option>
+		<option value=" 57">Rourkela</option>
+		<option value=" 179">Saharanpur</option>
+		<option value=" 180">Salem</option>
+		<option value=" 181">Sambalpur</option>
+		<option value=" 182">Sangli</option>
+		<option value=" 183">Satara</option>
+		<option value=" 184">Satna</option>
+		<option value=" 185">Shillong</option>
+		<option value=" 186">Shimla</option>
+		<option value=" 187">Shimoga</option>
+		<option value=" 188">Silchar</option>
+		<option value=" 189">Siliguri</option>
+		<option value=" 208">Silvassa</option>
+		<option value=" 58">Solapur</option>
+		<option value=" 190">Srinagar</option>
+		<option value=" 59">Surat</option>
+		<option value=" 60">Thane</option>
+		<option value=" 191">Thanjavur</option>
+		<option value=" 61">Thiruvananthapuram</option>
+		<option value=" 62">Tiruchchirappalli</option>
+		<option value=" 192">Tirunelveli</option>
+		<option value=" 193">Tirupathi</option>
+		<option value=" 194">Tiruppur</option>
+		<option value=" 195">Udaipur</option>
+		<option value=" 196">Udupi</option>
+		<option value=" 197">Ujjain</option>
+		<option value=" 63">Vadodara</option>
+		<option value=" 198">Valsad</option>
+		<option value=" 64">Varanasi</option>
+		<option value=" 200">Vellore</option>
+		<option value=" 65">Vijayawada</option>
+		<option value=" 66">Visakhapatnam</option>
+		<option value=" 201">Warangal</option>
+		<option value=" 202">Yavatmal</option>
               </select>
                 </div>
                 </div>
                 
-                 <div style="width:100%; margin-top:20px; float:left;">
+                 <div style="width:100%; margin-top:0px; float:left;">
                 <div class="note_sec">
                 <div class="checkbox">
             <label>
@@ -986,3 +1176,5 @@
 <script src="<?php echo base_url();?>/assets/js/car.js"></script> 
 <script src="<?php echo base_url();?>/assets/js/bootstrap-select1.js"></script> 
 <script src="<?php echo base_url();?>/assets/js/bootstrap-tooltip.js"></script> 
+
+

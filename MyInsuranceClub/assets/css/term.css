@@ -775,7 +775,7 @@ box-shadow:         0px 0 1px 2px rgba(75, 162, 249, 1);
 .term_hlp {
 	position: absolute;
 	top: 0;
-	right: -16px;
+	right: 5px;
 }
 .touch .term_hlp {
 	top: -16px;
@@ -1537,40 +1537,63 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	height: 32px;
 	width: 32px;
 }
-.male {
-	background-image: url('../images/icons/male.png');
+.tobaco_yes {
+	background-image: url('../images/icons/tobaco_yes.png');
 	background-size: 100% 100%;
 	height: 22px;
 	width: 22px;
 }
-.mic_btn_tl-hover .male {
-	background-image:url('../images/icons/male.png');
+.mic_btn_tl.mic_btn_tl_chkd .tobaco_yes {
+	background-image: url('../images/icons/tobaco_yes_chked.png');
+	background-size: 100% 100%;
+	height: 22px;
+	width: 22px;
+}
+ .tobaco_no{
+	background-image: url('../images/icons/tobaco_no.png');
+	background-size: 100% 100%;
+	height: 22px;
+	width: 22px;
+}
+.mic_btn_tl.mic_btn_tl_chkd .tobaco_no{
+	background-image: url('../images/icons/tobaco_no_chked.png');
+	background-size: 100% 100%;
+	height: 22px;
+	width: 22px;
+}
+.male_blue {
+	background-image: url('../images/icons/male_blue.png');
+	background-size: 100% 100%;
+	height: 22px;
+	width: 22px;
+}
+.mic_btn_tl-hover .male_blue {
+	background-image:url('../images/icons/male_blue.png');
+	background-size: 100% 100%;
+	height: 22px;
+	width: 22px;
+}
+.mic_btn_tl.mic_btn_tl_chkd .male_blue {
+	background-image: url('../images/icons/male_blue_chked.png');
+	background-size: 100% 100%;
+	height: 22px;
+	width: 22px;
+}
+.female_blue {
+	background-image: url('../images/icons/female_blue.png');
+	background-size: 100% 100%;
+	height: 22px;
+	width: 22px;
+}
+.mic_btn_tl-hover .female_blue {
+	background-image:url('../images/icons/female_blue.png');
 	;
 	background-size: 100% 100%;
 	height: 22px;
 	width: 22px;
 }
-.mic_btn_tl.mic_btn_tl_chkd .male {
-	background-image: url('../images/icons/male.png');
-	background-size: 100% 100%;
-	height: 22px;
-	width: 22px;
-}
-.female {
-	background-image: url('../images/icons/female.png');
-	background-size: 100% 100%;
-	height: 22px;
-	width: 22px;
-}
-.mic_btn_tl-hover .female {
-	background-image:url('../images/icons/female.png');
-	;
-	background-size: 100% 100%;
-	height: 22px;
-	width: 22px;
-}
-.mic_btn_tl.mic_btn_tl_chkd .female {
-	background-image: url('../images/icons/female.png');
+.mic_btn_tl.mic_btn_tl_chkd .female_blue {
+	background-image: url('../images/icons/female_blue_chked.png');
 	background-size: 100% 100%;
 	height: 22px;
 	width: 22px;
@@ -1849,6 +1872,9 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
     padding:11px 0 6px 12px;
     position: relative;
     white-space: nowrap;}
+	
+	.mic-menu .menu_it.top_c{ background:#E7E7E7;}
+	.mic-menu .menu_it.line{ border-top:1px dotted #31b7f1; margin-top:10px;}
 	.mic-menu .menu_it:hover{ background:#dadada;}
 .mic-menuitem, .mic-tristatemenuitem, .mic-filterobsmenuitem {
     color: #333;
@@ -1985,6 +2011,14 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
   background: #fff; color:#000; font-weight:normal;
   border-bottom: 1px dotted #31b7f1; padding:10px; font-size:12px !important; text-align:left;
 }
+.cssmenu li.css{
+  background: #fff; color:#000; font-weight:normal;
+  border-bottom: 0px dotted #31b7f1; padding:10px; font-size:12px !important; text-align:left;
+}
+.cssmenu li.css.line{
+border-top: 1px dotted #31b7f1;
+}
+.cssmenu li.css.bold{font-weight:bold;color:#ED8714;font-size:16px !important;    }
 .cssmenu {
   line-height: 1;
   border-radius: 5px 5px 0 0;

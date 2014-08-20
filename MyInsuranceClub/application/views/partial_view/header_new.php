@@ -43,14 +43,28 @@
       <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/health.css">
       <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/responsive.css">
       <script src="<?php echo base_url();?>/assets/js/jquery.min.js"></script>
+   
       <script src="<?php echo base_url();?>/assets/js/jquery.bxslider.min.js" type="text/javascript"></script>
        <script src="<?php echo base_url();?>/assets/js/social.js" type="text/javascript"></script>
+       
+       
+    
       <!-- HTML5 shiv & respond.js for IE6-8 support of HTML5 elements & media queries -->
       <!--[if lt IE 9]>
       <script src="plugins/html5shiv/dist/html5shiv.js"></script>
       <![endif]-->
       <!--Retina.js plugin - @see: http://retinajs.com/-->
       <script src="<?php echo base_url();?>/assets/plugins/js/retina-1.1.0.min.js"></script>
+         
+       <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>  
+<script src="<?php echo base_url();?>/assets/js/jquery-migrate-1.2.1.min.js"></script> 
+<script src="<?php echo base_url();?>/assets/js/bootstrap.min.js"></script> 
+<script src="<?php echo base_url();?>/assets/js/bootstrap-hover-dropdown.min.js"></script> 
+<script src="<?php echo base_url();?>/assets/js/jquery.clingify.min.js"></script> 
+<script src="<?php echo base_url();?>/assets/js/jquery.slicknav.js"></script> 
+<script src="<?php echo base_url();?>/assets/js/jquery.mousewheel.js"></script> 
+<script src="<?php echo base_url();?>/assets/js/jquery.jscrollpane.min.js"></script> 
+   <script src="<?php echo base_url();?>/assets/js/jquery-ui.min.js"></script> 
    </head>
    <script type="text/javascript">
       CI_ROOT = "<?php echo base_url() ?>";

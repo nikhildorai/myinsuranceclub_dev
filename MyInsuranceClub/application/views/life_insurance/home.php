@@ -18,7 +18,7 @@
     
     <div class="col-md-12 center">
     <div class="life_container">
-      
+      <a href="<?php echo site_url('life-insurance/term-insurance');?>" class="life_hover">
       <div class="one_third_l">
       	<div class="l_c">
       		<div class="l_icon"><img src="<?php echo base_url();?>/assets/images/life/1.png" border="0"></div>
@@ -30,10 +30,10 @@
             <p class="l_s_p_it">An absolute must for those who with dependents</p>
       	</div>
       	
-        <div class="l_cmp"><a href="<?php echo site_url('life-insurance/term-insurance');?>">Compare Term Plans <i class="fa fa-arrow-right"></i></a></div>
+        <div class="l_cmp">Compare Term Plans <i class="fa fa-arrow-right"></i></div>
       
-      </div>
-      
+      </div></a>
+      <a href="<?php echo site_url('life-insurance/child-plans');?>" class="life_hover">
      <div class="one_third_l">
       	<div class="l_c">
       		<div class="l_icon"><img src="<?php echo base_url();?>/assets/images/life/2.png" border="0"></div>
@@ -45,10 +45,11 @@
             <p class="l_s_p_it">Plan for their requirements well in advance</p>
       	</div>
       	
-        <div class="l_cmp"><a href="<?php echo site_url('life-insurance/child-plans');?>">Compare Child Plans <i class="fa fa-arrow-right"></i></a></div>
+        <div class="l_cmp">Compare Child Plans <i class="fa fa-arrow-right"></i></div>
       
-      </div>
+      </div></a>
       
+    <a href="<?php echo site_url('life-insurance/pension-plan');?>" class="life_hover">
       <div class="one_third_l no_ri8">
       
       	<div class="l_c">
@@ -61,13 +62,13 @@
             <p class="l_s_p_it">An absolute must for those who with dependents</p>
       	</div>
       	
-        <div class="l_cmp"><a href="<?php echo site_url('life-insurance/pension-plan');?>">Compare Pension Plans <i class="fa fa-arrow-right"></i></a> </div>
+        <div class="l_cmp">Compare Pension Plans <i class="fa fa-arrow-right"></i> </div>
       
       </div>
+      </a>
       
       
-      
-      
+      <a href="<?php echo site_url('life-insurance/endowment-insurance');?>" class="life_hover">
       <div class="one_third_l">
       	<div class="l_c">
       		<div class="l_icon"><img src="<?php echo base_url();?>/assets/images/life/4.png" border="0"></div>
@@ -79,10 +80,10 @@
             <p class="l_s_p_it">An absolute must for those who with dependents</p>
       	</div>
       	
-        <div class="l_cmp"><a href="<?php echo site_url('life-insurance/endowment-insurance');?>">Compare Endowment Plans <i class="fa fa-arrow-right"></i></a></div>
+        <div class="l_cmp">Compare Endowment Plans <i class="fa fa-arrow-right"></i></div>
       
-      </div>
-      
+      </div></a>
+      <a href="<?php echo site_url('life-insurance/money-back-policy');?>" class="life_hover">
      <div class="one_third_l">
       	<div class="l_c">
       		<div class="l_icon"><img src="<?php echo base_url();?>/assets/images/life/5.png" border="0"></div>
@@ -94,10 +95,10 @@
             <p class="l_s_p_it">An absolute must for those who with dependents</p>
       	</div>
       	
-        <div class="l_cmp"><a href="<?php echo site_url('life-insurance/money-back-policy');?>">Compare Money Back Plans <i class="fa fa-arrow-right"></i></a></div>
+        <div class="l_cmp">Compare Money Back Plans <i class="fa fa-arrow-right"></i></div>
       
-      </div>
-      
+      </div></a>
+      <a href="<?php echo site_url('life-insurance/ulip');?>" class="life_hover">
       <div class="one_third_l no_ri8">
       
       	<div class="l_c">
@@ -110,10 +111,10 @@
             <p class="l_s_p_it">An absolute must for those who with dependents</p>
       	</div>
       	
-        <div class="l_cmp"><a href="<?php echo site_url('life-insurance/ulip');?>">Compare ULIPs Plans <i class="fa fa-arrow-right"></i></a> </div>
+        <div class="l_cmp">Compare ULIPs Plans <i class="fa fa-arrow-right"></i> </div>
       
       </div>
-      
+      </a>
       
       
       
