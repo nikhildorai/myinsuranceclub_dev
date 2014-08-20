@@ -796,26 +796,43 @@ $('#in2days').click(function() {
 });
 
 $('#7_nights').click(function() {
-	var startDate = $("#trip_start").val();
-	var endDate =  new Date();
-	var end_of_trip = (endDate.getDate() + 7) +  "/" + (endDate.getMonth()+1) + "/" + endDate.getFullYear();
+	var startDate = $("#trip_start").val().split('/');
+	var end = parseInt(startDate[1]) + '/' + parseInt(startDate[0]) + '/' + parseInt(startDate[2]);
+	
+	var finalend_date = new Date(end);
+	finalend_date.setDate(finalend_date.getDate() + 7);
+	
+	
+	var end_of_trip = (finalend_date.getDate()) +  "/" + (finalend_date.getMonth()+1) + "/" + finalend_date.getFullYear();
+	
 	$("#trip_end").val(end_of_trip);
 	
 });
 
 $('#10_nights').click(function() {
-	var startDate = $("#trip_start").val();
-	var endDate =  new Date();
-	var end_of_trip = (endDate.getDate() + 10) +  "/" + (endDate.getMonth()+1) + "/" + endDate.getFullYear();
+	var startDate = $("#trip_start").val().split('/');
+	var end = parseInt(startDate[1]) + '/' + parseInt(startDate[0]) + '/' + parseInt(startDate[2]);
+	
+	var finalend_date = new Date(end);
+	finalend_date.setDate(finalend_date.getDate() + 10);
+	
+	
+	var end_of_trip = (finalend_date.getDate()) +  "/" + (finalend_date.getMonth()+1) + "/" + finalend_date.getFullYear();
+	//alert(end_of_trip);
 	$("#trip_end").val(end_of_trip);
 	
 });
 
 $('#14_nights').click(function() {
-	var startDate = $("#trip_start").val();
-	var endDate =  new Date();
-	var end_of_trip = (endDate.getDate() + 14) +  "/" + (endDate.getMonth()+1) + "/" + endDate.getFullYear();
-	//alert(end_of_trip);
+	var startDate = $("#trip_start").val().split('/');
+	var end = parseInt(startDate[1]) + '/' + parseInt(startDate[0]) + '/' + parseInt(startDate[2]);
+	
+	var finalend_date = new Date(end);
+	finalend_date.setDate(finalend_date.getDate() + 14);
+	
+	
+	var end_of_trip = (finalend_date.getDate()) +  "/" + (finalend_date.getMonth()+1) + "/" + finalend_date.getFullYear();
+	
 	$("#trip_end").val(end_of_trip);
 	
 });
