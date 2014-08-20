@@ -1,0 +1,10 @@
+
+
+.heart {
+position: absolute;
+background-color: transparent;
+background-image: url('../images/icons/heart.png');
+-webkit-transform: translateZ(0);
+-moz-transform: translateZ(0);
+transform: translateZ(0);
+}

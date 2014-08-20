@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/contact.css">
 
+<link href="<?php echo base_url();?>/assets/css/heart.css" rel="stylesheet">
 
 <div id="highlighted" class="single" style="background:#fff; padding-bottom:50px; margin-bottom:0px;" >
   
@@ -22,7 +23,7 @@
                 <div class="col-md-6">
                   <form id="feedback-form" action="#" role="form">
                   
-                  <div style=" margin-bottom:40px;" class="clearfix">
+                  <div style=" margin-bottom:20px;" class="clearfix">
                   <div class="form-field absolute_" style="color: rgb(106, 106, 106); margin-bottom:20px;">
       <label class="smiley-cover ng-scope">
       <div class="label_cover  has-sl"><span class="label ng-binding">How useful did you find this website?</span></div>
@@ -77,9 +78,10 @@
       </label>
     </div>
                   </div>-->
-                  
+		<div id="heart_show"></div>
+
                   <div class="toltip_text_p  clearfix"></div>
-                  <div class="social_tip  clearfix" style="margin-bottom:20px;">
+                  <div class="social_tip  clearfix" style="margin-bottom:30px;">
                   <ul class="">
                   <li class="fbp"> <div id="fb-root"></div><div class="fb-like" data-href="https://www.facebook.com/myinsuranceclub" data-width="200" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div></li>
 
@@ -94,7 +96,12 @@
                   
                 
                   
-                    <div class="form-group">
+                 
+                    <div class="form-group" style="margin-top:20px;">
+                      <label class="sr-only" for="contact-message">Message</label>
+                      <textarea rows="7" class="form-control" id="contact-message" placeholder="Your Feedback/ Comments (Maximum 200 characters)"></textarea>
+                    </div>
+                       <div class="form-group" >
                       <label class="sr-only" for="contact-name">Name</label>
                       <input type="text" class="form-control" id="contact-name" placeholder="Name">
                     </div>
@@ -106,10 +113,6 @@
                        <div class="form-group">
                       <label class="sr-only" for="contact-namobilee">Mobile</label>
                       <input type="text" class="form-control" id="contact-mobile" placeholder="Mobile (If you want us to call you)">
-                    </div>
-                    <div class="form-group">
-                      <label class="sr-only" for="contact-message">Message</label>
-                      <textarea rows="7" class="form-control" id="contact-message" placeholder="Your Feedback/ Comments (Maximum 200 characters)"></textarea>
                     </div>
                     <input type="button" class="btn btn-primary my" value="Send Message" style="float:right;">
                   </form>
@@ -131,6 +134,8 @@
  <script src="<?php echo base_url();?>/assets/js/bootstrap-tooltip.js"></script> 
 
 
+<script src="<?php echo base_url();?>/assets/js/rotate3Di.js" type="text/javascript"></script>
+<script src="<?php echo base_url();?>/assets/js/3d-falling-leaves.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -153,41 +158,45 @@ $(document).ready(function() {
 		$('.child-0').click(function(){
 		 $(this).addClass('is_on');
 		 $('.child-1,.child-2,.child-3,.child-4').removeClass('is_on');
-		   $(".toltip_text_p").html('<p class="top_t">"Oops, we seemed to have done something really wrong!"</p><p class="top_m">Do share some more information below so that we can attend to it</p>');
+		   $(".toltip_text_p").html('<p class="top_t red ">"Oops, we seemed to have done something really wrong!"</p><p class="top_m red">Do share some more information below so that we can attend to it</p>');
 		$('.social_tip').hide();
+		$(document).octoberLeaves('stop');
         });
 		
 		$('.child-1').click(function(){
 		 $(this).addClass('is_on');
 		 $('.child-0,.child-2,.child-3,.child-4').removeClass('is_on');
-		  $(".toltip_text_p").html('<p class="top_t">"Oops, we seemed to have done something really wrong!"</p><p class="top_m">Do share some more information below so that we can attend to it</p>');
+		  $(".toltip_text_p ").html('<p class="top_t red">"Poor! That is surely not what we set about wanting to do."</p><p class="top_m red">Do share some more information below so that we can attend to it.</p>');
 		 $('.social_tip').hide();
+		 $(document).octoberLeaves('stop');
         });
 		
 		$('.child-2').click(function(){
 		 $(this).addClass('is_on');
 		 $('.child-1,.child-0,.child-3,.child-4').removeClass('is_on');
-		  $(".toltip_text_p").html('<p class="top_t">"Poor! That is surely not what we set about wanting to do."</p><p class="top_m">Do share some more information below so that we can attend to it.</p>');
+		  $(".toltip_text_p").html('<p class="top_t">"Ok, it seems we are getting there. Still a long way to go though."</p><p class="top_m">Do let us know if there is some suggested improvement.</p>');
 		 $('.social_tip').hide();
+		 $(document).octoberLeaves('stop');
         });
 		
 		
 		$('.child-3').click(function(){
 		 $(this).addClass('is_on');
 		 $('.child-1,.child-2,.child-0,.child-4').removeClass('is_on');
-		  $(".toltip_text_p").html('<p class="top_t">"Yay, glad you liked what we are doing."</p><p class="top_m">Anything you want us to do better? And do you mind promoting us?!</p>');
+		  $(".toltip_text_p").html('<p class="top_t green">"Yay, glad you liked what we are doing."</p><p class="top_m green">Anything you want us to do better? And do you mind promoting us?!</p>');
 		    $('.social_tip').show();
 		  loadSocial_feedback();
-		
+		 $(document).octoberLeaves('stop');
         });
 		
 		
 		$('.child-4').click(function(){
 		 $(this).addClass('is_on');
 		 $('.child-1,.child-2,.child-3,.child-0').removeClass('is_on');
-		  $(".toltip_text_p").html('<p class="top_t">"Woo hoo, this makes us feel proud. Lots of love to you :)"</p><p class="top_m">Would you mind talking about us on FB/Twitter?</p>');
+		  $(".toltip_text_p").html('<p class="top_t green">"Woo hoo, this makes us feel proud. Lots of love to you :)"</p><p class="top_m green">Would you mind talking about us on FB/Twitter?</p>');
 		  $('.social_tip').show();
 		  loadSocial_feedback();
+		  $("#heart_show").octoberLeaves('start');
 		
         });
 	
