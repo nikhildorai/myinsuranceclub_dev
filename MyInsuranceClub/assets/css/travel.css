@@ -1421,7 +1421,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	width: 32px;
 }
 .mic_btn_tl.mic_btn_tl_chkd .t_single_trip {
-	background-image:url('../images/icons/single_trip.png');
+	background-image:url('../images/icons/single_trip_chked.png');
 	background-size: 100% 100%;
 	height: 32px;
 	width: 32px;
@@ -1439,7 +1439,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	width: 32px;
 }
 .mic_btn_tl.mic_btn_tl_chkd .t_mul_trip {
-	background-image:  url('../images/icons/annual_trip.png');
+	background-image:  url('../images/icons/annual_trip_chked.png');
 	background-size: 100% 100%;
 	height: 32px;
 	width: 32px;
@@ -1457,7 +1457,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	width: 38px;
 }
 .mic_btn_tl.mic_btn_tl_chkd .t_student_trip {
-	background-image:   url('../images/icons/student.png');
+	background-image:   url('../images/icons/student_chked.png');
 	background-size: 100% 100%;
 	height: 32px;
 	width: 38px;
@@ -1480,7 +1480,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	width: 32px;
 }
 .mic_btn_tl.mic_btn_tl_chkd .world_usa {
-	background-image: url('../images/icons/world_usa.png');
+	background-image: url('../images/icons/world_usa_chked.png');
 	background-size: 100% 100%;
 	height: 32px;
 	width: 32px;
@@ -1499,7 +1499,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	width: 32px;
 }
 .mic_btn_tl.mic_btn_tl_chkd .world_not_usa {
-	background-image: url('../images/icons/world_not_usa.png');
+	background-image: url('../images/icons/world_not_usa_chked.png');
 	background-size: 100% 100%;
 	height: 32px;
 	width: 32px;
@@ -1518,7 +1518,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	width: 32px;
 }
 .mic_btn_tl.mic_btn_tl_chkd .schengen {
-	background-image: url('../images/icons/schengen.png');
+	background-image: url('../images/icons/schengen_chked.png');
 	background-size: 100% 100%;
 	height: 32px;
 	width: 32px;
@@ -1537,45 +1537,45 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	width: 32px;
 }
 .mic_btn_tl.mic_btn_tl_chkd .asia {
-	background-image: url('../images/icons/asia.png');
+	background-image: url('../images/icons/asia_chked.png');
 	background-size: 100% 100%;
 	height: 32px;
 	width: 32px;
 }
 .male {
-	background-image: url('../images/icons/male.png');
+	background-image: url('../images/icons/male_blue.png');
 	background-size: 100% 100%;
 	height: 22px;
 	width: 22px;
 }
 .mic_btn_tl-hover .male {
-	background-image:url('../images/icons/male.png');
+	background-image:url('../images/icons/male_blue.png');
 	;
 	background-size: 100% 100%;
 	height: 22px;
 	width: 22px;
 }
 .mic_btn_tl.mic_btn_tl_chkd .male {
-	background-image: url('../images/icons/male.png');
+	background-image: url('../images/icons/male_blue_chked.png');
 	background-size: 100% 100%;
 	height: 22px;
 	width: 22px;
 }
 .female {
-	background-image: url('../images/icons/female.png');
+	background-image: url('../images/icons/female_blue.png');
 	background-size: 100% 100%;
 	height: 22px;
 	width: 22px;
 }
 .mic_btn_tl-hover .female {
-	background-image:url('../images/icons/female.png');
+	background-image:url('../images/icons/female_blue.png');
 	;
 	background-size: 100% 100%;
 	height: 22px;
 	width: 22px;
 }
 .mic_btn_tl.mic_btn_tl_chkd .female {
-	background-image: url('../images/icons/female.png');
+	background-image: url('../images/icons/female_blue_chked.png');
 	background-size: 100% 100%;
 	height: 22px;
 	width: 22px;
@@ -1593,7 +1593,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	width: 24px;
 }
 .mic_btn_tl.mic_btn_tl_chkd .calendar-start-button-icon {
-	background-image: url('../images/icons/calendar-32.png');
+	background-image: url('../images/icons/calendar-32_chked.png');
 	background-size: 100% 100%;
 	height: 24px;
 	width: 24px;
@@ -1611,7 +1611,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	width: 24px;
 }
 .mic_btn_tl.mic_btn_tl_chkd .calendar-end-button-icon {
-	background-image: url('../images/icons/calendar-32.png');
+	background-image: url('../images/icons/calendar-32_chked.png');
 	background-size: 100% 100%;
 	height: 24px;
 	width: 24px;
@@ -1629,7 +1629,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	width: 32px;
 }
 .mic_btn_tl.mic_btn_tl_chkd .couple-icon {
-	background-image: url('../images/icons/couple.png');
+	background-image: url('../images/icons/couple_chked.png');
 	background-size: 100% 100%;
 	height: 32px;
 	width: 32px;
@@ -1647,7 +1647,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	width: 66px;
 }
 .mic_btn_tl.mic_btn_tl_chkd .family-icon {
-	background-image: url('../images/icons/travel_family.png');
+	background-image: url('../images/icons/travel_family_chked.png');
 	background-size: 100% 100%;
 	height: 32px;
 	width: 66px;
@@ -1665,7 +1665,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	width: 32px;
 }
 .mic_btn_tl.mic_btn_tl_chkd .individual_icon {
-	background-image: url('../images/icons/single.png');
+	background-image: url('../images/icons/single_chked.png');
 	background-size: 100% 100%;
 	height: 32px;
 	width: 32px;
@@ -1795,18 +1795,68 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 }*/
 .small_i i{ font-size: 12px;
     top: 0;;}
- @media screen and (max-width: 1180px) {
- .health_page {
- margin-left: -485px;
- width:970px !important;
+ @media screen and (max-width: 1200px) {
+	 .travel_container{ width:910px;}
+	 .p_d_column{ width:278px;}
+	 .center p.travel_container{ padding-left:3px !important;}
+
 }
+ @media screen and (max-width: 990px) {
+	  .travel_container{ width:750px;}
+	 .p_d_column {
+    width: 222px;
 }
- @media screen and (max-width: 999px) {
- .health_page {
- margin-left: -375px;
-position:relative;
- width:750px !important;
+
+.mic_i_mar.female_blue{ margin-left:0px !important;}
+.mic_i_mar.male_blue{ margin-left:5px !important;}
+
 }
+
+ @media screen and (max-width: 813px) {
+	  .travel_container{ width:100%;}
+	 .p_d_column {
+    width: 48%;
+}
+.mic_icon .mic_i_btm{ padding-right:13px; text-align:right;}
+ }
+ 
+  @media screen and (max-width: 723px) {
+	  .travel_container{ width:100%;}
+	 .p_d_column {
+    width: 100%;
+}
+.mic_icon .mic_i_btm{ padding-right:13px; text-align:center;}
+ }
+   @media screen and (max-width: 650px) {
+	 .travel_mic .travel_form{ width:100%}
+	 .travel_mic .mic_tooltip_column,.travel_hlp{ display:none;}
+ }
+ 
+    @media screen and (max-width: 630px) {
+	body .mic_btn_tl.city_a,body .mic_btn_tl.city_b,body .mic_btn_tl.city_c,body .mic_btn_tl.city_d,body .mic_btn_tl.city_e,body .mic_btn_tl.city_f{ width:33.33% !important;}
+	body .mic_btn_tl.city_d{ margin-left:0px !important;}
+	.edit-select-control .edit-input{ left:-3px; width:152px;}
+	.mic-menu{ left:-2px; width:152px;}
+	.cssmenu .has-sub ul{ left:auto; right:-9px;}
+	
+ }
+ 
+  @media screen and (max-width: 492px) {
+	#duration_a,#duration_b,#duration_c,#duration_d,#duration_e{ width:33.33% !important;}
+	.col-md-12.center,.term_container{ padding:0 !important;}
+
+	
+ }
+  @media screen and (max-width: 424px) {
+	#cover_a,#cover_b,#cover_c,#cover_d{ width:50% !important;}
+	#cover_c{ margin-left:0px !important;}
+	
+ }
+ 
+  @media screen and (max-width:371px) {	
+  #duration_a,#duration_b,#duration_c,#duration_d,#duration_e{ width:50% !important;}
+  	.mic_icon .mic_i_btm{ text-align:right;}
+	.cssmenu .has-sub ul.duration_menu{ left:20px; }
 }
  @media only screen and (device-width: 768px) and (orientation:landscape) {
 }

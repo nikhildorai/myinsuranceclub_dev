@@ -483,14 +483,10 @@ float: right;
     z-index: 99999999; display:none;
 }
 
-  #share_link {
-
-     width: 404px;
-position: fixed; opacity:0; z-index: 99999999; right:5px;  margin-left: -202px; bottom:2px;
-
-    display:block; 
-
-
+ #share_link {
+width: 404px;
+position: fixed; opacity:1; z-index: 99999999; right:5px;  margin-left: -202px; bottom:2px;
+display:none; 
     background: #FFF;
         border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
        -webkit-box-shadow: inset 0px 0px 4px 1px rgba(3, 146, 204, 0.52);
@@ -511,7 +507,7 @@ box-shadow:         inset 0px 0px 4px 1px rgba(3, 146, 204, 0.52);
 #share_link .txt-fld label { display: block; float: left; width: 90px; padding-top: 8px; color: #222; font-size: 1.3em; text-align: left;  }
 #share_link .txt-fld input { width: 244px; padding: 8px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; font-size: 1.2em; color: #222; background: #F7F7F7; font-family: "Helvetica Neue"; outline: none; border-top: 1px solid #CCC; border-left: 1px solid #CCC; border-right: 1px solid #E7E6E6; border-bottom: 1px solid #E7E6E6; }
 #share_link .txt-fld input.good_input { background: #DEF5E1 url(../img/good.png) 236px center no-repeat; }
-#share_link .txt-fld input.error_input { background: #FDE0E0; }
+#share_link .txt-fld input.error_input { background: #FDE0E0;}
 .modal_close { position: absolute; top: 12px; right: 12px; display: block; width: 14px; height: 14px; background: url(../images/modal_close.png); z-index: 2; }
 
 #share_link .box {

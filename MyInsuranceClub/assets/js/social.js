@@ -97,6 +97,32 @@ function loadSocial() {
     }
 }
 
+
+function loadSocial_search() {
+    //I will assume that if we have one type of button we have them all
+    //If not we'll just exit
+    if ($(".twitter-follow-button").length == 0) return;
+
+    //Twitter
+    if (typeof (twttr) != 'undefined') {
+        twttr.widgets.load();
+    } else {
+        $.getScript('http://platform.twitter.com/widgets.js');
+    }
+
+    //Facebook
+    if (typeof (FB) != 'undefined') {
+        FB.init({ status: true, cookie: true, xfbml: true });
+    } else {
+        $.getScript("http://connect.facebook.net/en_US/all.js#xfbml=1", function () {
+            FB.init({ status: true, cookie: true, xfbml: true });
+        });
+    }
+  
+ 
+
+}
+
     function simulateAjaxRequest() {
         //Here we would load content from somewhere and insert that into the page.
         //In this case I will just add another couple of buttons to the loadbutton html

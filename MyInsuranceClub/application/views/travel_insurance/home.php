@@ -6,12 +6,12 @@
       <div class="col-md-12 center ">
         <div class="col-md-1"></div>
         <h1 class="travel_container" style="text-align:left; margin-top:30px;" id="step1">Compare & Buy Travel Insurance Plans</h1>
-        <div class="col-md-12">
+        <div class="col-md-12 center">
           <p class="travel_container" style="text-align:left; padding-top:10px; padding-bottom:25px;">Choose from 56 plans from 18 companies</p>
 <!--           <p class="col-md-11 start_icon"> <img src="assets/images/start2.png" ></p> 
 -->        </div>
         
-        <div class="col-md-12">
+        <div class="col-md-12 center">
           <p class="travel_container sc_top" style="text-align:left; padding-top:50px; padding-bottom:10px; color:#ff6633;">Want the best travel insurance plan? Get Started...</p>
         </div>
         

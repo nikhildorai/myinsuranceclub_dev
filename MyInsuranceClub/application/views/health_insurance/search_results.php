@@ -650,7 +650,8 @@ $(function() {
   $("#share_link,#backgroundPopup").delay(15000).fadeIn(500);
   
   setTimeout(function(){
-   $('#share_link').css({opacity: 1});
+    $('#share_link').show();
+ loadSocial_search();
    
 }, 15000);
   
@@ -659,7 +660,7 @@ $(function() {
   
   $('.modal_close').click(function() {
     $("#share_link,#backgroundPopup").fadeOut(500);
-     $("#share_link").css({opacity: 0});
+    // $("#share_link").css({opacity: 0});
     
     });
     
