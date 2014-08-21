@@ -764,7 +764,7 @@ height: 100%;
 margin-top: 0px;
 width: 100%;
 }
-.one_fourth {
+.one_fourth,.one_fourth.a,.one_fourth.b,.one_fourth.c,.one_fourth.d {
 width: 47.5%;
 }
 .one_fourth, .one_half, .three_fourth {
@@ -851,7 +851,7 @@ margin: 0;
  .art_cnt.widget.video {
 width:80%;
 }
- .one_fourth {
+ .one_fourth,.one_fourth.a,.one_fourth.b,.one_fourth.c,.one_fourth.d {
 width:100%;
 }
 }

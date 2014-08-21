@@ -1069,12 +1069,12 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	display: block; line-height:0px;
 }
 .mic_type .form-lable {
-	width: auto;
+	width: auto;  color:#f97e02;
 	margin-bottom: 10px;
 	font-size: 18px;
 }
 .mic_type .form-lable.t {
-	width: auto;
+	width: auto; color:#333;
 	margin-bottom: 10px;
 	font-size: 14px;
 }
@@ -2221,29 +2221,74 @@ border-top: 1px dotted #31b7f1;
 
 .small_i i{ font-size: 12px;
     top: 0;;}
-	.form-lable.f_big{ font-size:18px; margin-bottom:10px;}
- @media screen and (max-width: 1180px) {
- .health_page {
- margin-left: -485px;
- width:970px !important;
+	.form-lable.f_big{ font-size:18px; margin-bottom:10px; color:#f97e02;}
+ @media screen and (max-width: 1200px) {
+	 .term_container{ width:910px;}
+	 .p_d_column{ width:278px;}
+	 .center p.term_container{ padding-left:3px !important;}
+
 }
+ @media screen and (max-width: 990px) {
+	  .term_container{ width:750px;}
+	 .p_d_column {
+    width: 222px;
 }
- @media screen and (max-width: 999px) {
- .health_page {
- margin-left: -375px;
-position:relative;
- width:750px !important;
+
+.mic_i_mar.female_blue{ margin-left:0px !important;}
+.mic_i_mar.male_blue{ margin-left:5px !important;}
+
 }
+
+ @media screen and (max-width: 813px) {
+	  .term_container{ width:100%;}
+	 .p_d_column {
+    width: 48%;
+}
+.mic_icon .mic_i_btm{ padding-right:13px; text-align:right;}
+ }
+ 
+  @media screen and (max-width: 723px) {
+	  .term_container{ width:100%;}
+	 .p_d_column {
+    width: 100%;
+}
+.mic_icon .mic_i_btm{ padding-right:13px; text-align:center;}
+ }
+   @media screen and (max-width: 650px) {
+	 .term_mic .term_form{ width:100%}
+	 .term_mic .mic_tooltip_column,.term_hlp{ display:none;}
+ }
+ 
+    @media screen and (max-width: 630px) {
+	body .mic_btn_tl.city_a,body .mic_btn_tl.city_b,body .mic_btn_tl.city_c,body .mic_btn_tl.city_d,body .mic_btn_tl.city_e,body .mic_btn_tl.city_f{ width:33.33% !important;}
+	body .mic_btn_tl.city_d{ margin-left:0px !important;}
+	.edit-select-control .edit-input{ left:-3px; width:152px;}
+	.mic-menu{ left:-2px; width:152px;}
+	.cssmenu .has-sub ul{ left:auto; right:-9px;}
+	
+ }
+ 
+  @media screen and (max-width: 492px) {
+	#duration_a,#duration_b,#duration_c,#duration_d,#duration_e{ width:33.33% !important;}
+	.col-md-12.center,.term_container{ padding:0 !important;}
+
+	
+ }
+  @media screen and (max-width: 424px) {
+	#cover_a,#cover_b,#cover_c,#cover_d{ width:50% !important;}
+	#cover_c{ margin-left:0px !important;}
+	
+ }
+ 
+  @media screen and (max-width:371px) {	
+  #duration_a,#duration_b,#duration_c,#duration_d,#duration_e{ width:50% !important;}
+  	.mic_icon .mic_i_btm{ text-align:right;}
+	.cssmenu .has-sub ul.duration_menu{ left:20px; }
 }
  @media only screen and (device-width: 768px) and (orientation:landscape) {
 }
  @media only screen and (device-width: 768px) and (orientation:portrait) {
- .health_page {
- margin-left: -375px;
-position:relative;
-margin-top:-350px;
- width:750px !important;
-}
+
 }
  @media screen and (max-width: 990px) {
  .cus_cont {
@@ -2320,11 +2365,7 @@ width: 49px;
 }
 }
  @media screen and (max-width: 480px) {
- .health_page {
- margin-left: -485px;
-position:relative;
- width:970px !important;
-}
+
  .clearfix1 {
 width:100%;
 }

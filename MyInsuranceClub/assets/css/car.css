@@ -847,6 +847,7 @@ body .mic_btn_tl_one.mic_btn_tl_c_l, body .mic_btn_tl_one.mic_btn_tl_c_l.mic_btn
 	}*/
 	.reg_car_hide{ position: absolute;right: 10px;top: 8px;}
 	.reg_car_hide .reg_small_p{ margin:0px;}
+	.ui-autocomplete li.ui-menu-item.odd{ margin:0px;}
 
  @media screen and (max-width: 1180px) {
  .health_page {

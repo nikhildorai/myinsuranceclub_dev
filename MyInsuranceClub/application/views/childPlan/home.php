@@ -11,7 +11,7 @@
       </div>
         
         <div class="col-md-12">
-          <p class="term_container sc_top" style="text-align:left; padding-top:0px; padding-bottom:10px; color:#ff6633;">Get Started...</p>
+          <p class="term_container sc_top" style="text-align:left; padding-top:0px; padding-bottom:10px; color:#ff6633;">Want the best child insurance plan? Get Started...</p>
         </div>
         
       </div>

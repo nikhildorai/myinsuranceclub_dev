@@ -6,11 +6,11 @@
       <div class="col-md-12 center ">
         <div class="col-md-1"></div>
         <h1 class="term_container" style="text-align:left; margin-top:30px;" id="step1">Compare & Buy Term Insurance Plans</h1>
-        <div class="col-md-12">
+        <div class="col-md-12 center">
           <p class="term_container" style="text-align:left; padding-top:10px; padding-left:18px; padding-bottom:25px;">Choose from 56 plans from 18 companies</p>
        </div>
         
-        <div class="col-md-12">
+        <div class="col-md-12 center">
           <p class="term_container sc_top" style="text-align:left; padding-top:0px; padding-bottom:10px; color:#ff6633;">Want the best term insurance plan? Get Started...</p>
         </div>
         

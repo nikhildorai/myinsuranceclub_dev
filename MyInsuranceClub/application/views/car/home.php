@@ -633,7 +633,6 @@
 
                		<option value="ag">Agartala</option>
 		<option value=" 9">Agra</option>
-		<option value=" 10">Ahmedabad</option>
 		<option value=" 68">Ahmednagar</option>
 		<option value=" 69">Aizawl</option>
 		<option value=" 70">Ajmer</option>
@@ -657,7 +656,6 @@
 		<option value=" 87">Beawar</option>
 		<option value=" 88">Belgaum</option>
 		<option value=" 89">Bellary</option>
-		<option value=" 15">Bengaluru</option>
 		<option value=" 90">Berhampur</option>
 		<option value=" 91">Bhagalpur </option>
 		<option value=" 92">Bharuch</option>
@@ -713,7 +711,6 @@
 		<option value=" 134">Hoshiarpur</option>
 		<option value=" 135">Howrah</option>
 		<option value=" 136">Hubli</option>
-		<option value=" 28">Hyderabad</option>
 		<option value=" 137">Imphal</option>
 		<option value=" 29">Indore</option>
 		<option value=" 30">Jabalpur</option>
@@ -774,7 +771,6 @@
 		<option value=" 205">Patiala</option>
 		<option value=" 51">Patna</option>
 		<option value=" 52">Pondicherry</option>
-		<option value=" 53">Pune</option>
 		<option value=" 173">RaeBareli</option>
 		<option value=" 174">Raichur</option>
 		<option value=" 54">Raipur</option>

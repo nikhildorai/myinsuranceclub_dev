@@ -160,7 +160,7 @@ $(document).ready(function() {
 		 $('.child-1,.child-2,.child-3,.child-4').removeClass('is_on');
 		   $(".toltip_text_p").html('<p class="top_t red ">"Oops, we seemed to have done something really wrong!"</p><p class="top_m red">Do share some more information below so that we can attend to it</p>');
 		$('.social_tip').hide();
-		$(document).octoberLeaves('stop');
+		$("#heart_show").octoberLeaves('stop');
         });
 		
 		$('.child-1').click(function(){
@@ -168,7 +168,7 @@ $(document).ready(function() {
 		 $('.child-0,.child-2,.child-3,.child-4').removeClass('is_on');
 		  $(".toltip_text_p ").html('<p class="top_t red">"Poor! That is surely not what we set about wanting to do."</p><p class="top_m red">Do share some more information below so that we can attend to it.</p>');
 		 $('.social_tip').hide();
-		 $(document).octoberLeaves('stop');
+		 $("#heart_show").octoberLeaves('stop');
         });
 		
 		$('.child-2').click(function(){
@@ -176,7 +176,7 @@ $(document).ready(function() {
 		 $('.child-1,.child-0,.child-3,.child-4').removeClass('is_on');
 		  $(".toltip_text_p").html('<p class="top_t">"Ok, it seems we are getting there. Still a long way to go though."</p><p class="top_m">Do let us know if there is some suggested improvement.</p>');
 		 $('.social_tip').hide();
-		 $(document).octoberLeaves('stop');
+		 $("#heart_show").octoberLeaves('stop');
         });
 		
 		
@@ -186,7 +186,7 @@ $(document).ready(function() {
 		  $(".toltip_text_p").html('<p class="top_t green">"Yay, glad you liked what we are doing."</p><p class="top_m green">Anything you want us to do better? And do you mind promoting us?!</p>');
 		    $('.social_tip').show();
 		  loadSocial_feedback();
-		 $(document).octoberLeaves('stop');
+		 $("#heart_show").octoberLeaves('stop');
         });
 		
 		

@@ -337,17 +337,19 @@ $(document).ready(function() {
 
                 if (item.category != currentCategory) {
                     if (item.category) {
-						if(index==1 || index ==2){
-							cus_class = "c_bg";
-						}
+					
                         ul.append("<li class='ui-autocomplete-category2 "+ cus_class +"'>" + item.category + "</li>");
                     }
                     currentCategory = item.category;
                 }
                 self._renderItemData(ul, item);
+				if(index==1 || index ==2 || index ==3 || index ==4 || index ==5 || index ==6 || index ==7 ){
+							cus_class = "c_bg";
+							$( ul ).find( "li" ).addClass( "odd" );
+						}
             });
+				
 			
-			$( ul ).find( "li:odd" ).addClass( "odd" );
         };
     },
     _createShowAllButton: function() {
