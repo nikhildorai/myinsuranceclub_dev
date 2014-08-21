@@ -91,9 +91,9 @@
 	display: inline;
 }
 .mic_btn_tl {
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius:0px;
 	cursor: default;
 	font-size: 11px;
 	font-weight: bold;
@@ -648,11 +648,15 @@ img.loading-ball {
 }
 .card, .t_ca {
 	border-radius: 2px;
-	box-shadow: rgba(0, 0, 0, 0.4) 0 2px 1px, rgba(0, 0, 0, 0.4) 0 0 2px;
+	/*box-shadow: rgba(75, 162, 249, 0.4) 0 2px 1px, rgba(75, 162, 249, 0.4) 0 0 2px; border:1px solid #008C9E;*/
+	
+	-webkit-box-shadow: 0px 0 1px 2px rgba(75, 162, 249, 1);
+-moz-box-shadow:    0px 0 1px 2px rgba(75, 162, 249, 1);
+box-shadow:         0px 0 1px 2px rgba(75, 162, 249, 1);
 
 }
 .t_ca {
-	background-color: #fff;
+	background-color: #f2faff;
 }
 .inline-block {
 	display: inline-block;
@@ -1075,7 +1079,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	display: block;
 }
 .mic_type .form-lable {
-	width: auto;
+	width: auto; color:#f97e02;
 	margin-bottom: 16px;
 	font-size: 18px;
 }
@@ -1271,7 +1275,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	color: #888;
 	margin-top: 12px;
 }
-.travel_mic .note_sec .checkbox{ padding-left:0px;}
+.travel_mic .note_sec .checkbox{ padding-left:0px; margin-left:-2px;}
 .travel_mic .privacy-paragraph-section {
 	margin-top: 12px;
 	font-size: 11px;
@@ -1392,7 +1396,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 }
 .mic_tooltip_corner_out {
 	border: 8px solid;
-	border-color: transparent #bbb;
+	border-color: transparent #4BA2F9;
 	border-left-width: 0;
 	position: absolute;
 }
@@ -1759,6 +1763,17 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 	width: 240px;
 	z-index: 3;
 }
+
+.p_d_column {
+    float: left;
+    margin-right:15px;;
+    width: 285px; margin-bottom:15px;
+}
+.p_d_column label {
+    font-weight: normal; margin-bottom:10px;
+}
+.p_d_column.no_r { margin-right:0px; float:right;}
+
 
 
 /*.background-container {

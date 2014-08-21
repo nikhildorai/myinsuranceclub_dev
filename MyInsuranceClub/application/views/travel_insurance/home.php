@@ -12,7 +12,7 @@
 -->        </div>
         
         <div class="col-md-12">
-          <p class="travel_container sc_top" style="text-align:left; padding-top:50px; padding-bottom:10px; color:#ff6633;">Get Started...</p>
+          <p class="travel_container sc_top" style="text-align:left; padding-top:50px; padding-bottom:10px; color:#ff6633;">Want the best travel insurance plan? Get Started...</p>
         </div>
         
       </div>
@@ -66,15 +66,15 @@
                             <div  class="where_go_a mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r "  id = "including_usa_canada" style="width: 25%;cursor: pointer;">
                               <div class="mic_icon">
                                 <div class="mic_i_mar world_usa"></div>
-                                <div class="mic_i_btm">Worldwide<br/>
-                                  <span class="trip_location">Including USA/Canada</span></div>
+                                <div class="mic_i_btm"><span class="trip_location">Including USA/Canada</span><br/>Worldwide
+                                  </div>
                               </div>
                             </div>
                             <div class="where_go_b mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r"  id = "excluding_usa_canada" style="width: 25%;cursor: pointer;">
                               <div class="mic_icon">
                                 <div class="mic_i_mar world_not_usa"></div>
-                                <div class="mic_i_btm">Worldwide<br/>
-                                  <span class="trip_location">Excluding USA/Canada</span></div>
+                                <div class="mic_i_btm"><span class="trip_location">Excluding USA/Canada</span><br/>Worldwide
+                                  </div>
                               </div>
                             </div>
                             <div class="where_go_c mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r"  id = "Schengen" style="width: 25%;cursor: pointer;">
@@ -341,48 +341,73 @@
               	<input type="hidden" name="traveller_6_gender" id="traveller_6_gender" value="" />
               	<input type="hidden" name="traveller_7_gender" id="traveller_7_gender" value="" />
               	              	</div>
-              <div class="t_section t_ca">
-                <div class="title">Policyholder details</div>
-                <div>
-                  <div class=" travel-name-control right-spacer">
-                    <div class="mic_sec_label" >
-                      <div class="mic_t_input ">
-                        <input type="text" class="form-control" autocomplete="off" placeholder="Full name" onkeyup="javascript:validateName(cust_name);" maxlength="50" aria-label="Full name" name="cust_name" value="<?php echo ((isset($this->session->userdata['user_input']['full_name'])) ?  $this->session->userdata['user_input']['full_name'] : set_value('cust_name'));?>" required>
-                      </div>
-                     
-                      <div></div>
-                    </div>
-                  </div>
-                  <div class="travel-name-control" >
-                    <div class="mic_sec_label">
-                      <div class="mic_t_input ">
-                        <input type="text" class="form-control" autocomplete="off" placeholder="Mobile" aria-label="Mobile" name="cust_mobile" maxlength="10" value="<?php echo ((isset($this->session->userdata['user_input']['cust_mobile'])) ?  $this->session->userdata['user_input']['cust_mobile'] : set_value('cust_mobile'));?>" required>
-                      </div>
-                      <div class="error-text"></div>
-                    </div>
-                  </div>
+            
+              
+              <div id="Policy_holder_details" style="margin-top: 25px; height: auto; display: block;" class="t_section t_ca clearfix">
+            <div class="mic_type">
+              <div class="form-lable">Policyholder Details</div>
+              
+                <div style="width:100%;" class="term_reg_open">
+              
+
+
+
+              
+                <div class="p_d_column">
+                <label  for="">Full Name</label>
+                <input type="text" class="form-control" onkeyup="javascript:validateName(cust_name);" maxlength="50" aria-label="Full name" name="cust_name" value="<?php echo ((isset($this->session->userdata['user_input']['full_name'])) ?  $this->session->userdata['user_input']['full_name'] : set_value('cust_name'));?>" required >
                 </div>
-                <div class="travel-email-control">
-                  <div class="mic_sec_label">
-                    <div class="mic_t_input ">
-                      <input type="text" class="form-control" autocomplete="off" placeholder="Your email" aria-label="Your email" name="cust_email" required value="<?php echo ((isset($this->session->userdata['user_input']['cust_email'])) ?  $this->session->userdata['user_input']['cust_email'] : set_value('cust_email'));?>">
-                    </div>
-                    <div class="error-text"></div>
-                  </div>
+                
+          
+                
+                
+                 <div class="p_d_column no_r">
+                 
+                       <label  for="">Mobile</label>
+                <input type="text" class="form-control"  name="cust_mobile" maxlength="10" value="<?php echo ((isset($this->session->userdata['user_input']['cust_mobile'])) ?  $this->session->userdata['user_input']['cust_mobile'] : set_value('cust_mobile'));?>" required>
+            
                 </div>
+                
+                 <div class="p_d_column" style="width:100%;">
+                   <label  for="">Email</label>
+                <input type="text" class="form-control" name="cust_email" required value="<?php echo ((isset($this->session->userdata['user_input']['cust_email'])) ?  $this->session->userdata['user_input']['cust_email'] : set_value('cust_email'));?>" >
+           
+                </div>
+                
+                
+                
+                
+               
+                
+                 <div style="width:100%; margin-top:0px; float:left;">
                 <div class="note_sec">
                 <div class="checkbox">
             <label>
-            <input id="Field4" 		name="agree" checked 		type="checkbox" 		class="field checkbox" 		value="agree"/>
+            <input type="checkbox" id="Field4" name="agree" checked="" class="field checkbox" value="agree">
             <label class="" for="Field4">I authorize MyInsuranceClub &amp; its partners to Call/SMS for my application &amp; agree to the <a href="" class="link">Terms of Use</a>.</label>
-          </div>
+          </label></div>
+                
                 </div>
+                
                 <div class="button-panel"><span class="right-buttons"><span class="id-next-button">
                   <div style="font-weight: bold;padding: 10px 20px;">
                     <button class="btn btn-primary my" type="submit" id="sub_form" value="submit" name="submit">Show plans<i class="fa fa-chevron-right ar "></i> </button>
                   </div>
                   </span></span> </div>
-              </div>
+                
+                
+                </div>
+                
+                
+                
+                
+                
+                </div>
+            </div>
+          </div>
+              
+              
+              
             </div>
           <!-- /form> --> <?php echo form_close();?>         
            <div class=" mic_tooltip_column">

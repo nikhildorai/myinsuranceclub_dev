@@ -435,7 +435,7 @@
 	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
 	-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
 	box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
-	background: #F1EDD0;
+	background: #f8f8f8;
 	color: #333;
 }
 .mic_btn_tl_one.mic_btn_tl-selected, .mic_btn_tl_one.mic_btn_tl_clr_ol.mic_btn_tl-selected {
@@ -1391,7 +1391,7 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 }
 .mic_tooltip_corner_out {
 	border: 8px solid;
-	border-color: transparent #008C9E;
+	border-color: transparent #4BA2F9;
 	border-left-width: 0;
 	position: absolute;
 }
