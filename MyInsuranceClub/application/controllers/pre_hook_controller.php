@@ -80,7 +80,14 @@ class Pre_Hook_Controller extends Customer_Controller {
 		}
 		if($this->agent->is_mobile())
 		{
-			$user_info['device']=$this->agent->mobile();
+			if($this->agent->mobile() != NULL)
+			{
+				$user_info['device']=$this->agent->mobile();
+			}
+			else
+			{
+				$user_info['device']="Unkown Device";
+			}
 		}
 		if ($this->agent->is_referral())
 		{
