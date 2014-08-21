@@ -23,6 +23,7 @@ $server = base_url();//$this->util->getUrl('currentPageUrl');
         <script src="<?php echo $server;?>JS/tag-it.js" type="text/javascript" charset="utf-8"></script>
         <script src="<?php echo $server;?>assets/js/common.js" type="text/javascript" charset="utf-8"></script>
         <script src="<?php echo $server;?>assets/js/jquery.slugify.js" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo $server;?>assets/js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
         
         <!-- end needs images -->
 

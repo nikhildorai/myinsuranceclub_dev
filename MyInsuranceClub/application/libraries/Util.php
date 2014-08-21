@@ -2378,7 +2378,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 			else if ($type == 'getAllDetailsOfSingleHealthPolicy')
 				$query = "CALL sp_getAllDetailsOfSingleHealthPolicy(?)";
 			else if ($type == 'getAllPolicyVariantsDetails')
-				$query = "CALL sp_getAllPolicyVariantsDetails(?,?,?,?,?,?,?)";
+				$query = "CALL sp_getAllPolicyVariantsDetails(?,?,?,?,?,?,?,?,?)";
 			else if ($type == 'getPolicyVariantsFeaturesRidersDetails')
 				$query = "CALL sp_getPolicyVariantsFeaturesRidersDetails(?,?,?)";
 			else if ($type == 'getCompanyClaimRatio')
@@ -2415,6 +2415,8 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 	public static function getControllerForPolicyVariantFeatures($variantType)
 	{
 		$return  = array();
+		$variantType = explode(',', $variantType);
+		$variantType = reset($variantType);
 		if (!empty($variantType))
 		{
 			switch ($variantType)
@@ -3043,7 +3045,8 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 	
 	public static function getPolicyVariantsFeaturesRidersDetails($policySlug, $variantType = '', $companyType = '')
 	{
-		$data['companyDetails'] = $data['policyDetails'] = $data['variantDetails'] = $data['claimRatio'] = $data['claimRatioJson'] = $arrParams = array();
+		$data['companyDetails'] = $data['policyDetails'] = $data['variantDetails'] = $data['claimRatio'] = $data['claimRatioJson'] = $data['peerComparisionResult'] = $arrParams = array();
+		$data['disqusUrl'] = $url = '';
 		if (!empty($policySlug))
 		{
 			$url = base_url().'health-insurance/'.$policySlug;	
@@ -3094,6 +3097,42 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 						}
 					}
 					$data['claimRatioJson'] = json_encode($data['claimRatio']);
+					
+					//	peer comparision data
+					
+					$dbPrefix = Util::getdbPrefix();
+									
+					$param['premium_table'] = (!empty($allVariantTypes['premium_table'])) ? $dbPrefix.$allVariantTypes['premium_table'] : $dbPrefix.'annual_premium_health';
+					$param['product_id'] = (isset($data['policyDetails']['policy']['product_id']) && !empty($data['policyDetails']['policy']['product_id'])) ? $data['policyDetails']['policy']['product_id'] : '' ;
+					$param['sub_product_id'] = (isset($data['policyDetails']['policy']['sub_product_id']) && !empty($data['policyDetails']['policy']['sub_product_id'])) ? $data['policyDetails']['policy']['sub_product_id'] : '' ;
+					$param['city'] = 590;
+					$param['gender'] = 'male';
+					
+					$param['age'] = 25;
+					if (isset($data['policyDetails']['policy']['peer_comparision_age']) && !empty($data['policyDetails']['policy']['peer_comparision_age']))
+					{
+						$param['age'] = explode(',', $data['policyDetails']['policy']['peer_comparision_age']);
+						$param['age'] = reset($param['age']);
+					}
+					
+					$param['members'] = !empty($data['policyDetails']['policy']['policy_composition_type']) ? ($data['policyDetails']['policy']['policy_composition_type'] == 'individual') ? '1A' : '2A' : '1A';
+				
+					$param['sum_assured'] = 500000;
+					if (isset($data['policyDetails']['policy']['peer_comparision_coverage_amounts']) && !empty($data['policyDetails']['policy']['peer_comparision_coverage_amounts']))
+					{
+						$param['sum_assured'] = explode(',', $data['policyDetails']['policy']['peer_comparision_coverage_amounts']);
+						$param['sum_assured'] = reset($param['sum_assured']);
+					}
+					//$param['sum_assured'] = 500000;
+					$peerVariants = explode(',', $data['policyDetails']['policy']['peer_comparision_variants']);
+					foreach (array_filter(array_values(array_flip($data['variantNames']))) as $k2=>$v2)	
+						$peerVariants[] = $v2; 
+							
+					$param['variant_id'] = implode(',', $peerVariants); 
+//var_dump($data['policyDetails']['policy']['policy_composition'], $param);
+					$data['peerComparisionResult'] = Policy_variants_master_model::getAllPolicyVariantsDetails($param);
+					
+//var_dump($data['policyDetails']['policy']['policy_composition'], $param,$data['peerComparisionResult']);
 					//	seo data
 			        $data['socialSeoData'] = Util::getSocialMediaSeoData($data['policyDetails']['policy'], $url);
 			        $data['seoData']['title'] = $data['policyDetails']['policy']['seo_title'];
@@ -3105,6 +3144,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 //				Util::saveResultToCache($cacheFileName,$data);
 			}
 		}
+		$data['disqusUrl'] = $url;	
 		return $data;
 	}
 	
@@ -3169,14 +3209,14 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 						//	product details
 						if (in_array($k2, $tableNames[$dbPrefix.'product']))	
 						{
-							$data['policyDetails'][$v1['policy_id']]['policy']['product'][$k2] = $v2;
+							$data['policyDetails'][$v1['policy_id']]['policy']['product'][$v1['product_id']][$k2] = $v2;
 							$data['company'][$v1['company_id']]['product'][$k2] = $v2;
 						}	
 						
 						//	subproduct details
 						if (in_array($k2, $tableNames[$dbPrefix.'sub_product']))	
 						{
-							$data['policyDetails'][$v1['policy_id']]['policy']['sub_product'][$k2] = $v2;
+							$data['policyDetails'][$v1['policy_id']]['policy']['sub_product'][$v1['sub_product_id']][$k2] = $v2;
 							$data['company'][$v1['company_id']]['sub_product'][$k2] = $v2;
 						}	
 						
@@ -3227,6 +3267,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 	{
 		$html = 	'<table cellspacing="0" class="eligibility">
 						<tr>
+							<th scope="col" style="border-left: 1px solid #c1dad7;">#</th>
 							<th scope="col">Company Name</th>
 							<th scope="col">Policy Name</th>
 							<th scope="col">Variant Name</th>
@@ -3236,6 +3277,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 				$peerValue = explode(',', $peerValue);			
 				if (!empty($allVariants))
 				{
+					$i = 1;
 					foreach ($allVariants as $k1=>$v1)
 					{	
 						if ($v1['policy_id'] != $policy_id)
@@ -3243,19 +3285,21 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 							$checked = '';
 							if (in_array($v1['variant_id'], $peerValue))
 								$checked = 'checked';
-		$html .= 		'<tr>
-							<td class="spec" scope="row" width="334" valign="top" style="border-top: 1px solid #c1dad7; border-left: 1px solid #c1dad7">
-								'.$v1['company_display_name'].'
-							</td>
-							<td class="spec" scope="row" width="334" valign="top" style="border-top: 1px solid #c1dad7">';
-		$html .=				(!empty($v1['policy_display_name'])) ? $v1['policy_display_name'] : $v1['policy_name'];
-		$html .=			'</td>
-							<td class="spec" scope="row" width="234" valign="top" style="border-top: 1px solid #c1dad7">'.$v1['variant_name'].'</td>
-							<td class="spec" scope="row" width="200" valign="top" style="border-top: 1px solid #c1dad7">'.$v1['peer_comparision_count'].'</td>
-							<td class="spec" scope="row" width="24" valign="top" style="border-top: 1px solid #c1dad7;">
-								<label class="ui-checkbox"><input name="'.$modelName.'[peer_comparision_variants][]" type="checkbox" value="'.$v1['variant_id'].'" class="peerComparisionChk" '.$checked.'><span></span></label>
-							</td>
-						</tr>';				
+			$html .= 		'<tr>
+								<td class="spec" scope="row" valign="top" style="border-top: 1px solid #c1dad7; border-left: 1px solid #c1dad7">'.$i.'</td>
+								<td class="spec" scope="row" width="334" valign="top" style="border-top: 1px solid #c1dad7;">
+									'.$v1['company_display_name'].'
+								</td>
+								<td class="spec" scope="row" width="334" valign="top" style="border-top: 1px solid #c1dad7">';
+			$html .=				(!empty($v1['policy_display_name'])) ? $v1['policy_display_name'] : $v1['policy_name'];
+			$html .=			'</td>
+								<td class="spec" scope="row" width="234" valign="top" style="border-top: 1px solid #c1dad7">'.$v1['variant_name'].'</td>
+								<td class="spec" scope="row" width="200" valign="top" style="border-top: 1px solid #c1dad7">'.$v1['peer_comparision_count'].'</td>
+								<td class="spec" scope="row" width="24" valign="top" style="border-top: 1px solid #c1dad7;">
+									<label class="ui-checkbox"><input name="'.$modelName.'[peer_comparision_variants][]" type="checkbox" value="'.$v1['variant_id'].'" class="peerComparisionChk" '.$checked.'><span></span></label>
+								</td>
+							</tr>';		
+							$i++;		
 						}
 					}
 				}             

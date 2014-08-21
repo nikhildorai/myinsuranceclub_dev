@@ -231,7 +231,7 @@ $(window).scroll(function (event) {
 	    },
 	    
 	    title: {
-	        text: 'HDFC Life Click 2 Protect'
+	        text: chart_title_text
 	    },
 	    
 	    pane: {
@@ -288,9 +288,13 @@ $(window).scroll(function (event) {
 	            rotation: 'auto'
 	        },
 	        title: {
-	            text: 'Premium'
+	            //text: 'Premium'
 	        },
 	        plotBands: [{
+	            from: 0,
+	            to: 10000,
+	            color: '#55BF3B' // green
+	        }/*{
 	            from: 0,
 	            to: 5000,
 	            color: '#55BF3B' // green
@@ -302,12 +306,12 @@ $(window).scroll(function (event) {
 	            from: 7000,
 	            to: 10000,
 	            color: '#DF5353' // red
-	        }]        
+	        }*/]        
 	    },
 	
 	    series: [{
 	        name: 'Premium',
-	        data: [7800],
+	        data: [chart_series_premium],
 	        tooltip: {
 	            valueSuffix: ''
 	        }
@@ -336,7 +340,7 @@ $(window).scroll(function (event) {
 	    },
 	    
 	    title: {
-	        text: 'Smart Health Insurance'
+	        text: chart_title_text1
 	    },
 	    
 	    pane: {
@@ -393,9 +397,13 @@ $(window).scroll(function (event) {
 	            rotation: 'auto'
 	        },
 	        title: {
-	            text: 'Premium'
+	            //text: 'Premium'
 	        },
 	        plotBands: [{
+	            from: 0,
+	            to: 10000,
+	            color: '#55BF3B' // green
+	        }/*{
 	            from: 0,
 	            to: 5000,
 	            color: '#55BF3B' // green
@@ -407,12 +415,12 @@ $(window).scroll(function (event) {
 	            from: 7000,
 	            to: 10000,
 	            color: '#DF5353' // red
-	        }]        
+	        }*/]        
 	    },
 	
 	    series: [{
 	        name: 'Premium',
-	        data: [6000],
+	        data: [chart_series_premium1],
 	        tooltip: {
 	            valueSuffix: ''
 	        }
@@ -434,7 +442,7 @@ $(window).scroll(function (event) {
 	    },
 	    
 	    title: {
-	        text: 'Medisure Classic'
+	        text: chart_title_text2
 	    },
 	    
 	    pane: {
@@ -491,9 +499,13 @@ $(window).scroll(function (event) {
 	            rotation: 'auto'
 	        },
 	        title: {
-	            text: 'Premium'
+	            //text: 'Premium'
 	        },
 	        plotBands: [{
+	            from: 0,
+	            to: 10000,
+	            color: '#55BF3B' // green
+	        }/*{
 	            from: 0,
 	            to: 5000,
 	            color: '#55BF3B' // green
@@ -505,12 +517,12 @@ $(window).scroll(function (event) {
 	            from: 7000,
 	            to: 10000,
 	            color: '#DF5353' // red
-	        }]        
+	        }*/]          
 	    },
 	
 	    series: [{
 	        name: 'Premium',
-	        data: [7200],
+	        data: [chart_series_premium2],
 	        tooltip: {
 	            valueSuffix: ''
 	        }
@@ -532,7 +544,7 @@ $(window).scroll(function (event) {
 	    },
 	    
 	    title: {
-	        text: 'Health Guard Individual'
+	        text: chart_title_text3
 	    },
 	    
 	    pane: {
@@ -589,9 +601,13 @@ $(window).scroll(function (event) {
 	            rotation: 'auto'
 	        },
 	        title: {
-	            text: 'Premium'
+	            //text: 'Premium'
 	        },
 	        plotBands: [{
+	            from: 0,
+	            to: 10000,
+	            color: '#55BF3B' // green
+	        }/*{
 	            from: 0,
 	            to: 5000,
 	            color: '#55BF3B' // green
@@ -603,12 +619,12 @@ $(window).scroll(function (event) {
 	            from: 7000,
 	            to: 10000,
 	            color: '#DF5353' // red
-	        }]        
+	        }*/]       
 	    },
 	
 	    series: [{
 	        name: 'Premium',
-	        data: [4500],
+	        data: [chart_series_premium3],
 	        tooltip: {
 	            valueSuffix: ''
 	        }
@@ -631,7 +647,7 @@ $(window).scroll(function (event) {
 	    },
 	    
 	    title: {
-	        text: 'MediPrime Insurance'
+	        text: chart_title_text4
 	    },
 	    
 	    pane: {
@@ -688,9 +704,13 @@ $(window).scroll(function (event) {
 	            rotation: 'auto'
 	        },
 	        title: {
-	            text: 'Premium'
+	            ////text: 'Premium'
 	        },
 	        plotBands: [{
+	            from: 0,
+	            to: 10000,
+	            color: '#55BF3B' // green
+	        }/*{
 	            from: 0,
 	            to: 5000,
 	            color: '#55BF3B' // green
@@ -702,35 +722,23 @@ $(window).scroll(function (event) {
 	            from: 7000,
 	            to: 10000,
 	            color: '#DF5353' // red
-	        }]        
+	        }*/]        
 	    },
 	
 	    series: [{
 	        name: 'Premium',
-	        data: [7000],
+	        data: [chart_series_premium4],
 	        tooltip: {
-	            valueSuffix: ''
+	            valuePrefix: 'Rs. '
+	        },
+		    dataLabels: {
+	            enabled: true
 	        }
 	    }]
 	
 	}, 
 	// Add some life
 	function (chart) {});
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -744,686 +752,167 @@ $(window).scroll(function (event) {
 
 
 
-$('#c_amt').on('change', function() {
-  amt_value = $(this).val();
-	   
-	   	var chart = $('#container').highcharts();
-	   var point = chart.series[0].points[0],
-		            newVal;
-					
-					var chart1 = $('#container1').highcharts();
-	   var point1 = chart1.series[0].points[0],
-		            newVal1;
-					
-					var chart2 = $('#container2').highcharts();
-	   var point2 = chart2.series[0].points[0],
-		            newVal2;
-					
-					
-					var chart3 = $('#container3').highcharts();
-	   var point3 = chart3.series[0].points[0],
-		            newVal3;
-					
-					
-					var chart4 = $('#container4').highcharts();
-	   var point4 = chart4.series[0].points[0],
-		            newVal4;
-					
-	   if(amt_value == "1"){
-		        
-		        newVal = point.y - 2000;
-				newVal1 = point1.y - 2000;
-				newVal2 = point2.y - 2000;
-				newVal3 = point3.y - 2000;
-				newVal4 = point4.y - 2000;
-				point.update(newVal);
-				point1.update(newVal1);
-				point2.update(newVal2);
-				point3.update(newVal3);
-				point4.update(newVal4);
-  
-	   }
-	    if(amt_value == "50"){
-			
-		        
-		        newVal = point.y + 2000;
-				
-				newVal1 = point1.y + 2000;
-				newVal2 = point2.y + 2000;
-				newVal3 = point3.y + 2000;
-				newVal4 = point4.y + 2000;
-				
-				point.update(newVal);
-				point1.update(newVal1);
-				point2.update(newVal2);
-				point3.update(newVal3);
-				point4.update(newVal4);
-	   }
-	   
-	   
-    
+
+
+
+
+	
+	
 });
 
 
 
 
 
-$(".com_premium").delegate( "", "click", function( e ) {
-	$(this).removeClass('com_premium');
-	$(".count_shw").show();
-	
-	
-// $("#count_shw").fadeIn(18050);
-	
-    $('#container').highcharts({
-	
-	    chart: {
-	        type: 'gauge',
-	        plotBackgroundColor: null,
-	        plotBackgroundImage: null,
-	        plotBorderWidth: 0,
-	        plotShadow: true
-	    },
-	    
-	    title: {
-	        text: 'Religare Care'
-	    },
-	    
-	    pane: {
-	        startAngle: -150,
-	        endAngle: 150,
-	        background: [{
-	            backgroundColor: {
-	                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-	                stops: [
-	                    [0, '#FFF'],
-	                    [1, '#333']
-	                ]
-	            },
-	            borderWidth: 0,
-	            outerRadius: '109%'
-	        }, {
-	            backgroundColor: {
-	                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-	                stops: [
-	                    [0, '#333'],
-	                    [1, '#FFF']
-	                ]
-	            },
-	            borderWidth: 1,
-	            outerRadius: '107%'
-	        }, {
-	            // default background
-	        }, {
-	            backgroundColor: '#DDD',
-	            borderWidth: 0,
-	            outerRadius: '105%',
-	            innerRadius: '103%'
-	        }]
-	    },
-	       
-	    // the value axis
-	    yAxis: {
-	        min: 0,
-	        max: 10000,
-	        
-	        minorTickInterval: 'auto',
-	        minorTickWidth: 1,
-	        minorTickLength: 10,
-	        minorTickPosition: 'inside',
-	        minorTickColor: '#666',
-	
-	        tickPixelInterval: 50,
-	        tickWidth: 2,
-	        tickPosition: 'inside',
-	        tickLength: 10,
-	        tickColor: '#666',
-	        labels: {
-	            step: 2,
-	            rotation: 'auto'
-	        },
-	        title: {
-	            text: 'Premium'
-	        },
-	        plotBands: [{
-	            from: 0,
-	            to: 5000,
-	            color: '#55BF3B' // green
-	        }, {
-	            from: 5000,
-	            to: 7000,
-	            color: '#DDDF0D' // yellow
-	        }, {
-	            from: 7000,
-	            to: 10000,
-	            color: '#DF5353' // red
-	        }]        
-	    },
-	
-	    series: [{
-	        name: 'Premium',
-	        data: [7800],
-	        tooltip: {
-	            valueSuffix: ''
-	        }
-	    }]
-	
-	}, 
-	// Add some life
-	
 
-	function (chart) {
-		if (!chart.renderer.forExport) {
-		    setInterval(function () {
-		        var point = chart.series[0].points[0],
-		            newVal,
-		            inc = Math.round((Math.random() - 0.5) * 20);
-		        
-		        newVal = point.y + inc;
-		        if (newVal < 0 || newVal > 200) {
-		            newVal = point.y - inc;
-		        }
-		        
-		     //   point.update(newVal);
-		        
-		    }, 3000);
-		}
-	});
-	
-	
-	
-	
-	
-	
-	
-	
-	$('#container1').highcharts({
-	
-	    chart: {
-	        type: 'gauge',
-	        plotBackgroundColor: null,
-	        plotBackgroundImage: null,
-	        plotBorderWidth: 0,
-	        plotShadow: true
-	    },
-	    
-	    title: {
-	        text: 'Smart Health Insurance'
-	    },
-	    
-	    pane: {
-	        startAngle: -150,
-	        endAngle: 150,
-	        background: [{
-	            backgroundColor: {
-	                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-	                stops: [
-	                    [0, '#FFF'],
-	                    [1, '#333']
-	                ]
-	            },
-	            borderWidth: 0,
-	            outerRadius: '109%'
-	        }, {
-	            backgroundColor: {
-	                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-	                stops: [
-	                    [0, '#333'],
-	                    [1, '#FFF']
-	                ]
-	            },
-	            borderWidth: 1,
-	            outerRadius: '107%'
-	        }, {
-	            // default background
-	        }, {
-	            backgroundColor: '#DDD',
-	            borderWidth: 0,
-	            outerRadius: '105%',
-	            innerRadius: '103%'
-	        }]
-	    },
-	       
-	    // the value axis
-	    yAxis: {
-	        min: 0,
-	        max: 10000,
-	        
-	        minorTickInterval: 'auto',
-	        minorTickWidth: 1,
-	        minorTickLength: 10,
-	        minorTickPosition: 'inside',
-	        minorTickColor: '#666',
-	
-	        tickPixelInterval: 50,
-	        tickWidth: 2,
-	        tickPosition: 'inside',
-	        tickLength: 10,
-	        tickColor: '#666',
-	        labels: {
-	            step: 2,
-	            rotation: 'auto'
-	        },
-	        title: {
-	            text: 'Premium'
-	        },
-	        plotBands: [{
-	            from: 0,
-	            to: 5000,
-	            color: '#55BF3B' // green
-	        }, {
-	            from: 5000,
-	            to: 7000,
-	            color: '#DDDF0D' // yellow
-	        }, {
-	            from: 7000,
-	            to: 10000,
-	            color: '#DF5353' // red
-	        }]        
-	    },
-	
-	    series: [{
-	        name: 'Premium',
-	        data: [6000],
-	        tooltip: {
-	            valueSuffix: ''
-	        }
-	    }]
-	
-	}, 
-	// Add some life
-	function (chart) {});
-	
-	
-	$('#container2').highcharts({
-	
-	    chart: {
-	        type: 'gauge',
-	        plotBackgroundColor: null,
-	        plotBackgroundImage: null,
-	        plotBorderWidth: 0,
-	        plotShadow: true
-	    },
-	    
-	    title: {
-	        text: 'Smart Health Insurance'
-	    },
-	    
-	    pane: {
-	        startAngle: -150,
-	        endAngle: 150,
-	        background: [{
-	            backgroundColor: {
-	                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-	                stops: [
-	                    [0, '#FFF'],
-	                    [1, '#333']
-	                ]
-	            },
-	            borderWidth: 0,
-	            outerRadius: '109%'
-	        }, {
-	            backgroundColor: {
-	                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-	                stops: [
-	                    [0, '#333'],
-	                    [1, '#FFF']
-	                ]
-	            },
-	            borderWidth: 1,
-	            outerRadius: '107%'
-	        }, {
-	            // default background
-	        }, {
-	            backgroundColor: '#DDD',
-	            borderWidth: 0,
-	            outerRadius: '105%',
-	            innerRadius: '103%'
-	        }]
-	    },
-	       
-	    // the value axis
-	    yAxis: {
-	        min: 0,
-	        max: 10000,
-	        
-	        minorTickInterval: 'auto',
-	        minorTickWidth: 1,
-	        minorTickLength: 10,
-	        minorTickPosition: 'inside',
-	        minorTickColor: '#666',
-	
-	        tickPixelInterval: 50,
-	        tickWidth: 2,
-	        tickPosition: 'inside',
-	        tickLength: 10,
-	        tickColor: '#666',
-	        labels: {
-	            step: 2,
-	            rotation: 'auto'
-	        },
-	        title: {
-	            text: 'Premium'
-	        },
-	        plotBands: [{
-	            from: 0,
-	            to: 5000,
-	            color: '#55BF3B' // green
-	        }, {
-	            from: 5000,
-	            to: 7000,
-	            color: '#DDDF0D' // yellow
-	        }, {
-	            from: 7000,
-	            to: 10000,
-	            color: '#DF5353' // red
-	        }]        
-	    },
-	
-	    series: [{
-	        name: 'Premium',
-	        data: [6000],
-	        tooltip: {
-	            valueSuffix: ''
-	        }
-	    }]
-	
-	}, 
-	// Add some life
-	function (chart) {});
-	
-	
-	$('#container3').highcharts({
-	
-	    chart: {
-	        type: 'gauge',
-	        plotBackgroundColor: null,
-	        plotBackgroundImage: null,
-	        plotBorderWidth: 0,
-	        plotShadow: true
-	    },
-	    
-	    title: {
-	        text: 'Smart Health Insurance'
-	    },
-	    
-	    pane: {
-	        startAngle: -150,
-	        endAngle: 150,
-	        background: [{
-	            backgroundColor: {
-	                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-	                stops: [
-	                    [0, '#FFF'],
-	                    [1, '#333']
-	                ]
-	            },
-	            borderWidth: 0,
-	            outerRadius: '109%'
-	        }, {
-	            backgroundColor: {
-	                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-	                stops: [
-	                    [0, '#333'],
-	                    [1, '#FFF']
-	                ]
-	            },
-	            borderWidth: 1,
-	            outerRadius: '107%'
-	        }, {
-	            // default background
-	        }, {
-	            backgroundColor: '#DDD',
-	            borderWidth: 0,
-	            outerRadius: '105%',
-	            innerRadius: '103%'
-	        }]
-	    },
-	       
-	    // the value axis
-	    yAxis: {
-	        min: 0,
-	        max: 10000,
-	        
-	        minorTickInterval: 'auto',
-	        minorTickWidth: 1,
-	        minorTickLength: 10,
-	        minorTickPosition: 'inside',
-	        minorTickColor: '#666',
-	
-	        tickPixelInterval: 50,
-	        tickWidth: 2,
-	        tickPosition: 'inside',
-	        tickLength: 10,
-	        tickColor: '#666',
-	        labels: {
-	            step: 2,
-	            rotation: 'auto'
-	        },
-	        title: {
-	            text: 'Premium'
-	        },
-	        plotBands: [{
-	            from: 0,
-	            to: 5000,
-	            color: '#55BF3B' // green
-	        }, {
-	            from: 5000,
-	            to: 7000,
-	            color: '#DDDF0D' // yellow
-	        }, {
-	            from: 7000,
-	            to: 10000,
-	            color: '#DF5353' // red
-	        }]        
-	    },
-	
-	    series: [{
-	        name: 'Premium',
-	        data: [6000],
-	        tooltip: {
-	            valueSuffix: ''
-	        }
-	    }]
-	
-	}, 
-	// Add some life
-	function (chart) {});
-	
-	
-	
-	$('#container4').highcharts({
-	
-	    chart: {
-	        type: 'gauge',
-	        plotBackgroundColor: null,
-	        plotBackgroundImage: null,
-	        plotBorderWidth: 0,
-	        plotShadow: true
-	    },
-	    
-	    title: {
-	        text: 'Smart Health Insurance'
-	    },
-	    
-	    pane: {
-	        startAngle: -150,
-	        endAngle: 150,
-	        background: [{
-	            backgroundColor: {
-	                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-	                stops: [
-	                    [0, '#FFF'],
-	                    [1, '#333']
-	                ]
-	            },
-	            borderWidth: 0,
-	            outerRadius: '109%'
-	        }, {
-	            backgroundColor: {
-	                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-	                stops: [
-	                    [0, '#333'],
-	                    [1, '#FFF']
-	                ]
-	            },
-	            borderWidth: 1,
-	            outerRadius: '107%'
-	        }, {
-	            // default background
-	        }, {
-	            backgroundColor: '#DDD',
-	            borderWidth: 0,
-	            outerRadius: '105%',
-	            innerRadius: '103%'
-	        }]
-	    },
-	       
-	    // the value axis
-	    yAxis: {
-	        min: 0,
-	        max: 10000,
-	        
-	        minorTickInterval: 'auto',
-	        minorTickWidth: 1,
-	        minorTickLength: 10,
-	        minorTickPosition: 'inside',
-	        minorTickColor: '#666',
-	
-	        tickPixelInterval: 50,
-	        tickWidth: 2,
-	        tickPosition: 'inside',
-	        tickLength: 10,
-	        tickColor: '#666',
-	        labels: {
-	            step: 2,
-	            rotation: 'auto'
-	        },
-	        title: {
-	            text: 'Premium'
-	        },
-	        plotBands: [{
-	            from: 0,
-	            to: 5000,
-	            color: '#55BF3B' // green
-	        }, {
-	            from: 5000,
-	            to: 7000,
-	            color: '#DDDF0D' // yellow
-	        }, {
-	            from: 7000,
-	            to: 10000,
-	            color: '#DF5353' // red
-	        }]        
-	    },
-	
-	    series: [{
-	        name: 'Premium',
-	        data: [6000],
-	        tooltip: {
-	            valueSuffix: ''
-	        }
-	    }]
-	
-	}, 
-	// Add some life
-	function (chart) {});
-	
-	
-	});
-	
-	
-});
 
-function calculateEMI1(){
-			//	alert('s');
+function DropDown(el) {
+	this.dd = el;
+	this.placeholder = this.dd.children('span');
+	this.opts = this.dd.find('ul.dropdown > li');
+	this.val = '';
+	this.index = -1;
+	this.initEvents();
+}
+DropDown.prototype = {
+	initEvents : function() {
+		var obj = this;
+
+		obj.dd.on('click', function(event){
+			$(this).toggleClass('active');
+			return false;
+		});
+
+		obj.opts.on('click',function(){
+			var opt = $(this);
+			obj.val = opt.text();
+			$(this).parent().parent().find('span').text(opt.text()).data('textval',opt.text()).data('dataval',opt.text());
+
+			var sum_assured = $('#peer_comparision_sum_assured').data('dataval');
+			var age = $('#peer_comparision_age').data('dataval');				
+
+		//	console.log(age, $('#peer_comparision_age').data('dataval'), sum_assured, $('#peer_comparision_sum_assured').data('dataval'));
+			var formData = {policy_slug:policy_slug, age:age, sum_assured:sum_assured,peerComparisionVariants:peerComparisionVariants, variant_type:variant_type};
+
+		//	console.log(formData);
 			
+			var premium0 = 0; var premium1 = 0; var premium2 = 0; var premium3 = 0; var premium4 = 0;
+
+			var chart = $('#container').highcharts();
+			var point = chart.series[0].points[0];
+					
+			var chart1 = $('#container1').highcharts();
+			var point1 = chart1.series[0].points[0];
+					
+			var chart2 = $('#container2').highcharts();
+			var point2 = chart2.series[0].points[0];
+					
+			var chart3 = $('#container3').highcharts();
+			var point3 = chart3.series[0].points[0];
+					
+			var chart4 = $('#container4').highcharts();
+			var point4 = chart4.series[0].points[0];
+
+			
+			$.ajax({
+					url:CI_ROOT+'common/getPeerComparisionView',
+					type: "post",
+					data: formData,
+					success:function(result)
+					{
+						console.log(result);
+						results = $.parseJSON(result);
+						var maxY = parseInt(results.max);
+						if(results.premium[0] != '')
+						{
+							chart.yAxis[0].setExtremes(0,maxY,true);
+							chart.yAxis[0].addPlotBand({
+				                from: 0,
+				                to: maxY,
+				                color: '#55BF3B',
+				            });
+							point.update(parseInt(results.premium[0]));
+						}
+						if(results.premium[1] != '')
+						{
+							chart1.yAxis[0].setExtremes(0,maxY);
+							chart1.yAxis[0].addPlotBand({
+				                from: 0,
+				                to: maxY,
+				                color: '#55BF3B',
+				            });
+							point1.update(parseInt(results.premium[1]));
+						}
+						if(results.premium[2] != '')
+						{
+							chart2.yAxis[0].setExtremes(0,maxY);
+							chart2.yAxis[0].addPlotBand({
+				                from: 0,
+				                to: maxY,
+				                color: '#55BF3B',
+				            });
+							point2.update(parseInt(results.premium[2]));
+						}
+						if(results.premium[3] != '')
+						{
+							chart3.yAxis[0].setExtremes(0,maxY);
+							chart3.yAxis[0].addPlotBand({
+				                from: 0,
+				                to: maxY,
+				                color: '#55BF3B',
+				            });
+							point3.update(parseInt(results.premium[3]));
+						}
+						if(results.premium[4] != '')
+						{
+							chart4.yAxis[0].setExtremes(0,maxY);
+							chart4.yAxis[0].addPlotBand({
+				                from: 0,
+				                to: maxY,
+				                color: '#55BF3B',
+				            });
+							point4.update(parseInt(results.premium[4]));
+						}
+						/*
+						if(results.premium[0] != '')
+							point1.update(parseInt(results.premium[1]));
+						if(results.premium[2] != '')
+							point2.update(parseInt(results.premium[2]));
+						if(results.premium[3] != '')
+							point3.update(parseInt(results.premium[3]));
+						if(results.premium[4] != '')
+							point4.update(parseInt(results.premium[4]));
+						*/
+			    	}
+			});	
+			
+			//amt_value = $(this).val();
+
+			/*
+
+    newVal = point.y - premium0;
+	newVal1 = point1.y - premium1;
+	newVal2 = point2.y - premium2;
+	newVal3 = point3.y - premium3;
+	newVal4 = point4.y - premium4;
+	
+	point.update(premium0);
+	point1.update(premium1);
+	point2.update(premium2);
+	point3.update(premium3);
+	point4.update(premium4);*/
+			obj.index = opt.index();
+			obj.placeholder.text(obj.val);
+		});
+	},
+	getValue : function() {
+		return this.val;
+	},
+	getIndex : function() {
+		return this.index;
+	}
 }
 
-$(document).ready(function(){
-	
-$("#la_value").keyup(function(){
-  //calculateEMI();
-});
 
-			
-			function calculateEMI(){
-			
-				var loanAmount = $("#la_value").val();
-				var numberOfMonths = $("#nm_value").val();
-				var rateOfInterest = $("#roi_value").val();
-				var monthlyInterestRatio = (rateOfInterest/100)/12;
-				
-				var top = Math.pow((1+monthlyInterestRatio),numberOfMonths);
-				var bottom = top -1;
-				var sp = top / bottom;
-				var emi = ((loanAmount * monthlyInterestRatio) * sp);
-				var full = numberOfMonths * emi;
-				var interest = full - loanAmount;
-				var int_pge =  (interest / full) * 100;
-				$("#tbl_int_pge").html(int_pge.toFixed(2)+" %");
-				//$("#tbl_loan_pge").html((100-int_pge.toFixed(2))+" %");
-				
-				var emi_str = emi.toFixed(2).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-				var loanAmount_str = loanAmount.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-				var full_str = full.toFixed(2).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-				var int_str = interest.toFixed(2).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-				
-				$("#emi").html(emi);
-				$("#tbl_emi").html(emi_str);
-				$("#tbl_la").html(loanAmount_str);
-				$("#tbl_nm").html(numberOfMonths);
-				$("#tbl_roi").html(rateOfInterest);
-				$("#tbl_full").html(full_str);
-				$("#tbl_int").html(int_str);
-				var detailDesc = "<thead><tr class='success'><th>Payment No.</th><th>Begining Balance</th><th>EMI</th><th>Principal</th><th>Interest</th><th>Ending Balance</th></thead><tbody>";
-				var bb=parseInt(loanAmount);
-				var int_dd =0;var pre_dd=0;var end_dd=0;
-				for (var j=1;j<=numberOfMonths;j++){
-					int_dd = bb * ((rateOfInterest/100)/12);
-					pre_dd = emi.toFixed(2) - int_dd.toFixed(2);
-					end_dd = bb - pre_dd.toFixed(2);
-					detailDesc += "<tr><td>"+j+"</td><td>"+bb.toFixed(2)+"</td><td>"+emi.toFixed(2)+"</td><td>"+pre_dd.toFixed(2)+"</td><td>"+int_dd.toFixed(2)+"</td><td>"+end_dd.toFixed(2)+"</td></tr>";
-					bb = bb - pre_dd.toFixed(2);
-				}
-					detailDesc += "</tbody>";
-				$("#illustrate").html(detailDesc);
-				 $('#container').highcharts({
-				 
-						chart: {
-							plotBackgroundColor: null,
-							plotBorderWidth: null,
-							plotShadow: false
-						},
-						title: {
-							text: 'EMI Calculator'
-						},
-						tooltip: {
-							//pointFormat: '{series.name}: <b>{point.value}%</b>'
-						},
-						plotOptions: {
-							pie: {
-								allowPointSelect: true,
-								cursor: 'pointer',
-								dataLabels: {
-								//	enabled: true,
-									color: '#000000',
-									connectorColor: '#000000',
-									format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-								}
-							}
-						},
-						series: [{
-							type: 'pie',
-							name: 'Amount',
-							data: [
-								['Loan',   eval(loanAmount)],
-								['Interest',       eval(interest.toFixed(2))]
-							]
-						}]
-					});			
-			
-			}
-		//	calculateEMI();
 
-		});
+

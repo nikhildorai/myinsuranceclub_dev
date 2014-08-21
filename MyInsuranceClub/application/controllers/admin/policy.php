@@ -201,6 +201,7 @@ class Policy extends Admin_Controller {
 				$_POST['policyModel']['policy_wordings_images'] = $policyModel['policy_wordings_images'];
 				$_POST['policyModel']['brochure_images'] = $policyModel['brochure_images'];
 			}
+			
 			if (isset($_POST['policyModel']['product_id']) && !empty($_POST['policyModel']['product_id']))
 				$_POST['policyModel']['product_id'] = implode(',', $_POST['policyModel']['product_id']);
 				
@@ -216,7 +217,16 @@ class Policy extends Admin_Controller {
 			if (isset($_POST['policyModel']['peer_comparision_coverage_amounts']) && !empty($_POST['policyModel']['peer_comparision_coverage_amounts']))
 				$_POST['policyModel']['peer_comparision_coverage_amounts'] = implode(',', $_POST['policyModel']['peer_comparision_coverage_amounts']);
 				
+			if (!empty($_POST['policyModel']['policy_composition_type']) && $_POST['policyModel']['policy_composition_type'] == 'individual')
+				$_POST['policyModel']['policy_composition'] = '1A';
+			else
+				$_POST['policyModel']['policy_composition'] = implode(',', $_POST['policyModel']['policy_composition']);
+			
+			if (isset($_POST['policyModel']['policy_coverage_amounts']) && !empty($_POST['policyModel']['policy_coverage_amounts']))
+				$_POST['policyModel']['policy_coverage_amounts'] = implode(',', $_POST['policyModel']['policy_coverage_amounts']);
+			
 			$_POST['policyModel']['peer_comparision_variants'] = (isset($_POST['policyModel']['peer_comparision_variants']) && !empty($_POST['policyModel']['peer_comparision_variants'])) ? implode(',', $_POST['policyModel']['peer_comparision_variants']) : '';
+			
 			$newPeerComparision = explode(',', $_POST['policyModel']['peer_comparision_variants']);
 	
 			//	set default values for policy
@@ -371,6 +381,28 @@ class Policy extends Admin_Controller {
 			$policyModel = $_POST['policyModel'];
 		}		
 		
+		$variantType = '';
+		if (!empty($policyModel['product_id']) && empty($policyModel['sub_product_id']))
+		{
+			$where = array();
+			$where[0]['field'] = 'product_id';
+			$where[0]['value'] = (int)$policyModel['product_id'];
+			$where[0]['compare'] = 'equal';
+			$productOptions = $this->util->getTableData($modelName='Product_model', $type="single", $where, $fields = array());
+			$variantType = $productOptions['slug'];
+		}
+		else if (!empty($policyModel['product_id']) && !empty($policyModel['sub_product_id']))
+		{
+			$where = array();
+			$where[0]['field'] = 'sub_product_id';
+			$where[0]['value'] = (int)$policyModel['sub_product_id'];
+			$where[0]['compare'] = 'equal';
+			$subProductOptions = $this->util->getTableData($modelName='Sub_product_model', $type="single", $where, $fields = array());
+			$variantType = $subProductOptions['slug'];
+		}									
+		$variantAction = Util::getControllerForPolicyVariantFeatures($variantType);
+		$dbPrefix = Util::getdbPrefix();
+		$param['premium_table'] = (!empty($variantAction)) ? $dbPrefix.$variantAction['premium_table'] : $dbPrefix.'annual_premium_health';
 		$param['product_id'] = (isset($policyModel['product_id']) && !empty($policyModel['product_id'])) ? $policyModel['product_id'] : '';
 		$param['sub_product_id'] = (isset($policyModel['sub_product_id']) && !empty($policyModel['sub_product_id'])) ? $policyModel['sub_product_id'] : ''; 
 		$param['city'] = 590;
@@ -378,7 +410,9 @@ class Policy extends Admin_Controller {
 		$param['age'] = (isset($policyModel['peer_comparision_age']) && !empty($policyModel['peer_comparision_age'])) ? $policyModel['peer_comparision_age'] : '25';
 		$param['members'] = !empty($policyModel['peer_comparision_type']) ? ($policyModel['peer_comparision_type'] == 'individual') ? "1A" : '2A' : '1A';
 		$param['sum_assured'] = (isset($policyModel['peer_comparision_coverage_amounts']) && !empty($policyModel['peer_comparision_coverage_amounts'])) ? $policyModel['peer_comparision_coverage_amounts'] : '500000';
+		$param['variant_id'] = ''; //$policyModel['peer_comparision_variants'];
 		$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails($param);		
+		
 		$this->data['policyModel'] = $policyModel;
 		$this->data['modelType'] = $modelType;
 		$this->data['variantModel'] = $variantModel;
@@ -954,15 +988,32 @@ class Policy extends Admin_Controller {
 			$policy_id = $_POST['policy_id'];
 			$peerValue = $_POST['peerValue'];
 			$modelName = $_POST['modelName'];
+			
+			$variantType = '';
+			
+			if (!empty($_POST['product_id']) && empty($_POST['sub_product_id']))
+			{
+				$variantType = $_POST['prodSlug'];
+			}
+			else if (!empty($_POST['product_id']) && !empty($_POST['sub_product_id']))
+			{
+				$variantType = $_POST['subProdSlug'];
+			}			
+									
+			$variantAction = Util::getControllerForPolicyVariantFeatures($variantType);
+			$dbPrefix = Util::getdbPrefix();
+			
+			$param['premium_table'] = (!empty($variantAction)) ? $dbPrefix.$variantAction['premium_table'] : $dbPrefix.'annual_premium_health';
 			$param['product_id'] = (isset($_POST['product_id']) && !empty($_POST['product_id'])) ? implode(',', $_POST['product_id']) : '' ;
 			$param['sub_product_id'] = (isset($_POST['sub_product_id']) && !empty($_POST['sub_product_id'])) ? implode(',', $_POST['sub_product_id']) : '' ;
 			$param['city'] = 590;
 			$param['gender'] = 'male';
 			$param['age'] = (isset($_POST['model_peer_comparision_age']) && !empty($_POST['model_peer_comparision_age'])) ? implode(',', $_POST['model_peer_comparision_age']) : '25';
-			$param['members'] = !empty($_POST['peer_comparision_type']) ? ($_POST['peer_comparision_type'] == 'individual') ? "1A" : '2A' : '1A';
-			$param['sum_assured'] = (isset($_POST['model_coverage_amount']) && !empty($_POST['model_coverage_amount'])) ? implode(',', $_POST['model_coverage_amount']) : '500000';
+			$param['members'] = !empty($_POST['policy_composition_type']) ? ($_POST['policy_composition_type'] == 'individual') ? "1A" : '2A' : '1A';
+			$param['sum_assured'] = (isset($_POST['peer_comparision_coverage_amounts']) && !empty($_POST['peer_comparision_coverage_amounts'])) ? implode(',', $_POST['peer_comparision_coverage_amounts']) : '500000';
+			$param['variant_id'] = ''; 
+	
 			$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails($param);
-			
 			echo Util::peerComparisionTableViewBackend($allVariants, $policy_id, $peerValue, $modelName);
 		}
 	}

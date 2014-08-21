@@ -148,6 +148,100 @@ class Common extends Common_Controller {
 		}
 
 	}
+	
+	
+	public function getPeerComparisionView()
+	{
+		$data['premium'] = $arrParams = array();
+		if (!empty($_POST['policy_slug']) && !empty($_POST['variant_type']))
+		{
+			$this->load->model('policy_variants_master_model');
+			$policySlug = $_POST['policy_slug'];
+			$variantType = $_POST['variant_type'];
+		
+			$allVariantTypes = Util::getControllerForPolicyVariantFeatures($variantType);
+			$cacheFileName[] = 'peer_comparision';
+			foreach ($_POST as $k1=>$v1)
+			{
+				$cacheFileName[] = $v1;
+			}
+			$cacheFileName = implode('_', $cacheFileName);
+			$cacheResult = Util::getCachedObject($cacheFileName);
+
+			//	check if cache file exist
+			if(!empty($cacheResult))
+			{
+				// get result set from cache
+				$data = $cacheResult;
+			}
+			else
+			{
+				//get resultset from DB and save in cache
+				$db = &get_instance();
+				$dbPrefix = Util::getdbPrefix();
+				$where = array('table_name'=>$dbPrefix.'policy_master', 'where_field_name'=>'slug', 'where_field_value'=>$policySlug);
+				$details = Util::callStoreProcedure('sp_getSingleRecordFromTable', $where);
+				if (!empty($details))
+				{
+					$details = reset($details);
+	
+					//	peer comparision data
+					
+					$dbPrefix = Util::getdbPrefix();
+									
+					$param['premium_table'] = (!empty($allVariantTypes['premium_table'])) ? $dbPrefix.$allVariantTypes['premium_table'] : $dbPrefix.'annual_premium_health';
+					$param['product_id'] = (isset($details['product_id']) && !empty($details['product_id'])) ? $details['product_id'] : '' ;
+					$param['sub_product_id'] = (isset($details['sub_product_id']) && !empty($details['sub_product_id'])) ? $details['sub_product_id'] : '' ;
+					$param['city'] = 590;
+					$param['gender'] = 'male';
+					$param['age'] = (isset($_POST['age']) && !empty($_POST['age'])) ? $_POST['age'] : 25;
+					$param['members'] = !empty($details['policy_composition_type']) ? ($details['policy_composition_type'] == 'individual') ? "1A" : '2A' : '1A';
+					$param['sum_assured'] = (isset($_POST['sum_assured']) && !empty($_POST['sum_assured'])) ? $_POST['sum_assured'] : 500000;
+					$param['variant_id'] = $_POST['peerComparisionVariants']; 
+					
+					$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails($param);
+					if (!empty($allVariants))
+					{
+						$peerVariants = explode(',', $details['peer_comparision_variants']);
+						$i = 1;
+						foreach ($allVariants as $k2=>$v2)
+						{
+							if (in_array($k2, $peerVariants))
+							{
+								$data['premium'][$i] = $v2['final_premium'];
+								$i++;
+							}
+							else 
+							{
+								$data['premium'][0] = $v2['final_premium'];
+							}
+						}
+					}
+				}
+//				Util::saveResultToCache($cacheFileName,$data);
+			}
+		}
+		if (!empty($data['premium']))
+			ksort($data['premium']);
+		$data['max'] = (max($data['premium'])) > 10000 ? max($data['premium']) : 10000;
+
+		//	color band
+		$range = round($data['max']/3,0);
+		$rangeVal[0]['from'] = 0;
+		$rangeVal[0]['to'] = $range;
+		$rangeVal[0]['color'] = '#55BF3B';
+		$rangeVal[1]['to'] = $range*2;
+		$rangeVal[1]['from'] = $range;
+		$rangeVal[1]['color'] = '#DDDF0D';
+		$rangeVal[2]['from'] = $range*2; 
+		$rangeVal[2]['to'] = $data['max']; 
+		$rangeVal[2]['color'] = '#DF5353';
+			
+		echo json_encode($data);
+		
+		
+	}
+	
 }
 
 /* End of file common.php */

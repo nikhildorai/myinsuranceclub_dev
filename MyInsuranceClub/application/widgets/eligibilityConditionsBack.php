@@ -11,6 +11,7 @@ class EligibilityConditionsBack extends Widget{
     {
         $model = isset($ext['model']) ? $ext['model'] : array();
         $modelType = isset($ext['modelType']) ? $ext['modelType'] : '';
+    	$policyModel = isset($ext['policyModel']) ? $ext['policyModel'] : array();
 ?>    	
 		
                
@@ -32,47 +33,22 @@ class EligibilityConditionsBack extends Widget{
 						$values = isset($arrValues['value']) ? $arrValues['value'] : array(); 
 					?>
 						<div class="row">
-							<div class="col-sm-3">
-								<div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="model[coverage_amount][value][]" value="0.5 lakh" class="model_coverage_amount" <?php echo (in_array('0.5 lakh', $values)) ? 'checked' : ''?>> 0.5 Lakhs
-                                    </label>
-	                            </div>
-	                        </div> 
-							<div class="col-sm-3">
-								<div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="model[coverage_amount][value][]" value="0.75 lakh" class="model_coverage_amount"  <?php echo (in_array('0.75 lakh', $values)) ? 'checked' : ''?>> 0.75 Lakh
-                                    </label>
-	                            </div>
-	                        </div> 
-					<?php 
-							for ($i = 1; $i <= 10; $i += 0.25) 
-							{	
-								$checked = (in_array($i.' lakhs', $values)) ? 'checked' : '';
-								?>
-							<div class="col-sm-3">
-								<div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="model[coverage_amount][value][]" class="model_coverage_amount"  <?php echo $checked;?> value="<?php echo $i.' lakhs';?>"> <?php echo $i?> Lakhs
-                                    </label>
-	                            </div>
-	                        </div> 
-					<?php 	}
-							for ($i = 15; $i <= 100; $i += 5) 
-							{	
-								$checked = (in_array($i.' lakhs', $values)) ? 'checked' : '';
-								if ($i == 100)
-									$checked = (in_array('1 crore', $values)) ? 'checked' : '';
-								?>
-							<div class="col-sm-3">
-								<div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="model[coverage_amount][value][]" class="model_coverage_amount"  <?php echo $checked;?> value="<?php echo ($i != 100) ? $i.' lakhs':'1 crore'; ?>"> <?php echo ($i != 100) ? $i.' Lakhs':'1 Crore'; ?>
-                                    </label>
-	                            </div>
-	                        </div> 
-					<?php 	}	?>
+						<?php 
+							$arrRange = !empty($policyModel['policy_coverage_amounts']) ? explode(',', $policyModel['policy_coverage_amounts']) : array();
+							$peer_comparision_coverage_amounts = !empty($policyModel['peer_comparision_coverage_amounts']) ? explode(',', $policyModel['peer_comparision_coverage_amounts']) : array();
+							if (!empty($arrRange))
+							{
+								foreach ($arrRange as $k9=>$v9)
+								{	
+									$checked = (in_array($v9, $values)) ? 'checked' : '';
+									?>
+									<div class="col-sm-3">
+										<label class="ui-checkbox">
+											<input name="model[coverage_amount][value][]" type="checkbox" value="<?php echo $v9;?>" class="model_coverage_amount" <?php echo $checked;?> > <span><?php echo Util::moneyFormatIndia($v9);?></span>
+										</label>
+			                        </div> 
+						<?php 	}
+							}	?>
 						</div>
 						<div class="divider"></div>
 						<div class="row">

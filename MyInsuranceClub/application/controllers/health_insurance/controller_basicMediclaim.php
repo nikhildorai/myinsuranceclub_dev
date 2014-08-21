@@ -491,12 +491,14 @@ class controller_basicMediclaim extends Customer_Controller {
 		{
         	$this->load->plugin('widget_pi');
         	$this->load->library('disquslib');
+        	$this->load->model('policy_variants_master_model');
 			$data = array();
 			//	get policy
 			//	all details with variant, variant features and riders
 			$companyType = 'general-insurance-companies';
-			$variantType = 'health-insurance';
+			$variantType = 'health-insurance';			
 			$data = Util::getPolicyVariantsFeaturesRidersDetails($policySlug, $variantType, $companyType);
+			$data['variantType'] = $variantType;
 //echo '<pre>';print_r($data);die;			
 			$this->template->set_template('frontend');
 			$this->template->write_view('content', 'health_insurance/policyView', $data, TRUE);
@@ -507,6 +509,8 @@ class controller_basicMediclaim extends Customer_Controller {
 			redirect('generalInsurance/companies/');
 		}
 	}
+	
+	
 	
 }
 /* End of basicMediclaim controller. */

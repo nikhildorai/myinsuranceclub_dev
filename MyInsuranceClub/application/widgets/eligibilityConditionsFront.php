@@ -33,8 +33,8 @@ class EligibilityConditionsFront extends Widget{
 							$arrValues = array_key_exists( 'coverage_amount',$model) ? unserialize($model['coverage_amount']) : $default;
 							$arrValues = Util::array_overlay($default, $arrValues);		
 						?>
-						<td align="center"><?php echo reset($arrValues['value']);?></td>
-						<td align="center"><?php echo end($arrValues['value']);?></td>
+						<td align="center"><?php echo Util::moneyFormatIndia(reset($arrValues['value']));?></td>
+						<td align="center"><?php echo Util::moneyFormatIndia(end($arrValues['value']));?></td>
 					</tr>
 					<tr>
 						<td>Policy Term (in years)</td>

@@ -108,6 +108,7 @@ class Policy_variants_master_model EXTENDS Admin_Model{
 				}
 			}		
 		}
+//var_dump($arrParams, $result, $return);die;		
 		return $return;
 	}
 }

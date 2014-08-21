@@ -76,11 +76,27 @@
 
 										<tr>
 											<td>Product Type</td>
-											<td class="value"><?php echo $policyDetails['policy']['sub_product']['sub_product_name'];?></td>
+											<td class="value">
+												<?php 
+												$product = array();
+												foreach ($policyDetails['policy']['product'] as $k2=>$v2)
+												{
+													$product[] = $v2['product_name'];
+												}
+												echo implode(',', $product);?>
+											</td>
 										</tr>
 										<tr>
 											<td>Sub Product Type:</td>
-											<td class="value"><?php echo $policyDetails['policy']['sub_product']['sub_product_name'];?></td>
+											<td class="value">
+												<?php 
+												$subProduct = array();
+												foreach ($policyDetails['policy']['sub_product'] as $k2=>$v2)
+												{
+													$subProduct[] = $v2['sub_product_name'];
+												}
+												echo implode(',', $subProduct);?>
+											</td>
 										</tr>
 
 										<tr>
@@ -175,8 +191,7 @@
 					<div class="compo">
 						<h2 class="compo-title">2 Adults</h2>
 						<p class="compo-desc">
-							<img src="<?php echo base_url();?>assets/images/icons/person.png"
-								border="0" class="compo-img">
+							<img src="<?php echo base_url();?>assets/images/icons/person.png" border="0" class="compo-img">
 						</p>
 
 					</div>
@@ -191,11 +206,6 @@
 
 				</div>
 
-				<div class="col-md-3 ">
-
-					<div class="compo"></div>
-
-				</div>
 
 				<div class="col-md-3 ">
 
@@ -203,6 +213,12 @@
 
 				</div>
 
+
+				<div class="col-md-3 ">
+
+					<div class="compo"></div>
+
+				</div>
 
 			</div>
 
@@ -881,6 +897,29 @@
 												<td>Claim Loading</td>
 												<td><?php echo array_key_exists( 'claim_loading',$vFeatures) ? $vFeatures['claim_loading'] : '';?></td>
 											</tr>
+											
+											<tr>
+												<td>Free look period</td>
+												<td><?php echo array_key_exists( 'free_look_period',$vFeatures) ? $vFeatures['free_look_period'].' days from the date of receipt of the policy document' : '';?></td>
+											</tr>
+											
+											<tr>
+												<td>Grace period</td>
+												<td><?php echo array_key_exists( 'grace_period',$vFeatures) ? $vFeatures['grace_period'].' days from date of renewal ' : '';?></td>
+											</tr>
+											
+											
+											<tr>
+												<td>Dependent Parents</td>
+												<td><?php echo (!empty($vFeatures['dependent_parents']) && $vFeatures['dependent_parents'] == 'yes') ? 'Covered' : 'Not Covered';?></td>
+											</tr>
+											
+											
+											<tr>
+												<td>Pre-existing diseases</td>
+												<td><?php echo array_key_exists( 'preexisting_diseases',$vFeatures) ? ' Covered after '.$vFeatures['preexisting_diseases'].' years' : '';?></td>
+											</tr>
+											
 										</tbody>
 									</table>
 	
@@ -977,10 +1016,14 @@
 		
 			<div class="col-sm-12">
 				<h2 class="lined-heading">
-					<span>Peer Comparison</span>
+					<span>Annual Premium - Peer Comparison</span>
 				</h2>
 			</div>
-			<?php echo widget::run('peerComparisionFront', array('companyDetails'=>$companyDetails, 'policyDetails'=>$policyDetails));?>
+			
+			<?php
+			echo widget::run(	'peerComparisionFront', array(	'company'=>$company, 'policyDetails'=>$policyDetails['policy'], 
+																'peerComparisionResult'=>$peerComparisionResult,'policyVariants'=> $variantNames,
+																'type'=>'mediclaim', 'variantType'=>$variantType));?>
 			
 			
 			<div class="row">
@@ -1723,112 +1766,3 @@ var ratingType = "policy";
 
 
 
-<script type="text/javascript">
-			
-			function DropDown(el) {
-				this.dd = el;
-				this.placeholder = this.dd.children('span');
-				this.opts = this.dd.find('ul.dropdown > li');
-				this.val = '';
-				this.index = -1;
-				this.initEvents();
-			}
-			DropDown.prototype = {
-				initEvents : function() {
-					var obj = this;
-
-					obj.dd.on('click', function(event){
-						$(this).toggleClass('active');
-						return false;
-					});
-
-					obj.opts.on('click',function(){
-						var opt = $(this);
-						obj.val = opt.text();
-						
-						
-						
-						
-						
-						//amt_value = $(this).val();
-	   
-	   	var chart = $('#container').highcharts();
-	   var point = chart.series[0].points[0],
-		            newVal;
-					
-					var chart1 = $('#container1').highcharts();
-	   var point1 = chart1.series[0].points[0],
-		            newVal1;
-					
-					var chart2 = $('#container2').highcharts();
-	   var point2 = chart2.series[0].points[0],
-		            newVal2;
-					
-					
-					var chart3 = $('#container3').highcharts();
-	   var point3 = chart3.series[0].points[0],
-		            newVal3;
-					
-					
-					var chart4 = $('#container4').highcharts();
-	   var point4 = chart4.series[0].points[0],
-		            newVal4;
-					
-	   if(obj.val == "1 Crore"){
-		        
-		        newVal = point.y - 2000;
-				newVal1 = point1.y - 2000;
-				newVal2 = point2.y - 2000;
-				newVal3 = point3.y - 2000;
-				newVal4 = point4.y - 2000;
-				point.update(newVal);
-				point1.update(newVal1);
-				point2.update(newVal2);
-				point3.update(newVal3);
-				point4.update(newVal4);
-  
-	   }
-	    if(obj.val == "50 Lakhs"){
-			
-		        
-		        newVal = point.y + 2000;
-				
-				newVal1 = point1.y + 2000;
-				newVal2 = point2.y + 2000;
-				newVal3 = point3.y + 2000;
-				newVal4 = point4.y + 2000;
-				
-				point.update(newVal);
-				point1.update(newVal1);
-				point2.update(newVal2);
-				point3.update(newVal3);
-				point4.update(newVal4);
-	   }
-						
-						
-						
-						
-						obj.index = opt.index();
-						obj.placeholder.text(obj.val);
-					});
-				},
-				getValue : function() {
-					return this.val;
-				},
-				getIndex : function() {
-					return this.index;
-				}
-			}
-
-			$(function() {
-
-				var dd = new DropDown( $('#dd') );
-var dd = new DropDown( $('#dd1') );
-				$(document).click(function() {
-					// all dropdowns
-					$('.wrapper-dropdown-1').removeClass('active');
-				});
-
-			});
-			
-		</script>

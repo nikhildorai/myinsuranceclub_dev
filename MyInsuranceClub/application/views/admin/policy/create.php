@@ -566,7 +566,144 @@ $policy_id = (isset($policyModel['policy_id']) && !empty($policyModel['policy_id
 					            </section>
 					        </div>
 					    </div>
-					     					    
+					     	
+					    
+					    
+
+			        	<div class="row">
+					        <div class="col-md-12">
+					            <section class="panel panel-default">
+					                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Who all can be covered</strong></div>
+									<div class="panel-body">    
+						                <div class="col-sm-12">    
+											
+							                <div class="form-group">
+							                    <label for="" class="col-sm-3">Composition</label>
+							                    <div class="col-sm-9">
+							                    <?php 				 
+														$selected = !empty($policyModel['policy_composition_type']) ? $policyModel['policy_composition_type'] : 'individual';
+														$options = array('individual'=>'Individual', 'family floater'=>'Family Floater');
+														foreach ($options as $k1=>$v1)
+														{
+															$op = array(
+																'class'			=>	'policy_composition_type',
+															    'name'        	=> 'policyModel[policy_composition_type]',
+															    'value'       	=> $k1,
+															    'checked'     	=> ($selected == $k1) ? TRUE : FALSE,
+															    'style'       	=> 'margin:10px',
+															    );
+															echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+														}
+													?>
+							                    </div>
+							                </div>
+							                 
+							                <div class="form-group"id="familyCompositionDiv" style="display:<?php echo ($selected == 'individual') ? 'none' : 'block';?>;">
+							                
+								                <div class="form-group">
+								                </div>
+								                <div class="form-group">
+								                </div>
+												
+							                    <label for="" class="col-sm-3">Member Split</label>
+							                    <div class="col-sm-9">
+							                    			
+															
+													<div class="row">
+										                <div class="form-group row col-sm-6" style="margin-bottom: 5px;" >
+										                    <label for="Company Type" class="col-sm-3">Adults</label>
+										                    <div class="col-sm-9">
+																<span class="ui-select "> 
+																	<?php 				
+																	$policy_composition_type = !empty($policyModel['policy_composition']) ? explode(',', $policyModel['policy_composition']) : array();
+																	$options = array(	'1A'=>'1 Adults',	'2A'=>'2 Adults', 	'3A'=>'3 Adults', 	'3A'=>'3 Adults', 	'4A'=>'4 Adults',
+																						'5A'=>'5 Adults', 	'6A'=>'6 Adults', 	'7A'=>'7 Adults', 	'8A'=>'8 Adults', 	'9A'=>'9 Adults',	
+																						'10A'=>'10 Adults', '11A'=>'11 Adults', '12A'=>'12 Adults', '13A'=>'13 Adults', '14A'=>'14 Adults', 
+																						'15A'=>'15 Adults');
+																	
+																	echo form_dropdown('policyModel[policy_composition][]', $options, reset($policy_composition_type), 'style="margin-top: 0px;"');
+																	?>	
+																</span> 
+										                    </div>
+										                </div>
+															
+										                <div class="form-group row col-sm-6" style="margin-bottom: 5px;">
+										                    <label for="Company Type" class="col-sm-3">Children</label>
+										                    <div class="col-sm-6">
+																<span class="ui-select "> 
+																	<?php 		
+																	$options = array();			
+																	$options = array(	'1C'=>'1 Child', 	'2C'=>'2 Children', 	'3C'=>'3 Children', 	'4C'=>'4 Children',
+																						'5C'=>'5 Children', '6C'=>'6 Children', 	'7C'=>'7 Children', 	'8C'=>'8 Children',
+																						'9C'=>'9 Children', '10C'=>'10 Children');
+																	echo form_dropdown('policyModel[policy_composition][]', $options, end($policy_composition_type), 'style="margin-top: 0px;"');
+																	?>	
+																</span> 
+										                    </div>
+										                </div>
+													</div>				
+															
+							                    </div>
+							                </div>
+							                
+						             	</div>
+						            </div>
+					            </section>
+					        </div>
+					    </div> 
+					    
+					    
+					    
+
+			        	<div class="row">
+					        <div class="col-md-12">
+					            <section class="panel panel-default">
+					                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Coverage Amounts</strong></div>
+									<div class="panel-body">    
+						                <div class="col-sm-12">    
+										<?php 
+											$values = !empty($policyModel['policy_coverage_amounts']) ? explode(',', $policyModel['policy_coverage_amounts']) : array();
+										?>
+											<div class="row">
+												<div class="col-sm-2">
+													<label class="ui-checkbox">
+														<input name="policyModel[policy_coverage_amounts][]" type="checkbox" value="50000" class="policy_coverage_amounts" data-display-val="50,000" <?php echo (in_array('50000', $values)) ? 'checked' : ''?> > <span>50,000</span>
+													</label>
+						                        </div>  
+												<div class="col-sm-2">
+													<label class="ui-checkbox">
+														<input name="policyModel[policy_coverage_amounts][]" type="checkbox" value="75000" class="policy_coverage_amounts" data-display-val="75,000" <?php echo (in_array('75000', $values)) ? 'checked' : ''?> > <span>75,000</span>
+													</label>
+						                        </div>  
+										<?php 
+												for ($i = 100000; $i <= 1000000; $i += 25000) 
+												{	
+													$checked = (in_array($i, $values)) ? 'checked' : '';
+													?>
+													<div class="col-sm-2">
+														<label class="ui-checkbox">
+															<input name="policyModel[policy_coverage_amounts][]" type="checkbox" value="<?php echo $i;?>" data-display-val="<?php echo Util::moneyFormatIndia($i)?>" class="policy_coverage_amounts" <?php echo $checked;?> > <span><?php echo Util::moneyFormatIndia($i)?></span>
+														</label>
+							                        </div>  
+										<?php 	}
+												for ($i = 1500000; $i <= 10000000; $i += 500000) 
+												{	
+													$checked = (in_array($i, $values)) ? 'checked' : '';
+													?>
+													<div class="col-sm-2">
+														<label class="ui-checkbox">
+															<input name="policyModel[policy_coverage_amounts][]" type="checkbox" value="<?php echo $i;?>" data-display-val="<?php echo Util::moneyFormatIndia($i)?>" class="policy_coverage_amounts" <?php echo $checked;?> > <span><?php echo Util::moneyFormatIndia($i)?></span>
+														</label>
+							                        </div> 
+										<?php 	}	?>
+						                     </div>
+						             	</div>
+						            </div>
+					            </section>
+					        </div>
+					    </div> 
+					        
+					    				    
 			        	<div class="row">
 					        <div class="col-md-12">
 					            <section class="panel panel-default">
@@ -773,7 +910,7 @@ $policy_id = (isset($policyModel['policy_id']) && !empty($policyModel['policy_id
 						                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Additional Details</strong></div>
 						                <div class="panel-body">
 						                
-						                	<?php echo widget::run('additionalDetailsBack', array('model'=>$policyModel, 'ckeditor'=>$ckeditor, 'modelName'=>'policyModel')); ?>
+						                	<?php //echo widget::run('additionalDetailsBack', array('model'=>$policyModel, 'ckeditor'=>$ckeditor, 'modelName'=>'policyModel')); ?>
 							                
 						                </div>
 						            </section>
@@ -878,4 +1015,17 @@ $policy_id = (isset($policyModel['policy_id']) && !empty($policyModel['policy_id
 		var hrefVal = $('#deactiveCompany').data('hrefval');
 		window.location.href = hrefVal;
 	}
+	$(document).ready(function(){
+		$('.policy_composition_type').click(function(){
+			var policy_composition_type = $('.policy_composition_type:checked').val();
+			if(policy_composition_type == 'individual')
+			{
+				$('#familyCompositionDiv').hide();
+			}
+			else
+			{
+				$('#familyCompositionDiv').show();
+			}
+		});
+	});
 </script>
