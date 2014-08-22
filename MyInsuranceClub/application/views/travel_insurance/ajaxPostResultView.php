@@ -181,7 +181,7 @@ elseif(! empty ( $customer_details )) {
                         </tr>
                         <tr>
                         	<?php 
-                        			$hijack_details = '';
+                        			/* $hijack_details = '';
                         			
                         			if($detail['hijack_daily_allowance'] != '')
 									{
@@ -193,10 +193,10 @@ elseif(! empty ( $customer_details )) {
 								    else
 								    {
 								    	$hijack_details = '-';
-								    }
+								    } */
                         	?>
                           <td>Hijack Allowance</td>
-                          <td class="cus_width"><?php echo $hijack_details; ?></td>
+                          <td class="cus_width"><?php echo $detail['hijack_daily_allowance']; ?></td>
                         </tr>
 						</tbody>
 					</table>
