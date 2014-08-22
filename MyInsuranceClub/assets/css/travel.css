@@ -1812,7 +1812,8 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 .mic_icon .mic_i_btm{ padding-right:13px; text-align:center;}
 .col-md-12.center,.travel_container{ padding-left:0 !important;padding-right:0 !important;}
 .gen_but_m,.gen_but_f,.gen_but_spouce_m,.gen_but_spouce_f,.gen_but_addtra_m,.gen_but_addtra_f{ width:50% !important;}
-.id-delete-per{ right:5px;}
+#TextBoxDiv2,#TextBoxDiv3,#TextBoxDiv4,#TextBoxDiv5,#TextBoxDiv6{ position:relative;}
+.id-delete-per{ right:-20px; bottom:15px;}
 }
 
  @media screen and (max-width: 813px) {

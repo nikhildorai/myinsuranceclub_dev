@@ -2236,6 +2236,7 @@ border-top: 1px dotted #31b7f1;
 
 .mic_i_mar.female_blue{ margin-left:0px !important;}
 .mic_i_mar.male_blue{ margin-left:5px !important;}
+.col-md-12.center,.term_container{ padding-left:0 !important;padding-right:0 !important;}
 
 }
 
@@ -2253,6 +2254,9 @@ border-top: 1px dotted #31b7f1;
     width: 100%;
 }
 .mic_icon .mic_i_btm{ padding-right:13px; text-align:center;}
+#step1{ margin-top:0px !important;}
+ .term_container{ padding:0 !important;}
+	 .col-md-12.center{ padding-top:20px !important;}
  }
    @media screen and (max-width: 650px) {
 	 .term_mic .term_form{ width:100%}
@@ -2270,7 +2274,6 @@ border-top: 1px dotted #31b7f1;
  
   @media screen and (max-width: 492px) {
 	#duration_a,#duration_b,#duration_c,#duration_d,#duration_e{ width:33.33% !important;}
-	.col-md-12.center,.term_container{ padding:0 !important;}
 
 	
  }

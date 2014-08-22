@@ -378,6 +378,9 @@ text-align: center;
 .top_h_t {text-align: center !important;}
 }
  @media screen and (max-width: 990px) {
+	 .fa.fa-sort-desc.po {
+display:none
+}
  .center h3 {
 font-size: 27px !important;
 }
