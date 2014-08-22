@@ -99,7 +99,7 @@
                 </div>
               </div>
               <div class="t_section t_ca">
-                <div class="trip-start-date">
+                <div class="trip-start-date clearfix">
                   <div class="mic_type mic_section">
                     <div class="form-lable" id="trip_end_error" tabindex="3">When are you going?</div>
                     <div class="travel_hlp"><a class="t_h_btn  fa fa-info-circle toll_b" href="javascript:void(0)"></a></div>
@@ -143,7 +143,7 @@
                     <div class="start_datepicker" style="position:absolute; top:17px;"> </div>
                   </div>
                 </div>
-                <div class="travel_end_date trip-end-date">
+                <div class="travel_end_date trip-end-date clearfix">
                   <div class="mic_type mic_section" >
                     <div class="form-lable" id="family_composition_error" tabindex="5">When will you be returning?</div>
                     <div class="travel_hlp" style="display: block;"><a class="t_h_btn fa fa-info-circle toll_away" href="javascript:void(0)"></a></div>
@@ -223,7 +223,7 @@
                     <div >
                       <div class="member-header"></div>
                       <div>
-                        <div style="width:50%; float:left;">
+                        <div style="width:50%; float:left;" class="dob_single">
                           <div class="family_section_header ">Your date of birth</div>
                           <div class="family_section ">
                             <div class="individual_icon inline-block"></div>
@@ -268,7 +268,7 @@
                         <div id="TextBoxesGroup">
                           <div  id="TextBoxDiv1">
                             <div class="add_traveller" style="display:none;">
-                              <div style="width:50%; float:left;">
+                              <div style="width:50%; float:left;" class="dob_sp">
                                 <div class="family_section_header">Spouse's date of birth</div>
                                 <div class="family_section">
                                   <div class="individual_icon inline-block"></div>
@@ -288,7 +288,8 @@
                                   </div>
                                 </div>
                                 <!--          <div class="id-member-error-text error-text" style="display: none;"></div>
---> </div>
+-->
+ </div>
                               <div class="id-cus-gender-spouce" style="display:inline-block;width: 50%;">
                                 <div class="family_section_header ">Spouse Gender</div>
                                 <div style="width: 100%; margin-top:10px;" class="mic_t_input">
