@@ -9,11 +9,11 @@
     <div class="col-md-12 center ">
       <div class="col-md-1"></div>
       <h1 class="car_container" style="text-align:left; margin-top:30px;" id="step1">Compare & Buy Two Wheeler Insurance Plans</h1>
-      <div class="col-md-12">
+      <div class="col-md-12 center">
         <p class="car_container" style="text-align:left; padding-top:10px; padding-bottom:25px;">Choose from 56 plans from 18 companies</p>
         <!--           <p class="col-md-11 start_icon"> <img src="assets/images/start2.png" ></p> 
 --> </div>
-      <div class="col-md-12">
+      <div class="col-md-12 center">
         <p class="car_container sc_top" style="text-align:left; padding-top:50px; padding-bottom:10px; color:#ff6633;">Want the best bike insurance? Get Started....</p>
       </div>
     </div>
@@ -39,7 +39,7 @@
                   <div class="prmTxt">
                     <h2>Buy insurance for new two wheeler </h2>
                     <br>
-                    <p style="margin-left: 5px;">Our Comprehensive Price Challenge</p>
+                    <p style="margin-left: 0px;">Our Comprehensive Price Challenge</p>
                     <a class="go-button buy" href="javascript:">Buy</a> </div>
                 </div>
                 <!-- End of Ad Box 2 --></div>
