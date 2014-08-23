@@ -221,7 +221,11 @@ $(document).ready(function() {
 		
 		 $('#single_t').click(function(){
 		 $('.travel_form_s').fadeIn();
+		//  $('#2A,#family').removeClass('mic_btn_tl-disabled'); 
+		// $('#2A').addClass('insure_b'); 
+		// $('#family').addClass('insure_c'); 
 		// $('.mic_tooltip_message').fadeOut();
+		$('.insure_b,.insure_c,#TextBoxesGroup,#error_border_5').show(); 
 		$('.travel_end_date.trip-end-date').fadeIn();
 		 $(this).addClass('mic_btn_tl_chkd');  
 		 $('#mul_t,#stu_t').removeClass('mic_btn_tl_chkd'); 
@@ -234,6 +238,10 @@ $(document).ready(function() {
 		
 		 $('#mul_t').click(function(){
 		 $('.travel_form_s').fadeIn();
+		 //  $('#2A,#family').removeClass('mic_btn_tl-disabled'); 
+		// $('#2A').addClass('insure_b'); 
+		// $('#family').addClass('insure_c'); 
+		 $('.insure_b,.insure_c,#TextBoxesGroup,#error_border_5').show(); 
 		 $('.travel_end_date.trip-end-date').fadeOut();
 		 $('#trip_end').val('');
 		 $(this).addClass('mic_btn_tl_chkd');  
@@ -244,6 +252,11 @@ $(document).ready(function() {
 		
 		 $('#stu_t').click(function(){
 		 $('.travel_form_s').fadeIn();
+		 $('.insure_b,.insure_c,#TextBoxesGroup,.add_more_member,#error_border_5').hide(); 
+		 
+		// $('.insure_b,.insure_c').addClass('mic_btn_tl-disabled'); 
+		// $('.insure_b').removeClass('insure_b'); 
+		// $('.insure_c').removeClass('insure_c'); 
 		// $('.mic_tooltip_message').fadeOut();
 		$('.travel_end_date.trip-end-date').fadeIn();
 		 $(this).addClass('mic_btn_tl_chkd');  

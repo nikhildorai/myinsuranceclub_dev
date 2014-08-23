@@ -212,7 +212,7 @@
 	border-top: 1px solid #2f5bb7;
 }
 .mic_btn_tl-action.mic_btn_tl-disabled {
-	background: #4d90fe;
+	/*background: #4d90fe;*/
 	filter: alpha(opacity=50);
 	opacity: 0.5;
 }
@@ -484,6 +484,9 @@
 	border: 1px solid #f3f3f3;
 	border: 1px solid rgba(0, 0, 0, 0.05);
 	color: #b8b8b8;
+	opacity:0.5;
+	cursor: default !important;
+	box-shadow:none !important;
 }
 .mic_btn_tl_one .mic_btn_tl-img {
 	opacity: .55;

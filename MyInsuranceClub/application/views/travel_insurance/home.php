@@ -188,7 +188,7 @@
                   </div>
                 </div>
               </div>
-              <div class="t_section t_ca" style="padding-bottom:70px;">
+              <div class="t_section t_ca" style="">
                 <div class="mic_travel_insure">
                   <div class="mic_type mic_section">
                     <div class="form-lable" id="cust_gender_error" tabindex="6">Whom do you want to cover?</div>
