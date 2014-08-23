@@ -663,39 +663,26 @@ $policy_id = (isset($policyModel['policy_id']) && !empty($policyModel['policy_id
 						                <div class="col-sm-12">    
 										<?php 
 											$values = !empty($policyModel['policy_coverage_amounts']) ? explode(',', $policyModel['policy_coverage_amounts']) : array();
-										?>
-											<div class="row">
+											for ($i = 25000; $i <= 1000000; $i += 25000) 
+											{	
+												$checked = (in_array($i, $values)) ? 'checked' : '';
+												?>
 												<div class="col-sm-2">
 													<label class="ui-checkbox">
-														<input name="policyModel[policy_coverage_amounts][]" type="checkbox" value="50000" class="policy_coverage_amounts" data-display-val="50,000" <?php echo (in_array('50000', $values)) ? 'checked' : ''?> > <span>50,000</span>
+														<input name="policyModel[policy_coverage_amounts][]" type="checkbox" value="<?php echo $i;?>" data-display-val="<?php echo Util::moneyFormatIndia($i)?>" class="policy_coverage_amounts" <?php echo $checked;?> > <span><?php echo Util::moneyFormatIndia($i)?></span>
 													</label>
 						                        </div>  
+									<?php 	}
+											for ($i = 1500000; $i <= 10000000; $i += 500000) 
+											{	
+												$checked = (in_array($i, $values)) ? 'checked' : '';
+												?>
 												<div class="col-sm-2">
 													<label class="ui-checkbox">
-														<input name="policyModel[policy_coverage_amounts][]" type="checkbox" value="75000" class="policy_coverage_amounts" data-display-val="75,000" <?php echo (in_array('75000', $values)) ? 'checked' : ''?> > <span>75,000</span>
+														<input name="policyModel[policy_coverage_amounts][]" type="checkbox" value="<?php echo $i;?>" data-display-val="<?php echo Util::moneyFormatIndia($i)?>" class="policy_coverage_amounts" <?php echo $checked;?> > <span><?php echo Util::moneyFormatIndia($i)?></span>
 													</label>
-						                        </div>  
-										<?php 
-												for ($i = 100000; $i <= 1000000; $i += 25000) 
-												{	
-													$checked = (in_array($i, $values)) ? 'checked' : '';
-													?>
-													<div class="col-sm-2">
-														<label class="ui-checkbox">
-															<input name="policyModel[policy_coverage_amounts][]" type="checkbox" value="<?php echo $i;?>" data-display-val="<?php echo Util::moneyFormatIndia($i)?>" class="policy_coverage_amounts" <?php echo $checked;?> > <span><?php echo Util::moneyFormatIndia($i)?></span>
-														</label>
-							                        </div>  
-										<?php 	}
-												for ($i = 1500000; $i <= 10000000; $i += 500000) 
-												{	
-													$checked = (in_array($i, $values)) ? 'checked' : '';
-													?>
-													<div class="col-sm-2">
-														<label class="ui-checkbox">
-															<input name="policyModel[policy_coverage_amounts][]" type="checkbox" value="<?php echo $i;?>" data-display-val="<?php echo Util::moneyFormatIndia($i)?>" class="policy_coverage_amounts" <?php echo $checked;?> > <span><?php echo Util::moneyFormatIndia($i)?></span>
-														</label>
-							                        </div> 
-										<?php 	}	?>
+						                        </div> 
+									<?php 	}	?>
 						                     </div>
 						             	</div>
 						            </div>

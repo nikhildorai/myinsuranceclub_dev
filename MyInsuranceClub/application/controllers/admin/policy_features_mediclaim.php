@@ -113,7 +113,6 @@ class Policy_features_mediclaim extends Admin_Controller {
 											'room_rent','icu_rent',
 										);
 					
-//var_dump($_POST['model']['coverage_amount']);
 					foreach ($arrSerialize as $k1=>$v1)
 					{
 						if (isset($_POST['model'][$v1]) && !empty($_POST['model'][$v1]))
@@ -122,8 +121,8 @@ class Policy_features_mediclaim extends Admin_Controller {
 						}
 					}
 					
-//var_dump($_POST['model']['coverage_amount']);die;	
-//var_dump($_POST['model']['domiciliary_treatment_expenses']);die;		
+//var_dump($_POST['model']['policy_terms']);die;
+	
 					$arrParams = $this->input->post('model');
 					//	set default values
 					$arrParams['features_id'] = (isset($feature_id) && !empty($feature_id)) ? $feature_id : '';

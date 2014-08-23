@@ -51,23 +51,20 @@ $(".form-horizontal :input").prop("disabled", true);
 					      </div>';
 				} ?>
 				
-			
-			
 	        <div class="row">
 		        <div class="col-md-12">
 		        	<div class="panel-body">    
 			            <section class="panel panel-default">
 			                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Eligibility Conditions</strong></div>
 			                <div class="panel-body">			                
-			                	<?php echo widget::run('eligibilityConditionsBack', array('model'=>$model, 'policyModel'=>$policyModel)); ?>
+			                	<?php echo widget::run('eligibilityConditionsBack', array('model'=>$model, 'policyModel'=>$policyModel, 'type'=>'mediclaim')); ?>
 			                </div>
 			            </section>
 					</div>
 			    </div>
 			</div>  
 			
-			
-	        <div class="row">
+			<div class="row">
 		        <div class="col-md-12">
 		        	<div class="panel-body">    
 			            <section class="panel panel-default">
@@ -1763,7 +1760,7 @@ display:<?php echo ($maternitySelected == 'yes') ? 'table-row' : 'none';?>;
 					            <?php 	}else {	?>
 					                		<input type="submit" name="submit" value="Submit" class="btn btn-success btn-lg  " />
 					            <?php 	}	?>   
-					                	<a href = "<?php echo $base_url; ?>admin/articles"  class="btn btn-lg btn-default" style="margin-left: 30px;">Cancel</a>     
+					                	<a href = "<?php echo $base_url; ?>admin/policy"  class="btn btn-lg btn-default" style="margin-left: 30px;">Cancel</a>     
 							           <?php 	
 							                 if (isset($model['article_id']) && !empty($model['article_id']))
 							                 {	

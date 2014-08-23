@@ -106,8 +106,18 @@ class Policy_features_travel extends Admin_Controller {
 				//	$_POST['model']['peer_comparision_variants'] = (isset($_POST['model']['peer_comparision_variants']) && !empty($_POST['model']['peer_comparision_variants'])) ? implode(',', $_POST['model']['peer_comparision_variants']) : '';
 				//	$newPeerComparision = explode(',', $_POST['model']['peer_comparision_variants']);
 					
-					$arrSerialize = array(	'coverage_amount', 'policy_terms','entry_age','no_medical_test_age','no_medical_sum_assured_limit','cashless_treatment',
-											'pre_existing_diseases','free_look_period');
+					$arrSerialize = array(	'coverage_amount', 'policy_terms','entry_age','renewal_age', 'no_medical_test_age','no_medical_sum_assured_limit','cashless_treatment',
+											'pre_existing_diseases','free_look_period','grace_period', 'cumulative_bonus', 'medical_expenses','dental','emergency_medical_evacuation',
+											'repatriation_of_mortal_remains','total_loss_of_checked_baggage','delay_of_checked_baggage','loss_of_passport','loss_of_visa','personal_liability',
+											'trip_cancellation','trip_curtailment','trip_interruption','hospital_daily_cash','personal_accident','personal_accident_common_carrier',
+											'accident_sickness_medical_expenses_reimbursement','accidental_death_air_travel','flight_delay','hijack_daily_allowance','automatic_extension_of_policy',
+											'emergency_cash_advance','missed_connection','sponsor_protection','bounced_bookings','fraudulent_charges', 'home_burglary', 'study_interuption','compassionate_visit',
+											'bail_bond','felonious_assault','maternity_benefit_for_termination_of_pregnancy','other_medical_treatment','red_services','in_hospital_indemnity_accident',
+											'assistance_services','in_hospital_indemnity_accident','accommodation_charges_on_delay','loss_of_ticket','transportation','replacement_of_staff',
+											'missed_departure','loss_of_personal_documents','childcare_benefits','accidental_death_and_dismemberment','accidental_death_and_dismemberment_common_carrier',
+											'personal_accident_domestic','political_risk_and_catastrop_evacuation','fire_cover_for_building','fire_cover_for_home_content','emergency_hotel_extension',
+											'golfe_hole_in_one','any_one_illness','any_one_accident','tution_fees','accident_to_sponsor','family_visit','international_driving_license_loss',
+											'reunion_expenses','transportation_of_mortal_remains','ped','additioal_si_for_accidental_hospitalization','business_class','return_of_minor_children','out_patient_care');
 					foreach ($arrSerialize as $k1=>$v1)
 					{
 						if (isset($_POST['model'][$v1]) && !empty($_POST['model'][$v1]))

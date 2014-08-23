@@ -39,12 +39,10 @@ class EligibilityConditionsFront extends Widget{
 					<tr>
 						<td>Policy Term (in years)</td>
 						<?php 
-		                	$default = array('min'=>'','max'=>'');
-							$arrValues = array_key_exists( 'policy_terms',$model) ? unserialize($model['policy_terms']) : $default;
-							$arrValues = Util::array_overlay($default, $arrValues);	
+							$arrValues = array_key_exists( 'policy_terms',$model) ? unserialize($model['policy_terms']) : array();
 						?>
-						<td align="center"><?php echo $arrValues['min'];?></td>
-						<td align="center"><?php echo $arrValues['max'];?></td>
+						<td align="center"><?php echo reset($arrValues);?></td>
+						<td align="center"><?php echo end($arrValues);?></td>
 					</tr>
 					<tr>
 						<?php 			

@@ -37,7 +37,7 @@ $('body').on('change', '.fileUploadAjax', function(){
                  abc += 1; //increementing global variable by 1
 				var z = abc - 1;
                 var x = $(this).parent().parent().find('#previewimg' + z).remove();
-                var prevDiv = $(this).parent().parent().parent().before("<div id='abcd"+ abc +"' class='abcd'><img id='previewimg" + abc + "' src=''/></div>");
+                var prevDiv = $(this).parent().parent().parent().before("<div id='abcd"+ abc +"' class='abcd'><img id='previewimg" + abc + "' src=''  width='133' height='146'/></div>");
                 //$(this).parent().parent().find('.previewImage').html("<div id='abcd"+ abc +"' class='abcd'><img id='previewimg" + abc + "' src=''/></div>");
                
 			    var reader = new FileReader();

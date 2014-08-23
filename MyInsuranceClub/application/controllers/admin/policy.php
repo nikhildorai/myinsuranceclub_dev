@@ -53,6 +53,7 @@ class Policy extends Admin_Controller {
 
     public function create($policy_id = null)
 	{
+		$this->load->library('simpleImage');
 		$modelType = 'create';
 		//	check if policy id exists
 		$policyModel = $variantModel = $policyFeaturesModel = $oldPeerComparision = $newPeerComparision = array();
@@ -129,65 +130,68 @@ class Policy extends Admin_Controller {
 				$tag = $this->util->addUpdateTags($_POST['tag']);
 				$_POST['policyModel']['tag'] = $tag;
 			}		
-//var_dump($_FILES);die;			
+			
+//var_dump($policyModel['policy_wordings_images'], $policyModel['brochure_images']);
 			//	check if file is uploaded
 			if (!empty($_FILES))
 			{
 				$i = 1;
+//var_dump($_FILES['policyModel']['name']);			
 				foreach($_FILES['policyModel']['name'] as $k1=>$v1)
 				{
 					if (is_array($v1))
 					{
 						$j = 1;
 						$files = isset($policyModel[$k1]) ? explode(',', $policyModel[$k1]) : array();
-						foreach ($v1 as $k2=>$v2)
+						$fileExist = reset($v1);
+						if (!empty($fileExist))
 						{
-							if (!empty($v2))
+							foreach ($v1 as $k2=>$v2)
 							{
-								$name = $this->util->getSlug($_POST['policyModel']['policy_name']);
-								$ext = end(explode('.', $v2));
-								
-								if ($k1 == 'brochure_images')
-									$name .= '-brochure-images-'.$j;
-								else if ($k1 == 'policy_wordings_images')
-									$name .= '-policy-wordings-images-'.$j;
-								else 
-									$name .= '-doc-'.date('dmy').time().'-'.$j;
-										
-								$name .= '.'.$ext;
-								$arrFileNames[$k1][$k2] = $name;
-								if (empty($v2))
-									$_POST['policyModel'][$k1][$k2] = isset($files[$k2]) ? $files[$k2] : '';
-								else
-									$_POST['policyModel'][$k1][$k2] = $name;
+								if (!empty($v2))
+								{
+									$name = $this->util->getSlug($_POST['policyModel']['policy_name']);
+									$ext = end(explode('.', $v2));
 									
-								$j++;
+									if ($k1 == 'brochure_images')
+										$name .= '-brochure-images-'.$j;
+									else if ($k1 == 'policy_wordings_images')
+										$name .= '-policy-wordings-images-'.$j;
+									else 
+										$name .= '-doc-'.date('dmy').time().'-'.$j;
+											
+									$name .= '.'.$ext;
+									$arrFileNames[$k1][$k2] = $name;
+									$j++;
+								}
 							}
-						}						
-						$_POST['policyModel'][$k1] = (isset($_POST['policyModel'][$k1]) && !empty($_POST['policyModel'][$k1])) ? implode(',', $_POST['policyModel'][$k1]) : '';
+							$_POST['policyModel'][$k1] = (isset($arrFileNames[$k1]) && !empty($arrFileNames[$k1])) ? implode(',', $arrFileNames[$k1]) : '';	
+						}
+						else 
+							$_POST['policyModel'][$k1] = (isset($policyModel[$k1]) && !empty($policyModel[$k1])) ? $policyModel[$k1] : '';
 					}
 					else 
 					{
-						$name = $this->util->getSlug($_POST['policyModel']['policy_name']);
-						$ext = end(explode('.', $v1));
-						if (empty($ext))
-							$ext = 'doc';
-						if ($k1 == 'brochure')
-							$name .= '-brochure';
-						else if ($k1 == 'policy_wordings')
-							$name .= '-policy-wordings';
-						else if ($k1 == 'policy_logo')
-							$name .= '-policy-logo-172x68';
-						else 
-							$name .= '-doc-'.date('dmy').time();
-						$name .= '.'.$ext;
-						$arrFileNames[$k1] = $name;
-						if (empty($v1))
-						{
-							$_POST['policyModel'][$k1] = isset($policyModel[$k1]) ? $policyModel[$k1] : '';
+						if (!empty($v1))
+						{	
+							$name = $this->util->getSlug($_POST['policyModel']['policy_name']);
+							$ext = end(explode('.', $v1));
+							if (empty($ext))
+								$ext = 'doc';
+							if ($k1 == 'brochure')
+								$name .= '-brochure';
+							else if ($k1 == 'policy_wordings')
+								$name .= '-policy-wordings';
+							else if ($k1 == 'policy_logo')
+								$name .= '-policy-logo-172x68';
+							else 
+								$name .= '-doc-'.date('dmy').time();
+							$name .= '.'.$ext;
+							$arrFileNames[$k1] = $name;
+							$_POST['policyModel'][$k1] = (isset($arrFileNames[$k1]) && !empty($arrFileNames[$k1])) ? $arrFileNames[$k1] : '';
 						}
-						else
-							$_POST['policyModel'][$k1] = $name;
+						else 
+							$_POST['policyModel'][$k1] = (isset($policyModel[$k1]) && !empty($policyModel[$k1])) ? $policyModel[$k1] : '';
 					}
 					$i++;
 				}
@@ -195,13 +199,13 @@ class Policy extends Admin_Controller {
 			else 
 			{
 				//	set previous file name in post
-				$_POST['policyModel']['brochure'] = $policyModel['brochure'];
-				$_POST['policyModel']['policy_wordings'] = $policyModel['policy_wordings'];
-				$_POST['policyModel']['policy_logo'] = $policyModel['policy_logo'];
-				$_POST['policyModel']['policy_wordings_images'] = $policyModel['policy_wordings_images'];
-				$_POST['policyModel']['brochure_images'] = $policyModel['brochure_images'];
+				$_POST['policyModel']['brochure'] = (isset($policyModel['brochure']) && !empty($policyModel['brochure'])) ? $policyModel['brochure'] : '';
+				$_POST['policyModel']['policy_wordings'] = (isset($policyModel['policy_wordings']) && !empty($policyModel['policy_wordings'])) ? $policyModel['policy_wordings'] : '';
+				$_POST['policyModel']['policy_logo'] = (isset($policyModel['policy_logo']) && !empty($policyModel['policy_logo'])) ? $policyModel['policy_logo'] : '';
+				$_POST['policyModel']['policy_wordings_images'] = (isset($policyModel['policy_wordings_images']) && !empty($policyModel['policy_wordings_images'])) ? $policyModel['policy_wordings_images'] : 'policy_wordings_images';
+				$_POST['policyModel']['brochure_images'] = (isset($policyModel['brochure_images']) && !empty($policyModel['brochure_images'])) ? $policyModel['brochure_images'] : '';
 			}
-			
+					
 			if (isset($_POST['policyModel']['product_id']) && !empty($_POST['policyModel']['product_id']))
 				$_POST['policyModel']['product_id'] = implode(',', $_POST['policyModel']['product_id']);
 				
@@ -297,6 +301,24 @@ class Policy extends Admin_Controller {
 							if($this->upload->do_multi_upload("policyModel"))
 							{
 				              	$this->data['file_upload'] = $this->upload->get_multi_upload_data();
+
+				              	
+								//	if image is uploaded successfully resize images
+				              	if (!empty($this->data['file_upload']))
+				              	{
+				              		foreach ($this->data['file_upload'] as $k1=>$v1)
+				              		{
+										$photoName = $v1['orig_name'];
+										$path = $v1['file_path'];
+										//$path = $this->config->config['folder_path']['news']['all'];
+										$temp = $this->config->config['folder_path']['temp'];
+													              			
+				              			if (in_array($v1['client_name'], $_FILES['policyModel']['name']['policy_wordings_images']))       
+											SimpleImage::saveImages($path, $photoName, $type="policy_wordings_images");
+				              			else if(in_array($v1['client_name'], $_FILES['policyModel']['name']['brochure_images']))
+				              				SimpleImage::saveImages($path, $photoName, $type="brochure_images");
+				              		}		
+				              	}
 							}
 							else 
 							{
@@ -410,7 +432,7 @@ class Policy extends Admin_Controller {
 		$param['age'] = (isset($policyModel['peer_comparision_age']) && !empty($policyModel['peer_comparision_age'])) ? $policyModel['peer_comparision_age'] : '25';
 		$param['members'] = !empty($policyModel['peer_comparision_type']) ? ($policyModel['peer_comparision_type'] == 'individual') ? "1A" : '2A' : '1A';
 		$param['sum_assured'] = (isset($policyModel['peer_comparision_coverage_amounts']) && !empty($policyModel['peer_comparision_coverage_amounts'])) ? $policyModel['peer_comparision_coverage_amounts'] : '500000';
-		$param['variant_id'] = ''; //$policyModel['peer_comparision_variants'];
+		$param['variant_id'] = ''; //$policyModel['peer_comparision_variants'];		
 		$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails($param);		
 		
 		$this->data['policyModel'] = $policyModel;
@@ -1006,14 +1028,14 @@ class Policy extends Admin_Controller {
 			$param['premium_table'] = (!empty($variantAction)) ? $dbPrefix.$variantAction['premium_table'] : $dbPrefix.'annual_premium_health';
 			$param['product_id'] = (isset($_POST['product_id']) && !empty($_POST['product_id'])) ? implode(',', $_POST['product_id']) : '' ;
 			$param['sub_product_id'] = (isset($_POST['sub_product_id']) && !empty($_POST['sub_product_id'])) ? implode(',', $_POST['sub_product_id']) : '' ;
-			$param['city'] = 590;
+			$param['city'] = '';
 			$param['gender'] = 'male';
 			$param['age'] = (isset($_POST['model_peer_comparision_age']) && !empty($_POST['model_peer_comparision_age'])) ? implode(',', $_POST['model_peer_comparision_age']) : '25';
 			$param['members'] = !empty($_POST['policy_composition_type']) ? ($_POST['policy_composition_type'] == 'individual') ? "1A" : '2A' : '1A';
 			$param['sum_assured'] = (isset($_POST['peer_comparision_coverage_amounts']) && !empty($_POST['peer_comparision_coverage_amounts'])) ? implode(',', $_POST['peer_comparision_coverage_amounts']) : '500000';
 			$param['variant_id'] = ''; 
 	
-			$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails($param);
+			$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails($param);		
 			echo Util::peerComparisionTableViewBackend($allVariants, $policy_id, $peerValue, $modelName);
 		}
 	}

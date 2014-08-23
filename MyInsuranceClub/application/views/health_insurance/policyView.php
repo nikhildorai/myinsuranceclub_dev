@@ -1151,313 +1151,165 @@
 
 */ ?>
 
-
+<?php 
+		if (!empty($policyDetails['policy']['brochure_images']))
+		{	
+			$policy_wordings_images = array_filter(explode(',', $policyDetails['policy']['brochure_images']));
+			?>
 			<div class="row">
 				<div class="col-sm-12">
 					<h2 class="lined-heading">
-						<span>L&T my health Medisure Classic Brochure</span>
+						<span><?php echo $policyDetails['policy']['policy_name'];?> Brochure</span>
 					</h2>
 				</div>
-
-				<!--<div class="col-sm-12" style=" float: none;
-    margin: 0 auto;
-    width: 600px;">
-      <div class="col-sm-3 text-center"><img src="<?php echo base_url();?>assets/images/brch_1.jpg" border="0"></div>
-      <div class="col-sm-3 text-center"><img src="<?php echo base_url();?>assets/images/brch_2.jpg" border="0"></div>
-      <div class="col-sm-3 text-center"><img src="<?php echo base_url();?>assets/images/brch_3.jpg" border="0"></div>
-      <div class="col-sm-3 text-center"><img src="<?php echo base_url();?>assets/images/brch_4.jpg" border="0"></div>
-      </div>-->
-
-
-
-
-
 				<div class="col-sm-12">
-
 					<div class="sixteen columns">
-
-
 						<div class="portfolio clearfix">
-
-
-
 							<ul class="list">
-
-
-								<li class="" data-content="#colio_c1">
-									<div class="thumb">
-										<a class="button colio-link" href="#"><div class="view"></div>
-										</a> <img
-											src="<?php echo base_url();?>assets/images/brch_1.jpg"
-											alt="Pic" />
-									</div>
-								</li>
-
-
-
-								<li class="" data-content="#colio_c2">
-									<div class="thumb">
-										<a class="button colio-link" href="#"><div class="view"></div>
-										</a> <img
-											src="<?php echo base_url();?>assets/images/brch_2.jpg"
-											alt="Pic" />
-									</div>
-								</li>
-
-								<li class="" data-content="#colio_c3">
-									<div class="thumb">
-										<a class="button colio-link" href="#"><div class="view"></div>
-										</a> <img
-											src="<?php echo base_url();?>assets/images/brch_3.jpg"
-											alt="Pic" />
-									</div>
-								</li>
-
-								<li class="" data-content="#colio_c4">
-									<div class="thumb">
-										<a class="button colio-link" href="#"><div class="view"></div>
-										</a> <img
-											src="<?php echo base_url();?>assets/images/brch_4.jpg"
-											alt="Pic" />
-									</div>
-								</li>
-
-
-
+						<?php 	
+								$folderUrl = $this->config->config['folder_path']['policy']['brochure_thumbnails'];
+								$fileUrl = $this->config->config['url_path']['policy']['brochure_thumbnails'];
+								$i = 1;
+								if (!empty($policy_wordings_images))
+								{
+									foreach ($policy_wordings_images as $k1=>$v1)
+									{	
+										if (isset($v1) && !empty($v1))
+										{				
+											if (file_exists($folderUrl.$v1))
+											{	?>
+												<li class="" data-content="#wording_c<?php echo $i;?>">
+													<div class="thumb">
+														<a class="button colio-link" href="#">
+															<div class="view"></div>
+														</a> 
+														<img src="<?php echo $fileUrl.$v1;?>" alt="Pic" />
+													</div>
+												</li>
+					<?php 					$i++;
+											}
+										}
+									}
+								}	?>
 							</ul>
 							<!-- list -->
 
 						</div>
 						<!-- portfolio -->
-
-
 						<!-- colio-content # colio_c1 -->
-
-						<div id="colio_c1" class="colio-content">
-
-							<div class="main">
-								<div align="center">
-
-									<span class='zoom'> <img
-										src='<?php echo base_url();?>assets/images/pdf/hdfclife_click_2_protect_plan_brochure-1.jpg'
-										width="600" height="680" alt='' /> </span>
-								</div>
-
-
-
-
-							</div>
-						</div>
-
-						<div id="colio_c2" class="colio-content">
-							<div class="main">
-								<div align="center">
-									<span class='zoom'><img
-										src="<?php echo base_url();?>assets/images/pdf/hdfclife_click_2_protect_plan_brochure-2.jpg"
-										width="600" height="680" border="0"> </span>
-								</div>
-							</div>
-						</div>
-
-						<div id="colio_c3" class="colio-content">
-							<div class="main">
-								<div align="center">
-									<span class='zoom'><img
-										src="<?php echo base_url();?>assets/images/pdf/hdfclife_click_2_protect_plan_brochure-3.jpg"
-										width="600" height="680" border="0"> </span>
-								</div>
-							</div>
-						</div>
-
-						<div id="colio_c4" class="colio-content">
-							<div class="main">
-								<div align="center">
-									<span class='zoom'><img
-										src="<?php echo base_url();?>assets/images/pdf/hdfclife_click_2_protect_plan_brochure-4.jpg"
-										width="600" height="680" border="0"> </span>
-								</div>
-
-
-							</div>
-						</div>
-
-
-
+						<?php 	
+								$folderUrl = $this->config->config['folder_path']['policy']['brochure_images'];
+								$fileUrl = $this->config->config['url_path']['policy']['brochure_images'];
+								$i = 1;
+								if (!empty($policy_wordings_images))
+								{
+									foreach ($policy_wordings_images as $k1=>$v1)
+									{	
+										if (isset($v1) && !empty($v1))
+										{				
+											if (file_exists($folderUrl.$v1))
+											{	?>
+												<div id="wording_c<?php echo $i;?>" class="colio-content">
+													<div class="main">
+														<div align="center">
+															<span class='zoom'> 
+																<img src='<?php echo $fileUrl.$v1;?>' width="600" height="680" alt='' /> 
+															</span>
+														</div>
+													</div>
+												</div>
+					<?php 					$i++;
+											}
+										}
+									}
+								}	?>
 					</div>
-
 				</div>
-
-
-
-
-
-
-
-
 			</div>
+<?php 	}		?>
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<?php 
+		if (!empty($policyDetails['policy']['policy_wordings_images']))
+		{	
+			$policy_wordings_images = array_filter(explode(',', $policyDetails['policy']['policy_wordings_images']));
+			?>
 			<div class="row">
 				<div class="col-sm-12">
 					<h2 class="lined-heading">
-						<span>L&T my health Medisure policy wording</span>
+						<span><?php echo $policyDetails['policy']['policy_name'];?> policy wording</span>
 					</h2>
 				</div>
-
-				<!--<div class="col-sm-12" style=" float: none;
-    margin: 0 auto;
-    width: 600px;">
-      <div class="col-sm-3 text-center"><img src="<?php echo base_url();?>assets/images/brch_1.jpg" border="0"></div>
-      <div class="col-sm-3 text-center"><img src="<?php echo base_url();?>assets/images/brch_2.jpg" border="0"></div>
-      <div class="col-sm-3 text-center"><img src="<?php echo base_url();?>assets/images/brch_3.jpg" border="0"></div>
-      <div class="col-sm-3 text-center"><img src="<?php echo base_url();?>assets/images/brch_4.jpg" border="0"></div>
-      </div>-->
-
-
-
-
-
 				<div class="col-sm-12">
-
 					<div class="sixteen columns">
-
-
 						<div class="portfolio clearfix">
-
-
-
 							<ul class="list">
-
-
-								<li class="" data-content="#wording_c1">
-									<div class="thumb">
-										<a class="button colio-link" href="#"><div class="view"></div>
-										</a> <img
-											src="<?php echo base_url();?>assets/images/brch_1.jpg"
-											alt="Pic" />
-									</div>
-								</li>
-
-
-
-								<li class="" data-content="#wording_c2">
-									<div class="thumb">
-										<a class="button colio-link" href="#"><div class="view"></div>
-										</a> <img
-											src="<?php echo base_url();?>assets/images/brch_2.jpg"
-											alt="Pic" />
-									</div>
-								</li>
-
-								<li class="" data-content="#wording_c3">
-									<div class="thumb">
-										<a class="button colio-link" href="#"><div class="view"></div>
-										</a> <img
-											src="<?php echo base_url();?>assets/images/brch_3.jpg"
-											alt="Pic" />
-									</div>
-								</li>
-
-								<li class="" data-content="#wording_c4">
-									<div class="thumb">
-										<a class="button colio-link" href="#"><div class="view"></div>
-										</a> <img
-											src="<?php echo base_url();?>assets/images/brch_4.jpg"
-											alt="Pic" />
-									</div>
-								</li>
-
-
-
+						<?php 	
+								$folderUrl = $this->config->config['folder_path']['policy']['policy_wordings_thumbnails'];
+								$fileUrl = $this->config->config['url_path']['policy']['policy_wordings_thumbnails'];
+								$i = 1;
+								if (!empty($policy_wordings_images))
+								{
+									foreach ($policy_wordings_images as $k1=>$v1)
+									{	
+										if (isset($v1) && !empty($v1))
+										{				
+											if (file_exists($folderUrl.$v1))
+											{	?>
+												<li class="" data-content="#wording_c<?php echo $i;?>">
+													<div class="thumb">
+														<a class="button colio-link" href="#">
+															<div class="view"></div>
+														</a> 
+														<img src="<?php echo $fileUrl.$v1;?>" alt="Pic" />
+													</div>
+												</li>
+					<?php 					$i++;
+											}
+										}
+									}
+								}	?>
 							</ul>
 							<!-- list -->
 
 						</div>
 						<!-- portfolio -->
-
-
 						<!-- colio-content # colio_c1 -->
-
-						<div id="wording_c1" class="colio-content">
-
-							<div class="main">
-								<div align="center">
-
-									<span class='zoom'> <img
-										src='<?php echo base_url();?>assets/images/pdf/hdfclife_click_2_protect_plan_brochure-1.jpg'
-										width="600" height="680" alt='' /> </span>
-								</div>
-
-
-
-
-							</div>
-						</div>
-
-						<div id="wording_c2" class="colio-content">
-							<div class="main">
-								<div align="center">
-									<span class='zoom'><img
-										src="<?php echo base_url();?>assets/images/pdf/hdfclife_click_2_protect_plan_brochure-2.jpg"
-										width="600" height="680" border="0"> </span>
-								</div>
-							</div>
-						</div>
-
-						<div id="wording_c3" class="colio-content">
-							<div class="main">
-								<div align="center">
-									<span class='zoom'><img
-										src="<?php echo base_url();?>assets/images/pdf/hdfclife_click_2_protect_plan_brochure-3.jpg"
-										width="600" height="680" border="0"> </span>
-								</div>
-							</div>
-						</div>
-
-						<div id="wording_c4" class="colio-content">
-							<div class="main">
-								<div align="center">
-									<span class='zoom'><img
-										src="<?php echo base_url();?>assets/images/pdf/hdfclife_click_2_protect_plan_brochure-4.jpg"
-										width="600" height="680" border="0"> </span>
-								</div>
-
-
-							</div>
-						</div>
-
-
-
+						<?php 	
+								$folderUrl = $this->config->config['folder_path']['policy']['policy_wordings_images'];
+								$fileUrl = $this->config->config['url_path']['policy']['policy_wordings_images'];
+								$i = 1;
+								if (!empty($policy_wordings_images))
+								{
+									foreach ($policy_wordings_images as $k1=>$v1)
+									{	
+										if (isset($v1) && !empty($v1))
+										{				
+											if (file_exists($folderUrl.$v1))
+											{	?>
+												<div id="wording_c<?php echo $i;?>" class="colio-content">
+													<div class="main">
+														<div align="center">
+															<span class='zoom'> 
+																<img src='<?php echo $fileUrl.$v1;?>' width="600" height="680" alt='' /> 
+															</span>
+														</div>
+													</div>
+												</div>
+					<?php 					$i++;
+											}
+										}
+									}
+								}	?>
 					</div>
-
 				</div>
-
-
-
-
-
-
-
-
 			</div>
+<?php 	}		?>
+
+
 
 
 

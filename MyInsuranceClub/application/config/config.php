@@ -398,10 +398,10 @@ $config['url_path']['policy']['all'] 				= $config['base_url'].'uploads/policy/'
 $config['url_path']['policy']['policy_logo'] 		= $config['base_url'].'uploads/policy/logo/';
 $config['url_path']['policy']['brochure'] 				= $config['base_url'].'uploads/policy/brochure/';
 $config['url_path']['policy']['brochure_images'] 		= $config['base_url'].'uploads/policy/brochure/images/';
-$config['url_path']['policy']['brochure_thumbnails'] 	= $config['base_url'].'uploads/policy/brochure/thumbnails/';
+$config['url_path']['policy']['brochure_thumbnails'] 	= $config['base_url'].'uploads/policy/brochure/thumbnails_133x146/';
 $config['url_path']['policy']['policy_wordings'] 				= $config['base_url'].'uploads/policy/policy_wordings/';
 $config['url_path']['policy']['policy_wordings_images'] 		= $config['base_url'].'uploads/policy/policy_wordings/images/';
-$config['url_path']['policy']['policy_wordings_thumbnails'] 	= $config['base_url'].'uploads/policy/policy_wordings/thumbnails/';
+$config['url_path']['policy']['policy_wordings_thumbnails'] 	= $config['base_url'].'uploads/policy/policy_wordings/thumbnails_133x146/';
 
 //	news
 $config['url_path']['news']['all']							= $config['base_url'].'uploads/news/';
@@ -425,14 +425,14 @@ $config['folder_path']['company']['partnerLogo'] 		= realpath(APPPATH . '../uplo
 $config['folder_path']['company']['searchResultLogo'] 	= realpath(APPPATH . '../uploads').'/company/search_result_80x50/';
 $config['folder_path']['company']['companyLeadership'] 	= realpath(APPPATH . '../uploads').'/company/company_leadership_160x160/';
 
-$config['folder_path']['policy']['all'] 				= realpath(APPPATH . '../uploads').'/policy/';
-$config['folder_path']['policy']['policy_logo'] 		= realpath(APPPATH . '../uploads').'/policy/logo/';
-$config['folder_path']['policy']['brochure'] 				= realpath(APPPATH . '../uploads').'/policy/brochure/';
-$config['folder_path']['policy']['brochure_images'] 		= realpath(APPPATH . '../uploads').'/policy/brochure/images/';
-$config['folder_path']['policy']['brochure_thumbnails'] 	= realpath(APPPATH . '../uploads').'/policy/brochure/thumbnails/';
+$config['folder_path']['policy']['all'] 						= realpath(APPPATH . '../uploads').'/policy/';
+$config['folder_path']['policy']['policy_logo'] 				= realpath(APPPATH . '../uploads').'/policy/logo/';
+$config['folder_path']['policy']['brochure'] 					= realpath(APPPATH . '../uploads').'/policy/brochure/';
+$config['folder_path']['policy']['brochure_images'] 			= realpath(APPPATH . '../uploads').'/policy/brochure/images/';
+$config['folder_path']['policy']['brochure_thumbnails'] 		= realpath(APPPATH . '../uploads').'/policy/brochure/thumbnails_133x146/';
 $config['folder_path']['policy']['policy_wordings'] 			= realpath(APPPATH . '../uploads').'/policy/policy_wordings/';
 $config['folder_path']['policy']['policy_wordings_images'] 		= realpath(APPPATH . '../uploads').'/policy/policy_wordings/images/';
-$config['folder_path']['policy']['policy_wordings_thumbnails'] 	= realpath(APPPATH . '../uploads').'/policy/policy_wordings/thumbnails/';
+$config['folder_path']['policy']['policy_wordings_thumbnails'] 	= realpath(APPPATH . '../uploads').'/policy/policy_wordings/thumbnails_133x146/';
 
 //	news
 $config['folder_path']['news']['all']						= realpath(APPPATH . '../uploads').'/news/';

@@ -147,10 +147,9 @@ class PeerComparisionBack extends Widget{
 					}				
 				});
 
-				//$('.peer_comparision_coverage_amounts').on('click',function(e){
 				$(document).delegate('.peer_comparision_coverage_amounts','click',function(e){	
 					var countCheckedCheckboxes = $('.peer_comparision_coverage_amounts').filter(':checked').length;
-					if(countCheckedCheckboxes > 4)
+					if(countCheckedCheckboxes > 2)
 					{
 						alert('You can select only 2 amounts');
 						e.preventDefault();

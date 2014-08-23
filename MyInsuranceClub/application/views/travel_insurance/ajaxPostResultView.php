@@ -129,7 +129,7 @@ elseif(! empty ( $customer_details )) {
                         </tr>
                         <tr class="odd">
                           <td>Medical Evacuation</td>
-                          <td class="cus_width">Covered as part of 'Medical Treatment'</td>
+                          <td class="cus_width"><?php echo $detail['emergency_medical_evacuation']?></td>
                         </tr>
                         <tr >
                           <td>Hospital Daily Allowance</td>

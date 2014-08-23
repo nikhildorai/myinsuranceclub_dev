@@ -93,6 +93,7 @@ class Policy_variants_master_model EXTENDS Admin_Model{
 	{
 		$return = array();
 		$result = Util::callStoreProcedure('getAllPolicyVariantsDetails', $arrParams);
+
 		if (!empty($result))
 		{
 			foreach ($result as $k1=>$v1)

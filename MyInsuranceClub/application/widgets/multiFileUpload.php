@@ -25,13 +25,13 @@ class MultiFileUpload extends Widget{
 <?php 		
 			if ($uploadType == 'policy_wordings_images')
 			{
-				$folderUrl = $this->config->config['folder_path']['policy']['policy_wordings_images'];
-				$fileUrl = $this->config->config['url_path']['policy']['policy_wordings_images'];
+				$folderUrl = $this->config->config['folder_path']['policy']['policy_wordings_thumbnails'];
+				$fileUrl = $this->config->config['url_path']['policy']['policy_wordings_thumbnails'];
 			}
 			else if ($uploadType == 'brochure_images')
 			{
-				$folderUrl = $this->config->config['folder_path']['policy']['brochure_images'];
-				$fileUrl = $this->config->config['url_path']['policy']['brochure_images'];
+				$folderUrl = $this->config->config['folder_path']['policy']['brochure_thumbnails'];
+				$fileUrl = $this->config->config['url_path']['policy']['brochure_thumbnails'];
 			}
 			else if ($uploadType == 'news_original_image')
 			{
@@ -42,7 +42,7 @@ class MultiFileUpload extends Widget{
 			foreach ($files as $k1=>$v1)
 			{
 				if (isset($v1) && !empty($v1))
-				{
+				{				
 					if (file_exists($folderUrl.$v1))
 					{
 						echo '<img src="'.$fileUrl.$v1.'">';

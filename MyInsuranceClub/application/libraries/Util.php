@@ -3397,6 +3397,13 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 			);
 			
 		}
+		else if(in_array($type, array('policy_wordings_images', 'brochure_images')))
+		{
+			$arrImageSizes = array(
+					'thumbnails_133x146'=> array('width'=>'133','height'=>'146'),
+			);
+			
+		}
 		else if($type=='users')
 		{
 			$arrImageSizes = array(
