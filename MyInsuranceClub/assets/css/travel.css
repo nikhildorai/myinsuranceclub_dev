@@ -1798,6 +1798,9 @@ body .mic_btn_tl_one.mic_btn_tl-hover, body .mic_btn_tl_one.mic_btn_tl_clr_ol.mi
 }*/
 .small_i i{ font-size: 12px;
     top: 0;;}
+	.error_ic{margin-right: 5px;
+    position: relative;
+    top: -1px;}
  @media screen and (max-width: 1200px) {
 	 .travel_container{ width:910px;}
 	 .p_d_column{ width:278px;}

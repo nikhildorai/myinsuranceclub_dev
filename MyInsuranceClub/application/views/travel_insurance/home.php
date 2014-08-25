@@ -792,7 +792,7 @@
 	{	
 		$('#error_border_2').css({"border":"1px solid red","line-height":"0px"});
 		$('#error_box_2').show();
-		$('#error_box_2').html('Please choose trip location');
+		$('#error_box_2').html('<img src="assets/images/icons/error.png"  class="error_ic"> Please choose trip location');
 		$('#trip_location_error').focus();
 		return false;
 		
@@ -808,7 +808,7 @@
 	{
 		$('#error_border_3').css({"border":"1px solid red","line-height":"0px"});
 		$('#error_box_3').show();
-		$('#error_box_3').html('Please choose trip start date');
+		$('#error_box_3').html('<img src="assets/images/icons/error.png"  class="error_ic"> Please choose trip start date');
 		$('#trip_start_error').focus();
 		return false;
 	}
@@ -825,7 +825,7 @@
 	{
 		$('#error_border_4').css({"border":"1px solid red","line-height":"0px"});
 		$('#error_box_4').show();
-		$('#error_box_4').html('Please choose trip end date');
+		$('#error_box_4').html('<img src="assets/images/icons/error.png"  class="error_ic"> Please choose trip end date');
 		$('#trip_end_error').focus();
 		return false;
 	}
@@ -842,7 +842,7 @@
 	{
 		$('#error_border_5').css({"border":"1px solid red","line-height":"0px"});
 		$('#error_box_5').show();
-		$('#error_box_5').html('Please choose number of people to cover');
+		$('#error_box_5').html('<img src="assets/images/icons/error.png"  class="error_ic"> Please choose number of people to cover');
 		$('#family_composition_error').focus();
 		
 		return false;
@@ -858,7 +858,7 @@
 	{
 		$('#error_border_6').css({"border":"1px solid red"});
 		$('#error_box_6').show();
-		$('#error_box_6').html('Please choose your gender');
+		$('#error_box_6').html('<img src="assets/images/icons/error.png" class="error_ic"> Please choose your gender');
 		$('#cust_gender_error').focus();
 		
 		return false;
