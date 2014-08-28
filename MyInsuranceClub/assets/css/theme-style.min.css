@@ -357,7 +357,7 @@ small img {
 	padding-bottom:2em;
 	border-bottom:1px solid rgba(204, 204, 204, .7)
 }
-ul.big-list, ul.list-lg {
+/*ul.big-list, ul.list-lg {
 	font-size:1.1em;
 	padding:0;
 	margin:0
@@ -373,7 +373,7 @@ ul.big-list li, ul.list-lg li {
 }
 ul.big-list li:hover, ul.list-lg li:hover {
 	background:#f7f7f7
-}
+}*/
 .popover-title {
 	font-size:16px;
 	font-weight:700

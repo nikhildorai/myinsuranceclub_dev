@@ -31,9 +31,6 @@ $(document).ready(function() {
 		
 		
 		
-		
-		
-		
 		$('.toll_a,.where_go_a,.where_go_b,.where_go_c,.where_go_d').click(function(){
 		 
 		 $('.mic_tooltip_message').fadeIn();
@@ -299,9 +296,9 @@ $(document).ready(function() {
 		 $('.w_gb,.w_gc,.w_gd').removeClass('mic_btn_tl_chkd');   
 		 end_date = 7; 
 		   $( ".end_datepicker" ).datepicker( "option", "minDate", 0 );
-		 $('.n_a .mic_top_text').html(seven_day(7));
-		  $('.n_b .mic_top_text').html(seven_day(10));
-		   $('.n_c .mic_top_text').html(seven_day(14));
+		 $('.n_a .mic_top_text').html(seven_day(6));
+		  $('.n_b .mic_top_text').html(seven_day(9));
+		   $('.n_c .mic_top_text').html(seven_day(13));
 		   
         });
 		
@@ -312,9 +309,9 @@ $(document).ready(function() {
 		 $('.trip-end-date-picker .mic_sec_label').hide();
 		  end_date = 8; 
 		   $( ".end_datepicker" ).datepicker( "option", "minDate", 1 );
-		 $('.n_a .mic_top_text').html(seven_day(8));
-		  $('.n_b .mic_top_text').html(seven_day(11));
-		   $('.n_c .mic_top_text').html(seven_day(15));
+		 $('.n_a .mic_top_text').html(seven_day(6));
+		  $('.n_b .mic_top_text').html(seven_day(9));
+		   $('.n_c .mic_top_text').html(seven_day(13));
         });
 		
 		$(document).delegate('.w_gc','click',function() {
@@ -323,9 +320,9 @@ $(document).ready(function() {
 		  $('.trip-end-date-picker .mic_sec_label').hide();
 		  end_date = 9;  
 		  $( ".end_datepicker" ).datepicker( "option", "minDate", 2 );
-		 $('.n_a .mic_top_text').html(seven_day(9));
-		  $('.n_b .mic_top_text').html(seven_day(12));
-		   $('.n_c .mic_top_text').html(seven_day(16));
+		 $('.n_a .mic_top_text').html(seven_day(8));
+		  $('.n_b .mic_top_text').html(seven_day(11));
+		   $('.n_c .mic_top_text').html(seven_day(15));
         });
 		
 		
@@ -420,7 +417,7 @@ $(document).ready(function() {
 	var newTextBoxDiv = $(document.createElement('div'))
 	     .attr("id", 'TextBoxDiv' + counter);
 
-	newTextBoxDiv.after().html('<div> <div style="width:50%; float:left;" class="dob_tvlr"> <div class="family_section_header ">Traveller '+cnt_num+' date of birth</div> <div class="family_section "> <div class="individual_icon inline-block"></div> <div class="birth-date"> <div class="mic_sec_label mic_sec_label_cntrl"> <div class="mic_t_input"><span class=" mic_sec_day_cntrl"> <div class="mic_sec_label"> <div class="mic_t_input "> <input type="text" class="mic_t_input mic_e_input  id" style="margin-right:10px;" name="traveller_day[]" placeholder="DD" aria-label="DD" maxlength="2"> <input type="text" class="mic_t_input mic_e_input  id" style="margin-right:10px; width:36px;" placeholder="MM" name="traveller_month[]" aria-label="MM" maxlength="2"> <input type="text" class="mic_t_input mic_e_input " style="width:48px;" placeholder="YYYY" name="traveller_year[]" aria-label="YYYY" maxlength="4"> </div> <div class="id-error-text error-text" style="display: none;"></div> </div> </span></div> <div class=" error-text" style="display: none;"></div> </div> </div> </div> <div class="id-member-error-text error-text" style="display: none;"></div> </div> <div class="id-cus-gender" style="display:inline-block;width: 50%;"> <div class="family_section_header ">Traveller '+cnt_num+' Gender</div> <div style="width: 100%; margin-top:10px;" class="mic_t_input"> <div class=" mic_t_b_panel"> <div style="width:33.33%;" aria-pressed="true" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gen_but_addtra_m" id="traveller_'+ cnt_num +'_male"> <div class="mic_icon" style="padding: 5px 0px"> <div class="mic_i_mar male" style="float: left; margin-top: 2px;"></div> <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Male</div> </div> </div> <div style="width: 33.33%;"  class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r gen_but_addtra_f" id = "traveller_'+ cnt_num +'_female"> <div class="mic_icon" style="padding: 5px 0px"> <div class="mic_i_mar female" style="float: left; margin-top: 3px;"></div> <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Female</div> </div> </div> </div> <a href="javascript:void(0)" class="id-delete-per fa fa-trash-o " id="traveller_' + cnt_num +'_delete"></a> </div> </div></div>');
+	newTextBoxDiv.after().html('<div> <div style="width:50%; float:left;" class="dob_tvlr"> <div class="family_section_header ">Traveller '+cnt_num+' date of birth</div> <div class="family_section "> <div class="individual_icon inline-block"></div> <div class="birth-date"> <div class="mic_sec_label mic_sec_label_cntrl"> <div class="mic_t_input"><span class=" mic_sec_day_cntrl"> <div class="mic_sec_label"> <div class="mic_t_input "> <input type="text" class="mic_t_input mic_e_input  id" style="margin-right:10px;" name="traveller_day[]" placeholder="DD" aria-label="DD" maxlength="2"> <input type="text" class="mic_t_input mic_e_input  id" style="margin-right:10px; width:36px;" placeholder="MM" name="traveller_month[]" aria-label="MM" maxlength="2"> <input type="text" class="mic_t_input mic_e_input " style="width:48px;" placeholder="YYYY" name="traveller_year[]" aria-label="YYYY" maxlength="4"> </div> <div class="id-error-text error-text" style="display: none;"></div> </div> </span></div> <div class=" error-text" style="display: none;"></div> </div> </div> </div> <div class="id-member-error-text error-text" style="display: none;"></div> </div> <div class="id-cus-gender" style="display:inline-block;width: 50%;"> <div class="family_section_header ">Traveller '+cnt_num+' Gender</div> <div style="width: 100%; margin-top:10px;" class="mic_t_input"> <div class=" mic_t_b_panel"> <div style="width:50%;" aria-pressed="true" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gen_but_addtra_m" id="traveller_'+ cnt_num +'_male"> <div class="mic_icon" style="padding: 5px 0px"> <div class="mic_i_mar male" style="float: left; margin-top: 2px;"></div> <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Male</div> </div> </div> <div style="width: 50%;"  class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r gen_but_addtra_f" id = "traveller_'+ cnt_num +'_female"> <div class="mic_icon" style="padding: 5px 0px"> <div class="mic_i_mar female" style="float: left; margin-top: 3px;"></div> <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Female</div> </div> </div> </div> <a href="javascript:void(0)" class="id-delete-per fa fa-trash-o " id="traveller_' + cnt_num +'_delete"></a> </div> </div></div>');
  
 	newTextBoxDiv.appendTo("#TextBoxesGroup");
 	
@@ -492,9 +489,9 @@ alert(cur_date);*/
     var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 
- $('.n_a .mic_top_text').html(seven_day(7));
- $('.n_b .mic_top_text').html(seven_day(10));
- $('.n_c .mic_top_text').html(seven_day(14));
+ $('.n_a .mic_top_text').html(seven_day(6));
+ $('.n_b .mic_top_text').html(seven_day(9));
+ $('.n_c .mic_top_text').html(seven_day(13));
 		   
 		   
 var d = new Date();
@@ -607,17 +604,17 @@ function MDFormat(MMDD) {
 			{
 				
 				$('.w_gd .mic_i_btm').html(seven_day(dayDiff));
-			 $('.n_a .mic_top_text').html(seven_day(7));
- $('.n_b .mic_top_text').html(seven_day(10));
- $('.n_c .mic_top_text').html(seven_day(14));
+			 $('.n_a .mic_top_text').html(seven_day(6));
+ $('.n_b .mic_top_text').html(seven_day(9));
+ $('.n_c .mic_top_text').html(seven_day(13));
  
 			}
 			
 			else{
 				$('.w_gd .mic_i_btm').html(seven_day(dayDiff));
-				 $('.n_a .mic_top_text').html(seven_day(7+dayDiff));
- $('.n_b .mic_top_text').html(seven_day(10+dayDiff));
- $('.n_c .mic_top_text').html(seven_day(14+dayDiff));
+				 $('.n_a .mic_top_text').html(seven_day(6+dayDiff));
+ $('.n_b .mic_top_text').html(seven_day(9+dayDiff));
+ $('.n_c .mic_top_text').html(seven_day(13+dayDiff));
 				
 				}
 				
@@ -734,7 +731,13 @@ function MDFormat(MMDD) {
 		//var trip_type = $(this).text();
 		//alert("value recieved");
 		$("#trip_type").val("Single trip");
-		
+		 $('.n_a .mic_top_text').html(seven_day(6));
+		  $('.n_b .mic_top_text').html(seven_day(9));
+		   $('.n_c .mic_top_text').html(seven_day(13));
+		   
+		    $('.n_a .mic_i_btm').html('7 days');
+			 $('.n_b .mic_i_btm').html('10 days');
+			  $('.n_c .mic_i_btm').html('14 days');
 		
 	});
 	
@@ -743,6 +746,9 @@ $('#mul_t').click(function() {
 		//var trip_type = $(this).text();
 		
 		$("#trip_type").val("Annual multi-trip");
+		 $('.n_a .mic_top_text').html(seven_day(6));
+		  $('.n_b .mic_top_text').html(seven_day(9));
+		   $('.n_c .mic_top_text').html(seven_day(13));
 
 	});
 $('#stu_t').click(function() {
@@ -750,6 +756,37 @@ $('#stu_t').click(function() {
 	//var trip_type = $(this).text();
 	
 	$("#trip_type").val("Student trip");
+	
+  var oneDay = 24*60*60*1000;	// hours*minutes*seconds*milliseconds
+var CurrentDate = new Date();
+var x = 3; // for 3 month
+var CurrentDate1 = new Date();
+CurrentDate1.setMonth(CurrentDate1.getMonth() + x);
+
+var y = 6; // for 6 month
+var CurrentDate2 = new Date();
+CurrentDate2.setMonth(CurrentDate2.getMonth() + y);
+
+var z = 12; // for 12 month
+var CurrentDate3 = new Date();
+CurrentDate3.setMonth(CurrentDate3.getMonth() + z);
+
+
+var diffDays_3month = Math.abs((CurrentDate1 - CurrentDate)/(oneDay));
+var diffDays_6month = Math.abs((CurrentDate2 - CurrentDate)/(oneDay));
+var diffDays_12month = Math.abs((CurrentDate3 - CurrentDate)/(oneDay));	  
+
+
+
+	
+	 $('.n_a .mic_top_text').html(seven_day(diffDays_12month));
+		  $('.n_b .mic_top_text').html(seven_day(diffDays_6month));
+		   $('.n_c .mic_top_text').html(seven_day(diffDays_3month));
+		   
+		   
+		    $('.n_a .mic_i_btm').html('1 Year');
+			 $('.n_b .mic_i_btm').html('6 Months');
+			  $('.n_c .mic_i_btm').html('3 Months');
 	
 });
 

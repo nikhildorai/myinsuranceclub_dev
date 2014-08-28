@@ -7,9 +7,10 @@
         <div class="row">
           <div class="col-md-12"> 
             <!--branding/logo--> 
-            <a class="navbar-brand" href="<?php echo site_url();?>" title="Home">
+                      <span class="navbar-brand"  style="cursor:auto !important;" >
+
             <h1><img src="<?php echo base_url();?>/assets/images/logo.png" /> </h1>
-            </a>
+            </span>
             <div class="slogan col-md-8" style="color:#fff;">India's 1st IRDA Approved Comparison Site</div>
           </div>
         </div>

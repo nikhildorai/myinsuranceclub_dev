@@ -152,19 +152,19 @@
                         <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r n_a"  id="7_nights" style="width: 25%;cursor: pointer;">
                           <div class="mic_icon">
                             <div class="mic_top_text"></div>
-                            <div class="mic_i_btm">7 nights</div>
+                            <div class="mic_i_btm">7 days</div>
                           </div>
                         </div>
                         <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r n_b"  id="10_nights" style="width: 25%;cursor: pointer;">
                           <div class="mic_icon">
                             <div class="mic_top_text"></div>
-                            <div class="mic_i_btm">10 nights</div>
+                            <div class="mic_i_btm">10 days</div>
                           </div>
                         </div>
                         <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r n_c"  id="14_nights" style="width: 25%;cursor: pointer;">
                           <div class="mic_icon">
                             <div class="mic_top_text"></div>
-                            <div class="mic_i_btm">14 nights</div>
+                            <div class="mic_i_btm">14 days</div>
                           </div>
                         </div>
                         <div class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l n_d"  style="width: 25%;cursor: pointer;">
@@ -249,13 +249,13 @@
                           <div class="family_section_header ">Your Gender</div>
                           <div style="width: 100%; margin-top:10px;" class="mic_t_input">
                             <div class=" mic_t_b_panel" id="error_border_6">
-                              <div style="width:33.33%;" aria-pressed="true" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gen_but_m">
+                              <div style="width:50%;" aria-pressed="true" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gen_but_m">
                                 <div class="mic_icon" style="padding: 5px 0px;cursor: pointer;">
                                   <div class="mic_i_mar male" style="float: left; margin-top: 2px;"></div>
                                   <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Male</div>
                                 </div>
                               </div>
-                              <div style="width: 33.33%;"  class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r gen_but_f">
+                              <div style="width: 50%;"  class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r gen_but_f">
                                 <div class="mic_icon" style="padding: 5px 0px;cursor: pointer;">
                                   <div class="mic_i_mar female" style="float: left; margin-top: 3px;"></div>
                                   <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Female</div>
@@ -294,13 +294,13 @@
                                 <div class="family_section_header ">Spouse Gender</div>
                                 <div style="width: 100%; margin-top:10px;" class="mic_t_input">
                                   <div class=" mic_t_b_panel">
-                                    <div style="width:33.33%;" aria-pressed="true" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gen_but_spouce_m">
+                                    <div style="width:50%;" aria-pressed="true" class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_r gen_but_spouce_m">
                                       <div class="mic_icon" style="padding: 5px 0px; cursor: pointer;">
                                         <div class="mic_i_mar male" style="float: left; margin-top: 2px;"></div>
                                         <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Male</div>
                                       </div>
                                     </div>
-                                    <div style="width: 33.33%;"  class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r gen_but_spouce_f">
+                                    <div style="width: 50%;"  class="mic_btn_in mic_btn_tl mic_btn_tl_one s-b mic_btn_tl_c_l mic_btn_tl_c_r gen_but_spouce_f">
                                       <div class="mic_icon" style="padding: 5px 0px; cursor: pointer;">
                                         <div class="mic_i_mar female" style="float: left; margin-top: 3px;"></div>
                                         <div class="mic_i_btm" style="margin-top: 5px;padding-bottom: 5px;">Female</div>
@@ -790,7 +790,7 @@
 
 	if($('#trip_location').val() == '')
 	{	
-		$('#error_border_2').css({"border":"1px solid red","line-height":"0px"});
+		$('#error_border_2').css({"border":"1px solid #FF0000","line-height":"0px"});
 		$('#error_box_2').show();
 		$('#error_box_2').html('<img src="assets/images/icons/error.png"  class="error_ic"> Please choose trip location');
 		$('#trip_location_error').focus();
@@ -806,7 +806,7 @@
 
 	if($('#trip_start').val() == '')
 	{
-		$('#error_border_3').css({"border":"1px solid red","line-height":"0px"});
+		$('#error_border_3').css({"border":"1px solid #FF0000","line-height":"0px"});
 		$('#error_box_3').show();
 		$('#error_box_3').html('<img src="assets/images/icons/error.png"  class="error_ic"> Please choose trip start date');
 		$('#trip_start_error').focus();
@@ -823,7 +823,7 @@
 
 	if($('#trip_end').val() == '' && $('#trip_type').val() != 'Annual multi-trip')
 	{
-		$('#error_border_4').css({"border":"1px solid red","line-height":"0px"});
+		$('#error_border_4').css({"border":"1px solid #FF0000","line-height":"0px"});
 		$('#error_box_4').show();
 		$('#error_box_4').html('<img src="assets/images/icons/error.png"  class="error_ic"> Please choose trip end date');
 		$('#trip_end_error').focus();
@@ -840,7 +840,7 @@
 		
 	if($('#family_composition').val() == '')
 	{
-		$('#error_border_5').css({"border":"1px solid red","line-height":"0px"});
+		$('#error_border_5').css({"border":"1px solid #FF0000","line-height":"0px"});
 		$('#error_box_5').show();
 		$('#error_box_5').html('<img src="assets/images/icons/error.png"  class="error_ic"> Please choose number of people to cover');
 		$('#family_composition_error').focus();
@@ -856,7 +856,7 @@
 
 	if($('#cust_gender').val() == '')
 	{
-		$('#error_border_6').css({"border":"1px solid red"});
+		$('#error_border_6').css({"border":"1px solid #FF0000"});
 		$('#error_box_6').show();
 		$('#error_box_6').html('<img src="assets/images/icons/error.png" class="error_ic"> Please choose your gender');
 		$('#cust_gender_error').focus();
