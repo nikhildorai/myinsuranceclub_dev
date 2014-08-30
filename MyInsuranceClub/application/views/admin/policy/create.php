@@ -897,7 +897,7 @@ $policy_id = (isset($policyModel['policy_id']) && !empty($policyModel['policy_id
 						                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Additional Details</strong></div>
 						                <div class="panel-body">
 						                
-						                	<?php //echo widget::run('additionalDetailsBack', array('model'=>$policyModel, 'ckeditor'=>$ckeditor, 'modelName'=>'policyModel')); ?>
+						                	<?php echo widget::run('additionalDetailsBack', array('model'=>$policyModel, 'ckeditor'=>$ckeditor, 'modelName'=>'policyModel')); ?>
 							                
 						                </div>
 						            </section>

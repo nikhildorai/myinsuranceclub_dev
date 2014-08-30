@@ -78,4 +78,149 @@ class Guides_model EXTENDS Admin_Model{
 	{		
 		return $this->db->query($sql);
 	}
+	
+	
+	public static function getGuidesDetails($arrParams = array())
+	{
+		$data = $details = $relatedPost = array();
+		$data['seoData'] = '';
+		$cacheFileName = 'guides';
+		$db =& get_instance();
+		if (!empty($arrParams))
+		{
+			foreach ($arrParams as $k1=>$v1)
+			{
+				if (!empty($v1))
+					$cacheFileName .= '_'.$v1;
+			}
+		}
+		$cacheResult = Util::getCachedObject($cacheFileName);			
+		//	check if cache file exist
+		if(!empty($cacheResult))
+		{
+			// get result set from cache
+			$details = $cacheResult;
+		}
+		else
+		{			
+			//get resultset from DB and save in cache
+			$db->db->freeDBResource($db->db->conn_id);
+			$details = Util::callStoreProcedure("sp_getGuidesDetails", $arrParams);	
+			if (!empty($details))
+			{				
+				$db->db->freeDBResource($db->db->conn_id);
+				$data = Util::rearrangeDataAsPerColumnName('guidesListing', $details);				
+			}
+
+			//	get top 3 records
+			$tableName = Util::getdbPrefix().'guides';
+			$where = array('table_name'=>$tableName);
+			$top = Util::callStoreProcedure("sp_getTopNewsArticlesGuide", $where); 	
+			$data['top'] = $top;
+			
+			//	get all the tags with post count
+			$allTags = Util::callStoreProcedure("sp_getTagsWithNewsCount", $where);
+			if (!empty($allTags))
+				$data['allTags'] = $allTags;
+			else 
+				$data['allTags'] = array();
+				
+
+			if (isset($arrParams['guides_slug']) && !empty($arrParams['guides_slug']))
+			{
+				$data['guidesDetails'] = reset($data['guidesDetails']);					
+				
+				//	update page view count
+				$updateCount = Util::incrementPageViewCount('guides', 'page_view_count','guide_id',$data['guidesDetails']['guides']['guide_id']);
+							
+				//	seo data
+				$url = base_url().'guides/'.$arrParams['guides_slug'];
+		        $data['seoData']['title'] = $data['guidesDetails']['guides']['seo_title'];
+		        $data['seoData']['keywords'] = $data['guidesDetails']['guides']['seo_keywords'];
+		        $data['seoData']['description'] = $data['guidesDetails']['guides']['seo_description'];
+		        $data['seoData']['url'] = $url;
+		        $data['socialSeoData'] = Util::getSocialMediaSeoData($data['guidesDetails']['guides'], $url);
+		        $data['url'] = $url;
+		        	        
+				//	get related post by tags
+				$tags = $data['guidesDetails']['guides']['tag'];
+				if(!empty($tags))
+				{
+					$tags = explode(',', $tags);
+					foreach ($tags as $k2=>$v2)
+					{
+						if (!empty($v2))
+						{
+							if (count($relatedPost)<7)
+							{
+								$where['tag'] = $v2;
+								$rel= Util::callStoreProcedure('sp_getRelatedNewsArticlesGuides', $where);							
+								if (!empty($rel))
+								{
+									foreach ($rel as $k3=>$v3)
+									{
+										if ($v3['guide_id'] != $data['guidesDetails']['guides']['guide_id'])
+											$relatedPost[$v3['guide_id']] = $v3; 
+									}
+								}
+							}
+						}
+					}
+				}
+				$data['relatedPost'] = $relatedPost;
+			}
+			else 
+			{			
+				$arrTitle = array();
+				//	get comment count for each guides
+				foreach ($data['guidesDetails'] as $k4=>$v4)
+				{
+					$arrTitle[] = $v4['guides']['slug'];				
+				}	
+				$arrTitle = implode(',', $arrTitle);
+			}
+			
+			//	for guides by author  
+			if (!empty($arrParams['author']) && !empty($data['guidesDetails']))
+			{
+				$temp = reset($data['guidesDetails']);
+				$data['author'] = $temp['author'];
+			}
+			
+			//	for guides by category/tag
+			if (!empty($arrParams['tag']))
+			{
+				if (!empty($data['allTags']))
+				{
+					foreach ($data['allTags'] as $k1=>$v1)
+					{
+						if ($v1['slug'] == $arrParams['tag'])
+							$data['tagDetails'] = $v1;
+					}
+				}
+			}
+			
+			if (empty($data['seoData']))
+			{
+				$config = $db->util->get_pagination_params();
+				$arrSeo['currentPage'] = $config['currentPage'];
+				$seoType = 'guidesListing';
+				if (!empty($arrParams['author']) && !empty($data['author']))
+				{
+					$arrSeo['author_name'] = isset($data['author']['upro_last_name']) ? $data['author']['upro_first_name'].' '.$data['author']['upro_last_name'] : $data['author']['upro_first_name'];
+					$seoType = 'guidesByAuthor';
+				}
+				else if (!empty($arrParams['tag']))
+				{
+					$arrSeo['tag_name'] = isset($data['tagDetails']['name']) ? $data['tagDetails']['name'] : '';
+					$seoType = 'guidesByTag';
+				}
+				$data['seoData'] = Util::getDefaultSeoData($seoType, $arrSeo);
+			}
+			//Util::saveResultToCache($cacheFileName,$data);
+		}
+		return $data;
+	}
+	
+	
 }

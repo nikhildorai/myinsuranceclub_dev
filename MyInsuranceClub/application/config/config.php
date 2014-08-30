@@ -410,6 +410,20 @@ $config['url_path']['news']['main_image']					= $config['base_url'].'uploads/new
 $config['url_path']['news']['listing_image']				= $config['base_url'].'uploads/news/listing_image_300x220/';
 $config['url_path']['news']['thumbnail']					= $config['base_url'].'uploads/news/thumbnail_75x75/';
 
+//	articles
+$config['url_path']['articles']['all']							= $config['base_url'].'uploads/articles/';
+$config['url_path']['articles']['original_image']				= $config['base_url'].'uploads/articles/original_image/';
+$config['url_path']['articles']['main_image']					= $config['base_url'].'uploads/articles/main_image_680x309/';
+$config['url_path']['articles']['listing_image']				= $config['base_url'].'uploads/articles/listing_image_300x220/';
+$config['url_path']['articles']['thumbnail']					= $config['base_url'].'uploads/articles/thumbnail_75x75/';
+
+//	guides
+$config['url_path']['guides']['all']							= $config['base_url'].'uploads/guides/';
+$config['url_path']['guides']['original_image']				= $config['base_url'].'uploads/guides/original_image/';
+$config['url_path']['guides']['main_image']					= $config['base_url'].'uploads/guides/main_image_680x309/';
+$config['url_path']['guides']['listing_image']				= $config['base_url'].'uploads/guides/listing_image_300x220/';
+$config['url_path']['guides']['thumbnail']					= $config['base_url'].'uploads/guides/thumbnail_75x75/';
+
 //	user image
 $config['url_path']['users']['user_image']				= $config['base_url'].'uploads/users/user_image/';
 $config['url_path']['users']['original']				= $config['base_url'].'uploads/users/original/';
@@ -440,6 +454,20 @@ $config['folder_path']['news']['original_image']			= realpath(APPPATH . '../uplo
 $config['folder_path']['news']['main_image']				= realpath(APPPATH . '../uploads').'/news/main_image_680x309/';
 $config['folder_path']['news']['listing_image']				= realpath(APPPATH . '../uploads').'/news/listing_image_300x220/';
 $config['folder_path']['news']['thumbnail']					= realpath(APPPATH . '../uploads').'/news/thumbnail_75x75/';
+
+//	articles
+$config['folder_path']['articles']['all']						= realpath(APPPATH . '../uploads').'/articles/';
+$config['folder_path']['articles']['original_image']			= realpath(APPPATH . '../uploads').'/articles/original_image/';
+$config['folder_path']['articles']['main_image']				= realpath(APPPATH . '../uploads').'/articles/main_image_680x309/';
+$config['folder_path']['articles']['listing_image']				= realpath(APPPATH . '../uploads').'/articles/listing_image_300x220/';
+$config['folder_path']['articles']['thumbnail']					= realpath(APPPATH . '../uploads').'/articles/thumbnail_75x75/';
+
+//	guides
+$config['folder_path']['guides']['all']						= realpath(APPPATH . '../uploads').'/guides/';
+$config['folder_path']['guides']['original_image']			= realpath(APPPATH . '../uploads').'/guides/original_image/';
+$config['folder_path']['guides']['main_image']				= realpath(APPPATH . '../uploads').'/guides/main_image_680x309/';
+$config['folder_path']['guides']['listing_image']				= realpath(APPPATH . '../uploads').'/guides/listing_image_300x220/';
+$config['folder_path']['guides']['thumbnail']					= realpath(APPPATH . '../uploads').'/guides/thumbnail_75x75/';
 
 //	user image
 $config['folder_path']['users']['user_image']				= realpath(APPPATH . '../uploads').'/users/user_image/';

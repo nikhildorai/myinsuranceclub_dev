@@ -11,6 +11,7 @@ class SamplePremiumFront extends Widget{
     {
         $vModel = isset($ext['variant']) ? $ext['variant'] : array();
         $features = isset($ext['features']) ? $ext['features'] : array();
+        
 ?>    	
 			<div id="pricing-table">
 
@@ -53,8 +54,8 @@ class SamplePremiumFront extends Widget{
 							echo implode(', ', array_filter($dis))?>
 						</div>
 					</div>
-				</div>
 <?php 			}	?>	
+				</div>
 
 
 				<div class="sam_c">

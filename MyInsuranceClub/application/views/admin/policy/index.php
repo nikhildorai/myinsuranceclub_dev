@@ -95,7 +95,9 @@ $(document).ready(function(){
 </script>
 
 <?php //var_dump($this->util->getLoggedInUserDetails());?>
-<?php 	if (! empty($message))
+<?php 	
+//var_dump($this->session->flashdata('message'));
+if (! empty($message))
 		{
 			if (isset($msgType) && !empty($msgType))
 			{
@@ -108,7 +110,8 @@ $(document).ready(function(){
 			}
 			else
 				echo '<div class="callout callout-success">';
-							echo $message;
+				
+							echo $this->session->flashdata('message');
 					echo '</div>';
 		} ?>
 

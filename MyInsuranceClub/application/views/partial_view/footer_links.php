@@ -26,8 +26,8 @@
             <h3 class="bottom-col-title">Other Links</h3>
             <ul>
                       <li><a href="<?php echo site_url('ask-expert');?>">Ask an Expert</a></li>
-                      <li><a href="">Insurance Articles</a></li>
-                      <li><a href="">Insurance Guides</a></li>
+                      <li><a href="<?php echo base_url().'articles/'?>">Insurance Articles</a></li>
+                      <li><a href="<?php echo base_url().'guides/'?>">Insurance Guides</a></li>
                       <li><a href="<?php echo base_url().'news/'?>">Insurance News</a></li>
                       <li><a href="<?php echo base_url().'life-insurance/companies/';?>">Life Insurance Companies in India</a></li>
                       <li><a href="<?php echo base_url().'general-insurance-companies/';?>">General Insurance Companies in India</a></li>

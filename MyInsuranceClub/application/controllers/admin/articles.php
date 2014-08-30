@@ -17,7 +17,6 @@ class Articles extends Admin_Controller {
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
 		$this->session->set_flashdata('message','');		
 
-
 		$arrParams 	= $records = array();
 		$where 	= Articles_model::getWhere();	
 		$total = Util::getTotalRowTable('total','articles', $where);
@@ -31,7 +30,7 @@ class Articles extends Admin_Controller {
 		$this->data['search_query'] = $arrParams;
 		$where 	= Articles_model::getWhere($arrParams);
 			
-		$orderBy = 'title ASC, article_id ASC'; 
+		$orderBy = 'publish_date DESC,article_id DESC, title ASC '; 
 		$this->data['records'] = Util::getTotalRowTable('all','articles', $where, $limit, $orderBy);
 		
 		
@@ -47,6 +46,7 @@ class Articles extends Admin_Controller {
 
     public function create($article_id = null)
 	{
+		$this->load->library('simpleImage');
 		$modelType = 'create';
 		//	check if policy id exists
 		$model = array();
@@ -102,14 +102,59 @@ class Articles extends Admin_Controller {
 				$tag = $this->util->addUpdateTags($_POST['tag']);
 				$_POST['model']['tag'] = $tag;
 			}
-			if (isset($_POST['model']['slug']) && !empty($_POST['model']['slug']))
+		//	check if file is uploaded
+			if (!empty($_FILES))
 			{
+				$i = 1;
+				foreach($_FILES['model']['name'] as $k1=>$v1)
+				{
+					$time = time();
+					$ext = end(explode('.', $v1));
+					if (empty($ext))
+						$ext = 'jpg';
+					$name = $this->util->getSlug($_POST['model']['title']);
+					//$arrFileNames = array();
+					//	set name & upload path for each file 
+					if ($k1 == 'original_image')
+					{
+						$arrFileNames['original_image'] = $arrFileNames['main_image'] = $arrFileNames['listing_image'] = $arrFileNames['thumbnail'] = 	$name.'-'.$time.'.'.$ext;
+					}
+			//		else
+			//		{
+			//			$arrFileNames[$k1] = '-'.$i.'.'.$ext;
+			//		}
+					foreach ($arrFileNames as $k2=>$v2)
+					{
+						if (empty($v1))
+							$_POST['model'][$k1] = (isset($model[$k1]) && !empty($model[$k1])) ? $model[$k1] : '';
+						else
+							$_POST['model'][$k2] = $v2;
+						$i++;
+					}
+				}
+			}
+			else 
+			{
+				//	set previous file name in post
+				$_POST['model']['original_image'] 	= $model['original_image'];
+				$_POST['model']['main_image'] 		= $model['main_image'];
+				$_POST['model']['listing_image'] 	= $model['listing_image'];
+				$_POST['model']['thumbnail'] 		= $model['thumbnail'];
+			}
+						
+			if (isset($_POST['model']['slug']) && !empty($_POST['model']['slug']))
 				$_POST['model']['slug'] = $this->util->getSlug($_POST['model']['slug']);
-			}		
+			else
+				$_POST['model']['slug'] = $this->util->getSlug($_POST['model']['title']);
+					
 			if (isset($_POST['model']['publish_date']) && !empty($_POST['model']['publish_date']))
 			{
 				$_POST['model']['publish_date'] = $this->util->getDate($_POST['model']['publish_date'], 3);
-			}	
+			}
+			if (!isset($_POST['model']['seo_description'])|| empty($_POST['model']['seo_description']))
+			{
+				$_POST['model']['seo_description'] = substr(strip_tags($_POST['model']['description']), 1, 150);
+			}		
 			//	set default values for policy
 			$arrParams = $this->input->post('model');
 			$_POST['modelType'] = $modelType;
@@ -120,7 +165,7 @@ class Articles extends Admin_Controller {
 				array('field' => 'model[publish_date]', 'label' => 'publish date', 'rules' => 'required'),
 				array('field' => 'model[author]', 'label' => 'author', 'rules' => 'required'),
 				array('field' => 'model[seo_description]', 'label' => 'seo description', 'rules' => 'required'),
-				array('field' => 'model[seo_keywords]', 'label' => 'seo keywords', 'rules' => 'required'),
+			//	array('field' => 'model[seo_keywords]', 'label' => 'seo keywords', 'rules' => 'required'),
 				array('field' => 'model[seo_title]', 'label' => 'key features', 'rules' => 'required'),
 				array('field' => 'model[slug]', 'label' => 'url', 'rules' => 'required|callback_validatePost[slug]'),
 				array('field' => 'model[tag]', 'label' => 'tag', 'rules' => 'required'),
@@ -142,12 +187,74 @@ class Articles extends Admin_Controller {
 				}
 				else 
 					$saveData[] = false;
+				
+					
+				if (!empty($article_id))	
+				{
+					// 	save records for files
+					if (!empty($_FILES))
+					{
+						$this->data['file_upload_error'] = array();
+				        $config['upload_path'] = $this->config->config['folder_path']['articles']['original_image'];
+				        $config['file_name'] = $arrFileNames;
+				        $config['extra_config'] = Util::getConfigForFileUpload('articles');
+						$this->load->library('upload', $config);
+						$this->upload->initialize($config); 	
 						
+						if($this->upload->do_multi_upload("model"))
+						{
+			              	$this->data['file_upload'] = $this->upload->get_multi_upload_data();
+		              		//	if image is uploaded successfully resize images
+			              	if (!empty($this->data['file_upload']))
+			              	{
+			              		foreach ($this->data['file_upload'] as $k1=>$v1)
+			              		{
+									$photoName = $v1['orig_name'];
+									$path = $v1['file_path'];
+									//$path = $this->config->config['folder_path']['articles']['all'];
+									$temp = $this->config->config['folder_path']['temp'];
+									
+									SimpleImage::saveImages($path, $photoName, $type="articles");
+			              		}
+			              	}
+						}
+						else 
+						{
+			                $this->data['file_upload_error'][] = $this->upload->display_errors();
+						}
+			            $this->data['file_upload'] = $this->upload->get_multi_upload_data();
+			            
+			            if (empty($this->data['file_upload_error']))
+			            {
+							$saveData[] = true;
+			            }
+			            else if (!empty($this->data['file_upload_error']))
+			            {
+			            	foreach ($this->data['file_upload_error'] as $k1=>$v1)
+			            	{
+			            		$msg = str_replace('<p>', '', $v1);
+			            		$msg = str_replace('</p>', '', $msg);
+								$this->data['message'] .= '<p class="error_msg">'.$msg.'</p>';
+			            	}
+							$saveData[] = false;
+			            }
+			            else 
+			            {
+							$saveData[] = true;
+			            }
+					}	
+				}	
 				//	if policy and varients records are stored then on show success and redirect to index 
-				if(!in_array(false, $saveData))
+				if(!in_array(false, $saveData) && empty($this->data['file_upload_error']))
 				{
 					$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
 					$this->data['msgType'] = 'success';
+					redirect('admin/articles/index');
+				}
+				else if(in_array(false, $saveData) && !empty($this->data['file_upload_error']))
+				{
+					$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.'.$this->data['message'].'</p>');
+					$this->data['msgType'] = 'error';
 					redirect('admin/articles/index');
 				}
 				else 

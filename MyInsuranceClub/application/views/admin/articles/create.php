@@ -16,11 +16,13 @@ $( "#publish_date" ).datepicker({
 	});
 });
 </script>
+<script src="<?php echo  base_url()?>assets/js/multiFileUpload/script.js"></script>
 
 <link rel="stylesheet" href="<?php echo base_url();?>css/jquery-ui-1.10.4.custom.css">
 <div class="page" data-ng-controller="signupCtrl">
 <?php 	$attributes = array('class'=>"form-horizontal form-validation");
-		echo form_open_multipart(current_url(), $attributes);	?>
+		echo form_open_multipart(current_url(), $attributes);	
+$article_id = (isset($model['article_id']) && !empty($model['article_id'])) ? $model['article_id'] : '';?>
 	<div class="panel panel-primary">
     	<div class="panel-heading">
         	<strong>
@@ -63,14 +65,14 @@ $( "#publish_date" ).datepicker({
 				                <div class="form-group">
 				                    <label for="" class="col-sm-3">Title</label>
 				                    <div class="col-sm-9">
-				                        <input type="text" class="form-control" required placeholder="Add title" id="title" name="model[title]" value="<?php echo array_key_exists( 'title',$model) ? $model['title'] : '';?>"  >
+				                        <input type="text" class="form-control titleUrlClass" required placeholder="Add title" id="title" name="model[title]" value="<?php echo array_key_exists( 'title',$model) ? $model['title'] : '';?>"  >
 				                    </div>
 				                </div>
 				                
 				                <div class="form-group">
 				                    <label for="" class="col-sm-3">Description</label>
 				                    <div class="col-sm-9">
-				                        <textarea required class="form-control" name="model[description]" id="description" ><?php echo array_key_exists( 'description',$model) ? $model['description'] : '';?></textarea>
+				                        <textarea required class="form-control descriptionClass" name="model[description]" id="description" ><?php echo array_key_exists( 'description',$model) ? $model['description'] : '';?></textarea>
 				                        <?php echo display_ckeditor($this->data['ckeditor']); ?>
 				                    </div>
 					                <div class="form-group">
@@ -85,7 +87,7 @@ $( "#publish_date" ).datepicker({
 					                <div class="form-group">
 					                </div>
 				                </div>
-			                
+<?php /*?>			                
 				                <div class="form-group">
 				                    <label for="" class="col-sm-3">Category</label>
 				                    <div class="col-sm-9">
@@ -99,10 +101,10 @@ $( "#publish_date" ).datepicker({
 											echo form_dropdown('model[category]', $healthOptions, $selected, 'id="category" style="width: 345px; margin-top: 0px;"');
 										?>		
 										</span> 
-				                        <?php /*?><input type="text" class="form-control" placeholder="" required id="category" name="model[category]" value="<?php echo array_key_exists( 'category',$model) ? $model['category'] : '';?>"  > */ ?>
+				                        
 				                    </div>
 				                </div>
-			                
+<?php */ ?>			                
 				                <div class="form-group"> 
 									<?php $selected = array_key_exists( 'author',$model) ? $model['author'] : '';?>
 				                    <label for="" class="col-sm-3">Author</label>
@@ -116,28 +118,39 @@ $( "#publish_date" ).datepicker({
 				                </div>
 				                
 				                
-				                <div class="form-group">
-				                    <label for="" class="col-sm-3">SEO Title</label>
-				                    <div class="col-sm-9">
-				                        <input type="text" class="form-control" required  placeholder="SEO Title" maxlength="90" maxlength="90"  id="seo_title" name="model[seo_title]" value="<?php echo array_key_exists( 'seo_title',$model) ? $model['seo_title'] : '';?>" >
-				                        <span class="help-block">Max length 90 characters.</span>
-				                    </div>
-				                </div>
-				                
-				                <div class="form-group">
-				                    <label for="" class="col-sm-3">SEO Description</label>
-				                    <div class="col-sm-9">
-				                        <textarea class="form-control" rows="5"  required maxlength="175" id="seo_description" name="model[seo_description]"><?php echo array_key_exists( 'seo_description',$model) ? $model['seo_description'] : '';?></textarea>
-				                        <span class="help-block">Max length 175 characters.</span>
-				                    </div>
-				                </div>
-				                
-				                <div class="form-group">
-				                    <label for="" class="col-sm-3">SEO Keywords</label>
-				                    <div class="col-sm-9">
-				                        <textarea class="form-control" rows="4" required maxlength="175" id="seo_keywords" name="model[seo_keywords]"><?php echo array_key_exists( 'seo_keywords',$model) ? $model['seo_keywords'] : '';?></textarea>
-				                    </div>
-				                </div>
+			                <div class="form-group">
+			                    <label for="" class="col-sm-3">Tweet Property</label>
+			                    <div class="col-sm-9">
+			                        <input type="text" class="form-control" placeholder="Tweet property" maxlength="125" id="tweet_property" name="model[tweet_property]" value="<?php echo array_key_exists( 'tweet_property',$model) ? $model['tweet_property'] : '';?>"  >
+			                        <span class="help-block">Max length 125 characters.</span>
+			                    </div>
+			                </div>
+					                <div class="form-group">
+					                    <label for="" class="col-sm-3">SEO Title</label>
+					                    <div class="col-sm-9">
+					                        <input type="text" class="form-control charecterCount seoTitle"  placeholder="SEO Title" maxlength="90" id="seo_title" name="model[seo_title]" maxlength="90" value="<?php echo array_key_exists( 'seo_title',$model) ? $model['seo_title'] : '';?>" >
+					                         <span class="help-block" style="margin-bottom: -5px;">Max 90 chars | Recommended 60 chars</span>
+					                        <span class="help-block currentLength"><?php echo array_key_exists( 'seo_title',$model) ? 'Current length: '.strlen($model['seo_title']).' chars' : '0'.' chars';?></span>
+					                    </div>
+					                </div>
+					                
+					                <div class="form-group">
+					                    <label for="" class="col-sm-3">SEO Description</label>
+					                    <div class="col-sm-9">
+					                        <textarea class="form-control charecterCount" rows="5" maxlength="250" id="seo_description" name="model[seo_description]"><?php echo array_key_exists( 'seo_description',$model) ? $model['seo_description'] : '';?></textarea>
+					                        <span class="help-block" style="margin-bottom: -5px;">Max 250 chars | Recommended 150 chars</span>
+					                        <span class="help-block currentLength"><?php echo array_key_exists( 'seo_description',$model) ? 'Current length: '.strlen($model['seo_description']).' chars' : '0'.' chars';?></span>
+					                    </div>
+					                </div>
+					                
+					                <div class="form-group">
+					                    <label for="" class="col-sm-3">SEO Keywords</label>
+					                    <div class="col-sm-9">
+					                        <textarea class="form-control charecterCount" rows="4" maxlength="175" id="seo_keywords" name="model[seo_keywords]"><?php echo array_key_exists( 'seo_keywords',$model) ? $model['seo_keywords'] : '';?></textarea>
+					                        <span class="help-block" style="margin-bottom: -5px;">Max 175 chars | Recommended 150 chars</span>
+					                        <span class="help-block currentLength"><?php echo array_key_exists( 'seo_keywords',$model) ? 'Current length: '.strlen($model['seo_keywords']).' chars' : '0'.' chars';?></span>
+					                    </div>
+					                </div>
 				                
 								<?php 
 								//	tagit widget
@@ -146,9 +159,44 @@ $( "#publish_date" ).datepicker({
 				                <div class="form-group">
 				                    <label for="" class="col-sm-3">URL</label>
 				                    <div class="col-sm-9">
-				                        <input type="text" class="form-control"  required placeholder="URL"  id="url" name="model[slug]" value="<?php echo array_key_exists( 'slug',$model) ? $model['slug'] : '';?>"  >
+				                    	<span class="icon glyphicon glyphicon-star"></span>
+	<?php 								if (isset($model['slug']))	{?>
+				                        	<input type="text" class="form-control slug" placeholder="URL"  name="model[slug]" value="<?php echo $model['slug'];?>" >
+				                        	<?php /*?><span class="help-block" style="color:black;font-size: 12px"><a href="<?php echo ($currentCompanyTypeSlug == 'life-insurance') ? base_url().$currentCompanyTypeSlug.'/companies/'.$model['slug'] : base_url().$currentCompanyTypeSlug.'/'.$model['slug'];?>"><?php echo ($currentCompanyTypeSlug == 'life-insurance') ? base_url().$currentCompanyTypeSlug.'/companies/'.$model['slug'] : base_url().$currentCompanyTypeSlug.'/'.$model['slug'];?></a></span> */ ?>	
+	<?php 								}else{	?>
+				                        	<input type="text" class="form-control slug"  tooltip="Once created you cannot edit this field" data-toggle="tooltip" data-placement="top" tooltip-trigger="focus" required placeholder="URL"  name="model[slug]" value="" >
+	<?php 								}?>		
+				                        	<span class="help-block" style="color:black;font-size: 12px"><?php echo base_url().'articles/';?><span class="slug"><?php echo array_key_exists( 'slug',$model) ? $this->util->getSlug($model['slug']) : '';?></span>/</span>	                        
+				                        
 				                    </div>
 				                </div>
+				                
+				                
+								<?php //echo widget::run('multiFileUpload', array('policy_id'=>$article_id, 'policyModel'=>$model, 'modelName'=>'model','fieldName'=>'original_image','uploadType'=>'articles_original_image','multiUpload'=>"no")); ?>
+			                
+				                <div class="form-group">
+				                    <label for="" class="col-sm-3">Image</label>
+				                    <div class="col-sm-9">
+				                        <input type="file" id="original_image" name="model[original_image]"  accept="image/jpeg,image/gif,image/png,image/jpeg" title="Choose File" data-ui-file-upload class="btn-info" value="<?php echo array_key_exists( 'original_image',$model) ? $model['original_image'] : '';?>">
+				                        <span class="help-block">Image size: 680px X 309px.</span>
+				                    
+				                    <?php 
+												$folderUrl = $this->config->config['folder_path']['articles']['original_image'];
+												$fileUrl = $this->config->config['url_path']['articles']['original_image'];
+												
+												if (isset($model['original_image']) && !empty($model['original_image']))
+												{
+													if (file_exists($folderUrl.$model['original_image']))
+													{
+														echo 	'<div class="divider"></div>
+					                    						<img src="'.$fileUrl.$model['original_image'].'">';
+													}
+												}
+												?>
+									</div>
+				                </div>
+				                								
+								   
 			                </div>
 			            </section>
 					</div>
@@ -229,4 +277,13 @@ $( "#publish_date" ).datepicker({
 		window.location.href = hrefVal;
 	}
 //-->
+
+	$(document).ready(function(){
+		$('.titleUrlClass').keyup(function(){
+			$('.seoTitle').val($(this).val());
+			$('.slug').val($(this).val());
+			$('.slug').trigger('change');
+		});
+
+	});
 </script>

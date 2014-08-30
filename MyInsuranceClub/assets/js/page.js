@@ -176,7 +176,7 @@ $(window).scroll(function (event) {
                         fontSize: '10px',
                         fontFamily: 'Verdana, sans-serif',
                         textShadow: '0 0 3px black'
-                    }
+                    },
                 }
             }]
         });
@@ -313,7 +313,16 @@ $(window).scroll(function (event) {
 	        name: 'Premium',
 	        data: [chart_series_premium],
 	        tooltip: {
-	            valueSuffix: ''
+	            valuePrefix: currency,
+	        },
+	        dataLabels: {
+	        	//align: 'centre',
+                enabled: true,
+                x: 0,
+                y: 160,
+                style: {
+                    //color: 'red'
+                },
 	        }
 	    }]
 	
@@ -422,8 +431,17 @@ $(window).scroll(function (event) {
 	        name: 'Premium',
 	        data: [chart_series_premium1],
 	        tooltip: {
-	            valueSuffix: ''
-	        }
+	            valuePrefix: currency
+	        },
+	        dataLabels: {
+	        	//align: 'centre',
+                enabled: true,
+                x: 0,
+                y: 90,
+                style: {
+                    //color: 'red'
+                },
+            },
 	    }]
 	
 	}, 
@@ -524,7 +542,16 @@ $(window).scroll(function (event) {
 	        name: 'Premium',
 	        data: [chart_series_premium2],
 	        tooltip: {
-	            valueSuffix: ''
+	            valuePrefix: currency,
+	        },
+	        dataLabels: {
+	        	//align: 'centre',
+                enabled: true,
+                x: 0,
+                y: 90,
+                style: {
+                    //color: 'red'
+                },
 	        }
 	    }]
 	
@@ -626,7 +653,16 @@ $(window).scroll(function (event) {
 	        name: 'Premium',
 	        data: [chart_series_premium3],
 	        tooltip: {
-	            valueSuffix: ''
+	            valuePrefix: currency,
+	        },
+	        dataLabels: {
+	        	//align: 'centre',
+                enabled: true,
+                x: 0,
+                y: 90,
+                style: {
+                    //color: 'red'
+                },
 	        }
 	    }]
 	
@@ -729,10 +765,16 @@ $(window).scroll(function (event) {
 	        name: 'Premium',
 	        data: [chart_series_premium4],
 	        tooltip: {
-	            valuePrefix: 'Rs. '
+	            valuePrefix: currency,
 	        },
-		    dataLabels: {
-	            enabled: true
+	        dataLabels: {
+	        	//align: 'centre',
+                enabled: true,
+                x: 0,
+                y: 90,
+                style: {
+                    //color: 'red'
+                },
 	        }
 	    }]
 	

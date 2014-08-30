@@ -51,7 +51,33 @@ $(".form-horizontal :input").prop("disabled", true);
 					      </div>';
 				} ?>
 				
+			                	
+	        <div class="row">
+		        <div class="col-md-12">
+		        	<div class="panel-body">    
+			            <section class="panel panel-default">
+			                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Sample Premium</strong></div>
+			                <div class="panel-body">
+			                	<?php echo widget::run('samplePremiumBack', array('model'=>$model)); ?>
+							</div>
+			            </section>
+					</div>
+			    </div>
+			</div> 
 
+	        <div class="row">
+		        <div class="col-md-12">
+		        	<div class="panel-body">    
+			            <section class="panel panel-default">
+			                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Eligibility Conditions</strong></div>
+			                <div class="panel-body">			                
+			                	<?php echo widget::run('eligibilityConditionsBack', array('model'=>$model, 'policyModel'=>$policyModel, 'type'=>'travel')); ?>
+			                </div>
+			            </section>
+					</div>
+			    </div>
+			</div>  
+				
 	        <div class="row">
 		        <div class="col-md-12">
 		        	<div class="panel-body">    
@@ -75,7 +101,7 @@ $(".form-horizontal :input").prop("disabled", true);
 													$arrValues = array_key_exists( 'medical_expenses',$model) ? unserialize($model['medical_expenses']) : $default;
 													$arrValues = Util::array_overlay($default, $arrValues);
 								                ?>
-								                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block':'none';?>">
+								                    <div class="col-sm-12 row" >
 														<div class="row" >						
 											                <div class="col-sm-6">
 											                    <div class="col-sm-6"> 
@@ -1342,32 +1368,6 @@ $(".form-horizontal :input").prop("disabled", true);
 			    </div>
 			</div>  
 			                
-			                	
-	        <div class="row">
-		        <div class="col-md-12">
-		        	<div class="panel-body">    
-			            <section class="panel panel-default">
-			                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Eligibility Conditions</strong></div>
-			                <div class="panel-body">			                
-			                	<?php echo widget::run('eligibilityConditionsBack', array('model'=>$model, 'policyModel'=>$policyModel, 'type'=>'travel')); ?>
-			                </div>
-			            </section>
-					</div>
-			    </div>
-			</div>  
-				
-	        <div class="row">
-		        <div class="col-md-12">
-		        	<div class="panel-body">    
-			            <section class="panel panel-default">
-			                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Sample Premium</strong></div>
-			                <div class="panel-body">
-			                	<?php echo widget::run('samplePremiumBack', array('model'=>$model)); ?>
-							</div>
-			            </section>
-					</div>
-			    </div>
-			</div> 
 			
 			
 	        <div class="row">
@@ -1828,7 +1828,7 @@ $(".form-horizontal :input").prop("disabled", true);
 											<td width="510" valign="top" colspan="2">
 												<div class="row">
 												<?php
-													$default = array('covered'=>'no', 'amount'=>'','per_hour'=>'', 'deductable'=>'', 'comments'=>'');
+													$default = array('covered'=>'no', 'amount'=>'','per_hour'=>'', 'deductable'=>'', 'covered_after'=>'', 'comments'=>'');
 													$arrValues = array_key_exists( 'flight_delay',$model) ? unserialize($model['flight_delay']) : $default;
 													$arrValues = Util::array_overlay($default, $arrValues);
 													$selected = $arrValues['covered'];
@@ -1851,7 +1851,7 @@ $(".form-horizontal :input").prop("disabled", true);
 								                    </div> 
 								                    <div class="col-sm-12 row" style="display:<?php echo ($selected != 'no') ? 'block':'none';?>">
 														<div class="row" >						
-											                <div class="col-sm-4">
+											                <div class="col-sm-6">
 											                    <div class="col-sm-6"> 
 											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Per Hour USD</label>
 											                    </div>  
@@ -1859,7 +1859,7 @@ $(".form-horizontal :input").prop("disabled", true);
 											                        <input type="text" class="form-control numberValidation" name="model[flight_delay][per_hour]" value="<?php echo $arrValues['per_hour'];?>" >
 											                    </div>              
 											                </div>			
-											                <div class="col-sm-4">
+											                <div class="col-sm-6">
 											                    <div class="col-sm-6"> 
 											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Max upto</label>
 											                    </div>  
@@ -1867,16 +1867,30 @@ $(".form-horizontal :input").prop("disabled", true);
 											                        <input type="text" class="form-control numberValidation" name="model[flight_delay][amount]" value="<?php echo $arrValues['amount'];?>" >
 											                    </div>              
 											                </div>	
-											                <div class="col-sm-4">
+											            </div>
+									                    <br clear="all">
+										                <div class="divider"></div> 
+											            <div class="row" >						
+											                <div class="col-sm-6">
 											                    <div class="col-sm-6"> 
-											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Deductable upto</label>
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Deductable upto USD</label>
 											                    </div>  
 											                    <div class="col-sm-6">
 											                        <input type="text" class="form-control numberValidation" name="model[flight_delay][deductable]" value="<?php echo $arrValues['deductable'];?>" >
 											                    </div>              
+											                </div>			
+											                <div class="col-sm-6">
+											                    <div class="col-sm-5"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Covered After</label>
+											                    </div>  
+											                    <div class="col-sm-4">
+											                        <input type="text" class="form-control numberValidation" name="model[flight_delay][covered_after]" value="<?php echo $arrValues['covered_after'];?>" >
+											                    </div> 
+											                    <div class="col-sm-3"> 
+											                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">Hrs</label>
+											                    </div>              
 											                </div>	
 											            </div>
-											            
 								                    </div>  
 								                    <div class="form-group"></div>
 									                <div class="col-sm-12 row">
@@ -1981,7 +1995,7 @@ $(".form-horizontal :input").prop("disabled", true);
 											<td width="510" valign="top" colspan="2">
 												<div class="row">
 												<?php
-													$default = array('covered'=>'no', 'amount'=>'','per_hour'=>'', 'deductable'=>'', 'comments'=>'');
+													$default = array('covered'=>'no', 'days'=>'','comments'=>'');
 													$arrValues = array_key_exists( 'automatic_extension_of_policy',$model) ? unserialize($model['automatic_extension_of_policy']) : $default;
 													$arrValues = Util::array_overlay($default, $arrValues);
 													$selected = $arrValues['covered'];
@@ -2007,7 +2021,7 @@ $(".form-horizontal :input").prop("disabled", true);
 									                    	<label for="inputPassword3" class="col-sm-12 control-label" style="padding-left: 0px; padding-right: 0px;text-align: left;">No. of Days</label>
 									                    </div>  
 									                    <div class="col-sm-3">
-									                        <input type="text" class="form-control numberValidation" name="model[automatic_extension_of_policy][per_hour]" value="<?php echo $arrValues['per_hour'];?>" >
+									                        <input type="text" class="form-control numberValidation" name="model[automatic_extension_of_policy][days]" value="<?php echo $arrValues['days'];?>" >
 									                    </div>    											            
 								                    </div>  
 								                    <div class="form-group"></div>
@@ -4431,33 +4445,7 @@ $(".form-horizontal :input").prop("disabled", true);
 			    </div>
 			</div>    
 			    
-			    		
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			    
 			
 	        <div class="row">
 		        <div class="col-md-12">

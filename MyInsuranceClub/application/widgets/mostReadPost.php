@@ -10,7 +10,7 @@ class MostReadPost extends Widget{
     function run($ext = array())
     {
         $top = isset($ext['top']) ? $ext['top'] : array();
-        $type = isset($ext['type']) ? $ext['type'] : 'topic';
+        $type = isset($ext['type']) ? $ext['type'] : 'topic'; 
 ?>    	
 
 				<!-- START POPULAR POSTS WIDGET -->
@@ -37,18 +37,18 @@ class MostReadPost extends Widget{
 							$folderUrl = $this->config->config['folder_path']['guides']['thumbnail'];
 							$fileUrl = $this->config->config['url_path']['guides']['thumbnail'];
 						}
-						
+					
 						foreach ($top as $k1=>$v1)
 						{								
 							$imgUrl = "";
-							$url = base_url().'news/'.$v1['slug'];
+							$url = base_url().$type.'/'.$v1['slug'];
 							if (isset($v1['thumbnail']) && !empty($v1['thumbnail']))
 							{
 								if (file_exists($folderUrl.$v1['thumbnail']))
 								{
 									$imgUrl = $fileUrl.$v1['thumbnail'];
 								}
-							}
+							}			
 					?>
 							<li class="clearfix">
 						<?php 	if (!empty($imgUrl)){?>		

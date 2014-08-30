@@ -40,20 +40,33 @@ class Disquslib {
         		else if (!empty($v1))
         			$jsParams .= 'var '.$k1.' = "'.$v1.'";';
         	}
-        }
-//var_dump($config, $jsParams);die;     
-        return  "<div id='disqus_thread'></div>
-                <script type='text/javascript'>".$jsParams."
-
-                    /* * * DON'T EDIT BELOW THIS LINE * * */
-                    (function() {
-                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                    })();
+        } 
+        
+        return  '<div id="disqus_thread">
+        			<div class="nav-links clearfix">
+						<span class="meta-nav-prev">
+							<a href="#" onclick="disqus();return false;">Show Comments</a>
+						</span>
+					</div>
+				</div>
+                <script type="text/javascript">'.$jsParams.'
+					var disqus_loaded = false;
+	                function disqus() 
+	                {
+						if (!disqus_loaded) 
+						{
+							/* * * DONOT EDIT BELOW THIS LINE * * */
+							// This is to ensure that Disqus widget is loaded only once
+							disqus_loaded = true;
+							var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+		                    dsq.src = "http://" + disqus_shortname + ".disqus.com/embed.js";
+		                    (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+	                    }
+					}
                 </script>
-                <noscript>Please enable JavaScript to view the <a href='http://disqus.com/?ref_noscript'>comments powered by Disqus.</a></noscript>
-                <a href='http://disqus.com' class='dsq-brlink'>Loading comments</a>";
+                <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                <!-- <a href="http://disqus.com" class="dsq-brlink">Loading comments</a> -->
+                ';
 	}
 	
 	

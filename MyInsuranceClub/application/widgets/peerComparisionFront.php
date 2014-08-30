@@ -14,7 +14,9 @@ class PeerComparisionFront extends Widget{
         $peerComparisionResult = isset($ext['peerComparisionResult']) ? $ext['peerComparisionResult'] : array();
         $policyVariants = isset($ext['policyVariants']) ? $ext['policyVariants'] : array();
         $type = isset($ext['type']) ? $ext['type'] : array();
+        $features = isset($ext['features']) ? $ext['features'] : array();
         $variantType = $ext['variantType'];
+        $arrUSCurrency = array('travel');
         
         $peerCoverageAmount = explode(',', $policyDetails['peer_comparision_coverage_amounts']);
         $peerAge = explode(',', $policyDetails['peer_comparision_age']);
@@ -73,7 +75,12 @@ class PeerComparisionFront extends Widget{
 			
 			<div class="wid_25">
 				<div class="h_w">Term</div>
-				<div class="c_w">1 Years</div>
+				<div class="c_w">
+			<?php 	if ($type == 'travel')
+						echo '7 Days';
+					else 
+						echo '1 Years';?>
+				</div>
 			</div>
 			
 			<div class="wid_25">
@@ -82,7 +89,13 @@ class PeerComparisionFront extends Widget{
 			</div>
 			<div class="wid_25">
 				<div class="h_w">Life Style</div>
-				<div class="c_w">Healthy, Non smoker</div>
+				<div class="c_w">
+				<?php 
+					$dis[] = array_key_exists( 'healthy',$features) ? (strtolower($features['healthy']) == 'yes') ? 'Healthy' : 'Non-Healthy' : '' ;
+					$dis[] = array_key_exists( 'smoker',$features) ? (strtolower($features['smoker']) == 'yes') ? 'Smoker' : 'Non-Smoker' : '' ;
+					echo implode(', ', array_filter($dis));
+				?>
+				</div>
 			</div>
 		</div>
 		<div class="col-sm-12 clearfix no_pad_lr">
@@ -98,13 +111,12 @@ class PeerComparisionFront extends Widget{
 							?>
 								<img src="<?php echo $imgUrl;?>" border="0">
 							</div>
-							<div id="container" class="" style="max-width: 100%; height: 300px; margin: 0 auto"></div>
+							<div id="container" class="" style="max-width: 100%; height: 340px; margin: 0 auto"></div>
 						</div>
 					</div>
 		<?php 
 					if (!empty($peerComparisionResult))
-					{
-//var_dump($peerComparisionResult);						
+					{				
 						$i = 1;
 						
 						foreach ($peerComparisionResult as $k8=>$v8)
@@ -121,13 +133,12 @@ class PeerComparisionFront extends Widget{
 										<img src="<?php echo $imgUrl;?>" border="0">
 									</div>
 					
-									<div id="container<?php echo $i;?>" class="chartdiv" style="max-width: 100%; height: 300px; margin: 0 auto"></div>
+									<div id="container<?php echo $i;?>" class="chartdiv" style="max-width: 100%; height: 340px; margin: 0 auto"></div>
 								</div>
 <?php 							$i++;
 							}		
 						}
-					}
-//var_dump($peerComparisionResult);					
+					}				
 		?>
 				</div>
 		
@@ -156,6 +167,7 @@ class PeerComparisionFront extends Widget{
 		var chart_series_premium3	= '';
 		var chart_title_text4	=	'';
 		var chart_series_premium4	= '';
+		var currency = 'Rs. ';
 <?php 
 		$i = 1;
 		foreach ($peerComparisionResult as $k8=>$v8)

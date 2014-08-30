@@ -31,19 +31,21 @@ if (!empty($policies))
       <?php 
 		$i = 2;
 		foreach ($policies as $k1=>$v1)
-		{
+		{		
 			if (!empty($v1) && ($i % 2 == 0))
-			{
-			?>
-      <h3 class="sub_h_cmp"><?php echo $k1?> <?php echo (count($v1['policy'])>1) ? 'Plans' : 'Plan'?></h3>
-      <ul class="cmp_ul">
-        <?php 			foreach ($v1['policy'] as $k2=>$v2)
-				{	
-					?>
-        <li> <a href="<?php echo base_url().$v2['policy_url'];?>"><?php echo $v2['policy_name'];?> </a> </li>
-        <?php 			}		?>
-        <li class="cmp_link"> <a href="javascript:void(0)">Compare <?php echo $k1?> <i class="fa fa-arrow-right"></i> </a> </li>
-      </ul>
+			{			?>
+		      	<h3 class="sub_h_cmp"><?php echo $k1?> <?php echo (count($v1['policy'])>1) ? 'Plans' : 'Plan'?></h3>
+		      	<ul class="cmp_ul">
+        <?php 	foreach ($v1['policy'] as $k2=>$v2)
+				{	?>
+        			<li> 
+        				<a href="<?php echo base_url().$v2['policy_url'];?>"><?php echo $v2['policy_name'];?> </a> 
+        			</li>
+        <?php 	}		?>
+        			<li class="cmp_link"> 
+        				<a href="<?php echo base_url().$v1['compare_url'];?>">Compare <?php echo $k1?> <i class="fa fa-arrow-right"></i> </a> 
+        			</li>
+      			</ul>
       <?php 		
 			}
 			$i++;
@@ -58,23 +60,25 @@ if (!empty($policies))
 			foreach ($policies as $k1=>$v1)
 			{
 				if (!empty($v1) && ($i % 2 == 0))
-				{
-				?>
-      <h3 class="sub_h_cmp"><?php echo $k1?> <?php echo (count($v1['policy'])>1) ? 'Plans' : 'Plan'?></h3>
-      <ul class="cmp_ul">
-        <?php 			foreach ($v1['policy'] as $k2=>$v2)
-					{	
-						?>
-        <li> <a href="<?php echo base_url().$v2['policy_url'];?>"><?php echo $v2['policy_name'];?> </a> </li>
-        <?php 			}		?>
-        <li class="cmp_link"> <a href="javascript:void(0)">Compare <?php echo $k1?> <i class="fa fa-arrow-right"></i> </a> </li>
-      </ul>
+				{			?>
+			      	<h3 class="sub_h_cmp"><?php echo $k1?> <?php echo (count($v1['policy'])>1) ? 'Plans' : 'Plan'?></h3>
+			      	<ul class="cmp_ul">
+	        <?php 	foreach ($v1['policy'] as $k2=>$v2)
+					{	?>
+	        			<li> 
+	        				<a href="<?php echo base_url().$v2['policy_url'];?>"><?php echo $v2['policy_name'];?> </a> 
+	        			</li>
+	        <?php 	}		?>
+	        			<li class="cmp_link"> 
+	        				<a href="<?php echo base_url().$v1['compare_url'];?>">Compare <?php echo $k1?> <i class="fa fa-arrow-right"></i> </a> 
+	        			</li>
+	      			</ul>
       <?php 		
 				}
 				$i++;
 			}	?>
     </div>
-    <?php 	}
+ <?php 	}
 ?>
     <?php /*?>
 

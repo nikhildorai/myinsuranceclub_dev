@@ -2316,6 +2316,24 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 												'upload_path'	=>	$ci->config->config['folder_path']['news']['original_image'],
 											);
 		}
+		else if ($type == 'articles')
+		{
+			$config['original_image']	=	array(	'allowed_types'	=>	'gif|jpg|png|jpeg',
+												'max_size'		=>	'5120',
+												'max_width'		=>	'2000',
+												'max_height'	=>	'2000',
+												'upload_path'	=>	$ci->config->config['folder_path']['articles']['original_image'],
+											);
+		}
+		else if ($type == 'guides')
+		{
+			$config['original_image']	=	array(	'allowed_types'	=>	'gif|jpg|png|jpeg',
+												'max_size'		=>	'5120',
+												'max_width'		=>	'2000',
+												'max_height'	=>	'2000',
+												'upload_path'	=>	$ci->config->config['folder_path']['guides']['original_image'],
+											);
+		}
 		else if ($type == 'users')
 		{
 			$config['user_image']	=	array(	'allowed_types'	=>	'gif|jpg|png|jpeg',
@@ -2395,6 +2413,10 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 				$query = "CALL sp_insetIntoMIC_disqus_comments(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			else if ($type == 'sp_getNewsDetails')
 				$query = "CALL sp_getNewsDetails(?,?,?,?,?)";
+			else if ($type == 'sp_getArticlesDetails')
+				$query = "CALL sp_getArticlesDetails(?,?,?,?,?)";
+			else if ($type == 'sp_getGuidesDetails')
+				$query = "CALL sp_getGuidesDetails(?,?,?,?,?)";
 			else if ($type == 'sp_getTopNewsArticlesGuide')
 				$query = "CALL sp_getTopNewsArticlesGuide(?)";
 			else if ($type == 'sp_getRelatedNewsArticlesGuides')
@@ -2640,8 +2662,8 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 				case 'personal-accident':
 					$return['backendController'] = 'policy_variants_master';
 					$return['backendFeatureAction'] = 'personal_accident';
-					$return['feature_table'] = '';
-					$return['premium_table'] = '';
+					$return['feature_table'] = 'policy_features_personal_accident';
+					$return['premium_table'] = 'annual_premium_personal_accident';
 					$return['frontEndController'] = '';
 					$return['frontEndView'] = '';
 					$return['riderTable'] = '';
@@ -3049,7 +3071,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		$data['disqusUrl'] = $url = '';
 		if (!empty($policySlug))
 		{
-			$url = base_url().'health-insurance/'.$policySlug;	
+			$url = base_url().$variantType.'/'.$policySlug;	
 			$arrParams['policy_slug'] = $policySlug;
 			$allVariantTypes = Util::getControllerForPolicyVariantFeatures($variantType);
 			$arrParams['feature_table'] = $allVariantTypes['feature_table'];
@@ -3125,14 +3147,16 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 					}
 					//$param['sum_assured'] = 500000;
 					$peerVariants = explode(',', $data['policyDetails']['policy']['peer_comparision_variants']);
-					foreach (array_filter(array_values(array_flip($data['variantNames']))) as $k2=>$v2)	
-						$peerVariants[] = $v2; 
-							
+					if (isset($data['variantNames']) && !empty($data['variantNames']))
+					{
+						foreach (array_filter(array_values(array_flip($data['variantNames']))) as $k2=>$v2)	
+							$peerVariants[] = $v2; 
+					}		
 					$param['variant_id'] = implode(',', $peerVariants); 
-//var_dump($data['policyDetails']['policy']['policy_composition'], $param);
+
 					$data['peerComparisionResult'] = Policy_variants_master_model::getAllPolicyVariantsDetails($param);
 					
-//var_dump($data['policyDetails']['policy']['policy_composition'], $param,$data['peerComparisionResult']);
+//var_dump($data['policyDetails']['policy'], $param,$data['peerComparisionResult']);die;
 					//	seo data
 			        $data['socialSeoData'] = Util::getSocialMediaSeoData($data['policyDetails']['policy'], $url);
 			        $data['seoData']['title'] = $data['policyDetails']['policy']['seo_title'];
@@ -3145,6 +3169,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 			}
 		}
 		$data['disqusUrl'] = $url;	
+
 		return $data;
 	}
 	
@@ -3170,14 +3195,14 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		$tableNames[$dbPrefix.'policy_rider_personal_accident'][] = 'rider_slug';
 		$tableNames[$dbPrefix.'news'][]							= 'news_slug';
 		$tableNames[$dbPrefix.'news'][]							= 'comment_count';
-		$tableNames[$dbPrefix.'articles'][]						= 'article_slug';
-		$tableNames[$dbPrefix.'guides'][]						= 'guide_slug';
+		$tableNames[$dbPrefix.'articles'][]						= 'articles_slug';
+		$tableNames[$dbPrefix.'guides'][]						= 'guides_slug';
 		$tableNames[$dbPrefix.'master_tags'][] 					= 'tag_slug';
 //var_dump($tableNames['MIC_policy_features_mediclaim']);die;		
 	//	$tableNames[$dbPrefix.''][] 				= '_slug';
 		return $tableNames;
 	}
-	
+
 	
 	public static function rearrangeDataAsPerColumnName($type= '', $details = array(), $tableNames = array())
 	{
@@ -3187,7 +3212,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 		{
 			if (empty($tableNames))
 				$tableNames = Util::getFieldNamesOfAllTables();
-				
+		
 			foreach ($details as $k1=>$v1)
 			{	
 				foreach ($v1 as $k2=>$v2)
@@ -3236,6 +3261,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 						if (isset($tableNames['riderFields']) && in_array($k2, $tableNames['riderFields']))
 							$data['variantDetails'][$v1['variant_id']]['rider'][$v1['rider_id']][$k2] = $v2;
 						
+						//	variant name	
 						if (isset($v1['variant_id']))
 							$data['variantNames'][$v1['variant_id']] = $v1['variant_name']; 
 					}
@@ -3249,6 +3275,28 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 						
 						if (in_array($k2, $tableNames[$dbPrefix.'user_accounts']) || in_array($k2, $tableNames[$dbPrefix.'demo_user_profiles']))	
 							$data['newsDetails'][$v1['news_id']]['author'][$k2] = $v2;
+					}
+					else if ($type == 'articlesListing')
+					{
+						if (in_array($k2, $tableNames[$dbPrefix.'articles']))	
+							$data['articlesDetails'][$v1['article_id']]['articles'][$k2] = $v2;
+							
+				//		if (in_array($k2, $tableNames[$dbPrefix.'master_tags']))	
+				//			$data['articlesDetails'][$v1['articles_id']]['tag'][$v1['tag_id']][$k2] = $v2;
+						
+						if (in_array($k2, $tableNames[$dbPrefix.'user_accounts']) || in_array($k2, $tableNames[$dbPrefix.'demo_user_profiles']))	
+							$data['articlesDetails'][$v1['article_id']]['author'][$k2] = $v2;
+					}
+					else if ($type == 'guidesListing')
+					{
+						if (in_array($k2, $tableNames[$dbPrefix.'guides']))	
+							$data['guidesDetails'][$v1['guide_id']]['guides'][$k2] = $v2;
+							
+				//		if (in_array($k2, $tableNames[$dbPrefix.'master_tags']))	
+				//			$data['guidesDetails'][$v1['guides_id']]['tag'][$v1['tag_id']][$k2] = $v2;
+						
+						if (in_array($k2, $tableNames[$dbPrefix.'user_accounts']) || in_array($k2, $tableNames[$dbPrefix.'demo_user_profiles']))	
+							$data['guidesDetails'][$v1['guide_id']]['author'][$k2] = $v2;
 					}
 				}		
 			}
@@ -3323,7 +3371,6 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 			$arrParams['whereFieldName'] = $whereFieldName;
 			$arrParams['whereFieldValue'] = $whereFieldValue;
 			$arrParams['countValue'] = $count;
-
 			return Util::callStoreProcedure('sp_incrementPageViewCount', $arrParams);
 		}
 	}
@@ -3388,7 +3435,7 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 	
 	public static function getImagedimensions($type="")
 	{
-		if($type=='news')
+		if($type=='news' || $type=='articles' || $type=='guides' )
 		{
 			$arrImageSizes = array(
 					'listing_image_300x220'=> array('width'=>'300','height'=>'220'),
@@ -3454,6 +3501,35 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 			$data['title'] .=  '- MyInsuranceClub Newsdesk';
 			$data['description'] = 'Latest Insurance News'.$tagName.$page.'. Updated daily and brought to you by MyInsuranceClub.com Newsdesk.';
 			$data['keywords'] = 'insurance, india, indian, '.$keywords.'news, insurance news, myinsuranceclub.com, newsdesk';
+		}
+		else if ($type== 'articlesListing')
+		{
+			$data['title'] = 'Indian Insurance Industry Articles &amp; Views'.$page;
+			$data['title'] .=  '- MyInsuranceClub Newsdesk';
+			$data['description'] = 'Latest Indian Insurance Industry Articles and Views - both life insurance and general insurance businesses. Updated daily and brought to you by MyInsuranceClub.com Newsdesk.';
+			$data['keywords'] = 'insurance, india, indian, news, articles, insurance articles, myinsuranceclub.com, newsdesk';
+		}
+		else if ($type== 'articlesByAuthor')
+		{
+			$authorName = (isset($arrSeo['author_name']) && !empty($arrSeo['author_name'])) ? ' by '.$arrSeo['author_name'].' ' : '';
+			$keywords = (isset($arrSeo['author_name']) && !empty($arrSeo['author_name'])) ? $arrSeo['author_name'].', ' : '';
+			$data['title'] = 'Insurance Articles';	
+			$data['title'] .= $authorName;
+			$data['title'] .= $page;
+			$data['title'] .=  '- MyInsuranceClub Newsdesk';
+			$data['description'] = 'Latest Insurance Articles'.$authorName.$page.'. Updated daily and brought to you by MyInsuranceClub.com Newsdesk.';
+			$data['keywords'] = 'insurance, india, indian, articles, '.$keywords.'insurance articles, myinsuranceclub.com, newsdesk';
+		}
+		else if ($type== 'articlesByTag')
+		{
+			$keywords = (isset($arrSeo['tag_name']) && !empty($arrSeo['tag_name'])) ? $arrSeo['tag_name'].', ' : '';
+			$tagName = (isset($arrSeo['tag_name']) && !empty($arrSeo['tag_name'])) ? ' on '.$arrSeo['tag_name'].' ' : '';
+			$data['title'] = 'Insurance Articles';
+			$data['title'] .= $tagName;
+			$data['title'] .= $page;
+			$data['title'] .=  '- MyInsuranceClub Newsdesk';
+			$data['description'] = 'Latest Insurance Articles'.$tagName.$page.'. Updated daily and brought to you by MyInsuranceClub.com Newsdesk.';
+			$data['keywords'] = 'insurance, india, indian, '.$keywords.'articles, insurance articles, myinsuranceclub.com, newsdesk';
 		}
 		else
 		{

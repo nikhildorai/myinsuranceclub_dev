@@ -91,6 +91,7 @@ class Policy_variants_master_model EXTENDS Admin_Model{
 	
 	public static function getAllPolicyVariantsDetails($arrParams = array())
 	{
+//var_dump($arrParams);die;		
 		$return = array();
 		$result = Util::callStoreProcedure('getAllPolicyVariantsDetails', $arrParams);
 

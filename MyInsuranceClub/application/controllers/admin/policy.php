@@ -37,10 +37,10 @@ class Policy extends Admin_Controller {
 		{
 //			$total = count($this->data['records']);
 		}
-		
+//var_dump($this->session->flashdata('message'), $this->data, $this->session);die;				
 		// Set any returned status/error messages..		
 		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
-		$this->session->set_flashdata('message','');		
+	//	$this->session->set_flashdata('message','');		
 		
 		//	pagination
 		$config = $this->util->get_pagination_params();
@@ -120,7 +120,7 @@ class Policy extends Admin_Controller {
 				
 		//	check if post data is available
 		if ($this->input->post('policyModel') && $isActive == true)
-		{		
+		{
 			$_POST['policyModel']['policy_display_name'] = (isset($_POST['policyModel']['policy_display_name']) && !empty($_POST['policyModel']['policy_display_name'])) ? $_POST['policyModel']['policy_display_name'] :  $_POST['policyModel']['policy_name'];
 			//	save tags
 			if (isset($_POST['tag']) && !empty($_POST['tag']))
@@ -283,13 +283,12 @@ class Policy extends Admin_Controller {
 					}
 					else 
 						$saveData[] = false;
-					
-					
+							
 					// save records for policy is stored then add/update varient and policy features
 					if (!empty($policy_id))
 					{
 						// 	save records for files
-						if (!empty($_FILES))
+						if (!empty($_FILES) && !empty($arrFileNames))
 						{
 							$this->data['file_upload_error'] = array();
 					        $config['upload_path'] = $this->config->config['folder_path']['policy']['all'];
@@ -371,13 +370,14 @@ class Policy extends Admin_Controller {
 							$this->data['message'] .= $savePolicyFeatures['msg'];
 							$this->data['msgType'] = 'error';
 						}
-						$policyFeaturesPost = $savePolicyFeatures['policyFeaturesPost'];	
+						$policyFeaturesPost = isset($savePolicyFeatures['policyFeaturesPost']) ? $savePolicyFeatures['policyFeaturesPost'] : array();	
 						
 					}			
 					//	if policy and varients records are stored then on show success and redirect to index 
 					if(!in_array(false, $saveData))
 					{
 						$this->session->set_flashdata('message', '<p class="status_msg">Record saved successfully.</p>');
+//var_dump($this->session);die;						
 						$this->data['msgType'] = 'success';
 						redirect('admin/policy/index');
 					}
@@ -402,7 +402,7 @@ class Policy extends Admin_Controller {
 			}
 			$policyModel = $_POST['policyModel'];
 		}		
-		
+
 		$variantType = '';
 		if (!empty($policyModel['product_id']) && empty($policyModel['sub_product_id']))
 		{
@@ -421,8 +421,9 @@ class Policy extends Admin_Controller {
 			$where[0]['compare'] = 'equal';
 			$subProductOptions = $this->util->getTableData($modelName='Sub_product_model', $type="single", $where, $fields = array());
 			$variantType = $subProductOptions['slug'];
-		}									
+		}				
 		$variantAction = Util::getControllerForPolicyVariantFeatures($variantType);
+
 		$dbPrefix = Util::getdbPrefix();
 		$param['premium_table'] = (!empty($variantAction)) ? $dbPrefix.$variantAction['premium_table'] : $dbPrefix.'annual_premium_health';
 		$param['product_id'] = (isset($policyModel['product_id']) && !empty($policyModel['product_id'])) ? $policyModel['product_id'] : '';

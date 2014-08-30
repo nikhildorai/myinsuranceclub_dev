@@ -26,18 +26,25 @@ class RidersFront extends Widget{
 //var_dump($riderSlugs, $riderModel);			
 			if (!empty($riderModel))
 			{
+				$emptyRider = true;
 				foreach ($riderModel as $k1=>$v1)
 				{	
-					$valName = $v1['rider_name'];
-					$valDisName = $v1['rider_display_name'];
-					$valRidVal = $v1['rider_value'];
-					$valCom = $v1['comments'];
-						?>
-					<tr>
-						<td><?php echo $valName;?></td>
-						<td><?php echo $valRidVal;?></td>
-					</tr>
-<?php 			}
+					if (!empty($k1) && !empty($v1))
+					{
+						$emptyRider = false;
+						$valName = $v1['rider_name'];
+						$valDisName = $v1['rider_display_name'];
+						$valRidVal = $v1['rider_value'];
+						$valCom = $v1['comments'];
+							?>
+						<tr>
+							<td><?php echo $valName;?></td>
+							<td><?php echo $valRidVal;?></td>
+						</tr>
+<?php 				}
+				}
+				if ($emptyRider == true)
+					echo '<tr><td colspan="2">No Rider Options Available</td></tr>';
 			}
 ?>			        
 				</tbody>

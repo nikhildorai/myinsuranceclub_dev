@@ -111,6 +111,7 @@ $route['travel-insurance/search-results/(:any)'] = "travel/controller_travel/get
 $route['travel-insurance/search-results'] = "travel/controller_travel/get_travel_insurance_search_results";
 $route['travel-insurance/compare-results'] = "travel/controller_travel/compare_policies";
 $route['travel-insurance/increment-count'] = "travel/controller_travel/increment_count";
+$route['travel-insurance/(:any)'] = "travel/controller_travel/policyView/$1";
 
 //car insurance
 $route['car-insurance'] = "car/controller_car/index";
@@ -129,6 +130,16 @@ $route['general-insurance-companies/(:any)'] = "generalInsurance/companies/$1";
 $route['news'] = "news/index/";
 $route['news/(:any)/(:any)'] = "news/newsByCategory/$1/$2";
 $route['news/(:any)'] = "news/newsDetails/$1";
+
+//articles
+$route['articles'] = "articles/index/";
+$route['articles/(:any)/(:any)'] = "articles/articlesByCategory/$1/$2";
+$route['articles/(:any)'] = "articles/articlesDetails/$1";
+
+//guides
+$route['guides'] = "guides/index/";
+$route['guides/(:any)/(:any)'] = "guides/guidesByCategory/$1/$2";
+$route['guides/(:any)'] = "guides/guidesDetails/$1";
 
 
 //Static Pages

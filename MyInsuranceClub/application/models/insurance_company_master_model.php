@@ -208,22 +208,38 @@ class Insurance_company_master_model EXTENDS Admin_Model{
 							if ($v1['company_type_slug'] == 'life-insurance')
 							{
 								$policyUrl = $v1['company_type_slug'].'/companies/'.$v1['company_slug'].'/'.$v1['slug'];
+								$compareUrl = '';
 							}
 							else
 							{
 								if (!empty($v1['product_slug']) && $v1['product_slug'] == 'health-insurance')
+								{
 									$policyUrl = $v1['product_slug'].'/'.$v1['slug'];
-								else if (!empty($v1['sub_product_slug']))
+									$compareUrl = $v1['product_slug'];
+								}
+								else if (!empty($v1['product_slug']) && $v1['product_slug'] == 'international-travel')
+								{
+									$policyUrl = 'travel-insurance/'.$v1['slug'];
+									$compareUrl = 'travel-insurance';
+								}
+								else if (!empty($v1['product_slug']) && empty($v1['sub_product_slug']))
+								{
+									$policyUrl = $v1['product_slug'].'/'.$v1['slug'];
+									$compareUrl = $v1['product_slug'];
+								}
+								else if (!empty($v1['product_slug']) && !empty($v1['sub_product_slug']))
+								{
 									$policyUrl = $v1['sub_product_slug'].'/'.$v1['slug'];
-								else if (!empty($v1['product_slug']))
-									$policyUrl = $v1['product_slug'].'/'.$v1['slug'];
-							} 
+									$compareUrl = $v1['sub_product_slug'];
+								}
+							}
 							$policies[$v1['product_name']]['product_slug'] = $v1['product_slug'];
 							$policies[$v1['product_name']]['product_name'] = $v1['product_name'];
 							$policies[$v1['product_name']]['sub_product_slug'] = $v1['sub_product_slug'];
 							$policies[$v1['product_name']]['sub_product_name'] = $v1['sub_product_name'];
 							$policies[$v1['product_name']]['policy'][$k1] = $v1;
 							$policies[$v1['product_name']]['policy'][$k1]['policy_url'] = $policyUrl;
+							$policies[$v1['product_name']]['compare_url'] = $compareUrl;
 						}
 					}
 					Util::saveResultToCache($cacheFileName,$policies);
