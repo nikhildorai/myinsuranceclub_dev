@@ -2660,13 +2660,13 @@ public static function getFilteredDataForTermPlan($data,$search_filter = array()
 					$return['riderTable'] = '';
 					break;
 				case 'personal-accident':
-					$return['backendController'] = 'policy_variants_master';
+					$return['backendController'] = 'policy_features_personal_accident';
 					$return['backendFeatureAction'] = 'personal_accident';
 					$return['feature_table'] = 'policy_features_personal_accident';
 					$return['premium_table'] = 'annual_premium_personal_accident';
 					$return['frontEndController'] = '';
 					$return['frontEndView'] = '';
-					$return['riderTable'] = '';
+					$return['riderTable'] = 'policy_rider_personal_accident';
 					break;
 				case 'special-plans':
 					$return['backendController'] = 'policy_variants_master';
