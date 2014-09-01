@@ -190,8 +190,8 @@ class Policy_features_personal_accident extends Admin_Controller {
 						$this->data['message'] = validation_errors('<p class="error_msg">', '</p>'); 
 						$this->data['msgType'] = 'error';
 					}		
-					$model = $_POST['model'];
-					$riders = $_POST['riderModel'];
+					$model = (isset($_POST['model']) && !empty($_POST['model'])) ? $_POST['model'] : array();
+					$riders = (isset($_POST['riderModel']) && !empty($_POST['riderModel'])) ? $_POST['riderModel'] : array();
 				}	
 				//$allVariants = Policy_variants_master_model::getAllPolicyVariantsDetails(array('product_id'=>$policyModel['product_id'], 'sub_product_id'=>$policyModel['sub_product_id']));
 			

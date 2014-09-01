@@ -14,6 +14,7 @@ class EligibilityConditionsBack extends Widget{
     	$policyModel = isset($ext['policyModel']) ? $ext['policyModel'] : array();
     	$type = isset($ext['type']) ? $ext['type'] : array();
     	$arrUSCurrency = array('travel');
+ 	
 ?>    	
 		
                
@@ -64,7 +65,7 @@ class EligibilityConditionsBack extends Widget{
 				
 				
 				<tr>
-					<th class="spec" scope="row">Duration of Coverage/Policy Term (In <?php echo (in_array($type, $arrUSCurrency)) ? 'Days' : 'Years' ;?>)</th>
+					<th class="specalt" scope="row">Duration of Coverage/Policy Term (In <?php echo (in_array($type, $arrUSCurrency)) ? 'Days' : 'Years' ;?>)</th>
 					<td width="252" valign="top" colspan="2" style="text-align: left;">
 				<?php 	
 						$arrValues = array_key_exists( 'policy_terms',$model) ? unserialize($model['policy_terms']) : array();						
@@ -97,32 +98,71 @@ class EligibilityConditionsBack extends Widget{
 				
 				
 				<tr>
-					<th class="specalt" scope="row" width="234" valign="top">Entry Age (in years)</th>
+					<th class="spec" scope="row" width="234" valign="top">Entry Age (in years)</th>
 					<td width="252" valign="top">
-						
-						<div>
-							<label for="">Individual</label>	
-			                <div class="row">
-			                <?php 
-			                	$default = array(	'minimum'=>array(	'individual'=>array('value'=>'', 'type'=>'', 'comments'=>''),
-			                											'family_floater'=>array('value'=>'', 'type'=>'', 'comments'=>'')),
-									                'maximum'=>array(	'individual'=>array('value'=>'', 'type'=>'', 'comments'=>''),
-									                					'family_floater'=>array('value'=>'', 'type'=>'', 'comments'=>'')));
-			                	
-								$arrValues = array_key_exists( 'entry_age',$model) ? unserialize($model['entry_age']) : $default;
-								$arrValues = Util::array_overlay($default, $arrValues);
-			                	
-								if(in_array($type, $arrUSCurrency))
-								{
-									$selected = isset($arrValues['minimum']['individual']['type']) ? $arrValues['minimum']['individual']['type'] : '';									
-			                ?>
+<?php 					if ($policyModel['policy_composition_type'] == 'individual')
+						{	?>						
+							<div>
+								<label for="">Individual</label>	
+				                <div class="row">
+				                <?php 
+				                	$default = array(	'minimum'=>array(	'individual'=>array('value'=>'', 'type'=>'', 'comments'=>''),
+				                											'family_floater'=>array('value'=>'', 'type'=>'', 'comments'=>'')),
+										                'maximum'=>array(	'individual'=>array('value'=>'', 'type'=>'', 'comments'=>''),
+										                					'family_floater'=>array('value'=>'', 'type'=>'', 'comments'=>'')));
+				                	
+									$arrValues = array_key_exists( 'entry_age',$model) ? unserialize($model['entry_age']) : $default;
+									$arrValues = Util::array_overlay($default, $arrValues);
+				                	
+								//	if(in_array($type, $arrUSCurrency))
+								//	{
+										$selected = isset($arrValues['minimum']['individual']['type']) ? $arrValues['minimum']['individual']['type'] : '';									
+				                ?>
+					                    <div class="col-sm-10" style="padding-right: 0px; padding-left: 0px; width: 307px;"> 
+						                    <?php 
+						                    	$options = array('days'=>'Days','months'=>'Months', 'years'=>'Years');	
+												foreach ($options as $k1=>$v1)
+												{
+													$op = array(
+													    'name'        => 'model[entry_age][minimum][individual][type]',
+													    'value'       => $k1,
+													    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+													    'style'       => 'margin:10px',
+													    );
+													echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+												}
+											?>
+					                    </div> 
+				             <?php 	//}	?>   
+				                    <div class="col-sm-2" style="padding-left: 0px; border-right-width: 0px; padding-right: 0px; left: -16px; width: 74px;"> 
+				                        <input type="text" class="form-control numberValidation" maxlength="3" placeholder="Minimum entry age" name="model[entry_age][minimum][individual][value]" value="<?php echo isset($arrValues['minimum']['individual']['value']) ? $arrValues['minimum']['individual']['value'] : ''?>" >
+				                    </div>          
+				                </div>
+								<div class="divider"></div> 
+								<div class="row">  
+				                    <label for="" class="col-sm-3">Comment</label>
+				                    <div class="col-sm-9">
+				                    	<?php //$entry_age = array_key_exists( 'entry_age_comments',$model) ? unserialize($model['entry_age_comments']) : array('min'=>'', 'max'=>'');?>
+				                        <input type="text" class="form-control"  placeholder="Max 127 characters" name="model[entry_age][minimum][individual][comments]" maxlength="127" value="<?php echo isset($arrValues['minimum']['individual']['comments']) ? $arrValues['minimum']['individual']['comments'] : '';;?>"  >
+				                    </div>
+								</div>
+							</div>	
+<?php 					}
+						else if ($policyModel['policy_composition_type'] == 'family floater') 
+						{	?>
+							<div>
+								<label for="">Family Floater</label>	
+				                <div class="row">
+				                <?php 
+									$selected = isset($arrValues['minimum']['family_floater']['type']) ? $arrValues['minimum']['family_floater']['type'] : '';									
+				                ?>
 				                    <div class="col-sm-10" style="padding-right: 0px; padding-left: 0px; width: 307px;"> 
 					                    <?php 
 					                    	$options = array('days'=>'Days','months'=>'Months', 'years'=>'Years');	
 											foreach ($options as $k1=>$v1)
 											{
 												$op = array(
-												    'name'        => 'model[entry_age][minimum][individual][type]',
+												    'name'        => 'model[entry_age][minimum][family_floater][type]',
 												    'value'       => $k1,
 												    'checked'     => ($selected == $k1) ? TRUE : FALSE,
 												    'style'       => 'margin:10px',
@@ -131,72 +171,77 @@ class EligibilityConditionsBack extends Widget{
 											}
 										?>
 				                    </div> 
-			             <?php 	}	?>   
-			                    <div <?php echo in_array($type, $arrUSCurrency) ? 'class="col-sm-2" style="padding-left: 0px; border-right-width: 0px; padding-right: 0px; left: -16px; width: 74px;"': 'class="col-sm-12"'?>"> 
-			                        <input type="text" class="form-control numberValidation" maxlength="3" placeholder="Minimum entry age" name="model[entry_age][minimum][individual][value]" value="<?php echo isset($arrValues['minimum']['individual']['value']) ? $arrValues['minimum']['individual']['value'] : ''?>" >
-			                    </div>          
-			                </div>
-							<div class="divider"></div> 
-							<div class="row">  
-			                    <label for="" class="col-sm-3">Comment</label>
-			                    <div class="col-sm-9">
-			                    	<?php //$entry_age = array_key_exists( 'entry_age_comments',$model) ? unserialize($model['entry_age_comments']) : array('min'=>'', 'max'=>'');?>
-			                        <input type="text" class="form-control"  placeholder="Max 127 characters" name="model[entry_age][minimum][individual][comments]" maxlength="127" value="<?php echo isset($arrValues['minimum']['individual']['comments']) ? $arrValues['minimum']['individual']['comments'] : '';;?>"  >
-			                    </div>
-							</div>
-						</div>	
-						<div class="divider"></div> 
-						<div>
-							<label for="">Family Floater</label>	
-			                <div class="row">
-			                <?php 
-								$selected = isset($arrValues['minimum']['family_floater']['type']) ? $arrValues['minimum']['family_floater']['type'] : '';									
-			                ?>
-			                    <div class="col-sm-10" style="padding-right: 0px; padding-left: 0px; width: 307px;"> 
-				                    <?php 
-				                    	$options = array('days'=>'Days','months'=>'Months', 'years'=>'Years');	
-										foreach ($options as $k1=>$v1)
-										{
-											$op = array(
-											    'name'        => 'model[entry_age][minimum][family_floater][type]',
-											    'value'       => $k1,
-											    'checked'     => ($selected == $k1) ? TRUE : FALSE,
-											    'style'       => 'margin:10px',
-											    );
-											echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
-										}
-									?>
-			                    </div> 
-			                    <div class="col-sm-2" style="padding-left: 0px; border-right-width: 0px; padding-right: 0px; left: -16px; width: 74px;">
-			                        <input type="text" class="form-control numberValidation" maxlength="3" placeholder="" name="model[entry_age][minimum][family_floater][value]" value="<?php echo isset($arrValues['minimum']['family_floater']['value']) ? $arrValues['minimum']['family_floater']['value'] : '';?>"  style="width: 92px; padding-left: 0px; padding-right: 0px; margin-left: -16px;" >
-			                    </div>          
-			                </div>
-							<div class="divider"></div> 
-							<div class="row">  
-			                    <label for="" class="col-sm-3">Comment</label>
-			                    <div class="col-sm-9">
-			                    	<?php //$entry_age = array_key_exists( 'entry_age_comments',$model) ? unserialize($model['entry_age_comments']) : array('min'=>'', 'max'=>'');?>
-			                        <input type="text" class="form-control"  placeholder="Max 127 characters" name="model[entry_age][minimum][family_floater][comments]" maxlength="127" value="<?php echo isset($arrValues['minimum']['family_floater']['comments']) ? $arrValues['minimum']['family_floater']['comments'] : '';?>"  >
-			                    </div>
-							</div>
-						</div>	
+				                    <div class="col-sm-2" style="padding-left: 0px; border-right-width: 0px; padding-right: 0px; left: -16px; width: 74px;">
+				                        <input type="text" class="form-control numberValidation" maxlength="3" placeholder="" name="model[entry_age][minimum][family_floater][value]" value="<?php echo isset($arrValues['minimum']['family_floater']['value']) ? $arrValues['minimum']['family_floater']['value'] : '';?>"  style="width: 92px; padding-left: 0px; padding-right: 0px; margin-left: -16px;" >
+				                    </div>          
+				                </div>
+								<div class="divider"></div> 
+								<div class="row">  
+				                    <label for="" class="col-sm-3">Comment</label>
+				                    <div class="col-sm-9">
+				                    	<?php //$entry_age = array_key_exists( 'entry_age_comments',$model) ? unserialize($model['entry_age_comments']) : array('min'=>'', 'max'=>'');?>
+				                        <input type="text" class="form-control"  placeholder="Max 127 characters" name="model[entry_age][minimum][family_floater][comments]" maxlength="127" value="<?php echo isset($arrValues['minimum']['family_floater']['comments']) ? $arrValues['minimum']['family_floater']['comments'] : '';?>"  >
+				                    </div>
+								</div>
+							</div>	
+			<?php 		}	?>						
+						
 					</td>
 					<td width="252" valign="top">
-						<div>
-							<label for="">Individual</label>	
-			                <div class="row">
-			                <?php 
-								if(in_array($type, $arrUSCurrency))
-								{
-									$selected = isset($arrValues['maximum']['individual']['type']) ? $arrValues['maximum']['individual']['type'] : '';									
-			                ?>
+<?php 					if ($policyModel['policy_composition_type'] == 'individual')
+						{	?>						
+							<div>
+								<label for="">Individual</label>	
+				                <div class="row">
+				                <?php 
+						//			if(in_array($type, $arrUSCurrency))
+						//			{
+										$selected = isset($arrValues['maximum']['individual']['type']) ? $arrValues['maximum']['individual']['type'] : '';									
+				                ?>
+					                    <div class="col-sm-10" style="padding-right: 0px; padding-left: 0px; width: 307px;"> 
+						                    <?php 
+						                    	$options = array('days'=>'Days','months'=>'Months', 'years'=>'Years');	
+												foreach ($options as $k1=>$v1)
+												{
+													$op = array(
+													    'name'        => 'model[entry_age][maximum][individual][type]',
+													    'value'       => $k1,
+													    'checked'     => ($selected == $k1) ? TRUE : FALSE,
+													    'style'       => 'margin:10px',
+													    );
+													echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
+												}
+											?>
+					                    </div> 
+				             <?php 	//}	?>   
+				                    <div class="col-sm-2" style="padding-left: 0px; border-right-width: 0px; padding-right: 0px; left: -16px; width: 74px;">
+				                        <input type="text" class="form-control numberValidation" maxlength="3" placeholder="Maximum entry age" name="model[entry_age][maximum][individual][value]" value="<?php echo isset($arrValues['maximum']['individual']['value']) ? $arrValues['maximum']['individual']['value'] : ''?>" >
+				                    </div>          
+				                </div>
+								<div class="divider"></div> 
+								<div class="row">  
+				                    <label for="" class="col-sm-3">Comment</label>
+				                    <div class="col-sm-9">
+				                    	<?php //$entry_age = array_key_exists( 'entry_age_comments',$model) ? unserialize($model['entry_age_comments']) : array('min'=>'', 'max'=>'');?>
+				                        <input type="text" class="form-control"  placeholder="Max 127 characters" name="model[entry_age][maximum][individual][comments]" maxlength="127" value="<?php echo isset($arrValues['maximum']['individual']['comments']) ? $arrValues['maximum']['individual']['comments'] : '';;?>"  >
+				                    </div>
+								</div>
+							</div>	
+<?php 					}
+						else if ($policyModel['policy_composition_type'] == 'family floater') 
+						{	?>
+							<div>
+								<label for="">Family Floater</label>	
+				                <div class="row">
+				                <?php 
+									$selected = isset($arrValues['maximum']['family_floater']['type']) ? $arrValues['maximum']['family_floater']['type'] : '';									
+				                ?>
 				                    <div class="col-sm-10" style="padding-right: 0px; padding-left: 0px; width: 307px;"> 
 					                    <?php 
-					                    	$options = array('days'=>'Days','months'=>'Months', 'years'=>'Years');	
 											foreach ($options as $k1=>$v1)
 											{
 												$op = array(
-												    'name'        => 'model[entry_age][maximum][individual][type]',
+												    'name'        => 'model[entry_age][maximum][family_floater][type]',
 												    'value'       => $k1,
 												    'checked'     => ($selected == $k1) ? TRUE : FALSE,
 												    'style'       => 'margin:10px',
@@ -205,55 +250,20 @@ class EligibilityConditionsBack extends Widget{
 											}
 										?>
 				                    </div> 
-			             <?php 	}	?>   
-			                    <div <?php echo in_array($type, $arrUSCurrency) ? 'class="col-sm-2" style="padding-left: 0px; border-right-width: 0px; padding-right: 0px; left: -16px; width: 74px;"': 'class="col-sm-12"'?>">
-			                        <input type="text" class="form-control numberValidation" maxlength="3" placeholder="Maximum entry age" name="model[entry_age][maximum][individual][value]" value="<?php echo isset($arrValues['maximum']['individual']['value']) ? $arrValues['maximum']['individual']['value'] : ''?>" >
-			                    </div>          
-			                </div>
-							<div class="divider"></div> 
-							<div class="row">  
-			                    <label for="" class="col-sm-3">Comment</label>
-			                    <div class="col-sm-9">
-			                    	<?php //$entry_age = array_key_exists( 'entry_age_comments',$model) ? unserialize($model['entry_age_comments']) : array('min'=>'', 'max'=>'');?>
-			                        <input type="text" class="form-control"  placeholder="Max 127 characters" name="model[entry_age][maximum][individual][comments]" maxlength="127" value="<?php echo isset($arrValues['maximum']['individual']['comments']) ? $arrValues['maximum']['individual']['comments'] : '';;?>"  >
-			                    </div>
-							</div>
-						</div>	
-						
-						<div class="divider"></div> 
-						<div>
-							<label for="">Family Floater</label>	
-			                <div class="row">
-			                <?php 
-								$selected = isset($arrValues['maximum']['family_floater']['type']) ? $arrValues['maximum']['family_floater']['type'] : '';									
-			                ?>
-			                    <div class="col-sm-10" style="padding-right: 0px; padding-left: 0px; width: 307px;"> 
-				                    <?php 
-										foreach ($options as $k1=>$v1)
-										{
-											$op = array(
-											    'name'        => 'model[entry_age][maximum][family_floater][type]',
-											    'value'       => $k1,
-											    'checked'     => ($selected == $k1) ? TRUE : FALSE,
-											    'style'       => 'margin:10px',
-											    );
-											echo '<label class="ui-radio">'.form_radio($op).'<span>'.$v1.'</span></label>';
-										}
-									?>
-			                    </div> 
-			                    <div class="col-sm-2" style="padding-left: 0px; border-right-width: 0px; padding-right: 0px; left: -16px; width: 74px;">
-			                        <input type="text" class="form-control numberValidation" maxlength="3" placeholder="" name="model[entry_age][maximum][family_floater][value]" value="<?php echo isset($arrValues['maximum']['family_floater']['value']) ? $arrValues['maximum']['family_floater']['value'] : '';?>"  style="width: 92px; padding-left: 0px; padding-right: 0px; margin-left: -16px;" >
-			                    </div>          
-			                </div>
-							<div class="divider"></div> 
-							<div class="row">  
-			                    <label for="" class="col-sm-3">Comment</label>
-			                    <div class="col-sm-9">
-			                    	<?php //$entry_age = array_key_exists( 'entry_age_comments',$model) ? unserialize($model['entry_age_comments']) : array('min'=>'', 'max'=>'');?>
-			                        <input type="text" class="form-control"  placeholder="Max 127 characters" name="model[entry_age][maximum][family_floater][comments]" maxlength="127" value="<?php echo isset($arrValues['maximum']['family_floater']['comments']) ? $arrValues['maximum']['family_floater']['comments'] : '';?>"  >
-			                    </div>
-							</div>
-						</div>	
+				                    <div class="col-sm-2" style="padding-left: 0px; border-right-width: 0px; padding-right: 0px; left: -16px; width: 74px;">
+				                        <input type="text" class="form-control numberValidation" maxlength="3" placeholder="" name="model[entry_age][maximum][family_floater][value]" value="<?php echo isset($arrValues['maximum']['family_floater']['value']) ? $arrValues['maximum']['family_floater']['value'] : '';?>"  style="width: 92px; padding-left: 0px; padding-right: 0px; margin-left: -16px;" >
+				                    </div>          
+				                </div>
+								<div class="divider"></div> 
+								<div class="row">  
+				                    <label for="" class="col-sm-3">Comment</label>
+				                    <div class="col-sm-9">
+				                    	<?php //$entry_age = array_key_exists( 'entry_age_comments',$model) ? unserialize($model['entry_age_comments']) : array('min'=>'', 'max'=>'');?>
+				                        <input type="text" class="form-control"  placeholder="Max 127 characters" name="model[entry_age][maximum][family_floater][comments]" maxlength="127" value="<?php echo isset($arrValues['maximum']['family_floater']['comments']) ? $arrValues['maximum']['family_floater']['comments'] : '';?>"  >
+				                    </div>
+								</div>
+							</div>	
+<?php 					}	?>						
 					</td>
 					
 				</tr>
@@ -302,7 +312,7 @@ class EligibilityConditionsBack extends Widget{
 				</tr>
 				
 				<tr>
-					<th class="specalt" scope="row" width="234" valign="top"><strong>No Medical Test Age (in years)</strong></th>
+					<th class="spec" scope="row" width="234" valign="top"><strong>No Medical Test Age (in years)</strong></th>
 					<td width="510" valign="top" colspan="2">
 		                <div class="row">
 						<?php

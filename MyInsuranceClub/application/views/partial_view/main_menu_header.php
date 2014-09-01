@@ -52,7 +52,7 @@
                         <ul class="dropdown-menu mega-menu other" role="menu" aria-labelledby="features-drop">
                         
                            <li class="col-md-6" > <a role="menuitem" href="<?php echo site_url('critical-illness')."/";?>" tabindex="-1" class="menu-item"><strong>Critical Illness Insurance</strong></a> </li>
-                           <li class="col-md-6" > <a role="menuitem" href="<?php echo site_url('health_insurance/personal_accident');?>" tabindex="-1" class="menu-item"><strong>Personal Accident Insurance</strong></a> </li>
+                           <li class="col-md-6" > <a role="menuitem" href="<?php echo site_url('personal-accident');?>" tabindex="-1" class="menu-item"><strong>Personal Accident Insurance</strong></a> </li>
                         </ul>
                      </li>
                   </ul>

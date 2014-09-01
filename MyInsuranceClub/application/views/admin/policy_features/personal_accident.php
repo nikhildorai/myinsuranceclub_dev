@@ -77,8 +77,8 @@ $(".form-horizontal :input").prop("disabled", true);
 			    </div>
 			</div> 
 			
-				
-				
+
+						
 	        <div class="row">
 		        <div class="col-md-12">
 		        	<div class="panel-body">    
@@ -1617,55 +1617,6 @@ display:<?php echo ($maternitySelected == 'yes') ? 'table-row' : 'none';?>;
 					                <div class="form-group">
 					                </div>
 			                
-<?php /* ?>			                
-			                
-									<table  cellspacing="0" class="eligibility">
-										<thead>
-											<tr>
-												<th colspan="2">Major Exclusions</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<th class="specalt" scope="row" width="234" valign="top">For the first 30 days</th>
-												<td width="510" valign="top">
-													<input type="text" class="form-control"  placeholder="" name="model[first_30_days]" value="<?php echo array_key_exists( 'first_30_days',$model) ? $model['first_30_days'] : '';?>" >
-												</td>
-											</tr>
-											
-											<tr>
-												<th class="specalt" scope="row" width="234" valign="top">For the first 24 months</th>
-												<td width="510" valign="top">
-													<input type="text" class="form-control"  placeholder="" name="model[first_24_months]" value="<?php echo array_key_exists( 'first_24_months',$model) ? $model['first_24_months'] : '';?>" >
-												</td>
-											</tr>
-											
-											<tr>
-												<th class="specalt" scope="row" width="234" valign="top">Dental treatment or surgery</th>
-												<td width="510" valign="top">
-													<input type="text" class="form-control"  placeholder="" name="model[dental_treatment_or_surgery]" value="<?php echo array_key_exists( 'dental_treatment_or_surgery',$model) ? $model['dental_treatment_or_surgery'] : '';?>" >
-												</td>
-											</tr>
-											
-											<tr>
-												<th class="specalt" scope="row" width="234" valign="top">AIDS / HIV</th>
-												<td width="510" valign="top">
-													<input type="text" class="form-control"  placeholder="" name="model[aids_hiv]" value="<?php echo array_key_exists( 'aids_hiv',$model) ? $model['aids_hiv'] : '';?>" >
-												</td>
-											</tr>
-											
-											<tr>
-												<th class="specalt" scope="row" width="234" valign="top">Cosmetic treatment</th>
-												<td width="510" valign="top">
-													<input type="text" class="form-control"  placeholder="" name="model[cosmetic_treatment]" value="<?php echo array_key_exists( 'cosmetic_treatment',$model) ? $model['cosmetic_treatment'] : '';?>" >
-												</td>
-											</tr>
-											
-										</tbody>
-									</table>
-			
-<?php */ ?>		
-			
 								</div>
 			            </section>
 					</div>
@@ -1687,42 +1638,7 @@ display:<?php echo ($maternitySelected == 'yes') ? 'table-row' : 'none';?>;
 					</div>
 			    </div>
 			</div>  
-			
-			
-			
-		<?php /*?>	
-	        <div class="row">
-		        <div class="col-md-12">
-		        	<div class="panel-body">    
-			            <section class="panel panel-default">
-			                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Additional Details</strong></div>
-			                <div class="panel-body">
-			                
-			                	<?php echo widget::run('additionalDetailsBack', array('model'=>$model, 'ckeditor'=>$ckeditor)); ?>
-				                
-			                </div>
-			            </section>
-					</div>
-			    </div>
-			</div>  
-				
-	        <div class="row">
-		        <div class="col-md-12">
-		        	<div class="panel-body">    
-			            <section class="panel panel-default">
-			                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th-list"></span> Peer Comparision</strong></div>
-			                <div class="panel-body">
-			                
-			                <?php echo widget::run('peerComparisionBack', array('policy_id'=>$policyModel['policy_id'], 'peer_comparision_variants'=>$model['peer_comparision_variants'], 'allVariants'=>$allVariants)); ?>
-			                
-			                </div>
-			            </section>
-					</div>
-			    </div>
-			</div>  
-			
-			*/ ?>
-			
+					
 	        <div class="row">
 		        <div class="col-md-12">
 		        	<div class="panel-body">    
